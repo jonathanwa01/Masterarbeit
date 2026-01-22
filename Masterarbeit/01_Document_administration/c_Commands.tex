@@ -576,6 +576,10 @@ urlseen = {last access},
 % in this way, it is simpler to pull a new version of the template - you can simply copy this area to the new version
 % make sure that these commands do not require or override commands from above
 
+% ---------- commonly used sets ----------
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\C}{\mathbb{C}}
+
 % ---------- Category theory operators ----------
 \DeclareRobustCommand{\CatC}{\ensuremath{\mathscr{C}}}
 \DeclareRobustCommand{\CatD}{\ensuremath{\mathscr{D}}}
@@ -586,8 +590,6 @@ urlseen = {last access},
 \DeclareMathOperator{\Hom}{Hom}
 \DeclareMathOperator{\End}{End}
 \DeclareMathOperator{\Aut}{Aut}
-\DeclareMathOperator{\Pic}{Pic}
-\DeclareMathOperator{\Gal}{Gal}
 
 % (Optional) bracketed forms
 \NewDocumentCommand{\Specof}{m}{\ensuremath{\Spec\!\left(#1\right)}}
@@ -612,3 +614,12 @@ urlseen = {last access},
 % Convenience wrappers
 \NewDocumentCommand{\SchOver}{m}{\Over{\Sch}{#1}}
 \NewDocumentCommand{\SchUnder}{m}{\Under{\Sch}{#1}}
+
+% --- Structure sheaf ---
+\DeclareRobustCommand{\OO}{\mathscr{O}}             % calligraphic O
+\DeclareRobustCommand{\OOX}{\mathscr{O}_X}		% Structure sheaf of X
+\NewDocumentCommand{\res}{mm}{#1\!\mid_{#2}}  % Restriction: \res{F}{U} = F|_U
+
+% --- Frequently used terms ---
+\DeclareRobustCommand{\etale}{\'etal\'e}
+\DeclareRobustCommand{\Etale}{\'Etal\'e}

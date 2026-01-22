@@ -1,7 +1,65 @@
 \chapter{\'{E}tale Morphisms}
 
-Étalé morphisms are the central class of morphisms in this thesis, since they form the basic building blocks of the étale Grothendieck topology on schemes. Before we dive deeper into general schemes, we first recall the relevant notions for rings and affine schemes.
+\Etale\ morphisms are the central class of morphisms in this thesis, since they form the basic building blocks of the étale Grothendieck topology on schemes. Before we dive deeper into general schemes, we first recall the relevant notions for rings and affine schemes.
 
-\begin{definition}[Étalé ring maps]
-	
+\begin{definition}[Thickening]
+	(\cite[][(Definition 18.1), p.~32]{GoertzWedhornAG2})
+	Let $\iota: Y\hookrightarrow X$ be a closed immersion of a quasi-coherent ideal $\mathscr{I}\subset \OOX$. We call $\iota$ a thickening, iff $\mathscr{I}$ is locally nilpotent, i.e. there exists en open cover $(U_i)_{i\in I}$ of $X$ and $n_i\in \N$, such that $(\res{\mathscr{I}}{U_i})^{n_i+1} = 0$. For $n\in \N$ we call $\iota$ a thickening  of order $n$, if $\mathscr{I}^{n+1}= 0$. A thickening of order $1$ is called a first order thickening.
 \end{definition}
+
+\begin{definition}[\Etale\ ring maps]\label{def:etale_ring_map}
+(\cite[][(18.4), p.~36]{GoertzWedhornAG2})
+	We call an $R$-algebra $A$ formally étalé, iff for all rings $C$ and all ideals $I\lhd C$ the following diagram admits a unique morphism $A\to C$.
+	% https://q.uiver.app/#q=WzAsNCxbMCwxLCJDIl0sWzAsMCwiQy9JIl0sWzEsMCwiQSJdLFsxLDEsIkIiXSxbMywyXSxbMywwXSxbMCwxXSxbMiwxXSxbMiwwLCIiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+	\[\begin{tikzcd}
+		{C/I} & A \\
+		C & R
+		\arrow[from=1-2, to=1-1]
+		\arrow[dashed, from=1-2, to=2-1]
+		\arrow[from=2-1, to=1-1]
+		\arrow[from=2-2, to=1-2]
+		\arrow[from=2-2, to=2-1]
+	\end{tikzcd}\]
+\end{definition}
+
+
+\begin{definition}[Formally \etale\ morphism of affine schemes]
+	Analogously to definition \ref{def:etale_ring_map} we define a morphism of affine schemes $\Specof{A}\to \Specof{B}$ to be formally \etale, iff for all closed immersions $\Specof{R/I}\to \Specof{R}$  it admits a unique lift fitting into this commutative diagram:
+	% https://q.uiver.app/#q=WzAsNCxbMSwwLCJTcGVjQSJdLFsxLDEsIlNwZWNCIl0sWzAsMCwiVF8wIl0sWzAsMSwiVCJdLFsyLDNdLFsyLDBdLFszLDFdLFswLDFdLFszLDAsIiIsMSx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+	\[\begin{tikzcd}
+		\Specof{R/I} & \Specof{A} \\
+		\Specof{R} & \Specof{B}
+		\arrow[from=1-1, to=1-2]
+		\arrow[from=1-1, to=2-1]
+		\arrow[from=1-2, to=2-2]
+		\arrow[dashed, from=2-1, to=1-2]
+		\arrow[from=2-1, to=2-2]
+	\end{tikzcd}\]
+\end{definition}
+
+This naturally leads to the definition of formally \etale\ morphisms of schemes:
+
+\begin{definition}[Formally \etale\ morphism of schemes]
+	(\cite[][(Definition 18.3), p.~32]{GoertzWedhornAG2})
+	A morphism of schemes $X\to S$ is called formally \etale, iff for all first order thickenings $T_0\to T$ with affine $T$, there exists a unique lift fitting into this diagram:
+	% https://q.uiver.app/#q=WzAsNCxbMSwwLCJYIl0sWzEsMSwiUyJdLFswLDAsIlRfMCJdLFswLDEsIlQiXSxbMiwzXSxbMiwwXSxbMywxXSxbMCwxXSxbMywwLCIiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+	\[\begin{tikzcd}
+		{T_0} & X \\
+		T & S
+		\arrow[from=1-1, to=1-2]
+		\arrow[from=1-1, to=2-1]
+		\arrow[from=1-2, to=2-2]
+		\arrow[dashed, from=2-1, to=1-2]
+		\arrow[from=2-1, to=2-2]
+	\end{tikzcd}\]
+\end{definition}
+
+
+\begin{theorem}[Locality of \etale\ morphism]
+	(\cite[][Theorem 18.42, p. ~44]{GoertzWedhornAG2})
+	Let $f:X\to S$ be a morphism of schemes locallly of finite presentation. Let $x\in X$ and $s:= f(x)$. Then $f$ is \etale\ at $x$, iff there exists an open affine $V = \Specof{R}$ of $s$ and an open affine $U=\Specof{A}\subset f^{-1}(V)$ of $x$, such that $A$ is isomorphic to the standard \etale\ $R$-algebra.
+\end{theorem}
+
+\begin{proof}
+	Inhalt...
+\end{proof}
