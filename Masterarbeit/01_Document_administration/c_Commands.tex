@@ -140,7 +140,6 @@
 \newtheorem{theorem}{\theoremname}
 \newtheorem{lemma}{\lemmaname}
 \newtheorem{remark}{\remarkname}
-\newtheorem{proposition}{\propositionname}
 %------------------------------
 % THEOREM ENVIRONMENT
 %------------------------------
@@ -180,7 +179,7 @@
 	linecolor=black,
 	roundcorner=2pt,
 	linewidth=1pt
-]{propositionenv}[theoremenv]{\propositionname}
+]{proposition}[theoremenv]{\propositionname}
 %------------------------------
 % MATH AND OPERATORS
 %------------------------------
@@ -595,6 +594,8 @@ urlseen = {last access},
 % ---------- Category theory operators ----------
 \DeclareRobustCommand{\CatC}{\ensuremath{\mathscr{C}}}
 \DeclareRobustCommand{\CatD}{\ensuremath{\mathscr{D}}}
+\DeclareMathOperator{\Ob}{Ob}
+
 
 % ---------- Algebraic geometry operators ----------
 \DeclareMathOperator{\Spec}{Spec}

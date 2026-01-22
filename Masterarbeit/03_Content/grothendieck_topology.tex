@@ -1,0 +1,20 @@
+\chapter{Grothendieck Topology}
+
+In this chapter we want to define a Grothendieck topology on a category. 
+Given a topological space $X$, the open sets define a category, where the objects are the open sets of $X$ and morphisms are given by inclusion. In algebraic geometry one tries to analyze sheaves of the space $X$. The category associated to $X$ encodes the coverings of open subest of $X$ by opens.\\
+The notion of a Grothendieck topology will generalize this for arbitrary categories and arbitrary "coverings"
+
+\begin{definition}[Sieve]
+	(\cite[][p.~38]{MacLaneMoerdijk1992})
+	Let $X\in \CatC$ be an object of a small category. A sieve on $X$ is a subfunctor of the representable presheaf $\Hom_\CatC(-, X)$
+\end{definition}
+
+\begin{definition}[Grothendieck Topology]
+	(\cite[(Definition 1), p. ~110]{MacLaneMoerdijk1992})
+	A Grothendieck topology $J$ on a small categrory $\CatC$ is a function that assigns to each object $X\in C$ a collection of sieves $J(X)$, such that the following axioms are satisfied:
+	\begin{enumerate}
+		\item For each object $X\in \CatC$ $\Hom_\CatC(-, X)$ is a sieve.
+		\item For each morphism $f:X\to Y$ in $\CatC$ and each sieve $S\in J(Y)$ the pullback $f^*(S)\in J(X)$ is a sieve on $X$.
+		\item For each sieve $S, R\in J(Y)$, such that $f^*(R)\in J(X)$ for all $f:X\to Y\in S$, then $R\in J(X)$
+	\end{enumerate}
+\end{definition}
