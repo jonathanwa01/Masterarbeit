@@ -120,13 +120,16 @@
 \newcommand{\theoremname}{}
 \newcommand{\lemmaname}{}
 \newcommand{\remarkname}{}
+\newcommand{\propositionname}{}
 \iflanguage{english}{
 	\renewcommand{\theoremname}{Theorem}
 	\renewcommand{\lemmaname}{Lemma}
+	\renewcommand{\propositionname}{Proposition}
 	\renewcommand{\remarkname}{Remark}
 	}{\iflanguage{ngerman}{
 		\renewcommand{\theoremname}{Satz}
 		\renewcommand{\lemmaname}{Hilfssatz}
+		\renewcommand{\propositionname}{Proposition}
 		\renewcommand{\remarkname}{Bemerkung}
 	}{}
 	}
@@ -149,26 +152,34 @@
 % LEMMA ENVIRONMENT
 %------------------------------
 \newmdtheoremenv[
-  linecolor=blue,
-  roundcorner=2pt,
-  linewidth=1pt
-]{lemmaenv}{\lemmaname}[chapter]
+linecolor=blue,
+roundcorner=2pt,
+linewidth=1pt
+]{lemmaenv}[theoremenv]{\lemmaname}
 %------------------------------
 % REMARK ENVIRONMENT
 %------------------------------
 \newmdtheoremenv[
-  linecolor=red,
-  roundcorner=2pt,
-  linewidth=0.5pt
-]{remarkenv}{\remarkname}[chapter]
+linecolor=red,
+roundcorner=2pt,
+linewidth=0.5pt
+]{remarkenv}[theoremenv]{\remarkname}
 %------------------------------
 % DEFINITION ENVIRONMENT
 %------------------------------
 \newmdtheoremenv[
-  linecolor=black,
-  roundcorner=2pt,
-  linewidth=1pt
-]{definition}{Definition}[chapter]
+linecolor=black,
+roundcorner=2pt,
+linewidth=1pt
+]{definition}[theoremenv]{Definition}
+%------------------------------
+% PROPOSITION ENVIRONMENT
+%------------------------------
+\newmdtheoremenv[
+linecolor=black,
+roundcorner=2pt,
+linewidth=1pt
+]{propositionenv}[theoremenv]{\propositionname}
 %------------------------------
 % MATH AND OPERATORS
 %------------------------------
