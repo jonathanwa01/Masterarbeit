@@ -575,3 +575,40 @@ urlseen = {last access},
 % You can use this area for additional own commands
 % in this way, it is simpler to pull a new version of the template - you can simply copy this area to the new version
 % make sure that these commands do not require or override commands from above
+
+% ---------- Category theory operators ----------
+\DeclareRobustCommand{\CatC}{\ensuremath{\mathscr{C}}}
+\DeclareRobustCommand{\CatD}{\ensuremath{\mathscr{D}}}
+
+% ---------- Algebraic geometry operators ----------
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Proj}{Proj}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Pic}{Pic}
+\DeclareMathOperator{\Gal}{Gal}
+
+% (Optional) bracketed forms
+\NewDocumentCommand{\Specof}{m}{\ensuremath{\Spec\!\left(#1\right)}}
+\NewDocumentCommand{\Homof}{mm}{\ensuremath{\Hom\!\left(#1,#2\right)}}
+
+% ---------- Categories (sans serif) ----------
+\DeclareRobustCommand{\cat}[1]{\ensuremath{\mathsf{#1}}}
+
+\DeclareRobustCommand{\Sch}{\cat{Sch}}
+\DeclareRobustCommand{\Set}{\cat{Set}}
+\DeclareRobustCommand{\Top}{\cat{Top}}
+\DeclareRobustCommand{\Grp}{\cat{Grp}}
+\DeclareRobustCommand{\Ab}{\cat{Ab}}
+\DeclareRobustCommand{\Ring}{\cat{Ring}}
+\DeclareRobustCommand{\CRing}{\cat{CRing}}
+\DeclareRobustCommand{\Mod}{\cat{Mod}} % use as \Mod_A
+
+% Over/under categories
+\NewDocumentCommand{\Over}{mm}{\ensuremath{#1_{/#2}}}  % \Over{\Sch}{S} -> \Sch_{/S}
+\NewDocumentCommand{\Under}{mm}{\ensuremath{#1_{#2/}}} % \Under{\Sch}{S} -> \Sch_{S/}
+
+% Convenience wrappers
+\NewDocumentCommand{\SchOver}{m}{\Over{\Sch}{#1}}
+\NewDocumentCommand{\SchUnder}{m}{\Under{\Sch}{#1}}
