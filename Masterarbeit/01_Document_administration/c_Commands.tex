@@ -595,18 +595,29 @@ urlseen = {last access},
 \DeclareRobustCommand{\CatC}{\ensuremath{\mathscr{C}}}
 \DeclareRobustCommand{\CatD}{\ensuremath{\mathscr{D}}}
 \DeclareMathOperator{\Ob}{Ob}
+% adjoint
+\NewDocumentCommand{\adj}{mm}{\ensuremath{#1 \dashv #2}}
+
+% ---------- (Pre)Sheaves ----------
+% Presheaves on C: Set^{C^op}
+\DeclareRobustCommand{\Psh}[1]{\ensuremath{\cat{PSh}\!\left(#1\right)}}
+\DeclareRobustCommand{\PshC}{\Psh{\CatC}}              % \Psh(\mathscr{C})
+
+% Sheaves on C (requires you to have fixed a Grothendieck topology on C)
+\DeclareRobustCommand{\Sh}[1]{\ensuremath{\cat{Sh}\!\left(#1\right)}}
+\DeclareRobustCommand{\ShC}{\Sh{\CatC}}                % \Sh(\mathscr{C})
+% explicit presheaves on set
+\DeclareRobustCommand{\PshSet}[1]{\ensuremath{\Set^{\Opp{#1}}}}
+\DeclareRobustCommand{\PshSetC}{\PshSet{\CatC}}        % \Set^{\mathscr{C}^{op}}
 
 
-% ---------- Algebraic geometry operators ----------
-\DeclareMathOperator{\Spec}{Spec}
-\DeclareMathOperator{\Proj}{Proj}
-\DeclareMathOperator{\Hom}{Hom}
-\DeclareMathOperator{\End}{End}
-\DeclareMathOperator{\Aut}{Aut}
+% ---------- Opposite category ----------
+\DeclareRobustCommand{\op}{\mathrm{op}}
+\NewDocumentCommand{\Opp}{m}{\ensuremath{#1^{\op}}}
+% Convenience shorthands for your default categories
+\DeclareRobustCommand{\CatCop}{\Opp{\CatC}}
+\DeclareRobustCommand{\CatDop}{\Opp{\CatD}}
 
-% (Optional) bracketed forms
-\NewDocumentCommand{\Specof}{m}{\ensuremath{\Spec\!\left(#1\right)}}
-\NewDocumentCommand{\Homof}{mm}{\ensuremath{\Hom\!\left(#1,#2\right)}}
 
 % ---------- Categories (sans serif) ----------
 \DeclareRobustCommand{\cat}[1]{\ensuremath{\mathsf{#1}}}
@@ -627,6 +638,17 @@ urlseen = {last access},
 % Convenience wrappers
 \NewDocumentCommand{\SchOver}{m}{\Over{\Sch}{#1}}
 \NewDocumentCommand{\SchUnder}{m}{\Under{\Sch}{#1}}
+
+% ---------- Algebraic geometry operators ----------
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Proj}{Proj}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Aut}{Aut}
+
+% (Optional) bracketed forms
+\NewDocumentCommand{\Specof}{m}{\ensuremath{\Spec\!\left(#1\right)}}
+\NewDocumentCommand{\Homof}{mm}{\ensuremath{\Hom\!\left(#1,#2\right)}}
 
 % --- Structure sheaf ---
 \DeclareRobustCommand{\OO}{\mathscr{O}}             % calligraphic O
