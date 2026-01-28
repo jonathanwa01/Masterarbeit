@@ -1,0 +1,62 @@
+\chapter{Grothendieck Topology}
+
+In this chapter we want to define a Grothendieck topology on a category. 
+Given a topological space $X$, the open sets define a category, where the objects are the open sets of $X$ and morphisms are given by inclusion. In algebraic geometry one tries to analyze sheaves of the space $X$. The category associated to $X$ encodes the coverings of open subest of $X$ by opens.\\
+The notion of a Grothendieck topology will generalize this for arbitrary categories and arbitrary "coverings"
+
+\begin{definition}[Sieve]
+	(\cite[][p.~38]{MacLaneMoerdijk1992})
+	Let $X\in \CatC$ be an object of a small category. A sieve on $X$ is a subfunctor of the representable presheaf $\Hom_\CatC(-, X)$. We will write $y(X)$ for the Yoneda embedding $\Hom_\CatC(-, X)$.
+\end{definition}
+
+\begin{definition}[Grothendieck Topology]
+	(\cite[(Definition 1), p. ~110]{MacLaneMoerdijk1992})
+	A Grothendieck topology $J$ on a small categrory $\CatC$ is a function that assigns to each object $X\in C$ a collection of sieves $J(X)$ called covering sieves, such that the following axioms are satisfied:
+	\begin{enumerate}
+		\item For each object $X\in \CatC$ $\Hom_\CatC(-, X)$ is a sieve.
+		\item For each morphism $f:X\to Y$ in $\CatC$ and each sieve $S\in J(Y)$ the pullback $f^*(S)\in J(X)$ is a sieve on $X$.
+		\item For each covering sieve $S\in J(Y)$ and each sieve $R$ on $Y$, such that $f^*(R)\in J(X)$ for all $f:X\to Y\in S$, then $R\in J(Y)$
+	\end{enumerate}
+\end{definition}
+
+\begin{remark}
+	For a sieve $S$ on $Y\in\CatC$ and any $f:X\to Y$ in $\CatC$ we have $f^*S = \{g:Z\to X\mid f\circ g\in S\}\subset \Hom_\CatC(-, X)$
+\end{remark}
+
+\begin{definition}[Site]
+	(\cite[][p. ~110]{MacLaneMoerdijk1992})
+	For a small category $\CatC$ and a Grothendieck topology $J$ we will call the pair $(\CatC, J)$  a site on $\CatC$.
+\end{definition}
+
+\begin{definition}[Matching family]
+	(\cite[][p.~121]{MacLaneMoerdijk1992})
+	Let $(\CatC, J)$ be a site, $P:\CatCop\to \Set$ a presheaf on $\CatC$ and $S\in J(C)$ a covering sieve. A matching familiy for $S$ of elements of $P$ is natural transformation $\eta:S\Rightarrow P$.
+	
+	This assigns to each $f:D\to C\in S(D)$ an element $x_f\in P(D)$, such that $P(g)(x_f) = x_{f\circ g}$ for all $g:E\to D\in \CatC$. Notice that $f\circ g\in S(E)$, since $S$ is a sieve.
+	
+	An amalgation of the matching family $\eta$ is an element $x\in P(C)$, such that $P(f)(x) = x_f$ for all $f\in S$
+\end{definition}
+
+\begin{definition}[Sheaf]
+	(\cite[(p. ~121]{MacLaneMoerdijk1992})
+	Let $(\CatC, J) $ be a site. A presheaf $P:\CatCop\to \Set$ is a sheaf, iff for every covering sieve $S\in J(C)$ the following diagramm admits a unique lift:
+	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJTIl0sWzEsMCwiUCJdLFswLDEsInkoQykiXSxbMCwyLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDFdLFsyLDEsIiIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+	\[\begin{tikzcd}
+		S & P \\
+		{y(C)}
+		\arrow[from=1-1, to=1-2]
+		\arrow[hook, from=1-1, to=2-1]
+		\arrow[dashed, from=2-1, to=1-2]
+	\end{tikzcd}\]
+	Write $\Sh{\CatC,J} \subset \PshC$ for the full subcategory of sheaves.
+\end{definition}
+
+\begin{remark}
+	(\cite[(p. ~122]{MacLaneMoerdijk1992})
+	Let $(\CatC, J) $  be a site. 
+\end{remark}
+
+\begin{lemma}[Sheafication]
+	
+	Let $(\CatC, J)$ be a site, then the fully faithful inclusion $\iota: \Sh{\CatC,J} \hookrightarrow \PshC$ admits a left adjoint $\adj{a}{\iota}$.
+\end{lemma}
