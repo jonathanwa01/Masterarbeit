@@ -6,7 +6,7 @@ The notion of a Grothendieck topology will generalize this for arbitrary categor
 
 \begin{definition}[Sieve]
 	(\cite[][p.~38]{MacLaneMoerdijk1992})
-	Let $X\in \CatC$ be an object of a small category. A sieve on $X$ is a subfunctor of the representable presheaf $\Hom_\CatC(-, X)$. We will write $y(X)$ for the Yoneda embedding $\Hom_\CatC(-, X)$.
+	Let $X\in \CatC$ be an object of a small category. A sieve on $X$ is a subfunctor of the representable presheaf $\Hom_\CatC(-, X)$. We will write $h_X$ for the Yoneda embedding $\Hom_\CatC(-, X)$.
 \end{definition}
 
 \begin{definition}[Grothendieck Topology]
@@ -43,13 +43,17 @@ The notion of a Grothendieck topology will generalize this for arbitrary categor
 	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJTIl0sWzEsMCwiUCJdLFswLDEsInkoQykiXSxbMCwyLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDFdLFsyLDEsIiIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
 	\[\begin{tikzcd}
 		S & P \\
-		{y(C)}
+		{h_C}
 		\arrow[from=1-1, to=1-2]
 		\arrow[hook, from=1-1, to=2-1]
 		\arrow[dashed, from=2-1, to=1-2]
 	\end{tikzcd}\]
 	Write $\Sh{\CatC,J} \subset \PshC$ for the full subcategory of sheaves.
 \end{definition}
+
+\begin{remark}
+	The sheaf condition is a local property.
+\end{remark}
 
 \begin{remark}
 	(\cite[(p. ~122]{MacLaneMoerdijk1992})

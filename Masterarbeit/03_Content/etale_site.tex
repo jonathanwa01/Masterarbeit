@@ -1,0 +1,71 @@
+\chapter{\Etale\ Site}
+
+
+\begin{definition}[\Etale\ covering]
+	(\cite[][(Definition 20.21), p.~101]{GoertzWedhornAG2})
+	An \etale\ covering of a scheme $X$ is a family of \etale\ morphisms $(g_i: U_i\to X)_{i\in I}$, such that $X = \bigcup_{i\in I} g_i(U_i)$. Let $\mathcal{U} =(U_i\to X)_{i\in I}$ and $\mathcal{V} = (V_j\to X)_{j\in J}$ be \etale\ coverings, than we call $\mathcal{V}$ a refinement of $\mathcal{U}$, if there exists a map $\alpha: J\to I$, such that for each $j\in J$ there exists a morphism $V_j\to U_{\alpha(j)}$, such that the following commute:
+	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJWX2oiXSxbMiwwLCJVX3tcXGFscGhhX2p9Il0sWzEsMSwiWCJdLFswLDJdLFsxLDJdLFswLDEsIlxcdmFycGhpX2oiXV0=
+	\[\begin{tikzcd}
+		{V_j} && {U_{\alpha(j)}} \\
+		& X
+		\arrow[from=1-1, to=1-3]
+		\arrow[from=1-1, to=2-2]
+		\arrow[from=1-3, to=2-2]
+	\end{tikzcd}\]
+\end{definition}
+
+\begin{proposition}\label{prop:affine-etale-refinement}
+	(\cite[][p.~101]{GoertzWedhornAG2})
+	Let $X$ be a scheme. Then every \etale\ covering $\mathcal{U} =(g_i: U_i\to X)_{i\in I}$ of $X$ admits a refinement $\mathcal{V} = (V_j\to X)_{j\in J}$ of affine schemes. If $X$ quasi-compact, the refinement can be chosen to be finite.
+\end{proposition}
+
+\begin{proof}
+	For each $(U_i)_{i\in I}$ chose an open affine cover $U_i = \bigcup_{j\in J_i} V_{ij}$. Now consider the composite $V_{ij} \hookrightarrow U_i\xrightarrow{g_i} X$ . Each $V_{ij}\hookrightarrow U_i$ is an open immersion, hence \etale. Let $J = \coprod_{i\in I}J_i = \{(i, j) \mid i\in I, j\in J_i\}$.  This yields an \etale\ cover $\mathcal{V} = (V_{ij} \to X)_{(i, j)\in J}$, since the composite of two \etale\ morohisms is \etale\ and the image covers $X$ by construction.
+	$\mathcal{V}$ is a refinement of $\mathcal{U}$ via $\alpha: J\to I, (i, j) \mapsto i$.
+	If $X$ is quasi-compact, there exists a finite subset $J'\subseteq J$ such that the opens $g_{\alpha(j)}(V_j)$ cover $X$.
+\end{proof}
+
+This allows us to restrict to finite affine \etale\ covers. Such reductions are standard in
+algebraic geometry: many statements can then be checked on affines and translated into
+commutative algebra.
+
+\begin{theorem}[Representable presheaves of schemes]
+	Let $X$ be a scheme. Consider the representable presheaf 
+	\[h_X: (\SchOver{Et})^\op \to \Set\]
+	on the \etale\ site of \Sch. Then $h_X$ is a sheaf for the \etale\ topology.
+\end{theorem}
+
+\begin{proof}
+	Let $U$ be a scheme and $\mathcal{U} = (U_i\to U)_{i\in I}$ be an \etale\ covering. Let $U = \bigcup_\alpha V_\alpha$ be an affine open cover. To construct a morphism $f:U\to X$ it suffices to construct compatible morphisms $g_\alpha:V_\alpha \to X$:\\
+	Consider the following pullback diagram.
+	% https://q.uiver.app/#q=WzAsNCxbMSwwLCJVX2kiXSxbMSwxLCJVIl0sWzAsMSwiVl9cXGFscGhhIl0sWzAsMCwiVl9cXGFscGhhXFx0aW1lc19VVV9pIl0sWzIsMV0sWzAsMV0sWzMsMl0sWzMsMF1d
+	\[\begin{tikzcd}
+		{V_\alpha\times_UU_i} & {U_i} \\
+		{V_\alpha} & U
+		\arrow[from=1-1, to=1-2]
+		\arrow[from=1-1, to=2-1]
+		\arrow[from=1-2, to=2-2]
+		\arrow[from=2-1, to=2-2]
+	\end{tikzcd}\]
+	The morphisms $V_\alpha\times_UU_i \to V_\alpha$ are \etale\ by prop ???.
+	Assume the sheaf condition holds for $(V_\alpha\times_UU_i\to V_\alpha)_{i\in I}$ for all $\alpha$, i.e. the following diagram is a exact:
+	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJoX1goVSkiXSxbMSwwLCJcXHByb2RfXFxhbHBoYSBoX1goVl9cXGFscGhhKSJdLFsyLDAsIlxccHJvZF97XFxhbHBoYSxcXGJldGF9KFZfXFxhbHBoYVxcdGltZXNfVSBWX1xcYmV0YSkiXSxbMCwxXSxbMSwyLCIiLDAseyJvZmZzZXQiOjJ9XSxbMSwyLCIiLDAseyJvZmZzZXQiOi0yfV1d
+	\[\begin{tikzcd}
+		{h_X(U)} & {\prod_\alpha h_X(V_\alpha)} & {\prod_{\alpha,\beta}(V_\alpha\times_U V_\beta)}
+		\arrow[from=1-1, to=1-2]
+		\arrow[shift right=2, from=1-2, to=1-3]
+		\arrow[shift left=2, from=1-2, to=1-3]
+	\end{tikzcd}\]
+	
+	Assume $f_i:U_i\to X$ agree on $U_i\times_U U_j$. The inclusions $V_\alpha \hookrightarrow U$ are open immersions, hence \etale. So $\{V_\alpha \to U\}$ is itself an \etale\ cover.
+	
+	Now suppose we are given compatible morphisms $g_\alpha:V_\alpha \to X$, such that the following commutes:
+	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJWX1xcYWxwaGEiXSxbMiwwLCJWX1xcYWxwaGFcXHRpbWVzX1VVX2kiXSxbMSwxLCJYIl0sWzAsMiwiZl9cXGFscGhhIiwyXSxbMSwyXSxbMSwwXV0=
+	\[\begin{tikzcd}
+		{V_\alpha} && {V_\alpha\times_UU_i} \\
+		& X
+		\arrow["{g_\alpha}"', from=1-1, to=2-2]
+		\arrow[from=1-3, to=1-1]
+		\arrow[from=1-3, to=2-2]
+	\end{tikzcd}\]
+\end{proof}
