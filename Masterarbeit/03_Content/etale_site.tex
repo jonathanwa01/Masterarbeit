@@ -143,6 +143,48 @@ commutative algebra.
 	So all $g_\alpha$ can be glued together to a unique morphism $f:U\to X$, since $h_X$ is a sheaf in the Zariski site.
 	Finally we need to check, that $f$ restricts to $f_i$ on $U_i$. This can be checked on all the $V_{i,\alpha}\to U_i$ for all $\alpha$. But this holds by construction.
 	
+	So far, we successfully reduced $U$ to the affine case. So without loss of generality assume $U = \Specof{B}$ to be affine.
+	We will now reducs $X$ to the affine case too. 
 	
+	Let $\{W_i \hookrightarrow X\}_{i\in I}$ be an open affine cover of a scheme $X$, and set
+	\[
+	W_{ij} := W_i \cap W_j \qquad (i,j\in I).
+	\]
+	Then for every scheme $S$ there is a natural isomorphism
+	\[
+	h_X(S)=\Hom(S,X)
+	\;\cong\;
+	\Eq\!\left(
+	\prod_{i} \Hom(S,W_i)
+	\;\rightrightarrows\;
+	\prod_{i,j} \Hom(S,W_{ij})
+	\right),
+	\]
+	where the two arrows are induced by restricting a morphism $S\to W_i$ to
+	$S\to W_{ij}$ via the open immersions $W_{ij}\hookrightarrow W_i$ and
+	$W_{ij}\hookrightarrow W_j$.
+	
+	\medskip
+	
+	Equivalently, as presheaves on $(\Sch/S)$,
+	\[
+	h_X \;\cong\;
+	\Eq\!\left(
+	\prod_{i} h_{W_i}
+	\;\rightrightarrows\;
+	\prod_{i,j} h_{W_{ij}}
+	\right).
+	\]
+	In particular, $h_X$ is a limit of the diagram of the $h_{W_i}$
+	and $h_{W_{ij}}$, hence also
+	computed sectionwise for presheaves.
+	
+	Since the category of sheaves of sets on $(\Sch/S)_{et}$ is closed under
+	limits, it follows that if each $h_{W_i}$
+	is a sheaf, then $h_X$ is a sheaf as well.
+	Therefore, to prove that $h_X$ is a sheaf for an arbitrary $X$, it suffices to
+	prove the claim when $X$ is affine.
+	
+	So we now assume both $U=\Specof{A}$ and $X=\Specof{B}$ to be affine schemes. Since the scheme $U$ has an affine basis, we may refine the covering $(U_i\to U)_{i\in I}$ and assume wlog $U_i = \Specof{A_i}$.
 	
 \end{proof}
