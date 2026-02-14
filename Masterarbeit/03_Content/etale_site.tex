@@ -79,7 +79,8 @@
 		\end{tikzcd}
 	\end{equation}
 	
-	Let $S:= \prod_i R_i$ and $\alpha: R\to S$ be the canonical ring map induced by the $\alpha_i$, i.e. $\alpha(r) = (\alpha_i(r))_i$. The $\varphi_i:A\to R_i$ induce a morphism $\Phi:A \to S$ given by $\Phi(a) = (\varphi_i(a))_i$.
+	The $\varphi_i:A\to R_i$ induce a morphism $\Phi:A \to S$ given by $\Phi(a) = (\varphi_i(a))_i$. Let $S:= \prod_i R_i$ and $\alpha: R\to S$ be the canonical ring map induced by the $\alpha_i$, i.e. $\alpha(r) = (\alpha_i(r))_i$. By \cite[][Tag 00HQ]{stacks-project}, a flat ring map $R \to S$ is faithfully flat if and only if $\Spec(S) \to \Spec(R)$ is surjective. Since the $R_i$ cover $R$, and $S$ is free, hence flat, the induced map $R\to S$ is faithfully flat.
+	
 	
 	Let $\delta_1, \delta_2:S\to S\otimes_R S$ be given by $\delta_1 = id\otimes_R 1, \delta_2 = 1\otimes_R  id$. Since, the cover is finite, $S$ is finitely generated. Hence we obtain a natural isomorphism
 	\[
@@ -123,7 +124,7 @@
 	S/\alpha(R) \to (S/\alpha(R))\otimes_R S
 	\]is injective. Hence $\bar{s} = 0$, i.e. $s \in \alpha(R)$, which proves the claim.
 	
-	Now by \ref{eq:delta_phi} and by exactness of \ref{diagram:exactness_R_S}, the universal property of the kernal R induces a unique morphism $\varphi:A\to R$, such that the following commutes:
+	Now by \ref{eq:delta_phi} and by exactness of \ref{diagram:exactness_R_S}, the universal property of the kernal $R$ induces a unique morphism $\varphi:A\to R$, such that the following commutes:
 	% https://q.uiver.app/#q=WzAsNSxbMSwxLCJSIl0sWzIsMSwiUyJdLFsyLDAsIkEiXSxbMCwxLCIwIl0sWzMsMSwiU1xcb3RpbWVzX1IgUyJdLFsyLDEsIlxcUGhpIl0sWzAsMSwiXFxhbHBoYSJdLFszLDBdLFsxLDQsIlxcZGVsdGFfMSAtXFxkZWx0YV8yIiwyXSxbMiw0XSxbMiwwLCJcXHZhcnBoaSIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
 	\[\begin{tikzcd}
 		&& A \\
