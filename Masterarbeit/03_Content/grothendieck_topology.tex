@@ -55,12 +55,11 @@ The notion of a Grothendieck topology will generalize this for arbitrary categor
 	The sheaf condition is a local property.
 \end{remark}
 
-\begin{remark}
-	(\cite[(p. ~122]{MacLaneMoerdijk1992})
-	Let $(\CatC, J) $  be a site. 
-\end{remark}
-
-\begin{lemma}[Sheafication]
-	
+\begin{lemma}[Sheafication]\label{lem:sheafification}
+	(\cite[p. 134]{MacLaneMoerdijk1992})
 	Let $(\CatC, J)$ be a site, then the fully faithful inclusion $\iota: \Sh{\CatC,J} \hookrightarrow \PshC$ admits a left adjoint $\adj{a}{\iota}$.
 \end{lemma}
+
+\begin{corollary}\label{cor:limit-sheaf}
+	By \cite[]{MacLaneCFWM}, the category $\Sh{\CatC,J}$ is complete. In particular the limit of sheaves is again a sheaf and is calculated in the full subcategory $\PshC$ of presheaves.
+\end{corollary}

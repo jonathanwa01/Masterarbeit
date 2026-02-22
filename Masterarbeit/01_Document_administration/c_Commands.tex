@@ -121,16 +121,19 @@
 \newcommand{\lemmaname}{}
 \newcommand{\remarkname}{}
 \newcommand{\propositionname}{}
+\newcommand{\corollaryname}{}
 \iflanguage{english}{
 	\renewcommand{\theoremname}{Theorem}
 	\renewcommand{\lemmaname}{Lemma}
 	\renewcommand{\propositionname}{Proposition}
 	\renewcommand{\remarkname}{Remark}
+	\renewcommand{\corollaryname}{Corollary}
 	}{\iflanguage{ngerman}{
 		\renewcommand{\theoremname}{Satz}
 		\renewcommand{\lemmaname}{Hilfssatz}
 		\renewcommand{\propositionname}{Proposition}
 		\renewcommand{\remarkname}{Bemerkung}
+		\renewcommand{\corollaryname}{Korollar}
 	}{}
 	}
 %------------------------------
@@ -140,6 +143,7 @@
 \newtheorem{theorem}{\theoremname}
 \newtheorem{lemma}{\lemmaname}
 \newtheorem{remark}{\remarkname}
+\newtheorem{corollary}{\corollaryname}
 %------------------------------
 % THEOREM ENVIRONMENT
 %------------------------------
@@ -156,6 +160,14 @@
 	roundcorner=2pt,
 	linewidth=1pt
 ]{lemmaenv}[theoremenv]{\lemmaname}
+%------------------------------
+% COROLLARY ENVIRONMENT
+%------------------------------
+\newmdtheoremenv[
+linecolor=black,
+roundcorner=2pt,
+linewidth=1pt
+]{corollaryenv}[theoremenv]{\corollaryname}
 %------------------------------
 % REMARK ENVIRONMENT
 %------------------------------
@@ -290,6 +302,7 @@
 	\def\tableautorefname{Tab.}%
 	\def\theoremenvautorefname{Satz}%
 	\def\lemmaenvautorefname{Hilfssatz}%
+	\def\corollaryenvautorefname{Korollar}%
 	\def\remarkenvautorefname{Bem.}%
 	\def\definitionautorefname{Def.}%
 	\def\algorithmautorefname{Alg.}%
@@ -304,6 +317,7 @@
 	\def\equationautorefnamelong~#1\null{Gleichung~(#1)\null}%
 	\def\theoremenvautorefnamelong{Satz}%
 	\def\lemmaenvautorefnamelong{Hilfssatz}%
+	\def\corollaryenvautorefnamelong{Korollar}%
 	\def\remarkenvautorefnamelong{Bemerkung}%
 	\def\definitionautorefnamelong{Definition}%
 	\def\algorithmautorefnamelong{Algorithmus}%
@@ -326,6 +340,7 @@
 	\def\equationautorefname~#1\null{Eq.~(#1)\null}%
 	\def\theoremenvautorefname{Theorem}%
 	\def\lemmaenvautorefname{Lemma}%
+	\def\corollaryenvautorefname{Corollary}%
 	\def\remarkenvautorefname{Remark}%
 	\def\definitionautorefname{Def.}%
 	\def\algorithmautorefname{Alg.}%
@@ -339,6 +354,7 @@
 	\def\equationautorefnamelong~#1\null{Equation~(#1)\null}%
 	\def\theoremenvautorefnamelong{Theorem}%
 	\def\lemmaenvautorefnamelong{Lemma}%
+	\def\corollaryenvautorefnamelong{Corollary}%
 	\def\remarkenvautorefnamelong{Remark}%
 	\def\definitionautorefnamelong{Definition}%
 	\def\algorithmautorefnamelong{Algorithm}%
@@ -361,6 +377,7 @@
   \renewcommand{\tableautorefname}{\tableautorefnamelong}%
   \renewcommand{\equationautorefname}{\equationautorefnamelong}%
   \renewcommand{\theoremenvautorefname}{\theoremenvautorefnamelong}%
+  \renewcommand{\corollaryenvautorefname}{\corollaryenvautorefnamelong}%
   \renewcommand{\lemmaenvautorefname}{\lemmaenvautorefnamelong}%
   \renewcommand{\remarkenvautorefname}{\remarkenvautorefnamelong}%
   \renewcommand{\definitionautorefname}{\definitionautorefnamelong}%

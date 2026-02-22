@@ -14,6 +14,10 @@
 	\end{tikzcd}\]
 \end{definition}
 
+\begin{definition}[\Etale\ Site]
+	We write $\Sch_{et}$ for the \etale\ site $(\Sch, J)$, where $J(X)$ contains all \etale\ coverings of $X$.
+\end{definition}
+
 \begin{proposition}\label{prop:affine-etale-refinement}
 	(\cite[][p.~101]{GoertzWedhornAG2})
 	Let $X$ be a scheme. Then every \etale\ covering $\mathcal{U} =(g_i: U_i\to X)_{i\in I}$ of $X$ admits a refinement $\mathcal{V} = (V_j\to X)_{j\in J}$ of affine schemes. If $X$ quasi-compact, the refinement can be chosen to be finite.
@@ -30,7 +34,7 @@
 	Let $f:R\to S$ be faithfully flat ring, then $f$ is injective.
 \end{lemma}
 
-\begin{lemma}[Representable presheaves of affine schemes]
+\begin{lemma}[Representable presheaves of affine schemes]\label{lem:repr-presheafs-of-affines}
 	Let $A$ be an commutative ring and let $\{\alpha_i: R\to R_i\}_{i\in I}$ be a morphism of \etale\ ring maps, such that the induced morphism of schemes 
 	\[
 	\coprod_{i\in I}\Specof{R_i} \to \Specof{R}
@@ -266,7 +270,7 @@ commutative algebra.
 	\[
 	W_{ij} := W_i \cap W_j \qquad (i,j\in I).
 	\]
-	Then for every scheme $S$ there is a natural isomorphism
+	Then for every scheme $S$, by Zariski gluing there is a natural isomorphism
 	\[
 	h_X(S)=\Hom(S,X)
 	\;\cong\;
@@ -282,7 +286,7 @@ commutative algebra.
 	
 	\medskip
 	
-	Equivalently, as presheaves on $(\Sch/S)$,
+	Via Yoneda, this is equivalent to an isomorphism of presheaves in $\Psh{\Sch}$,
 	\[
 	h_X \;\cong\;
 	\Eq\!\left(
@@ -293,14 +297,12 @@ commutative algebra.
 	\]
 	In particular, $h_X$ is a limit of the diagram of the $h_{W_i}$
 	and $h_{W_{ij}}$, hence also
-	computed sectionwise for presheaves.
+	computed sectionwise for presheaves. 
 	
-	Since the category of sheaves of sets on $(\Sch/S)_{et}$ is closed under
-	limits, it follows that if each $h_{W_i}$
-	is a sheaf, then $h_X$ is a sheaf as well.
-	Therefore, to prove that $h_X$ is a sheaf for an arbitrary $X$, it suffices to
-	prove the claim when $X$ is affine.
+	All $h_{W_i}$ and all $h_{W_{ij}}$ are sheaves by lemma \ref{lem:repr-presheafs-of-affines}.
+	By corrolary \ref{cor:limit-sheaf}, the category $\Sh{\Sch_{et}}$ is closed under limits, hence $h_X$ is a sheaf too.
 	
-	So we now assume both $U=\Specof{A}$ and $X=\Specof{B}$ to be affine schemes. Since the scheme $U$ has an affine basis, we may refine the covering $(U_i\to U)_{i\in I}$ and assume wlog $U_i = \Specof{A_i}$.
+	
+	
 	
 \end{proof}
