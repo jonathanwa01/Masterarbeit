@@ -156,7 +156,9 @@ commutative algebra.
 \end{theorem}
 
 \begin{proof}
-	Let $U$ be a scheme and $\mathcal{U} = (U_i\to U)_{i\in I}$ be an \etale\ covering. We need to show, that the following diagram is exact:
+	
+	We first assume $X$ to be an affine scheme. Let $U$ be a scheme and $\mathcal{U} = (U_i\to U)_{i\in I}$ be an \etale\ covering. By \ref{prop:affine-etale-refinement} without loss of generality we may assume the $U_i$ to be affine.
+	We need to show, that the following diagram is exact:
 	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJoX1goVSkiXSxbMSwwLCJcXHByb2RfaSBoX1goVV9pKSJdLFsyLDAsIlxccHJvZF97aSxqfSBoX1goVV9pXFx0aW1lc19VIFVfaikiXSxbMCwxXSxbMSwyLCIiLDAseyJvZmZzZXQiOjJ9XSxbMSwyLCIiLDAseyJvZmZzZXQiOi0yfV1d
 	\[\begin{tikzcd}
 		{h_X(U)} & {\prod_i h_X(U_i)} & {\prod_{i,j} h_X(U_i\times_U U_j)}
@@ -169,7 +171,6 @@ commutative algebra.
 	We will first reduce $U$ to the affine case.
 	Let $U = \bigcup_\alpha V_\alpha$ be an affine open cover.  Assume $f_i:U_i\to X$, such that $U_i\times_U U_j\to U_i \xrightarrow{f_i} X$ and $U_i\times_U U_j\to U_j \xrightarrow{f_j} X$ coincide. To construct a unique morphism $f:U\to X$ it suffices to construct compatible morphisms $g_\alpha:V_\alpha \to X$ for all $\alpha$.
 	
-	
 	Consider the following pullback diagram.
 	% https://q.uiver.app/#q=WzAsNCxbMSwwLCJVX2kiXSxbMSwxLCJVIl0sWzAsMSwiVl9cXGFscGhhIl0sWzAsMCwiVl9cXGFscGhhXFx0aW1lc19VVV9pIl0sWzIsMV0sWzAsMV0sWzMsMl0sWzMsMF1d
 	\[\begin{tikzcd}
@@ -181,8 +182,8 @@ commutative algebra.
 		\arrow[from=2-1, to=2-2]
 		\arrow[phantom, from=1-1, to=2-2, "\lrcorner", pos=0.15]
 	\end{tikzcd}\]
-	The morphisms $V_\alpha\times_UU_i \to V_\alpha$ are \etale\ by proposition \ref{prop:etale-stable-under-pullback}. The morphism $V_\alpha\hookrightarrow U$ is the inclusion of the affine open $V_\alpha$, which is an open immersion, hence \etale. Write $V_{i, \alpha} := V_\alpha\times_UU_i$.
-	Assume the sheaf condition holds for $(V_{i, \alpha}\to V_\alpha)_{i\in I}$ for all $\alpha$, i.e. the following diagram is a exact:
+	The morphisms $V_\alpha\times_UU_i \to V_\alpha$ are \etale\ by proposition \ref{prop:etale-stable-under-pullback}. The morphism $V_\alpha\hookrightarrow U$ is the inclusion of the affine open $V_\alpha$, which is an open immersion. Write $V_{i, \alpha} := V_\alpha\times_UU_i$. By assumption, $V_\alpha$ and $U_i$ are affine, hence $V_{i, \alpha}$ is affine.
+	By lemma \ref{lem:repr-presheafs-of-affines} sheaf condition holds for $(V_{i, \alpha}\to V_\alpha)_{i\in I}$ for all $\alpha$, i.e. the following diagram is a exact:
 	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJoX1goVl9cXGFscGhhKSJdLFsxLDAsIlxccHJvZF9pIGhfWChWX3tpLFxcYWxwaGF9KSJdLFsyLDAsIlxccHJvZF97aSxqfWhfWChWX3tpLFxcYWxwaGF9XFx0aW1lc197Vl9cXGFscGhhfSBWX3tqLFxcYWxwaGF9KSJdLFswLDFdLFsxLDIsIiIsMCx7Im9mZnNldCI6Mn1dLFsxLDIsIiIsMCx7Im9mZnNldCI6LTJ9XV0=
 	\[\begin{tikzcd}
 		{h_X(V_\alpha)} & {\prod_i h_X(V_{i,\alpha})} & {\prod_{i,j}h_X(V_{i,\alpha}\times_{V_\alpha} V_{j,\alpha})}
@@ -263,10 +264,10 @@ commutative algebra.
 	So all $g_\alpha$ can be glued together to a unique morphism $f:U\to X$, since $h_X$ is a sheaf in the Zariski site.
 	Finally we need to check, that $f$ restricts to $f_i$ on $U_i$. This can be checked on all the $V_{i,\alpha}\to U_i$ for all $\alpha$. But this holds by construction.
 	
-	So far, we successfully reduced $U$ to the affine case. So without loss of generality assume $U = \Specof{B}$ to be affine.
-	We will now reducs $X$ to the affine case too. 
+
 	
-	Let $\{W_i \hookrightarrow X\}_{i\in I}$ be an open affine cover of a scheme $X$, and set
+	Now we assume $X$ to be any scheme.
+	Let $\{W_i \hookrightarrow X\}_{i\in I}$ be an open affine cover of the scheme $X$, and set
 	\[
 	W_{ij} := W_i \cap W_j \qquad (i,j\in I).
 	\]
@@ -299,10 +300,7 @@ commutative algebra.
 	and $h_{W_{ij}}$, hence also
 	computed sectionwise for presheaves. 
 	
-	All $h_{W_i}$ and all $h_{W_{ij}}$ are sheaves by lemma \ref{lem:repr-presheafs-of-affines}.
+	By the frist part of the proof, $h_{W_i}$ and all $h_{W_{ij}}$ are sheaves.
 	By corrolary \ref{cor:limit-sheaf}, the category $\Sh{\Sch_{et}}$ is closed under limits, hence $h_X$ is a sheaf too.
-	
-	
-	
 	
 \end{proof}
