@@ -271,18 +271,24 @@ commutative algebra.
 	\[
 	W_{ij} := W_i \cap W_j \qquad (i,j\in I).
 	\]
-	Then for every scheme $S$, by Zariski gluing there is a natural isomorphism
+	
+	Then via Zariksi gluing we have a natural isomorphim of schemes
 	\[
-	h_X(S)=\Hom(S,X)
+	X \cong \Coeq\big(\coprod_{i, j} W_{ij}  \;\rightrightarrows\; \coprod_i W_i\big).
+	\]
+	
+	Then  for every scheme $S$, by continuity of $\Hom$ there is a natural isomorphism
+	\[
+	h_X(S)=\Hom_\Sch(S,X)
 	\;\cong\;
 	\Eq\!\left(
-	\prod_{i} \Hom(S,W_i)
+	\prod_{i} \Hom_\Sch(S,W_i)
 	\;\rightrightarrows\;
-	\prod_{i,j} \Hom(S,W_{ij})
+	\prod_{i,j} \Hom_\Sch(S,W_{ij})
 	\right),
 	\]
 	where the two arrows are induced by restricting a morphism $S\to W_i$ to
-	$S\to W_{ij}$ via the open immersions $W_{ij}\hookrightarrow W_i$ and
+	$S\to W_{ij}$ along the open immersions $W_{ij}\hookrightarrow W_i$ and
 	$W_{ij}\hookrightarrow W_j$.
 	
 	\medskip
