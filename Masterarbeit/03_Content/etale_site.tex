@@ -169,7 +169,21 @@ commutative algebra.
 	Obviously the composite is equal by the pullback property.
 	
 	We will first reduce $U$ to the affine case.
-	Let $U = \bigcup_\alpha V_\alpha$ be an affine open cover.  Assume $f_i:U_i\to X$, such that $U_i\times_U U_j\to U_i \xrightarrow{f_i} X$ and $U_i\times_U U_j\to U_j \xrightarrow{f_j} X$ coincide. To construct a unique morphism $f:U\to X$ it suffices to construct compatible morphisms $g_\alpha:V_\alpha \to X$ for all $\alpha$.
+	Let $U = \bigcup_\alpha V_\alpha$ be an affine open cover.  Assume $f_i:U_i\to X$, such that $U_i\times_U U_j\to U_i \xrightarrow{f_i} X$ and $U_i\times_U U_j\to U_j \xrightarrow{f_j} X$ coincide, i.e. the following commutes:
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJVX2lcXHRpbWVzX1VVX2oiXSxbMSwwLCJVX2oiXSxbMCwxLCJVX2kiXSxbMSwxLCJYIl0sWzAsMV0sWzAsMl0sWzIsMywiZl9pIiwyXSxbMSwzLCJmX2oiXV0=
+	\begin{equation}\label{diag:fi-fj-agree-on-uij}
+		\begin{tikzcd}
+			{U_i\times_UU_j} & {U_j} \\
+			{U_i} & X
+			\arrow[from=1-1, to=1-2]
+			\arrow[from=1-1, to=2-1]
+			\arrow["{f_j}", from=1-2, to=2-2]
+			\arrow["{f_i}"', from=2-1, to=2-2]
+		\end{tikzcd}
+	\end{equation}
+	
+	
+	To construct a unique morphism $f:U\to X$ it suffices to construct compatible morphisms $g_\alpha:V_\alpha \to X$ for all $\alpha$ and then glue Zariski locally.
 	
 	Consider the following pullback diagram.
 	% https://q.uiver.app/#q=WzAsNCxbMSwwLCJVX2kiXSxbMSwxLCJVIl0sWzAsMSwiVl9cXGFscGhhIl0sWzAsMCwiVl9cXGFscGhhXFx0aW1lc19VVV9pIl0sWzIsMV0sWzAsMV0sWzMsMl0sWzMsMF1d
@@ -182,87 +196,112 @@ commutative algebra.
 		\arrow[from=2-1, to=2-2]
 		\arrow[phantom, from=1-1, to=2-2, "\lrcorner", pos=0.15]
 	\end{tikzcd}\]
-	The morphisms $V_\alpha\times_UU_i \to V_\alpha$ are \etale\ by proposition \ref{prop:etale-stable-under-pullback}. The morphism $V_\alpha\hookrightarrow U$ is the inclusion of the affine open $V_\alpha$, which is an open immersion. Write $V_{i, \alpha} := V_\alpha\times_UU_i$. By assumption, $V_\alpha$ and $U_i$ are affine, hence $V_{i, \alpha}$ is affine.
-	By lemma \ref{lem:repr-presheafs-of-affines} sheaf condition holds for $(V_{i, \alpha}\to V_\alpha)_{i\in I}$ for all $\alpha$, i.e. the following diagram is a exact:
-	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJoX1goVl9cXGFscGhhKSJdLFsxLDAsIlxccHJvZF9pIGhfWChWX3tpLFxcYWxwaGF9KSJdLFsyLDAsIlxccHJvZF97aSxqfWhfWChWX3tpLFxcYWxwaGF9XFx0aW1lc197Vl9cXGFscGhhfSBWX3tqLFxcYWxwaGF9KSJdLFswLDFdLFsxLDIsIiIsMCx7Im9mZnNldCI6Mn1dLFsxLDIsIiIsMCx7Im9mZnNldCI6LTJ9XV0=
+	The morphisms $V_\alpha\times_UU_i \to V_\alpha$ are \etale\ by proposition \ref{prop:etale-stable-under-pullback}. The morphism $V_\alpha\hookrightarrow U$ is the inclusion of the affine open $V_\alpha$.
+	Write $V_{i, \alpha} := V_\alpha\times_UU_i$. Now by proposition \ref{prop:affine-etale-refinement} we can refine to an affine \etale\ cover
+	\[
+	\{W_{i, \alpha, \lambda} \hookrightarrow V_{i, \alpha} \to V_\alpha\}_{i, \lambda}.
+	\]
+	
+	In particular $V_{i, \alpha} = \bigcup_{\lambda} W_{i, \alpha, \lambda}$.
+	Now $X$, $V_\alpha$ and $W_{i, \alpha, \lambda}$ are affine.
+	By lemma \ref{lem:repr-presheafs-of-affines} sheaf condition holds for $\{W_{i, \alpha, \lambda}\to V_\alpha\}_{i, \lambda}$ for all $\alpha$, i.e. the following diagram is a exact:
+	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJoX1goVl9cXGFscGhhKSJdLFsxLDAsIlxccHJvZF9pIGhfWChXX3tpLCBcXGFscGhhLCBcXGxhbWJkYX0pIl0sWzIsMCwiXFxwcm9kX3tpLGp9aF9YKFdfe2ksIFxcYWxwaGEsIFxcbGFtYmRhfVxcdGltZXNfe1ZfXFxhbHBoYX0gV197aiwgXFxhbHBoYSwgXFxsYW1iZGF9KSJdLFswLDFdLFsxLDIsIiIsMCx7Im9mZnNldCI6Mn1dLFsxLDIsIiIsMCx7Im9mZnNldCI6LTJ9XV0=
+	\begin{equation}\label{eq:eq-affine-V-W}
+		\begin{tikzcd}
+			{h_X(V_\alpha)} & {\prod_{(i,\lambda)} h_X(W_{i, \alpha, \lambda})} & {\prod_{(i, \lambda),(j, \mu)}h_X(W_{i, \alpha, \lambda}\times_{V_\alpha} W_{j, \alpha, \mu})}
+			\arrow[from=1-1, to=1-2]
+			\arrow[shift right=2, from=1-2, to=1-3]
+			\arrow[shift left=2, from=1-2, to=1-3]
+		\end{tikzcd}
+	\end{equation}
+
+	We write $f_{i, \alpha, \lambda}: W_{i, \alpha, \lambda}\hookrightarrow V_{i, \alpha}  \hookrightarrow U_i \xrightarrow{f_i} X$ for the restriction of $f_i$ to $W_{i, \alpha, \lambda}$. Define $W := W_{i, \alpha, \lambda}\times_{V_\alpha} W_{j, \alpha, \mu}$.
+	
+	We have canonical morphisms 
+	\begin{align*}
+		\varphi: W \xrightarrow{\pi_1} W_{i,\alpha,\lambda} \hookrightarrow V_{i,\alpha} = V_\alpha\times_UU_i \xrightarrow{\pi_{U_i}} U_i \\
+		\psi: W \xrightarrow{\pi_1} W_{j,\alpha, \mu} \hookrightarrow V_{j,\alpha} = V_\alpha\times_UU_j\xrightarrow{\pi_{U_j}} U_j 
+	\end{align*}
+	We will now proof, that $f_i\circ \varphi = f_j\circ \psi$. \\	
+	Since $W$ is the fibre product over $V_\alpha$, the following commute:	
+	% https://q.uiver.app/#q=WzAsOSxbMSwwLCJXIl0sWzAsMSwiV197aSwgXFxhbHBoYSwgXFxsYW1iZGF9Il0sWzIsMSwiV197aiwgXFxhbHBoYSwgXFxtdX0iXSxbMCwyLCJWX3tpLCBcXGFscGhhfSJdLFsyLDIsIlZfe2osIFxcYWxwaGF9Il0sWzEsMiwiVl9cXGFscGhhIl0sWzAsMywiVV9pIl0sWzIsMywiVV9qIl0sWzEsMywiVSJdLFswLDFdLFsxLDMsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzIsNCwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMCwyXSxbMyw2XSxbNSw4XSxbNiw4XSxbNyw4XSxbNCw3XSxbNCw1XSxbMyw1XSxbMyw4LCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XSxbNCw4LCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
 	\[\begin{tikzcd}
-		{h_X(V_\alpha)} & {\prod_i h_X(V_{i,\alpha})} & {\prod_{i,j}h_X(V_{i,\alpha}\times_{V_\alpha} V_{j,\alpha})}
-		\arrow[from=1-1, to=1-2]
-		\arrow[shift right=2, from=1-2, to=1-3]
-		\arrow[shift left=2, from=1-2, to=1-3]
+		& W & \\
+		{W_{i, \alpha, \lambda}} && {W_{j, \alpha, \mu}} \\
+		{V_{i, \alpha}} & {V_\alpha} & {V_{j, \alpha}} \\
+		{U_i} & U & {U_j}
+		\arrow[from=1-2, to=2-1]
+		\arrow[from=1-2, to=2-3]
+		\arrow[hook, from=2-1, to=3-1]
+		\arrow[hook, from=2-3, to=3-3]
+		\arrow[from=3-1, to=3-2]
+		\arrow[from=3-1, to=4-1]
+		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=3-1, to=4-2]
+		\arrow[from=3-2, to=4-2]
+		\arrow[from=3-3, to=3-2]
+		\arrow["\lrcorner"{anchor=center, pos=0.125, rotate=-90}, draw=none, from=3-3, to=4-2]
+		\arrow[from=3-3, to=4-3]
+		\arrow[from=4-1, to=4-2]
+		\arrow[from=4-3, to=4-2]
 	\end{tikzcd}\]
-	Write $f_{i, \alpha}: V_{i, \alpha} \to U_i \xrightarrow{f_i} X$ for the restriction of $f_i$ to $V_{i, \alpha}$. Since $f_i$ and $f_j$ agree on $U_i\times_U U_j$, the following commutes: 
-	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJVX2lcXHRpbWVzX1UgVV9qIl0sWzEsMCwiVV9qIl0sWzAsMSwiVV9pIl0sWzEsMSwiWCJdLFsxLDMsImZfaiJdLFsyLDMsImZfaSIsMl0sWzAsMl0sWzAsMV1d
+	
+	By commutativity of \ref{diag:fi-fj-agree-on-uij}, there is a unique $\delta$ fitting into the following diagram:
+	% https://q.uiver.app/#q=WzAsMTAsWzEsMCwiV197aSxcXGFscGhhLFxcbGFtYmRhfVxcdGltZXNfe1ZfXFxhbHBoYX0gV197aixcXGFscGhhLFxcbXV9Il0sWzAsMSwiV197aSxcXGFscGhhLFxcbGFtYmRhfSJdLFsyLDEsIldfe2osXFxhbHBoYSxcXG11fSJdLFswLDIsIlZfe2ksXFxhbHBoYX09Vl9cXGFscGhhXFx0aW1lc19VIFVfaSAiXSxbMiwyLCJWX3tqLFxcYWxwaGF9PVZfXFxhbHBoYVxcdGltZXNfVSBVX2oiXSxbMSwyLCJVX2lcXHRpbWVzX1UgVV9qIl0sWzEsNCwiWCJdLFswLDMsIlVfaSJdLFsyLDMsIlVfaiJdLFsxLDMsIlUiXSxbMCwxXSxbMCwyXSxbMiw0XSxbMSwzXSxbNSw4LCJcXHBpX3tVX2p9Il0sWzUsNywiXFxwaV97VV9pfSIsMl0sWzcsOV0sWzgsOV0sWzUsOSwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzMsN10sWzQsOF0sWzcsNiwiZl9pIiwyXSxbOCw2LCJmX2oiXSxbMCw1LCJcXGRlbHRhIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
 	\[\begin{tikzcd}
-		{U_i\times_U U_j} & {U_j} \\
-		{U_i} & X
+		& {W} & \\
+		{W_{i,\alpha,\lambda}} && {W_{j,\alpha,\mu}} \\
+		{V_{i,\alpha}=V_\alpha\times_U U_i } & {U_i\times_U U_j} & {V_{j,\alpha}=V_\alpha\times_U U_j} \\
+		{U_i} & U & {U_j} \\
+		& X
+		\arrow[from=1-2, to=2-1]
+		\arrow[from=1-2, to=2-3]
+		\arrow["\delta", dashed, from=1-2, to=3-2]
+		\arrow[from=2-1, to=3-1]
+		\arrow[from=2-3, to=3-3]
+		\arrow[from=3-1, to=4-1]
+		\arrow["{\pi_{U_i}}"', from=3-2, to=4-1]
+		\arrow["\lrcorner"{anchor=center, pos=0.125, rotate=-45}, draw=none, from=3-2, to=4-2]
+		\arrow["{\pi_{U_j}}", from=3-2, to=4-3]
+		\arrow[from=3-3, to=4-3]
+		\arrow[from=4-1, to=4-2]
+		\arrow["{f_i}"', from=4-1, to=5-2]
+		\arrow[from=4-3, to=4-2]
+		\arrow["{f_j}", from=4-3, to=5-2]
+	\end{tikzcd}\]
+	Hence $f_i\circ \pi_{U_i} = f_j\circ \pi_{U_j}$ pulls back to $W$ via $\delta$, which yields $f_{i, \alpha, \lambda}\mid_W = f_{j, \alpha, \mu}\mid_W$.
+	By the sheaf condition \ref{eq:eq-affine-V-W}, the $f_{i, \alpha, \lambda}$ glue together to a unique $g_\alpha: V_\alpha \to X$.
+	
+	
+	Next we prove, that the $g_\alpha$ agree on overlaps $V_{\alpha\beta} := V_\alpha \cap V_\beta \cong V_\alpha\times_U V_\beta$ and glue them again Zariski locally.
+	Let $\{T_\eta\}_{\eta}$ be an affine open cover of $V_{\alpha\beta}$. 
+	
+	Again by proposition \ref{prop:etale-stable-under-pullback} the following pullback is \etale:
+	% https://q.uiver.app/#q=WzAsNixbMiwwLCJVX2kiXSxbMSwxLCJWX3tcXGFscGhhXFxiZXRhfSJdLFsyLDEsIlUiXSxbMCwxLCJUX3tcXGV0YX0iXSxbMCwwLCJUX3tpLCBcXGV0YX0iXSxbMSwwLCJWX3tpLCBcXGFscGhhXFxiZXRhfSJdLFsxLDIsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsMl0sWzMsMSwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbNCwzXSxbNCwyLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XSxbNSwwXSxbNSwxXSxbNSwyLCIiLDAseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XSxbNCw1XV0=
+	\[\begin{tikzcd}
+		{T_{i, \eta}} & {V_{i, \alpha\beta}} & {U_i} \\
+		{T_{\eta}} & {V_{\alpha\beta}} & U
 		\arrow[from=1-1, to=1-2]
 		\arrow[from=1-1, to=2-1]
-		\arrow["{f_j}", from=1-2, to=2-2]
-		\arrow["{f_i}"', from=2-1, to=2-2]
-	\end{tikzcd}\]
-
-	By functoriality of $V_\alpha\times_U -$ we obtain a commutative diagram:
-	% https://q.uiver.app/#q=WzAsNSxbMSwwLCJWX1xcYWxwaGFcXHRpbWVzX1UoVV9pXFx0aW1lc19VIFVfaikiXSxbMiwwLCJWX1xcYWxwaGEgXFx0aW1lc19VIFVfaiJdLFsxLDEsIlZfXFxhbHBoYSBcXHRpbWVzX1UgVV9pIl0sWzIsMSwiWCJdLFswLDAsIihWX1xcYWxwaGFcXHRpbWVzX1UgVV9pKVxcdGltZXNfe1ZfXFxhbHBoYX0oVl9cXGFscGhhXFx0aW1lc19VIFVfaikiXSxbMSwzLCJmX3tqLCBcXGFscGhhfSJdLFsyLDMsImZfe2ksXFxhbHBoYX0iLDJdLFswLDJdLFswLDFdLFs0LDAsIlxcY29uZyJdXQ==
-	\[\begin{tikzcd}
-		{(V_\alpha\times_U U_i)\times_{V_\alpha}(V_\alpha\times_U U_j)} & {V_\alpha\times_U(U_i\times_U U_j)} & {V_\alpha \times_U U_j} \\
-		& {V_\alpha \times_U U_i} & X
-		\arrow["\cong", from=1-1, to=1-2]
+		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-3]
 		\arrow[from=1-2, to=1-3]
 		\arrow[from=1-2, to=2-2]
-		\arrow["{f_{j, \alpha}}", from=1-3, to=2-3]
-		\arrow["{f_{i,\alpha}}"', from=2-2, to=2-3]
-	\end{tikzcd}\]
-	
-	Then the compatible $f_{i, \alpha}$ glue uniquely to a morphism $g_\alpha:V_\alpha\to X$ fitting into the following diagramm:
-	% https://q.uiver.app/#q=WzAsNSxbMCwwLCJWX3tpLCBcXGFscGhhfVxcdGltZXNfe1ZfXFxhbHBoYX1WX3tqLCBcXGFscGhhfSJdLFsxLDAsIlZfe2osIFxcYWxwaGF9Il0sWzAsMSwiVl97aSwgXFxhbHBoYX0iXSxbMSwxLCJWX1xcYWxwaGEiXSxbMiwyLCJYIl0sWzAsMl0sWzAsMV0sWzIsM10sWzEsM10sWzEsNCwiZl97aiwgXFxhbHBoYX0iLDAseyJjdXJ2ZSI6LTJ9XSxbMiw0LCJmX3tpLCBcXGFscGhhfSIsMix7ImN1cnZlIjoyfV0sWzMsNCwiZ19cXGFscGhhIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
-	\[\begin{tikzcd}
-		{V_{i, \alpha}\times_{V_\alpha}V_{j, \alpha}} & {V_{j, \alpha}} \\
-		{V_{i, \alpha}} & {V_\alpha} \\
-		&& X
-		\arrow[from=1-1, to=1-2]
-		\arrow[from=1-1, to=2-1]
-		\arrow[from=1-2, to=2-2]
-		\arrow[from=2-1, to=2-2]
-		\arrow[phantom, from=1-1, to=2-2, "\lrcorner", pos=0.15]
-		\arrow["{f_{j, \alpha}}", from=1-2, to=3-3, bend left=15]
-		\arrow["{f_{i, \alpha}}"', from=2-1, to=3-3, bend right=15]
-		\arrow["{g_\alpha}"', dashed, from=2-2, to=3-3]
-	\end{tikzcd}\]
-	
-	Next we prove, that the $g_\alpha$ agree on overlaps $V_{\alpha\beta} := V_\alpha \cap V_\beta \cong V_\alpha\times_U V_\beta$. Again by proposition \ref{prop:etale-stable-under-pullback} the following pullback is \etale:
-	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJVX2lcXHRpbWVzX1UgVl97XFxhbHBoYVxcYmV0YX0iXSxbMSwwLCJVX2kiXSxbMCwxLCJWX3tcXGFscGhhXFxiZXRhfSJdLFsxLDEsIlUiXSxbMCwyXSxbMiwzXSxbMSwzXSxbMCwxXV0=
-	\[\begin{tikzcd}
-		V_{i, \alpha\beta} & {U_i} \\
-		{V_{\alpha\beta}} & U
-		\arrow[from=1-1, to=1-2]
-		\arrow[from=1-1, to=2-1]
-		\arrow[from=1-2, to=2-2]
-		\arrow[from=2-1, to=2-2]
-		\arrow[phantom, from=1-1, to=2-2, "\lrcorner", pos=0.15]
+		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-2, to=2-3]
+		\arrow[from=1-3, to=2-3]
+		\arrow[hook, from=2-1, to=2-2]
+		\arrow[hook, from=2-2, to=2-3]
 	\end{tikzcd}\]
 
-	Consider the following commutative diagram:
+	Again by proposition \ref{prop:affine-etale-refinement} we refine ${T_{i, \eta}}$ by an affine cover $\{T_{i, \eta, \lambda}\hookrightarrow T_{i, \eta} \to T_\eta\}_{i, \lambda}$. For each $i, \lambda$ we can restrict $f_i$ to $f_{i, \eta, \lambda}: T_{i, \eta, \lambda} \hookrightarrow T_{i, \eta} \to U_i \xrightarrow{f_i} X$. By construction $g_\alpha$ restrict uniquely to 
 
-	% https://q.uiver.app/#q=WzAsNyxbMSwyLCJWX1xcYWxwaGEiXSxbMSwxLCJWX3tcXGFscGhhXFxiZXRhfSJdLFsyLDEsIlZfXFxiZXRhIl0sWzIsMiwiWCJdLFswLDAsIlZfe2ksXFxhbHBoYVxcYmV0YX0iXSxbMSwwLCJWX3tpLCBcXGJldGF9Il0sWzAsMSwiVl97aSwgXFxhbHBoYX0iXSxbMCwzLCJnX1xcYWxwaGEiXSxbMiwzLCJnX1xcYmV0YSIsMl0sWzEsMiwiXFxpb3RhX1xcYmV0YSJdLFsxLDAsIlxcaW90YV9cXGFscGhhIiwyXSxbNCwxXSxbNCw2LCIoaWQsIFxcaW90YV9cXGFscGhhKSIsMl0sWzQsNSwiKGlkLCBcXGlvdGFfXFxiZXRhKSJdLFs2LDMsImZfe2ksIFxcYWxwaGF9IiwyLHsiY3VydmUiOjV9XSxbNSwzLCJmX3tpLCBcXGJldGF9IiwwLHsiY3VydmUiOi01fV1d
-	\[\begin{tikzcd}
-		{V_{i,\alpha\beta}} & {V_{i, \beta}} \\
-		{V_{i, \alpha}} & {V_{\alpha\beta}} & {V_\beta} \\
-		& {V_\alpha} & X
-		\arrow["{(id, \iota_\beta)}", from=1-1, to=1-2]
-		\arrow["{(id, \iota_\alpha)}"', from=1-1, to=2-1]
-		\arrow[from=1-1, to=2-2]
-		\arrow["{f_{i, \beta}}", bend left=60, from=1-2, to=3-3]
-		\arrow["{f_{i, \alpha}}"', bend right=35, from=2-1, to=3-3]
-		\arrow["{\iota_\beta}", from=2-2, to=2-3]
-		\arrow["{\iota_\alpha}"', from=2-2, to=3-2]
-		\arrow["{g_\beta}"', from=2-3, to=3-3]
-		\arrow["{g_\alpha}", from=3-2, to=3-3]
-	\end{tikzcd}\]
-	We see, that on the \etale\ cover $V_{i, \alpha\beta} \to V_{\alpha\beta}$ both restrictions of $g_\alpha$ and $g_\beta$ equal the same morphism, namely $f_i$ (or the restriction to $V_{i, \alpha\beta}$, to be precise).
-	
+
+
+
+
+
+
+	The $V_{i, \alpha\beta}$ cover $V_{\alpha\beta}$, because $U_i$ cover $U$.
+	Since $g_\alpha$ restrict to $f_{i, \alpha,\lambda}$ on the affine open $W_{i,\alpha,\lambda}$, we get $g_\alpha \mid_{V_{i, \alpha\beta}} = f_i\mid_{V_{i, \alpha\beta}}$ for all $i$. Analogously $g_\beta \mid_{V_{i, \alpha\beta}} = f_i\mid_{V_{i, \alpha\beta}}$. 
 	So all $g_\alpha$ can be glued together to a unique morphism $f:U\to X$, since $h_X$ is a sheaf in the Zariski site.
-	Finally we need to check, that $f$ restricts to $f_i$ on $U_i$. This can be checked on all the $V_{i,\alpha}\to U_i$ for all $\alpha$. But this holds by construction.
 	
 
 	
