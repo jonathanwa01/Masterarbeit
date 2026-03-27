@@ -1,0 +1,220 @@
+\chapter{Algebraic Stacks}
+
+\begin{definition}[Stack]
+	(\cite[][Tag 026F]{stacks-project})
+	Let $(\mathcal C, J)$ be a site. A \emph{stack} over $(\mathcal C, J)$ is a category
+	fibred in groupoids
+	\[
+	p : \mathcal X \to \mathcal C
+	\]
+	such that for every object $U \in \mathcal C$ and every covering
+	$\{U_i \to U\}$ in $J$, the following conditions hold:
+	
+	\begin{enumerate}
+		\item \textbf{Sheaf condition for morphisms.}  
+		For any objects $x,y \in \mathcal X(U)$, the presheaf
+		\[
+		V \to U \;\longmapsto\; \mathrm{Isom}_{\mathcal X(V)}(x|_V, y|_V)
+		\]
+		is a sheaf on the site $(\mathcal C/U, J)$.
+		
+		\item \textbf{Effective descent for objects.}  
+		Let $x_i \in \mathcal X(U_i)$ be objects together with isomorphisms
+		\[
+		\varphi_{ij} : x_i|_{U_{ij}} \xrightarrow{\sim} x_j|_{U_{ij}}
+		\]
+		on $U_{ij} = U_i \times_U U_j$ satisfying the cocycle condition on
+		triple overlaps. Then there exists an object $x \in \mathcal X(U)$
+		together with isomorphisms
+		\[
+		x|_{U_i} \cong x_i
+		\]
+		compatible with the $\varphi_{ij}$.
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}[Algebraic Stack]
+	(\cite[][Tag 026O]{stacks-project})
+	Let $S$ be a scheme. An algebraic stack over $S$ is a category fibred in groupoids
+	\[
+	\mathcal{X} \to (\SchOver{S})_{\mathrm{fppf}}
+	\]
+	such that:
+	\begin{enumerate}
+		\item $\mathcal{X}$ is a stack in groupoids over $(\SchOver{S})_{\mathrm{fppf}}$;
+		\item the diagonal
+		\[
+		\Delta_{\mathcal{X}} \colon \mathcal{X} \to \mathcal{X} \times \mathcal{X}
+		\]
+		is representable by algebraic spaces;
+		\item there exists a scheme $U$ and a smooth surjective morphism
+		\[
+		U \to \mathcal{X}.
+		\]
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}[Inertia stack]
+	(\cite[][Tag 036X]{stacks-project})
+	Let \(\mathcal{X}\) be an algebraic stack over \(S\). The inertia stack of \(\mathcal{X}\), denoted
+	\[
+	I_{\mathcal X},
+	\]
+	is the stack over \((\SchOver{S})_{\mathrm{fppf}}\) defined as follows:
+	
+	For every scheme $U$ over $S$, the groupoid \(I_{\mathcal X}(U)\) has
+	\begin{enumerate}
+		\item objects given by pairs \((x,\alpha)\), where
+		\[
+		x \in \mathcal X(U)
+		\quad\text{and}\quad
+		\alpha \in \operatorname{Aut}_{\mathcal X(U)}(x),
+		\]
+		\item morphisms
+		\[
+		(x,\alpha) \to (y,\beta)
+		\]
+		given by morphisms \(f : x \to y\) in \(\mathcal X(U)\) such that
+		\[
+		f \circ \alpha = \beta \circ f.
+		\]
+	\end{enumerate}
+\end{definition}
+
+
+\begin{lemma}
+	Let $\mathcal X$ be an algebraic stack over $S$. Then there is an isomorphism of stacks
+	\[
+	I_{\mathcal X}
+	\cong
+	\mathcal X \times_{\mathcal X \times \mathcal X} \mathcal X,
+	\]
+	where both morphisms $\mathcal X \to \mathcal X \times \mathcal X$ are equal to the diagonal
+	\[
+	\Delta_{\mathcal X} : \mathcal X \to \mathcal X \times \mathcal X.
+	\]
+\end{lemma}
+
+\begin{proof}
+	Let $U$ be a scheme over $S$. By definition of the fibre product of stacks, an object of
+	\[
+	\left(\mathcal X \times_{\mathcal X \times \mathcal X} \mathcal X\right)(U)
+	\]
+	consists of objects $x,y \in \mathcal X(U)$ together with an isomorphism
+	\[
+	\varphi : \Delta_{\mathcal X}(x) \xrightarrow{\sim} \Delta_{\mathcal X}(y)
+	\]
+	in $(\mathcal X \times \mathcal X)(U)$.
+	
+	Now
+	\[
+	\Delta_{\mathcal X}(x) = (x,x)
+	\quad\text{and}\quad
+	\Delta_{\mathcal X}(y) = (y,y).
+	\]
+	Hence an isomorphism
+	\[
+	\varphi : (x,x) \xrightarrow{\sim} (y,y)
+	\]
+	is given by a pair of isomorphisms
+	\[
+	(f,g)
+	\]
+	with
+	\[
+	f : x \xrightarrow{\sim} y
+	\quad\text{and}\quad
+	g : x \xrightarrow{\sim} y
+	\]
+	in $\mathcal X(U)$.
+	
+	From such a tuple $(x,y,f,g)$ we obtain a pair
+	\[
+	(x,\alpha),
+	\qquad
+	\alpha = g^{-1}\circ f \in \operatorname{Aut}_{\mathcal X(U)}(x).
+	\]
+	Conversely, given a pair $(x,\alpha)$ with
+	\[
+	\alpha \in \operatorname{Aut}_{\mathcal X(U)}(x),
+	\]
+	we obtain an object of the fibre product by taking
+	\[
+	x=y
+	\]
+	and the isomorphism
+	\[
+	(\alpha,id_x) : (x,x) \xrightarrow{\sim} (x,x).
+	\]
+	These two constructions are inverse to each other up to canonical isomorphism. Thus the objects of
+	\[
+	\left(\mathcal X \times_{\mathcal X \times \mathcal X} \mathcal X\right)(U)
+	\]
+	identify with pairs $(x,\alpha)$, where $x \in \mathcal X(U)$ and
+	\[
+	\alpha \in \operatorname{Aut}_{\mathcal X(U)}(x).
+	\]
+	It remains to identify the morphisms. A morphism in the fibre product from
+	\[
+	(x,y,f,g)
+	\quad\text{to}\quad
+	(x',y',f',g')
+	\]
+	is given by morphisms
+	\[
+	a : x \to x',
+	\qquad
+	b : y \to y'
+	\]
+	in $\mathcal X(U)$ such that the square
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCIoeCx4KSJdLFsxLDAsIih5LHkpIl0sWzAsMSwiKHgnLHgnKSJdLFsxLDEsIih5Jyx5JykiXSxbMCwyLCIoYSxhKSIsMl0sWzAsMSwiKGYsZykiXSxbMSwzLCIoYixiKSJdLFsyLDMsIihmJyxnJykiXV0=
+	\[\begin{tikzcd}
+		{(x,x)} & {(y,y)} \\
+		{(x',x')} & {(y',y')}
+		\arrow["{(f,g)}", from=1-1, to=1-2]
+		\arrow["{(a,a)}"', from=1-1, to=2-1]
+		\arrow["{(b,b)}", from=1-2, to=2-2]
+		\arrow["{(f',g')}", from=2-1, to=2-2]
+	\end{tikzcd}\]
+	commutes in $(\mathcal X \times \mathcal X)(U)$. This means precisely that
+	\[
+	b\circ f = f'\circ a
+	\qquad\text{and}\qquad
+	b\circ g = g'\circ a.
+	\]
+	Passing to the corresponding automorphisms
+	\[
+	\alpha = g^{-1}\circ f
+	\qquad\text{and}\qquad
+	\beta = (g')^{-1}\circ f',
+	\]
+	one checks that this is equivalent to
+	\[
+	a \circ \alpha = \beta \circ a.
+	\]
+	Hence morphisms correspond exactly to morphisms
+	\[
+	a : x \to x'
+	\]
+	such that
+	\[
+	a \circ \alpha = \beta \circ a.
+	\]
+	
+	Therefore the stack
+	\[
+	\mathcal X \times_{\mathcal X \times \mathcal X} \mathcal X
+	\]
+	is identified with the inertia stack $I_{\mathcal X}$.
+\end{proof}
+
+\begin{corollary}
+	There is a natural morphism
+	\[
+	I_{\mathcal X} \to \mathcal X
+	\]
+	given by either projection from the fibre product. On objects it sends
+	\[
+	(x,\alpha) \mapsto x.
+	\]
+\end{corollary}

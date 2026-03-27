@@ -1,0 +1,23 @@
+\chapter{Descent Theory}
+
+\begin{proposition}[Descent for faithfully flat modules]
+	(\cite[][p. 71]{alper2026stacks})
+	Let $\varphi:A\to B$ be a faithfully flat ring map, then the following diagram is an equalizer:
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCIwIl0sWzEsMCwiQSJdLFsyLDAsIkIiXSxbNCwwLCJCXFxvdGltZXNfQUIiXSxbMCwxXSxbMSwyLCJcXHZhcnBoaSJdLFsyLDMsImJcXG1hcHN0byAxXFxvdGltZXMgYiIsMix7Im9mZnNldCI6Mn1dLFsyLDMsImJcXG1hcHN0byBiXFxvdGltZXMgMSIsMCx7Im9mZnNldCI6LTJ9XV0=
+	\[\begin{tikzcd}
+		0 & A & B && {B\otimes_AB}
+		\arrow[from=1-1, to=1-2]
+		\arrow["\varphi", from=1-2, to=1-3]
+		\arrow["{b\mapsto 1\otimes b}"', shift right=2, from=1-3, to=1-5]
+		\arrow["{b\mapsto b\otimes 1}", shift left=2, from=1-3, to=1-5]
+	\end{tikzcd}\]
+	Let $M$ be any $A$-module, then the following diagram is an equalizer:
+	% https://q.uiver.app/#q=WzAsNCxbMywwLCJNXFxvdGltZXNfQUIiXSxbNSwwLCJNXFxvdGltZXNfQUJcXG90aW1lc19BQiJdLFswLDAsIjAiXSxbMSwwLCJNIl0sWzAsMSwibVxcb3RpbWVzIGJcXG1hcHN0byBtXFxvdGltZXMxXFxvdGltZXMgYiIsMix7Im9mZnNldCI6Mn1dLFswLDEsIm1cXG90aW1lcyBiXFxtYXBzdG8gbVxcb3RpbWVzIGJcXG90aW1lcyAxIiwwLHsib2Zmc2V0IjotMn1dLFszLDAsIm1cXG1hcHN0byBtXFxvdGltZXMgMSJdLFsyLDNdXQ==
+	\[\begin{tikzcd}
+		0 & M && {M\otimes_AB} && {M\otimes_AB\otimes_AB}
+		\arrow[from=1-1, to=1-2]
+		\arrow["{m\mapsto m\otimes 1}", from=1-2, to=1-4]
+		\arrow["{m\otimes b\mapsto m\otimes1\otimes b}"', shift right=2, from=1-4, to=1-6]
+		\arrow["{m\otimes b\mapsto m\otimes b\otimes 1}", shift left=2, from=1-4, to=1-6]
+	\end{tikzcd}\]
+\end{proposition}
