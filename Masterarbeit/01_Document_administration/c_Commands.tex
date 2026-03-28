@@ -609,8 +609,9 @@ urlseen = {last access},
 \DeclareMathOperator{\C}{\mathbb{C}}
 
 % ---------- Category theory operators ----------
-\DeclareRobustCommand{\CatC}{\ensuremath{\mathscr{C}}}
-\DeclareRobustCommand{\CatD}{\ensuremath{\mathscr{D}}}
+\DeclareRobustCommand{\CatC}{\ensuremath{\mathcal{C}}}
+\DeclareRobustCommand{\CatD}{\ensuremath{\mathcal{D}}}
+\DeclareRobustCommand{\Cat}[1]{\ensuremath{\mathcal{#1}}}
 \DeclareMathOperator{\Ob}{Ob}
 % adjoint
 \NewDocumentCommand{\adj}{mm}{\ensuremath{#1 \dashv #2}}
@@ -643,6 +644,7 @@ urlseen = {last access},
 \DeclareRobustCommand{\Set}{\cat{Set}}
 \DeclareRobustCommand{\Top}{\cat{Top}}
 \DeclareRobustCommand{\Grp}{\cat{Grp}}
+\DeclareRobustCommand{\Grpd}{\cat{Grpd}}
 \DeclareRobustCommand{\Ab}{\cat{Ab}}
 \DeclareRobustCommand{\Ring}{\cat{Ring}}
 \DeclareRobustCommand{\CRing}{\cat{CRing}}
