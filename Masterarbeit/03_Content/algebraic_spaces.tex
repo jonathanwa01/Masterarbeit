@@ -9,17 +9,23 @@ We have seen in ... that the representable presheaf of a scheme is indeeed a she
 
 \begin{definition}[Algebraic Space]
 	(\cite[][(Definition 4.1.2), p.~105]{alper2026stacks})
-	An algebraic space is a sheaf $X$ on $\SchOver{Et}$, such that there exists a scheme $U$ and an \etale\ surjection $U\to X$ representable by schemes.
+	An algebraic space $X$ is a sheaf $X:\SchOver{Et} \to \Set$, such that there exists a scheme $U$ and an \etale\ surjection $U\to X$ representable by schemes.
 \end{definition}
 
+\begin{remark}
+	In analogy with schemes, which are Zariski-locally given by affine schemes, an algebraic space is a sheaf admitting an \etale\ cover by schemes, and hence, after refinement (\ref{prop:affine-etale-refinement}), by affine schemes. Thus an algebraic space is a sheaf that is \etale-locally a scheme.
+	
+	Indeed, let $U \to X$ be an \etale\ surjection, where $U$ is a scheme, and let $\{U_i\}$ be an open affine cover of $U$. Then the induced morphism
+	\[
+	\coprod_i U_i \to X
+	\]
+	is again an \etale\ surjection. It follows that every algebraic space admits an \etale\ cover by affine schemes.
+\end{remark}
 
-In analogy with schemes, which are Zariski-locally given by affine schemes, an algebraic space is a sheaf admitting an \etale\ cover by schemes, and hence, after refinement (\ref{prop:affine-etale-refinement}), by affine schemes. Thus an algebraic space is a sheaf that is \etale-locally a scheme.
 
-Indeed, let $U \to X$ be an \etale\ surjection, where $U$ is a scheme, and let $\{U_i\}$ be an open affine cover of $U$. Then the induced morphism
-\[
-\coprod_i U_i \to X
-\]
-is again an \etale\ surjection. It follows that every algebraic space admits an \etale\ cover by affine schemes.
+
+
+
 
 \begin{theorem}[Representability of the Diagonal]
 	(\cite[][(Theorem 4.2.1), p.~118]{alper2026stacks})

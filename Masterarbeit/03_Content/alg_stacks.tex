@@ -94,7 +94,7 @@ This denotes that $\zeta$ lies over $U$ and $\phi$ lies over $f$, i.e. $p_\mathc
 \end{corollary}
 
 \begin{remark}
-	As explained in the Stacks Project \cite[][Tags 02XJ, 003S]{stacks-project}, from a higher-categorical point of view, a category $\mathcal{F}\to \mathcal{C}$ fibred in groupoids may equivalently be regarded as a pseudofunctor $\mathcal{F}:\CatCop\to \Grpd$, where $\Grpd$ denotes the (2,1)-category of groupoids. This follows the Grothendieck construction, see \cite[][Tags 02XJ, 003S]{stacks-project} and \cite[][p. 45, section 3.1.2]{vistoli2007notesgrothendiecktopologiesfibered}.
+	As explained in the Stacks Project \cite[][Tags 02XJ, 003S]{stacks-project}, from a higher-categorical point of view, a category $\mathcal{F}\to \mathcal{C}$ fibred in groupoids may equivalently be regarded as a pseudofunctor $\mathcal{F}:\CatCop\to \Grpd$, where $\Grpd$ denotes the (2,1)-category of groupoids. This follows the Grothendieck construction, see \cite[][Tags 02XJ, 003S]{stacks-project} and \cite[][p. 45, section 3.1.2]{vistoli2007notesgrothendiecktopologiesfibered}. 
 \end{remark}
 
 
@@ -145,7 +145,7 @@ instead of sets. Equivalently, stacks are $2$-sheaves on a site,
 or sheaves valued in $\infty$-groupoids.
 
 \begin{definition}[Stack]\label{def:stack}
-	(\cite[][Tag 026F]{stacks-project})
+	(\cite[][Tag 02ZH]{stacks-project})
 	Let $(\Cat{C},J)$ be a site, and let
 	\[
 	p_{\Cat{F}}:\Cat{F}\to\Cat{C}
@@ -191,19 +191,83 @@ or sheaves valued in $\infty$-groupoids.
 \end{definition}
 
 \begin{remark}
-	Following Definition 2.6 of \cite[][p. 13]{khan2022stacks} we get a nice $\infty$-categorical picture of a stack, namely it is a $2$-sheaf, satisfying descent
+	There exists a slightly more general notion of a stack where one does not
+	assume that the fibres are groupoids. In the definition above we assumed that
+	\[
+	p : \mathcal X \to \mathcal C
+	\]
+	is a category fibred in groupoids. In this situation every morphism in a fibre
+	is an isomorphism, and therefore the sheaf condition only needs to be checked
+	for isomorphisms, as in condition (2) of the definition.
 	
-	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXENhdHtYfShVKSJdLFsxLDAsIlxccHJvZFxcQ2F0e1h9KFVfaSkiXSxbMiwwLCJcXHByb2Rfe2ksan1cXENhdHtYfShVX2lcXHRpbWVzX1VVX2opIl0sWzMsMCwiXFxwcm9kX3tpLGosa31cXENhdHtYfShVX2lcXHRpbWVzX1VVX2pcXHRpbWVzX1VVX2spIl0sWzAsMV0sWzEsMiwiIiwwLHsib2Zmc2V0IjotMX1dLFsxLDIsIiIsMCx7Im9mZnNldCI6MX1dLFsyLDNdLFsyLDMsIiIsMCx7Im9mZnNldCI6LTJ9XSxbMiwzLCIiLDAseyJvZmZzZXQiOjJ9XV0=
-	\[\begin{tikzcd}
-		{\Cat{X}(U)} & {\prod\Cat{X}(U_i)} & {\prod_{i,j}\Cat{X}(U_i\times_UU_j)} & {\prod_{i,j,k}\Cat{X}(U_i\times_UU_j\times_UU_k)}
-		\arrow[from=1-1, to=1-2]
-		\arrow[shift left, from=1-2, to=1-3]
-		\arrow[shift right, from=1-2, to=1-3]
-		\arrow[from=1-3, to=1-4]
-		\arrow[shift left=2, from=1-3, to=1-4]
-		\arrow[shift right=2, from=1-3, to=1-4]
-	\end{tikzcd}\]	
+	If one drops the assumption that the fibres are groupoids, one can define a
+	stack to be a fibred category such that for every $U \in \mathcal C$ and every
+	covering $\{U_i \to U\}$, the following hold:
+	\begin{enumerate}
+		\item For all objects $X,Y \in \mathcal X(U)$, the presheaf
+		\[
+		\underline{\mathrm{Hom}}_U(X,Y)
+		\]
+		is a sheaf.
+		\item Every descent datum is effective.
+	\end{enumerate}
+
+	This is done e.g. in \cite[][Tag 0268]{stacks-project}. In the literature, many algebraic geometry texts first define a
+	\emph{prestack} to be a category fibred in groupoids such that the
+	isomorphism presheaves are sheaves, and then define a \emph{stack} to be a
+	prestack for which descent data are effective. Other references combine these two conditions directly into the definition of a stack.
+	
+	In this thesis we will not distinguish between prestacks and stacks
+	terminologically. Whenever we speak of a stack, we always mean a category
+	fibred in groupoids satisfying both the sheaf condition for isomorphisms and
+	the effectiveness of descent data.
+	
+	For moduli problems and algebraic stacks it is sufficient to work with
+	categories fibred in groupoids, since moduli problems classify objects up to
+	isomorphism rather than arbitrary morphisms. Therefore we will restrict
+	ourselves to stacks in groupoids throughout this thesis.
 \end{remark}
+
+
+
+
+\begin{remark}
+	Following Definition 2.6 of \cite[][p. 13]{khan2022stacks} we get a nice $\infty$-categorical picture of a stack, namely it is a $2$-sheaf, satisfying descent.
+	
+	The passage from algebraic spaces to stacks may be viewed as a categorification
+	of the sheaf condition. Recall that an algebraic space may be described by its
+	functor of points as a sheaf of sets on the big \'etale site. Following remark \ref{rem:sheaf-ses-cech}, for a covering
+	$X \to U$, the sheaf condition may be expressed by the equalizer diagram
+	\[
+	F(X) \to F(U) \rightrightarrows F(U \times_X U).
+	\]
+	Thus sections over $X$ are precisely those sections over $U$ whose pullbacks
+	to $U \times_X U$ agree.
+	
+	For moduli problems, however, local objects usually do not agree literally on
+	overlaps, but only up to isomorphism. This leads to replacing sets by
+	groupoids. One therefore considers an assignment
+	\[
+	U \longmapsto \mathcal X(U),
+	\]
+	where $\mathcal X(U)$ is a groupoid, together with pullback functors along
+	morphisms. 
+	In this language, the sheaf condition is replaced by descent. For a covering
+	$U \to X$, a descent datum consists of an object $x \in \mathcal X(U)$
+	together with an isomorphism
+	\[
+	\pi_2^*x \xrightarrow{\sim} \pi_1^*x
+	\]
+	in $\mathcal X(U \times_X U)$ satisfying the cocycle condition on
+	$U \times_X U \times_X U$. The stack condition asserts that every such
+	descent datum is effective. If all fibres are discrete groupoids, this reduces
+	to the usual sheaf condition for set-valued functors.
+	This fits perfectly into the next proposition.
+\end{remark}
+
+\begin{proposition}
+	
+\end{proposition}
 
 
 
