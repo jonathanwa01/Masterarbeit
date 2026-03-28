@@ -1,37 +1,211 @@
 \chapter{Algebraic Stacks}
 
-\begin{definition}[Stack]
-	(\cite[][Tag 026F]{stacks-project})
-	Let $(\mathcal C, J)$ be a site. A \emph{stack} over $(\mathcal C, J)$ is a category
-	fibred in groupoids
-	\[
-	p : \mathcal X \to \mathcal C
-	\]
-	such that for every object $U \in \mathcal C$ and every covering
-	$\{U_i \to U\}$ in $J$, the following conditions hold:
-	
+\section{Fibred Categories}
+
+In this section we will consider commutative diagrams of the following form:
+% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXHpldGEiXSxbMSwwLCJcXGV0YSJdLFswLDEsIlUiXSxbMSwxLCJWIl0sWzIsMCwiXFxtYXRoY2Fse0Z9Il0sWzIsMSwiXFxtYXRoY2Fse0N9Il0sWzAsMiwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dLFsyLDMsImYiXSxbMSwzLCIiLDIseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzAsMSwiXFxwaGkiXSxbNCw1LCJwX1xcbWF0aGNhbHtGfSJdXQ==
+\[\begin{tikzcd}
+	\zeta & \eta & {\mathcal{F}} \\
+	U & V & {\mathcal{C}}
+	\arrow["\phi", from=1-1, to=1-2]
+	\arrow[maps to, from=1-1, to=2-1]
+	\arrow[maps to, from=1-2, to=2-2]
+	\arrow["{p_\mathcal{F}}", from=1-3, to=2-3]
+	\arrow["f", from=2-1, to=2-2]
+\end{tikzcd}\]
+This denotes that $\zeta$ lies over $U$ and $\phi$ lies over $f$, i.e. $p_\mathcal{F}(\zeta) = U$ and $p_\mathcal{F}(\phi) = f$.
+
+
+\begin{definition}[Category fibred in Groupoids]\label{def:category-fibred-in-groupoids}
+	(\cite[][p. 9, Definition 2.15]{Gomez2001AlgebraicStacks})
+	Let $\mathcal{F}$ be a category over $\mathcal{C}$. We call it a category fibred in groupoids, if 
 	\begin{enumerate}
-		\item \textbf{Sheaf condition for morphisms.}  
-		For any objects $x,y \in \mathcal X(U)$, the presheaf
-		\[
-		V \to U \;\longmapsto\; \mathrm{Isom}_{\mathcal X(V)}(x|_V, y|_V)
-		\]
-		is a sheaf on the site $(\mathcal C/U, J)$.
-		
-		\item \textbf{Effective descent for objects.}  
-		Let $x_i \in \mathcal X(U_i)$ be objects together with isomorphisms
-		\[
-		\varphi_{ij} : x_i|_{U_{ij}} \xrightarrow{\sim} x_j|_{U_{ij}}
-		\]
-		on $U_{ij} = U_i \times_U U_j$ satisfying the cocycle condition on
-		triple overlaps. Then there exists an object $x \in \mathcal X(U)$
-		together with isomorphisms
-		\[
-		x|_{U_i} \cong x_i
-		\]
-		compatible with the $\varphi_{ij}$.
+		\item Pullbacks exists, i.e. for all morphisms $f:B'\to B$ in $\mathcal{C}$ and every object $X$ lying over $B$ there exists an object $X'$ and a morphism $\phi:X'\to X$ lying over $B'$ and $f$ resp.
+		% https://q.uiver.app/#q=WzAsNCxbMSwwLCJYIl0sWzAsMCwiWCciXSxbMCwxLCJCJyJdLFsxLDEsIkIiXSxbMiwzLCJmIiwyXSxbMCwzLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzEsMiwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9LCJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMSwwLCJcXHBoaSIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+		\[\begin{tikzcd}
+			{X'} & X \\
+			{B'} & B
+			\arrow["\phi", dashed, from=1-1, to=1-2]
+			\arrow[dashed, maps to, from=1-1, to=2-1]
+			\arrow[maps to, from=1-2, to=2-2]
+			\arrow["f"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		\item Every diagram 
+		% https://q.uiver.app/#q=WzAsNixbMCwwLCJYXzMiXSxbMiwwLCJYXzEiXSxbMSwxLCJYXzIiXSxbMCwyLCJCXzMiXSxbMSwzLCJCXzIiXSxbMiwyLCJCXzEiXSxbMyw0LCJmJyIsMl0sWzQsNSwiZiIsMl0sWzMsNSwiZlxcY2lyYyBmJyIsMCx7ImxhYmVsX3Bvc2l0aW9uIjo4MH1dLFswLDEsIlxccHNpIl0sWzIsMSwiXFxwaGkiLDJdLFsyLDQsIiIsMSx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbMSw1LCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzAsMywiIiwxLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dLFswLDIsIlxcdmFycGhpIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+		\[\begin{tikzcd}
+			{X_3} && {X_1} \\
+			& {X_2} \\
+			{B_3} && {B_1} \\
+			& {B_2}
+			\arrow["\psi", from=1-1, to=1-3]
+			\arrow["\varphi"', dashed, from=1-1, to=2-2]
+			\arrow[maps to, from=1-1, to=3-1]
+			\arrow[maps to, from=1-3, to=3-3]
+			\arrow["\phi"', from=2-2, to=1-3]
+			\arrow[maps to, from=2-2, to=4-2]
+			\arrow["{f\circ f'}"{pos=0.8}, from=3-1, to=3-3]
+			\arrow["{f'}"', from=3-1, to=4-2]
+			\arrow["f"', from=4-2, to=3-3]
+		\end{tikzcd}\]
+		admits a unique morphism $\varphi$ lying over $f'$ and letting the upper triangle commute.
 	\end{enumerate}
 \end{definition}
+
+\begin{definition}
+	Let $\mathcal{F}\to \mathcal{C}$ be a category fibred in groupoids and let $B\in \mathcal{C}$. We call the subcategory of $\mathcal{F}$ of objects lying over $B$ and morphisms lying over $id_B$ the fibre of $\mathcal{F}$ over $B$ and denote it by $\mathcal{F}(B)$.
+\end{definition}
+
+
+\begin{proposition}
+	The pullback $X'$ of $X$ along $f$ is unique up to isomorphism. We will denote it by $f^*X$
+\end{proposition}
+
+\begin{proof}
+	Assume there is a nother $X''$ satisfying 1). Apply 2) with $X_1 = X$ and $X_2 = X"$ $X_3 = X'$ to optain a unique morphism $X'\to X''$. Then exchanging roles yields a unique morphism $X''\to X'$
+\end{proof}
+
+
+\begin{proposition}
+	In definition \ref{def:category-fibred-in-groupoids} 2), $f$ is an isomorphism if and only if $\phi$ is an isomorphism.
+\end{proposition}
+
+\begin{proof}
+	One direction is obvious, since $p_\Cat{F}$ is a functor. For the other direction consider the following diagram:
+	% https://q.uiver.app/#q=WzAsNixbMCwwLCJYXzEiXSxbMiwwLCJYXzEiXSxbMSwxLCJYXzIiXSxbMCwyLCJCXzEiXSxbMSwzLCJCXzIiXSxbMiwyLCJCXzEiXSxbMyw0LCJmXnstMX0iLDJdLFs0LDUsImYiLDJdLFszLDUsImlkIiwwLHsibGFiZWxfcG9zaXRpb24iOjgwfV0sWzAsMSwiaWQiXSxbMiwxLCJcXHBoaSIsMl0sWzIsNCwiIiwxLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dLFsxLDUsIiIsMSx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbMCwzLCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzAsMiwiXFxwaGleey0xfSIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+	\[\begin{tikzcd}
+		{X_1} && {X_1} \\
+		& {X_2} \\
+		{B_1} && {B_1} \\
+		& {B_2}
+		\arrow["id", from=1-1, to=1-3]
+		\arrow["{\phi^{-1}}"', dashed, from=1-1, to=2-2]
+		\arrow[maps to, from=1-1, to=3-1]
+		\arrow[maps to, from=1-3, to=3-3]
+		\arrow["\phi"', from=2-2, to=1-3]
+		\arrow[maps to, from=2-2, to=4-2]
+		\arrow["id"{pos=0.8}, from=3-1, to=3-3]
+		\arrow["{f^{-1}}"', from=3-1, to=4-2]
+		\arrow["f"', from=4-2, to=3-3]
+	\end{tikzcd}\]
+\end{proof}
+
+\begin{corollary}
+	Let $\Cat{F}\to \Cat{C}$ be a category fibred in groupoids. Then the fibres $\Cat{F}(B)$ of $\Cat{F}$ over every object $B\in\CatC$ is a groupoid.
+\end{corollary}
+
+\begin{remark}
+	As explained in the Stacks Project \cite[][Tags 02XJ, 003S]{stacks-project}, from a higher-categorical point of view, a category $\mathcal{F}\to \mathcal{C}$ fibred in groupoids may equivalently be regarded as a pseudofunctor $\mathcal{F}:\CatCop\to \Grpd$, where $\Grpd$ denotes the (2,1)-category of groupoids. This follows the Grothendieck construction, see \cite[][Tags 02XJ, 003S]{stacks-project} and \cite[][p. 45, section 3.1.2]{vistoli2007notesgrothendiecktopologiesfibered}.
+\end{remark}
+
+
+
+\iffalse
+	
+\begin{definition}
+	(\cite[][p. 44, Definition 3.1]{vistoli2007notesgrothendiecktopologiesfibered})
+	Let $\mathcal{F}$ be a category over $\mathcal{C}$, i.e. there is a functor $p_\mathcal{F}:\mathcal{F} \to \mathcal{C}$. We call a morphism $\phi:\xi \to \eta$ of $\mathcal{F}$  cartesian, if for any morphism $\psi:\zeta \to \eta$ of $\mathcal{F}$ and any morphism $h:p_\mathcal{F}\zeta \to p\mathcal{F}\xi$ in $\mathcal{C}$ with $p_\mathcal{F}\phi \circ h = p_\mathcal{F}\psi$, there exists a unique morphism $\theta:\zeta \to \xi$ with $p_\mathcal{F}\theta = h$ and $\phi \circ \theta = \psi$.
+	% https://q.uiver.app/#q=WzAsNixbMiwxLCJcXHpldGEnIl0sWzMsMSwiXFxldGEiXSxbMiwyLCJwX1xcbWF0aGNhbHtGfVxcemV0YSciXSxbMywyLCJwX1xcbWF0aGNhbHtGfVxcZXRhIl0sWzAsMCwiXFx6ZXRhIl0sWzAsMSwicF9cXG1hdGhjYWx7Rn1cXHpldGEiXSxbMCwxLCJcXHBoaSJdLFsyLDNdLFs0LDEsIlxccHNpIiwwLHsiY3VydmUiOi0xfV0sWzQsMCwiXFx0aGV0YSIsMl0sWzQsNSwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dLFs1LDIsImgiLDJdLFswLDIsIiIsMSx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbMSwzLCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzUsMywiIiwyLHsiY3VydmUiOi0xfV1d
+	\[\begin{tikzcd}
+		\zeta &&& \\
+		{p_\mathcal{F}\zeta} && {\xi} & \eta \\
+		&& {p_\mathcal{F}\xi} & {p_\mathcal{F}\eta}
+		\arrow[maps to, from=1-1, to=2-1]
+		\arrow["\theta"', dashed, from=1-1, to=2-3]
+		\arrow["\psi", bend left=12, from=1-1, to=2-4]
+		\arrow["h"', from=2-1, to=3-3]
+		\arrow[bend left=12, from=2-1, to=3-4]
+		\arrow["\phi", from=2-3, to=2-4]
+		\arrow[maps to, from=2-3, to=3-3]
+		\arrow[maps to, from=2-4, to=3-4]
+		\arrow[from=3-3, to=3-4]
+	\end{tikzcd}\]
+	If a cartesian morphism $\phi:\xi\to \eta$ fo $\mathcal{F}$ is mapped to $U\to V$ in $\mathcal{C}$, we call $\xi$ a pullback of $\eta$ to $U$.
+\end{definition}
+
+\begin{definition}[Fibred category]
+		(\cite[][p. 45, Definition 3.5]{vistoli2007notesgrothendiecktopologiesfibered})
+		A category $\mathcal{F}$ over $\mathcal{C}$ is called fibred, if for every morphism $f:U\to V$ in $\mathcal{C}$ and every object $\eta\in \mathcal{F}$ lying over $V$, there exists a cartesian morphism $\phi:\xi \to \eta$ in $\mathcal{F}$ such that $p_\mathcal{F}\phi = f$.
+		% https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXHpldGEiXSxbMSwwLCJcXGV0YSJdLFswLDEsIlUiXSxbMSwxLCJWIl0sWzIsMV0sWzAsMiwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9LCJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMiwzLCJmIl0sWzEsMywiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dLFswLDEsIlxccGhpIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+		\[\begin{tikzcd}
+			\zeta & \eta & \\
+			U & V & {}
+			\arrow["\phi", dashed, from=1-1, to=1-2]
+			\arrow[dashed, maps to, from=1-1, to=2-1]
+			\arrow[maps to, from=1-2, to=2-2]
+			\arrow["f", from=2-1, to=2-2]
+		\end{tikzcd}\]
+\end{definition}
+
+\fi
+
+
+\section{Stacks}
+Conceptually, stacks generalize sheaves by allowing values in groupoids
+instead of sets. Equivalently, stacks are $2$-sheaves on a site,
+or sheaves valued in $\infty$-groupoids.
+
+\begin{definition}[Stack]\label{def:stack}
+	(\cite[][Tag 026F]{stacks-project})
+	Let $(\Cat{C},J)$ be a site, and let
+	\[
+	p_{\Cat{F}}:\Cat{F}\to\Cat{C}
+	\]
+	be a category fibred in groupoids. We call $\Cat{F}$ a \emph{stack} over $(\Cat{C},J)$ if for every object $B\in\Cat{C}$ and every covering $\{f_i:U_i\to U\}_{i\in I}$ in $J$, the following conditions hold:
+	\begin{enumerate}
+		\item \textbf{Sheaf condition for isomorphisms.}
+		For every pair of objects $X,Y\in\Cat{F}(B)$, the presheaf
+		\[
+		Isom_U(X,Y):(\Cat{C}/U)^{op}\to\Set,
+		\qquad
+		(g:U'\to U)\longmapsto
+		Isom_{\Cat{F}(U')}(g^*X,g^*Y)
+		\]
+		is a sheaf on the slice site $(\Cat{C}/U,J_U)$.
+		
+		\item \textbf{Effective descent for objects.}
+		Let $\{f_i:U_i\to U\}_{i\in I}$ be a covering, and for each $i$ let $X_i\in\Cat{F}(U_i)$ be an object. Suppose moreover that for every pair $i,j$ there is an isomorphism
+		\[
+		\varphi_{ij}:\pi_1^*X_i\xrightarrow{\sim}\pi_2^*X_j
+		\qquad\text{in }\Cat{F}(U_i\times_U U_j),
+		\]
+		where $\pi_1:U_i\times_U U_j\to U_i$ and $\pi_2:U_i\times_U U_j\to U_j$ are the projections, and that these isomorphisms satisfy the cocycle condition on triple fibre products
+		\[
+		U_i\times_U U_j\times_U U_k.
+		\]
+		Then there exists an object $X\in\Cat{F}(U)$ together with isomorphisms
+		\[
+		\alpha_i:f_i^*X\xrightarrow{\sim}X_i
+		\qquad\text{in }\Cat{F}(U_i)
+		\]
+		such that for every pair $i,j$ the diagram
+		\[
+		\begin{tikzcd}
+			\pi_1^*f_i^*X \arrow[r,"\pi_1^*\alpha_i"] \arrow[d,"\cong"']
+			& \pi_1^*X_i \arrow[d,"\varphi_{ij}"] \\
+			\pi_2^*f_j^*X \arrow[r,"\pi_2^*\alpha_j"']
+			& \pi_2^*X_j
+		\end{tikzcd}
+		\]
+		commutes in $\Cat{F}(U_i\times_U U_j)$.
+	\end{enumerate}
+\end{definition}
+
+\begin{remark}
+	Following Definition 2.6 of \cite[][p. 13]{khan2022stacks} we get a nice $\infty$-categorical picture of a stack, namely it is a $2$-sheaf, satisfying descent
+	
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXENhdHtYfShVKSJdLFsxLDAsIlxccHJvZFxcQ2F0e1h9KFVfaSkiXSxbMiwwLCJcXHByb2Rfe2ksan1cXENhdHtYfShVX2lcXHRpbWVzX1VVX2opIl0sWzMsMCwiXFxwcm9kX3tpLGosa31cXENhdHtYfShVX2lcXHRpbWVzX1VVX2pcXHRpbWVzX1VVX2spIl0sWzAsMV0sWzEsMiwiIiwwLHsib2Zmc2V0IjotMX1dLFsxLDIsIiIsMCx7Im9mZnNldCI6MX1dLFsyLDNdLFsyLDMsIiIsMCx7Im9mZnNldCI6LTJ9XSxbMiwzLCIiLDAseyJvZmZzZXQiOjJ9XV0=
+	\[\begin{tikzcd}
+		{\Cat{X}(U)} & {\prod\Cat{X}(U_i)} & {\prod_{i,j}\Cat{X}(U_i\times_UU_j)} & {\prod_{i,j,k}\Cat{X}(U_i\times_UU_j\times_UU_k)}
+		\arrow[from=1-1, to=1-2]
+		\arrow[shift left, from=1-2, to=1-3]
+		\arrow[shift right, from=1-2, to=1-3]
+		\arrow[from=1-3, to=1-4]
+		\arrow[shift left=2, from=1-3, to=1-4]
+		\arrow[shift right=2, from=1-3, to=1-4]
+	\end{tikzcd}\]	
+\end{remark}
+
+
 
 \begin{definition}[Algebraic Stack]
 	(\cite[][Tag 026O]{stacks-project})
@@ -53,6 +227,10 @@
 		\]
 	\end{enumerate}
 \end{definition}
+
+\begin{proposition}
+	There is a fully faithful embedding of algebraic spaces into algebraic stacks $AlgSp \subset AlgStacks$.
+\end{proposition}
 
 \begin{definition}[Inertia stack]
 	(\cite[][Tag 036X]{stacks-project})
