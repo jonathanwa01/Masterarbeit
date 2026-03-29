@@ -51,19 +51,13 @@ This denotes that $\zeta$ lies over $U$ and $\phi$ lies over $f$, i.e. $p_\mathc
 	\end{enumerate}
 \end{definition}
 
+\begin{remark}
+	Such a morhism $\phi$ is often called cartesian.
+\end{remark}
+
 \begin{definition}
 	Let $\mathcal{F}\to \mathcal{C}$ be a category fibred in groupoids and let $B\in \mathcal{C}$. We call the subcategory of $\mathcal{F}$ of objects lying over $B$ and morphisms lying over $id_B$ the fibre of $\mathcal{F}$ over $B$ and denote it by $\mathcal{F}(B)$.
 \end{definition}
-
-
-\begin{proposition}
-	The pullback $X'$ of $X$ along $f$ is unique up to isomorphism. We will denote it by $f^*X$
-\end{proposition}
-
-\begin{proof}
-	Assume there is a nother $X''$ satisfying 1). Apply 2) with $X_1 = X$ and $X_2 = X"$ $X_3 = X'$ to optain a unique morphism $X'\to X''$. Then exchanging roles yields a unique morphism $X''\to X'$
-\end{proof}
-
 
 \begin{proposition}
 	In definition \ref{def:category-fibred-in-groupoids} 2), $f$ is an isomorphism if and only if $\phi$ is an isomorphism.
@@ -89,12 +83,70 @@ This denotes that $\zeta$ lies over $U$ and $\phi$ lies over $f$, i.e. $p_\mathc
 	\end{tikzcd}\]
 \end{proof}
 
+\begin{proposition}\label{prop:unique-pullback}
+	The pullback $X'$ of $X$ along $f$ is unique up to a unique isomorphism. We will denote it by $f^*X$
+\end{proposition}
+
+\begin{proof}
+	Assume there is a nother $X''$ satisfying 1). Applying 2) to this diagramm
+	% https://q.uiver.app/#q=WzAsNixbMCwwLCJYJyciXSxbMiwwLCJYIl0sWzEsMSwiWCciXSxbMCwyLCJCJyJdLFsxLDMsIkInIl0sWzIsMiwiQiJdLFszLDQsImlkX3tCJ30iLDJdLFs0LDUsImYiLDJdLFszLDUsImYiLDAseyJsYWJlbF9wb3NpdGlvbiI6ODB9XSxbMCwxLCJcXHBzaSJdLFsyLDEsIlxccGhpIiwyXSxbMiw0LCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzEsNSwiIiwxLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dLFswLDMsIiIsMSx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbMCwyLCJcXHZhcnBoaSIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+	\[\begin{tikzcd}
+		{X''} && X \\
+		& {X'} \\
+		{B'} && B \\
+		& {B'}
+		\arrow["\psi", from=1-1, to=1-3]
+		\arrow["\varphi"', dashed, from=1-1, to=2-2]
+		\arrow[maps to, from=1-1, to=3-1]
+		\arrow[maps to, from=1-3, to=3-3]
+		\arrow["\phi"', from=2-2, to=1-3]
+		\arrow[maps to, from=2-2, to=4-2]
+		\arrow["f"{pos=0.8}, from=3-1, to=3-3]
+		\arrow["{id_{B'}}"', from=3-1, to=4-2]
+		\arrow["f"', from=4-2, to=3-3]
+	\end{tikzcd}\]
+	we optain a unique morphism $\varphi:X''\to X'$ over $id_{B'}$. Then exchanging roles yields a unique morphism $\eta:X'\to X''$  over $id_{B'}$. Then by uniqueness we get $\varphi\circ\eta = id_{X''}$ and  $\eta \circ \varphi= id_{X'}$.
+\end{proof}
+
 \begin{corollary}
 	Let $\Cat{F}\to \Cat{C}$ be a category fibred in groupoids. Then the fibres $\Cat{F}(B)$ of $\Cat{F}$ over every object $B\in\CatC$ is a groupoid.
 \end{corollary}
 
 \begin{remark}
-	As explained in the Stacks Project \cite[][Tags 02XJ, 003S]{stacks-project}, from a higher-categorical point of view, a category $\mathcal{F}\to \mathcal{C}$ fibred in groupoids may equivalently be regarded as a pseudofunctor $\mathcal{F}:\CatCop\to \Grpd$, where $\Grpd$ denotes the (2,1)-category of groupoids. This follows the Grothendieck construction, see \cite[][Tags 02XJ, 003S]{stacks-project} and \cite[][p. 45, section 3.1.2]{vistoli2007notesgrothendiecktopologiesfibered}. 
+	As explained in the Stacks Project \cite[][Tags 02XJ, 003S]{stacks-project}, a category fibred in groupoids
+	\[
+	\mathcal F \to \mathcal C
+	\]
+	may equivalently be described by a pseudofunctor
+	\[
+	\mathcal F\colon \mathcal C^{op}\to \Grpd,
+	\]
+	where $\Grpd$ denotes the $(2,1)$-category of groupoids. This is the Grothendieck construction; see also \cite[][Section 3.1.2]{vistoli2007notes}. Concretely, to each object $B\in \mathcal C$ one associates the fibre groupoid $\mathcal F(B)=\mathcal F_B$, and to each morphism $f\colon B'\to B$ one associates the pullback functor
+	\[
+	f^*\colon \mathcal F(B)\to \mathcal F(B').
+	\]
+	These pullback functors are not strictly functorial: for each object $B\in \mathcal C$ there is a natural isomorphism
+	\[
+	id_{\mathcal F(B)}\Rightarrow (id_B)^*,
+	\]
+	and for each pair of composable morphisms
+	\[
+	B'' \xrightarrow{f} B' \xrightarrow{g} B
+	\]
+	there is a natural isomorphism
+	\[
+	f^*g^* \Rightarrow (g\circ f)^*,
+	\]
+	subject to the usual coherence conditions. Thus one obtains a pseudofunctor rather than an ordinary functor. The reason is precisely that pullbacks in a fibred category are determined only up to canonical isomorphism.
+	From the higher-categorical point of view, however, this is not a defect but the correct notion of functoriality. Indeed, the $(2,1)$-category $\Grpd$ presents the $\infty$-category of spaces $\mathcal S$, and a pseudofunctor
+	\[
+	\mathcal C^{op}\to \Grpd
+	\]
+	is equivalently a functor of $\infty$-categories
+	\[
+	N(\mathcal C)^{op}\to \mathcal S,
+	\]
+	where $N(\mathcal C)$ denotes the nerve of $\mathcal C$. In this formulation the coherence isomorphisms are built into the notion of an $\infty$-functor: the fact that pullback is associative and unital only up to canonical isomorphism is encoded as homotopy-coherent functoriality. Equivalently, categories fibred in groupoids over $\mathcal C$ correspond, after passing to nerves, to right fibrations over $N(\mathcal C)$ via straightening-unstraightening, see \cite[][section 2.2.1]{lurie2008higher}.
 \end{remark}
 
 
@@ -150,7 +202,7 @@ or sheaves valued in $\infty$-groupoids.
 	\[
 	p_{\Cat{F}}:\Cat{F}\to\Cat{C}
 	\]
-	be a category fibred in groupoids. We call $\Cat{F}$ a \emph{stack} over $(\Cat{C},J)$ if for every object $B\in\Cat{C}$ and every covering $\{f_i:U_i\to U\}_{i\in I}$ in $J$, the following conditions hold:
+	be a category fibred in groupoids. We call $\Cat{F}$ a stack over $(\Cat{C},J)$ if for every object $B\in\Cat{C}$ and every covering $\{f_i:U_i\to U\}_{i\in I}$ in $J$, the following conditions hold:
 	\begin{enumerate}
 		\item \textbf{Sheaf condition for isomorphisms.}
 		For every pair of objects $X,Y\in\Cat{F}(B)$, the presheaf
@@ -190,54 +242,14 @@ or sheaves valued in $\infty$-groupoids.
 	\end{enumerate}
 \end{definition}
 
-\begin{remark}
-	There exists a slightly more general notion of a stack where one does not
-	assume that the fibres are groupoids. In the definition above we assumed that
-	\[
-	p : \mathcal X \to \mathcal C
-	\]
-	is a category fibred in groupoids. In this situation every morphism in a fibre
-	is an isomorphism, and therefore the sheaf condition only needs to be checked
-	for isomorphisms, as in condition (2) of the definition.
-	
-	If one drops the assumption that the fibres are groupoids, one can define a
-	stack to be a fibred category such that for every $U \in \mathcal C$ and every
-	covering $\{U_i \to U\}$, the following hold:
-	\begin{enumerate}
-		\item For all objects $X,Y \in \mathcal X(U)$, the presheaf
-		\[
-		\underline{\mathrm{Hom}}_U(X,Y)
-		\]
-		is a sheaf.
-		\item Every descent datum is effective.
-	\end{enumerate}
-
-	This is done e.g. in \cite[][Tag 0268]{stacks-project}. In the literature, many algebraic geometry texts first define a
-	\emph{prestack} to be a category fibred in groupoids such that the
-	isomorphism presheaves are sheaves, and then define a \emph{stack} to be a
-	prestack for which descent data are effective. Other references combine these two conditions directly into the definition of a stack.
-	
-	In this thesis we will not distinguish between prestacks and stacks
-	terminologically. Whenever we speak of a stack, we always mean a category
-	fibred in groupoids satisfying both the sheaf condition for isomorphisms and
-	the effectiveness of descent data.
-	
-	For moduli problems and algebraic stacks it is sufficient to work with
-	categories fibred in groupoids, since moduli problems classify objects up to
-	isomorphism rather than arbitrary morphisms. Therefore we will restrict
-	ourselves to stacks in groupoids throughout this thesis.
-\end{remark}
-
-
-
 
 \begin{remark}
-	Following Definition 2.6 of \cite[][p. 13]{khan2022stacks} we get a nice $\infty$-categorical picture of a stack, namely it is a $2$-sheaf, satisfying descent.
+	Following Definition 2.6 of \cite[][p. 13]{khan2022stacks} we get a nice $\infty$-categorical picture of a stack, namely as a $2$-sheaf, satisfying descent.
 	
 	The passage from algebraic spaces to stacks may be viewed as a categorification
 	of the sheaf condition. Recall that an algebraic space may be described by its
 	functor of points as a sheaf of sets on the big \'etale site. Following remark \ref{rem:sheaf-ses-cech}, for a covering
-	$X \to U$, the sheaf condition may be expressed by the equalizer diagram
+	$U \to X$, the sheaf condition may be expressed by the equalizer diagram
 	\[
 	F(X) \to F(U) \rightrightarrows F(U \times_X U).
 	\]
@@ -265,10 +277,60 @@ or sheaves valued in $\infty$-groupoids.
 	This fits perfectly into the next proposition.
 \end{remark}
 
-\begin{proposition}
-	
-\end{proposition}
 
+\begin{remark}
+	(\cite[][Definition 2.10]{khan2022stacks})
+	Let \(\mathcal F:\mathcal C^{op}\to \Grpd\) be a pseudofunctor, and let
+	\(U\to X\) be a covering. Write
+	\[
+	U_\bullet:\quad
+	U,\;
+	U\times_X U,\;
+	U\times_X U\times_X U,\;
+	\dots
+	\]
+	for the associated \v{C}ech nerve. Applying $\mathcal F$ yields a cosimplicial
+	diagram
+	% https://q.uiver.app/#q=WzAsNSxbMCwwLCJGKFgpIl0sWzEsMCwiRihVKSJdLFsyLDAsIkYoVVxcdGltZXNfWFUpIl0sWzMsMCwiRihVXFx0aW1lc19YVVxcdGltZXNfWFUpIl0sWzQsMCwiXFxjZG90cyJdLFswLDFdLFsxLDIsIiIsMCx7Im9mZnNldCI6MX1dLFsxLDIsIiIsMCx7Im9mZnNldCI6LTF9XSxbMiwzXSxbMiwzLCIiLDAseyJvZmZzZXQiOi0yfV0sWzIsMywiIiwwLHsib2Zmc2V0IjoyfV0sWzMsNCwiIiwwLHsib2Zmc2V0IjozfV0sWzMsNCwiIiwwLHsib2Zmc2V0IjotM31dLFszLDQsIiIsMCx7Im9mZnNldCI6MX1dLFszLDQsIiIsMCx7Im9mZnNldCI6LTF9XV0=
+	\[\begin{tikzcd}
+		{F(X)} & {F(U)} & {F(U\times_XU)} & {F(U\times_XU\times_XU)} & \cdots
+		\arrow[from=1-1, to=1-2]
+		\arrow[shift right, from=1-2, to=1-3]
+		\arrow[shift left, from=1-2, to=1-3]
+		\arrow[from=1-3, to=1-4]
+		\arrow[shift left=2, from=1-3, to=1-4]
+		\arrow[shift right=2, from=1-3, to=1-4]
+		\arrow[shift right=3, from=1-4, to=1-5]
+		\arrow[shift left=3, from=1-4, to=1-5]
+		\arrow[shift right, from=1-4, to=1-5]
+		\arrow[shift left, from=1-4, to=1-5]
+	\end{tikzcd}\]
+	
+	We say that \(\mathcal F\) is a stack if for every covering \(U\to X\), the
+	canonical functor
+	\[
+	\mathcal F(X)\to \operatorname*{holim} \mathcal{F}(U_\bullet)
+	\]
+	is an equivalence of groupoids.
+	
+	Equivalently, one may view \(\mathcal F\) as a presheaf valued in the
+	\(\infty\)-category of groupoids. Since this target is an \((2,1)\)-category
+	(or, equivalently, a \(2\)-truncated \(\infty\)-category), the limit of the
+	cosimplicial diagram \(\mathcal F(U_\bullet)\) is determined already by its
+	restriction to \([0],[1],[2]\). Hence the descent condition can be computed as
+	the corresponding \(2\)-limit:
+	\[
+	\mathcal F(X)\simeq
+	2-\lim\Big(
+	\mathcal F(U)\rightrightarrows
+	\mathcal F(U\times_XU)\rightarrow
+	\mathcal F(U\times_XU\times_XU)
+	\Big).
+	\]
+	Thus the usual stack condition for groupoid-valued pseudofunctors is precisely
+	the statement that \(\mathcal F(X)\) is the \(2\)-limit of the first three
+	levels of the \v{C}ech nerve.
+\end{remark}
 
 
 \begin{definition}[Algebraic Stack]
