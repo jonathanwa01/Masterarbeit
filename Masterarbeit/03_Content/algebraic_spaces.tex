@@ -31,6 +31,167 @@ We have seen in ... that the representable presheaf of a scheme is indeeed a she
 	The diagonal $\Delta_X: X\to X\times X$ of an algebraic space $X$ is represantable by schemes.
 \end{theorem}
 
+
+
+\begin{proposition}
+	Let $U$ be a scheme and let
+	% https://q.uiver.app/#q=WzAsMixbMCwwLCJSIl0sWzEsMCwiVVxcdGltZXNfUyBVIl0sWzAsMSwidCIsMix7Im9mZnNldCI6MX1dLFswLDEsInMiLDAseyJvZmZzZXQiOi0xfV1d
+	\[\begin{tikzcd}
+		R & {U\times_S U}
+		\arrow["t"', shift right, from=1-1, to=1-2]
+		\arrow["s", shift left, from=1-1, to=1-2]
+	\end{tikzcd}\]
+	be an \etale\ equivalence relation. Denote by $F:=U/R$ the quotient presheaf and let
+	\[
+	X:=F^\sharp
+	\]
+	be its sheafification. Then the canonical morphism
+	\[
+	R \to U\times_X U,\qquad h\mapsto (s\circ h,t\circ h),
+	\]
+	is an isomorphism of sheaves.
+\end{proposition}
+
+\begin{proof}
+	Let $p:U\to X$ be the canonical map. For every scheme $T$, the set
+	\[
+	(U\times_XU)(T)
+	\]
+	consists of pairs of morphisms $f,g:T\to U$ such that $p\circ f=p\circ g$ in $X(T)$.
+	
+	Define a morphism of sheaves
+	\[
+	\varphi:R\to U\times_XU,\qquad h\mapsto (s\circ h,t\circ h).
+	\]
+	It is well-defined because $s(h)$ and $t(h)$ define the same class in $F(T)$, hence have the same image in $X(T)$.
+	
+	To prove surjectivity, let $(f,g)\in (U\times_XU)(T)$. Since $p\circ f=p\circ g$ in $X(T)$, the two sections of $F(T)$ defined by $f$ and $g$ become equal in the sheafification. Hence, by \cite[][Tag 00WK]{stacks-project} there exists an \etale\ covering $\{T_i\to T\}$ such that the restrictions of $f$ and $g$ have the same image in
+	\[
+	F(T_i)=U(T_i)/R(T_i).
+	\]
+	Therefore, for each $i$, there exists $h_i\in R(T_i)$ with
+	\[
+	s\circ h_i=f|_{T_i},\qquad t\circ h_i=g|_{T_i}.
+	\]
+	On overlaps, the restrictions of $h_i$ and $h_j$ have the same images under $(s,t):R\to U\times_SU$. Since $(s,t)$ is a monomorphism, they are equal. Because $R$ is representable, it is a sheaf on the big \etale\ site, so the $h_i$ glue uniquely to a morphism $h:T\to R$ with
+	\[
+	s\circ h=f,\qquad t\circ h=g.
+	\]
+	Thus $\varphi(T)$ is surjective.
+	
+	For injectivity, suppose $h,h'\in R(T)$ satisfy
+	\[
+	s\circ h=s\circ h',\qquad t\circ h=t\circ h'.
+	\]
+	Since $(s,t):R\to U\times_SU$ is a monomorphism, it follows that $h=h'$. Thus $\varphi(T)$ is injective.
+	
+	Hence $\varphi$ is an isomorphism of sheaves.
+\end{proof}
+
+
+
+
+
+\begin{lemma}[Quotients by \etale\ equivalence relations]
+	Let $U$ be an affine scheme and let
+	\[
+	R \rightrightarrows U
+	\]
+	be an \etale\ equivalence relation. Then the sheaf
+	\[
+	X:=(U/R)^\sharp
+	\]
+	is an algebraic space, and the canonical morphism
+	\[
+	U\to X
+	\]
+	is surjective and \etale.
+\end{lemma}
+
+\begin{proof}
+	By construction, $X$ is a sheaf on the big \etale\ site.
+	
+	We first show that the canonical morphism $p:U\to X$ is surjective. Let $T$ be a scheme and let
+	\[
+	\sigma\in X(T).
+	\]
+	By the local description of sheafification (\cite[][Tag 00WK]{stacks-project}), there exists an \etale\ covering $\{T_i\to T\}_i$ and sections
+	\[
+	\sigma_i\in (U/R)(T_i)=U(T_i)/R(T_i)
+	\]
+	whose images in $X(T_i)$ are equal to $\sigma|_{T_i}$. Choosing representatives of the classes $\sigma_i$, we obtain morphisms
+	\[
+	f_i:T_i\to U
+	\]
+	such that
+	\[
+	p\circ f_i=\sigma|_{T_i}.
+	\]
+	Hence $p:U\to X$ is surjective as a morphism of sheaves.
+	
+	Now let $a:T\to X$ be a morphism from a scheme $T$. Since $p$ is surjective, there exists an \'etale covering $\{T_i\to T\}_i$ and lifts
+	\[
+	f_i:T_i\to U
+	\]
+	of the morphisms $a|_{T_i}:T_i\to X$, so that
+	\[
+	p\circ f_i=a|_{T_i}.
+	\]
+	
+	By the previous proposition, there is a pullback diagram
+	\[
+	\begin{tikzcd}
+		R \arrow[r,"s"] \arrow[d,"t"'] & U \arrow[d,"p"] \\
+		U \arrow[r,"p"'] & X.
+	\end{tikzcd}
+	\]
+	Pulling this square back along $f_i:T_i\to U$ yields an isomorphism
+	\[
+	T_i\times_X U \cong T_i\times_{U,t} R 
+	\]
+	visualized via
+	% https://q.uiver.app/#q=WzAsNixbMSwwLCJSIl0sWzIsMCwiVSJdLFsxLDEsIlUiXSxbMiwxLCJYIl0sWzAsMCwiVF9pXFx0aW1lc19YUiJdLFswLDEsIlRfaSJdLFsyLDMsInAiLDJdLFsxLDMsInAiXSxbMCwyLCJ0IiwyXSxbMCwxLCJzIl0sWzQsNV0sWzUsMiwiZl9pIiwyXSxbNCwwXV0=
+	\[\begin{tikzcd}
+		{T_i\times_XR} & R & U \\
+		{T_i} & U & X.
+		\arrow[from=1-1, to=1-2]
+		\arrow[from=1-1, to=2-1]
+		\arrow["s", from=1-2, to=1-3]
+		\arrow["t"', from=1-2, to=2-2]
+		\arrow["p", from=1-3, to=2-3]
+		\arrow["{f_i}"', from=2-1, to=2-2]
+		\arrow["p"', from=2-2, to=2-3]
+	\end{tikzcd}\]
+	In particular, since $T_i, U$ and $R$ are schemes, $T_i\times_X U$ is represented by a scheme. Since $t:R\to U$ is \'etale, its base change
+	\[
+	T_i\times_X U \to T_i
+	\]
+	is \'etale.
+	
+	The schemes $T_i\times_X U$ carry their canonical descent datum with respect to the \'etale covering $\{T_i\to T\}_i$, since they are the pullbacks of the sheaf $T\times_X U$. Because schemes form a stack for the big \'etale topology, this descent datum is effective. Hence $T\times_X U$ is represented by a scheme.
+	
+	Moreover, \'etaleness descends along \'etale coverings of the base, so from the fact that each
+	\[
+	T_i\times_X U \to T_i
+	\]
+	is \'etale, it follows that
+	\[
+	T\times_X U \to T
+	\]
+	is \'etale.
+	
+	Thus the morphism $p:U\to X$ is representable, surjective, and \'etale. Therefore $X$ is an algebraic space.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
 \begin{proposition}
 	Let $U$ be a scheme and let 
 	% https://q.uiver.app/#q=WzAsMixbMCwwLCJSIl0sWzEsMCwiVVxcdGltZXNfUyBVIl0sWzAsMSwidCIsMix7Im9mZnNldCI6MX1dLFswLDEsInMiLDAseyJvZmZzZXQiOi0xfV1d
@@ -47,16 +208,16 @@ We have seen in ... that the representable presheaf of a scheme is indeeed a she
 \end{proposition}
 
 \begin{proof}
-	For every sscheme $T$ we get an isomorphism $(U\times_X U)(T) \cong U(T) \times_{X(T))} U(T)$. Via Yoneda, elements are given by morphisms $f,g: U(T)$, such that $\pi(f) = \pi(g)\in X(T)$, where $\pi:U\to X$ denotes the canonical morphism $U\to F \to F^\sharp$ of the sheafification. By \cite[][Tag 00WK]{stacks-project} for the section $\sigma:= \pi(f) = \pi (g) \in F^\sharp(T)$, we get an \etale\ cover $\{T_i\to T\}_i$ and elements $\sigma_i\in F(T_i) = U(T_i) / R(T_i)$, such that 
+	For every sscheme $T$ we get an isomorphism $(U\times_X U)(T) \cong U(T) \times_{X(T)} U(T)$. Via Yoneda, elements $f,g\in U(T)$ are given by morphisms $f,g:T\to U$, such that $\pi(f) = \pi(g)\in X(T)$, where $\pi:U\to X$ denotes the canonical morphism $U\to F \to F^\sharp$ of the sheafification. By \cite[][Tag 00WK]{stacks-project} for the section $\sigma:= \pi(f) = \pi (g) \in F^\sharp(T)$, we get an \etale\ cover $\{T_i\to T\}_i$ and elements $\sigma_i\in F(T_i) = U(T_i) / R(T_i)$, such that 
 	\begin{enumerate}
-		\item $\sigma \mid_{T_i} = \eta^2(\sigma_i)$, where $\eta^2$ denotes the counit at $F$, see \ref{lem:sheafification}.
+		\item $\sigma \mid_{T_i} = \eta^2(\sigma_i)$, where $\eta^2$ denotes the unit at $F$, see \ref{lem:sheafification}.
 		\item For every $i,j$ there exists an \etale\ covering $\{T_{i,j,k}\to T_i\times_T T_j\}_k$, such that $(\sigma_i)\mid_{T_{i,j,k}} = (\sigma_j)\mid_{T_{i,j,k}}$.
 	\end{enumerate}
 	By definition of $F(T_i) = U(T_i)/R(T_i)$, each $\sigma_i$ is represented by a pair or morphisms $f_i, g_i:T_i \to U$, which are in the same equivalence class under $R$. Hence, there is an $h_i\in R(T_i)$, such that $s\circ h_i = f_i$ and $t\circ h_i = g_i$.  
 	
 	By 1), we can choose representatives $f, g$, such that $f\mid_{T_i} = f_i$ and $g\mid_{T_i} = g_i$. 
 	So \etale\ locally on $T_i$, $(f_i,g_i)$ comes from a morphism $h_i$ to $R$.
-	These local $h_i:T_i\to R$ agree on the overlaps $T_i\times_T T_j$, because they were defined by the same section $\sigma_i$ of the sheaf $F^\sharp$. Since $R$ is representable, hence a sheaf in the \etale\ site, these $h_i$ glue to a unique morphism $h:T\to R$. Thus, from $(f,g)\in U\times_X U)(T)$ we get an $h\in R(T)$ with
+	These local $h_i:T_i\to R$ agree on the overlaps $T_i\times_T T_j$, because they have the same image under $(s,t):R\to U\times_X U$ and $(s,r)$ is a monomorphism. Since $R$ is representable, hence a sheaf in the \etale\ site, these $h_i$ glue to a unique morphism $h:T\to R$. Thus, from $(f,g)\in U\times_X U)(T)$ we get an $h\in R(T)$ with
 	\[
 	(f,g) = (s\circ h, t\circ h).
 	\]
@@ -69,14 +230,14 @@ We have seen in ... that the representable presheaf of a scheme is indeeed a she
 
 
 \begin{lemma}[Quotiens of spaces by finite equivalence relation]
-	Let $U$ be an affine scheme over a base scheme $S$ and let 
+	Let $U$ be an affine scheme and let 
 	% https://q.uiver.app/#q=WzAsMixbMCwwLCJSIl0sWzEsMCwiVVxcdGltZXNfUyBVIl0sWzAsMSwidCIsMix7Im9mZnNldCI6MX1dLFswLDEsInMiLDAseyJvZmZzZXQiOi0xfV1d
 	\[\begin{tikzcd}
 		R & {U\times_S U}
 		\arrow["t"', shift right, from=1-1, to=1-2]
 		\arrow["s", shift left, from=1-1, to=1-2]
 	\end{tikzcd}\]
-	be an etale equivalence over $S$. Then there exists a quotient $[U/R]$ as an algebraic space, such that the projection $U\to [U/R]$ is \etale.
+	be an etale equivalence. Then there exists a quotient $[U/R]$ as an algebraic space, such that the projection $U\to [U/R]$ is \etale.
 \end{lemma}
 
 \begin{proof}
@@ -96,7 +257,7 @@ We have seen in ... that the representable presheaf of a scheme is indeeed a she
 	Let $\sigma\in X(T)$ be a section. Then by \cite[][Tag 00WK]{stacks-project}, there exists an \etale\ cover $\{T_i\to T\}_i$ and sections $\sigma_i\in F(T_i) = U(T_i)/R(T_i)$, such that $\sigma\mid_{T_i}
  	= \eta^2(\sigma_i)$ and the $\sigma_i$ are compatible on the overlaps.
  	So \etale\ locally on $T$, the morphism $T\to X$ comes from a morphism $T_i\to U$.
- 	Over each $T_i$, we have an actual map $f_i:T_i \to U$ lifting to 
+ 	Over each $T_i$, we have an actual map $f_i:T_i \to U$ lifting to $f_i:T_i\to X$.
  	
  	We have a natural isomorphism $T_i\times_X U \cong T_i\times_X U\times_X U$, given via base change of the following diagram:
  	% https://q.uiver.app/#q=WzAsNixbMSwxLCJVIl0sWzIsMSwiWCJdLFswLDEsIlRfaSJdLFsyLDAsIlUiXSxbMSwwLCJSIl0sWzAsMCwiVF9pXFx0aW1lc19VUiJdLFsyLDAsImZfaSIsMl0sWzAsMV0sWzMsMV0sWzQsMywicyJdLFs0LDAsInQiLDJdLFs1LDJdLFs1LDRdLFs0LDEsIiIsMix7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXIifX1dLFs1LDAsIiIsMCx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXIifX1dXQ==
@@ -113,6 +274,17 @@ We have seen in ... that the representable presheaf of a scheme is indeeed a she
  		\arrow["{f_i}"', from=2-1, to=2-2]
  		\arrow[from=2-2, to=2-3]
  	\end{tikzcd}\]
- 	Since $t$ is \etale, $T_i\times_XU\to T$ is \etale. 
- 	Since being \etale can be checked \etale\ locally on the base, we conclude, that $T\times_XU\to T$ is \etale. Again by the same argument, $U\to X$ is \etale.
+ 	Since $t$ is \etale, $T_i\times_XU\to T_i$ is \etale. 
+ 	Since being \etale\ can be checked \etale\ locally on the base, we conclude, that $T\times_XU\to T$ is \etale. Again by the same argument, $U\to X$ is \etale.
 \end{proof}
+
+\begin{lemma}[Quotiens of spaces by finite equivalence relation]
+	Let $U$ be an affine scheme over a base scheme $S$ and let 
+	% https://q.uiver.app/#q=WzAsMixbMCwwLCJSIl0sWzEsMCwiVVxcdGltZXNfUyBVIl0sWzAsMSwidCIsMix7Im9mZnNldCI6MX1dLFswLDEsInMiLDAseyJvZmZzZXQiOi0xfV1d
+	\[\begin{tikzcd}
+		R & {U\times_S U}
+		\arrow["t"', shift right, from=1-1, to=1-2]
+		\arrow["s", shift left, from=1-1, to=1-2]
+	\end{tikzcd}\]
+	be an etale equivalence over $S$. Then there exists a quotient $[U/R]$ as an algebraic space, such that the projection $U\to [U/R]$ is \etale.
+\end{lemma}
