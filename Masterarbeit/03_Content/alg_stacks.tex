@@ -18,7 +18,7 @@ This denotes that $\zeta$ lies over $U$ and $\phi$ lies over $f$, i.e. $p_\mathc
 
 \begin{definition}[Category fibred in Groupoids]\label{def:category-fibred-in-groupoids}
 	(\cite[][p. 9, Definition 2.15]{Gomez2001AlgebraicStacks})
-	Let $\mathcal{F}$ be a category over $\mathcal{C}$. We call it a category fibred in groupoids, if 
+	Let $\mathcal{F}$ be a category over $\mathcal{C}$. We call it a category fibred in groupoids (CFG), if 
 	\begin{enumerate}
 		\item Pullbacks exists, i.e. for all morphisms $f:B'\to B$ in $\mathcal{C}$ and every object $X$ lying over $B$ there exists an object $X'$ and a morphism $\phi:X'\to X$ lying over $B'$ and $f$ resp.
 		% https://q.uiver.app/#q=WzAsNCxbMSwwLCJYIl0sWzAsMCwiWCciXSxbMCwxLCJCJyJdLFsxLDEsIkIiXSxbMiwzLCJmIiwyXSxbMCwzLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzEsMiwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9LCJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMSwwLCJcXHBoaSIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
@@ -52,8 +52,12 @@ This denotes that $\zeta$ lies over $U$ and $\phi$ lies over $f$, i.e. $p_\mathc
 \end{definition}
 
 \begin{remark}
-	Such a morhism $\phi$ is often called cartesian.
+	Such a morhism $\phi$ is called cartesian.
 \end{remark}
+
+\begin{definition}[Morphism of CFG]
+	Let $\mathcal{F},\mathcal{G}$ be categories fibred in groupoids over $\CatC$. A morphism of categories fibred in groupoids is a functor $f:\mathcal{F}\to \mathcal{G}$ 
+\end{definition}
 
 \begin{definition}
 	Let $\mathcal{F}\to \mathcal{C}$ be a category fibred in groupoids and let $B\in \mathcal{C}$. We call the subcategory of $\mathcal{F}$ of objects lying over $B$ and morphisms lying over $id_B$ the fibre of $\mathcal{F}$ over $B$ and denote it by $\mathcal{F}(B)$.
@@ -111,6 +115,10 @@ This denotes that $\zeta$ lies over $U$ and $\phi$ lies over $f$, i.e. $p_\mathc
 \begin{corollary}
 	Let $\Cat{F}\to \Cat{C}$ be a category fibred in groupoids. Then the fibres $\Cat{F}(B)$ of $\Cat{F}$ over every object $B\in\CatC$ is a groupoid.
 \end{corollary}
+
+\begin{definition}
+	Given CFG $\mathcal{F},\mathcal{G}$ over $\CatC$, we call a natural
+\end{definition}
 
 \begin{remark}
 	As explained in the Stacks Project \cite[][Tags 02XJ, 003S]{stacks-project}, a category fibred in groupoids
