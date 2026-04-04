@@ -681,6 +681,39 @@ urlseen = {last access},
 \DeclareRobustCommand{\OOX}{\mathscr{O}_X}		% Structure sheaf of X
 \NewDocumentCommand{\res}{mm}{#1\!\mid_{#2}}  % Restriction: \res{F}{U} = F|_U
 
+% ---------- Algebraic spaces ----------
+\DeclareRobustCommand{\AlgSp}{\cat{AlgSp}}
+\NewDocumentCommand{\AlgSpOver}{m}{\Over{\AlgSp}{#1}}
+\NewDocumentCommand{\AlgSpUnder}{m}{\Under{\AlgSp}{#1}}
+
+% ---------- Quasi-coherent sheaves ----------
+\DeclareRobustCommand{\QCoh}{\cat{QCoh}}
+\NewDocumentCommand{\QCohof}{m}{\ensuremath{\QCoh\!\left(#1\right)}}
+\DeclareRobustCommand{\QCohX}{\QCohof{X}}
+\DeclareRobustCommand{\QCohY}{\QCohof{Y}}
+
+% ---------- Stacks ----------
+\DeclareRobustCommand{\Stk}{\cat{Stk}}
+\NewDocumentCommand{\StkOver}{m}{\Over{\Stk}{#1}}
+\NewDocumentCommand{\StkUnder}{m}{\Under{\Stk}{#1}}
+\NewDocumentCommand{\Stacksof}{m}{\ensuremath{\Stk\!\left(#1\right)}}
+
+% ---------- Infinity-stacks ----------
+\DeclareRobustCommand{\inftyGrpd}{\ensuremath{\cat{\infty\text{-}Grpd}}}
+\DeclareRobustCommand{\inftyStk}{\ensuremath{\cat{\infty\text{-}Stk}}}
+\NewDocumentCommand{\inftyStacksof}{m}{\ensuremath{\inftyStk\!\left(#1\right)}}
+\NewDocumentCommand{\inftyStkOver}{m}{\Over{\inftyStk}{#1}}
+\NewDocumentCommand{\inftyStkUnder}{m}{\Under{\inftyStk}{#1}}
+
+% ---------- Affine-schemes  ----------
+\DeclareRobustCommand{\Aff}{\cat{Aff}}
+\NewDocumentCommand{\AffOver}{m}{\Over{\Aff}{#1}}
+\NewDocumentCommand{\AffUnder}{m}{\Under{\Aff}{#1}}
+
+% ---------- Homological algebra ----------
+\DeclareMathOperator{\Tot}{Tot}
+\NewDocumentCommand{\Totof}{m}{\ensuremath{\Tot\!\left(#1\right)}}
+
 % --- Frequently used terms ---
 \DeclareRobustCommand{\etale}{\'etal\'e}
 \DeclareRobustCommand{\Etale}{\'Etal\'e}

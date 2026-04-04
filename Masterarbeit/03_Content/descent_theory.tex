@@ -1,5 +1,264 @@
 \chapter{Descent Theory}
 
+Descent theory provides a unified framework for reconstructing global objects from local data along coverings. In algebraic geometry, this theory appears at several levels of generality, forming a hierarchy that can be organized by truncation level in higher category theory. At the most algebraic level, faithfully flat descent for commutative rings is governed by the exactness of the Amitsur complex. Descent for modules, quasi-coherent sheaves, and affine schemes reduces to this algebraic statement. Algebraic spaces satisfy descent as sheaves of sets, while stacks satisfy descent as sheaves of groupoids, which amounts to truncating the Čech descent diagram at the level of triple overlaps. More generally, $\infty$-stacks satisfy descent with respect to the entire Čech nerve. Thus, descent theory in algebraic geometry forms a hierarchy ranging from faithfully flat descent for rings to $\infty$-categorical descent, and the theory of stacks can be understood both as a higher-categorical extension of classical faithfully flat descent and as a 2-truncated form of $\infty$-categorical descent.
+
+% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXGluZnR5LXN0YWNrcyJdLFsxLDAsInN0YWNrcyJdLFsyLDAsImFsZ2VicmFpYyBzcGFjZXMiXSxbMywwLCJRQ29oIl0sWzQsMCwiQWZmIl0sWzUsMCwiUmluZ3MiXSxbMCwxXSxbMSwyXSxbMiwzXSxbMyw0XSxbNCw1XV0=
+\[\begin{tikzcd}
+	{\inftyStk} & \Stk & \AlgSp & \QCoh & \Aff & \Ring
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=1-5, to=1-6]
+\end{tikzcd}\]
+
+
+The guiding principle for the entire chapter should be:
+
+Descent for a geometric object $F$ means that for a covering 
+$U\to X$, the natural map $F(X) \to \Totof{F(U_\bullet)}$ is an equivalence, where $U_\bullet$ is the Čech nerve of the covering.
+
+
+
+\begin{definition}[Čech nerve]
+	Let $f : U \to X$ be a morphism in a category with fiber products.
+	The \emph{Čech nerve} of $f$ is the simplicial object
+	\[
+	U_\bullet : \Delta^{op} \to \mathcal{C}
+	\]
+	given by
+	\[
+	U_n = \underbrace{U \times_X \cdots \times_X U}_{n+1 \text{ times}}.
+	\]
+	The face maps are given by the projections and the degeneracy maps by diagonals.
+\end{definition}
+
+\begin{definition}[Totalization]
+	Let $\mathcal{C}$ be a category with limits and let
+	\[
+	X^\bullet : \Delta \to \mathcal{C}
+	\]
+	be a cosimplicial object. The \emph{totalization} of $X^\bullet$
+	is defined as the limit of the cosimplicial diagram
+	\[
+	\operatorname{Tot}(X^\bullet)
+	:=
+	\lim_{\Delta} X^\bullet.
+	\]
+	If $\mathcal{C}$ is a homotopical category, the totalization is
+	defined as the homotopy limit
+	\[
+	\Totof{X^\bullet}
+	:=
+	\operatorname{holim}_{\Delta} X^\bullet.
+	\]
+\end{definition}
+
+\begin{definition}[Truncated totalization]
+	Let $X^\bullet : \Delta \to \mathcal{C}$ be a cosimplicial object.
+	For $n \ge 0$, define the $n$-th totalization by
+	\[
+	\Tot_n(X^\bullet)
+	:=
+	\lim_{\Delta_{\le n}} X^\bullet,
+	\]
+	where $\Delta_{\le n}$ is the full subcategory of $\Delta$
+	on objects $[0],\dots,[n]$.
+\end{definition}
+
+\begin{remark}
+	Totalization can be viewed as the simplicial limit of a cosimplicial
+	object. In descent theory, given a covering $U \to X$ with Čech nerve
+	$U_\bullet$ and a presheaf $F$, the cosimplicial object
+	$F(U_\bullet)$ is obtained by evaluating $F$ on the Čech nerve.
+	Descent for $F$ is equivalent to the statement that
+	\[
+	F(X) \simeq \Tot(F(U_\bullet)).
+	\]
+	In this work we restrict to $1$-stacks, i.e.\ stacks taking values in the
+	$(2,1)$-category $\Grpd$. Since groupoids correspond to $1$-truncated
+	homotopy types, all higher homotopy groups $\pi_n$ vanish for $n \ge 2$.
+	Consequently, the homotopy limit over the Čech nerve is already determined
+	by the truncated totalization over $\Delta_{\le 2}$.
+\end{remark}
+
+
+The Amitsur complex computes the totalization of the Čech nerve of
+$\Spec(B) \to \Spec(A)$, and faithfully flat descent for rings states
+that this totalization recovers the ring $A$. Thus descent theory in
+algebraic geometry ultimately reduces to exactness of the Amitsur complex.
+
+\begin{theorem}[Amitsur complex]
+	Let $A \to B$ be a faithfully flat morphism of rings.
+	Then the augmented Amitsur complex
+	\[
+	0 \to A
+	\longrightarrow B
+	\longrightarrow B \otimes_A B
+	\longrightarrow B \otimes_A B \otimes_A B
+	\longrightarrow \cdots
+	\]
+	with differentials given by the alternating sum of the coface maps
+	is exact.
+\end{theorem}
+
+
+
+
+\begin{theorem}[Faithfully flat descent for rings]
+	Let $A \to B$ be a faithfully flat morphism of rings and let
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJCIl0sWzEsMCwiQlxcb3RpbWVzX0EgQiJdLFsyLDAsIkJcXG90aW1lc19BQlxcb3RpbWVzX0FCIl0sWzMsMCwiXFxjZG90cyJdLFswLDEsIiIsMCx7Im9mZnNldCI6LTF9XSxbMSwyXSxbMSwyLCIiLDAseyJvZmZzZXQiOi0yfV0sWzEsMiwiIiwwLHsib2Zmc2V0IjoyfV0sWzAsMSwiIiwwLHsib2Zmc2V0IjoxfV0sWzIsMywiIiwwLHsib2Zmc2V0IjotMX1dLFsyLDMsIiIsMCx7Im9mZnNldCI6MX1dLFsyLDMsIiIsMCx7Im9mZnNldCI6M31dLFsyLDMsIiIsMCx7Im9mZnNldCI6LTN9XV0=
+	\[
+	B_\bullet =
+	\big(
+	\begin{tikzcd}
+		B & {B\otimes_A B} & {B\otimes_AB\otimes_AB} & \cdots
+		\arrow[shift left, from=1-1, to=1-2]
+		\arrow[shift right, from=1-1, to=1-2]
+		\arrow[from=1-2, to=1-3]
+		\arrow[shift left=2, from=1-2, to=1-3]
+		\arrow[shift right=2, from=1-2, to=1-3]
+		\arrow[shift left, from=1-3, to=1-4]
+		\arrow[shift right, from=1-3, to=1-4]
+		\arrow[shift right=3, from=1-3, to=1-4]
+		\arrow[shift left=3, from=1-3, to=1-4]
+	\end{tikzcd}
+	\big)
+	\]
+	
+	be the Čech nerve of $A \to B$.
+	Then the natural map
+	\[
+	A \longrightarrow \operatorname{Tot}(B^\bullet)
+	\]
+	is an isomorphism.
+\end{theorem}
+
+\begin{proof}
+	The cosimplicial ring $B^\bullet$ associated to the morphism
+	$A \to B$ is the Amitsur complex of the extension.
+	If $A \to B$ is faithfully flat, the augmented Amitsur complex
+	\[
+	0 \to A \to B \to B \otimes_A B \to B \otimes_A B \otimes_A B \to \cdots
+	\]
+	is exact. Exactness of this complex implies that $A$ is the limit
+	of the cosimplicial diagram $B^\bullet$. Hence
+	\[
+	A \cong \operatorname{Tot}(B^\bullet).
+	\]
+\end{proof}
+
+\begin{remark}
+	The cosimplicial ring $B^\bullet$ is the Amitsur complex associated to
+	$A \to B$. Faithfully flat descent is equivalent to exactness of this
+	complex.
+\end{remark}
+
+
+\begin{proposition}[Descent for affine schemes]
+	Let $U \to X$ be a faithfully flat morphism of affine schemes and let
+	$U_\bullet$ be its Čech nerve. Then
+	\[
+	X \simeq \operatorname{colim}(U_\bullet)
+	\]
+	in the category of schemes.
+	Equivalently, for every scheme $T$ we have
+	\[
+	\Hom(T, X)
+	\simeq
+	\Tot
+	\big(
+	\Hom(T, U_\bullet)
+	\big).
+	\]
+\end{proposition}
+
+
+\begin{theorem}[Faithfully flat descent for quasi-coherent sheaves]
+	Let $f : U \to X$ be an fpqc covering of schemes and let $U_\bullet$
+	be the Čech nerve.
+	Then the pullback functor induces an equivalence
+	\[
+	\QCoh(X)
+	\;\simeq\;
+	\operatorname{Tot}
+	\big(
+	\QCoh(U_\bullet)
+	\big).
+	\]
+\end{theorem}
+
+\begin{proposition}[Sheaf condition as Čech descent]
+	Let $F$ be a sheaf of sets on a site and let $U \to X$ be a covering
+	with Čech nerve $U_\bullet$. Then
+	\[
+	F(X)
+	\cong
+	\operatorname{Tot}
+	\big(
+	F(U_\bullet)
+	\big).
+	\]
+	Since sets are $0$-truncated, the totalization reduces to the equalizer
+	\[
+	F(X)
+	\to
+	F(U)
+	\rightrightarrows
+	F(U \times_X U).
+	\]
+\end{proposition}
+
+\begin{theorem}[Descent for stacks]
+	Let $\mathcal{X}$ be a stack in groupoids on a site and let
+	$U \to X$ be a covering with Čech nerve $U_\bullet$.
+	Then the natural functor
+	\[
+	\mathcal{X}(X)
+	\longrightarrow
+	\operatorname{Tot}
+	\big(
+	\mathcal{X}(U_\bullet)
+	\big)
+	\]
+	is an equivalence of groupoids.
+\end{theorem}
+
+\begin{remark}
+	Since groupoids are $2$-truncated homotopy types, the totalization above
+	is determined by the first three levels of the Čech nerve:
+	\[
+	U,\quad
+	U \times_X U,\quad
+	U \times_X U \times_X U.
+	\]
+	Thus descent for stacks consists of
+	\begin{enumerate}
+		\item objects on $U$,
+		\item isomorphisms on $U \times_X U$,
+		\item a cocycle condition on $U \times_X U \times_X U$.
+	\end{enumerate}
+\end{remark}
+
+
+
+
+\begin{theorem}[Descent for $\infty$-stacks]
+	Let $F : \mathcal{C}^{op} \to \mathcal{S}$ be a presheaf of spaces.
+	Then $F$ is a stack if and only if for every covering
+	$U \to X$ with Čech nerve $U_\bullet$ the natural map
+	\[
+	F(X)
+	\longrightarrow
+	\operatorname{Tot}
+	\big(
+	F(U_\bullet)
+	\big)
+	\]
+	is an equivalence of spaces.
+\end{theorem}
+
+
 \begin{proposition}[Descent for faithfully flat modules]
 	(\cite[][p. 71]{alper2026stacks})
 	Let $\varphi:A\to B$ be a faithfully flat ring map, then the following diagram is an equalizer:
