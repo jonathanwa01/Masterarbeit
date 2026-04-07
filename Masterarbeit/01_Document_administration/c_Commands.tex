@@ -640,6 +640,7 @@ urlseen = {last access},
 % ---------- Categories (sans serif) ----------
 \DeclareRobustCommand{\cat}[1]{\ensuremath{\mathsf{#1}}}
 
+\DeclareRobustCommand{\Cat}{\cat{Cat}}
 \DeclareRobustCommand{\Sch}{\cat{Sch}}
 \DeclareRobustCommand{\Set}{\cat{Set}}
 \DeclareRobustCommand{\Top}{\cat{Top}}
@@ -689,6 +690,8 @@ urlseen = {last access},
 % ---------- Quasi-coherent sheaves ----------
 \DeclareRobustCommand{\QCoh}{\cat{QCoh}}
 \NewDocumentCommand{\QCohof}{m}{\ensuremath{\QCoh\!\left(#1\right)}}
+\DeclareRobustCommand{\QCohAlg}{\cat{QCohAlg}}
+\NewDocumentCommand{\QCohAlgof}{m}{\ensuremath{\QCohAlg\!\left(#1\right)}}
 \DeclareRobustCommand{\QCohX}{\QCohof{X}}
 \DeclareRobustCommand{\QCohY}{\QCohof{Y}}
 

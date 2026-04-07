@@ -54,6 +54,16 @@ $U\to X$, the natural map $F(X) \to \Totof{F(U_\bullet)}$ is an equivalence, whe
 	\]
 \end{definition}
 
+\begin{remark}
+	In the applications relevant for descent theory, the category $\mathcal{C}$
+	will typically be the category $\Cat$ of (small) categories, or a closely
+	related $(2,1)$-category such as $\Grpd$. In this case, the totalization
+	$\Tot(X^\bullet)$ is again a category, obtained as the limit in $\Cat$,
+	and can be described concretely in terms of compatible objects and morphisms
+	in the diagram $X^\bullet$. In particular, this viewpoint will allow us to
+	interpret totalizations as categories of descent data.
+\end{remark}
+
 \begin{definition}[Truncated totalization]
 	Let $X^\bullet : \Delta \to \mathcal{C}$ be a cosimplicial object.
 	For $n \ge 0$, define the $n$-th totalization by
@@ -73,7 +83,7 @@ $U\to X$, the natural map $F(X) \to \Totof{F(U_\bullet)}$ is an equivalence, whe
 	$F(U_\bullet)$ is obtained by evaluating $F$ on the Čech nerve.
 	Descent for $F$ is equivalent to the statement that
 	\[
-	F(X) \simeq \Tot(F(U_\bullet)).
+	F(X) \cong \Tot(F(U_\bullet)).
 	\]
 	In this work we restrict to $1$-stacks, i.e.\ stacks taking values in the
 	$(2,1)$-category $\Grpd$. Since groupoids correspond to $1$-truncated
@@ -150,8 +160,166 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 
 \begin{remark}
 	The cosimplicial ring $B^\bullet$ is the Amitsur complex associated to
-	$A \to B$. Faithfully flat descent is equivalent to exactness of this
+	$A \to B$. Faithfully flat descent for rings is equivalent to exactness of this
 	complex.
+\end{remark}
+
+\begin{theorem}[Faithfully flat descent for modules]\label{thm:faithfully-flat-descent-modules}
+	(\cite[Tag 023F, 03OA]{stacks-project})
+	Let $A \to B$ be a faithfully flat morphism of rings and let $B^\bullet$
+	be the Čech nerve. Then the natural functor
+	\[
+	\Mod_A
+	\longrightarrow
+	\Totof{\Mod(B^\bullet)}
+	\]
+	is an equivalence of categories.
+\end{theorem}
+
+\begin{proof}
+	We divide the proof into two steps.
+	
+	\medskip
+	\textbf{Step 1: Fully faithfulness.}
+	Let $M$ be an $A$-module. Consider the associated cosimplicial
+	$B$-module
+	\[
+	M \otimes_A B^\bullet.
+	\]
+	The Amitsur complex of $M$ is the complex
+	\[
+		M \to M \otimes_A B \to M \otimes_A B \otimes_A B \to \cdots
+	\]
+	obtained from this cosimplicial object.
+	
+	Since $A \to B$ is faithfully flat, the Amitsur complex is exact in positive
+	degrees and has $H^0 \cong M$.
+	
+	It follows that
+	\[
+	M \cong \Totof{M \otimes_A B^\bullet}.
+	\]
+	Thus $M$ can be recovered from its pullback to $B^\bullet$, which shows that
+	the functor
+	\[
+	\Mod_A \to \Totof{\Mod(B^\bullet)}
+	\]
+	is fully faithful.
+	
+	\medskip
+	
+	\noindent	
+	\textbf{Step 2: Essential surjectivity.}
+	Let $(N,\varphi)$ be an object of $\Totof{\Mod(B^\bullet)}$, i.e.\ a
+	$B$-module $N$ together with descent data, that is, an isomorphism
+	\[
+	\varphi : N\otimes_A B \xrightarrow{\sim} B\otimes_A N
+	\]
+	satisfying the cocycle condition
+	\[
+	d^0(N) \cong_\varphi d^1(N).
+	\]
+	This suffices, since descent data for modules is governed by objects,
+	isomorphisms, and a cocycle condition, i.e.\ by levels $0,1,2$ of the Čech
+	nerve. Equivalently, the cosimplicial diagram $\Mod(B^\bullet)$ takes values
+	in the $2$-category $\Cat$, so its totalization is already determined by the
+	truncation $\Tot_2$, and no higher coherence data is required.
+	Define the $A$-module
+	\[
+	M := \{ n \in N \mid 1 \otimes n = \varphi(n \otimes 1) \}.
+	\]
+	Equivalently, $M$ is the equalizer
+	\[
+	\begin{tikzcd}
+		M \arrow[r,"\psi"] & N \arrow[r,shift left,"n\mapsto n\otimes 1"] \arrow[r,shift right,"\;n\mapsto \varphi(n\otimes 1)"'] & N\otimes_A B.
+	\end{tikzcd}
+	\]
+	
+	We claim that the natural map
+	\[
+	B \otimes_A M \longrightarrow N, \qquad b\otimes m \mapsto b\cdot \psi(m),
+	\]
+	is an isomorphism.
+	
+	\medskip
+	
+	Consider the two cosimplicial modules
+	\[
+	M_\bullet := M \otimes_A B^\bullet,
+	\qquad
+	N_\bullet := \big(N \to N\otimes_A B \to N\otimes_A B\otimes_A B \to \cdots\big),
+	\]
+	where $M_\bullet$ is the Amitsur complex of $M$, (\cite[Tag 03OA]{stacks-project}), and $N_\bullet$ is the
+	twisted Amitsur complex associated to $(N,\varphi)$ (\cite[Tag 023F]{stacks-project}), with coface maps
+	given as follows:
+	\[
+	\begin{aligned}
+		\delta^0(n) &= 1\otimes n, &
+		\delta^1(n) &= \varphi(n\otimes 1), \\
+		\delta^0(n\otimes b) &= 1\otimes n\otimes b, &
+		\delta^1(n\otimes b) &= n\otimes 1\otimes b, &
+		\delta^2(n\otimes b) &= (\varphi\otimes \mathrm{id})(n\otimes b\otimes 1),
+	\end{aligned}
+	\]
+	and similarly in higher degrees. The cocycle condition on $\varphi$
+	ensures that these maps satisfy the cosimplicial identities.
+	
+	By construction of $M$ as the equalizer, we have
+	\[
+	M \cong H^0(N_\bullet).
+	\]
+	
+	Tensoring $N_\bullet$ with $B$, we obtain a cosimplicial $B$-module
+	\[
+	B \otimes_A N_\bullet.
+	\]
+	Using the descent isomorphism $\varphi$, one checks that the twisting
+	disappears after base change, and there is a canonical identification
+	\[
+	B \otimes_A N_\bullet \;\cong\; B \otimes_A (M \otimes_A B^\bullet).
+	\]
+	In particular, $B \otimes_A N_\bullet$ identifies with the Amitsur complex
+	of the $B$-module $B\otimes_A M$.
+	
+	Since $A \to B$ is faithfully flat, the Amitsur complex of $M$ is exact,
+	hence $M_\bullet$ is exact. Flatness implies that tensoring with $B$
+	preserves exactness, so $B \otimes_A M_\bullet$ is exact. Therefore
+	\[
+	B \otimes_A N_\bullet
+	\]
+	is exact.
+	
+	Again by faithful flattness, $N_\bullet$ itself is exact.
+	
+	Taking $H^0$, we obtain
+	\[
+	B \otimes_A M \;\cong\; H^0(B \otimes_A N_\bullet)
+	\;\cong\; H^0(N_\bullet)
+	\;\cong\; N,
+	\]
+	which proves that the map $B \otimes_A M \to N$ is an isomorphism.
+	
+	\medskip
+	
+	Thus every descent datum is effective, and the functor
+	\[
+	\Mod_A \longrightarrow \Totof{\Mod(B^\bullet)}
+	\]
+	is essentially surjective.
+\end{proof}
+
+\begin{remark}[Descent data as totalization]
+	Let $A \to B$ be a ring map with Čech nerve $B^\bullet$.
+	Then the category of descent data for modules is naturally identified with
+	the totalization
+	\[
+	\mathrm{Desc}(B/A)
+	\cong
+	\Tot\big(\mathrm{Mod}(B^\bullet)\big).
+	\]
+	Indeed, an object of the totalization consists of a $B$-module together with
+	compatibility isomorphisms over $B \otimes_A B$ satisfying a cocycle condition
+	over $B \otimes_A B \otimes_A B$, which is precisely a descent datum.
 \end{remark}
 
 
@@ -173,14 +341,14 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	\]
 \end{proposition}
 
-
 \begin{theorem}[Faithfully flat descent for quasi-coherent sheaves]
+	(\cite[Tag 023T]{stacks-project})
 	Let $f : U \to X$ be an fpqc covering of schemes and let $U_\bullet$
 	be the Čech nerve.
 	Then the pullback functor induces an equivalence
 	\[
 	\QCoh(X)
-	\;\simeq\;
+	\cong
 	\operatorname{Tot}
 	\big(
 	\QCoh(U_\bullet)
@@ -188,7 +356,195 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	\]
 \end{theorem}
 
-\begin{proposition}[Sheaf condition as Čech descent]
+\begin{proof}
+	We first reduce to the affine case and then glue the local statements.
+	
+	Choose an affine open covering
+	\[
+	X = \bigcup_{j \in J} V_j,
+	\qquad
+	V_j = \Spec A_j.
+	\]
+	For each $j$, set
+	\[
+	U_j := U \times_X V_j.
+	\]
+	Since fpqc morphisms are stable under base change, each morphism
+	\[
+	U_j \to V_j
+	\]
+	is again an fpqc covering, and its Čech nerve is given by
+	\[
+	(U_j)_\bullet = U_\bullet \times_X V_j.
+	\]
+	
+	We claim that it suffices to prove that for each $j$ the pullback functor
+	\[
+	\QCoh(V_j) \longrightarrow \Tot\big(\QCoh((U_j)_\bullet)\big)
+	\]
+	is an equivalence.
+	
+	Indeed, let
+	\[
+	(\mathcal F_U,\alpha)\in \Tot\big(\QCoh(U_\bullet)\big)
+	\]
+	be a descent datum on $U$. Restricting to $U_j$ yields for each $j$ an object
+	\[
+	(\mathcal F_{U_j},\alpha_j)\in \Tot\big(\QCoh((U_j)_\bullet)\big).
+	\]
+	Assuming the affine case, there exists a quasi-coherent sheaf
+	\[
+	\mathcal F_j\in \QCoh(V_j)
+	\]
+	whose induced descent datum on $U_j\to V_j$ is identified with
+	$(\mathcal F_{U_j},\alpha_j)$.
+	
+	Now for $j,j'\in J$, the restrictions
+	\[
+	\mathcal F_j|_{V_j\cap V_{j'}}
+	\qquad\text{and}\qquad
+	\mathcal F_{j'}|_{V_j\cap V_{j'}}
+	\]
+	induce the same descent datum on
+	\[
+	U\times_X(V_j\cap V_{j'}) \to V_j\cap V_{j'}.
+	\]
+	By the fully faithful part of the affine case, there is therefore a unique
+	isomorphism
+	\[
+	\theta_{jj'}:
+	\mathcal F_j|_{V_j\cap V_{j'}}
+	\xrightarrow{\sim}
+	\mathcal F_{j'}|_{V_j\cap V_{j'}}
+	\]
+	compatible with the descent data. By uniqueness, these isomorphisms satisfy
+	the cocycle condition on triple overlaps. Hence the sheaves $\mathcal F_j$
+	glue to a quasi-coherent sheaf
+	\[
+	\mathcal F\in \QCoh(X).
+	\]
+	By construction, the canonical descent datum associated to $\mathcal F$
+	recovers the original descent datum $(\mathcal F_U,\alpha)$. This proves
+	essential surjectivity globally. Fully faithfulness is proved in the same way:
+	morphisms can be checked on the affine open cover $\{V_j\}$ and then glued by
+	uniqueness.
+	
+	Hence, it remains to prove the affine case. Thus assume
+	\[
+	X=\Spec A
+	\]
+	is affine. Since $U\to X$ is fpqc, we may choose an affine open covering
+	\[
+	U=\bigcup_{i\in I} U_i,
+	\qquad
+	U_i=\Spec B_i.
+	\]
+	Then
+	\[
+	\coprod_{i\in I} U_i \to X
+	\]
+	is again an fpqc covering, and its Cech nerve refines the Cech nerve of
+	$U\to X$. Hence it suffices to prove the statement for the affine fpqc cover
+	\[
+	\coprod_{i\in I}\Spec B_i \to \Spec A.
+	\]
+	For an affine scheme, we have equivalence of categories, see \cite[Tag 01IB]{stacks-project}:
+	\[
+	\QCoh(\Spec A)\cong \Mod_A
+	\]
+	and
+	\[
+	\QCoh(\Spec B_i)\cong \Mod_{B_i}
+	\]
+	Under these identifications, the Cech nerve of the covering
+	\[
+	\coprod_i \Spec B_i \to \Spec A
+	\]
+	corresponds to the cosimplicial ring obtained from the fpqc algebra
+	\[
+	A \to \prod_i B_i.
+	\]
+	Since a finite product of faithfully flat $A$-algebras is again faithfully
+	flat, descent for quasi-coherent sheaves over this affine fpqc cover reduces
+	to faithfully flat descent for modules:
+	\[
+	\Mod_A \cong \Tot\big(\Mod(B^\bullet)\big),
+	\]
+	where $B=\prod_i B_i$ and $B^\bullet$ is the associated Amitsur-Cech nerve.
+	
+	Equivalently, if one prefers to keep the covering indexed by the family
+	$\{B_i\}$, then descent data for quasi-coherent sheaves on the affine fpqc
+	cover $\{\Spec B_i\to \Spec A\}$ is exactly descent data for $A$-modules with
+	respect to the corresponding Čech diagram, and the equivalence follows from
+	faithfully flat descent for modules.
+	This proves the affine case, and therefore the theorem.
+\end{proof}
+
+
+
+\begin{theorem}[Descent for affine schemes via relative spectrum]
+	Let $X$ be a scheme and let $U \to X$ be an fpqc covering with Cech nerve $U_\bullet$.
+	Then the functor
+	\[
+	\Aff/X \;\longrightarrow\; \Tot\big((\Aff/U_\bullet)\big)
+	\]
+	is an equivalence, where $\Aff/X$ denotes the category of affine schemes over $X$.
+	
+	Equivalently, for quasi-coherent $\mathcal{O}_X$-algebras one has
+	\[
+	\QCohAlg(X)
+	\cong
+	\Tot\big(\QCohAlg(U_\bullet)\big),
+	\]
+	and this equivalence is compatible with the relative spectrum construction
+	\[
+	\underline{\Spec}_X : \QCohAlg(X)^{op} \;\longrightarrow\; \Aff/X.
+	\]
+\end{theorem}
+
+\begin{proof}
+	We first treat quasi-coherent algebras and then pass to affine schemes via
+	relative $\Spec$.
+	
+	Since quasi-coherent $\mathcal{O}_X$-modules satisfy fpqc descent, the same
+	is true for quasi-coherent $\mathcal{O}_X$-algebras: the algebra structure
+	(consisting of multiplication and unit maps) is given by morphisms in
+	$\QCoh(X)$ and is preserved under limits. Hence
+	\[
+	\QCohAlg(X)
+	\cong
+	\Tot\big(\QCohAlg(U_\bullet)\big).
+	\]
+	
+	Now consider the relative spectrum construction
+	\[
+	\underline{\Spec}_X : \QCohAlg(X)^{op} \to \Aff/X.
+	\]
+	This functor is functorial and compatible with base change. Moreover, it
+	induces an equivalence between quasi-coherent algebras on $X$ and affine
+	schemes over $X$.
+	
+plicial diagram
+	$\QCohAlg(U_\bullet)$ yields the cosimplicial diagram of affine schemes
+	$\Aff/U_\bullet$. Since $\underline{\Spec}$ is compatible with base change,
+	it preserves the descent data.
+	
+	Therefore the equivalence for quasi-coherent algebras induces an equivalence
+	\[
+	\Aff/X \cong \Tot\big(\Aff/U_\bullet\big).
+	\]
+\end{proof}
+
+\begin{remark}[Reference]
+	Descent for affine schemes (and more generally affine morphisms) with
+	respect to fpqc coverings has been prooven in the Stacks Project,
+	see \cite[Tag 0244]{stacks-project}. The reduction to quasi-coherent
+	algebras and the compatibility with relative $\Spec$ are standard and
+	follow from fpqc descent for quasi-coherent sheaves,
+	see \cite[Tag 023T]{stacks-project}.
+\end{remark}
+
+\begin{theorem}[Sheaf condition as Čech descent]
 	Let $F$ be a sheaf of sets on a site and let $U \to X$ be a covering
 	with Čech nerve $U_\bullet$. Then
 	\[
@@ -207,7 +563,7 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	\rightrightarrows
 	F(U \times_X U).
 	\]
-\end{proposition}
+\end{theorem}
 
 \begin{theorem}[Descent for stacks]
 	Let $\mathcal{X}$ be a stack in groupoids on a site and let
@@ -241,8 +597,6 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 \end{remark}
 
 
-
-
 \begin{theorem}[Descent for $\infty$-stacks]
 	Let $F : \mathcal{C}^{op} \to \mathcal{S}$ be a presheaf of spaces.
 	Then $F$ is a stack if and only if for every covering
@@ -257,26 +611,3 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	\]
 	is an equivalence of spaces.
 \end{theorem}
-
-
-\begin{proposition}[Descent for faithfully flat modules]
-	(\cite[][p. 71]{alper2026stacks})
-	Let $\varphi:A\to B$ be a faithfully flat ring map, then the following diagram is an equalizer:
-	% https://q.uiver.app/#q=WzAsNCxbMCwwLCIwIl0sWzEsMCwiQSJdLFsyLDAsIkIiXSxbNCwwLCJCXFxvdGltZXNfQUIiXSxbMCwxXSxbMSwyLCJcXHZhcnBoaSJdLFsyLDMsImJcXG1hcHN0byAxXFxvdGltZXMgYiIsMix7Im9mZnNldCI6Mn1dLFsyLDMsImJcXG1hcHN0byBiXFxvdGltZXMgMSIsMCx7Im9mZnNldCI6LTJ9XV0=
-	\[\begin{tikzcd}
-		0 & A & B && {B\otimes_AB}
-		\arrow[from=1-1, to=1-2]
-		\arrow["\varphi", from=1-2, to=1-3]
-		\arrow["{b\mapsto 1\otimes b}"', shift right=2, from=1-3, to=1-5]
-		\arrow["{b\mapsto b\otimes 1}", shift left=2, from=1-3, to=1-5]
-	\end{tikzcd}\]
-	Let $M$ be any $A$-module, then the following diagram is an equalizer:
-	% https://q.uiver.app/#q=WzAsNCxbMywwLCJNXFxvdGltZXNfQUIiXSxbNSwwLCJNXFxvdGltZXNfQUJcXG90aW1lc19BQiJdLFswLDAsIjAiXSxbMSwwLCJNIl0sWzAsMSwibVxcb3RpbWVzIGJcXG1hcHN0byBtXFxvdGltZXMxXFxvdGltZXMgYiIsMix7Im9mZnNldCI6Mn1dLFswLDEsIm1cXG90aW1lcyBiXFxtYXBzdG8gbVxcb3RpbWVzIGJcXG90aW1lcyAxIiwwLHsib2Zmc2V0IjotMn1dLFszLDAsIm1cXG1hcHN0byBtXFxvdGltZXMgMSJdLFsyLDNdXQ==
-	\[\begin{tikzcd}
-		0 & M && {M\otimes_AB} && {M\otimes_AB\otimes_AB}
-		\arrow[from=1-1, to=1-2]
-		\arrow["{m\mapsto m\otimes 1}", from=1-2, to=1-4]
-		\arrow["{m\otimes b\mapsto m\otimes1\otimes b}"', shift right=2, from=1-4, to=1-6]
-		\arrow["{m\otimes b\mapsto m\otimes b\otimes 1}", shift left=2, from=1-4, to=1-6]
-	\end{tikzcd}\]
-\end{proposition}
