@@ -359,12 +359,14 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 \begin{proof}
 	We first reduce to the affine case and then glue the local statements.
 	
-	Choose an affine open covering
+	Choose an affine open basis
 	\[
 	X = \bigcup_{j \in J} V_j,
 	\qquad
-	V_j = \Spec A_j.
+	V_j = \Spec A_j,
 	\]
+	which is closed under intersection.
+	Then each intersection $V_j\cap V_{j'}$ is again affine.
 	For each $j$, set
 	\[
 	U_j := U \times_X V_j.
@@ -373,18 +375,18 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	\[
 	U_j \to V_j
 	\]
-	is again an fpqc covering, and its Čech nerve is given by
+	is again an fpqc covering, and its Cech nerve is given by
 	\[
 	(U_j)_\bullet = U_\bullet \times_X V_j.
 	\]
 	
 	We claim that it suffices to prove that for each $j$ the pullback functor
-	\[
-	\QCoh(V_j) \longrightarrow \Tot\big(\QCoh((U_j)_\bullet)\big)
-	\]
+	\begin{align}\label{diag:descent-qcoh-affine-restriction}
+			\QCoh(V_j) \longrightarrow \Tot\big(\QCoh((U_j)_\bullet)\big)
+	\end{align}
 	is an equivalence.
-	
-	Indeed, let
+	Assume \ref{diag:descent-qcoh-affine-restriction} is an equivalence for all $j$.
+	For essential surjectivity, let
 	\[
 	(\mathcal F_U,\alpha)\in \Tot\big(\QCoh(U_\bullet)\big)
 	\]
@@ -396,9 +398,42 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	\[
 	\mathcal F_j\in \QCoh(V_j)
 	\]
-	whose induced descent datum on $U_j\to V_j$ is identified with
+	whose pullback along $U_j\to V_j$ is identified with
 	$(\mathcal F_{U_j},\alpha_j)$.
+	Write $U_{jj'}$ for the pullback $U\times_X(V_j\cap V_{j'})$.
+	In the following diagram, the squiggly morphisms denote the category over the schemes $U,U_J, V_j, X$.
 	
+	% https://q.uiver.app/#q=WzAsMTIsWzAsNCwiVSJdLFsxLDQsIlgiXSxbMiwzLCJWX2oiXSxbMSwzLCJVX2oiXSxbMCwyLCJcXFRvdChcXFFDb2goVV9cXGJ1bGxldCkpIl0sWzEsMSwiXFxUb3QoXFxRQ29oKChVX2opX1xcYnVsbGV0KSkiXSxbMiwxLCJcXFFDb2goVl9qKSJdLFsxLDIsIlxcUUNvaChYKSJdLFszLDIsIlZfalxcY2FwIFZfe2onfSJdLFsyLDIsIlVfe2pqJ30iXSxbMiwwLCJcXFRvdG9me1xcUUNvaChVX3tqaid9KV9cXGJ1bGxldCl9Il0sWzMsMCwiXFxRQ29oKFZfalxcY2FwIFZfe2onfSkiXSxbMCwxXSxbMiwxXSxbMywwXSxbMywyXSxbNCwwLCIiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJzcXVpZ2dseSJ9fX1dLFs1LDMsIiIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6InNxdWlnZ2x5In19fV0sWzMsMSwiIiwyLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzYsMiwiIiwyLHsib2Zmc2V0IjotMywic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoic3F1aWdnbHkifX19XSxbNSw2LCJcXGNvbmciXSxbNywxLCIiLDAseyJvZmZzZXQiOi0zLCJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJzcXVpZ2dseSJ9fX1dLFs0LDddLFs2LDddLFs1LDRdLFs5LDhdLFs5LDNdLFs4LDJdLFsxMCw5LCIiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJzcXVpZ2dseSJ9fX1dLFsxMSw4LCIiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJzcXVpZ2dseSJ9fX1dLFsxMCw1XSxbMTEsNl0sWzEwLDExLCJcXGNvbmciXV0=
+	\[\begin{tikzcd}
+		&& {\Totof{\QCoh(U_{jj'})_\bullet)}} & {\QCoh(V_j\cap V_{j'})} \\
+		& {\Tot(\QCoh((U_j)_\bullet))} & {\QCoh(V_j)} \\
+		{\Tot(\QCoh(U_\bullet))} & {\QCoh(X)} & {U_{jj'}} & {V_j\cap V_{j'}} \\
+		& {U_j} & {V_j} \\
+		U & X
+		\arrow["\cong", from=1-3, to=1-4]
+		\arrow[from=1-3, to=2-2]
+		\arrow[squiggly, from=1-3, to=3-3]
+		\arrow[from=1-4, to=2-3]
+		\arrow[squiggly, from=1-4, to=3-4]
+		\arrow["\cong", from=2-2, to=2-3]
+		\arrow[from=2-2, to=3-1]
+		\arrow[squiggly, from=2-2, to=4-2]
+		\arrow[from=2-3, to=3-2]
+		\arrow[shift left=3, squiggly, from=2-3, to=4-3]
+		\arrow[from=3-1, to=3-2]
+		\arrow[squiggly, from=3-1, to=5-1]
+		\arrow[shift left=3, squiggly, from=3-2, to=5-2]
+		\arrow[from=3-3, to=3-4]
+		\arrow[from=3-3, to=4-2]
+		\arrow[from=3-4, to=4-3]
+		\arrow[from=4-2, to=4-3]
+		\arrow[from=4-2, to=5-1]
+		\arrow["\lrcorner"{anchor=center, pos=0.125, rotate=-45}, draw=none, from=4-2, to=5-2]
+		\arrow[from=4-3, to=5-2]
+		\arrow[from=5-1, to=5-2]
+	\end{tikzcd}\]
+
+	By assumption on the cover, the intersection $V_j\cap V_{j'}$ is affine.
 	Now for $j,j'\in J$, the restrictions
 	\[
 	\mathcal F_j|_{V_j\cap V_{j'}}
@@ -407,33 +442,66 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	\]
 	induce the same descent datum on
 	\[
-	U\times_X(V_j\cap V_{j'}) \to V_j\cap V_{j'}.
+	U_{jj'} \to V_j\cap V_{j'},
 	\]
-	By the fully faithful part of the affine case, there is therefore a unique
-	isomorphism
+	because both $\mathcal{F}_j|_{V_j\cap V_{j'}}$ and $\mathcal{F}_{j'}|_{V_j\cap V_{j'}}$ pull back to the same object $\mathcal{F}_U|_{U_{jj'}}$ with the same cocycle isomorphism $\alpha$.
+	Hence they define the same object of 
+	\[
+	\Totof{\QCoh((U_{jj'}))_\bullet)}.
+	\]
+	
+	By the affine case, for $V_j\cap V_{j'}$ and the fpqc morphism 
+	\[
+	U_{jj'} \to V_j\cap V_{j'},
+	\]
+	there is therefore a unique isomorphism
 	\[
 	\theta_{jj'}:
 	\mathcal F_j|_{V_j\cap V_{j'}}
 	\xrightarrow{\sim}
 	\mathcal F_{j'}|_{V_j\cap V_{j'}}
 	\]
-	compatible with the descent data. By uniqueness, these isomorphisms satisfy
+	whose pullback to $U_{jj'}$ is the identity on $\mathcal{F}_U|_{U_{jj'}}$. By uniqueness, these isomorphisms satisfy
 	the cocycle condition on triple overlaps. Hence the sheaves $\mathcal F_j$
 	glue to a quasi-coherent sheaf
 	\[
 	\mathcal F\in \QCoh(X).
 	\]
-	By construction, the canonical descent datum associated to $\mathcal F$
-	recovers the original descent datum $(\mathcal F_U,\alpha)$. This proves
-	essential surjectivity globally. Fully faithfulness is proved in the same way:
-	morphisms can be checked on the affine open cover $\{V_j\}$ and then glued by
-	uniqueness.
+	By construction, $f^*\mathcal{F}$ with its canonical descent datum is identified with $(\mathcal{F}_U, \alpha)$.
+	This proves essential surjectivity globally.
+	
+	Now for fully faithfulness let $\mathcal{F}, \mathcal{G}\in \QCoh(X)$. We show that there is a bijection
+	\[
+	\Hom_{\QCohX}(\mathcal{F}, \mathcal{G}) \to \Hom_{\Totof{\QCoh(U_\bullet)}}(f^*\mathcal{F}, f^*\mathcal{G}).
+	\]	
+	
+	Injectivity: 
+	
+	Let $\varphi, \psi: \mathcal{F}\to \mathcal{G}$ have the same pullback to $U$, then for every $V_j$ their restrictions
+	\[
+	\varphi|_{V_j}, \psi|_{V_j}: \mathcal{F}|_{V_j} \to \mathcal{G}|_{V_j}
+	\]
+	have the same pullback to $U_j$. By the affine case for $V_j$, we get $\varphi|_{V_j} = \psi|_{V_j}$. Since they agree on an open cover, $\varphi = \psi$. 
+	
+	Surjectivity:
+	
+	Let $\theta:f^*\mathcal{F} \to f^*\mathcal{G}$ be a morphism in $\Totof{\QCoh(U_\bullet)}$. Restricting to $U_j$ yields a morphism in $\theta_{j}:f^*\mathcal{F}|_{U_j}\to f^*\mathcal{G}|_{U_j}$ in $\Totof{\QCoh((U_j)_\bullet)}$. By the affine case this corresponds to a morphism $\mathcal{F}|_{U_j} \to \mathcal{G}|_{U_j}$. Now for $j, j'$, the morphism
+	$\theta_{j}|_{U_{jj'}}$ and $\theta_{j'}|_{U_{jj'}}$ restrict to the same pullback $\theta_{jj'}$ in 
+	\[
+	\Totof{\QCoh((U_{jj'})_\bullet)},
+	\]
+	which corresponds to a morphism $\mathcal{F}|_{U_{jj'}} \to \mathcal{G}|_{U_{jj'}}$, again by the affine version. 
+	By the sheaf property, these morphisms agree on overlaps and therefore glue uniquely to a morphism
+	\[
+	\mathcal F \to \mathcal G.
+	\]
+	By construction, this morphism pulls back to $\theta$ in $\Totof{\QCoh(U_\bullet)}$, which proves surjectivity.
 	
 	Hence, it remains to prove the affine case. Thus assume
 	\[
 	X=\Spec A
 	\]
-	is affine. Since $U\to X$ is fpqc, we may choose an affine open covering
+	is affine. Since $U\to X$ is fpqc, we may choose a finite affine open covering
 	\[
 	U=\bigcup_{i\in I} U_i,
 	\qquad
@@ -444,7 +512,8 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	\coprod_{i\in I} U_i \to X
 	\]
 	is again an fpqc covering, and its Cech nerve refines the Cech nerve of
-	$U\to X$. Hence it suffices to prove the statement for the affine fpqc cover
+	$U\to X$.
+	Since descent for quasi-coherent sheaves is local on the source, replacing $U$ by the fpqc covering $\coprod_{i\in I} U_i \to X$ does not change the category of descent data (\cite[Tag 02L4]{stacks-project}). Hence, it suffices to prove the statement for the affine fpqc cover
 	\[
 	\coprod_{i\in I}\Spec B_i \to \Spec A.
 	\]
@@ -466,7 +535,7 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	\]
 	Since a finite product of faithfully flat $A$-algebras is again faithfully
 	flat, descent for quasi-coherent sheaves over this affine fpqc cover reduces
-	to faithfully flat descent for modules:
+	to faithfully flat descent for modules (Thm \ref{thm:faithfully-flat-descent-modules}):
 	\[
 	\Mod_A \cong \Tot\big(\Mod(B^\bullet)\big),
 	\]
@@ -475,7 +544,7 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	Equivalently, if one prefers to keep the covering indexed by the family
 	$\{B_i\}$, then descent data for quasi-coherent sheaves on the affine fpqc
 	cover $\{\Spec B_i\to \Spec A\}$ is exactly descent data for $A$-modules with
-	respect to the corresponding Čech diagram, and the equivalence follows from
+	respect to the corresponding Cech diagram, and the equivalence follows from
 	faithfully flat descent for modules.
 	This proves the affine case, and therefore the theorem.
 \end{proof}
@@ -544,9 +613,9 @@ plicial diagram
 	see \cite[Tag 023T]{stacks-project}.
 \end{remark}
 
-\begin{theorem}[Sheaf condition as Čech descent]
+\begin{theorem}[Sheaf condition as Cech descent]
 	Let $F$ be a sheaf of sets on a site and let $U \to X$ be a covering
-	with Čech nerve $U_\bullet$. Then
+	with Cech nerve $U_\bullet$. Then
 	\[
 	F(X)
 	\cong
@@ -567,7 +636,7 @@ plicial diagram
 
 \begin{theorem}[Descent for stacks]
 	Let $\mathcal{X}$ be a stack in groupoids on a site and let
-	$U \to X$ be a covering with Čech nerve $U_\bullet$.
+	$U \to X$ be a covering with Cech nerve $U_\bullet$.
 	Then the natural functor
 	\[
 	\mathcal{X}(X)
@@ -582,7 +651,7 @@ plicial diagram
 
 \begin{remark}
 	Since groupoids are $2$-truncated homotopy types, the totalization above
-	is determined by the first three levels of the Čech nerve:
+	is determined by the first three levels of the Cech nerve:
 	\[
 	U,\quad
 	U \times_X U,\quad
@@ -600,7 +669,7 @@ plicial diagram
 \begin{theorem}[Descent for $\infty$-stacks]
 	Let $F : \mathcal{C}^{op} \to \mathcal{S}$ be a presheaf of spaces.
 	Then $F$ is a stack if and only if for every covering
-	$U \to X$ with Čech nerve $U_\bullet$ the natural map
+	$U \to X$ with Cech nerve $U_\bullet$ the natural map
 	\[
 	F(X)
 	\longrightarrow
