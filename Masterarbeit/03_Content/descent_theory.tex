@@ -92,6 +92,44 @@ $U\to X$, the natural map $F(X) \to \Totof{F(U_\bullet)}$ is an equivalence, whe
 	by the truncated totalization over $\Delta_{\le 2}$, see \cite[][Propoition 2.8]{khan2022stacks}.
 \end{remark}
 
+\begin{definition}[Descent datum]
+	Let $F$ be a presheaf and let $U \to X$ be a covering with Cech nerve
+	$U_\bullet$. A descent datum for $F$ along $U \to X$ is an object of
+	the totalization
+	\[
+	\Tot\big(F(U_\bullet)\big).
+	\]
+	If $F$ takes values in $\Grpd$, this is equivalently an object of the
+	truncated totalization $\Tot_2(F(U_\bullet))$, hence consists of:
+	\begin{enumerate}
+		\item an object $\xi \in F(U)$,
+		\item an isomorphism between the two pullbacks of $\xi$ to
+		$U\times_X U$,
+		\item a cocycle condition on $U\times_X U\times_X U$.
+	\end{enumerate}
+\end{definition}
+
+
+\begin{proposition}[Sheaf condition as Cech descent]
+	Let $F$ be a sheaf of sets on a site and let $U \to X$ be a covering
+	with Cech nerve $U_\bullet$. Then
+	\[
+	F(X)
+	\cong
+	\operatorname{Tot}
+	\big(
+	F(U_\bullet)
+	\big).
+	\]
+	Since sets are $0$-truncated, the totalization reduces to the equalizer
+	\[
+	F(X)
+	\to
+	F(U)
+	\rightrightarrows
+	F(U \times_X U).
+	\]
+\end{proposition}
 
 The Amitsur complex computes the totalization of the Čech nerve of
 $\Spec(B) \to \Spec(A)$, and faithfully flat descent for rings states
@@ -307,20 +345,6 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	\]
 	is essentially surjective.
 \end{proof}
-
-\begin{remark}[Descent data as totalization]
-	Let $A \to B$ be a ring map with Čech nerve $B^\bullet$.
-	Then the category of descent data for modules is naturally identified with
-	the totalization
-	\[
-	\mathrm{Desc}(B/A)
-	\cong
-	\Tot\big(\mathrm{Mod}(B^\bullet)\big).
-	\]
-	Indeed, an object of the totalization consists of a $B$-module together with
-	compatibility isomorphisms over $B \otimes_A B$ satisfying a cocycle condition
-	over $B \otimes_A B \otimes_A B$, which is precisely a descent datum.
-\end{remark}
 
 
 \begin{proposition}[Descent for affine schemes]
@@ -613,57 +637,8 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	see \cite[Tag 023T]{stacks-project}.
 \end{remark}
 
-\begin{theorem}[Sheaf condition as Cech descent]
-	Let $F$ be a sheaf of sets on a site and let $U \to X$ be a covering
-	with Cech nerve $U_\bullet$. Then
-	\[
-	F(X)
-	\cong
-	\operatorname{Tot}
-	\big(
-	F(U_\bullet)
-	\big).
-	\]
-	Since sets are $0$-truncated, the totalization reduces to the equalizer
-	\[
-	F(X)
-	\to
-	F(U)
-	\rightrightarrows
-	F(U \times_X U).
-	\]
-\end{theorem}
 
-\begin{theorem}[Descent for stacks]
-	Let $\mathcal{X}$ be a stack in groupoids on a site and let
-	$U \to X$ be a covering with Cech nerve $U_\bullet$.
-	Then the natural functor
-	\[
-	\mathcal{X}(X)
-	\longrightarrow
-	\operatorname{Tot}
-	\big(
-	\mathcal{X}(U_\bullet)
-	\big)
-	\]
-	is an equivalence of groupoids.
-\end{theorem}
 
-\begin{remark}
-	Since groupoids are $2$-truncated homotopy types, the totalization above
-	is determined by the first three levels of the Cech nerve:
-	\[
-	U,\quad
-	U \times_X U,\quad
-	U \times_X U \times_X U.
-	\]
-	Thus descent for stacks consists of
-	\begin{enumerate}
-		\item objects on $U$,
-		\item isomorphisms on $U \times_X U$,
-		\item a cocycle condition on $U \times_X U \times_X U$.
-	\end{enumerate}
-\end{remark}
 
 
 \begin{theorem}[Descent for $\infty$-stacks]
