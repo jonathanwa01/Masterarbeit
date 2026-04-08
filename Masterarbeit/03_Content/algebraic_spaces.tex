@@ -7,6 +7,14 @@ We have seen in ... that the representable presheaf of a scheme is indeeed a she
 	A morphism $X\to Y$ of sheaves over $\Sch$ is called representable by schemes, if for every scheme $T$ and every morphism $T\to Y$, the fibre product $X\times_Y T$ is a scheme.
 \end{definition}
 
+\begin{definition}[\Etale\ morphisms of sheaves]
+	Given a morphism $f:X\to Y$ of sheaves over the big \etale\ site. We call $f$ \etale, if $f$ is representable and for every scheme $T\to Y$, the projection $X\times_YT\to T$ is \etale.
+\end{definition}
+
+\begin{remark}
+	Note, that via Yoneda the morohism $X\times_Y T \to T$ corresponds to a morphism of scheme, since both are representable by assumption.
+\end{remark}
+
 \begin{definition}[Algebraic Space]
 	(\cite[][(Definition 4.1.2), p.~105]{alper2026stacks})
 	An algebraic space $X$ is a sheaf $X:\SchOver{Et} \to \Set$, such that there exists a scheme $U$ and an \etale\ surjection $U\to X$ representable by schemes.
@@ -112,6 +120,7 @@ We have seen in ... that the representable presheaf of a scheme is indeeed a she
 	U\to X
 	\]
 	is surjective and \etale.
+	We will denote the algebraic spase $X$ by $[U/R]$.
 \end{lemma}
 
 \begin{proof}
@@ -189,15 +198,3 @@ We have seen in ... that the representable presheaf of a scheme is indeeed a she
 	Thus the morphism $p:U\to X$ is representable, surjective, and \'etale. Therefore $X$ is an algebraic space.
 \end{proof}
 
-
-
-\begin{lemma}[Quotiens of spaces by finite equivalence relation]
-	Let $U$ be an affine scheme over a base scheme $S$ and let 
-	% https://q.uiver.app/#q=WzAsMixbMCwwLCJSIl0sWzEsMCwiVVxcdGltZXNfUyBVIl0sWzAsMSwidCIsMix7Im9mZnNldCI6MX1dLFswLDEsInMiLDAseyJvZmZzZXQiOi0xfV1d
-	\[\begin{tikzcd}
-		R & {U\times_S U}
-		\arrow["t"', shift right, from=1-1, to=1-2]
-		\arrow["s", shift left, from=1-1, to=1-2]
-	\end{tikzcd}\]
-	be an etale equivalence over $S$. Then there exists a quotient $[U/R]$ as an algebraic space, such that the projection $U\to [U/R]$ is \etale.
-\end{lemma}
