@@ -1,0 +1,176 @@
+\chapter{Groupoids in algebraic spaces}
+
+In this chapter we introduce groupoids in algebraic spaces, which provide the
+correct framework to describe quotients of algebraic stacks and play a central
+role in the proof of the Keel--Mori theorem.
+
+\section{Groupoids in Algebraic Spaces}
+
+\begin{definition}[Groupoid in algebraic spaces]
+	(\cite[][Tag 043V]{stacks-project})
+	Let $B$ be a base algebraic space. A \emph{groupoid in algebraic spaces over $B$}
+	consists of a quintuple
+	\[
+	(U, R, s, t, c)
+	\]
+	where:
+	\begin{itemize}
+		\item $U$ and $R$ are algebraic spaces over $B$,
+		\item $s,t : R \to U$ are morphisms (source and target),
+		\item $c : R \times_{s,U,t} R \to R$ is a composition morphism,
+	\end{itemize}
+	such that for every scheme $T \to B$, the induced data
+	\[
+	(U(T), R(T), s, t, c)
+	\]
+	define a groupoid (i.e. a category in which all morphisms are invertible).
+\end{definition}
+
+\begin{remark}
+	The definition is functorial in $T$. Hence all axioms of a groupoid can be
+	checked on $T$-valued points.
+\end{remark}
+
+\begin{lemma}[Identity and inverse]
+	(\cite[][Tag 043V]{stacks-project})
+	Let $(U,R,s,t,c)$ be a groupoid in algebraic spaces over $B$. Then there exist
+	unique morphisms
+	\[
+	e : U \to R, \qquad i : R \to R
+	\]
+	such that for every scheme $T \to B$:
+	\begin{itemize}
+		\item $e$ defines identity morphisms,
+		\item $i$ defines inverses.
+	\end{itemize}
+	
+	We will write $(U,R,s,t,c,e,i)$ for the corresponding septuple.
+	We write
+	\[
+	R \rightrightarrows U
+	\]
+	for a groupoid in algebraic spaces, where the two arrows are given by
+	$s,t : R \to U$.
+\end{lemma}
+
+
+\section{Relation to Equivalence Relations}
+
+\begin{definition}[Associated relation]
+	Let $(U,R,s,t,c)$ be a groupoid in algebraic spaces over $B$. Then the morphism
+	\[
+	j = (t,s) : R \to U \times_B U
+	\]
+	is called the associated \emph{pre-equivalence relation}.
+\end{definition}
+
+\begin{lemma}
+	(\cite[][Tag 043V]{stacks-project})
+	The morphism
+	\[
+	j : R \to U \times_B U
+	\]
+	associated to a groupoid defines a pre-equivalence relation on $U$.
+\end{lemma}
+
+\begin{remark}
+	Thus groupoids generalize equivalence relations:
+	\begin{itemize}
+		\item If $j$ is a monomorphism, one recovers an equivalence relation.
+		\item In general, groupoids allow nontrivial automorphisms (stabilizers).
+	\end{itemize}
+\end{remark}
+
+---
+
+\section{Examples}
+
+\begin{example}[Equivalence relations]
+	Let $j : R \to U \times_B U$ be an equivalence relation in algebraic spaces.
+	Then there is a unique groupoid structure on $(U,R)$ extending this data.
+\end{example}
+
+\begin{example}[Group actions]
+	Let $G$ be a group algebraic space over $B$ acting on an algebraic space $U$.
+	Then
+	\[
+	R := G \times_B U
+	\]
+	with
+	\[
+	s(g,x) = x, \quad t(g,x) = g \cdot x
+	\]
+	defines a groupoid in algebraic spaces.
+\end{example}
+
+---
+
+\section{Stabilizers}
+
+\begin{definition}[Stabilizer]
+	(\cite[][Tag 0448]{stacks-project})
+	Let $(U,R,s,t,c)$ be a groupoid in algebraic spaces over $B$. The
+	\emph{stabilizer} is the algebraic space
+	\[
+	G := R \times_{(t,s), U \times_B U, \Delta} U,
+	\]
+	where $\Delta : U \to U \times_B U$ is the diagonal.
+\end{definition}
+
+\begin{remark}
+	The stabilizer parametrizes automorphisms of objects. It is the groupoid-theoretic
+	counterpart of the inertia stack of a stack.
+\end{remark}
+
+---
+
+\section{Base Change}
+
+\begin{lemma}[Base change of groupoids]
+	(\cite[][Tag 043V]{stacks-project})
+	Let $(U,R,s,t,c)$ be a groupoid over $B$, and let $B' \to B$ be a morphism of
+	algebraic spaces. Then
+	\[
+	U' := B' \times_B U, \qquad R' := B' \times_B R
+	\]
+	define a groupoid $(U',R',s',t',c')$ over $B'$.
+\end{lemma}
+
+---
+
+\section{Quotients (Preview)}
+
+\begin{definition}[Sheaf quotient]
+	Let $(U,R)$ be a groupoid in algebraic spaces over $B$. The presheaf quotient
+	is defined by
+	\[
+	(U/R)(T) := U(T)/R(T).
+	\]
+	Its sheafification (in the étale topology) is called the \emph{quotient sheaf}.
+\end{definition}
+
+\begin{remark}
+	A central problem is to determine when $U/R$ is representable by an algebraic
+	space. This will be the key step in the proof of the Keel--Mori theorem.
+\end{remark}
+
+---
+
+\section{Relation to Stacks}
+
+\begin{remark}[Groupoids and stacks]
+	Let $\mathcal{X}$ be an algebraic stack and let $U \to \mathcal{X}$ be a smooth
+	surjective morphism. Then
+	\[
+	R := U \times_{\mathcal{X}} U
+	\]
+	carries a natural structure of a groupoid in algebraic spaces:
+	\[
+	R \rightrightarrows U.
+	\]
+	
+	This groupoid presents the stack $\mathcal{X}$ as a quotient:
+	\[
+	\mathcal{X} \simeq [U/R].
+	\]
+\end{remark}
