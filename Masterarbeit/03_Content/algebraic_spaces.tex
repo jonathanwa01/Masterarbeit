@@ -32,14 +32,19 @@ We have seen in ... that the representable presheaf of a scheme is indeeed a she
 
 
 
-
-
 \begin{theorem}[Representability of the Diagonal]
 	(\cite[][(Theorem 4.2.1), p.~118]{alper2026stacks})
 	The diagonal $\Delta_X: X\to X\times X$ of an algebraic space $X$ is represantable by schemes.
 \end{theorem}
 
-
+\begin{definition}[\Etale\ equivalence relation]
+	(\cite[add. text]{olsson2016spaces})
+	An \etale\ equivalence relation on an $S$-scheme $X$ is a monomorphism 
+	\[
+		R\hookrightarrow X\times_S X,
+	\]
+	such that for every $S$-scheme $T$, the $T$-points $R(T) \subset X(T)\times X(T)$ is an equivalence relation on $X(T)$ and the projections $s,t: R\to X$ are \etale.
+\end{definition}
 
 \begin{proposition}
 	Let $U$ be a scheme and let
@@ -101,6 +106,7 @@ We have seen in ... that the representable presheaf of a scheme is indeeed a she
 
 
 \begin{lemma}[Quotients by \etale\ equivalence relations]
+	(\cite[Tag 03I2]{stacks-project})
 	Let $U$ be an affine scheme and let
 	\[
 	R \rightrightarrows U
