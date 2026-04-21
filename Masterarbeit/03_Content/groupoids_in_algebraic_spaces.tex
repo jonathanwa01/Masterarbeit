@@ -1,0 +1,328 @@
+\chapter{Groupoids in algebraic spaces}
+
+In this chapter we introduce groupoids in algebraic spaces, which provide the
+correct framework to describe quotients of algebraic stacks and play a central
+role in the proof of the Keel--Mori theorem.
+
+\section{Quotients of spaces}
+
+\begin{proposition}
+	Let $U$ be a scheme and let
+	% https://q.uiver.app/#q=WzAsMixbMCwwLCJSIl0sWzEsMCwiVVxcdGltZXNfUyBVIl0sWzAsMSwidCIsMix7Im9mZnNldCI6MX1dLFswLDEsInMiLDAseyJvZmZzZXQiOi0xfV1d
+	\[\begin{tikzcd}
+		R & {U\times_S U}
+		\arrow["t"', shift right, from=1-1, to=1-2]
+		\arrow["s", shift left, from=1-1, to=1-2]
+	\end{tikzcd}\]
+	be an \etale\ equivalence relation. Denote by $F:=U/R$ the quotient presheaf and let
+	\[
+	X:=F^\sharp
+	\]
+	be its sheafification. Then the canonical morphism
+	\[
+	R \to U\times_X U,\qquad h\mapsto (s\circ h,t\circ h),
+	\]
+	is an isomorphism of sheaves.
+\end{proposition}
+
+\begin{proof}
+	Let $p:U\to X$ be the canonical map. For every scheme $T$, the set
+	\[
+	(U\times_XU)(T)
+	\]
+	consists of pairs of morphisms $f,g:T\to U$ such that $p\circ f=p\circ g$ in $X(T)$.
+	
+	Define a morphism of sheaves
+	\[
+	\varphi:R\to U\times_XU,\qquad h\mapsto (s\circ h,t\circ h).
+	\]
+	It is well-defined because $s(h)$ and $t(h)$ define the same class in $F(T)$, hence have the same image in $X(T)$.
+	
+	To prove surjectivity, let $(f,g)\in (U\times_XU)(T)$. Since $p\circ f=p\circ g$ in $X(T)$, the two sections of $F(T)$ defined by $f$ and $g$ become equal in the sheafification. Hence, by \cite[][Tag 00WK]{stacks-project} there exists an \etale\ covering $\{T_i\to T\}$ such that the restrictions of $f$ and $g$ have the same image in
+	\[
+	F(T_i)=U(T_i)/R(T_i).
+	\]
+	Therefore, for each $i$, there exists $h_i\in R(T_i)$ with
+	\[
+	s\circ h_i=f|_{T_i},\qquad t\circ h_i=g|_{T_i}.
+	\]
+	On overlaps, the restrictions of $h_i$ and $h_j$ have the same images under $(s,t):R\to U\times_SU$. Since $(s,t)$ is a monomorphism, they are equal. Because $R$ is representable, it is a sheaf on the big \etale\ site, so the $h_i$ glue uniquely to a morphism $h:T\to R$ with
+	\[
+	s\circ h=f,\qquad t\circ h=g.
+	\]
+	Thus $\varphi(T)$ is surjective.
+	
+	For injectivity, suppose $h,h'\in R(T)$ satisfy
+	\[
+	s\circ h=s\circ h',\qquad t\circ h=t\circ h'.
+	\]
+	Since $(s,t):R\to U\times_SU$ is a monomorphism, it follows that $h=h'$. Thus $\varphi(T)$ is injective.
+	
+	Hence $\varphi$ is an isomorphism of sheaves.
+\end{proof}
+
+\begin{lemma}[Quotients by \etale\ equivalence relations]
+	(\cite[Tag 03I2]{stacks-project})
+	Let $U$ be an affine scheme and let
+	\[
+	R \rightrightarrows U
+	\]
+	be an \etale\ equivalence relation. Then the sheaf
+	\[
+	X:=(U/R)^\sharp
+	\]
+	is an algebraic space, and the canonical morphism
+	\[
+	U\to X
+	\]
+	is surjective and \etale.
+	We will denote the algebraic spase $X$ by $[U/R]$.
+\end{lemma}
+
+\begin{proof}
+	By construction, $X$ is a sheaf on the big \etale\ site.
+	
+	We first show that the canonical morphism $p:U\to X$ is surjective. Let $T$ be a scheme and let
+	\[
+	\sigma\in X(T).
+	\]
+	By the local description of sheafification (\cite[][Tag 00WK]{stacks-project}), there exists an \etale\ covering $\{T_i\to T\}_i$ and sections
+	\[
+	\sigma_i\in (U/R)(T_i)=U(T_i)/R(T_i)
+	\]
+	whose images in $X(T_i)$ are equal to $\sigma|_{T_i}$. Choosing representatives of the classes $\sigma_i$, we obtain morphisms
+	\[
+	f_i:T_i\to U
+	\]
+	such that
+	\[
+	p\circ f_i=\sigma|_{T_i}.
+	\]
+	Hence $p:U\to X$ is surjective as a morphism of sheaves.
+	
+	Now let $a:T\to X$ be a morphism from a scheme $T$. Since $p$ is surjective, there exists an \'etale covering $\{T_i\to T\}_i$ and lifts
+	\[
+	f_i:T_i\to U
+	\]
+	of the morphisms $a|_{T_i}:T_i\to X$, so that
+	\[
+	p\circ f_i=a|_{T_i}.
+	\]
+	
+	By the previous proposition, there is a pullback diagram
+	\[
+	\begin{tikzcd}
+		R \arrow[r,"s"] \arrow[d,"t"'] & U \arrow[d,"p"] \\
+		U \arrow[r,"p"'] & X.
+	\end{tikzcd}
+	\]
+	Pulling this square back along $f_i:T_i\to U$ yields an isomorphism
+	\[
+	T_i\times_X U \cong T_i\times_{U,t} R 
+	\]
+	visualized via
+	% https://q.uiver.app/#q=WzAsNixbMSwwLCJSIl0sWzIsMCwiVSJdLFsxLDEsIlUiXSxbMiwxLCJYIl0sWzAsMCwiVF9pXFx0aW1lc19YUiJdLFswLDEsIlRfaSJdLFsyLDMsInAiLDJdLFsxLDMsInAiXSxbMCwyLCJ0IiwyXSxbMCwxLCJzIl0sWzQsNV0sWzUsMiwiZl9pIiwyXSxbNCwwXV0=
+	\[\begin{tikzcd}
+		{T_i\times_XR} & R & U \\
+		{T_i} & U & X.
+		\arrow[from=1-1, to=1-2]
+		\arrow[from=1-1, to=2-1]
+		\arrow["s", from=1-2, to=1-3]
+		\arrow["t"', from=1-2, to=2-2]
+		\arrow["p", from=1-3, to=2-3]
+		\arrow["{f_i}"', from=2-1, to=2-2]
+		\arrow["p"', from=2-2, to=2-3]
+	\end{tikzcd}\]
+	In particular, since $T_i, U$ and $R$ are schemes, $T_i\times_X U$ is represented by a scheme. Since $t:R\to U$ is \'etale, its base change
+	\[
+	T_i\times_X U \to T_i
+	\]
+	is \'etale.
+	
+	The schemes $T_i\times_X U$ carry their canonical descent datum with respect to the \'etale covering $\{T_i\to T\}_i$, since they are the pullbacks of the sheaf $T\times_X U$. Because schemes form a stack for the big \'etale topology, this descent datum is effective. Hence $T\times_X U$ is represented by a scheme.
+	
+	Moreover, \'etaleness descends along \'etale coverings of the base, so from the fact that each
+	\[
+	T_i\times_X U \to T_i
+	\]
+	is \'etale, it follows that
+	\[
+	T\times_X U \to T
+	\]
+	is \'etale.
+	
+	Thus the morphism $p:U\to X$ is representable, surjective, and \'etale. Therefore $X$ is an algebraic space.
+\end{proof}
+
+
+
+\section{Groupoids in Algebraic Spaces}
+
+\begin{definition}[Groupoid in algebraic spaces]
+	(\cite[][Tag 043V]{stacks-project})
+	Let $B$ be a base algebraic space. A \emph{groupoid in algebraic spaces over $B$}
+	consists of a quintuple
+	\[
+	(U, R, s, t, c)
+	\]
+	where:
+	\begin{itemize}
+		\item $U$ and $R$ are algebraic spaces over $B$,
+		\item $s,t : R \to U$ are morphisms (source and target),
+		\item $c : R \times_{s,U,t} R \to R$ is a composition morphism,
+	\end{itemize}
+	such that for every scheme $T \to B$, the induced data
+	\[
+	(U(T), R(T), s, t, c)
+	\]
+	define a groupoid (i.e. a category in which all morphisms are invertible).
+\end{definition}
+
+\begin{remark}
+	The definition is functorial in $T$. Hence all axioms of a groupoid can be
+	checked on $T$-valued points.
+\end{remark}
+
+\begin{lemma}[Identity and inverse]
+	(\cite[][Tag 043V]{stacks-project})
+	Let $(U,R,s,t,c)$ be a groupoid in algebraic spaces over $B$. Then there exist
+	unique morphisms
+	\[
+	e : U \to R, \qquad i : R \to R
+	\]
+	such that for every scheme $T \to B$:
+	\begin{itemize}
+		\item $e$ defines identity morphisms,
+		\item $i$ defines inverses.
+	\end{itemize}
+	
+	We will write $(U,R,s,t,c,e,i)$ for the corresponding septuple.
+	We write
+	\[
+	R \rightrightarrows U
+	\]
+	for a groupoid in algebraic spaces, where the two arrows are given by
+	$s,t : R \to U$.
+\end{lemma}
+
+
+\section{Relation to Equivalence Relations}
+
+\begin{definition}[Associated relation]
+	Let $(U,R,s,t,c)$ be a groupoid in algebraic spaces over $B$. Then the morphism
+	\[
+	j = (t,s) : R \to U \times_B U
+	\]
+	is called the associated \emph{pre-equivalence relation}.
+\end{definition}
+
+\begin{lemma}
+	(\cite[][Tag 043V]{stacks-project})
+	The morphism
+	\[
+	j : R \to U \times_B U
+	\]
+	associated to a groupoid defines a pre-equivalence relation on $U$.
+\end{lemma}
+
+\begin{remark}
+	Thus groupoids generalize equivalence relations:
+	\begin{itemize}
+		\item If $j$ is a monomorphism, one recovers an equivalence relation.
+		\item In general, groupoids allow nontrivial automorphisms (stabilizers).
+	\end{itemize}
+\end{remark}
+
+---
+
+\section{Examples}
+
+\begin{example}[Equivalence relations]
+	Let $j : R \to U \times_B U$ be an equivalence relation in algebraic spaces.
+	Then there is a unique groupoid structure on $(U,R)$ extending this data.
+\end{example}
+
+\begin{example}[Group actions]
+	Let $G$ be a group algebraic space over $B$ acting on an algebraic space $U$.
+	Then
+	\[
+	R := G \times_B U
+	\]
+	with
+	\[
+	s(g,x) = x, \quad t(g,x) = g \cdot x
+	\]
+	defines a groupoid in algebraic spaces.
+\end{example}
+
+---
+
+\section{Stabilizers}
+
+\begin{definition}[Stabilizer]
+	(\cite[][Tag 0448]{stacks-project})
+	Let $(U,R,s,t,c)$ be a groupoid in algebraic spaces over $B$. The
+	\emph{stabilizer} is the algebraic space
+	\[
+	G := R \times_{(t,s), U \times_B U, \Delta} U,
+	\]
+	where $\Delta : U \to U \times_B U$ is the diagonal.
+\end{definition}
+
+\begin{remark}
+	The stabilizer parametrizes automorphisms of objects. It is the groupoid-theoretic
+	counterpart of the inertia stack of a stack.
+\end{remark}
+
+---
+
+\section{Base Change}
+
+\begin{lemma}[Base change of groupoids]
+	(\cite[][Tag 043V]{stacks-project})
+	Let $(U,R,s,t,c)$ be a groupoid over $B$, and let $B' \to B$ be a morphism of
+	algebraic spaces. Then
+	\[
+	U' := B' \times_B U, \qquad R' := B' \times_B R
+	\]
+	define a groupoid $(U',R',s',t',c')$ over $B'$.
+\end{lemma}
+
+---
+
+\section{Quotients (Preview)}
+
+\begin{definition}[Sheaf quotient]
+	Let $(U,R)$ be a groupoid in algebraic spaces over $B$. The presheaf quotient
+	is defined by
+	\[
+	(U/R)(T) := U(T)/R(T).
+	\]
+	Its sheafification (in the étale topology) is called the \emph{quotient sheaf}.
+\end{definition}
+
+\begin{remark}
+	A central problem is to determine when $U/R$ is representable by an algebraic
+	space. This will be the key step in the proof of the Keel--Mori theorem.
+\end{remark}
+
+---
+
+\section{Relation to Stacks}
+
+\begin{remark}[Groupoids and stacks]
+	Let $\mathcal{X}$ be an algebraic stack and let $U \to \mathcal{X}$ be a smooth
+	surjective morphism. Then
+	\[
+	R := U \times_{\mathcal{X}} U
+	\]
+	carries a natural structure of a groupoid in algebraic spaces:
+	\[
+	R \rightrightarrows U.
+	\]
+	
+	This groupoid presents the stack $\mathcal{X}$ as a quotient:
+	\[
+	\mathcal{X} \simeq [U/R].
+	\]
+\end{remark}

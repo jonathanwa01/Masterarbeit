@@ -179,22 +179,8 @@ We have seen in ... that the representable presheaf of a scheme is indeeed a she
 	\end{tikzcd}\]
 	In particular, since $T_i, U$ and $R$ are schemes, $T_i\times_X U$ is represented by a scheme. Since $t:R\to U$ is \'etale, its base change
 	\[
-	T_i\times_X U \to T_i
+		R\hookrightarrow X\times_S X,
 	\]
-	is \'etale.
-	
-	The schemes $T_i\times_X U$ carry their canonical descent datum with respect to the \'etale covering $\{T_i\to T\}_i$, since they are the pullbacks of the sheaf $T\times_X U$. Because schemes form a stack for the big \'etale topology, this descent datum is effective. Hence $T\times_X U$ is represented by a scheme.
-	
-	Moreover, \'etaleness descends along \'etale coverings of the base, so from the fact that each
-	\[
-	T_i\times_X U \to T_i
-	\]
-	is \'etale, it follows that
-	\[
-	T\times_X U \to T
-	\]
-	is \'etale.
-	
-	Thus the morphism $p:U\to X$ is representable, surjective, and \'etale. Therefore $X$ is an algebraic space.
-\end{proof}
+	such that for every $S$-scheme $T$, the $T$-points $R(T) \subset X(T)\times X(T)$ is an equivalence relation on $X(T)$ and the projections $s,t: R\to X$ are \etale.
+\end{definition}
 

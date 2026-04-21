@@ -1,0 +1,174 @@
+\chapter{Coarse Moduli Spaces}
+
+In this chapter we introduce coarse moduli spaces, which provide a way to pass
+from algebraic stacks to algebraic spaces by identifying objects up to
+isomorphism. This construction plays a central role in the Keel--Mori theorem.
+
+\section{Motivation}
+
+Let $\mathcal{X}$ be an algebraic stack. For a scheme $T$, the groupoid
+$\mathcal{X}(T)$ consists of objects over $T$ together with their isomorphisms.
+A natural goal is to construct a geometric object whose points correspond to
+isomorphism classes of objects of $\mathcal{X}$.
+
+However, in general $\mathcal{X}$ is not representable by a scheme or algebraic
+space due to the presence of automorphisms. The notion of a coarse moduli space
+provides a best possible approximation.
+
+---
+
+\section{Definition of Coarse Moduli Space}
+
+\begin{definition}[Coarse moduli space]
+	(\cite[][Tag 04UX]{stacks-project})
+	Let $\mathcal{X}$ be an algebraic stack. A morphism
+	\[
+	\pi : \mathcal{X} \to X
+	\]
+	to an algebraic space $X$ is called a \emph{coarse moduli space} if:
+	
+	\begin{enumerate}
+		\item \textbf{Universality:}  
+		For every algebraic space $Y$ and every morphism
+		\[
+		f : \mathcal{X} \to Y,
+		\]
+		there exists a unique morphism
+		\[
+		g : X \to Y
+		\]
+		such that $f = g \circ \pi$.
+		
+		\item \textbf{Geometric points:}  
+		For every algebraically closed field $k$, the induced map
+		\[
+		|\mathcal{X}(k)| \to X(k)
+		\]
+		identifies $X(k)$ with the set of isomorphism classes of objects of
+		$\mathcal{X}(k)$.
+	\end{enumerate}
+\end{definition}
+
+\begin{remark}
+	The coarse moduli space forgets all automorphism data and only remembers
+	isomorphism classes. In particular, it does not carry a universal family in
+	general.
+\end{remark}
+
+---
+
+\section{Basic Properties}
+
+\begin{proposition}
+	(\cite[][Tag 04UX]{stacks-project})
+	Let $\pi : \mathcal{X} \to X$ be a coarse moduli space. Then:
+	\begin{enumerate}
+		\item $\pi$ is surjective,
+		\item $\pi$ is universally closed,
+		\item $\pi$ is universal for morphisms to algebraic spaces.
+	\end{enumerate}
+\end{proposition}
+
+\begin{remark}
+	In general, formation of coarse moduli spaces does not commute with arbitrary
+	base change, but only with flat base change. :contentReference[oaicite:1]{index=1}
+\end{remark}
+
+---
+
+\section{Coarse Moduli as Quotients}
+
+\begin{definition}[Coarse quotient]
+	(\cite[][Tag 04A1]{stacks-project})
+	Let $R \rightrightarrows U$ be a groupoid in algebraic spaces. A morphism
+	\[
+	\phi : U \to X
+	\]
+	is called a \emph{coarse quotient} if:
+	\begin{enumerate}
+		\item $\phi$ is a categorical quotient,
+		\item $\phi$ identifies geometric points with orbits.
+	\end{enumerate}
+\end{definition}
+
+\begin{remark}
+	Coarse moduli spaces can be viewed as coarse quotients of groupoids arising
+	from presentations of stacks.
+\end{remark}
+
+---
+
+\section{Relation to Groupoids}
+
+\begin{proposition}
+	Let $\mathcal{X}$ be an algebraic stack and let $U \to \mathcal{X}$ be a smooth
+	surjective morphism. Set
+	\[
+	R := U \times_{\mathcal{X}} U.
+	\]
+	Then:
+	\begin{enumerate}
+		\item $R \rightrightarrows U$ is a groupoid in algebraic spaces,
+		\item a coarse moduli space $\mathcal{X} \to X$ corresponds to a coarse
+		quotient $U \to X$ of this groupoid.
+	\end{enumerate}
+\end{proposition}
+
+\begin{remark}
+	This reduces the construction of coarse moduli spaces to the construction of
+	quotients of groupoids in algebraic spaces.
+\end{remark}
+
+---
+
+\section{Examples}
+
+\begin{example}[Trivial case]
+	If $\mathcal{X} = X$ is an algebraic space, then the identity
+	\[
+	X \to X
+	\]
+	is a coarse moduli space.
+\end{example}
+
+\begin{example}[Quotient by a finite group]
+	Let $G$ be a finite group acting on a scheme $U$. Then the quotient stack
+	\[
+	[U/G]
+	\]
+	has a coarse moduli space given by the geometric quotient
+	\[
+	U \to U/G.
+	\]
+\end{example}
+
+---
+
+\section{Existence Problem}
+
+\begin{remark}
+	In general, coarse moduli spaces do not always exist. However, the
+	Keel--Mori theorem shows that they exist for a large class of algebraic stacks,
+	namely those with finite inertia.
+\end{remark}
+
+---
+
+\section{Outlook: Keel--Mori Theorem}
+
+The central result of this thesis is the following:
+
+\begin{theorem}[Keel--Mori]
+	Let $\mathcal{X}$ be an algebraic stack locally of finite type over a
+	scheme $S$ with finite inertia. Then there exists a coarse moduli space
+	\[
+	\pi : \mathcal{X} \to X,
+	\]
+	where $X$ is an algebraic space.
+\end{theorem}
+
+\begin{remark}
+	The proof proceeds by choosing a smooth presentation $U \to \mathcal{X}$,
+	constructing the associated groupoid $R = U \times_{\mathcal{X}} U$, and
+	showing that the quotient $U/R$ exists as an algebraic space.
+\end{remark}

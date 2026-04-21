@@ -119,6 +119,7 @@
 %------------------------------
 \newcommand{\theoremname}{}
 \newcommand{\lemmaname}{}
+\newcommand{\examplename}{}
 \newcommand{\remarkname}{}
 \newcommand{\propositionname}{}
 \newcommand{\corollaryname}{}
@@ -126,11 +127,13 @@
 	\renewcommand{\theoremname}{Theorem}
 	\renewcommand{\lemmaname}{Lemma}
 	\renewcommand{\propositionname}{Proposition}
+	\renewcommand{\examplename}{Example}
 	\renewcommand{\remarkname}{Remark}
 	\renewcommand{\corollaryname}{Corollary}
 	}{\iflanguage{ngerman}{
 		\renewcommand{\theoremname}{Satz}
 		\renewcommand{\lemmaname}{Hilfssatz}
+		\renewcommand{\examplename}{Beispiel}
 		\renewcommand{\propositionname}{Proposition}
 		\renewcommand{\remarkname}{Bemerkung}
 		\renewcommand{\corollaryname}{Korollar}
@@ -160,6 +163,14 @@
 	roundcorner=2pt,
 	linewidth=1pt
 ]{lemmaenv}[theoremenv]{\lemmaname}
+%------------------------------
+% EXAMPLE ENVIRONMENT
+%------------------------------
+\newmdtheoremenv[
+linecolor=black,
+roundcorner=2pt,
+linewidth=0.5pt
+]{example}[theoremenv]{\examplename}
 %------------------------------
 % COROLLARY ENVIRONMENT
 %------------------------------
@@ -302,6 +313,8 @@ linewidth=1pt
 	\def\tableautorefname{Tab.}%
 	\def\theoremenvautorefname{Satz}%
 	\def\lemmaenvautorefname{Hilfssatz}%
+	\def\exampleautorefname{Bsp.}%
+	\def\exampleautorefnamelong{Beispiel}%
 	\def\corollaryenvautorefname{Korollar}%
 	\def\remarkenvautorefname{Bem.}%
 	\def\definitionautorefname{Def.}%
@@ -337,6 +350,8 @@ linewidth=1pt
 	\def\subsubsectionautorefname{Sec.}%	
 	\def\figureautorefname{Fig.}%
 	\def\tableautorefname{Tab.}%
+	\def\exampleautorefname{Example}%
+	\def\exampleautorefnamelong{Example}%
 	\def\equationautorefname~#1\null{Eq.~(#1)\null}%
 	\def\theoremenvautorefname{Theorem}%
 	\def\lemmaenvautorefname{Lemma}%
@@ -373,6 +388,7 @@ linewidth=1pt
   \renewcommand{\sectionautorefname}{\subsectionautorefnamelong}%
   \renewcommand{\subsectionautorefname}{\subsectionautorefnamelong}%
   \renewcommand{\subsubsectionautorefname}{\subsubsectionautorefnamelong}%
+  \renewcommand{\exampleautorefname}{\exampleautorefnamelong}%
   \renewcommand{\figureautorefname}{\figureautorefnamelong}%
   \renewcommand{\tableautorefname}{\tableautorefnamelong}%
   \renewcommand{\equationautorefname}{\equationautorefnamelong}%
