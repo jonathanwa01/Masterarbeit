@@ -109,7 +109,6 @@ $U\to X$, the natural map $F(X) \to \Totof{F(U_\bullet)}$ is an equivalence, whe
 	\end{enumerate}
 \end{definition}
 
-
 \begin{proposition}[Sheaf condition as Cech descent]
 	Let $F$ be a sheaf of sets on a site and let $U \to X$ be a covering
 	with Cech nerve $U_\bullet$. Then
@@ -182,6 +181,7 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	is an isomorphism.
 \end{theorem}
 
+
 \begin{proof}
 	The cosimplicial ring $B^\bullet$ associated to the morphism
 	$A \to B$ is the Amitsur complex of the extension.
@@ -201,6 +201,8 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	$A \to B$. Faithfully flat descent for rings is equivalent to exactness of this
 	complex.
 \end{remark}
+
+
 
 \begin{theorem}[Faithfully flat descent for modules]\label{thm:faithfully-flat-descent-modules}
 	(\cite[Tag 023F, 03OA]{stacks-project})
@@ -628,11 +630,41 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	\]
 \end{proof}
 
-\begin{remark}[Reference]
+\begin{remark}
 	Descent for affine schemes (and more generally affine morphisms) with
 	respect to fpqc coverings has been prooven in the Stacks Project,
 	see \cite[Tag 0244]{stacks-project}. The reduction to quasi-coherent
 	algebras and the compatibility with relative $\Spec$ are standard and
 	follow from fpqc descent for quasi-coherent sheaves,
 	see \cite[Tag 023T]{stacks-project}.
+\end{remark}
+
+\begin{corollary}[Affine constructions are fpqc-local on the base]
+	Let $X$ be a scheme and let $U \to X$ be an fpqc covering with Čech nerve
+	$U_\bullet$. Then any affine morphism over $X$ may be constructed fpqc-locally
+	on $U$ together with descent data, and descends uniquely to an affine morphism
+	over $X$.
+	
+	More precisely, the functor
+	\[
+	\Aff/X \longrightarrow \Tot\big((\Aff/U_\bullet)\big)
+	\]
+	is an equivalence. Equivalently, for every cosimplicial system of affine
+	$U_n$-schemes
+	\[
+	Y_\bullet \to U_\bullet
+	\]
+	equipped with descent data, there exists a unique affine $X$-scheme
+	\[
+	Y \to X
+	\]
+	whose pullback to $U_\bullet$ recovers $Y_\bullet$.
+\end{corollary}
+
+\begin{remark}
+	This corollary is used repeatedly in quotient constructions: one first
+	constructs the desired object locally on an fpqc cover, often after reducing
+	to affine charts, and then glues the local affine pieces by fpqc descent.
+	In particular, auxiliary affine morphisms arising in the proof of the
+	Keel--Mori theorem may be constructed locally and descended globally.
 \end{remark}
