@@ -193,6 +193,71 @@ which underlies the Čech nerve and the notion of totalization.
 	by the truncated totalization over $\Delta_{\le 2}$, see \cite[][Propoition 2.8]{khan2022stacks}.
 \end{remark}
 
+\begin{lemma}[Truncated descent for sets and groupoids]
+	Let $X^\bullet : \Delta \to \mathcal{C}$ be a cosimplicial object.
+	
+	\begin{enumerate}
+		\item If $\mathcal{C} = \Set$, then the natural map
+		\[
+		\Tot(X^\bullet) \longrightarrow \Tot_1(X^\bullet)
+		=
+		\Eq\big(X^0 \rightrightarrows X^1\big)
+		\]
+		is an isomorphism.
+		
+		\item If $\mathcal{C} = \Grpd$, then the natural map
+		\[
+		\Tot(X^\bullet) \longrightarrow \Tot_2(X^\bullet)
+		\]
+		is an equivalence of categories.
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	We describe explicitly what the totalization computes.
+	
+	\medskip
+	
+	(1) In $\Set$, the limit of a cosimplicial diagram consists of elements
+	$s \in X^0$ such that the two images in $X^1$ agree.
+	Higher compatibility conditions are automatic since equalities are strict.
+	Hence $\Tot(X^\bullet)$ is already the equalizer of
+	$X^0 \rightrightarrows X^1$.
+	
+	\medskip
+	
+	(2) In $\Grpd$, the totalization $\Tot(X^\bullet)$ is the category of descent data consisting of  objects: $(N, \alpha)$, with $N \in X^0$ and an isomorphism
+	$\alpha : d^0(N) \to d^1(N)$ in $X^1$ satisfying the cocycle condition
+	$d^2(\alpha) \circ d^0(\alpha) = d^1(\alpha)$, i.e. letting the following commute:
+	% https://q.uiver.app/#q=WzAsMyxbMCwxLCJkXjBkXjAoTikiXSxbMiwxLCJkXjFkXjEoTikiXSxbMSwwLCJkXjBkXjFOIl0sWzAsMSwiZF4xXFxhbHBoYSIsMl0sWzAsMiwiZF4wXFxhbHBoYSJdLFsyLDEsImReMlxcYWxwaGEiXV0=
+	\[\begin{tikzcd}
+		& {d^0d^1N} & \\
+		{d^0d^0(N)} && {d^1d^1(N)}
+		\arrow["{d^2\alpha}", from=1-2, to=2-3]
+		\arrow["{d^0\alpha}", from=2-1, to=1-2]
+		\arrow["{d^1\alpha}"', from=2-1, to=2-3]
+	\end{tikzcd}\]
+
+	Here we applied $d^0, d^1$ and $d^2$ to the morphism $\alpha$ and impliclty used the simplicial identities for the cofaces $d^i$.
+	All higher compatibility conditions (in degrees $\ge 3$) are automatic,
+	because in a groupoid all higher diagrams commute uniquely once the
+	2-dimensional compatibility is satisfied.
+	
+	Hence $\Tot(X^\bullet)$ is already determined by the truncation
+	$\Delta_{\le 2}$, i.e.\ $\Tot_2(X^\bullet)$.
+\end{proof}
+
+\begin{remark}
+	This lemma reflects the general principle that sets are $0$-truncated
+	and groupoids are $1$-truncated objects. For $n$-truncated objects,
+	all higher coherence conditions above level $n+1$ are automatic, so
+	totalizations stabilize at level $n+1$.
+\end{remark}
+
+\begin{example}
+	Let $A\to B$ be a ring morphism and let $M$ be a $B$ module. Consider 
+\end{example}
+
 \begin{definition}[Descent datum]
 	Let $F$ be a presheaf and let $U \to X$ be a covering with Cech nerve
 	$U_\bullet$. A descent datum for $F$ along $U \to X$ is an object of
@@ -231,6 +296,10 @@ which underlies the Čech nerve and the notion of totalization.
 	F(U \times_X U).
 	\]
 \end{proposition}
+
+\begin{remark}
+	Given a simplicial object $U_\bullet$ in a cateogry $\mathcal{C}$. Applying a preseahf $F$ gives rise to a cosimplicial object $F(U_\bullet)$. 
+\end{remark}
 
 The Amitsur complex computes the totalization of the Čech nerve of
 $\Spec(B) \to \Spec(A)$, and faithfully flat descent for rings states
@@ -303,7 +372,6 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	$A \to B$. Faithfully flat descent for rings is equivalent to exactness of this
 	complex.
 \end{remark}
-
 
 
 \begin{lemma}[Faithfully flat descent for modules]
@@ -416,17 +484,17 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 		\arrow[shift right, from=1-5, to=1-6]
 		\arrow[shift right=3, from=1-5, to=1-6]
 	\end{tikzcd}\]
-	This is exact by construction of $M$, i.e. $H^0(s(N_\bullet)) = M$.
+	This is exact by construction of $M$ and fully faithfulness of $R\to S$, i.e. $H^0(s(N_\bullet)) = M$.
 	
 	Now we tensor this complex with $S\otimes_R - $ and untwist the sequence using the descent datum $\alpha$:
 	
-	% https://q.uiver.app/#q=WzAsMTAsWzAsMCwiMCJdLFsxLDAsIlNcXG90aW1lc19SIE0iXSxbMiwwLCJTXFxvdGltZXNfUk4iXSxbMywwLCJTXFxvdGltZXNfUiBOXFxvdGltZXNfUiBTIl0sWzQsMCwiU1xcb3RpbWVzX1IgTlxcb3RpbWVzX1IgU1xcb3RpbWVzX1IgUyJdLFswLDEsIjAiXSxbMSwxLCJTXFxvdGltZXNfUk0iXSxbMiwxLCJOXFxvdGltZXNfUiBTIl0sWzMsMSwiTlxcb3RpbWVzX1IgU1xcb3RpbWVzX1IgUyJdLFs0LDEsIk5cXG90aW1lc19SIFNcXG90aW1lc19SIFNcXG90aW1lc19SIFMiXSxbMCwxXSxbMSwyXSxbMiwzLCIiLDAseyJvZmZzZXQiOi0xfV0sWzIsMywiIiwwLHsib2Zmc2V0IjoxfV0sWzMsNF0sWzMsNCwiIiwwLHsib2Zmc2V0IjotMn1dLFszLDQsIiIsMCx7Im9mZnNldCI6Mn1dLFsxLDYsImlkIl0sWzUsNl0sWzYsNywiXFxwc2kiXSxbMiw3LCJcXGFscGhhIl0sWzcsOCwiIiwwLHsib2Zmc2V0IjotMX1dLFszLDgsIlxcYWxwaGFcXG90aW1lcyBpZCJdLFs4LDldLFs4LDksIiIsMCx7Im9mZnNldCI6LTJ9XSxbOCw5LCIiLDAseyJvZmZzZXQiOjJ9XSxbNCw5LCJcXGFscGhhXFxvdGltZXMgaWRcXG90aW1lcyBpZCJdLFs3LDgsIiIsMCx7Im9mZnNldCI6MX1dXQ==
+	% https://q.uiver.app/#q=WzAsMTAsWzAsMCwiMCJdLFsxLDAsIlNcXG90aW1lc19SIE0iXSxbMiwwLCJTXFxvdGltZXNfUk4iXSxbMywwLCJTXFxvdGltZXNfUiBOXFxvdGltZXNfUiBTIl0sWzQsMCwiU1xcb3RpbWVzX1IgTlxcb3RpbWVzX1IgU1xcb3RpbWVzX1IgUyJdLFswLDEsIjAiXSxbMSwxLCJTXFxvdGltZXNfUk0iXSxbMiwxLCJOXFxvdGltZXNfUiBTIl0sWzMsMSwiTlxcb3RpbWVzX1IgU1xcb3RpbWVzX1IgUyJdLFs0LDEsIk5cXG90aW1lc19SIFNcXG90aW1lc19SIFNcXG90aW1lc19SIFMiXSxbMCwxXSxbMSwyXSxbMiwzLCIiLDAseyJvZmZzZXQiOi0xfV0sWzIsMywiIiwwLHsib2Zmc2V0IjoxfV0sWzMsNF0sWzMsNCwiIiwwLHsib2Zmc2V0IjotMn1dLFszLDQsIiIsMCx7Im9mZnNldCI6Mn1dLFsxLDYsIj0iXSxbNSw2XSxbNiw3LCJcXHBzaSJdLFsyLDcsIlxcYWxwaGEiXSxbNyw4LCIiLDAseyJvZmZzZXQiOi0xfV0sWzMsOCwiXFxhbHBoYVxcb3RpbWVzIGlkIl0sWzgsOV0sWzgsOSwiIiwwLHsib2Zmc2V0IjotMn1dLFs4LDksIiIsMCx7Im9mZnNldCI6Mn1dLFs0LDksIlxcYWxwaGFcXG90aW1lcyBpZFxcb3RpbWVzIGlkIl0sWzcsOCwiIiwwLHsib2Zmc2V0IjoxfV1d
 	\[\begin{tikzcd}
 		0 & {S\otimes_R M} & {S\otimes_RN} & {S\otimes_R N\otimes_R S} & {S\otimes_R N\otimes_R S\otimes_R S} \\
 		0 & {S\otimes_RM} & {N\otimes_R S} & {N\otimes_R S\otimes_R S} & {N\otimes_R S\otimes_R S\otimes_R S}
 		\arrow[from=1-1, to=1-2]
 		\arrow[from=1-2, to=1-3]
-		\arrow["id", from=1-2, to=2-2]
+		\arrow["{=}", from=1-2, to=2-2]
 		\arrow[shift left, from=1-3, to=1-4]
 		\arrow[shift right, from=1-3, to=1-4]
 		\arrow["\alpha", from=1-3, to=2-3]
@@ -456,9 +524,49 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	$\psi(s\otimes m) = \alpha(s\otimes m) = \alpha((s\otimes 1)(1\otimes m)) = (s\otimes 1)\alpha(1\otimes m) = (s\otimes 1)(m\otimes 1) = (sm)\otimes 1$ by $S\otimes_R S$-linearity of $\alpha$. Hence, this morphisms $\psi$ is given by $s\otimes m\mapsto (sm)\otimes 1$.
 	
 	Now we compare the second row to the Amitsur complex $N_\bullet$ of $N$:
-	% https://q.uiver.app/#q=WzAsMTAsWzAsMCwiMCJdLFsxLDAsIlNcXG90aW1lc19SIE0iXSxbMiwwLCJOXFxvdGltZXNfUiBTIl0sWzMsMCwiTlxcb3RpbWVzX1IgU1xcb3RpbWVzX1IgUyJdLFswLDEsIjAiXSxbMSwxLCJOIl0sWzIsMSwiTlxcb3RpbWVzX1IgUyJdLFszLDEsIk5cXG90aW1lc19SIFNcXG90aW1lc19SIFMiXSxbNCwxLCJcXGNkb3RzIl0sWzQsMCwiXFxjZG90cyJdLFswLDFdLFsxLDIsIlxccHNpIl0sWzIsMywiIiwwLHsib2Zmc2V0IjotMX1dLFsyLDMsIiIsMCx7Im9mZnNldCI6MX1dLFsxLDUsIlxcdGhldGEiXSxbNCw1XSxbNSw2XSxbMiw2LCI9Il0sWzYsNywiIiwwLHsib2Zmc2V0IjotMX1dLFszLDcsIj0iXSxbNiw3LCIiLDAseyJvZmZzZXQiOjF9XSxbNyw4XSxbNyw4LCIiLDAseyJvZmZzZXQiOi0yfV0sWzcsOCwiIiwwLHsib2Zmc2V0IjoyfV0sWzMsOV0sWzMsOSwiIiwwLHsib2Zmc2V0IjotMn1dLFszLDksIiIsMCx7Im9mZnNldCI6Mn1dLFs5LDhdXQ==
+	% https://q.uiver.app/#q=WzAsMTUsWzAsMCwiMCJdLFsxLDAsIlNcXG90aW1lc19SIE0iXSxbMiwwLCJTXFxvdGltZXNfUk4iXSxbMywwLCJTXFxvdGltZXNfUiBOXFxvdGltZXNfUiBTIl0sWzQsMCwiU1xcb3RpbWVzX1IgTlxcb3RpbWVzX1IgU1xcb3RpbWVzX1IgUyJdLFswLDEsIjAiXSxbMSwxLCJTXFxvdGltZXNfUk0iXSxbMiwxLCJOXFxvdGltZXNfUiBTIl0sWzMsMSwiTlxcb3RpbWVzX1IgU1xcb3RpbWVzX1IgUyJdLFs0LDEsIk5cXG90aW1lc19SIFNcXG90aW1lc19SIFNcXG90aW1lc19SIFMiXSxbMCwyLCIwIl0sWzEsMiwiTiJdLFsyLDIsIk5cXG90aW1lc19SIFMiXSxbMywyLCJOXFxvdGltZXNfUiBTXFxvdGltZXNfUiBTIl0sWzQsMiwiTlxcb3RpbWVzX1IgU1xcb3RpbWVzX1IgU1xcb3RpbWVzX1IgUyJdLFswLDFdLFsxLDJdLFsyLDMsIiIsMCx7Im9mZnNldCI6LTF9XSxbMiwzLCIiLDAseyJvZmZzZXQiOjF9XSxbMyw0XSxbMyw0LCIiLDAseyJvZmZzZXQiOi0yfV0sWzMsNCwiIiwwLHsib2Zmc2V0IjoyfV0sWzEsNiwiPSJdLFs1LDZdLFs2LDcsIlxccHNpIl0sWzIsNywiXFxhbHBoYSJdLFs3LDgsIiIsMCx7Im9mZnNldCI6LTF9XSxbMyw4LCJcXGFscGhhXFxvdGltZXMgaWQiXSxbOCw5XSxbOCw5LCIiLDAseyJvZmZzZXQiOi0yfV0sWzgsOSwiIiwwLHsib2Zmc2V0IjoyfV0sWzQsOSwiXFxhbHBoYVxcb3RpbWVzIGlkXFxvdGltZXMgaWQiXSxbNyw4LCIiLDAseyJvZmZzZXQiOjF9XSxbNiwxMSwiXFx0aGV0YSJdLFsxMCwxMV0sWzExLDEyXSxbMTIsMTMsIiIsMix7Im9mZnNldCI6MX1dLFsxMiwxMywiIiwyLHsib2Zmc2V0IjotMX1dLFsxMywxNF0sWzEzLDE0LCIiLDIseyJvZmZzZXQiOi0yfV0sWzEzLDE0LCIiLDIseyJvZmZzZXQiOjJ9XSxbNywxMiwiPSJdLFs4LDEzLCI9Il0sWzksMTQsIj0iXV0=
 	\[\begin{tikzcd}
-		0 & {S\otimes_R M} & {N\otimes_R S} & {N\otimes_R S\otimes_R S} & \cdots \\
+		0 & {S\otimes_R M} & {S\otimes_RN} & {S\otimes_R N\otimes_R S} & {S\otimes_R N\otimes_R S\otimes_R S} \\
+		0 & {S\otimes_RM} & {N\otimes_R S} & {N\otimes_R S\otimes_R S} & {N\otimes_R S\otimes_R S\otimes_R S} \\
+		0 & N & {N\otimes_R S} & {N\otimes_R S\otimes_R S} & {N\otimes_R S\otimes_R S\otimes_R S}
+		\arrow[from=1-1, to=1-2]
+		\arrow[from=1-2, to=1-3]
+		\arrow["{=}", from=1-2, to=2-2]
+		\arrow[shift left, from=1-3, to=1-4]
+		\arrow[shift right, from=1-3, to=1-4]
+		\arrow["\alpha", from=1-3, to=2-3]
+		\arrow[from=1-4, to=1-5]
+		\arrow[shift left=2, from=1-4, to=1-5]
+		\arrow[shift right=2, from=1-4, to=1-5]
+		\arrow["{\alpha\otimes id}", from=1-4, to=2-4]
+		\arrow["{\alpha\otimes id\otimes id}", from=1-5, to=2-5]
+		\arrow[from=2-1, to=2-2]
+		\arrow["\psi", from=2-2, to=2-3]
+		\arrow["\theta", from=2-2, to=3-2]
+		\arrow[shift left, from=2-3, to=2-4]
+		\arrow[shift right, from=2-3, to=2-4]
+		\arrow["{=}", from=2-3, to=3-3]
+		\arrow[from=2-4, to=2-5]
+		\arrow[shift left=2, from=2-4, to=2-5]
+		\arrow[shift right=2, from=2-4, to=2-5]
+		\arrow["{=}", from=2-4, to=3-4]
+		\arrow["{=}", from=2-5, to=3-5]
+		\arrow[from=3-1, to=3-2]
+		\arrow[from=3-2, to=3-3]
+		\arrow[shift right, from=3-3, to=3-4]
+		\arrow[shift left, from=3-3, to=3-4]
+		\arrow[from=3-4, to=3-5]
+		\arrow[shift left=2, from=3-4, to=3-5]
+		\arrow[shift right=2, from=3-4, to=3-5]
+	\end{tikzcd}\]
+	
+	By definition of $\theta$, this diagram commutes, i.e. $\psi(s\otimes m) = sm\otimes 1 = \theta(s\otimes m)\otimes 1$.
+	
+	Since $R\to S$ is faithfully flat, the Amitsur $N_\bullet$ complex is exact.
+	
+	% https://q.uiver.app/#q=WzAsMTAsWzAsMCwiMCJdLFsxLDAsIlNcXG90aW1lc19STSJdLFsyLDAsIlNcXG90aW1lc19SIE4iXSxbMywwLCJTXFxvdGltZXNfUiBOXFxvdGltZXNfUiBTIl0sWzQsMCwiXFxjZG90cyJdLFswLDEsIjAiXSxbMSwxLCJOIl0sWzIsMSwiTlxcb3RpbWVzX1IgUyJdLFszLDEsIk5cXG90aW1lc19SIFNcXG90aW1lc19SIFMiXSxbNCwxLCJcXGNkb3RzIl0sWzAsMV0sWzEsMiwiXFxwc2kiXSxbMiwzLCIiLDAseyJvZmZzZXQiOi0xfV0sWzMsNF0sWzMsNCwiIiwwLHsib2Zmc2V0IjotMn1dLFszLDQsIiIsMCx7Im9mZnNldCI6Mn1dLFsyLDMsIiIsMCx7Im9mZnNldCI6MX1dLFsxLDYsIlxcdGhldGEiXSxbNSw2XSxbNiw3XSxbNyw4LCIiLDIseyJvZmZzZXQiOjF9XSxbNyw4LCIiLDIseyJvZmZzZXQiOi0xfV0sWzgsOV0sWzgsOSwiIiwyLHsib2Zmc2V0IjotMn1dLFs4LDksIiIsMix7Im9mZnNldCI6Mn1dLFsyLDcsIj0iXSxbMyw4LCI9Il1d
+	\[\begin{tikzcd}
+		0 & {S\otimes_RM} & {S\otimes_R N} & {S\otimes_R N\otimes_R S} & \cdots \\
 		0 & N & {N\otimes_R S} & {N\otimes_R S\otimes_R S} & \cdots
 		\arrow[from=1-1, to=1-2]
 		\arrow["\psi", from=1-2, to=1-3]
@@ -470,24 +578,14 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 		\arrow[shift left=2, from=1-4, to=1-5]
 		\arrow[shift right=2, from=1-4, to=1-5]
 		\arrow["{=}", from=1-4, to=2-4]
-		\arrow[from=1-5, to=2-5]
 		\arrow[from=2-1, to=2-2]
 		\arrow[from=2-2, to=2-3]
-		\arrow[shift left, from=2-3, to=2-4]
 		\arrow[shift right, from=2-3, to=2-4]
+		\arrow[shift left, from=2-3, to=2-4]
 		\arrow[from=2-4, to=2-5]
 		\arrow[shift left=2, from=2-4, to=2-5]
 		\arrow[shift right=2, from=2-4, to=2-5]
 	\end{tikzcd}\]
-	
-	The second row is the augmented Amitsur complex $N_\bullet$ of $N$.
-	By definition of $\theta$, this diagram commutes, i.e. $\psi(s\otimes m) = sm\otimes 1 = \theta(s\otimes m)\otimes 1$.
-	
-	Since $R\to S$ is faithfully flat, this Amitsur complex is exact.
-	
-	\begin{tikzcd}
-		[column sep=large] 0 \arrow[r] & S\otimes_R M \arrow[r] \arrow[d,"\theta"'] & S\otimes_R N \arrow[r,shift left] \arrow[r,shift right] \arrow[d,"\alpha^{-1}"'] & S\otimes_R S\otimes_R N \arrow[r] \arrow[d,"\beta_1"'] & \cdots \\ 0 \arrow[r] & N \arrow[r] & N\otimes_R S \arrow[r,shift left] \arrow[r,shift right] & N\otimes_R S\otimes_R S \arrow[r] & \cdots
-	\end{tikzcd}
 	
 	
 	
