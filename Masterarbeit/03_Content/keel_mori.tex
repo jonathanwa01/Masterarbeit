@@ -1,0 +1,174 @@
+\chapter{Keel Mori Theorem}
+
+The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by first constructing moduli spaces on a special local class of algebraic stacks, called well-nigh affine stacks, and then gluing these local moduli spaces along
+\etale overlaps.
+
+\section{Local constructions}
+
+\begin{definition}[Well-nigh]
+	(\cite[Tag 0DUL][]{stacks-project})
+	Let $\mathcal{X}$ be an algebraic stack. We call $\mathcal{X}$ well-nigh affine, if there exists an affine scheme $U$ ad a surjective, flat, finite and finitely presented morphism $U\to \mathcal{X}$.	
+\end{definition}
+
+\begin{remark}
+	The condition of being well-nigh affine is not part of the definition of an algebraic stack, but an additional finiteness and locality assumption on its presentation.
+	
+	Indeed, by definition of an algebraic stack (e.g.\ \cite[Tag 026N]{stacks-project}), there already exists a smooth surjective morphism $V \to \mathcal{X}$ from a scheme $V$. However, in general $V$ need neither be affine nor satisfy strong finiteness properties over $\mathcal{X}$.
+	
+	The well-nigh condition strengthens this by requiring the existence of a presentation $U \to \mathcal{X}$ where $U$ is affine and the morphism is flat, finite, and finitely presented. In particular, the associated equivalence relation
+	\[
+	R = U \times_{\mathcal{X}} U
+	\]
+	acquires good finiteness properties, which allows one to treat it similarly to a finite equivalence relation on an affine scheme.
+	
+	This additional structure is crucial in the construction of coarse moduli spaces, as it provides a local situation in which quotients can be formed and then glued via descent.
+\end{remark}
+
+
+\begin{lemma}[Affine invariant quotient construction]\label{lem:affine-invariant-quotient}
+	Let
+	\[
+	\mathcal X=[U/R]
+	\]
+	be a quotient stack, where 
+	% https://q.uiver.app/#q=WzAsMixbMCwwLCJSPVxcU3BlY29me0J9Il0sWzEsMCwiVT1cXFNwZWNvZntBfSJdLFswLDEsInMiLDAseyJvZmZzZXQiOi0xfV0sWzAsMSwidCIsMix7Im9mZnNldCI6MX1dXQ==
+	\[\begin{tikzcd}
+		{R=\Specof{B}} & {U=\Specof{A}}
+		\arrow["s", shift left, from=1-1, to=1-2]
+		\arrow["t"', shift right, from=1-1, to=1-2]
+	\end{tikzcd}\]
+	is a groupoid in affine schemes. Let
+	\[
+	C=\{a\in A \mid s^\#(a)=t^\#(a)\}.
+	\]
+	Then the canonical morphism
+	\[
+	U\to \Specof{C}
+	\]
+	is $R$-invariant and therefore induces a morphism
+	\[
+	\mathcal X \to \Specof{C}.
+	\]
+\end{lemma}
+
+\begin{proof}
+	The condition
+	\[
+	C=\{a\in A \mid s^\#(a)=t^\#(a)\}
+	\]
+	means precisely that $C$ is the equalizer
+	\[
+	C=\operatorname{Eq}\big(A \rightrightarrows B\big),
+	\]
+	where the two maps are $s^\#$ and $t^\#$ corresponding to the morphisms
+	\[
+	s,t : R \to U.
+	\]
+	
+	The inclusion $C \hookrightarrow A$ induces a morphism of affine schemes
+	\[
+	U=\Spec(A) \longrightarrow \Spec(C).
+	\]
+	
+	We claim that this morphism is $R$-invariant. By definition, this means
+	that the two compositions
+	\[
+	R \rightrightarrows U \to \Spec(C)
+	\]
+	coincide.
+	
+	On the level of rings, these two morphisms correspond to the two maps
+	\[
+	C \hookrightarrow A \xrightarrow{s^\#} B
+	\qquad \text{and} \qquad
+	C \hookrightarrow A \xrightarrow{t^\#} B.
+	\]
+	But by definition of $C$, we have $s^\#(a)=t^\#(a)$ for all $a\in C$.
+	Hence these two ring maps agree, and therefore the two morphisms
+	\[
+	R \rightrightarrows U \to \Spec(C)
+	\]
+	are equal. This proves that $U \to \Spec(C)$ is $R$-invariant.
+	
+	It remains to show that such an invariant morphism descends to the quotient
+	stack $\mathcal X=[U/R]$.
+	
+	By definition of the quotient stack, a morphism
+	\[
+	\mathcal X \to Y
+	\]
+	to a scheme $Y$ is equivalent to the following data:
+	\begin{enumerate}
+		\item a morphism $U \to Y$,
+		\item such that the two pullbacks along $s,t : R \to U$ agree.
+	\end{enumerate}
+	
+	Since we have already shown that the morphism $U \to \Spec(C)$ satisfies
+	this invariance condition, it follows that it defines a morphism
+	\[
+	f : \mathcal X \to \Spec(C).
+	\]
+\end{proof}
+
+
+\begin{lemma}[Local existence of a coarse moduli space on well-nigh affine chart]
+	(\cite[Tag 0DUP][]{stacks-project})
+	Let $\mathcal{X}$  be a well-nigh affine algebraic stack. Then there exists a coarse moduli space $f:\mathcal{X} \to X$ in the category of affine schemes. Moreover $f$ is separated, quasi-compact and a universal homeomorphism.
+\end{lemma}
+
+\begin{proof}
+	By \cite[Tag 0DUM]{stacks-project}, there exists a presentation
+	\[
+	\mathcal X = [U/R],
+	\]
+	where
+	\[
+	U=\Spec(A)
+	\]
+	is an affine scheme and
+	\[
+	R = U \times_{\mathcal X} U = \Spec(B)
+	\]
+	is a groupoid in affine schemes such that the morphisms
+	\[
+	s,t : R \to U
+	\]
+	are finite locally free.
+	
+	Let
+	\[
+	C := \{ a \in A \mid s^\#(a) = t^\#(a) \}
+	\]
+	be the ring of invariant functions. Equivalently,
+	\[
+	C = \operatorname{Eq}\big(A \rightrightarrows B\big).
+	\]
+	
+	By Lemma~\ref{lem:affine-invariant-quotient}, the canonical morphism
+	\[
+	U \to \Spec(C)
+	\]
+	is $R$-invariant and therefore induces a morphism
+	\[
+	f : \mathcal X \to \Spec(C).
+	\]
+	
+	Set
+	\[
+	X := \Spec(C).
+	\]
+	
+	It remains to show that $f$ is a coarse moduli space and satisfies the
+	stated properties. This is proved in \cite[Tag 0DUP]{stacks-project},
+	where it is shown that:
+	
+	\begin{enumerate}
+		\item the morphism $f$ is a uniform categorical moduli space in the
+		category of affine schemes;
+		\item $f$ is separated and quasi-compact;
+		\item $f$ is a universal homeomorphism.
+	\end{enumerate}
+	
+	In particular, $X=\Spec(C)$ is the desired coarse moduli space of
+	$\mathcal X$ in the affine case.
+\end{proof}

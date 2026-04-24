@@ -19,6 +19,107 @@ Descent for a geometric object $F$ means that for a covering
 $U\to X$, the natural map $F(X) \to \Totof{F(U_\bullet)}$ is an equivalence, where $U_\bullet$ is the Čech nerve of the covering.
 
 
+\section*{Simplicial and cosimplicial objects}
+
+Lets briefly recall the formalism of simplicial and cosimplicial objects
+which underlies the Čech nerve and the notion of totalization.
+
+\begin{definition}[Simplicial and cosimplicial objects]
+	Let $\Delta$ denote the simplex category, whose objects are the finite ordered sets
+	$[n]=\{0,\dots,n\}$ and whose morphisms are non-decreasing maps.
+	
+	\begin{enumerate}
+		\item A simplicial object in a category $\mathcal{C}$ is a functor
+		\[
+		X_\bullet : \Delta^{op} \to \mathcal{C}.
+		\]
+		
+		\item A cosimplicial object in $\mathcal{C}$ is a functor
+		\[
+		X^\bullet : \Delta \to \mathcal{C}.
+		\]
+	\end{enumerate}
+	
+	Equivalently, a simplicial (resp.\ cosimplicial) object consists of objects
+	$X_n$ together with face and degeneracy maps satisfying the simplicial identities.
+\end{definition}
+
+\begin{remark}
+	A cosimplicial object in $\mathcal{C}$ is the same as a simplicial object
+	in the opposite category $\mathcal{C}^{op}$.
+	In practice, simplicial objects encode gluing diagrams, while
+	cosimplicial objects encode descent data.
+\end{remark}
+
+\begin{example}[Cech nerve as a simplicial object]
+	Let $f : U \to X$ be a morphism admitting fiber products.
+	The Čech nerve
+	\[
+	U_\bullet : \Delta^{op} \to \mathcal{C},
+	\qquad
+	U_n = U^{\times_X (n+1)},
+	\]
+	is a simplicial object.
+	
+	\begin{itemize}
+		\item The face maps forget one factor:
+		\[
+		d^i : U_n \to U_{n-1}, \qquad
+		(u_0,\dots,u_n) \mapsto (u_0,\dots,\widehat{u_i},\dots,u_n).
+		\]
+		
+		\item The degeneracy maps repeat a factor via diagonals:
+		\[
+		s^i : U_n \to U_{n+1}, \qquad
+		(u_0,\dots,u_n) \mapsto (u_0,\dots,u_i,u_i,\dots,u_n).
+		\]
+	\end{itemize}
+\end{example}
+
+\begin{example}[From simplicial to cosimplicial via a presheaf]
+	Let $F : \mathcal{C}^{op} \to \mathcal{D}$ be a presheaf.
+	Applying $F$ to a simplicial object $U_\bullet$ produces a cosimplicial object
+	\[
+	F(U_\bullet) : \Delta \to \mathcal{D}, \qquad
+	[n] \mapsto F(U_n).
+	\]
+	
+	Concretely, the two face maps
+	\[
+	U \times_X U \rightrightarrows U
+	\]
+	induce two maps
+	\[
+	F(U) \rightrightarrows F(U \times_X U),
+	\]
+	and similarly in higher degrees.
+	
+	This reversal of arrows is the reason why descent naturally involves
+	\emph{cosimplicial} objects.
+\end{example}
+
+\begin{example}[Very concrete example: sets]
+	Let $F$ be a presheaf of sets and let $U \to X$ be a covering.
+	Then the beginning of the cosimplicial diagram $F(U_\bullet)$ is
+	\[
+	F(U)
+	\rightrightarrows
+	F(U \times_X U).
+	\]
+	
+	The totalization reduces to the equalizer
+	\[
+	F(X)
+	\cong
+	\left\{
+	s \in F(U)
+	\;\middle|\;
+	\pi_1^*(s) = \pi_2^*(s)
+	\;\text{in } F(U \times_X U)
+	\right\},
+	\]
+	which is precisely the usual sheaf condition.
+\end{example}
 
 \begin{definition}[Čech nerve]
 	Let $f : U \to X$ be a morphism in a category with fiber products.
@@ -109,6 +210,7 @@ $U\to X$, the natural map $F(X) \to \Totof{F(U_\bullet)}$ is an equivalence, whe
 	\end{enumerate}
 \end{definition}
 
+
 \begin{proposition}[Sheaf condition as Cech descent]
 	Let $F$ be a sheaf of sets on a site and let $U \to X$ be a covering
 	with Cech nerve $U_\bullet$. Then
@@ -152,7 +254,7 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 
 
 
-\begin{theorem}[Faithfully flat descent for rings]
+\begin{theorem}[Faithfully flat descent for rings]\label{thm:faithfully-flat-descent-for-rings}
 	Let $A \to B$ be a faithfully flat morphism of rings and let
 	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJCIl0sWzEsMCwiQlxcb3RpbWVzX0EgQiJdLFsyLDAsIkJcXG90aW1lc19BQlxcb3RpbWVzX0FCIl0sWzMsMCwiXFxjZG90cyJdLFswLDEsIiIsMCx7Im9mZnNldCI6LTF9XSxbMSwyXSxbMSwyLCIiLDAseyJvZmZzZXQiOi0yfV0sWzEsMiwiIiwwLHsib2Zmc2V0IjoyfV0sWzAsMSwiIiwwLHsib2Zmc2V0IjoxfV0sWzIsMywiIiwwLHsib2Zmc2V0IjotMX1dLFsyLDMsIiIsMCx7Im9mZnNldCI6MX1dLFsyLDMsIiIsMCx7Im9mZnNldCI6M31dLFsyLDMsIiIsMCx7Im9mZnNldCI6LTN9XV0=
 	\[
@@ -204,15 +306,216 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 
 
 
+\begin{lemma}[Faithfully flat descent for modules]
+	\label{lem:ff-descent-modules}
+	Let $\varphi:R\to S$ be a faithfully flat ring homomorphism.
+	
+	Define $\Desc(S/R)$ to be the category whose objects are pairs $(N,\alpha)$
+	consisting of an $S$-module $N$ and an isomorphism of
+	$S\otimes_R S$-modules
+	\[
+	\alpha:\pi_1^*N \xrightarrow{\sim} \pi_2^*N,
+	\]
+	where
+	\[
+	\pi_1,\pi_2:S\to S\otimes_R S
+	\]
+	are the two canonical maps, such that on $S\otimes_R S\otimes_R S$ one has
+	the cocycle condition
+	\[
+	\pi_{23}^*(\alpha)\circ \pi_{12}^*(\alpha)=\pi_{13}^*(\alpha).
+	\]
+	Morphisms in $\Desc(S/R)$ are $S$-linear maps compatible with the descent
+	isomorphisms.
+	
+	Then the functor
+	\[
+	\Mod_R \longrightarrow \Desc(S/R),\qquad
+	M\longmapsto (S\otimes_R M,\alpha_M)
+	\]
+	is an equivalence of categories, where $\alpha_M$ is the canonical
+	identification
+	\[
+	(S\otimes_R M)\otimes_{R,\pi_1}(S\otimes_R S)
+	\cong
+	(S\otimes_R M)\otimes_{R,\pi_2}(S\otimes_R S).
+	\]
+	
+	An inverse functor is given by
+	\[
+	(N,\alpha)\longmapsto
+	\{\,n\in N \mid \alpha(1\otimes n)=n\otimes 1\,\}.
+	\]
+\end{lemma}
+
+\begin{proof}
+	For an $R$-module $M$, set
+	\[
+	F(M):=(S\otimes_R M,\alpha_M),
+	\]
+	where $\alpha_M$ is the canonical descent datum. This defines a functor
+	\[
+	F:\Mod_R\to \Desc(S/R).
+	\]
+	
+	Conversely, let $(N,\alpha)\in \Desc(S/R)$. Define
+	\[
+	G(N,\alpha):=
+	\{\,n\in N \mid \alpha(1\otimes n)=n\otimes 1\,\}.
+	\]
+	Equivalently, $G(N,\alpha)$ is the equalizer of the two maps
+	\[
+	N \rightrightarrows N\otimes_R S,
+	\qquad
+	n\mapsto \alpha(n\otimes 1),\quad n\mapsto n\otimes 1.
+	\]
+	This gives a functor
+	\[
+	G:\Desc(S/R)\to \Mod_R.
+	\]
+	
+	We show that $F$ and $G$ are quasi-inverse.
+	
+	First, let $M\in \Mod_R$. Then
+	\[
+	G(F(M))
+	=
+	\{\,x\in S\otimes_R M \mid x\otimes 1 = \alpha_M(1\otimes x)\,\}.
+	\]
+	By the exactness of the Amitsur complex for the faithfully flat map
+	$R\to S$, the sequence
+	\[
+	0\to M \to S\otimes_R M \rightrightarrows S\otimes_R S\otimes_R M
+	\]
+	is exact. Hence the equalizer above is canonically identified with $M$.
+	Thus
+	\[
+	G(F(M))\cong M.
+	\]
+	
+	Now let $(N,\alpha)\in \Desc(S/R)$. Set $M:=G(N,\alpha)$. There is a natural
+	$S$-linear map
+	\[
+	\theta:S\otimes_R M\longrightarrow N,\qquad s\otimes m\longmapsto sm.
+	\]
+	We claim that $\theta$ is an isomorphism.
+	
+	To prove this, consider the augmented twisted Amitsur complex $s(N_\bullet)$ associated to the descent datum $(N,\alpha)$, given by $s(N_n) = N \otimes_R S^{\otimes_R n}$ with $s(N_{-1}) = M$:
+	% https://q.uiver.app/#q=WzAsNixbMCwwLCIwIl0sWzEsMCwiTSJdLFsyLDAsIk4iXSxbMywwLCJOXFxvdGltZXNfUiBTIl0sWzQsMCwiTlxcb3RpbWVzX1IgU1xcb3RpbWVzX1IgUyJdLFs1LDAsIlxcY2RvdHMiXSxbMCwxXSxbMSwyLCJcXGlvdGEiXSxbMiwzLCJuXFxtYXBzdG8gXFxhbHBoYSgxXFxvdGltZXMgbikiLDIseyJvZmZzZXQiOjF9XSxbMiwzLCJuXFxtYXBzdG8gblxcb3RpbWVzIDEiLDAseyJvZmZzZXQiOi0xfV0sWzMsNF0sWzMsNCwiIiwwLHsib2Zmc2V0IjotMn1dLFszLDQsIiIsMCx7Im9mZnNldCI6Mn1dLFs0LDUsIiIsMCx7Im9mZnNldCI6LTF9XSxbNCw1LCIiLDAseyJvZmZzZXQiOi0zfV0sWzQsNSwiIiwwLHsib2Zmc2V0IjoxfV0sWzQsNSwiIiwwLHsib2Zmc2V0IjozfV1d
+	\[\begin{tikzcd}
+		0 & M & N & {N\otimes_R S} & {N\otimes_R S\otimes_R S} & \cdots
+		\arrow[from=1-1, to=1-2]
+		\arrow["\iota", from=1-2, to=1-3]
+		\arrow["{n\mapsto \alpha(1\otimes n)}"', shift right, from=1-3, to=1-4]
+		\arrow["{n\mapsto n\otimes 1}", shift left, from=1-3, to=1-4]
+		\arrow[from=1-4, to=1-5]
+		\arrow[shift left=2, from=1-4, to=1-5]
+		\arrow[shift right=2, from=1-4, to=1-5]
+		\arrow[shift left, from=1-5, to=1-6]
+		\arrow[shift left=3, from=1-5, to=1-6]
+		\arrow[shift right, from=1-5, to=1-6]
+		\arrow[shift right=3, from=1-5, to=1-6]
+	\end{tikzcd}\]
+	This is exact by construction of $M$, i.e. $H^0(s(N_\bullet)) = M$.
+	
+	Now we tensor this complex with $S\otimes_R - $ and untwist the sequence using the descent datum $\alpha$:
+	
+	% https://q.uiver.app/#q=WzAsMTAsWzAsMCwiMCJdLFsxLDAsIlNcXG90aW1lc19SIE0iXSxbMiwwLCJTXFxvdGltZXNfUk4iXSxbMywwLCJTXFxvdGltZXNfUiBOXFxvdGltZXNfUiBTIl0sWzQsMCwiU1xcb3RpbWVzX1IgTlxcb3RpbWVzX1IgU1xcb3RpbWVzX1IgUyJdLFswLDEsIjAiXSxbMSwxLCJTXFxvdGltZXNfUk0iXSxbMiwxLCJOXFxvdGltZXNfUiBTIl0sWzMsMSwiTlxcb3RpbWVzX1IgU1xcb3RpbWVzX1IgUyJdLFs0LDEsIk5cXG90aW1lc19SIFNcXG90aW1lc19SIFNcXG90aW1lc19SIFMiXSxbMCwxXSxbMSwyXSxbMiwzLCIiLDAseyJvZmZzZXQiOi0xfV0sWzIsMywiIiwwLHsib2Zmc2V0IjoxfV0sWzMsNF0sWzMsNCwiIiwwLHsib2Zmc2V0IjotMn1dLFszLDQsIiIsMCx7Im9mZnNldCI6Mn1dLFsxLDYsImlkIl0sWzUsNl0sWzYsNywiXFxwc2kiXSxbMiw3LCJcXGFscGhhIl0sWzcsOCwiIiwwLHsib2Zmc2V0IjotMX1dLFszLDgsIlxcYWxwaGFcXG90aW1lcyBpZCJdLFs4LDldLFs4LDksIiIsMCx7Im9mZnNldCI6LTJ9XSxbOCw5LCIiLDAseyJvZmZzZXQiOjJ9XSxbNCw5LCJcXGFscGhhXFxvdGltZXMgaWRcXG90aW1lcyBpZCJdLFs3LDgsIiIsMCx7Im9mZnNldCI6MX1dXQ==
+	\[\begin{tikzcd}
+		0 & {S\otimes_R M} & {S\otimes_RN} & {S\otimes_R N\otimes_R S} & {S\otimes_R N\otimes_R S\otimes_R S} \\
+		0 & {S\otimes_RM} & {N\otimes_R S} & {N\otimes_R S\otimes_R S} & {N\otimes_R S\otimes_R S\otimes_R S}
+		\arrow[from=1-1, to=1-2]
+		\arrow[from=1-2, to=1-3]
+		\arrow["id", from=1-2, to=2-2]
+		\arrow[shift left, from=1-3, to=1-4]
+		\arrow[shift right, from=1-3, to=1-4]
+		\arrow["\alpha", from=1-3, to=2-3]
+		\arrow[from=1-4, to=1-5]
+		\arrow[shift left=2, from=1-4, to=1-5]
+		\arrow[shift right=2, from=1-4, to=1-5]
+		\arrow["{\alpha\otimes id}", from=1-4, to=2-4]
+		\arrow["{\alpha\otimes id\otimes id}", from=1-5, to=2-5]
+		\arrow[from=2-1, to=2-2]
+		\arrow["\psi", from=2-2, to=2-3]
+		\arrow[shift left, from=2-3, to=2-4]
+		\arrow[shift right, from=2-3, to=2-4]
+		\arrow[from=2-4, to=2-5]
+		\arrow[shift left=2, from=2-4, to=2-5]
+		\arrow[shift right=2, from=2-4, to=2-5]
+	\end{tikzcd}\]
+
+	The morphism $\psi: S\otimes_R M \to N\otimes_R S$ factors as 
+	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJTXFxvdGltZXNfUk0iXSxbMSwwLCJTXFxvdGltZXNfUk4iXSxbMiwwLCJOXFxvdGltZXNfUlMiXSxbMCwxLCJTXFxvdGltZXNfUlxcaW90YSJdLFsxLDIsIlxcYWxwaGEiXV0=
+	\[\begin{tikzcd}
+		{S\otimes_RM} & {S\otimes_RN} & {N\otimes_RS},
+		\arrow["{S\otimes_R\iota}", from=1-1, to=1-2]
+		\arrow["\alpha", from=1-2, to=1-3]
+	\end{tikzcd}\]
+
+	where $\iota$ is the inclusion $M\subset N$. Since for all $m\in M$ we have $\alpha(1\otimes m) = m\otimes 1$, we get 
+	$\psi(s\otimes m) = \alpha(s\otimes m) = \alpha((s\otimes 1)(1\otimes m)) = (s\otimes 1)\alpha(1\otimes m) = (s\otimes 1)(m\otimes 1) = (sm)\otimes 1$ by $S\otimes_R S$-linearity of $\alpha$. Hence, this morphisms $\psi$ is given by $s\otimes m\mapsto (sm)\otimes 1$.
+	
+	Now we compare the second row to the Amitsur complex $N_\bullet$ of $N$:
+	% https://q.uiver.app/#q=WzAsMTAsWzAsMCwiMCJdLFsxLDAsIlNcXG90aW1lc19SIE0iXSxbMiwwLCJOXFxvdGltZXNfUiBTIl0sWzMsMCwiTlxcb3RpbWVzX1IgU1xcb3RpbWVzX1IgUyJdLFswLDEsIjAiXSxbMSwxLCJOIl0sWzIsMSwiTlxcb3RpbWVzX1IgUyJdLFszLDEsIk5cXG90aW1lc19SIFNcXG90aW1lc19SIFMiXSxbNCwxLCJcXGNkb3RzIl0sWzQsMCwiXFxjZG90cyJdLFswLDFdLFsxLDIsIlxccHNpIl0sWzIsMywiIiwwLHsib2Zmc2V0IjotMX1dLFsyLDMsIiIsMCx7Im9mZnNldCI6MX1dLFsxLDUsIlxcdGhldGEiXSxbNCw1XSxbNSw2XSxbMiw2LCI9Il0sWzYsNywiIiwwLHsib2Zmc2V0IjotMX1dLFszLDcsIj0iXSxbNiw3LCIiLDAseyJvZmZzZXQiOjF9XSxbNyw4XSxbNyw4LCIiLDAseyJvZmZzZXQiOi0yfV0sWzcsOCwiIiwwLHsib2Zmc2V0IjoyfV0sWzMsOV0sWzMsOSwiIiwwLHsib2Zmc2V0IjotMn1dLFszLDksIiIsMCx7Im9mZnNldCI6Mn1dLFs5LDhdXQ==
+	\[\begin{tikzcd}
+		0 & {S\otimes_R M} & {N\otimes_R S} & {N\otimes_R S\otimes_R S} & \cdots \\
+		0 & N & {N\otimes_R S} & {N\otimes_R S\otimes_R S} & \cdots
+		\arrow[from=1-1, to=1-2]
+		\arrow["\psi", from=1-2, to=1-3]
+		\arrow["\theta", from=1-2, to=2-2]
+		\arrow[shift left, from=1-3, to=1-4]
+		\arrow[shift right, from=1-3, to=1-4]
+		\arrow["{=}", from=1-3, to=2-3]
+		\arrow[from=1-4, to=1-5]
+		\arrow[shift left=2, from=1-4, to=1-5]
+		\arrow[shift right=2, from=1-4, to=1-5]
+		\arrow["{=}", from=1-4, to=2-4]
+		\arrow[from=1-5, to=2-5]
+		\arrow[from=2-1, to=2-2]
+		\arrow[from=2-2, to=2-3]
+		\arrow[shift left, from=2-3, to=2-4]
+		\arrow[shift right, from=2-3, to=2-4]
+		\arrow[from=2-4, to=2-5]
+		\arrow[shift left=2, from=2-4, to=2-5]
+		\arrow[shift right=2, from=2-4, to=2-5]
+	\end{tikzcd}\]
+	
+	The second row is the augmented Amitsur complex $N_\bullet$ of $N$.
+	By definition of $\theta$, this diagram commutes, i.e. $\psi(s\otimes m) = sm\otimes 1 = \theta(s\otimes m)\otimes 1$.
+	
+	Since $R\to S$ is faithfully flat, this Amitsur complex is exact.
+	
+	\begin{tikzcd}
+		[column sep=large] 0 \arrow[r] & S\otimes_R M \arrow[r] \arrow[d,"\theta"'] & S\otimes_R N \arrow[r,shift left] \arrow[r,shift right] \arrow[d,"\alpha^{-1}"'] & S\otimes_R S\otimes_R N \arrow[r] \arrow[d,"\beta_1"'] & \cdots \\ 0 \arrow[r] & N \arrow[r] & N\otimes_R S \arrow[r,shift left] \arrow[r,shift right] & N\otimes_R S\otimes_R S \arrow[r] & \cdots
+	\end{tikzcd}
+	
+	
+	
+	 Hence, we obtain an isomorphism
+	\[
+	S\otimes_R M \xrightarrow{\theta} H^0(N_\bullet) \cong N
+	\]
+	Moreover, under this isomorphism the canonical descent
+	datum on $S\otimes_R M$ identifies with the given descent datum $\alpha$ on
+	$N$. Hence
+	\[
+	F(G(N,\alpha))\cong (N,\alpha).
+	\]
+	
+	Therefore $F$ and $G$ are quasi-inverse equivalences.
+\end{proof}
+
+
 \begin{theorem}[Faithfully flat descent for modules]\label{thm:faithfully-flat-descent-modules}
 	(\cite[Tag 023F, 03OA]{stacks-project})
 	Let $A \to B$ be a faithfully flat morphism of rings and let $B^\bullet$
-	be the Čech nerve. Then the natural functor
-	\[
-	\Mod_A
-	\longrightarrow
-	\Totof{\Mod(B^\bullet)}
-	\]
+	be the Čech nerve as in theorem \ref{thm:faithfully-flat-descent-for-rings}. Then the natural functor
+	\begin{align*}
+		\Mod_A
+		&\longrightarrow
+		\Totof{\Mod_{B^\bullet}}\\
+		M &\mapsto \Totof{M\otimes_A B^\bullet}
+	\end{align*}
 	is an equivalence of categories.
 \end{theorem}
 
@@ -253,7 +556,7 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	Let $(N,\varphi)$ be an object of $\Totof{\Mod(B^\bullet)}$, i.e.\ a
 	$B$-module $N$ together with descent data, that is, an isomorphism
 	\[
-	\varphi : N\otimes_A B \xrightarrow{\sim} B\otimes_A N
+	\varphi : N\otimes_A B \xrightarrow{\cong} B\otimes_A N
 	\]
 	satisfying the cocycle condition
 	\[
@@ -261,7 +564,7 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	\]
 	This suffices, since descent data for modules is governed by objects,
 	isomorphisms, and a cocycle condition, i.e.\ by levels $0,1,2$ of the Čech
-	nerve. Equivalently, the cosimplicial diagram $\Mod(B^\bullet)$ takes values
+	nerve. Equivalently, the cosimplicial diagram $\Mod_{B^\bullet}$ takes values
 	in the $2$-category $\Cat$, so its totalization is already determined by the
 	truncation $\Tot_2$, and no higher coherence data is required.
 	Define the $A$-module
@@ -311,12 +614,18 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	
 	Tensoring $N_\bullet$ with $B$, we obtain a cosimplicial $B$-module
 	\[
-	B \otimes_A N_\bullet.
+	B \otimes_A N_\bullet = (B\otimes_A N \to B\otimes_A N\otimes_A B \to B\otimes_A N\otimes_A B \otimes_A B \dots)
 	\]
-	Using the descent isomorphism $\varphi$, one checks that the twisting
-	disappears after base change, and there is a canonical identification
+	Using the descent isomorphism $B\otimes_A N \xleftarrow[\cong]{\varphi} N\otimes_A B$, we obtain 
 	\[
-	B \otimes_A N_\bullet \;\cong\; B \otimes_A (M \otimes_A B^\bullet).
+	B\otimes_A N_n = B\otimes_A N \otimes_A B^{\otimes_A n} \cong N\otimes_A B \otimes B^{\otimes_A n} \cong N\otimes_A B^{\otimes_A (n+1)} \cong N_{n+1}
+	\]
+	
+	
+	
+	the twisting disappears after base change, and there is a canonical identification
+	\[
+	B \otimes_A N_\bullet \;\cong\; (B \otimes_A M) \otimes_A B^\bullet.
 	\]
 	In particular, $B \otimes_A N_\bullet$ identifies with the Amitsur complex
 	of the $B$-module $B\otimes_A M$.
@@ -342,6 +651,179 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	\medskip
 	
 	Thus every descent datum is effective, and the functor
+	\[
+	\Mod_A \longrightarrow \Totof{\Mod(B^\bullet)}
+	\]
+	is essentially surjective.
+\end{proof}
+
+\begin{proof}
+	\medskip
+	\noindent
+	\textbf{Step 2: Essential surjectivity.}
+	Let $(N,\varphi)$ be an object of $\Totof{\Mod(B^\bullet)}$, i.e.\ a
+	$B$-module $N$ together with descent data, that is, an isomorphism
+	\[
+	\varphi : N\otimes_A B \xrightarrow{\sim} B\otimes_A N
+	\]
+	satisfying the cocycle condition.
+	
+	Define the $A$-module
+	\[
+	M := \{ n \in N \mid 1 \otimes n = \varphi(n \otimes 1) \}.
+	\]
+	Equivalently, $M$ is the equalizer
+	\[
+	\begin{tikzcd}
+		M \arrow[r,"\psi"] & N \arrow[r,shift left,"n\mapsto 1\otimes n"] \arrow[r,shift right,"\;n\mapsto \varphi(n\otimes 1)"'] & B\otimes_A N.
+	\end{tikzcd}
+	\]
+	In particular, $M \cong H^0(N_\bullet)$, where $N_\bullet$ denotes the
+	twisted Amitsur complex associated to $(N,\varphi)$.
+	
+	\medskip
+	
+	We claim that the natural map
+	\[
+	\alpha : B \otimes_A M \longrightarrow N, \qquad b\otimes m \mapsto b\cdot \psi(m),
+	\]
+	is an isomorphism.
+	
+	\medskip
+	
+	Consider the two cosimplicial $A$-modules
+	\[
+	M_\bullet := M \otimes_A B^\bullet,
+	\qquad
+	N_\bullet := \big(N \to N\otimes_A B \to N\otimes_A B\otimes_A B \to \cdots\big),
+	\]
+	where $M_\bullet$ is the Amitsur complex of $M$ and $N_\bullet$ is the
+	twisted Amitsur complex associated to $(N,\varphi)$ (\cite[Tag 023F]{stacks-project}).
+	
+	By construction of $M$ as the equalizer of the two maps
+	\[
+	N \rightrightarrows B\otimes_A N,
+	\]
+	the inclusion $\psi : M \to N$ induces a morphism of cosimplicial $A$-modules
+	\[
+	\theta_\bullet : M_\bullet \longrightarrow N_\bullet,
+	\]
+	which in degree $n$ is given by
+	\[
+	\theta_n :
+	M \otimes_A B^{\otimes_A n}
+	\longrightarrow
+	N \otimes_A B^{\otimes_A n},
+	\qquad
+	m \otimes b_1 \otimes \cdots \otimes b_n
+	\mapsto
+	\psi(m) \otimes b_1 \otimes \cdots \otimes b_n.
+	\]
+	
+	\medskip
+	
+	Tensoring with $B$ over $A$, we obtain a morphism of cosimplicial
+	$B$-modules
+	\[
+	B \otimes_A \theta_\bullet :
+	B \otimes_A M_\bullet \longrightarrow B \otimes_A N_\bullet.
+	\]
+	
+	We now show that this morphism is an isomorphism.
+	
+	\medskip
+	
+	First observe that in each degree $n$ we have
+	\[
+	B \otimes_A N_n
+	=
+	B \otimes_A N \otimes_A B^{\otimes_A n}.
+	\]
+	Using the descent isomorphism
+	\[
+	\varphi : N \otimes_A B \xrightarrow{\sim} B \otimes_A N,
+	\]
+	we obtain an identification
+	\[
+	B \otimes_A N \;\cong\; N \otimes_A B,
+	\]
+	and hence
+	\[
+	B \otimes_A N_n
+	\;\cong\;
+	N \otimes_A B^{\otimes_A (n+1)}.
+	\]
+	Under this identification, the coface maps of the twisted complex
+	become the standard coface maps of the Amitsur complex. In other words,
+	after base change along $A \to B$, the twisting given by $\varphi$
+	disappears.
+	
+	Thus the cosimplicial $B$-module $B \otimes_A N_\bullet$ identifies
+	with the Amitsur complex.
+	
+	\medskip
+	
+	On the other hand,
+	\[
+	B \otimes_A M_\bullet
+	=
+	B \otimes_A (M \otimes_A B^\bullet)
+	\cong
+	(B \otimes_A M) \otimes_A B^\bullet,
+	\]
+	which is the ordinary Amitsur complex of the $B$-module $B \otimes_A M$.
+	
+	\medskip
+	
+	Using the description of $M$ as the equalizer of the two maps
+	\[
+	N \rightrightarrows B\otimes_A N,
+	\]
+	one checks that the morphism
+	\[
+	B \otimes_A \theta_\bullet :
+	(B \otimes_A M) \otimes_A B^\bullet
+	\longrightarrow
+	B \otimes_A N_\bullet
+	\]
+	identifies these two Amitsur complexes. Hence
+	\[
+	B \otimes_A \theta_\bullet
+	\]
+	is an isomorphism of cosimplicial $B$-modules.
+	
+	\medskip
+	
+	Since $A \to B$ is faithfully flat, the Amitsur complex
+	$M_\bullet$ is exact, and flatness implies that
+	$B \otimes_A M_\bullet$ is exact. Therefore
+	\[
+	B \otimes_A N_\bullet
+	\]
+	is exact as well.
+	
+	By faithful flatness, exactness descends along $A \to B$, so
+	$N_\bullet$ is exact.
+	
+	\medskip
+	
+	Taking $H^0$, we obtain
+	\[
+	M \cong H^0(N_\bullet).
+	\]
+	Comparing degree $0$ of the isomorphism
+	\[
+	B \otimes_A M_\bullet \xrightarrow{\sim} B \otimes_A N_\bullet,
+	\]
+	we obtain that the map
+	\[
+	\alpha : B \otimes_A M \longrightarrow N
+	\]
+	is an isomorphism.
+	
+	\medskip
+	
+	Thus every descent datum $(N,\varphi)$ is effective, and the functor
 	\[
 	\Mod_A \longrightarrow \Totof{\Mod(B^\bullet)}
 	\]
