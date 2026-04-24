@@ -239,6 +239,7 @@ which underlies the Čech nerve and the notion of totalization.
 	\end{tikzcd}\]
 
 	Here we applied $d^0, d^1$ and $d^2$ to the morphism $\alpha$ and impliclty used the simplicial identities for the cofaces $d^i$.
+	
 	All higher compatibility conditions (in degrees $\ge 3$) are automatic,
 	because in a groupoid all higher diagrams commute uniquely once the
 	2-dimensional compatibility is satisfied.
@@ -269,7 +270,7 @@ which underlies the Čech nerve and the notion of totalization.
 	truncated totalization $\Tot_2(F(U_\bullet))$, hence consists of:
 	\begin{enumerate}
 		\item an object $\xi \in F(U)$,
-		\item an isomorphism between the two pullbacks of $\xi$ to
+		\item an isomorphism $\alpha$ between the two pullbacks of $\xi$ to
 		$U\times_X U$,
 		\item a cocycle condition on $U\times_X U\times_X U$.
 	\end{enumerate}
@@ -373,48 +374,85 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	complex.
 \end{remark}
 
+\begin{proposition}[The totalization as descent data]
+	\label{prop:tot-mod-desc}
+	Let $R\to S$ be a ring homomorphism and set
+	\[
+	S^n:=\underbrace{S\otimes_R\cdots\otimes_R S}_{n+1\text{ factors}}.
+	\]
+	The cosimplicial $R$-algebra $S^\bullet$ induces a cosimplicial diagram of
+	categories
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXE1vZF9TIl0sWzEsMCwiXFxNb2Rfe1NcXG90aW1lc19SIFN9Il0sWzIsMCwiXFxNb2Rfe1NcXG90aW1lc19SIFNcXG90aW1lc19SIFN9Il0sWzMsMCwiXFxjZG90cyJdLFswLDEsIiIsMCx7Im9mZnNldCI6LTF9XSxbMSwyLCIiLDAseyJvZmZzZXQiOjJ9XSxbMSwyLCIiLDAseyJvZmZzZXQiOi0yfV0sWzAsMSwiIiwwLHsib2Zmc2V0IjoxfV0sWzEsMl0sWzIsM11d
+	\[\begin{tikzcd}
+		{\Mod_S} & {\Mod_{S\otimes_R S}} & {\Mod_{S\otimes_R S\otimes_R S}} & \cdots
+		\arrow[shift left, from=1-1, to=1-2]
+		\arrow[shift right, from=1-1, to=1-2]
+		\arrow[shift right=2, from=1-2, to=1-3]
+		\arrow[shift left=2, from=1-2, to=1-3]
+		\arrow[from=1-2, to=1-3]
+		\arrow[from=1-3, to=1-4]
+	\end{tikzcd}\]
+	Then there is a natural equivalence
+	\[
+	\Tot(\Mod_{S^\bullet})\cong \Desc(S/R),
+	\]
+	where $\Desc(S/R)$ is the category of descent data for modules relative to
+	$R\to S$.
+\end{proposition}
 
-\begin{lemma}[Faithfully flat descent for modules]
-	\label{lem:ff-descent-modules}
-	Let $\varphi:R\to S$ be a faithfully flat ring homomorphism.
-	
-	Define $\Desc(S/R)$ to be the category whose objects are pairs $(N,\alpha)$
-	consisting of an $S$-module $N$ and an isomorphism of
-	$S\otimes_R S$-modules
+\begin{proof}
+	An object of the totalization is an object
 	\[
-	\alpha:\pi_1^*N \xrightarrow{\sim} \pi_2^*N,
+	N\in \Mod_S
 	\]
-	where
+	together with an isomorphism between its two pullbacks to
+	$\Mod_{S\otimes_R S}$,
 	\[
-	\pi_1,\pi_2:S\to S\otimes_R S
+	\alpha:\pi_1^*N\xrightarrow{\sim}\pi_2^*N,
 	\]
-	are the two canonical maps, such that on $S\otimes_R S\otimes_R S$ one has
-	the cocycle condition
+	satisfying the compatibility condition after pulling back to
+	$S\otimes_R S\otimes_R S$. Explicitly this condition is
 	\[
 	\pi_{23}^*(\alpha)\circ \pi_{12}^*(\alpha)=\pi_{13}^*(\alpha).
 	\]
-	Morphisms in $\Desc(S/R)$ are $S$-linear maps compatible with the descent
-	isomorphisms.
+	This is precisely an object of $\Desc(S/R)$.
 	
-	Then the functor
+	Similarly, a morphism in the totalization is an $S$-linear map
+	$f:N\to N'$ such that the square
 	\[
-	\Mod_R \longrightarrow \Desc(S/R),\qquad
-	M\longmapsto (S\otimes_R M,\alpha_M)
+	\begin{tikzcd}
+		\pi_1^*N \arrow[r,"\alpha"] \arrow[d,"\pi_1^*f"'] &
+		\pi_2^*N \arrow[d,"\pi_2^*f"] \\
+		\pi_1^*N' \arrow[r,"\alpha'"'] &
+		\pi_2^*N'
+	\end{tikzcd}
 	\]
-	is an equivalence of categories, where $\alpha_M$ is the canonical
-	identification
+	commutes. This is exactly the definition of a morphism in $\Desc(S/R)$.
+	Hence
 	\[
-	(S\otimes_R M)\otimes_{R,\pi_1}(S\otimes_R S)
-	\cong
-	(S\otimes_R M)\otimes_{R,\pi_2}(S\otimes_R S).
+	\Tot(\Mod_{S^\bullet})\simeq \Desc(S/R).
 	\]
-	
-	An inverse functor is given by
+\end{proof}
+
+
+\begin{theorem}[Faithfully flat descent for modules]
+	\label{thm:faithfully-flat-descent-modules}
+	(\cite[Theorem 3.16]{khan2022stacks})
+	Let $R\to S$ be faithfully flat. Then the canonical functor
 	\[
-	(N,\alpha)\longmapsto
-	\{\,n\in N \mid \alpha(1\otimes n)=n\otimes 1\,\}.
+	\Mod_R\longrightarrow \Tot(\Mod_{S^\bullet})
 	\]
-\end{lemma}
+	is an equivalence of categories. Under the identification
+	\[
+	\Tot(\Mod_{S^\bullet})\simeq \Desc(S/R),
+	\]
+	this functor is given by
+	\[
+	M\longmapsto (S\otimes_R M,\alpha_M),
+	\]
+	where $\alpha_M$ is the canonical descent datum.
+\end{theorem}
+
 
 \begin{proof}
 	For an $R$-module $M$, set
@@ -602,332 +640,6 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	
 	Therefore $F$ and $G$ are quasi-inverse equivalences.
 \end{proof}
-
-
-\begin{theorem}[Faithfully flat descent for modules]\label{thm:faithfully-flat-descent-modules}
-	(\cite[Tag 023F, 03OA]{stacks-project})
-	Let $A \to B$ be a faithfully flat morphism of rings and let $B^\bullet$
-	be the Čech nerve as in theorem \ref{thm:faithfully-flat-descent-for-rings}. Then the natural functor
-	\begin{align*}
-		\Mod_A
-		&\longrightarrow
-		\Totof{\Mod_{B^\bullet}}\\
-		M &\mapsto \Totof{M\otimes_A B^\bullet}
-	\end{align*}
-	is an equivalence of categories.
-\end{theorem}
-
-\begin{proof}
-	We divide the proof into two steps.
-	
-	\medskip
-	\textbf{Step 1: Fully faithfulness.}
-	Let $M$ be an $A$-module. Consider the associated cosimplicial
-	$B$-module
-	\[
-	M \otimes_A B^\bullet.
-	\]
-	The Amitsur complex of $M$ is the complex
-	\[
-		M \to M \otimes_A B \to M \otimes_A B \otimes_A B \to \cdots
-	\]
-	obtained from this cosimplicial object.
-	
-	Since $A \to B$ is faithfully flat, the Amitsur complex is exact in positive
-	degrees and has $H^0 \cong M$.
-	
-	It follows that
-	\[
-	M \cong \Totof{M \otimes_A B^\bullet}.
-	\]
-	Thus $M$ can be recovered from its pullback to $B^\bullet$, which shows that
-	the functor
-	\[
-	\Mod_A \to \Totof{\Mod(B^\bullet)}
-	\]
-	is fully faithful.
-	
-	\medskip
-	
-	\noindent	
-	\textbf{Step 2: Essential surjectivity.}
-	Let $(N,\varphi)$ be an object of $\Totof{\Mod(B^\bullet)}$, i.e.\ a
-	$B$-module $N$ together with descent data, that is, an isomorphism
-	\[
-	\varphi : N\otimes_A B \xrightarrow{\cong} B\otimes_A N
-	\]
-	satisfying the cocycle condition
-	\[
-	d^0(N) \cong_\varphi d^1(N).
-	\]
-	This suffices, since descent data for modules is governed by objects,
-	isomorphisms, and a cocycle condition, i.e.\ by levels $0,1,2$ of the Čech
-	nerve. Equivalently, the cosimplicial diagram $\Mod_{B^\bullet}$ takes values
-	in the $2$-category $\Cat$, so its totalization is already determined by the
-	truncation $\Tot_2$, and no higher coherence data is required.
-	Define the $A$-module
-	\[
-	M := \{ n \in N \mid 1 \otimes n = \varphi(n \otimes 1) \}.
-	\]
-	Equivalently, $M$ is the equalizer
-	\[
-	\begin{tikzcd}
-		M \arrow[r,"\psi"] & N \arrow[r,shift left,"n\mapsto n\otimes 1"] \arrow[r,shift right,"\;n\mapsto \varphi(n\otimes 1)"'] & N\otimes_A B.
-	\end{tikzcd}
-	\]
-	
-	We claim that the natural map
-	\[
-	B \otimes_A M \longrightarrow N, \qquad b\otimes m \mapsto b\cdot \psi(m),
-	\]
-	is an isomorphism.
-	
-	\medskip
-	
-	Consider the two cosimplicial modules
-	\[
-	M_\bullet := M \otimes_A B^\bullet,
-	\qquad
-	N_\bullet := \big(N \to N\otimes_A B \to N\otimes_A B\otimes_A B \to \cdots\big),
-	\]
-	where $M_\bullet$ is the Amitsur complex of $M$, (\cite[Tag 03OA]{stacks-project}), and $N_\bullet$ is the
-	twisted Amitsur complex associated to $(N,\varphi)$ (\cite[Tag 023F]{stacks-project}), with coface maps
-	given as follows:
-	\[
-	\begin{aligned}
-		\delta^0(n) &= 1\otimes n, &
-		\delta^1(n) &= \varphi(n\otimes 1), \\
-		\delta^0(n\otimes b) &= 1\otimes n\otimes b, &
-		\delta^1(n\otimes b) &= n\otimes 1\otimes b, &
-		\delta^2(n\otimes b) &= (\varphi\otimes \mathrm{id})(n\otimes b\otimes 1),
-	\end{aligned}
-	\]
-	and similarly in higher degrees. The cocycle condition on $\varphi$
-	ensures that these maps satisfy the cosimplicial identities.
-	
-	By construction of $M$ as the equalizer, we have
-	\[
-	M \cong H^0(N_\bullet).
-	\]
-	
-	Tensoring $N_\bullet$ with $B$, we obtain a cosimplicial $B$-module
-	\[
-	B \otimes_A N_\bullet = (B\otimes_A N \to B\otimes_A N\otimes_A B \to B\otimes_A N\otimes_A B \otimes_A B \dots)
-	\]
-	Using the descent isomorphism $B\otimes_A N \xleftarrow[\cong]{\varphi} N\otimes_A B$, we obtain 
-	\[
-	B\otimes_A N_n = B\otimes_A N \otimes_A B^{\otimes_A n} \cong N\otimes_A B \otimes B^{\otimes_A n} \cong N\otimes_A B^{\otimes_A (n+1)} \cong N_{n+1}
-	\]
-	
-	
-	
-	the twisting disappears after base change, and there is a canonical identification
-	\[
-	B \otimes_A N_\bullet \;\cong\; (B \otimes_A M) \otimes_A B^\bullet.
-	\]
-	In particular, $B \otimes_A N_\bullet$ identifies with the Amitsur complex
-	of the $B$-module $B\otimes_A M$.
-	
-	Since $A \to B$ is faithfully flat, the Amitsur complex of $M$ is exact,
-	hence $M_\bullet$ is exact. Flatness implies that tensoring with $B$
-	preserves exactness, so $B \otimes_A M_\bullet$ is exact. Therefore
-	\[
-	B \otimes_A N_\bullet
-	\]
-	is exact.
-	
-	Again by faithful flattness, $N_\bullet$ itself is exact.
-	
-	Taking $H^0$, we obtain
-	\[
-	B \otimes_A M \;\cong\; H^0(B \otimes_A N_\bullet)
-	\;\cong\; H^0(N_\bullet)
-	\;\cong\; N,
-	\]
-	which proves that the map $B \otimes_A M \to N$ is an isomorphism.
-	
-	\medskip
-	
-	Thus every descent datum is effective, and the functor
-	\[
-	\Mod_A \longrightarrow \Totof{\Mod(B^\bullet)}
-	\]
-	is essentially surjective.
-\end{proof}
-
-\begin{proof}
-	\medskip
-	\noindent
-	\textbf{Step 2: Essential surjectivity.}
-	Let $(N,\varphi)$ be an object of $\Totof{\Mod(B^\bullet)}$, i.e.\ a
-	$B$-module $N$ together with descent data, that is, an isomorphism
-	\[
-	\varphi : N\otimes_A B \xrightarrow{\sim} B\otimes_A N
-	\]
-	satisfying the cocycle condition.
-	
-	Define the $A$-module
-	\[
-	M := \{ n \in N \mid 1 \otimes n = \varphi(n \otimes 1) \}.
-	\]
-	Equivalently, $M$ is the equalizer
-	\[
-	\begin{tikzcd}
-		M \arrow[r,"\psi"] & N \arrow[r,shift left,"n\mapsto 1\otimes n"] \arrow[r,shift right,"\;n\mapsto \varphi(n\otimes 1)"'] & B\otimes_A N.
-	\end{tikzcd}
-	\]
-	In particular, $M \cong H^0(N_\bullet)$, where $N_\bullet$ denotes the
-	twisted Amitsur complex associated to $(N,\varphi)$.
-	
-	\medskip
-	
-	We claim that the natural map
-	\[
-	\alpha : B \otimes_A M \longrightarrow N, \qquad b\otimes m \mapsto b\cdot \psi(m),
-	\]
-	is an isomorphism.
-	
-	\medskip
-	
-	Consider the two cosimplicial $A$-modules
-	\[
-	M_\bullet := M \otimes_A B^\bullet,
-	\qquad
-	N_\bullet := \big(N \to N\otimes_A B \to N\otimes_A B\otimes_A B \to \cdots\big),
-	\]
-	where $M_\bullet$ is the Amitsur complex of $M$ and $N_\bullet$ is the
-	twisted Amitsur complex associated to $(N,\varphi)$ (\cite[Tag 023F]{stacks-project}).
-	
-	By construction of $M$ as the equalizer of the two maps
-	\[
-	N \rightrightarrows B\otimes_A N,
-	\]
-	the inclusion $\psi : M \to N$ induces a morphism of cosimplicial $A$-modules
-	\[
-	\theta_\bullet : M_\bullet \longrightarrow N_\bullet,
-	\]
-	which in degree $n$ is given by
-	\[
-	\theta_n :
-	M \otimes_A B^{\otimes_A n}
-	\longrightarrow
-	N \otimes_A B^{\otimes_A n},
-	\qquad
-	m \otimes b_1 \otimes \cdots \otimes b_n
-	\mapsto
-	\psi(m) \otimes b_1 \otimes \cdots \otimes b_n.
-	\]
-	
-	\medskip
-	
-	Tensoring with $B$ over $A$, we obtain a morphism of cosimplicial
-	$B$-modules
-	\[
-	B \otimes_A \theta_\bullet :
-	B \otimes_A M_\bullet \longrightarrow B \otimes_A N_\bullet.
-	\]
-	
-	We now show that this morphism is an isomorphism.
-	
-	\medskip
-	
-	First observe that in each degree $n$ we have
-	\[
-	B \otimes_A N_n
-	=
-	B \otimes_A N \otimes_A B^{\otimes_A n}.
-	\]
-	Using the descent isomorphism
-	\[
-	\varphi : N \otimes_A B \xrightarrow{\sim} B \otimes_A N,
-	\]
-	we obtain an identification
-	\[
-	B \otimes_A N \;\cong\; N \otimes_A B,
-	\]
-	and hence
-	\[
-	B \otimes_A N_n
-	\;\cong\;
-	N \otimes_A B^{\otimes_A (n+1)}.
-	\]
-	Under this identification, the coface maps of the twisted complex
-	become the standard coface maps of the Amitsur complex. In other words,
-	after base change along $A \to B$, the twisting given by $\varphi$
-	disappears.
-	
-	Thus the cosimplicial $B$-module $B \otimes_A N_\bullet$ identifies
-	with the Amitsur complex.
-	
-	\medskip
-	
-	On the other hand,
-	\[
-	B \otimes_A M_\bullet
-	=
-	B \otimes_A (M \otimes_A B^\bullet)
-	\cong
-	(B \otimes_A M) \otimes_A B^\bullet,
-	\]
-	which is the ordinary Amitsur complex of the $B$-module $B \otimes_A M$.
-	
-	\medskip
-	
-	Using the description of $M$ as the equalizer of the two maps
-	\[
-	N \rightrightarrows B\otimes_A N,
-	\]
-	one checks that the morphism
-	\[
-	B \otimes_A \theta_\bullet :
-	(B \otimes_A M) \otimes_A B^\bullet
-	\longrightarrow
-	B \otimes_A N_\bullet
-	\]
-	identifies these two Amitsur complexes. Hence
-	\[
-	B \otimes_A \theta_\bullet
-	\]
-	is an isomorphism of cosimplicial $B$-modules.
-	
-	\medskip
-	
-	Since $A \to B$ is faithfully flat, the Amitsur complex
-	$M_\bullet$ is exact, and flatness implies that
-	$B \otimes_A M_\bullet$ is exact. Therefore
-	\[
-	B \otimes_A N_\bullet
-	\]
-	is exact as well.
-	
-	By faithful flatness, exactness descends along $A \to B$, so
-	$N_\bullet$ is exact.
-	
-	\medskip
-	
-	Taking $H^0$, we obtain
-	\[
-	M \cong H^0(N_\bullet).
-	\]
-	Comparing degree $0$ of the isomorphism
-	\[
-	B \otimes_A M_\bullet \xrightarrow{\sim} B \otimes_A N_\bullet,
-	\]
-	we obtain that the map
-	\[
-	\alpha : B \otimes_A M \longrightarrow N
-	\]
-	is an isomorphism.
-	
-	\medskip
-	
-	Thus every descent datum $(N,\varphi)$ is effective, and the functor
-	\[
-	\Mod_A \longrightarrow \Totof{\Mod(B^\bullet)}
-	\]
-	is essentially surjective.
-\end{proof}
-
 
 \begin{proposition}[Descent for affine schemes]
 	Let $U \to X$ be a faithfully flat morphism of affine schemes and let
