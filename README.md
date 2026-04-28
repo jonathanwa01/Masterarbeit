@@ -17,10 +17,6 @@ This script will automatically compile the LaTeX sources and generate the final 
 ## Project Structure
 
 * `src/` – Main LaTeX source files
-* `figures/` – Images and diagrams used in the thesis
-* `references/` – Bibliography files
-* `build.sh` – Script to compile the thesis PDF
-* `output/` – Generated PDF and build artifacts
 
 ## Requirements
 
