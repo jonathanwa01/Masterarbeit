@@ -193,8 +193,10 @@ which underlies the Čech nerve and the notion of totalization.
 	by the truncated totalization over $\Delta_{\le 2}$, see \cite[][Propoition 2.8]{khan2022stacks}.
 \end{remark}
 
+TODO: For strict $2$-cateogries
 \begin{lemma}[Truncated descent for sets and groupoids]
-	Let $X^\bullet : \Delta \to \mathcal{C}$ be a cosimplicial object.
+	\label{lem:truncated-tot-for-stric-n-cats}
+	Let $X^\bullet : \Delta \to \mathcal{C}$ be a cosimplicial object in a category $\mathcal{C}$
 	
 	\begin{enumerate}
 		\item If $\mathcal{C} = \Set$, then the natural map
@@ -416,7 +418,7 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	\[
 	\pi_{23}^*(\alpha)\circ \pi_{12}^*(\alpha)=\pi_{13}^*(\alpha).
 	\]
-	Under the identification $\pi_1^*N \cong N\otimes_R S$ and $\pi_2^*N \cong S\otimes_R N$ the $S\otimes_R S$, $\alpha$ is precisely an $S\times_R S$-linear morphism $N\otimes_R S\to S\otimes_R N$ satisfying the cocycle compatibility over $S\otimes_R S\otimes_R S$.
+	Under the identification $\pi_1^*N \cong N\otimes_R S$ and $\pi_2^*N \cong S\otimes_R N$ as $S\otimes_R S$-modules, $\alpha$ is precisely an $S\times_R S$-linear morphism $N\otimes_R S\to S\otimes_R N$ satisfying the cocycle compatibility over $S\otimes_R S\otimes_R S$.
 	This is precisely an object of $\Desc(S/R)$.
 	
 	Similarly, a morphism in the totalization is an $S$-linear map
@@ -436,6 +438,9 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	\]
 \end{proof}
 
+\begin{remark}
+	Since $\Mod_{S^\bullet}$ takes values in the strict $2$-category $\Cat$, by \ref{lem:truncated-tot-for-stric-n-cats} the totalization is equivalent to the $2$-truncated totalization, i.e. the descent category $\Desc$.
+\end{remark}
 
 \begin{theorem}[Faithfully flat descent for modules]
 	\label{thm:faithfully-flat-descent-modules}
@@ -524,7 +529,7 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 		\arrow[shift right, from=1-5, to=1-6]
 		\arrow[shift right=3, from=1-5, to=1-6]
 	\end{tikzcd}\]
-	This is exact by construction of $M$ and fully faithfulness of $R\to S$, i.e. $H^0(s(N_\bullet)) = M$.
+	This is exact by construction of $M$ and faithfully flatness of $R\to S$, i.e. $H^0(s(N_\bullet)) = M$.
 	
 	Now we tensor this complex with $S\otimes_R - $ and untwist the sequence using the descent datum $\alpha$:
 	
@@ -857,7 +862,7 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	flat, descent for quasi-coherent sheaves over this affine fpqc cover reduces
 	to faithfully flat descent for modules (Thm \ref{thm:faithfully-flat-descent-modules}):
 	\[
-	\Mod_A \cong \Tot\big(\Mod(B^\bullet)\big),
+	\Mod_A \cong \Tot\big(\Mod_{B^\bullet}\big),
 	\]
 	where $B=\prod_i B_i$ and $B^\bullet$ is the associated Amitsur-Cech nerve.
 	
