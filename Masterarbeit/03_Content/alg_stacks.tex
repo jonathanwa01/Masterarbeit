@@ -68,7 +68,7 @@ This denotes that $\zeta$ lies over $U$ and $\phi$ lies over $f$, i.e. $p_\mathc
 \end{proposition}
 
 \begin{proof}
-	One direction is obvious, since $p_\Cat{F}$ is a functor. For the other direction consider the following diagram:
+	One direction is obvious, since $p_\mathcal{F}$ is a functor. For the other direction consider the following diagram:
 	% https://q.uiver.app/#q=WzAsNixbMCwwLCJYXzEiXSxbMiwwLCJYXzEiXSxbMSwxLCJYXzIiXSxbMCwyLCJCXzEiXSxbMSwzLCJCXzIiXSxbMiwyLCJCXzEiXSxbMyw0LCJmXnstMX0iLDJdLFs0LDUsImYiLDJdLFszLDUsImlkIiwwLHsibGFiZWxfcG9zaXRpb24iOjgwfV0sWzAsMSwiaWQiXSxbMiwxLCJcXHBoaSIsMl0sWzIsNCwiIiwxLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dLFsxLDUsIiIsMSx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbMCwzLCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzAsMiwiXFxwaGleey0xfSIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
 	\[\begin{tikzcd}
 		{X_1} && {X_1} \\
@@ -113,7 +113,7 @@ This denotes that $\zeta$ lies over $U$ and $\phi$ lies over $f$, i.e. $p_\mathc
 \end{proof}
 
 \begin{corollary}
-	Let $\Cat{F}\to \Cat{C}$ be a category fibred in groupoids. Then the fibres $\Cat{F}(B)$ of $\Cat{F}$ over every object $B\in\CatC$ is a groupoid.
+	Let $\mathcal{F}\to \mathcal{C}$ be a category fibred in groupoids. Then the fibres $\mathcal{F}(B)$ of $\mathcal{F}$ over every object $B\in\CatC$ is a groupoid.
 \end{corollary}
 
 \begin{definition}
@@ -235,7 +235,7 @@ or sheaves valued in $\infty$-groupoids.
 		\begin{align*}
 			Isom_U(X,Y):(\CatC/U)^{op} &\to\Set \\
 			(g:U'\to U) &\mapsto
-			Isom_{\Cat{F}(U')}(g^*X,g^*Y)
+			Isom_{\mathcal{F}(U')}(g^*X,g^*Y)
 		\end{align*}
 	
 		is a sheaf on the slice site $(\CatC/U,J_U)$.
@@ -303,10 +303,16 @@ or sheaves valued in $\infty$-groupoids.
 	In particular, stacks are precisely \(2\)-sheaves: they satisfy descent with
 	values in groupoids, and this descent is completely determined by the first
 	three levels
-	\[
-	U,\qquad U\times_X U,\qquad U\times_X U\times_X U
-	\]
-	of the \v{C}ech nerve.
+	% https://q.uiver.app/#q=WzAsMyxbMiwwLCJVIl0sWzEsMCwiVVxcdGltZXNfWCBVIl0sWzAsMCwiVVxcdGltZXNfWFVcXHRpbWVzX1hVIl0sWzIsMV0sWzIsMSwiIiwyLHsib2Zmc2V0IjotMn1dLFsyLDEsIiIsMSx7Im9mZnNldCI6Mn1dLFsxLDAsIiIsMSx7Im9mZnNldCI6LTF9XSxbMSwwLCIiLDEseyJvZmZzZXQiOjF9XV0=
+	\[\begin{tikzcd}
+		{U\times_XU\times_XU} & {U\times_X U} & U
+		\arrow[from=1-1, to=1-2]
+		\arrow[shift left=2, from=1-1, to=1-2]
+		\arrow[shift right=2, from=1-1, to=1-2]
+		\arrow[shift left, from=1-2, to=1-3]
+		\arrow[shift right, from=1-2, to=1-3]
+	\end{tikzcd}\]
+	of the Cech nerve.
 \end{proposition}
 
 \begin{proof}
@@ -381,11 +387,6 @@ or sheaves valued in $\infty$-groupoids.
 	This fits perfectly into the next proposition.
 \end{remark}
 
-\begin{lemma}[Products ald pullbacks of stacks]
-	\cite[][04TD]{stacks-project}
-	The category of stacks over a base scheme $S$ is closed under products and pullbacks.
-\end{lemma}
-
 
 \begin{lemma}[Products and pullbacks of stacks]
 	\cite[][04TD]{stacks-project}
@@ -424,7 +425,7 @@ or sheaves valued in $\infty$-groupoids.
 	(\cite[][Tag 036X]{stacks-project})
 	Let \(\mathcal{X}\) be an algebraic stack over \(S\). The inertia stack of \(\mathcal{X}\), denoted
 	\[
-	I_{\mathcal X},
+	\mathcal{I}_{\mathcal X},
 	\]
 	is the stack over \((\SchOver{S})_{\mathrm{fppf}}\) defined as follows:
 	
@@ -451,14 +452,25 @@ or sheaves valued in $\infty$-groupoids.
 \begin{lemma}
 	Let $\mathcal X$ be an algebraic stack over $S$. Then there is an isomorphism of stacks
 	\[
-	I_{\mathcal X}
+	\mathcal{I}_{\mathcal X}
 	\cong
 	\mathcal X \times_{\mathcal X \times \mathcal X} \mathcal X,
 	\]
 	where both morphisms $\mathcal X \to \mathcal X \times \mathcal X$ are equal to the diagonal
 	\[
-	\Delta_{\mathcal X} : \mathcal X \to \mathcal X \times \mathcal X.
+	\Delta_{\mathcal X} : \mathcal X \to \mathcal X \times \mathcal X,
 	\]
+	i.e. the following diagram is a 2-pullback:
+	% https://q.uiver.app/#q=WzAsNCxbMCwxLCJcXG1hdGhjYWx7WH0iXSxbMSwxLCJcXG1hdGhjYWx7WH1cXHRpbWVzIFxcbWF0aGNhbHtYfSJdLFsxLDAsIlxcbWF0aGNhbHtYfSJdLFswLDAsIlxcbWF0aGNhbHtJfV9cXG1hdGhjYWx7WH0iXSxbMCwxLCJcXERlbHRhIiwyXSxbMiwxLCJcXERlbHRhIl0sWzMsMF0sWzMsMl0sWzMsMSwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
+	\[\begin{tikzcd}
+		{\mathcal{I}_\mathcal{X}} & {\mathcal{X}} \\
+		{\mathcal{X}} & {\mathcal{X}\times \mathcal{X}}
+		\arrow[from=1-1, to=1-2]
+		\arrow[from=1-1, to=2-1]
+		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+		\arrow["\Delta", from=1-2, to=2-2]
+		\arrow["\Delta"', from=2-1, to=2-2]
+	\end{tikzcd}\]
 \end{lemma}
 
 \begin{proof}
