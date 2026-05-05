@@ -236,17 +236,13 @@ TODO: For strict $2$-cateogries
 	totalizations stabilize at level $n+1$.
 \end{remark}
 
-\begin{example}
-	Let $A\to B$ be a ring morphism and let $M$ be a $B$ module. Consider 
-\end{example}
-
 \begin{definition}[Descent datum]
-	Let $(\CatC, \mathcal{J})$ be a site, $F: \CatC\to \Cat$ a pseudo functor and $U \to X$ be a covering. A descent datum for $F$ along $U \to X$ consists of
+	Let $\CatC$ be a category with pullbacks, $F: \CatC^\op\to \Cat$ a pseudo functor and $U \to X$ a morphism. A descent datum for $F$ along $U \to X$ consists of
 	\begin{enumerate}
 		\item an object $x\in F(U)$,
-		\item an isomorphism $\alpha:d_0(x) \xrightarrow{\sim} d_1(x)$ in $F(U\times_X U))$ between two pullbacks of $x$ to
-		$U\times_X U$
-		\item a cocycle condition $d_2(\alpha)\circ d_0(\alpha) = d_1(\alpha)$ in $F(U\times_X U\times_X U)$, i.e. the following commutes:
+		\item an isomorphism $\alpha:d^0(x) \xrightarrow{\sim} d^1(x)$ in $F(U\times_X U))$ between two pullbacks of $x$ to
+		$U\times_X U$, such that $s^0(\alpha) = id_\alpha$
+		\item a cocycle condition $d^2(\alpha)\circ d^0(\alpha) = d^1(\alpha)$ in $F(U\times_X U\times_X U)$, i.e. the following commutes:
 		% https://q.uiver.app/#q=WzAsMyxbMCwxLCJkXjBkXjAoeCkiXSxbMiwxLCJkXjFkXjEoeCkiXSxbMSwwLCJkXjBkXjEoeCkiXSxbMCwxLCJkXjFcXGFscGhhIiwyXSxbMCwyLCJkXjBcXGFscGhhIl0sWzIsMSwiZF4yXFxhbHBoYSJdXQ==
 		\[\begin{tikzcd}
 			& {d^0d^1(x)} & \\
@@ -256,11 +252,96 @@ TODO: For strict $2$-cateogries
 			\arrow["{d^1\alpha}"', from=2-1, to=2-3]
 		\end{tikzcd}\]
 	\end{enumerate}
+	A morphism of descent data
+	\[
+	f:(x,\alpha)\longrightarrow (y,\beta)
+	\]
+	is a morphism
+	\[
+	f:x\to y
+	\]
+	in $F(U)$ such that the diagram
+	\[
+	\begin{tikzcd}
+		d^0(x) \arrow[r,"\alpha"] \arrow[d,"d^0(f)"'] &
+		d^1(x) \arrow[d,"d^1(f)"] \\
+		d^0(y) \arrow[r,"\beta"'] &
+		d^1(y)
+	\end{tikzcd}
+	\]
+	commutes in $F(U\times_X U)$.
+	We write $\Desc_p(F)$ for the category whose objects are descent data and
+	whose morphisms are morphisms of descent data.
 \end{definition}
 
-\begin{remark}
-	This definition specializes to descent data for rings, modules,
-	quasi-coherent sheaves, schemes, and stacks.
+\begin{remark}[Descent data as a 2-categorical totalization]
+	Let \(p:U\to X\) be a cover and let
+	\[
+	U_\bullet
+	\]
+	be its \v{C}ech nerve. Applying the pseudofunctor
+	\[
+	F:\CatC^{op}\to\Cat
+	\]
+	gives a pseudocosimplicial category
+	\[
+	F(U_\bullet):\Delta\to\Cat .
+	\]
+	From a 2-categorical point of view, the category of descent data should be thought of
+	as the pseudo-limit, or descent object, of the beginning of this cosimplicial diagram:
+	\[
+	\begin{tikzcd}
+		{F(U)} & {F(U\times_XU)} & {F(U\times_XU\times_XU)} .
+		\arrow[shift left, from=1-1, to=1-2]
+		\arrow[shift right, from=1-1, to=1-2]
+		\arrow[from=1-2, to=1-3]
+		\arrow[shift left=2, from=1-2, to=1-3]
+		\arrow[shift right=2, from=1-2, to=1-3]
+	\end{tikzcd}
+	\]
+	Thus an object of this pseudo-limit consists of an object \(x\in F(U)\), together
+	with an invertible comparison morphism
+	\[
+	\alpha:d^0x\xrightarrow{\sim}d^1x
+	\]
+	in \(F(U\times_XU)\). The compatibility of the pseudo-cone with the degeneracy map
+	gives the normalization condition
+	\[
+	s^0(\alpha)=id_x,
+	\]
+	and the compatibility with the three coface maps gives the cocycle condition
+	\[
+	d^2(\alpha)\circ d^0(\alpha)=d^1(\alpha)
+	\]
+	in \(F(U\times_XU\times_XU)\), up to the coherence isomorphisms of the
+	pseudofunctor \(F\). In this sense, the usual cocycle condition is precisely the
+	higher coherence condition which appears when the ordinary sheaf condition is
+	categorified.
+	
+	Equivalently, one may write informally
+	\[
+	\Desc_p(F)
+	\simeq
+	\operatorname{pslim}_{[n]\in\Delta_{\leq 2}} F(U_n),
+	\]
+	where the right-hand side denotes the 2-categorical totalization of the
+	2-truncated \v{C}ech diagram.
+	\footnote{
+		Strictly speaking, the displayed pseudo-limit notation suppresses the coherence
+		isomorphisms coming from the pseudofunctor \(F\). Hollander gives the corresponding
+		explicit description for cosimplicial groupoids: the homotopy limit, denoted
+		\(\operatorname{Tot}_2\), has objects \((x,\alpha)\) satisfying a unit condition and
+		a cocycle condition; see \cite[Corollary~2.11]{hollander2001homotopy}. In the
+		proof of \cite[Theorem~3.9]{hollander2001homotopy}, she identifies such objects
+		with classical descent data for a cover. For the \(\Cat\)-valued 2-categorical
+		formulation, Nunes defines the descent object of a pseudocosimplicial object as a
+		right pseudo-Kan extension \cite[Definition~4.3]{lucatellinunes2018pseudokan}, observes that it
+		is a conical bilimit \cite[Remark~4.4]{lucatellinunes2018pseudokan}, compares this with the usual
+		weighted definition of the descent object \cite[Definition~4.6 and Theorem~4.11]
+		{lucatellinunes2018pseudokan}, and gives an explicit description of strict descent objects in
+		\(\Cat\) by an object together with an invertible comparison morphism satisfying
+		associativity and identity conditions \cite[Remark~4.23]{lucatellinunes2018pseudokan}.
+	}
 \end{remark}
 
 
@@ -361,53 +442,93 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	complex.
 \end{remark}
 
-\begin{proposition}[The totalization as descent data]
-	\label{prop:tot-mod-desc}
-	Let $R\to S$ be a ring homomorphism and set
+\begin{theorem}[Faithfully flat descent for modules]
+	\label{thm:faithfully-flat-descent-modules}
+	(\cite[Tag 023N]{stacks-project})
+	Let \(R\to S\) be a faithfully flat ring homomorphism, and consider the
+	pseudofunctor
 	\[
-	S^n:=\underbrace{S\otimes_R\cdots\otimes_R S}_{n+1\text{ factors}}.
+	\Mod_{(-)}:(\Alg_R)^{op}\to\Cat,
+	\qquad
+	A\longmapsto \Mod_A,
 	\]
-	The cosimplicial $R$-algebra $S^\bullet$ induces a cosimplicial diagram of
-	categories
-	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXE1vZF9TIl0sWzEsMCwiXFxNb2Rfe1NcXG90aW1lc19SIFN9Il0sWzIsMCwiXFxNb2Rfe1NcXG90aW1lc19SIFNcXG90aW1lc19SIFN9Il0sWzMsMCwiXFxjZG90cyJdLFswLDEsIiIsMCx7Im9mZnNldCI6LTF9XSxbMSwyLCIiLDAseyJvZmZzZXQiOjJ9XSxbMSwyLCIiLDAseyJvZmZzZXQiOi0yfV0sWzAsMSwiIiwwLHsib2Zmc2V0IjoxfV0sWzEsMl0sWzIsM11d
-	\[\begin{tikzcd}
-		{\Mod_S} & {\Mod_{S\otimes_R S}} & {\Mod_{S\otimes_R S\otimes_R S}} & \cdots
-		\arrow[shift left, from=1-1, to=1-2]
-		\arrow[shift right, from=1-1, to=1-2]
-		\arrow[shift right=2, from=1-2, to=1-3]
-		\arrow[shift left=2, from=1-2, to=1-3]
-		\arrow[from=1-2, to=1-3]
-		\arrow[from=1-3, to=1-4]
-	\end{tikzcd}\]
-	Then there is a natural equivalence
+	which sends a morphism of \(R\)-algebras \(A\to B\) to the extension of
+	scalars functor
 	\[
-	\Tot(\Mod_{S^\bullet})\cong \Desc(S/R),
+	B\otimes_A -:\Mod_A\to\Mod_B.
 	\]
-	where $\Desc(S/R)$ is the category of descent data for modules relative to
-	$R\to S$.
-\end{proposition}
-
-\begin{proof}
-	Write $\pi_1, \pi_2: S\to S\otimes_R S$ for the two morphisms $s\mapsto s\otimes 1$ and $s\mapsto 1\otimes s$ resp. For an $S$ module $N$ write $\pi_i^*N = N\otimes_{S, \pi_i} (S\otimes_R S)$ for the $S\otimes S$ module induced by $\pi_i$.
-	An object of the totalization is an object
+	We define
 	\[
-	N\in \Mod_S
+	\Desc(S/R)
+	:=
+	\Desc_{R\to S}(\Mod_{(-)}).
 	\]
-	together with an isomorphism between its two pullbacks to
-	$\Mod_{S\otimes_R S}$,
-	\[
-	\alpha:\pi_1^*N\xrightarrow{\sim}\pi_2^*N,
-	\]
-	satisfying the compatibility condition after pulling back to
-	$S\otimes_R S\otimes_R S$. Explicitly this condition is
-	\[
-	\pi_{23}^*(\alpha)\circ \pi_{12}^*(\alpha)=\pi_{13}^*(\alpha).
-	\]
-	Under the identification $\pi_1^*N \cong N\otimes_R S$ and $\pi_2^*N \cong S\otimes_R N$ as $S\otimes_R S$-modules, $\alpha$ is precisely an $S\times_R S$-linear morphism $N\otimes_R S\to S\otimes_R N$ satisfying the cocycle compatibility over $S\otimes_R S\otimes_R S$.
-	This is precisely an object of $\Desc(S/R)$.
 	
-	Similarly, a morphism in the totalization is an $S$-linear map
-	$f:N\to N'$ such that the square
+	Explicitly, an object of \(\Desc(S/R)\) is an \(S\)-module \(N\), together
+	with an isomorphism
+	\[
+	\alpha:d^0N\xrightarrow{\sim}d^1N
+	\]
+	in \(\Mod_{S\otimes_R S}\), satisfying
+	\[
+	s^0(\alpha)=id_N
+	\]
+	and
+	\[
+	d^2(\alpha)\circ d^0(\alpha)=d^1(\alpha)
+	\]
+	in \(\Mod_{S\otimes_R S\otimes_R S}\).
+	
+	Equivalently, if
+	\[
+	\pi_1,\pi_2:S\to S\otimes_R S
+	\]
+	are given by
+	\[
+	\pi_1(s)=s\otimes 1,
+	\qquad
+	\pi_2(s)=1\otimes s,
+	\]
+	then
+	\[
+	d^0N=\pi_1^*N,
+	\qquad
+	d^1N=\pi_2^*N,
+	\]
+	and \(\alpha\) is an isomorphism
+	\[
+	\alpha:
+	\pi_1^*N\xrightarrow{\sim}\pi_2^*N.
+	\]
+	The cocycle condition becomes
+	\[
+	\pi_{23}^*(\alpha)\circ \pi_{12}^*(\alpha)
+	=
+	\pi_{13}^*(\alpha)
+	\]
+	in \(\Mod_{S\otimes_R S\otimes_R S}\), where
+	\[
+	\pi_{12},\pi_{13},\pi_{23}:S\otimes_R S
+	\to S\otimes_R S\otimes_R S
+	\]
+	are defined by
+	\[
+	\pi_{12}(s\otimes t)=s\otimes t\otimes 1,
+	\qquad
+	\pi_{13}(s\otimes t)=s\otimes 1\otimes t,
+	\qquad
+	\pi_{23}(s\otimes t)=1\otimes s\otimes t.
+	\]
+	
+	A morphism
+	\[
+	f:(N,\alpha)\to (N',\alpha')
+	\]
+	in \(\Desc(S/R)\) is an \(S\)-linear map \(f:N\to N'\) such that
+	\[
+	\alpha'\circ d^0f=d^1f\circ\alpha.
+	\]
+	Equivalently, the square
 	\[
 	\begin{tikzcd}
 		\pi_1^*N \arrow[r,"\alpha"] \arrow[d,"\pi_1^*f"'] &
@@ -416,32 +537,169 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 		\pi_2^*N'
 	\end{tikzcd}
 	\]
-	commutes. This is exactly the definition of a morphism in $\Desc(S/R)$.
-	Hence
+	commutes.
+	
+	Then the canonical functor
 	\[
-	\Tot(\Mod_{S^\bullet})\simeq \Desc(S/R).
+	\Mod_R\longrightarrow \Desc(S/R)
 	\]
-\end{proof}
-
-\begin{remark}
-	Since $\Mod_{S^\bullet}$ takes values in the strict $2$-category $\Cat$, by \ref{lem:truncated-tot-for-stric-n-cats} the totalization is equivalent to the $2$-truncated totalization, i.e. the descent category $\Desc$.
-\end{remark}
+	is an equivalence of categories. Explicitly, it sends an \(R\)-module \(M\)
+	to
+	\[
+	M\longmapsto (S\otimes_R M,\alpha_M),
+	\]
+	where \(\alpha_M\) is the canonical descent isomorphism
+	\[
+	d^0(S\otimes_R M)
+	\xrightarrow{\sim}
+	d^1(S\otimes_R M),
+	\]
+	equivalently
+	\[
+	\pi_1^*(S\otimes_R M)
+	\xrightarrow{\sim}
+	\pi_2^*(S\otimes_R M).
+	\]
+\end{theorem}
 
 \begin{theorem}[Faithfully flat descent for modules]
-	\label{thm:faithfully-flat-descent-modules}
-	(\cite[Theorem 3.16]{khan2022stacks})
-	Let $R\to S$ be faithfully flat. Then the canonical functor
+	\label{thm:faithfully-flat-descent-modules2}
+	(\cite[Tag 023N]{stacks-project})
+	Let \(R\to S\) be a faithfully flat ring homomorphism. Consider the
+	pseudofunctor
 	\[
-	\Mod_R \longrightarrow \Desc(S/R)
+	\Mod_{(-)}:(\Alg_R)^{op}\longrightarrow \Cat,
+	\qquad
+	A\longmapsto \Mod_A,
 	\]
-	is an equivalence of categories.
-	Explicitly, it sends an $R$-module $M$ to the descent datum
+	which sends a morphism of \(R\)-algebras \(A\to B\) to the extension of
+	scalars functor
 	\[
-	M \longmapsto (S \otimes_R M, \alpha_M),
+	B\otimes_A -:\Mod_A\to\Mod_B.
 	\]
-	where $\alpha_M$ is the canonical isomorphism
+	
+	Set
 	\[
-	(S \otimes_R M)\otimes_R S \;\cong\; S \otimes_R (S \otimes_R M).
+	S^n:=\underbrace{S\otimes_R\cdots\otimes_R S}_{n+1\text{ factors}}.
+	\]
+	The algebras \(S^n\) form the Amitsur cosimplicial \(R\)-algebra
+	associated to \(R\to S\). Applying the pseudofunctor \(\Mod_{(-)}\) gives
+	a cosimplicial diagram of categories
+	\[
+	\begin{tikzcd}
+		{\Mod_S} &
+		{\Mod_{S\otimes_R S}} &
+		{\Mod_{S\otimes_R S\otimes_R S}} &
+		\cdots .
+		\arrow[shift left, from=1-1, to=1-2]
+		\arrow[shift right, from=1-1, to=1-2]
+		\arrow[shift right=2, from=1-2, to=1-3]
+		\arrow[shift left=2, from=1-2, to=1-3]
+		\arrow[from=1-2, to=1-3]
+		\arrow[from=1-3, to=1-4]
+	\end{tikzcd}
+	\]
+	
+	We define
+	\[
+	\Desc(S/R):=\Desc_{R\to S}(\Mod_{(-)})
+	\]
+	to be the descent category associated to this pseudofunctor and the
+	morphism \(R\to S\) in \(\Alg_R\).
+	
+	Explicitly, let
+	\[
+	\pi_1,\pi_2:S\to S\otimes_R S
+	\]
+	be given by
+	\[
+	\pi_1(s)=s\otimes 1,
+	\qquad
+	\pi_2(s)=1\otimes s.
+	\]
+	With the convention
+	\[
+	d^0=\pi_1^*,
+	\qquad
+	d^1=\pi_2^*,
+	\]
+	an object of \(\Desc(S/R)\) is an \(S\)-module \(N\), together with an
+	isomorphism
+	\[
+	\alpha:d^0N\xrightarrow{\sim}d^1N
+	\]
+	in \(\Mod_{S\otimes_R S}\). Equivalently,
+	\[
+	\alpha:
+	N\otimes_{S,\pi_1}(S\otimes_R S)
+	\xrightarrow{\sim}
+	N\otimes_{S,\pi_2}(S\otimes_R S).
+	\]
+	This isomorphism is required to satisfy the normalization condition
+	\[
+	s^0(\alpha)=id_N
+	\]
+	and the cocycle condition
+	\[
+	d^2(\alpha)\circ d^0(\alpha)=d^1(\alpha)
+	\]
+	in \(\Mod_{S\otimes_R S\otimes_R S}\).
+	
+	In tensor notation, this cocycle condition is
+	\[
+	\pi_{23}^*(\alpha)\circ \pi_{12}^*(\alpha)
+	=
+	\pi_{13}^*(\alpha),
+	\]
+	where
+	\[
+	\pi_{12},\pi_{13},\pi_{23}:S\otimes_R S\to
+	S\otimes_R S\otimes_R S
+	\]
+	are given by
+	\[
+	\pi_{12}(s\otimes t)=s\otimes t\otimes 1,
+	\]
+	\[
+	\pi_{13}(s\otimes t)=s\otimes 1\otimes t,
+	\]
+	\[
+	\pi_{23}(s\otimes t)=1\otimes s\otimes t.
+	\]
+	
+	A morphism
+	\[
+	f:(N,\alpha)\to (N',\alpha')
+	\]
+	in \(\Desc(S/R)\) is an \(S\)-linear morphism \(f:N\to N'\) such that the
+	square
+	\[
+	\begin{tikzcd}
+		d^0N \arrow[r,"\alpha"] \arrow[d,"d^0f"'] &
+		d^1N \arrow[d,"d^1f"] \\
+		d^0N' \arrow[r,"\alpha'"'] &
+		d^1N'
+	\end{tikzcd}
+	\]
+	commutes. Equivalently,
+	\[
+	\alpha'\circ d^0f=d^1f\circ\alpha.
+	\]
+	
+	Then the canonical functor
+	\[
+	\Mod_R\longrightarrow \Desc(S/R)
+	\]
+	is an equivalence of categories. Explicitly, it sends an \(R\)-module \(M\)
+	to
+	\[
+	M\longmapsto (S\otimes_R M,\alpha_M),
+	\]
+	where \(\alpha_M\) is the canonical isomorphism
+	\[
+	d^0(S\otimes_R M)
+	\xrightarrow{\sim}
+	d^1(S\otimes_R M).
 	\]
 \end{theorem}
 
@@ -633,79 +891,85 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	Therefore $F$ and $G$ are quasi-inverse equivalences.
 \end{proof}
 
-\begin{proposition}[Descent for affine schemes]
-	Let $U \to X$ be a faithfully flat morphism of affine schemes and let
-	$U_\bullet$ be its Čech nerve. Then
-	\[
-	X \simeq \operatorname{colim}(U_\bullet)
-	\]
-	in the category of schemes.
-	Equivalently, for every scheme $T$ we have
-	\[
-	\Hom(T, X)
-	\simeq
-	\Tot
-	\big(
-	\Hom(T, U_\bullet)
-	\big).
-	\]
-\end{proposition}
-
 \begin{definition}[Descent category for quasi-coherent sheaves]
-	Let $f : U \to X$ be a covering. The category 
+	Let \(f:U\to X\) be a morphism of schemes. Consider the pseudofunctor
+	\[
+	\QCoh:\Sch^{op}\to\Cat,
+	\qquad
+	X\longmapsto \QCoh(X).
+	\]
+	We write
 	\[
 	\Desc_{\QCoh}(U/X)
+	:=
+	\Desc_f(\QCoh)
 	\]
-	of descent data for quasi-coherent sheaves along $U \to X$ is defined as follows.
+	for the category of descent data for \(\QCoh\) along \(f\).
 	
-	\textbf{Objects:}
-	Pairs $(\mathcal{F}, \varphi)$ consisting of
-	\begin{itemize}
-		\item a quasi-coherent sheaf $\mathcal{F}$ on $U$,
-		\item an isomorphism
-		\[
-		\varphi : \pi_1^*\mathcal{F} \xrightarrow{\sim} \pi_2^*\mathcal{F}
-		\]
-		on $U \times_X U$,
-	\end{itemize}
-	such that the cocycle condition holds on $U \times_X U \times_X U$:
+	Explicitly, an object of \(\Desc_{\QCoh}(U/X)\) is a pair
 	\[
-	\pi_{23}^*(\varphi) \circ \pi_{12}^*(\varphi)
-	=
-	\pi_{13}^*(\varphi).
+	(\mathcal F,\varphi)
 	\]
+	consisting of a quasi-coherent sheaf \(\mathcal F\in\QCoh(U)\), together with
+	an isomorphism
+	\[
+	\varphi:\pi_1^*\mathcal F\xrightarrow{\sim}\pi_2^*\mathcal F
+	\]
+	in \(\QCoh(U\times_X U)\), where
+	\[
+	\pi_1,\pi_2:U\times_X U\to U
+	\]
+	are the two projections.
 	
-	\textbf{Morphisms:}
+	This isomorphism is required to satisfy the normalization condition
+	\[
+	\Delta^*(\varphi)=id_{\mathcal F},
+	\]
+	where
+	\[
+	\Delta:U\to U\times_X U
+	\]
+	is the diagonal, and the cocycle condition
+	\[
+	\pi_{23}^*(\varphi)\circ \pi_{12}^*(\varphi)
+	=
+	\pi_{13}^*(\varphi)
+	\]
+	in \(\QCoh(U\times_X U\times_X U)\). Here
+	\[
+	\pi_{ij}:U\times_X U\times_X U\to U\times_X U
+	\]
+	denotes the projection onto the \(i\)-th and \(j\)-th factors.
+	
 	A morphism
 	\[
-	(\mathcal{F}, \varphi) \longrightarrow (\mathcal{F}', \varphi')
+	\psi:(\mathcal F,\varphi)\longrightarrow(\mathcal F',\varphi')
 	\]
-	is a morphism of quasi-coherent sheaves
+	is a morphism
 	\[
-	\psi : \mathcal{F} \to \mathcal{F}'
-	\quad \text{in } \QCoh(U)
+	\psi:\mathcal F\to\mathcal F'
 	\]
-	such that the following diagram commutes on $U \times_X U$:
+	in \(\QCoh(U)\) such that the diagram
 	\[
 	\begin{tikzcd}
-		\pi_1^*\mathcal{F}
-		\arrow[r, "\varphi"]
-		\arrow[d, "\pi_1^*\psi"']
+		\pi_1^*\mathcal F
+		\arrow[r,"\varphi"]
+		\arrow[d,"\pi_1^*\psi"']
 		&
-		\pi_2^*\mathcal{F}
-		\arrow[d, "\pi_2^*\psi"]
+		\pi_2^*\mathcal F
+		\arrow[d,"\pi_2^*\psi"]
 		\\
-		\pi_1^*\mathcal{F}'
-		\arrow[r, "\varphi'"']
+		\pi_1^*\mathcal F'
+		\arrow[r,"\varphi'"']
 		&
-		\pi_2^*\mathcal{F}'.
+		\pi_2^*\mathcal F'
 	\end{tikzcd}
 	\]
-	Equivalently,
+	commutes in \(\QCoh(U\times_X U)\). Equivalently,
 	\[
-	\varphi' \circ \pi_1^*(\psi)
+	\varphi'\circ \pi_1^*(\psi)
 	=
-	\pi_2^*(\psi) \circ \varphi.
+	\pi_2^*(\psi)\circ \varphi .
 	\]
 \end{definition}
 
