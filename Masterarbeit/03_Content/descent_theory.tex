@@ -53,7 +53,7 @@ We shall make this precise without developing the general theory of
 homotopy limits. Instead, we use the \(2\)-categorical notion of a
 pseudolimit. Gambino shows that, in the setting of \(2\)-categories, homotopy
 limits can be studied via model structures on diagram \(2\)-categories and
-that pseudolimits are related to such homotopy limits. \cite{gambino2008homotopy}
+that pseudolimits are related to such homotopy limits, see \cite{gambino2008homotopy}.
 This justifies taking the pseudolimit of the Cech descent diagram as the
 correct \(2\)-categorical replacement for the ordinary limit. Accordingly,
 for \(F\) valued in \(\Grpd\) or \(\Cat\), we define descent with respect to
@@ -287,8 +287,7 @@ TODO: For strict $2$-cateogries
 	\[
 	F(U_\bullet):\Delta\to\Cat .
 	\]
-	From a 2-categorical point of view, the category of descent data should be thought of
-	as the pseudo-limit, or descent object, of the beginning of this cosimplicial diagram:
+	From a 2-categorical point of view, the category of descent data should be thought of as the pseudo-limit of the beginning of this cosimplicial diagram:
 	\[
 	\begin{tikzcd}
 		{F(U)} & {F(U\times_XU)} & {F(U\times_XU\times_XU)} .
@@ -331,16 +330,12 @@ TODO: For strict $2$-cateogries
 		isomorphisms coming from the pseudofunctor \(F\). Hollander gives the corresponding
 		explicit description for cosimplicial groupoids: the homotopy limit, denoted
 		\(\operatorname{Tot}_2\), has objects \((x,\alpha)\) satisfying a unit condition and
-		a cocycle condition; see \cite[Corollary~2.11]{hollander2001homotopy}. In the
-		proof of \cite[Theorem~3.9]{hollander2001homotopy}, she identifies such objects
+		a cocycle condition; see \cite[Corollary~2.11][]{hollander2001homotopy}. In the
+		proof of \cite[Theorem~3.9][]{hollander2001homotopy}, she identifies such objects
 		with classical descent data for a cover. For the \(\Cat\)-valued 2-categorical
-		formulation, Nunes defines the descent object of a pseudocosimplicial object as a
-		right pseudo-Kan extension \cite[Definition~4.3]{lucatellinunes2018pseudokan}, observes that it
-		is a conical bilimit \cite[Remark~4.4]{lucatellinunes2018pseudokan}, compares this with the usual
-		weighted definition of the descent object \cite[Definition~4.6 and Theorem~4.11]
-		{lucatellinunes2018pseudokan}, and gives an explicit description of strict descent objects in
-		\(\Cat\) by an object together with an invertible comparison morphism satisfying
-		associativity and identity conditions \cite[Remark~4.23]{lucatellinunes2018pseudokan}.
+		formulation, Nunes defines the descent object of a pseudocosimplicial object as a right pseudo-Kan extension \cite[Definition~4.3][]{lucatellinunes2018pseudokan}, observes that it
+		is a conical bilimit \cite[Remark~4.4][]{lucatellinunes2018pseudokan}, compares this with the usual weighted definition of the descent object \cite[Definition~4.6 and Theorem~4.11][]
+		{lucatellinunes2018pseudokan}, and gives an explicit description of strict descent objects in $\Cat$ by an object together with an invertible comparison morphism satisfying associativity and identity conditions \cite[Remark~4.23]{lucatellinunes2018pseudokan}.
 	}
 \end{remark}
 
@@ -390,58 +385,6 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 \end{theorem}
 
 
-
-
-\begin{theorem}[Faithfully flat descent for rings]\label{thm:faithfully-flat-descent-for-rings}
-	Let $A \to B$ be a faithfully flat morphism of rings and let
-	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJCIl0sWzEsMCwiQlxcb3RpbWVzX0EgQiJdLFsyLDAsIkJcXG90aW1lc19BQlxcb3RpbWVzX0FCIl0sWzMsMCwiXFxjZG90cyJdLFswLDEsIiIsMCx7Im9mZnNldCI6LTF9XSxbMSwyXSxbMSwyLCIiLDAseyJvZmZzZXQiOi0yfV0sWzEsMiwiIiwwLHsib2Zmc2V0IjoyfV0sWzAsMSwiIiwwLHsib2Zmc2V0IjoxfV0sWzIsMywiIiwwLHsib2Zmc2V0IjotMX1dLFsyLDMsIiIsMCx7Im9mZnNldCI6MX1dLFsyLDMsIiIsMCx7Im9mZnNldCI6M31dLFsyLDMsIiIsMCx7Im9mZnNldCI6LTN9XV0=
-	\[
-	B_\bullet =
-	\big(
-	\begin{tikzcd}
-		B & {B\otimes_A B} & {B\otimes_AB\otimes_AB} & \cdots
-		\arrow[shift left, from=1-1, to=1-2]
-		\arrow[shift right, from=1-1, to=1-2]
-		\arrow[from=1-2, to=1-3]
-		\arrow[shift left=2, from=1-2, to=1-3]
-		\arrow[shift right=2, from=1-2, to=1-3]
-		\arrow[shift left, from=1-3, to=1-4]
-		\arrow[shift right, from=1-3, to=1-4]
-		\arrow[shift right=3, from=1-3, to=1-4]
-		\arrow[shift left=3, from=1-3, to=1-4]
-	\end{tikzcd}
-	\big)
-	\]
-	
-	be the Čech nerve of $A \to B$.
-	Then the natural map
-	\[
-	A \longrightarrow \operatorname{Tot}(B^\bullet)
-	\]
-	is an isomorphism.
-\end{theorem}
-
-
-\begin{proof}
-	The cosimplicial ring $B^\bullet$ associated to the morphism
-	$A \to B$ is the Amitsur complex of the extension.
-	If $A \to B$ is faithfully flat, the augmented Amitsur complex
-	\[
-	0 \to A \to B \to B \otimes_A B \to B \otimes_A B \otimes_A B \to \cdots
-	\]
-	is exact. Exactness of this complex implies that $A$ is the limit
-	of the cosimplicial diagram $B^\bullet$. Hence
-	\[
-	A \cong \operatorname{Tot}(B^\bullet).
-	\]
-\end{proof}
-
-\begin{remark}
-	The cosimplicial ring $B^\bullet$ is the Amitsur complex associated to
-	$A \to B$. Faithfully flat descent for rings is equivalent to exactness of this
-	complex.
-\end{remark}
-
 \begin{theorem}[Faithfully flat descent for modules]
 	\label{thm:faithfully-flat-descent-modules}
 	(\cite[Tag 023N]{stacks-project})
@@ -464,7 +407,7 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	\Desc_{R\to S}(\Mod_{(-)}).
 	\]
 	
-	Explicitly, an object of \(\Desc(S/R)\) is an \(S\)-module \(N\), together
+	An object of \(\Desc(S/R)\) is an \(S\)-module \(N\), together
 	with an isomorphism
 	\[
 	\alpha:d^0N\xrightarrow{\sim}d^1N
@@ -520,25 +463,7 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	\pi_{23}(s\otimes t)=1\otimes s\otimes t.
 	\]
 	
-	A morphism
-	\[
-	f:(N,\alpha)\to (N',\alpha')
-	\]
-	in \(\Desc(S/R)\) is an \(S\)-linear map \(f:N\to N'\) such that
-	\[
-	\alpha'\circ d^0f=d^1f\circ\alpha.
-	\]
-	Equivalently, the square
-	\[
-	\begin{tikzcd}
-		\pi_1^*N \arrow[r,"\alpha"] \arrow[d,"\pi_1^*f"'] &
-		\pi_2^*N \arrow[d,"\pi_2^*f"] \\
-		\pi_1^*N' \arrow[r,"\alpha'"'] &
-		\pi_2^*N'
-	\end{tikzcd}
-	\]
-	commutes.
-	
+
 	Then the canonical functor
 	\[
 	\Mod_R\longrightarrow \Desc(S/R)
@@ -561,148 +486,6 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	\pi_2^*(S\otimes_R M).
 	\]
 \end{theorem}
-
-\begin{theorem}[Faithfully flat descent for modules]
-	\label{thm:faithfully-flat-descent-modules2}
-	(\cite[Tag 023N]{stacks-project})
-	Let \(R\to S\) be a faithfully flat ring homomorphism. Consider the
-	pseudofunctor
-	\[
-	\Mod_{(-)}:(\Alg_R)^{op}\longrightarrow \Cat,
-	\qquad
-	A\longmapsto \Mod_A,
-	\]
-	which sends a morphism of \(R\)-algebras \(A\to B\) to the extension of
-	scalars functor
-	\[
-	B\otimes_A -:\Mod_A\to\Mod_B.
-	\]
-	
-	Set
-	\[
-	S^n:=\underbrace{S\otimes_R\cdots\otimes_R S}_{n+1\text{ factors}}.
-	\]
-	The algebras \(S^n\) form the Amitsur cosimplicial \(R\)-algebra
-	associated to \(R\to S\). Applying the pseudofunctor \(\Mod_{(-)}\) gives
-	a cosimplicial diagram of categories
-	\[
-	\begin{tikzcd}
-		{\Mod_S} &
-		{\Mod_{S\otimes_R S}} &
-		{\Mod_{S\otimes_R S\otimes_R S}} &
-		\cdots .
-		\arrow[shift left, from=1-1, to=1-2]
-		\arrow[shift right, from=1-1, to=1-2]
-		\arrow[shift right=2, from=1-2, to=1-3]
-		\arrow[shift left=2, from=1-2, to=1-3]
-		\arrow[from=1-2, to=1-3]
-		\arrow[from=1-3, to=1-4]
-	\end{tikzcd}
-	\]
-	
-	We define
-	\[
-	\Desc(S/R):=\Desc_{R\to S}(\Mod_{(-)})
-	\]
-	to be the descent category associated to this pseudofunctor and the
-	morphism \(R\to S\) in \(\Alg_R\).
-	
-	Explicitly, let
-	\[
-	\pi_1,\pi_2:S\to S\otimes_R S
-	\]
-	be given by
-	\[
-	\pi_1(s)=s\otimes 1,
-	\qquad
-	\pi_2(s)=1\otimes s.
-	\]
-	With the convention
-	\[
-	d^0=\pi_1^*,
-	\qquad
-	d^1=\pi_2^*,
-	\]
-	an object of \(\Desc(S/R)\) is an \(S\)-module \(N\), together with an
-	isomorphism
-	\[
-	\alpha:d^0N\xrightarrow{\sim}d^1N
-	\]
-	in \(\Mod_{S\otimes_R S}\). Equivalently,
-	\[
-	\alpha:
-	N\otimes_{S,\pi_1}(S\otimes_R S)
-	\xrightarrow{\sim}
-	N\otimes_{S,\pi_2}(S\otimes_R S).
-	\]
-	This isomorphism is required to satisfy the normalization condition
-	\[
-	s^0(\alpha)=id_N
-	\]
-	and the cocycle condition
-	\[
-	d^2(\alpha)\circ d^0(\alpha)=d^1(\alpha)
-	\]
-	in \(\Mod_{S\otimes_R S\otimes_R S}\).
-	
-	In tensor notation, this cocycle condition is
-	\[
-	\pi_{23}^*(\alpha)\circ \pi_{12}^*(\alpha)
-	=
-	\pi_{13}^*(\alpha),
-	\]
-	where
-	\[
-	\pi_{12},\pi_{13},\pi_{23}:S\otimes_R S\to
-	S\otimes_R S\otimes_R S
-	\]
-	are given by
-	\[
-	\pi_{12}(s\otimes t)=s\otimes t\otimes 1,
-	\]
-	\[
-	\pi_{13}(s\otimes t)=s\otimes 1\otimes t,
-	\]
-	\[
-	\pi_{23}(s\otimes t)=1\otimes s\otimes t.
-	\]
-	
-	A morphism
-	\[
-	f:(N,\alpha)\to (N',\alpha')
-	\]
-	in \(\Desc(S/R)\) is an \(S\)-linear morphism \(f:N\to N'\) such that the
-	square
-	\[
-	\begin{tikzcd}
-		d^0N \arrow[r,"\alpha"] \arrow[d,"d^0f"'] &
-		d^1N \arrow[d,"d^1f"] \\
-		d^0N' \arrow[r,"\alpha'"'] &
-		d^1N'
-	\end{tikzcd}
-	\]
-	commutes. Equivalently,
-	\[
-	\alpha'\circ d^0f=d^1f\circ\alpha.
-	\]
-	
-	Then the canonical functor
-	\[
-	\Mod_R\longrightarrow \Desc(S/R)
-	\]
-	is an equivalence of categories. Explicitly, it sends an \(R\)-module \(M\)
-	to
-	\[
-	M\longmapsto (S\otimes_R M,\alpha_M),
-	\]
-	where \(\alpha_M\) is the canonical isomorphism
-	\[
-	d^0(S\otimes_R M)
-	\xrightarrow{\sim}
-	d^1(S\otimes_R M).
-	\]
-\end{theorem}
-
 
 \begin{proof}
 	For an $R$-module $M$, set
@@ -900,13 +683,13 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	\]
 	We write
 	\[
-	\Desc_{\QCoh}(U/X)
+	\Desc(U/X)
 	:=
 	\Desc_f(\QCoh)
 	\]
 	for the category of descent data for \(\QCoh\) along \(f\).
 	
-	Explicitly, an object of \(\Desc_{\QCoh}(U/X)\) is a pair
+	Concretely, an object of \(\Desc(U/X)\) is a pair
 	\[
 	(\mathcal F,\varphi)
 	\]
@@ -940,52 +723,18 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	\pi_{ij}:U\times_X U\times_X U\to U\times_X U
 	\]
 	denotes the projection onto the \(i\)-th and \(j\)-th factors.
-	
-	A morphism
-	\[
-	\psi:(\mathcal F,\varphi)\longrightarrow(\mathcal F',\varphi')
-	\]
-	is a morphism
-	\[
-	\psi:\mathcal F\to\mathcal F'
-	\]
-	in \(\QCoh(U)\) such that the diagram
-	\[
-	\begin{tikzcd}
-		\pi_1^*\mathcal F
-		\arrow[r,"\varphi"]
-		\arrow[d,"\pi_1^*\psi"']
-		&
-		\pi_2^*\mathcal F
-		\arrow[d,"\pi_2^*\psi"]
-		\\
-		\pi_1^*\mathcal F'
-		\arrow[r,"\varphi'"']
-		&
-		\pi_2^*\mathcal F'
-	\end{tikzcd}
-	\]
-	commutes in \(\QCoh(U\times_X U)\). Equivalently,
-	\[
-	\varphi'\circ \pi_1^*(\psi)
-	=
-	\pi_2^*(\psi)\circ \varphi .
-	\]
 \end{definition}
 
 \begin{theorem}[Faithfully flat descent for quasi-coherent sheaves]
 	(\cite[Tag 023T]{stacks-project})
-	Let $f : U \to X$ be an fpqc covering of schemes and let $U_\bullet$
-	be the Čech nerve.
+	Let $f : U \to X$ be an fpqc covering of schemes.
 	
 	Then the pullback functor induces an equivalence of categories
 	\[
 	\QCoh(X)
 	\longrightarrow
-	\Desc_{\QCoh}(U/X),
+	\Desc(U/X).
 	\]
-	where $\Desc_{\QCoh}(U/X)$ denotes the category of descent data
-	for quasi-coherent sheaves along $U \to X$.
 \end{theorem}
 
 \begin{proof}
@@ -1011,21 +760,21 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	
 	We claim that it suffices to prove that for each $j$ the pullback functor
 	\begin{align}\label{diag:descent-qcoh-affine-restriction}
-			\QCoh(V_j) \longrightarrow \Desc_{\QCoh} (U_j/X)
+			\QCoh(V_j) \longrightarrow \Desc (U_j/X)
 	\end{align}
 	is an equivalence.
 	Assume \ref{diag:descent-qcoh-affine-restriction} is an equivalence for all $j$.
 	For essential surjectivity, let
 	\[
-	(\mathcal F_U,\alpha)\in \Desc_{\QCoh}(U/X)
+	(\mathcal F_U,\alpha)\in \Desc(U/X)
 	\]
 	be a descent datum on $U$. Restricting to $U_j$ yields for each $j$ an object
 	\[
-	(\mathcal F_{U_j},\alpha_j)\in  \Desc_{\QCoh} (U_j/X)).
+	(\mathcal F_{U_j},\alpha_j)\in  \Desc(U_j/X)).
 	\]
 	Assuming the affine case, there exists a quasi-coherent sheaf
 	\[
-	\mathcal F_j\in \QCoh(V_j)
+	\mathcal F_j\in \QCoh(V_j/X)
 	\]
 	whose pullback along $U_j\to V_j$ is identified with
 	$(\mathcal F_{U_j},\alpha_j)$.
@@ -1034,9 +783,9 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	
 	% https://q.uiver.app/#q=WzAsMTIsWzAsNCwiVSJdLFsxLDQsIlgiXSxbMiwzLCJWX2oiXSxbMSwzLCJVX2oiXSxbMCwyLCJcXERlc2Nfe1xcUUNvaH0oVS9YKSJdLFsxLDEsIlxcRGVzY197XFxRQ29ofShVX2opIl0sWzIsMSwiXFxRQ29oKFZfaikiXSxbMSwyLCJcXFFDb2goWCkiXSxbMywyLCJWX2pcXGNhcCBWX3tqJ30iXSxbMiwyLCJVX3tqaid9Il0sWzIsMCwiXFxEZXNjX3tcXFFDb2h9KFVfe2pqJ30pIl0sWzMsMCwiXFxRQ29oKFZfalxcY2FwIFZfe2onfSkiXSxbMCwxXSxbMiwxXSxbMywwXSxbMywyXSxbNCwwLCIiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJzcXVpZ2dseSJ9fX1dLFs1LDMsIiIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6InNxdWlnZ2x5In19fV0sWzMsMSwiIiwyLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzYsMiwiIiwyLHsib2Zmc2V0IjotMywic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoic3F1aWdnbHkifX19XSxbNSw2LCJcXGNvbmciXSxbNywxLCIiLDAseyJvZmZzZXQiOi0zLCJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJzcXVpZ2dseSJ9fX1dLFs0LDddLFs2LDddLFs1LDRdLFs5LDhdLFs5LDNdLFs4LDJdLFsxMCw5LCIiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJzcXVpZ2dseSJ9fX1dLFsxMSw4LCIiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJzcXVpZ2dseSJ9fX1dLFsxMCw1XSxbMTEsNl0sWzEwLDExLCJcXGNvbmciXV0=
 	\[\begin{tikzcd}
-		&& {\Desc_{\QCoh}(U_{jj'})} & {\QCoh(V_j\cap V_{j'})} \\
-		& {\Desc_{\QCoh}(U_j)} & {\QCoh(V_j)} \\
-		{\Desc_{\QCoh}(U/X)} & {\QCoh(X)} & {U_{jj'}} & {V_j\cap V_{j'}} \\
+		&& {\Desc(U_{jj'}/X)} & {\QCoh(V_j\cap V_{j'})} \\
+		& {\Desc(U_j/X)} & {\QCoh(V_j)} \\
+		{\Desc(U/X)} & {\QCoh(X)} & {U_{jj'}} & {V_j\cap V_{j'}} \\
 		& {U_j} & {V_j} \\
 		U & X
 		\arrow["\cong", from=1-3, to=1-4]
@@ -1076,7 +825,7 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	because both $\mathcal{F}_j|_{V_j\cap V_{j'}}$ and $\mathcal{F}_{j'}|_{V_j\cap V_{j'}}$ pull back to the same object $\mathcal{F}_U|_{U_{jj'}}$ with the same cocycle isomorphism $\alpha$.
 	Hence they define the same object of 
 	\[
-	\Desc_{\QCoh}(U_{jj'}).
+	\Desc(U_{jj'}/X).
 	\]
 	
 	By the affine case, for $V_j\cap V_{j'}$ and the fpqc morphism 
@@ -1101,7 +850,7 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	
 	Now for fully faithfulness let $\mathcal{F}, \mathcal{G}\in \QCoh(X)$. We show that there is a bijection
 	\[
-	\Hom_{\QCohX}(\mathcal{F}, \mathcal{G}) \to \Hom_{\Desc_{\QCoh}(U/X)}(f^*\mathcal{F}, f^*\mathcal{G}).
+	\Hom_{\QCohX}(\mathcal{F}, \mathcal{G}) \to \Hom_{\Desc(U/X)}(f^*\mathcal{F}, f^*\mathcal{G}).
 	\]	
 	
 	Injectivity: 
@@ -1117,14 +866,14 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	Let $\theta:f^*\mathcal{F} \to f^*\mathcal{G}$ be a morphism in $\Desc_{\QCoh}(U/X)$. Restricting to $U_j$ yields a morphism in $\theta_{j}:f^*\mathcal{F}|_{U_j}\to f^*\mathcal{G}|_{U_j}$ in $\Desc_{\QCoh}(U_j/X)$. By the affine case this corresponds to a morphism $\mathcal{F}|_{U_j} \to \mathcal{G}|_{U_j}$. Now for $j, j'$, the morphism
 	$\theta_{j}|_{U_{jj'}}$ and $\theta_{j'}|_{U_{jj'}}$ restrict to the same pullback $\theta_{jj'}$ in 
 	\[
-	\Desc_{\QCoh}(U_{jj'}/X),
+	\Desc(U_{jj'}/X),
 	\]
 	which corresponds to a morphism $\mathcal{F}|_{U_{jj'}} \to \mathcal{G}|_{U_{jj'}}$, again by the affine version. 
 	By the sheaf property, these morphisms agree on overlaps and therefore glue uniquely to a morphism
 	\[
 	\mathcal F \to \mathcal G.
 	\]
-	By construction, this morphism pulls back to $\theta$ in $\Desc_{\QCoh}(U/X)$, which proves surjectivity.
+	By construction, this morphism pulls back to $\theta$ in $\Desc(U/X)$, which proves surjectivity.
 	
 	Hence, it remains to prove the affine case. Thus assume
 	\[
@@ -1166,9 +915,9 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	flat, descent for quasi-coherent sheaves over this affine fpqc cover reduces
 	to faithfully flat descent for modules (Thm \ref{thm:faithfully-flat-descent-modules}):
 	\[
-	\Mod_A \cong \Desc(B/A)),
+	\Mod_A \cong \Desc(B/A),
 	\]
-	where $B=\prod_i B_i$ and $B^\bullet$ is the associated Amitsur-Cech nerve.
+	where $B=\prod_i B_i$.
 \end{proof}
 
 
