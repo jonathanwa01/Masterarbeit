@@ -1,18 +1,20 @@
 \chapter{Algebraic Spaces}
 
-We have seen in ... that the representable presheaf of a scheme is indeeed a sheaf in $\SchOver{Et}$. Via the Yoneda embedding we can identify a scheme $U$ with its correspoding sheaf and denote it also by $U$.
+While schemes are Zariski local given by affine schemes, we coarse the topology towards the \etale\ topology. Algebraic spaces are therefore thought of as "spaces", given etale locally by schemes.
 
 \begin{definition}[Representable Morphism]
 	(\cite[][(Definition 4.1.1), p.~105]{alper2026stacks})
 	A morphism $X\to Y$ of sheaves over $\Sch$ is called representable by schemes, if for every scheme $T$ and every morphism $T\to Y$, the fibre product $X\times_Y T$ is a scheme.
 \end{definition}
 
+We have seen in ... that the representable presheaf of a scheme is indeeed a sheaf in $\SchOver{Et}$. Via the Yoneda embedding we can identify a scheme $U$ with its correspoding sheaf and denote it also by $U$. 
+
 \begin{definition}[\Etale\ morphisms of sheaves]
 	Given a morphism $f:X\to Y$ of sheaves over the big \etale\ site. We call $f$ \etale, if $f$ is representable and for every scheme $T\to Y$, the projection $X\times_YT\to T$ is \etale.
 \end{definition}
 
 \begin{remark}
-	Note, that via Yoneda the morohism $X\times_Y T \to T$ corresponds to a morphism of scheme, since both are representable by assumption.
+	Note, that via Yoneda the morohism $X\times_Y T \to T$ corresponds to a morphism of schemes, since both are representable by assumption.
 \end{remark}
 
 \begin{definition}[Algebraic Space]
@@ -120,7 +122,7 @@ We have seen in ... that the representable presheaf of a scheme is indeeed a she
 	U\to X
 	\]
 	is surjective and \etale.
-	We will denote the algebraic spase $X$ by $[U/R]$.
+	We will denote the algebraic space $X$ by $U/R$.
 \end{lemma}
 
 \begin{proof}
@@ -184,3 +186,4 @@ We have seen in ... that the representable presheaf of a scheme is indeeed a she
 	such that for every $S$-scheme $T$, the $T$-points $R(T) \subset X(T)\times X(T)$ is an equivalence relation on $X(T)$ and the projections $s,t: R\to X$ are \etale.
 \end{proof}
 
+TODO: Quotients of spaces by free finite algebraic group actions
