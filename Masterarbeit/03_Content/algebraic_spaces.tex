@@ -45,11 +45,11 @@ We have seen in ... that the representable presheaf of a scheme is indeeed a she
 
 \begin{definition}[\Etale\ equivalence relation]
 	(\cite[add. text]{olsson2016spaces})
-	An \etale\ equivalence relation on an $S$-scheme $X$ is a monomorphism 
+	An \etale\ equivalence relation on an $S$-scheme $U$ is a monomorphism 
 	\[
-		R\hookrightarrow X\times_S X,
+		R\hookrightarrow U\times_S U,
 	\]
-	such that for every $S$-scheme $T$, the $T$-points $R(T) \subset X(T)\times X(T)$ is an equivalence relation on $X(T)$ and the projections $s,t: R\to X$ are \etale.
+	such that for every $S$-scheme $T$, the $T$-points $R(T) \subset U(T)\times U(T)$ is an equivalence relation on $U(T)$ and the projections $s,t: R\to U$ are \etale.
 \end{definition}
 
 \begin{proposition}
@@ -111,7 +111,7 @@ We have seen in ... that the representable presheaf of a scheme is indeeed a she
 
 
 
-\begin{lemma}[Quotients by \etale\ equivalence relations]
+\begin{lemma}[Quotients by \etale\ equivalence relations]\label{lem:quotient-by-etale-eq}
 	(\cite[Tag 03I2]{stacks-project})
 	Let $U$ be an affine scheme and let
 	\[
@@ -188,6 +188,25 @@ We have seen in ... that the representable presheaf of a scheme is indeeed a she
 		R\hookrightarrow X\times_S X,
 	\]
 	such that for every $S$-scheme $T$, the $T$-points $R(T) \subset X(T)\times X(T)$ is an equivalence relation on $X(T)$ and the projections $s,t: R\to X$ are \etale.
+\end{proof}
+
+\begin{lemma}
+	Let $G$ be a finite group scheme acting freely on an $S$-scheme $X$. The naturally defined groupoid 
+	% https://q.uiver.app/#q=WzAsMixbMCwwLCJHXFx0aW1lcyBYIl0sWzEsMCwiWCJdLFswLDEsIiIsMCx7Im9mZnNldCI6LTF9XSxbMCwxLCIiLDIseyJvZmZzZXQiOjF9XV0=
+	\[\begin{tikzcd}
+		{G\times X} & X
+		\arrow[shift left, from=1-1, to=1-2]
+		\arrow[shift right, from=1-1, to=1-2]
+	\end{tikzcd}\]
+	given by $(g,x) \mapsto x$ and $(g,x) \mapsto g\cdot x$ defines an \etale\ equivalence relation.
+\end{lemma}
+
+\begin{corollary}
+	Let $G$ be a finite group scheme $G$ acting freely on an $S$-scheme $X$. Then the quotient $X/G$ is an algebraic space.
+\end{corollary}
+
+\begin{proof}
+	Since $G$ acts freely, $(s, t): R\to X\times X$ is a monomorphism and since $G$ is finite, the projections $s, t$ are finite \etale. Hence, by lemma \ref{lem:quotient-by-etale-eq}, the quotient $X/G$ is an algebraic space.
 \end{proof}
 
 TODO: Quotients of spaces by free finite algebraic group actions

@@ -224,14 +224,14 @@ or sheaves valued in $\infty$-groupoids.
 
 \begin{definition}[Stack]\label{def:stack}
 	(\cite[][Tag 02ZH]{stacks-project})
-	Let $(\Cat{C},J)$ be a site, and let
+	Let $(\CatC,J)$ be a site, and let
 	\[
 	p_{\mathcal{F}}:\mathcal{F}\to\CatC
 	\]
 	be a category fibred in groupoids. We call $\mathcal{F}$ a stack over $(\CatC,J)$ if for every object $B\in\CatC$ and every covering $\{f_i:U_i\to U\}_{i\in I}$ in $J$, the following conditions hold:
 	\begin{enumerate}
 		\item \textbf{Sheaf condition for isomorphisms.}
-		For every pair of objects $X,Y\in\Cat{F}(B)$, the presheaf
+		For every pair of objects $X,Y\in\mathcal{F}(B)$, the presheaf
 		\begin{align*}
 			Isom_U(X,Y):(\CatC/U)^{op} &\to\Set \\
 			(g:U'\to U) &\mapsto
