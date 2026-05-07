@@ -387,6 +387,128 @@ or sheaves valued in $\infty$-groupoids.
 	This fits perfectly into the next proposition.
 \end{remark}
 
+\begin{example}[A quotient stack of pencils of quadrics up to orthogonal action]
+	Let \(k\) be a field with \(\operatorname{char}(k)\neq 2\), and let \(V\) be an
+	\(n\)-dimensional \(k\)-vector space. Let
+	\[
+	q \in \operatorname{Sym}^2(V^\vee)
+	\]
+	be a nondegenerate quadratic form. We denote by \(O(q)\) the corresponding
+	orthogonal group scheme, defined by
+	\[
+	O(q)
+	=
+	\{g\in \operatorname{GL}(V) \mid q(gv,gw)=q(v,w)
+	\text{ for all } v,w\in V\}.
+	\]
+	After choosing a basis of \(V\), this can be written as the closed subgroup
+	scheme
+	\[
+	O(q)
+	=
+	\{g\in \operatorname{GL}_n \mid g^T Q g = Q\},
+	\]
+	where \(Q\) is the symmetric matrix representing \(q\).
+	
+	Consider the Grassmannian
+	\[
+	X
+	=
+	\operatorname{Gr}\bigl(2,\operatorname{Sym}^2(V^\vee)\bigr).
+	\]
+	A \(k\)-point of \(X\) is a two-dimensional linear subspace
+	\[
+	P \subset \operatorname{Sym}^2(V^\vee),
+	\]
+	which may be interpreted as a pencil of quadratic forms on \(V\).
+	
+	The group \(O(q)\) acts on \(\operatorname{Sym}^2(V^\vee)\) by change of
+	coordinates. Explicitly, for \(g\in O(q)\) and
+	\(A\in \operatorname{Sym}^2(V^\vee)\), define
+	\[
+	(g\cdot A)(v,w)
+	=
+	A(g^{-1}v,g^{-1}w).
+	\]
+	In matrix notation, this action is given by
+	\[
+	g\cdot A
+	=
+	(g^{-1})^T A g^{-1}.
+	\]
+	This induces an action of \(O(q)\) on \(X\) by
+	\[
+	g\cdot P
+	=
+	\{g\cdot A \mid A\in P\}.
+	\]
+	
+	We define the quotient stack of pencils of quadratic forms modulo orthogonal
+	change of coordinates to be
+	\[
+	\mathcal X
+	=
+	\left[
+	\operatorname{Gr}\bigl(2,\operatorname{Sym}^2(V^\vee)\bigr) / O(q)
+	\right].
+	\]
+	
+	For a \(k\)-scheme \(S\), an object of \(\mathcal X(S)\) consists of an
+	\(O(q)\)-torsor
+	\[
+	\pi\colon E\to S
+	\]
+	together with an \(O(q)\)-equivariant morphism
+	\[
+	E \longrightarrow
+	\operatorname{Gr}\bigl(2,\operatorname{Sym}^2(V^\vee)\bigr).
+	\]
+	Equivalently, it is a rank-two subbundle
+	\[
+	\mathcal P
+	\subset
+	E\times^{O(q)} \operatorname{Sym}^2(V^\vee).
+	\]
+	Thus the stack \(\mathcal X\) classifies families of pencils of quadratic forms
+	on vector bundles locally isomorphic to \(V\), equipped with an orthogonal
+	structure modeled on \(q\), modulo orthogonal changes of coordinates.
+	
+	This quotient stack is typically not an algebraic space. Indeed, the stabilizer
+	of a pencil
+	\[
+	P\in \operatorname{Gr}\bigl(2,\operatorname{Sym}^2(V^\vee)\bigr)
+	\]
+	is the group scheme
+	\[
+	\operatorname{Stab}_{O(q)}(P)
+	=
+	\{g\in O(q) \mid g\cdot P=P\}.
+	\]
+	The central element \(-I\in O(q)\) acts trivially on
+	\(\operatorname{Sym}^2(V^\vee)\), since
+	\[
+	(-I)\cdot A
+	=
+	((-I)^{-1})^T A (-I)^{-1}
+	=
+	(-I)^T A (-I)
+	=
+	A.
+	\]
+	Therefore \(-I\) fixes every pencil \(P\). Hence every stabilizer contains the
+	subgroup
+	\[
+	\{\pm I\}\cong \mu_2.
+	\]
+	Consequently, the quotient stack
+	\[
+	\left[
+	\operatorname{Gr}\bigl(2,\operatorname{Sym}^2(V^\vee)\bigr) / O(q)
+	\right]
+	\]
+	has nontrivial stabilizers at every point. In particular, it is a genuinely
+	stacky quotient rather than an ordinary quotient variety or algebraic space.
+\end{example}
 
 \begin{lemma}[Products and pullbacks of stacks]
 	\cite[][04TD]{stacks-project}
@@ -448,6 +570,28 @@ or sheaves valued in $\infty$-groupoids.
 	\end{enumerate}
 \end{definition}
 
+\begin{remark}
+	The inertia stack should be thought of as the stack-theoretic analogue of the stabilizer of a group action. Since stacks take values in groupoids, points may have non-trivial automorphism groups, and the inertia stack records these automorphisms globally.
+	
+	Let $G$ be an algebraic group acting on a scheme $X$. For a point $x\in X$, the stabilizer is
+	\[
+	G_x = \{g\in G \mid g\cdot x = x\}.
+	\]
+	In the quotient stack $[X/G]$, this stabilizer appears as the automorphism group of the corresponding object:
+	\[
+	\Aut_{[X/G]}(x) \cong G_x.
+	\]
+	The inertia stack collects these automorphism groups into a single stack. 
+	In the quotient case, this gives 
+	\[
+	\mathcal{I}_{[X/G]} \cong [{(x,g)\in X\times G \mid g\cdot x = x}/G]
+	\]
+	From a higher categorcal perspective, when we view stacks as $2$-truncated $\infty$-stacks, we can view the inertia stack essentially as the loop stack 
+	\[
+	\mathcal{I}_\mathcal{X} \simeq \text{Map}(S^1, \mathcal{X}).
+	\]
+	Thus, any non trivial, non free action of an algebraic group $G$ on a scheme $X$ induces a proper quotient stack.
+\end{remark}
 
 \begin{lemma}
 	Let $\mathcal X$ be an algebraic stack over $S$. Then there is an isomorphism of stacks
