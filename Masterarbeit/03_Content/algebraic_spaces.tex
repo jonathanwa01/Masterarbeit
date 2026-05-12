@@ -19,7 +19,7 @@ We have seen in ... that the representable presheaf of a scheme is indeeed a she
 
 \begin{definition}[Algebraic Space]
 	(\cite[][(Definition 4.1.2), p.~105]{alper2026stacks})
-	An algebraic space $X$ is a sheaf $X:\SchOver{Et} \to \Set$, such that there exists a scheme $U$ and an \etale\ surjection $U\to X$ representable by schemes.
+	An algebraic space $X$ is a sheaf $X:\SchOver{S} \to \Set$ in the fppf-topology, such that there exists a scheme $U$ and an \etale\ surjection $U\to X$ representable by schemes.
 \end{definition}
 
 \begin{remark}
@@ -84,7 +84,7 @@ We have seen in ... that the representable presheaf of a scheme is indeeed a she
 	\]
 	It is well-defined because $s(h)$ and $t(h)$ define the same class in $F(T)$, hence have the same image in $X(T)$.
 	
-	To prove surjectivity, let $(f,g)\in (U\times_XU)(T)$. Since $p\circ f=p\circ g$ in $X(T)$, the two sections of $F(T)$ defined by $f$ and $g$ become equal in the sheafification. Hence, by \cite[][Tag 00WK]{stacks-project} there exists an \etale\ covering $\{T_i\to T\}$ such that the restrictions of $f$ and $g$ have the same image in
+	To prove surjectivity, let $(f,g)\in (U\times_XU)(T)$. Since $p\circ f=p\circ g$ in $X(T)$, the two sections of $F(T)$ defined by $f$ and $g$ become equal in the sheafification. Hence, by \cite[][Tag 00WK]{stacks-project} there exists a covering $\{T_i\to T\}$ such that the restrictions of $f$ and $g$ have the same image in
 	\[
 	F(T_i)=U(T_i)/R(T_i).
 	\]
@@ -92,7 +92,7 @@ We have seen in ... that the representable presheaf of a scheme is indeeed a she
 	\[
 	s\circ h_i=f|_{T_i},\qquad t\circ h_i=g|_{T_i}.
 	\]
-	On overlaps, the restrictions of $h_i$ and $h_j$ have the same images under $(s,t):R\to U\times_SU$. Since $(s,t)$ is a monomorphism, they are equal. Because $R$ is representable, it is a sheaf on the big \etale\ site, so the $h_i$ glue uniquely to a morphism $h:T\to R$ with
+	On overlaps, the restrictions of $h_i$ and $h_j$ have the same images under $(s,t):R\to U\times_SU$. Since $(s,t)$ is a monomorphism, they are equal. Because $R$ is representable, it is a sheaf, so the $h_i$ glue uniquely to a morphism $h:T\to R$ with
 	\[
 	s\circ h=f,\qquad t\circ h=g.
 	\]
@@ -112,7 +112,7 @@ We have seen in ... that the representable presheaf of a scheme is indeeed a she
 
 
 \begin{lemma}[Quotients by \etale\ equivalence relations]\label{lem:quotient-by-etale-eq}
-	(\cite[Tag 03I2]{stacks-project})
+	(\cite[Tag 0265]{stacks-project})
 	Let $U$ be an affine scheme and let
 	\[
 	R \rightrightarrows U
@@ -190,23 +190,80 @@ We have seen in ... that the representable presheaf of a scheme is indeeed a she
 	such that for every $S$-scheme $T$, the $T$-points $R(T) \subset X(T)\times X(T)$ is an equivalence relation on $X(T)$ and the projections $s,t: R\to X$ are \etale.
 \end{proof}
 
-\begin{lemma}
-	Let $G$ be a finite group scheme acting freely on an $S$-scheme $X$. The naturally defined groupoid 
-	% https://q.uiver.app/#q=WzAsMixbMCwwLCJHXFx0aW1lcyBYIl0sWzEsMCwiWCJdLFswLDEsIiIsMCx7Im9mZnNldCI6LTF9XSxbMCwxLCIiLDIseyJvZmZzZXQiOjF9XV0=
-	\[\begin{tikzcd}
-		{G\times X} & X
-		\arrow[shift left, from=1-1, to=1-2]
-		\arrow[shift right, from=1-1, to=1-2]
-	\end{tikzcd}\]
-	given by $(g,x) \mapsto x$ and $(g,x) \mapsto g\cdot x$ defines an \etale\ equivalence relation.
+% partial reference TAG 06PH.
+\begin{lemma}[Quotients by free finite group actions on algebraic spaces]
+	\label{lem:quotient-free-finite-group-action-alg-spaces}
+	Let $S$ be a scheme, let $G\to S$ be a finite locally free group algebraic space, and let
+	$X$ be an algebraic space over $S$. Suppose that $G$ acts freely on $X$, i.e. the morphism
+	\[
+	j=(a,\pi_2):G\times_S X\longrightarrow X\times_S X,
+	\qquad (g,x)\longmapsto (g\cdot x,x)
+	\]
+	is a monomorphism. Then the fppf quotient sheaf
+	\[
+	X/G
+	\]
+	is an algebraic space. Moreover, the canonical morphism
+	\[
+	X\to X/G
+	\]
+	is surjective, finite locally free, and hence flat and locally of finite presentation.
 \end{lemma}
 
+\begin{proof}
+	Let
+	\[
+	R:=G\times_S X.
+	\]
+	The action defines a groupoid
+	\[
+	R\rightrightarrows X,
+	\]
+	with source and target maps
+	\[
+	s=\operatorname{pr}_2,\qquad t=a.
+	\]
+	Since the action is free, the morphism
+	\[
+	(t,s):R\to X\times_S X
+	\]
+	is a monomorphism, so this groupoid is an equivalence relation.
+	
+	The morphism $s:R\to X$ is the base change of $G\to S$, hence is finite locally free.
+	The morphism $t:R\to X$ is obtained from $s$ after composing with the automorphism
+	\[
+	G\times_S X\longrightarrow G\times_S X,\qquad (g,x)\longmapsto (g,g\cdot x),
+	\]
+	and is therefore also finite locally free. In particular, both $s$ and $t$ are flat and locally
+	of finite presentation.
+	
+	By the theorem \cite[Tag 04S6]{stacks-project} on quotients by flat locally finitely presented equivalence relations in algebraic spaces, the fppf quotient sheaf
+	\[
+	X/G=X/R
+	\]
+	is an algebraic space. The morphism $X\to X/G$ is surjective by construction of the
+	quotient sheaf, and it is flat and locally of finite presentation. Since after base change
+	along the cover $X\to X/G$ one obtains
+	\[
+	X\times_{X/G}X \cong G\times_S X,
+	\]
+	the morphism $X\to X/G$ is finite locally free by fpqc descent.
+\end{proof}
+
 \begin{corollary}
-	Let $G$ be a finite group scheme $G$ acting freely on an $S$-scheme $X$. Then the quotient $X/G$ is an algebraic space.
+	Let $G$ be a finite group scheme acting freely on an $S$-scheme $X$. The naturally defined groupoid 
+	% https://q.uiver.app/#q=WzAsMixbMCwwLCJHXFx0aW1lcyBYIl0sWzEsMCwiWCJdLFswLDEsInMiLDAseyJvZmZzZXQiOi0xfV0sWzAsMSwidCIsMix7Im9mZnNldCI6MX1dXQ==
+	\[\begin{tikzcd}
+		{G\times X} & X
+		\arrow["s", shift left, from=1-1, to=1-2]
+		\arrow["t"', shift right, from=1-1, to=1-2]
+	\end{tikzcd}\]
+	given by $t: (g,x) \mapsto x$ and $t: (g,x) \mapsto g\cdot x$ defines an \etale\ equivalence relation. In particular the quotient $X/G$ is an algebraic space.
 \end{corollary}
 
 \begin{proof}
-	Since $G$ acts freely, $(s, t): R\to X\times X$ is a monomorphism and since $G$ is finite, the projections $s, t$ are finite \etale. Hence, by lemma \ref{lem:quotient-by-etale-eq}, the quotient $X/G$ is an algebraic space.
+	Since $G$ acts freely, $(s, t): R\to X\times X$ is a monomorphism. Since $G$ is finite, the projections $s, t$ are finite \etale. 
+	Hence, by lemma \ref{lem:quotient-by-etale-eq}, the quotient $X/G$ is an algebraic space.
 \end{proof}
 
 TODO: Quotients of spaces by free finite algebraic group actions

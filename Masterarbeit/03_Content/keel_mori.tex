@@ -24,6 +24,18 @@ The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by fir
 	This additional structure is crucial in the construction of coarse moduli spaces, as it provides a local situation in which quotients can be formed and then glued via descent.
 \end{remark}
 
+\begin{lemma}[{\cite[Tag 0DUM]{stacks-project}}]
+	\label{lem-groupoid-representation-of-well-nigh-affine}
+	Let $\mathcal{X}$ be an algebraic stack. Then the following are equivalent:
+	\begin{enumerate}
+		\item $\mathcal{X}$ is well-nigh affine;
+		\item there exists a groupoid scheme $(U,R,s,t,c)$ with $U$ and $R$ affine and
+		$s,t \colon R \to U$ finite locally free such that
+		$\mathcal{X} \cong [U/R]$.
+	\end{enumerate}
+	If these conditions hold, then $\mathcal{X}$ is quasi-compact, quasi-DM, and separated.
+\end{lemma}
+
 
 \begin{lemma}[Affine invariant quotient construction]\label{lem:affine-invariant-quotient}
 	Let
@@ -148,27 +160,18 @@ The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by fir
 	\[
 	U \to \Spec(C)
 	\]
-	is $R$-invariant and therefore induces a morphism
-	\[
-	f : \mathcal X \to \Spec(C).
-	\]
-	
+	is $R$-invariant and therefore induces a morphism $f : \mathcal X \to \Spec(C).$	
 	Set
 	\[
 	X := \Spec(C).
 	\]
 	
 	It remains to show that $f$ is a coarse moduli space and satisfies the
-	stated properties. This is proven in \cite[Tag 0DUP]{stacks-project},
-	where it is shown that:
+	stated properties. 
 	
-	\begin{enumerate}
-		\item the morphism $f$ is a uniform categorical moduli space in the
-		category of affine schemes;
-		\item $f$ is separated and quasi-compact;
-		\item $f$ is a universal homeomorphism.
-	\end{enumerate}
-	
+	By lemma \ref{lem-groupoid-representation-of-well-nigh-affine} $\mathcal{X}$ is separated. Since $X$ is affine, hence separated, $f$ is separated.
+	$U\to \mathcal{X}$ is surjective and $U\to X$ is quasi-compact, hence $f$ is quasi-compact by \cite[Tag 050X]{stacks-project}.
+	The details about $f$ being universially surjective is prooven in more detail in the proof here \cite[Tag 0DUP]{stacks-project}.
 	In particular, $X=\Spec(C)$ is the desired coarse moduli space of
 	$\mathcal X$ in the affine case.
 \end{proof}
@@ -179,7 +182,7 @@ The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by fir
 \end{lemma}
 
 \begin{proof}
-	Let $Y$ be an algebraic space and let $h:\mathcal{X}\to Y$ be a morphism of stacks. We want to construct a morphisn $g:X\to Y$ such that the following commutes:
+	Let $Y$ be an algebraic space and let $h:\mathcal{X}\to Y$ be a morphism of stacks. We want to construct a morphisn unique morphism $g:X\to Y$ such that the following commutes:
 	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG1hdGhjYWx7WH0iXSxbMCwxLCJYIl0sWzEsMCwiWSJdLFsxLDIsImciLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMCwyLCJoIl0sWzAsMSwiZiIsMl1d
 	\[\begin{tikzcd}
 		{\mathcal{X}} & Y \\
@@ -190,24 +193,17 @@ The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by fir
 	\end{tikzcd}\]
 
 
-	Let \(V\to Y\) be an étale surjection with \(V\) affine, and let
-	\(V_\bullet\) be its Čech nerve. Since \(Y\) is the sheaf quotient of the
+	Let \(V\to Y\) be an étale surjection with \(V\) affine. Since \(Y\) is the sheaf quotient of the
 	étale equivalence relation \(R_V=V\times_Y V\rightrightarrows V\), we have
 	\[
-	Y \cong \Coeq(R_V\rightrightarrows V) \cong \operatorname{colim}_{\Delta^{\op}} V_\bullet
+	Y \cong \Coeq(R_V\rightrightarrows V)
 	\]
 	in sheaves. Therefore, for every sheaf \(T\),
 	\[
 	\Hom(T,Y)
 	\cong
-	\lim_{\Delta}\Hom(T,V_\bullet).
-	\]
-	Equivalently,
-	\[
-	\Hom(T,Y)
-	\cong
 	\operatorname{Eq}\left(
-	\Hom(T,V)\rightrightarrows \Hom(T,V\times_Y V)
+	\Hom(T,V)\rightrightarrows \Hom(T, R_V)
 	\right).
 	\]
 	It therefore suffices to construct $g:X \to V$ and check compatibility over $R_V$.
@@ -300,5 +296,132 @@ The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by fir
 		\arrow["g"', dashed, from=4-1, to=4-2]
 	\end{tikzcd}\]
 	
-	Again by lemma \ref{lem:local-ex-cms-in-affines}, uniqueness implies that these two maps agree. Now since$Y$ is a sheaf, by descent there exists a unique $g:X\to Y$. After pulling back $g$ along $V\to Y$, we obtain $h_V = g_0\circ f_V$ and $h_{R_V} = g_1 \circ f_{R_V}$. Again by descent, $h = g\circ f$ globally.
+	Again by lemma \ref{lem:local-ex-cms-in-affines}, uniqueness implies that these two maps agree. Now since $Y$ is a sheaf, there exists a unique $g:X\to Y$. After pulling back $g$ along $V\to Y$, we obtain $h_V = g_0\circ f_V$ and $h_{R_V} = g_1 \circ f_{R_V}$. Again by descent, $h = g\circ f$ globally.
+\end{proof}
+
+
+\begin{lemma}
+	(\cite[Tag 0DUE]{stacks-project})
+	Let $\mathcal{X}$ be an algebraic stack with finite inertia. Then $\mathcal{X}$ admits an \etale\ cover by well-nigh affine stacks.
+	
+	More precisely, there exists a family of morphisms
+	\[
+	g_i : \mathcal{X}_i \to \mathcal{X}
+	\]
+	such that:
+	\begin{enumerate}
+		\item the morphisms $g_i$ are representable by algebraic spaces, separated, and étale,
+		
+		\item the induced map
+		\[
+		\coprod_i \mathcal{X}_i \to \mathcal{X}
+		\]
+		is surjective,
+		
+		\item each $\mathcal{X}_i$ is well-nigh affine,
+		
+		\item the natural morphism
+		\[
+		\mathcal{I}_{\mathcal{X}_i}
+		\longrightarrow
+		\mathcal{X}_i \times_{\mathcal{X}} \mathcal{I}_{\mathcal{X}}
+		\]
+		is an isomorphism.
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	By Stacks Project, Lemma~\texttt{0DU4}, for every point
+	$x \in |\mathcal{X}|$ there exists a morphism
+	\[
+	g_x : \mathcal{U}_x \to \mathcal{X}
+	\]
+	such that:
+	\begin{enumerate}
+		\item $x \in |g_x|(|\mathcal{U}_x|)$,
+		
+		\item $\mathcal{U}_x$ is well-nigh affine,
+		
+		\item the natural morphism
+		\[
+		\mathcal{I}_{\mathcal{U}_x}
+		\to
+		\mathcal{U}_x \times_{\mathcal{X}} \mathcal{I}_{\mathcal{X}}
+		\]
+		is an isomorphism,
+		
+		\item $g_x$ is representable by algebraic spaces,
+		separated, and étale.
+	\end{enumerate}
+	
+	Choose a smooth surjective morphism
+	\[
+	p : V \to \mathcal{X}
+	\]
+	with $V$ a scheme. Since $|V|$ is a set, for every point
+	$v \in |V|$ we may choose a morphism
+	\[
+	g_v : \mathcal{U}_v \to \mathcal{X}
+	\]
+	as above corresponding to the image point
+	\[
+	x = |p|(v) \in |\mathcal{X}|.
+	\]
+	
+	Consider the base change
+	\[
+	\mathcal{U}_v \times_{\mathcal{X}} V \to V.
+	\]
+	Since $g_v$ is representable and étale, this morphism is étale.
+	By construction, there exists a point of
+	\[
+	|\mathcal{U}_v \times_{\mathcal{X}} V|
+	\]
+	mapping to $v$. Since étale morphisms are open, after replacing $V$
+	by a suitable open neighbourhood of $v$, we may assume that this
+	open neighbourhood factors through $g_v$.
+	
+	Thus for every $v \in |V|$ there exists an open neighbourhood
+	\[
+	W_v \subset V
+	\]
+	such that the composite
+	\[
+	W_v \to V \to \mathcal{X}
+	\]
+	factors through
+	\[
+	g_v : \mathcal{U}_v \to \mathcal{X}.
+	\]
+	
+	Because $|V|$ is a set, the family $\{W_v\}_{v \in |V|}$ is a
+	set-indexed open cover of $V$. Choose a refinement by affine opens
+	\[
+	V = \bigcup_{i \in I} V_i
+	\]
+	with $I$ a set. For each $i \in I$, choose some $v_i \in |V|$
+	such that
+	\[
+	V_i \subset W_{v_i}.
+	\]
+	Then the morphism
+	\[
+	V_i \to \mathcal{X}
+	\]
+	factors through
+	\[
+	g_{v_i} : \mathcal{U}_{v_i} \to \mathcal{X}.
+	\]
+	
+	Since $V \to \mathcal{X}$ is surjective, the family
+	\[
+	\{ g_{v_i} : \mathcal{U}_{v_i} \to \mathcal{X} \}_{i \in I}
+	\]
+	is surjective as well. Hence
+	\[
+	\coprod_{i \in I} \mathcal{U}_{v_i} \to \mathcal{X}
+	\]
+	is surjective.
+	
+	All remaining properties follow from Lemma~\texttt{0DU4}.
 \end{proof}
