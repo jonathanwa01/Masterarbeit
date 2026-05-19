@@ -129,7 +129,7 @@ The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by fir
 \end{lemma}
 
 \begin{proof}
-	By \cite[Tag 0DUM]{stacks-project}, there exists a presentation
+	By \ref{lem-groupoid-representation-of-well-nigh-affine} there exists a presentation
 	\[
 	\mathcal X = [U/R],
 	\]
@@ -176,127 +176,233 @@ The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by fir
 	$\mathcal X$ in the affine case.
 \end{proof}
 
+\begin{lemma}\label{lem:cms-pullback}
+	(\cite[Tag 0DUQ][]{stacks-project})
+	Let $h: \mathcal{X}' \to \mathcal{X}$ be an \etale\ morphism of well-nigh affine stacks, which induces isomorphisms on automorphism groups. Then the following diagram is cartesian and the induced morphisn $M'\to M$ is \etale.
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhjYWx7WH0nIl0sWzEsMCwiXFxtYXRoY2Fse1h9Il0sWzAsMSwiWCciXSxbMSwxLCJYIl0sWzAsMV0sWzEsM10sWzIsM10sWzAsMl0sWzAsMywiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
+	\[\begin{tikzcd}
+		{\mathcal{X}'} & {\mathcal{X}} \\
+		{X'} & X
+		\arrow[from=1-1, to=1-2]
+		\arrow[from=1-1, to=2-1]
+		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+		\arrow[from=1-2, to=2-2]
+		\arrow[from=2-1, to=2-2]
+	\end{tikzcd}\]
+\end{lemma}
+
 \begin{lemma}
 	(\cite[Tag 0DUR][]{stacks-project})
 	The morphisms of lemma \ref{lem:local-ex-cms-in-affines} is universal for morphisms into algebraic spaces.
 \end{lemma}
 
 \begin{proof}
-	Let $Y$ be an algebraic space and let $h:\mathcal{X}\to Y$ be a morphism of stacks. We want to construct a morphisn unique morphism $g:X\to Y$ such that the following commutes:
-	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG1hdGhjYWx7WH0iXSxbMCwxLCJYIl0sWzEsMCwiWSJdLFsxLDIsImciLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMCwyLCJoIl0sWzAsMSwiZiIsMl1d
-	\[\begin{tikzcd}
-		{\mathcal{X}} & Y \\
-		X
-		\arrow["h", from=1-1, to=1-2]
-		\arrow["f"', from=1-1, to=2-1]
-		\arrow["g"', dashed, from=2-1, to=1-2]
-	\end{tikzcd}\]
-
-
-	Let \(V\to Y\) be an étale surjection with \(V\) affine. Since \(Y\) is the sheaf quotient of the
-	étale equivalence relation \(R_V=V\times_Y V\rightrightarrows V\), we have
+	Let \(Y\) be an algebraic space and let
+	\(h:\mathcal X\to Y\) be a morphism. We construct a unique morphism
+	\(g:X\to Y\) such that \(h=g\circ f\).
+	
+	Choose an étale surjection \(p:V\to Y\), where \(V\) is a scheme
+	which is a disjoint union of affine schemes. Put
 	\[
-	Y \cong \Coeq(R_V\rightrightarrows V)
+	R=V\times_Y V.
 	\]
-	in sheaves. Therefore, for every sheaf \(T\),
+	Then \(Y\) is the sheaf quotient of the étale equivalence relation
 	\[
-	\Hom(T,Y)
-	\cong
-	\operatorname{Eq}\left(
-	\Hom(T,V)\rightrightarrows \Hom(T, R_V)
-	\right).
+	R\rightrightarrows V.
 	\]
-	It therefore suffices to construct $g:X \to V$ and check compatibility over $R_V$.
 	
 	Consider the base change of $h$ along the \etale\ cover $V\to Y$:
-	% https://q.uiver.app/#q=WzAsNCxbMCwxLCJcXG1hdGhjYWx7WH0iXSxbMSwxLCJZIl0sWzEsMCwiViJdLFswLDAsIlxcbWF0aGNhbHtYfV9WIl0sWzAsMSwiaCIsMl0sWzIsMV0sWzMsMF0sWzMsMiwiaF9WIl0sWzMsMSwiIiwwLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
+	% https://q.uiver.app/#q=WzAsNCxbMSwxLCJZIl0sWzAsMCwiXFxtYXRoY2Fse1h9X1YiXSxbMCwxLCJWIl0sWzEsMCwiXFxtYXRoY2Fse1h9Il0sWzEsMCwiIiwwLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzEsMiwiaF9WIiwyXSxbMiwwXSxbMywwLCJoIiwyXSxbMSwzXV0=
 	\[\begin{tikzcd}
-		{\mathcal{X}_V} & V \\
-		{\mathcal{X}} & Y
-		\arrow["{h_V}", from=1-1, to=1-2]
+		{\mathcal{X}_V} & {\mathcal{X}} \\
+		V & Y
+		\arrow[from=1-1, to=1-2]
+		\arrow["{h_V}"', from=1-1, to=2-1]
+		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+		\arrow["h"', from=1-2, to=2-2]
+		\arrow[from=2-1, to=2-2]
+	\end{tikzcd}\]
+	
+	The morphism \(\mathcal X_V\to V\) has affine target $V$.
+	By Lemma \ref{lem:local-ex-cms-in-affines}, it factors uniquely as
+	\[
+	\mathcal X_V \xrightarrow{f_V} X_V
+	\xrightarrow{g_V} V.
+	\]
+	Here \(X_V\) is the algebraic space associated to \(\mathcal X_V\) by
+	the lemma \ref{lem:local-ex-cms-in-affines}.
+	Now consider
+	\[
+	\mathcal X_R:=\mathcal X\times_Y R,
+	\]
+	Equivalently,
+	\[
+	\mathcal X_R
+	\cong
+	\mathcal X_V\times_{\mathcal X}\mathcal X_V,
+	\]
+	by the following diagram:
+	% https://q.uiver.app/#q=WzAsOCxbMCwyLCJWIl0sWzEsMiwiWSJdLFszLDEsIlYiXSxbMiwxLCJSIl0sWzEsMSwiXFxtYXRoY2Fse1h9Il0sWzAsMSwiXFxtYXRoY2Fse1h9X1YiXSxbMywwLCJcXG1hdGhjYWx7WH1fViJdLFsyLDAsIlxcbWF0aGNhbHtYfV9SIl0sWzAsMV0sWzIsMV0sWzMsMCwiIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzMsMl0sWzUsNF0sWzUsMF0sWzYsMl0sWzYsNF0sWzcsNV0sWzcsNl0sWzMsMV0sWzcsMywiIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzcsNF0sWzQsMV1d
+	\[\begin{tikzcd}
+		&& {\mathcal{X}_R} & {\mathcal{X}_V} \\
+		{\mathcal{X}_V} & {\mathcal{X}} & R & V \\
+		V & Y
+		\arrow[from=1-3, to=1-4]
+		\arrow[from=1-3, to=2-1]
+		\arrow[from=1-3, to=2-2]
+		\arrow[dashed, from=1-3, to=2-3]
+		\arrow[from=1-4, to=2-2]
+		\arrow[from=1-4, to=2-4]
+		\arrow[from=2-1, to=2-2]
+		\arrow[from=2-1, to=3-1]
+		\arrow[from=2-2, to=3-2]
+		\arrow[from=2-3, to=2-4]
+		\arrow[dashed, from=2-3, to=3-1]
+		\arrow[from=2-3, to=3-2]
+		\arrow[from=2-4, to=3-2]
+		\arrow[from=3-1, to=3-2]
+	\end{tikzcd}\]
+	Let \(X_R\) be the algebraic space associated to \(\mathcal X_R\) by lemma \ref{lem:local-ex-cms-in-affines}, then the morphism
+	\[
+	\mathcal X_R\to R
+	\]
+	factors uniquely as
+	\[
+	\mathcal X_R \xrightarrow{f_R} X_R
+	\xrightarrow{g_R} R.
+	\]
+	All of this fit into the folllowing commutative diagram:
+	% https://q.uiver.app/#q=WzAsOSxbMCwyLCJSIl0sWzEsMiwiViJdLFsyLDIsIlkiXSxbMiwxLCJYX1IiXSxbMywxLCJYX1YiXSxbNCwxLCJYIl0sWzEsMCwiXFxtYXRoY2Fse1h9X1IiXSxbMiwwLCJcXG1hdGhjYWx7WH1fViJdLFszLDAsIlxcbWF0aGNhbHtYfSJdLFszLDAsImdfUiIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFs0LDEsImdfViIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFs1LDIsImciLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbNiwwLCJoX1IiLDIseyJsYWJlbF9wb3NpdGlvbiI6NDB9XSxbNiw3LCIiLDAseyJvZmZzZXQiOi0xfV0sWzcsOF0sWzcsMSwiaF9WIiwyLHsibGFiZWxfcG9zaXRpb24iOjQwfV0sWzYsMywiZl9SIl0sWzcsNCwiZl9WIl0sWzgsNSwiZiJdLFswLDEsIiIsMCx7Im9mZnNldCI6LTF9XSxbMCwxLCIiLDAseyJvZmZzZXQiOjF9XSxbNiw3LCIiLDAseyJvZmZzZXQiOjF9XSxbMyw0LCIiLDEseyJvZmZzZXQiOjF9XSxbNCw1XSxbMSwyXSxbMyw0LCIiLDEseyJvZmZzZXQiOi0xfV0sWzgsMiwiaCIsMix7ImxhYmVsX3Bvc2l0aW9uIjo0MH1dXQ==
+	\begin{equation}
+		\label{fig:cms-prism}
+		\begin{tikzcd}
+			& {\mathcal{X}_R} & {\mathcal{X}_V} & {\mathcal{X}} & \\
+			&& {X_R} & {X_V} & X \\
+			R & V & Y
+			\arrow[shift left, from=1-2, to=1-3]
+			\arrow[shift right, from=1-2, to=1-3]
+			\arrow["{f_R}", from=1-2, to=2-3]
+			\arrow["{h_R}"'{pos=0.4}, from=1-2, to=3-1]
+			\arrow[from=1-3, to=1-4]
+			\arrow["{f_V}", from=1-3, to=2-4]
+			\arrow["{h_V}"'{pos=0.4}, from=1-3, to=3-2]
+			\arrow["f", from=1-4, to=2-5]
+			\arrow["h"'{pos=0.4}, from=1-4, to=3-3]
+			\arrow[shift right, from=2-3, to=2-4]
+			\arrow[shift left, from=2-3, to=2-4]
+			\arrow["{g_R}"', dashed, from=2-3, to=3-1]
+			\arrow[from=2-4, to=2-5]
+			\arrow["{g_V}"', dashed, from=2-4, to=3-2]
+			\arrow["g"', dashed, from=2-5, to=3-3]
+			\arrow[shift left, from=3-1, to=3-2]
+			\arrow[shift right, from=3-1, to=3-2]
+			\arrow[from=3-2, to=3-3]
+		\end{tikzcd}
+	\end{equation}
+	Our goal is to define $g:X\to Y$.
+	The morphisms $X_R\rightrightarrows X_V$ are induced by
+	$\mathcal{X}_R \rightrightarrows \mathcal{X}_V \to X_V$
+	via lemma \ref{lem:local-ex-cms-in-affines}. By lemma \ref{lem:cms-pullback} the following squares of the diagram is cartesian:
+	% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXG1hdGhjYWx7WH1fUiJdLFsxLDAsIlxcbWF0aGNhbHtYfV9WIl0sWzAsMSwiWF9SIl0sWzEsMSwiWF9WIl0sWzIsMCwiXFxtYXRoY2Fse1h9Il0sWzIsMSwiWCJdLFswLDEsInRfXFxtYXRoY2Fse1h9IiwyLHsib2Zmc2V0IjoxfV0sWzEsM10sWzIsMywidCIsMix7Im9mZnNldCI6MX1dLFswLDJdLFswLDMsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXIifX1dLFsxLDRdLFs0LDVdLFszLDVdLFsxLDUsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXIifX1dLFswLDEsInNfXFxtYXRoY2Fse1h9IiwwLHsib2Zmc2V0IjotMX1dLFsyLDMsInMiLDAseyJvZmZzZXQiOi0xfV1d
+	\[\begin{tikzcd}
+		{\mathcal{X}_R} & {\mathcal{X}_V} & {\mathcal{X}} \\
+		{X_R} & {X_V} & X
+		\arrow["{t_\mathcal{X}}"', shift right, from=1-1, to=1-2]
+		\arrow["{s_\mathcal{X}}", shift left, from=1-1, to=1-2]
 		\arrow[from=1-1, to=2-1]
 		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+		\arrow[from=1-2, to=1-3]
 		\arrow[from=1-2, to=2-2]
-		\arrow["h"', from=2-1, to=2-2]
+		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-2, to=2-3]
+		\arrow[from=1-3, to=2-3]
+		\arrow["t"', shift right, from=2-1, to=2-2]
+		\arrow["s", shift left, from=2-1, to=2-2]
+		\arrow[from=2-2, to=2-3]
 	\end{tikzcd}\]
+	By compatibility of the construction with étale base change along $X_V\to X$, we have
+	\[
+	\mathcal{X}_R \cong \mathcal{X}_V \times_\mathcal{X} \mathcal{X}_V \cong (X_V \times_X \mathcal{X}) \times_\mathcal{X} (X_V \times_X \mathcal{X}) \cong (X_V\times_X X_V) \times_X \mathcal{X}
+	\]
+	The coarse moduli space of $(X_V\times_X X_V) \times_X \mathcal{X}$ is $(X_V\times_X X_V) $ by lemma \ref{lem:cms-pullback}. However we have that the coarse moduli space of $\mathcal{X}_R$ is $X_R$ by definition. Hence, by universality we have
+	\[
+	X_R \cong X_V\times_X X_V.
+	\]
+	So the back and the front of the commutative prism \ref{fig:cms-prism} are cartesian.
 	
-	Now $V$ is affine, hence by lemma \ref{lem:local-ex-cms-in-affines}, the morphism $\mathcal{X} \to X$ is universal in the category of affine schemes. So there exists a unique morphism $g_0: X_V := X\times_Y V\to V$, such that the following commutes:
-	% https://q.uiver.app/#q=WzAsMyxbMCwxLCJYX1YiXSxbMCwwLCJcXG1hdGhjYWx7WH1fViJdLFsxLDAsIlYiXSxbMCwyLCJnXzAiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMSwyLCJoX1YiXSxbMSwwLCJmX1YiLDJdXQ==
-	\[\begin{tikzcd}
-		{\mathcal{X}_V} & V \\
-		{X_V}
-		\arrow["{h_V}", from=1-1, to=1-2]
-		\arrow["{f_V}"', from=1-1, to=2-1]
-		\arrow["{g_0}"', dashed, from=2-1, to=1-2]
-	\end{tikzcd}\]
-	We repeat the process for $R_V$. Let $\mathcal{X}_{R_V} := \mathcal{X} \times_Y R_V$ and $h_{R_V}: \mathcal{X}_{R_V} \to R_V$ be the pullback along the \etale\ cover $R_V\to Y$. The following diagram is a pullback:
+	Let \(s,t:R\rightrightarrows V\) and
+	\(s_X,t_X:X_R\rightrightarrows X_V\) be the two projections. We claim
+	that
+	\[
+	s\circ g_R = g_V\circ s_X,
+	\qquad
+	t\circ g_R = g_V\circ t_X.
+	\]
+	Indeed, after precomposing with \(f_R:\mathcal X_R\to X_R\), both
+	sides of the first equality give the same morphism
+	\(\mathcal X_R\to V\), namely 
+	\[
+		\mathcal{X}_R \xrightarrow{h_R} R \xrightarrow{s} V = \mathcal{X}_R \xrightarrow{s_\mathcal{X}} \mathcal{X}_V \xrightarrow{h_V} V.
+	\]
+	Since
+	\(f_R\) is universal for morphisms to affine schemes locally on \(V\),
+	uniqueness gives the equality. The second equality is analogous.
 	
-	% https://q.uiver.app/#q=WzAsNixbMSwwLCJSX1YiXSxbMSwxLCJWIl0sWzAsMSwiXFxtYXRoY2Fse1h9X1YiXSxbMSwyLCJZIl0sWzAsMiwiXFxtYXRoY2Fse1h9Il0sWzAsMCwiXFxtYXRoY2Fse1h9X3tSX1Z9Il0sWzIsMSwiaF9WIl0sWzQsMywiaCIsMl0sWzEsM10sWzAsMSwiIiwyLHsib2Zmc2V0IjoxfV0sWzAsMSwiIiwyLHsib2Zmc2V0IjotMX1dLFsyLDRdLFs1LDIsIiIsMCx7Im9mZnNldCI6LTF9XSxbNSwwXSxbMiwzLCIiLDIseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XSxbNSwxLCIiLDIseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XSxbMCwzLCIiLDIseyJjdXJ2ZSI6LTJ9XSxbNSwyLCIiLDAseyJvZmZzZXQiOjF9XV0=
+	Thus \(g_V:X_V\to V\) is compatible with the descent data
+	\[
+	X_R\rightrightarrows X_V
+	\qquad\text{and}\qquad
+	R\rightrightarrows V.
+	\]
+	Equivalently, we have a morphism of étale equivalence relations
+	\[
+	(X_R\rightrightarrows X_V)
+	\longrightarrow
+	(R\rightrightarrows V).
+	\]
+	Since
+	\[
+	X \cong X_V/X_R
+	\qquad\text{and}\qquad
+	Y \cong V/R
+	\]
+	as sheaves for the \etale\ topology, by the universal property of the quotient sheaf and by $Y$ being a sheaf in the \etale\ topology this morphism of equivalence relations descends to a unique morphism
+	\[
+	g:X\to Y.
+	\]
+	In fact, this is precisely indicated via Yoneda in the equalizer diagram:
+	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJZKFgpIl0sWzEsMCwiWShYX1YpIl0sWzIsMCwiWShYX1IpIl0sWzAsMV0sWzEsMiwiIiwwLHsib2Zmc2V0IjotMX1dLFsxLDIsIiIsMCx7Im9mZnNldCI6MX1dXQ==
 	\[\begin{tikzcd}
-		{\mathcal{X}_{R_V}} & {R_V} \\
-		{\mathcal{X}_V} & V \\
-		{\mathcal{X}} & Y
+		{Y(X)} & {Y(X_V)} & {Y(X_R)}
 		\arrow[from=1-1, to=1-2]
-		\arrow[shift left, from=1-1, to=2-1]
-		\arrow[shift right, from=1-1, to=2-1]
-		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
-		\arrow[shift right, from=1-2, to=2-2]
-		\arrow[shift left, from=1-2, to=2-2]
-		\arrow[bend left, from=1-2, to=3-2]
-		\arrow["{h_V}", from=2-1, to=2-2]
-		\arrow[from=2-1, to=3-1]
-		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=2-1, to=3-2]
-		\arrow[from=2-2, to=3-2]
-		\arrow["h"', from=3-1, to=3-2]
-	\end{tikzcd}\]
-
-	
-	
-	Since $R_V$ as a product of affines is itself affine, again by lemma \ref{lem:local-ex-cms-in-affines} we obtain a unique morphism $g_1: X_{R_V} \to R_V$ fitting into this diagram:
-	% https://q.uiver.app/#q=WzAsMyxbMCwxLCJYX3tSX1Z9Il0sWzAsMCwiXFxtYXRoY2Fse1h9X3tSX1Z9Il0sWzEsMCwiUl9WIl0sWzAsMiwiZ18xIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzEsMiwiaF97Ul9WfSJdLFsxLDAsImZfe1JfVn0iLDJdXQ==
-	\[\begin{tikzcd}
-		{\mathcal{X}_{R_V}} & {R_V} \\
-		{X_{R_V}}
-		\arrow["{h_{R_V}}", from=1-1, to=1-2]
-		\arrow["{f_{R_V}}"', from=1-1, to=2-1]
-		\arrow["{g_1}"', dashed, from=2-1, to=1-2]
-	\end{tikzcd}\]
-	
-	Now both pullbacks of $g_0$ to $X_{R_V}$ agree and correspond to the map 
-	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJYX3tSX1Z9Il0sWzEsMCwiUl9WIl0sWzIsMCwiViJdLFsxLDIsIiIsMCx7Im9mZnNldCI6LTF9XSxbMSwyLCIiLDIseyJvZmZzZXQiOjF9XSxbMCwxLCJnXzEiLDJdXQ==
-	\[\begin{tikzcd}
-		{X_{R_V}} & {R_V} & V
-		\arrow["{g_1}"', from=1-1, to=1-2]
 		\arrow[shift left, from=1-2, to=1-3]
 		\arrow[shift right, from=1-2, to=1-3]
 	\end{tikzcd}\]
-	 by commutativity of the following diagram:
-	% https://q.uiver.app/#q=WzAsOSxbMCwyLCJYX1YiXSxbMSwyLCJWIl0sWzEsMSwiUl9WIl0sWzAsMSwiWF97Ul9WfSJdLFsxLDMsIlkiXSxbMCwzLCJYIl0sWzIsMCwiXFxtYXRoY2Fse1h9X3tSX1Z9Il0sWzIsMSwiXFxtYXRoY2Fse1h9X1YiXSxbMiwyLCJcXG1hdGhjYWx7WH0iXSxbMCwxLCJnXzAiLDJdLFsyLDEsIiIsMix7Im9mZnNldCI6MX1dLFsyLDEsIiIsMix7Im9mZnNldCI6LTF9XSxbNSw0LCJnIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzEsNF0sWzAsNV0sWzMsMiwiZ18xIiwyXSxbMywwLCIiLDIseyJvZmZzZXQiOjF9XSxbNiwzLCJmX3tSX1Z9IiwxXSxbNiw3XSxbNywwLCJmX1YiLDEseyJsYWJlbF9wb3NpdGlvbiI6NzB9XSxbMywwLCIiLDIseyJvZmZzZXQiOi0xfV0sWzgsNSwiZiIsMSx7ImxhYmVsX3Bvc2l0aW9uIjo3MH1dLFs4LDQsImgiLDFdLFs3LDhdLFs3LDEsImhfViIsMV0sWzYsMiwiaF97Ul9WfSIsMV1d
-	\[\begin{tikzcd}
-		&& {\mathcal{X}_{R_V}} \\
-		{X_{R_V}} & {R_V} & {\mathcal{X}_V} \\
-		{X_V} & V & {\mathcal{X}} \\
-		X & Y
-		\arrow["{f_{R_V}}"{description}, from=1-3, to=2-1]
-		\arrow["{h_{R_V}}"{description}, from=1-3, to=2-2]
-		\arrow[from=1-3, to=2-3]
-		\arrow["{g_1}"', from=2-1, to=2-2]
-		\arrow[shift right, from=2-1, to=3-1]
-		\arrow[shift left, from=2-1, to=3-1]
-		\arrow[shift right, from=2-2, to=3-2]
-		\arrow[shift left, from=2-2, to=3-2]
-		\arrow["{f_V}"{description, pos=0.7}, from=2-3, to=3-1]
-		\arrow["{h_V}"{description}, from=2-3, to=3-2]
-		\arrow[from=2-3, to=3-3]
-		\arrow["{g_0}"', from=3-1, to=3-2]
-		\arrow[from=3-1, to=4-1]
-		\arrow[from=3-2, to=4-2]
-		\arrow["f"{description, pos=0.7}, from=3-3, to=4-1]
-		\arrow["h"{description}, from=3-3, to=4-2]
-		\arrow["g"', dashed, from=4-1, to=4-2]
-	\end{tikzcd}\]
 	
-	Again by lemma \ref{lem:local-ex-cms-in-affines}, uniqueness implies that these two maps agree. Now since $Y$ is a sheaf, there exists a unique $g:X\to Y$. After pulling back $g$ along $V\to Y$, we obtain $h_V = g_0\circ f_V$ and $h_{R_V} = g_1 \circ f_{R_V}$. Again by descent, $h = g\circ f$ globally.
+	It remains to check that \(h=g\circ f\). This can be checked after the
+	étale surjection \(\mathcal X_V\to \mathcal X\). After pulling back to
+	\(\mathcal X_V\), the equality becomes
+	\[
+	\mathcal X_V \xrightarrow{f_V} X_V
+	\xrightarrow{g_V} V
+	\longrightarrow Y
+	=
+	\mathcal X_V\longrightarrow V\longrightarrow Y,
+	\]
+	which holds by construction of \(g_V\). Hence \(h=g\circ f\).
+	
+	Finally, suppose \(g,g':X\to Y\) both satisfy
+	\[
+	g\circ f = h = g'\circ f.
+	\]
+	Pulling back along the étale cover \(X_V\to X\), the two morphisms
+	\(g|_{X_V}\) and \(g'|_{X_V}\) both factor the same morphism
+	\(\mathcal X_V\to V\). By the uniqueness part of
+	Lemma \ref{lem:local-ex-cms-in-affines}, they agree on \(X_V\).
+	Since \(X_V\to X\) is an étale surjection, it follows that
+	\(g=g'\).
+	
+	Thus \(f:\mathcal X\to X\) is universal for morphisms from
+	\(\mathcal X\) to any algebraic space.
 \end{proof}
 
 
@@ -331,97 +437,32 @@ The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by fir
 \end{lemma}
 
 \begin{proof}
-	By Stacks Project, Lemma~\texttt{0DU4}, for every point
-	$x \in |\mathcal{X}|$ there exists a morphism
-	\[
-	g_x : \mathcal{U}_x \to \mathcal{X}
-	\]
-	such that:
-	\begin{enumerate}
-		\item $x \in |g_x|(|\mathcal{U}_x|)$,
-		
-		\item $\mathcal{U}_x$ is well-nigh affine,
-		
-		\item the natural morphism
-		\[
-		\mathcal{I}_{\mathcal{U}_x}
-		\to
-		\mathcal{U}_x \times_{\mathcal{X}} \mathcal{I}_{\mathcal{X}}
-		\]
-		is an isomorphism,
-		
-		\item $g_x$ is representable by algebraic spaces,
-		separated, and étale.
-	\end{enumerate}
-	
-	Choose a smooth surjective morphism
+	To see that the covering can be indexed by a set, choose a smooth
+	surjective morphism
 	\[
 	p : V \to \mathcal{X}
 	\]
-	with $V$ a scheme. Since $|V|$ is a set, for every point
-	$v \in |V|$ we may choose a morphism
+	with $V$ a scheme. Since $|V|$ is a set, we may apply
+	Lemma \cite[0DU4][]{stacks-project} only to points in the image of $|V| \to |\mathcal{X}|$.
+	
+	Thus for every $v \in |V|$ there exists a morphism
 	\[
 	g_v : \mathcal{U}_v \to \mathcal{X}
 	\]
-	as above corresponding to the image point
+	satisfying the conclusions of Lemma 0DU4 for the point
 	\[
-	x = |p|(v) \in |\mathcal{X}|.
+	x = |p|(v).
 	\]
 	
-	Consider the base change
+	Since $|V|$ is a set, the family
 	\[
-	\mathcal{U}_v \times_{\mathcal{X}} V \to V.
+	\{ g_v : \mathcal{U}_v \to \mathcal{X} \}_{v \in |V|}
 	\]
-	Since $g_v$ is representable and étale, this morphism is étale.
-	By construction, there exists a point of
+	is set-indexed. Moreover, because $p$ is surjective, the images of the
+	morphisms $g_v$ cover $|\mathcal{X}|$. Hence
 	\[
-	|\mathcal{U}_v \times_{\mathcal{X}} V|
-	\]
-	mapping to $v$. Since étale morphisms are open, after replacing $V$
-	by a suitable open neighbourhood of $v$, we may assume that this
-	open neighbourhood factors through $g_v$.
-	
-	Thus for every $v \in |V|$ there exists an open neighbourhood
-	\[
-	W_v \subset V
-	\]
-	such that the composite
-	\[
-	W_v \to V \to \mathcal{X}
-	\]
-	factors through
-	\[
-	g_v : \mathcal{U}_v \to \mathcal{X}.
-	\]
-	
-	Because $|V|$ is a set, the family $\{W_v\}_{v \in |V|}$ is a
-	set-indexed open cover of $V$. Choose a refinement by affine opens
-	\[
-	V = \bigcup_{i \in I} V_i
-	\]
-	with $I$ a set. For each $i \in I$, choose some $v_i \in |V|$
-	such that
-	\[
-	V_i \subset W_{v_i}.
-	\]
-	Then the morphism
-	\[
-	V_i \to \mathcal{X}
-	\]
-	factors through
-	\[
-	g_{v_i} : \mathcal{U}_{v_i} \to \mathcal{X}.
-	\]
-	
-	Since $V \to \mathcal{X}$ is surjective, the family
-	\[
-	\{ g_{v_i} : \mathcal{U}_{v_i} \to \mathcal{X} \}_{i \in I}
-	\]
-	is surjective as well. Hence
-	\[
-	\coprod_{i \in I} \mathcal{U}_{v_i} \to \mathcal{X}
+	\coprod_{v \in |V|} \mathcal{U}_v \to \mathcal{X}
 	\]
 	is surjective.
-	
-	All remaining properties follow from Lemma~\texttt{0DU4}.
+	The rest of the proof is done by \cite{stacks-project}.
 \end{proof}
