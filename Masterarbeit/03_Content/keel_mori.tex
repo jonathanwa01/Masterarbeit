@@ -1,7 +1,7 @@
 \chapter{Keel Mori Theorem}
 
 The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by first constructing moduli spaces on a special local class of algebraic stacks, called well-nigh affine stacks, and then gluing these local moduli spaces along
-\etale overlaps.
+\etale\ overlaps.
 
 \section{Local constructions}
 
@@ -201,8 +201,7 @@ The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by fir
 	\(h:\mathcal X\to Y\) be a morphism. We construct a unique morphism
 	\(g:X\to Y\) such that \(h=g\circ f\).
 	
-	Choose an étale surjection \(p:V\to Y\), where \(V\) is a scheme
-	which is a disjoint union of affine schemes. Put
+	Choose an étale surjection \(p:V\to Y\), where \(V\) is a scheme. Put
 	\[
 	R=V\times_Y V.
 	\]
@@ -319,6 +318,7 @@ The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by fir
 		\arrow["s", shift left, from=2-1, to=2-2]
 		\arrow[from=2-2, to=2-3]
 	\end{tikzcd}\]
+	So the back and the front of the commutative prism \ref{fig:cms-prism} are cartesian.
 	By compatibility of the construction with étale base change along $X_V\to X$, we have
 	\[
 	\mathcal{X}_R \cong \mathcal{X}_V \times_\mathcal{X} \mathcal{X}_V \cong (X_V \times_X \mathcal{X}) \times_\mathcal{X} (X_V \times_X \mathcal{X}) \cong (X_V\times_X X_V) \times_X \mathcal{X}
@@ -327,8 +327,6 @@ The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by fir
 	\[
 	X_R \cong X_V\times_X X_V.
 	\]
-	So the back and the front of the commutative prism \ref{fig:cms-prism} are cartesian.
-	
 	Let \(s,t:R\rightrightarrows V\) and
 	\(s_X,t_X:X_R\rightrightarrows X_V\) be the two projections. We claim
 	that
