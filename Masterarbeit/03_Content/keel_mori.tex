@@ -118,14 +118,14 @@ The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by fir
 	Since we have already shown that the morphism $U \to \Spec(C)$ satisfies
 	this invariance condition, it follows that it defines a morphism
 	\[
-	f : \mathcal X \to \Spec(C).
+	\pi : \mathcal X \to \Spec(C).
 	\]
 \end{proof}
 
 
 \begin{lemma}[Local existence of a coarse moduli space on well-nigh affine chart]\label{lem:local-ex-cms-in-affines}
 	(\cite[Tag 0DUP][]{stacks-project})
-	Let $\mathcal{X}$  be a well-nigh affine algebraic stack. Then there exists a coarse moduli space $f:\mathcal{X} \to X$ in the category of affine schemes. Moreover $f$ is separated, quasi-compact and a universal homeomorphism.
+	Let $\mathcal{X}$  be a well-nigh affine algebraic stack. Then there exists a coarse moduli space $\pi:\mathcal{X} \to X$ in the category of affine schemes. Moreover $\pi$ is separated, quasi-compact and a universal homeomorphism.
 \end{lemma}
 
 \begin{proof}
@@ -160,25 +160,25 @@ The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by fir
 	\[
 	U \to \Spec(C)
 	\]
-	is $R$-invariant and therefore induces a morphism $f : \mathcal X \to \Spec(C).$	
+	is $R$-invariant and therefore induces a morphism $\pi: \mathcal X \to \Spec(C).$	
 	Set
 	\[
 	X := \Spec(C).
 	\]
 	
-	It remains to show that $f$ is a coarse moduli space and satisfies the
+	It remains to show that $\pi$ is a coarse moduli space and satisfies the
 	stated properties. 
 	
-	By lemma \ref{lem-groupoid-representation-of-well-nigh-affine} $\mathcal{X}$ is separated. Since $X$ is affine, hence separated, $f$ is separated.
-	$U\to \mathcal{X}$ is surjective and $U\to X$ is quasi-compact, hence $f$ is quasi-compact by \cite[Tag 050X]{stacks-project}.
-	The details about $f$ being universially surjective is prooven in more detail in the proof here \cite[Tag 0DUP]{stacks-project}.
+	By lemma \ref{lem-groupoid-representation-of-well-nigh-affine} $\mathcal{X}$ is separated. Since $X$ is affine, hence separated, $\pi$ is separated.
+	$U\to \mathcal{X}$ is surjective and $U\to X$ is quasi-compact, hence $\pi$ is quasi-compact by \cite[Tag 050X]{stacks-project}.
+	The details about $\pi$ being universially surjective is prooven in more detail in the proof here \cite[Tag 0DUP]{stacks-project}.
 	In particular, $X=\Spec(C)$ is the desired coarse moduli space of
 	$\mathcal X$ in the affine case.
 \end{proof}
 
 \begin{lemma}\label{lem:cms-pullback}
 	(\cite[Tag 0DUQ][]{stacks-project})
-	Let $h: \mathcal{X}' \to \mathcal{X}$ be an \etale\ morphism of well-nigh affine stacks, which induces isomorphisms on automorphism groups. Then the following diagram is cartesian and the induced morphisn $M'\to M$ is \etale.
+	Let $\mathcal{X}, \mathcal{X}'$ be well-nigh affine algebraic stacks and $h: \mathcal{X}' \to \mathcal{X}$ be an \etale\ morphism, which induces isomorphisms on automorphism groups. Then the following diagram is cartesian and the induced morphism $X'\to X$ is \etale.
 	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhjYWx7WH0nIl0sWzEsMCwiXFxtYXRoY2Fse1h9Il0sWzAsMSwiWCciXSxbMSwxLCJYIl0sWzAsMV0sWzEsM10sWzIsM10sWzAsMl0sWzAsMywiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
 	\[\begin{tikzcd}
 		{\mathcal{X}'} & {\mathcal{X}} \\
@@ -199,7 +199,7 @@ The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by fir
 \begin{proof}
 	Let \(Y\) be an algebraic space and let
 	\(h:\mathcal X\to Y\) be a morphism. We construct a unique morphism
-	\(g:X\to Y\) such that \(h=g\circ f\).
+	\(g:X\to Y\) such that \(h=g\circ \pi\).
 	
 	Choose an étale surjection \(p:V\to Y\), where \(V\) is a scheme. Put
 	\[
@@ -225,22 +225,21 @@ The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by fir
 	The morphism \(\mathcal X_V\to V\) has affine target $V$.
 	By Lemma \ref{lem:local-ex-cms-in-affines}, it factors uniquely as
 	\[
-	\mathcal X_V \xrightarrow{f_V} X_V
+	\mathcal X_V \xrightarrow{\pi_V} X_V
 	\xrightarrow{g_V} V.
 	\]
-	Here \(X_V\) is the algebraic space associated to \(\mathcal X_V\) by
-	the lemma \ref{lem:local-ex-cms-in-affines}.
+	Here \(\pi_V\mathcal{X}_V \to X_V\) is the coarse moduli space associated to \(\mathcal X_V\) by lemma \ref{lem:local-ex-cms-in-affines}.
 	Now consider
 	\[
 	\mathcal X_R:=\mathcal X\times_Y R,
 	\]
-	Equivalently,
+	Equivalently, there is a canonical isomorphism
 	\[
 	\mathcal X_R
 	\cong
 	\mathcal X_V\times_{\mathcal X}\mathcal X_V,
 	\]
-	by the following diagram:
+	which can be verified by a straightforward diagram chase using the following:
 	% https://q.uiver.app/#q=WzAsOCxbMCwyLCJWIl0sWzEsMiwiWSJdLFszLDEsIlYiXSxbMiwxLCJSIl0sWzEsMSwiXFxtYXRoY2Fse1h9Il0sWzAsMSwiXFxtYXRoY2Fse1h9X1YiXSxbMywwLCJcXG1hdGhjYWx7WH1fViJdLFsyLDAsIlxcbWF0aGNhbHtYfV9SIl0sWzAsMV0sWzIsMV0sWzMsMCwiIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzMsMl0sWzUsNF0sWzUsMF0sWzYsMl0sWzYsNF0sWzcsNV0sWzcsNl0sWzMsMV0sWzcsMywiIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzcsNF0sWzQsMV1d
 	\[\begin{tikzcd}
 		&& {\mathcal{X}_R} & {\mathcal{X}_V} \\
@@ -267,25 +266,25 @@ The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by fir
 	\]
 	factors uniquely as
 	\[
-	\mathcal X_R \xrightarrow{f_R} X_R
+	\mathcal X_R \xrightarrow{\pi_R} X_R
 	\xrightarrow{g_R} R.
 	\]
 	All of this fit into the folllowing commutative diagram:
-	% https://q.uiver.app/#q=WzAsOSxbMCwyLCJSIl0sWzEsMiwiViJdLFsyLDIsIlkiXSxbMiwxLCJYX1IiXSxbMywxLCJYX1YiXSxbNCwxLCJYIl0sWzEsMCwiXFxtYXRoY2Fse1h9X1IiXSxbMiwwLCJcXG1hdGhjYWx7WH1fViJdLFszLDAsIlxcbWF0aGNhbHtYfSJdLFszLDAsImdfUiIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFs0LDEsImdfViIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFs1LDIsImciLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbNiwwLCJoX1IiLDIseyJsYWJlbF9wb3NpdGlvbiI6NDB9XSxbNiw3LCIiLDAseyJvZmZzZXQiOi0xfV0sWzcsOF0sWzcsMSwiaF9WIiwyLHsibGFiZWxfcG9zaXRpb24iOjQwfV0sWzYsMywiZl9SIl0sWzcsNCwiZl9WIl0sWzgsNSwiZiJdLFswLDEsIiIsMCx7Im9mZnNldCI6LTF9XSxbMCwxLCIiLDAseyJvZmZzZXQiOjF9XSxbNiw3LCIiLDAseyJvZmZzZXQiOjF9XSxbMyw0LCIiLDEseyJvZmZzZXQiOjF9XSxbNCw1XSxbMSwyXSxbMyw0LCIiLDEseyJvZmZzZXQiOi0xfV0sWzgsMiwiaCIsMix7ImxhYmVsX3Bvc2l0aW9uIjo0MH1dXQ==
+	% https://q.uiver.app/#q=WzAsOSxbMCwyLCJSIl0sWzEsMiwiViJdLFsyLDIsIlkiXSxbMiwxLCJYX1IiXSxbMywxLCJYX1YiXSxbNCwxLCJYIl0sWzEsMCwiXFxtYXRoY2Fse1h9X1IiXSxbMiwwLCJcXG1hdGhjYWx7WH1fViJdLFszLDAsIlxcbWF0aGNhbHtYfSJdLFszLDAsImdfUiIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFs0LDEsImdfViIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFs1LDIsImciLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbNiwwLCJoX1IiLDIseyJsYWJlbF9wb3NpdGlvbiI6NDB9XSxbNiw3LCIiLDAseyJvZmZzZXQiOi0xfV0sWzcsOF0sWzcsMSwiaF9WIiwyLHsibGFiZWxfcG9zaXRpb24iOjQwfV0sWzYsMywiXFxwaV9SIl0sWzcsNCwiXFxwaV9WIl0sWzgsNSwiXFxwaSJdLFswLDEsIiIsMCx7Im9mZnNldCI6LTF9XSxbMCwxLCIiLDAseyJvZmZzZXQiOjF9XSxbNiw3LCIiLDAseyJvZmZzZXQiOjF9XSxbMyw0LCIiLDEseyJvZmZzZXQiOjF9XSxbNCw1XSxbMSwyXSxbMyw0LCIiLDEseyJvZmZzZXQiOi0xfV0sWzgsMiwiaCIsMix7ImxhYmVsX3Bvc2l0aW9uIjo0MH1dXQ==
 	\begin{equation}
 		\label{fig:cms-prism}
-		\begin{tikzcd}
+			\begin{tikzcd}
 			& {\mathcal{X}_R} & {\mathcal{X}_V} & {\mathcal{X}} & \\
 			&& {X_R} & {X_V} & X \\
 			R & V & Y
 			\arrow[shift left, from=1-2, to=1-3]
 			\arrow[shift right, from=1-2, to=1-3]
-			\arrow["{f_R}", from=1-2, to=2-3]
+			\arrow["{\pi_R}", from=1-2, to=2-3]
 			\arrow["{h_R}"'{pos=0.4}, from=1-2, to=3-1]
 			\arrow[from=1-3, to=1-4]
-			\arrow["{f_V}", from=1-3, to=2-4]
+			\arrow["{\pi_V}", from=1-3, to=2-4]
 			\arrow["{h_V}"'{pos=0.4}, from=1-3, to=3-2]
-			\arrow["f", from=1-4, to=2-5]
+			\arrow["\pi", from=1-4, to=2-5]
 			\arrow["h"'{pos=0.4}, from=1-4, to=3-3]
 			\arrow[shift right, from=2-3, to=2-4]
 			\arrow[shift left, from=2-3, to=2-4]
@@ -299,10 +298,10 @@ The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by fir
 		\end{tikzcd}
 	\end{equation}
 	Our goal is to define $g:X\to Y$.
-	The morphisms $X_R\rightrightarrows X_V$ are induced by
+	The morphisms $X_R\rightrightarrows X_V$ are \etale\ and induced by
 	$\mathcal{X}_R \rightrightarrows \mathcal{X}_V \to X_V$
 	via lemma \ref{lem:local-ex-cms-in-affines}. By lemma \ref{lem:cms-pullback} the following squares of the diagram is cartesian:
-	% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXG1hdGhjYWx7WH1fUiJdLFsxLDAsIlxcbWF0aGNhbHtYfV9WIl0sWzAsMSwiWF9SIl0sWzEsMSwiWF9WIl0sWzIsMCwiXFxtYXRoY2Fse1h9Il0sWzIsMSwiWCJdLFswLDEsInRfXFxtYXRoY2Fse1h9IiwyLHsib2Zmc2V0IjoxfV0sWzEsM10sWzIsMywidCIsMix7Im9mZnNldCI6MX1dLFswLDJdLFswLDMsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXIifX1dLFsxLDRdLFs0LDVdLFszLDVdLFsxLDUsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXIifX1dLFswLDEsInNfXFxtYXRoY2Fse1h9IiwwLHsib2Zmc2V0IjotMX1dLFsyLDMsInMiLDAseyJvZmZzZXQiOi0xfV1d
+	% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXG1hdGhjYWx7WH1fUiJdLFsxLDAsIlxcbWF0aGNhbHtYfV9WIl0sWzAsMSwiWF9SIl0sWzEsMSwiWF9WIl0sWzIsMCwiXFxtYXRoY2Fse1h9Il0sWzIsMSwiWCJdLFswLDEsInRfXFxtYXRoY2Fse1h9IiwyLHsib2Zmc2V0IjoxfV0sWzEsM10sWzIsMywidF9YIiwyLHsib2Zmc2V0IjoxfV0sWzAsMl0sWzAsMywiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzEsNF0sWzQsNV0sWzMsNV0sWzEsNSwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzAsMSwic19cXG1hdGhjYWx7WH0iLDAseyJvZmZzZXQiOi0xfV0sWzIsMywic19YIiwwLHsib2Zmc2V0IjotMX1dXQ==
 	\[\begin{tikzcd}
 		{\mathcal{X}_R} & {\mathcal{X}_V} & {\mathcal{X}} \\
 		{X_R} & {X_V} & X
@@ -314,37 +313,32 @@ The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by fir
 		\arrow[from=1-2, to=2-2]
 		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-2, to=2-3]
 		\arrow[from=1-3, to=2-3]
-		\arrow["t"', shift right, from=2-1, to=2-2]
-		\arrow["s", shift left, from=2-1, to=2-2]
+		\arrow["{t_X}"', shift right, from=2-1, to=2-2]
+		\arrow["{s_X}", shift left, from=2-1, to=2-2]
 		\arrow[from=2-2, to=2-3]
 	\end{tikzcd}\]
 	So the back and the front of the commutative prism \ref{fig:cms-prism} are cartesian.
-	By compatibility of the construction with étale base change along $X_V\to X$, we have
+	Let
 	\[
-	\mathcal{X}_R \cong \mathcal{X}_V \times_\mathcal{X} \mathcal{X}_V \cong (X_V \times_X \mathcal{X}) \times_\mathcal{X} (X_V \times_X \mathcal{X}) \cong (X_V\times_X X_V) \times_X \mathcal{X}
+	s,t:R\rightrightarrows V
+	\qquad\text{and}\qquad
+	s_X,t_X:X_R\rightrightarrows X_V
 	\]
-	The coarse moduli space of $(X_V\times_X X_V) \times_X \mathcal{X}$ is $(X_V\times_X X_V) $ by lemma \ref{lem:cms-pullback}. However we have that the coarse moduli space of $\mathcal{X}_R$ is $X_R$ by definition. Hence, by universality we have
-	\[
-	X_R \cong X_V\times_X X_V.
-	\]
-	Let \(s,t:R\rightrightarrows V\) and
-	\(s_X,t_X:X_R\rightrightarrows X_V\) be the two projections. We claim
-	that
+	be the two projections. We claim that
 	\[
 	s\circ g_R = g_V\circ s_X,
 	\qquad
 	t\circ g_R = g_V\circ t_X.
 	\]
-	Indeed, after precomposing with \(f_R:\mathcal X_R\to X_R\), both
+	Indeed, after precomposing with \(\pi_R:\mathcal X_R\to X_R\), both
 	sides of the first equality give the same morphism
 	\(\mathcal X_R\to V\), namely 
 	\[
 		\mathcal{X}_R \xrightarrow{h_R} R \xrightarrow{s} V = \mathcal{X}_R \xrightarrow{s_\mathcal{X}} \mathcal{X}_V \xrightarrow{h_V} V.
 	\]
 	Since
-	\(f_R\) is universal for morphisms to affine schemes locally on \(V\),
+	\(\pi_R\) is universal for morphisms to affine schemes locally on \(V\),
 	uniqueness gives the equality. The second equality is analogous.
-	
 	Thus \(g_V:X_V\to V\) is compatible with the descent data
 	\[
 	X_R\rightrightarrows X_V
@@ -376,21 +370,21 @@ The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by fir
 		\arrow[shift right, from=1-2, to=1-3]
 	\end{tikzcd}\]
 	
-	It remains to check that \(h=g\circ f\). This can be checked after the
+	It remains to check that \(h=g\circ \pi\). This can be checked after the
 	étale surjection \(\mathcal X_V\to \mathcal X\). After pulling back to
 	\(\mathcal X_V\), the equality becomes
 	\[
-	\mathcal X_V \xrightarrow{f_V} X_V
+	\mathcal X_V \xrightarrow{\pi_V} X_V
 	\xrightarrow{g_V} V
 	\longrightarrow Y
 	=
 	\mathcal X_V\longrightarrow V\longrightarrow Y,
 	\]
-	which holds by construction of \(g_V\). Hence \(h=g\circ f\).
+	which holds by construction of \(g_V\). Hence \(h=g\circ \pi\).
 	
 	Finally, suppose \(g,g':X\to Y\) both satisfy
 	\[
-	g\circ f = h = g'\circ f.
+	g\circ \pi = h = g'\circ \pi.
 	\]
 	Pulling back along the étale cover \(X_V\to X\), the two morphisms
 	\(g|_{X_V}\) and \(g'|_{X_V}\) both factor the same morphism
