@@ -240,9 +240,12 @@ role in the proof of the Keel--Mori theorem.
 \begin{example}[Group actions]
 	Let $G$ be a group algebraic space over $B$ acting on an algebraic space $U$.
 	Then
-	\[
-	R := G \times_B U
-	\]
+	% https://q.uiver.app/#q=WzAsMixbMCwwLCJSOj0gR1xcdGltZXNfQlUiXSxbMSwwLCJVIl0sWzAsMSwicyIsMCx7Im9mZnNldCI6LTF9XSxbMCwxLCJ0IiwyLHsib2Zmc2V0IjoxfV1d
+	\[\begin{tikzcd}
+		{R:= G\times_BU} & U
+		\arrow["s", shift left, from=1-1, to=1-2]
+		\arrow["t"', shift right, from=1-1, to=1-2]
+	\end{tikzcd}\]
 	with
 	\[
 	s(g,x) = x, \quad t(g,x) = g \cdot x
