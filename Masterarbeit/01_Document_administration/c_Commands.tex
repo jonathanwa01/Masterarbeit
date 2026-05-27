@@ -718,6 +718,11 @@ urlseen = {last access},
 \NewDocumentCommand{\StkUnder}{m}{\Under{\Stk}{#1}}
 \NewDocumentCommand{\Stacksof}{m}{\ensuremath{\Stk\!\left(#1\right)}}
 
+% ---------- Stacks ----------
+\DeclareRobustCommand{\AlgStk}{\cat{AlgStk}}
+\NewDocumentCommand{\AlgStkOver}{m}{\Over{\AlgStk}{#1}}
+\NewDocumentCommand{\AlgStkUnder}{m}{\Under{\AlgStk}{#1}}
+
 % ---------- Infinity-stacks ----------
 \DeclareRobustCommand{\inftyGrpd}{\ensuremath{\cat{\infty\text{-}Grpd}}}
 \DeclareRobustCommand{\inftyStk}{\ensuremath{\cat{\infty\text{-}Stk}}}

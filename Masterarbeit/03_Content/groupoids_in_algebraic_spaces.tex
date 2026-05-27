@@ -77,7 +77,7 @@ role in the proof of the Keel--Mori theorem.
 	U\to X
 	\]
 	is surjective and \etale.
-	We will denote the algebraic spase $X$ by $(U/R)$.
+	By abuse of notation we will denote the algebraic spase $X$ also by $U/R$.
 \end{lemma}
 
 \begin{proof}
@@ -162,7 +162,7 @@ role in the proof of the Keel--Mori theorem.
 \begin{definition}[Groupoid in algebraic spaces]
 	(\cite[][Tag 043V]{stacks-project})
 	Let $B$ be a base algebraic space. A \emph{groupoid in algebraic spaces over $B$}
-	consists of a quintuple
+	consists of a tuple
 	\[
 	(U, R, s, t, c)
 	\]
@@ -176,7 +176,7 @@ role in the proof of the Keel--Mori theorem.
 	\[
 	(U(T), R(T), s, t, c)
 	\]
-	define a groupoid (i.e. a category in which all morphisms are invertible).
+	define a groupoid.
 \end{definition}
 
 \begin{remark}
@@ -215,11 +215,11 @@ role in the proof of the Keel--Mori theorem.
 
 \begin{lemma}
 	(\cite[][Tag 043V]{stacks-project})
-	The morphism
+	Let $(U,R,s,t,c)$ be a groupoid in algebraic spaces over $B$. Then the morphism
 	\[
-	j : R \to U \times_B U
+	j = (t,s) : R \to U \times_B U
 	\]
-	associated to a groupoid defines a pre-equivalence relation on $U$.
+	is defines the a pre-equivalence relation on $U$.
 \end{lemma}
 
 \begin{remark}
@@ -229,8 +229,6 @@ role in the proof of the Keel--Mori theorem.
 		\item In general, groupoids allow nontrivial automorphisms (stabilizers).
 	\end{itemize}
 \end{remark}
-
----
 
 \section{Examples}
 
@@ -271,8 +269,6 @@ role in the proof of the Keel--Mori theorem.
 	counterpart of the inertia stack of a stack.
 \end{remark}
 
----
-
 \section{Base Change}
 
 \begin{lemma}[Base change of groupoids]
@@ -284,28 +280,6 @@ role in the proof of the Keel--Mori theorem.
 	\]
 	define a groupoid $(U',R',s',t',c')$ over $B'$.
 \end{lemma}
-
----
-
-\section{Quotients (Preview)}
-
-\begin{definition}[Sheaf quotient]
-	Let $(U,R)$ be a groupoid in algebraic spaces over $B$. The presheaf quotient
-	is defined by
-	\[
-	(U/R)(T) := U(T)/R(T).
-	\]
-	Its sheafification (in the étale topology) is called the \emph{quotient sheaf}.
-\end{definition}
-
-\begin{remark}
-	A central problem is to determine when $U/R$ is representable by an algebraic
-	space. This will be the key step in the proof of the Keel--Mori theorem.
-\end{remark}
-
----
-
-\section{Relation to Stacks}
 
 \begin{remark}[Groupoids and stacks]
 	Let $\mathcal{X}$ be an algebraic stack and let $U \to \mathcal{X}$ be a smooth

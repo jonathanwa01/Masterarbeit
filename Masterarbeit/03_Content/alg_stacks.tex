@@ -279,80 +279,6 @@ or sheaves valued in $\infty$-groupoids.
 	\cite[][Section~3.1.2]{vistoli2007notes}.
 \end{remark}
 
-
-\begin{proposition}[Stacks as \(2\)-sheaves via totalization]\label{prop:stacks-2-sheaves-totalization}
-	Let \((\mathcal C,J)\) be a site, and let
-	\[
-	\mathcal{F}:\mathcal C^{op}\to \Grpd
-	\]
-	be a pseudofunctor. The following are equivalent:
-	\begin{enumerate}
-		\item \(\mathcal{F}\) is a stack on \((\mathcal C,J)\), i.e.\ it satisfies descent for isomorphisms and effective descent for objects.
-		\item For every covering \(U\to X\) with \v{C}ech nerve \(U_\bullet\), the natural functor
-		\[
-		\mathcal{F}(X)\longrightarrow \Tot\big(\mathcal{F}(U_\bullet)\big)
-		\]
-		is an equivalence of groupoids.
-		\item For every covering \(U\to X\), the natural functor
-		\[
-		\mathcal{F}(X)\longrightarrow \Tot_2\big(\mathcal{F}(U_\bullet)\big)
-		\]
-		is an equivalence of groupoids.
-	\end{enumerate}
-	
-	In particular, stacks are precisely \(2\)-sheaves: they satisfy descent with
-	values in groupoids, and this descent is completely determined by the first
-	three levels
-	% https://q.uiver.app/#q=WzAsMyxbMiwwLCJVIl0sWzEsMCwiVVxcdGltZXNfWCBVIl0sWzAsMCwiVVxcdGltZXNfWFVcXHRpbWVzX1hVIl0sWzIsMV0sWzIsMSwiIiwyLHsib2Zmc2V0IjotMn1dLFsyLDEsIiIsMSx7Im9mZnNldCI6Mn1dLFsxLDAsIiIsMSx7Im9mZnNldCI6LTF9XSxbMSwwLCIiLDEseyJvZmZzZXQiOjF9XV0=
-	\[\begin{tikzcd}
-		{U\times_XU\times_XU} & {U\times_X U} & U
-		\arrow[from=1-1, to=1-2]
-		\arrow[shift left=2, from=1-1, to=1-2]
-		\arrow[shift right=2, from=1-1, to=1-2]
-		\arrow[shift left, from=1-2, to=1-3]
-		\arrow[shift right, from=1-2, to=1-3]
-	\end{tikzcd}\]
-	of the Cech nerve.
-\end{proposition}
-
-\begin{proof}
-	By Proposition~\ref{prop:grothendieck-construction}, categories fibred in
-	groupoids over \(\mathcal C\) are equivalent to pseudofunctors
-	\[
-	\mathcal C^{op}\to\Grpd.
-	\]
-	Under this equivalence, the usual definition of stack translates into the
-	statement that objects together with descent isomorphisms and their cocycle
-	condition glue effectively and uniquely up to unique isomorphism.
-	
-	Now let \(U\to X\) be a covering with \v{C}ech nerve \(U_\bullet\). The
-	cosimplicial diagram \(\mathcal{F}(U_\bullet)\) has:
-	\begin{itemize}
-		\item objects of \(\mathcal{F}(U)\) in degree \(0\),
-		\item isomorphisms between their two pullbacks to \(\mathcal{F}(U\times_X U)\) in degree \(1\),
-		\item the cocycle condition in \(\mathcal{F}(U\times_X U\times_X U)\) in degree \(2\).
-	\end{itemize}
-	Thus an object of \(\Tot_2(\mathcal{F}(U_\bullet))\) is exactly a descent datum for
-	\(F\) along \(U\to X\), and morphisms in \(\Tot_2(\mathcal{F}(U_\bullet))\) are exactly
-	isomorphisms of descent data.
-	
-	It follows that the classical stack condition is equivalent to the statement
-	that the canonical functor
-	\[
-	F(X)\longrightarrow \Tot_2(\mathcal{F}(U_\bullet))
-	\]
-	is an equivalence of groupoids for every covering \(U\to X\).
-	
-	Finally, since groupoids model \(1\)-truncated homotopy types, higher
-	coherence data vanish. Therefore the full totalization of the cosimplicial
-	groupoid \(\mathcal{F}(U_\bullet)\) is already determined by its restriction to
-	\(\Delta_{\le 2}\). Hence
-	\[
-	\Tot\big(\mathcal{F}(U_\bullet)\big)\simeq \Tot_2\big(\mathcal{F}(U_\bullet)\big),
-	\]
-	which shows the equivalence of (2) and (3).
-\end{proof}
-
 \begin{remark}
 	Following Definition 2.6 of \cite[][p. 13]{khan2022stacks} we get a nice $\infty$-categorical picture of a stack, namely as a $2$-sheaf, satisfying descent.
 	
@@ -515,7 +441,6 @@ or sheaves valued in $\infty$-groupoids.
 	The category of stacks over a base scheme $S$ is closed under products and pullbacks.
 \end{lemma}
 
-
 \section{Algebraic Stacks}
 
 \begin{definition}[Algebraic Stack]
@@ -540,8 +465,34 @@ or sheaves valued in $\infty$-groupoids.
 \end{definition}
 
 \begin{proposition}
-	There is a fully faithful embedding of algebraic spaces into algebraic stacks $AlgSp \subset AlgStacks$.
+	\label{prop:algspaces-are-algstacks}
+	There is a fully faithful embedding of algebraic spaces into algebraic stacks $\AlgSp \subset \AlgStk$.
 \end{proposition}
+
+\begin{proof}
+	This follows from the Grothendieck construction, proposition \ref{prop:grothendieck-construction}, and the fact that smooth morphisms are \etale.
+\end{proof}
+
+\begin{definition}[Points of algebraic stacks]
+	(\cite[][Tag 04XE]{stacks-project})
+	Let $\mathcal{X}$ be an algebraic stack, $K, L$ two fields and let $p:\Specof{K}\to \mathcal{X}$, $q: \Specof{L}\to \mathcal{X}$ be a morphisms of stacks. We call $p$ and $q$ equivalent, if there exists a field $\Omega$ such that the following diagram is $2$-commutative:
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXFNwZWNvZntcXE9tZWdhfSJdLFsxLDAsIlxcU3BlY29me0t9Il0sWzAsMSwiXFxTcGVjb2Z7TH0iXSxbMSwxLCJcXG1hdGhjYWx7WH0iXSxbMSwzLCJwIl0sWzIsMywicSIsMl0sWzAsMl0sWzAsMV1d
+	\[\begin{tikzcd}
+		{\Specof{\Omega}} & {\Specof{K}} \\
+		{\Specof{L}} & {\mathcal{X}}
+		\arrow[from=1-1, to=1-2]
+		\arrow[from=1-1, to=2-1]
+		\arrow["p", from=1-2, to=2-2]
+		\arrow["q"', from=2-1, to=2-2]
+	\end{tikzcd}\]
+	A point of $\mathcal{X}$ is an equivalence class of morphisms $\Specof{K}\to \mathcal{X}$ for a field $K$. We write $|\mathcal{X}I$ for the set of points of $\mathcal{X}$.
+\end{definition}
+
+\begin{remark}
+	The fact that $|\mathcal{X}|$ is a set rather than a proper class relies crucially on $\mathcal{X}$ being an algebraic stack. For a general stack, the collection of all isomorphism classes of morphisms $\Specof{K}\to \mathcal{X}$, as $K$ ranges over all fields, forms a priori only a proper class in ZFC set theory, since there is no bound on the cardinality of $K$.
+	
+	For an algebraic stack however, this issue is resolved by the existence of a smooth surjective presentation $U\to \mathcal{X}$ from a scheme $U$. Since $|U|$ is a genuine set and the map $U\to \mathcal{X}$ is surjective (\cite[][Tag 04XI]{stacks-project}), every point of $|\mathcal{X}|$ is represented by a point of $U$. One then sees, that $|\mathcal{X}|$ is the set-theoretic quotient $|U|/|R|$, where $R=U\times_X U$ is the algebraic space encoding the equivalence relation. This is indeed a set, and one verifies that it agrees with the description via field-valued points.
+\end{remark}
 
 \begin{definition}[Inertia stack]
 	(\cite[][Tag 036X]{stacks-project})
