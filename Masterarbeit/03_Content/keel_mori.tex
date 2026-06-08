@@ -191,7 +191,7 @@ The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by fir
 	\end{tikzcd}\]
 \end{lemma}
 
-\begin{lemma}
+\begin{lemma}\label{lem:cms-universal-along-alg-spaces}
 	(\cite[Tag 0DUR][]{stacks-project})
 	The morphisms of lemma \ref{lem:local-ex-cms-in-affines} is universal for morphisms into algebraic spaces.
 \end{lemma}
@@ -240,7 +240,7 @@ The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by fir
 	\mathcal X_V\times_{\mathcal X}\mathcal X_V,
 	\]
 	which can be verified by a straightforward diagram chase using the following:
-	% https://q.uiver.app/#q=WzAsOCxbMCwyLCJWIl0sWzEsMiwiWSJdLFszLDEsIlYiXSxbMiwxLCJSIl0sWzEsMSwiXFxtYXRoY2Fse1h9Il0sWzAsMSwiXFxtYXRoY2Fse1h9X1YiXSxbMywwLCJcXG1hdGhjYWx7WH1fViJdLFsyLDAsIlxcbWF0aGNhbHtYfV9SIl0sWzAsMV0sWzIsMV0sWzMsMCwiIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzMsMl0sWzUsNF0sWzUsMF0sWzYsMl0sWzYsNF0sWzcsNV0sWzcsNl0sWzMsMV0sWzcsMywiIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzcsNF0sWzQsMV1d
+	% https://q.uiver.app/#q=WzAsOCxbMCwyLCJWIl0sWzEsMiwiWSJdLFszLDEsIlYiXSxbMiwxLCJSIl0sWzEsMSwiXFxtYXRoY2Fse1h9Il0sWzAsMSwiXFxtYXRoY2Fse1h9X1YiXSxbMywwLCJcXG1hdGhjYWx7WH1fViJdLFsyLDAsIlxcbWF0aGNhbHtYfV9SIl0sWzAsMV0sWzIsMV0sWzMsMl0sWzUsNF0sWzUsMF0sWzYsMl0sWzYsNF0sWzcsNV0sWzcsNl0sWzMsMV0sWzcsNF0sWzQsMV0sWzMsMF0sWzcsM11d
 	\[\begin{tikzcd}
 		&& {\mathcal{X}_R} & {\mathcal{X}_V} \\
 		{\mathcal{X}_V} & {\mathcal{X}} & R & V \\
@@ -255,7 +255,7 @@ The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by fir
 		\arrow[from=2-1, to=3-1]
 		\arrow[from=2-2, to=3-2]
 		\arrow[from=2-3, to=2-4]
-		\arrow[dashed, from=2-3, to=3-1]
+		\arrow[from=2-3, to=3-1]
 		\arrow[from=2-3, to=3-2]
 		\arrow[from=2-4, to=3-2]
 		\arrow[from=3-1, to=3-2]
@@ -397,10 +397,27 @@ The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by fir
 	\(\mathcal X\) to any algebraic space.
 \end{proof}
 
+
+\begin{lemma}\label{lem:cms-pullback-domain-non-well-nigh-affine}
+	(\cite[Tag 0DUS][]{stacks-project})
+	Let $h:\mathcal{X'} \to \mathcal{X}$ be an \etale\ morphism of algebraic stacks, which induces isomorphism on automorphism groups and assume further that $\mathcal{X}$ is well-nigh affine. Then there exists a cartesian diagram 
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhjYWx7WH0nIl0sWzEsMCwiXFxtYXRoY2Fse1h9Il0sWzAsMSwiWCciXSxbMSwxLCJYIl0sWzAsMl0sWzAsMSwiaCIsMl0sWzEsM10sWzIsM10sWzAsMywiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
+	\[\begin{tikzcd}
+		{\mathcal{X}'} & {\mathcal{X}} \\
+		{X'} & X,
+		\arrow["h"', from=1-1, to=1-2]
+		\arrow[from=1-1, to=2-1]
+		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+		\arrow[from=1-2, to=2-2]
+		\arrow[from=2-1, to=2-2]
+	\end{tikzcd}\]
+	such that $M'\to M$ is \etale\ and $\mathcal{X}\to X$ is a coarse moduli space.
+\end{lemma}
+
 So far we have prooven the existence of a coarse moduli space for well-nigh affine stacks. In the next part, we will construct for an algebraic stack with finite inertia a cover of such well-nigh affine stacks.
 
 
-\begin{lemma}
+\begin{lemma}\label{lem:wna-decomposition}
 	(\cite[Tag 0DUE]{stacks-project})
 	Let $\mathcal{X}$ be an algebraic stack with finite inertia. Then $\mathcal{X}$ admits an \etale\ cover by well-nigh affine stacks.
 	
@@ -430,42 +447,133 @@ So far we have prooven the existence of a coarse moduli space for well-nigh affi
 	\end{enumerate}
 \end{lemma}
 
+
+\begin{theorem}[Keel-Mori Theorem]
+	Let $\mathcal{X}$ be an algebraic stack with finite inertia, i.e. $\mathcal{I_X}\to \mathcal{X}$ is a finite morphism. Then there exists a coarse moduli space
+	\[
+	\pi: \mathcal{X}\to X.
+	\]
+\end{theorem}
+
 \begin{proof}
-	For each point $x\in |\mathcal{X}|$ we will construct an \etale\ neighbourhood $\mathcal{U}\to \mathcal{X}$ of $x$ with the desired properties. Since $|\mathcal{X}|$ is a set, everything will be well defined.
+	By lemma \ref{lem:wna-decomposition} there is a decomposition into well-nigh affine substacks $g_i:\mathcal{X}_i\to \mathcal{X}$. By  \ref{lem:local-ex-cms-in-affines} and \ref{lem:cms-universal-along-alg-spaces} there exists coarse moduli spaces $\pi_i:\mathcal{X}_i \to X_i$. We now have to ensure, that these constructed local coarse moduli spaces glue to a global coarse moduli space $X$.
+	Therefore let $\mathcal{X}_{ij}$ be the pullback
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhjYWx7WH1fe2lqfSJdLFsxLDAsIlxcbWF0aGNhbHtYfV9pIl0sWzAsMSwiXFxtYXRoY2Fse1h9X2oiXSxbMSwxLCJcXG1hdGhjYWx7WH0iXSxbMiwzLCJnX2oiLDJdLFsxLDMsImdfaSJdLFswLDFdLFswLDJdLFswLDMsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXIifX1dXQ==
+	\[\begin{tikzcd}
+		{\mathcal{X}_{ij}} & {\mathcal{X}_i} \\
+		{\mathcal{X}_j} & {\mathcal{X}}
+		\arrow[from=1-1, to=1-2]
+		\arrow[from=1-1, to=2-1]
+		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+		\arrow["{g_i}", from=1-2, to=2-2]
+		\arrow["{g_j}"', from=2-1, to=2-2]
+	\end{tikzcd}\]
+	By lemma \ref{lem:wna-decomposition} the morphisms $g_i$ are representable by algebraic spaces and \etale. Since \etale\ morphisms are stable under base change (\cite[see][Tag 0CIN]{stacks-project}) , all $\mathcal{X}_{ij}\to \mathcal{X}_i$ are \etale. All $\mathcal{X}_{ij}\to \mathcal{X}_i$ induce isomorphisms on automorphisms groups, seen by the following diagram:
+	% https://q.uiver.app/#q=WzAsOCxbMCwyLCJcXG1hdGhjYWx7WH1faiJdLFsyLDEsIlxcbWF0aGNhbHtJfV9cXG1hdGhjYWx7WF9pfSJdLFsxLDIsIlxcbWF0aGNhbHtYfSJdLFszLDEsIlxcbWF0aGNhbHtJX1h9Il0sWzMsMCwiXFxtYXRoY2Fse0l9X1xcbWF0aGNhbHtYX2l9Il0sWzIsMCwiXFxtYXRoY2Fse0l9X3tcXG1hdGhjYWx7WH1fe2lqfX0iXSxbMSwxLCJcXG1hdGhjYWx7WH1faSJdLFswLDEsIlxcbWF0aGNhbHtYfV97aWp9Il0sWzMsMl0sWzEsMF0sWzEsM10sWzAsMl0sWzEsMiwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzUsNF0sWzQsM10sWzUsMV0sWzcsMF0sWzcsNl0sWzYsMl0sWzcsMiwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzQsNl0sWzUsN10sWzQsMiwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
+	\[\begin{tikzcd}
+		&& {\mathcal{I}_{\mathcal{X}_{ij}}} & {\mathcal{I}_\mathcal{X_i}} \\
+		{\mathcal{X}_{ij}} & {\mathcal{X}_i} & {\mathcal{I}_\mathcal{X_i}} & {\mathcal{I_X}} \\
+		{\mathcal{X}_j} & {\mathcal{X}}
+		\arrow[from=1-3, to=1-4]
+		\arrow[from=1-3, to=2-1]
+		\arrow[from=1-3, to=2-3]
+		\arrow[from=1-4, to=2-2]
+		\arrow[from=1-4, to=2-4]
+		\arrow["\lrcorner"{anchor=center, pos=0.125, rotate=-90}, draw=none, from=1-4, to=3-2]
+		\arrow[from=2-1, to=2-2]
+		\arrow[from=2-1, to=3-1]
+		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=2-1, to=3-2]
+		\arrow[from=2-2, to=3-2]
+		\arrow[from=2-3, to=2-4]
+		\arrow[from=2-3, to=3-1]
+		\arrow["\lrcorner"{anchor=center, pos=0.125, rotate=-90}, draw=none, from=2-3, to=3-2]
+		\arrow[from=2-4, to=3-2]
+		\arrow[from=3-1, to=3-2]
+	\end{tikzcd}\]
+	Since the front, the bottom and right squares are cartesian, the left back face is cartesian.
+	In general, the pullback of two well-nigh affine stacks is not again well-nigh affine. Hence, we can only apply lemma \ref{lem:cms-pullback-domain-non-well-nigh-affine} here.
+	Now since $\mathcal{X}_i$ is well-nigh affine, by lemma \ref{lem:cms-pullback-domain-non-well-nigh-affine} applied to $\mathcal{X}_{ij} \to \mathcal{X}_i$ we get cartesian squares
+	\begin{equation}
+		\label{diag:coarse-moduli-cartesian-square}
+		% https://q.uiver.app/#q=WzAsNixbMSwwLCJcXG1hdGhjYWx7WH1fe2lqfSJdLFsyLDAsIlxcbWF0aGNhbHtYfV9pIl0sWzAsMCwiXFxtYXRoY2Fse1h9X2oiXSxbMCwxLCJYX2oiXSxbMSwxLCJYX3tpan0iXSxbMiwxLCJYX2kiXSxbMCwxXSxbMCwyXSxbMSw1LCJcXHBpX2kiXSxbMCw0LCJcXHBpX3tpan0iXSxbMiwzLCJcXHBpX2oiXSxbNCwzXSxbNCw1XSxbMCw1LCIiLDAseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XSxbMCwzLCIiLDAseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
+		\begin{tikzcd}
+			{\mathcal{X}_j} & {\mathcal{X}_{ij}} & {\mathcal{X}_i} \\
+			{X_j} & {X_{ij}} & {X_i}
+			\arrow["{\pi_j}", from=1-1, to=2-1]
+			\arrow[from=1-2, to=1-1]
+			\arrow[from=1-2, to=1-3]
+			\arrow["\lrcorner"{anchor=center, pos=0.125, rotate=-90}, draw=none, from=1-2, to=2-1]
+			\arrow["{\pi_{ij}}", from=1-2, to=2-2]
+			\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-2, to=2-3]
+			\arrow["{\pi_i}", from=1-3, to=2-3]
+			\arrow[from=2-2, to=2-1]
+			\arrow[from=2-2, to=2-3]
+		\end{tikzcd}
+	\end{equation}
+
+	with $X_{ij}\to X_i$ \etale\ and $\pi_i:\mathcal{X}_i\to X_i$ coarse moduli spaces. We now glue the $X_i$ to a global coarse moduli space $X$ via \etale\ descent. Claim:
+	% https://q.uiver.app/#q=WzAsMixbMCwwLCJcXGNvcHJvZCBYX3tpan0iXSxbMSwwLCJcXGJpZyhcXGNvcHJvZCBYX2lcXGJpZylcXHRpbWVzIFxcYmlnKFxcY29wcm9kIFhfalxcYmlnKSJdLFswLDEsIihzLHQpIl1d
+	\[\begin{tikzcd}
+		{\coprod X_{ij}} & {\big(\coprod X_i\big)\times \big(\coprod X_j\big)}
+		\arrow["{(s,t)}", from=1-1, to=1-2]
+	\end{tikzcd}\]
+	is an \etale\ equivalence relation, where $s$ and $t$ are the induces morphisms from \ref{diag:coarse-moduli-cartesian-square}.
 	
-	 
-	
-	
-	
-	
-	
-	
-	To see that the covering can be indexed by a set, choose a smooth
-	surjective morphism
+	Proof: We know that $s, t$ are \etale, since all $X_{ij} \to X_i$ are \etale. Setting $R=\coprod X_{ij}$ and $U=\coprod X_i$, diagram \ref{diag:coarse-moduli-cartesian-square} translates to 
 	\[
-	p : V \to \mathcal{X}
+	R \to U\times U.
 	\]
-	with $V$ a scheme. Since $|V|$ is a set, we may apply
-	Lemma \cite[0DU4][]{stacks-project} only to points in the image of $|V| \to |\mathcal{X}|$.
+	We now construct a groupoid structure on $\coprod X_i$ as in definition \ref{def:groupoid-in-alg-spaces}, in order to define the quotient algebraic space $U/R$.
 	
-	Thus for every $v \in |V|$ there exists a morphism
+	By associativity of the fibre product, we have 
 	\[
-	g_v : \mathcal{U}_v \to \mathcal{X}
+	\mathcal{X}_{ijk}:= \mathcal{X}_i\times_\mathcal{X} \mathcal{X}_j \times_\mathcal{X} \mathcal{X}_k \cong \mathcal{X}_{ij} \times_{\mathcal{X}_j} \mathcal{X}_{jk}.
 	\]
-	satisfying the conclusions of Lemma 0DU4 for the point
-	\[
-	x = |p|(v).
-	\]
-	
-	Since $|V|$ is a set, the family
-	\[
-	\{ g_v : \mathcal{U}_v \to \mathcal{X} \}_{v \in |V|}
-	\]
-	is set-indexed. Moreover, because $p$ is surjective, the images of the
-	morphisms $g_v$ cover $|\mathcal{X}|$. Hence
-	\[
-	\coprod_{v \in |V|} \mathcal{U}_v \to \mathcal{X}
-	\]
-	is surjective.
-	The rest of the proof is done by \cite{stacks-project}.
+	The induced morphism $\mathcal{X}_{ijk} \to \mathcal{X}_j$ is again \etale\ and induces isomorphisms on automorphism groups as a base change along $g_i$ by lemma \ref{lem:wna-decomposition}.
+	Now apply lemma \ref{lem:cms-pullback-domain-non-well-nigh-affine} again to $\mathcal{X}_{ijk} \to \mathcal{X}_i$ to obtain a cartesian square:
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhjYWx7WH1fe2lqa30iXSxbMSwwLCJcXG1hdGhjYWx7WH1faSJdLFswLDEsIlhfe2lqa30iXSxbMSwxLCJYX2kiXSxbMCwxXSxbMCwyXSxbMiwzXSxbMSwzXSxbMCwzLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
+	\[\begin{tikzcd}
+		{\mathcal{X}_{ijk}} & {\mathcal{X}_i} \\
+		{X_{ijk}} & {X_i}
+		\arrow[from=1-1, to=1-2]
+		\arrow[from=1-1, to=2-1]
+		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+		\arrow[from=1-2, to=2-2]
+		\arrow[from=2-1, to=2-2]
+	\end{tikzcd}\]
+	This diagram factors via the following:
+	% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXG1hdGhjYWx7WH1fe2lqa30iXSxbMSwwLCJcXG1hdGhjYWx7WH1fe2lqfSJdLFswLDEsIlhfe2lqa30iXSxbMSwxLCJYX3tpan0iXSxbMiwwLCJcXG1hdGhjYWx7WH1faSJdLFsyLDEsIlhfaSJdLFswLDFdLFswLDJdLFsxLDNdLFsyLDNdLFsxLDRdLFszLDVdLFs0LDVdXQ==
+	\[\begin{tikzcd}
+		{\mathcal{X}_{ijk}} & {\mathcal{X}_{ij}} & {\mathcal{X}_i} \\
+		{X_{ijk}} & {X_{ij}} & {X_i}
+		\arrow[from=1-1, to=1-2]
+		\arrow[from=1-1, to=2-1]
+		\arrow[from=1-2, to=1-3]
+		\arrow[from=1-2, to=2-2]
+		\arrow[from=1-3, to=2-3]
+		\arrow[from=2-1, to=2-2]
+		\arrow[from=2-2, to=2-3]
+	\end{tikzcd}\]
+	Since the right square and the outer rectagle is cartesian, the left square is also cartesian. 
+	Now consider the following commutative diagram:
+	% https://q.uiver.app/#q=WzAsOCxbMSwxLCJcXG1hdGhjYWx7WH1faSJdLFswLDEsIlxcbWF0aGNhbHtYfV97amt9Il0sWzMsMCwiXFxtYXRoY2Fse1h9X3tpan0iXSxbMiwwLCJcXG1hdGhjYWx7WH1fe2lqa30iXSxbMSwyLCJYX2kiXSxbMCwyLCJYX3tqa30iXSxbMiwxLCJYX3tpamt9Il0sWzMsMSwiWF97aWp9Il0sWzEsMF0sWzMsMV0sWzIsMF0sWzMsMl0sWzMsNl0sWzIsN10sWzYsNV0sWzcsNF0sWzUsNF0sWzEsNV0sWzAsNF0sWzYsN10sWzMsMF0sWzYsNF1d
+	\[\begin{tikzcd}
+		&& {\mathcal{X}_{ijk}} & {\mathcal{X}_{ij}} \\
+		{\mathcal{X}_{jk}} & {\mathcal{X}_i} & {X_{ijk}} & {X_{ij}} \\
+		{X_{jk}} & {X_i}
+		\arrow[from=1-3, to=1-4]
+		\arrow[from=1-3, to=2-1]
+		\arrow[from=1-3, to=2-2]
+		\arrow[from=1-3, to=2-3]
+		\arrow[from=1-4, to=2-2]
+		\arrow[from=1-4, to=2-4]
+		\arrow[from=2-1, to=2-2]
+		\arrow[from=2-1, to=3-1]
+		\arrow[from=2-2, to=3-2]
+		\arrow[from=2-3, to=2-4]
+		\arrow[from=2-3, to=3-1]
+		\arrow[from=2-3, to=3-2]
+		\arrow[from=2-4, to=3-2]
+		\arrow[from=3-1, to=3-2]
+	\end{tikzcd}\]
 \end{proof}
