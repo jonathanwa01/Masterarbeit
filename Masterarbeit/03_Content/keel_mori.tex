@@ -446,21 +446,22 @@ So far we have prooven the existence of a coarse moduli space for well-nigh affi
 	\pi_\mathcal{W}: \mathcal{W} \to W = \Specof{A^{G_x}}.
 	\]
 	
-	 Since $\mathcal{U}$ is open and $\pi_\mathcal{W}$ is a homeomorphism, $\pi_\mathcal{W}(\mathcal{U})$ is open in $\Specof{A^{G_x}}$. 
-	 Let $X_1$ be a principal affine neighbourhood of $\pi_\mathcal{W}(w)$ inside $\pi_\mathcal{W}(\mathcal{U})$.
-	 Now since $W = \Specof{A^{G_x}}$ is affine, $X_1$ corresponds to $A^{G_x}[g^{-1}]$ for some $g\in A^{G_x}$.
-	By construction, the preimage of $X_1$ under $\Specof{A} \to \Specof{A^{G_x}}$ is a $G_x$-stable open subscheme of $\Specof{A}$, which we denote by $\Specof{A_1}$ as the pullback
-	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXFNwZWNvZntBXzF9Il0sWzEsMCwiWF8xIl0sWzAsMSwiXFxTcGVjb2Z7QX0iXSxbMSwxLCJcXFNwZWNvZntBXntHX3h9fSJdLFsyLDNdLFsxLDMsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsMV0sWzAsMl1d
+	Since $\mathcal{U}$ is open and $\pi_\mathcal{W}$ is a homeomorphism, $\pi_\mathcal{W}(\mathcal{U})$ is open in $\Specof{A^{G_x}}$. 
+	Let $X_1$ be a principal affine neighbourhood of $\pi_\mathcal{W}(w)$ inside $\pi_\mathcal{W}(\mathcal{U})$.
+	Now since $W = \Specof{A^{G_x}}$ is affine, $X_1$ corresponds to $A^{G_x}[h^{-1}]$ for some $h\in A^{G_x}$.
+	By construction, the preimage of $X_1$ under $\Specof{A} \to \Specof{A^{G_x}}$ is a $G_x$-stable open subscheme of $\Specof{A}$, which we denote by $\Specof{A_1}$ as the following pullback indicates:
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXFNwZWNvZntBXzF9Il0sWzEsMCwiWF8xIl0sWzAsMSwiXFxTcGVjb2Z7QX0iXSxbMSwxLCJcXFNwZWNvZntBXntHX3h9fSJdLFsyLDNdLFsxLDMsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsMV0sWzAsMiwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMCwzLCIiLDIseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
 	\[\begin{tikzcd}
 		{\Specof{A_1}} & {X_1} \\
-		{\Specof{A}} & {\Specof{A^{G_x}}}.
+		{\Specof{A}} & {\Specof{A^{G_x}}}
 		\arrow[from=1-1, to=1-2]
-		\arrow[from=1-1, to=2-1]
+		\arrow[hook, from=1-1, to=2-1]
+		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
 		\arrow[hook, from=1-2, to=2-2]
 		\arrow[from=2-1, to=2-2]
 	\end{tikzcd}\]
 
-	Since $X_1 = \Specof{A^{G_x}[g^{-1}]}$, we have $A_1 \cong A \otimes_{A^{G_x}} A^{G_x}[g^{-1}] \cong A[g^{-1}]$. Taking $G_x$-invariants we get $A_1^{G_x} \cong (A[g^{-1}])^{G_x} \cong A^{G_x}[g^{-1}]$, since localizing is exact. Hence, $X_1 \cong \Specof{A_1^{G_x}}$.
+	Since $X_1 = \Specof{A^{G_x}[h^{-1}]}$, we have $A_1 \cong A \otimes_{A^{G_x}} A^{G_x}[h^{-1}] \cong A[h^{-1}]$. Taking $G_x$-invariants we get $A_1^{G_x} \cong (A[h^{-1}])^{G_x} \cong A^{G_x}[h^{-1}]$, since localizing is exact. Hence, $X_1 \cong \Specof{A_1^{G_x}}$.
 	Now consider $\pi_\mathcal{W}^{-1}(X_1)$ an open substack of $\mathcal{W}$. Open substacks of $\mathcal{W} = [\Specof{A}/G_x]$ correspond precisely to $G_x$-stable open subschemes $V\subset \Specof{A}$. 
 	Hence the open substack $\pi_\mathcal{W}^{-1}(X_1)$ must be given by $[V/ G_x]$ for 
 	\[
@@ -489,7 +490,9 @@ So far we have prooven the existence of a coarse moduli space for well-nigh affi
 	\end{tikzcd}\]
 	Hence, $V = \Specof{A_1}$ and $\pi_\mathcal{W}^{-1}(X_1) \cong [\Specof{A_1} / G_x]$. Now we have a morphism
 	\[
-		h: \mathcal{X}_1 = ([\Specof{A_1} /G_x] , w) \to (\mathcal{X}, x)
+		g: \mathcal{X}_1 = ([\Specof{A_1} /G_x] , w) \to (\mathcal{X}, x)
 	\]
 	which induces isomorphism on all geometric stabilizer groups, since $\mathcal{X}_1 \subset \mathcal{U}$.
+	
+	Next we show, that $\mathcal{X}_0 := im(f)$ admits a coarse moduli space. Let $\mathcal{X}_2 := \mathcal{X}_1\times_{\mathcal{X}} \mathcal{X}_1$ and $\mathcal{X}_3 := \mathcal{X}_1 \times_\mathcal{X} \mathcal{X}_1 \times_\mathcal{X} \mathcal{X}_1$. Since $g$ is affine, each $\mathcal{X}_i = [\Specof{A_i} /G_x]$ and the coarse moduli spaces of $\mathcal{X}_i$ is given by $\Specof{A_i^{G_x}}$.
 \end{proof}
