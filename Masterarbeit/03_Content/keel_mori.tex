@@ -160,20 +160,6 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	$\mathcal X$ in the affine case.
 \end{proof}
 
-\begin{lemma}\label{lem:cms-pullback}
-	(\cite[Tag 0DUQ][]{stacks-project})
-	Let $\mathcal{X}, \mathcal{X}'$ be well-nigh affine algebraic stacks and $h: \mathcal{X}' \to \mathcal{X}$ be an \etale\ morphism, which induces isomorphisms on automorphism groups. Then the following diagram is cartesian and the induced morphism $X'\to X$ is \etale.
-	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhjYWx7WH0nIl0sWzEsMCwiXFxtYXRoY2Fse1h9Il0sWzAsMSwiWCciXSxbMSwxLCJYIl0sWzAsMV0sWzEsM10sWzIsM10sWzAsMl0sWzAsMywiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
-	\[\begin{tikzcd}
-		{\mathcal{X}'} & {\mathcal{X}} \\
-		{X'} & X
-		\arrow[from=1-1, to=1-2]
-		\arrow[from=1-1, to=2-1]
-		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
-		\arrow[from=1-2, to=2-2]
-		\arrow[from=2-1, to=2-2]
-	\end{tikzcd}\]
-\end{lemma}
 
 \begin{lemma}\label{lem:cms-universal-along-alg-spaces}
 	(\cite[Tag 0DUR][]{stacks-project})
@@ -460,8 +446,9 @@ So far we have prooven the existence of a coarse moduli space for well-nigh affi
 	\pi_\mathcal{W}: \mathcal{W} \to W = \Specof{A^{G_x}}.
 	\]
 	
-	Let $X_1$ be a principal affine neighbourhood of $\pi_\mathcal{W}(w)$ inside $W$.
-	Now since $W = \Specof{A^{G_x}}$ is affine, $X_1$ corresponds to $A^{G_x}[g^{-1}]$ for some $g\in A^{G_x}$.
+	 Since $\mathcal{U}$ is open and $\pi_\mathcal{W}$ is a homeomorphism, $\pi_\mathcal{W}(\mathcal{U})$ is open in $\Specof{A^{G_x}}$. 
+	 Let $X_1$ be a principal affine neighbourhood of $\pi_\mathcal{W}(w)$ inside $\pi_\mathcal{W}(\mathcal{U})$.
+	 Now since $W = \Specof{A^{G_x}}$ is affine, $X_1$ corresponds to $A^{G_x}[g^{-1}]$ for some $g\in A^{G_x}$.
 	By construction, the preimage of $X_1$ under $\Specof{A} \to \Specof{A^{G_x}}$ is a $G_x$-stable open subscheme of $\Specof{A}$, which we denote by $\Specof{A_1}$ as the pullback
 	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXFNwZWNvZntBXzF9Il0sWzEsMCwiWF8xIl0sWzAsMSwiXFxTcGVjb2Z7QX0iXSxbMSwxLCJcXFNwZWNvZntBXntHX3h9fSJdLFsyLDNdLFsxLDMsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsMV0sWzAsMl1d
 	\[\begin{tikzcd}
@@ -504,5 +491,5 @@ So far we have prooven the existence of a coarse moduli space for well-nigh affi
 	\[
 		h: \mathcal{X}_1 = ([\Specof{A_1} /G_x] , w) \to (\mathcal{X}, x)
 	\]
-	which induces isomorphism on all geometric stabilizer groups.
+	which induces isomorphism on all geometric stabilizer groups, since $\mathcal{X}_1 \subset \mathcal{U}$.
 \end{proof}
