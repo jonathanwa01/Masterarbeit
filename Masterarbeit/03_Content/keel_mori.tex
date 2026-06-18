@@ -1,40 +1,24 @@
 \chapter{Keel Mori Theorem}
-
 The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by first constructing moduli spaces on a special local class of algebraic stacks, called well-nigh affine stacks, and then gluing these local moduli spaces along
 \etale\ overlaps.
 
 \section{Local constructions}
 
-\begin{definition}[Well-nigh]
-	(\cite[Tag 0DUL][]{stacks-project})
-	Let $\mathcal{X}$ be an algebraic stack. We call $\mathcal{X}$ well-nigh affine, if there exists an affine scheme $U$ and a surjective, flat, finite and finitely presented morphism $U\to \mathcal{X}$.	
-\end{definition}
+From now on we will be working with Deligne-Momford stacks follwing jarod's notes.
 
-\begin{remark}
-	The condition of being well-nigh affine is not part of the definition of an algebraic stack, but an additional finiteness and locality assumption on its presentation.
-	
-	Indeed, by definition of an algebraic stack (e.g.\ \cite[Tag 026N]{stacks-project}), there already exists a smooth surjective morphism $V \to \mathcal{X}$ from a scheme $V$. However, in general $V$ need neither be affine nor satisfy strong finiteness properties over $\mathcal{X}$.
-	
-	The well-nigh condition strengthens this by requiring the existence of a presentation $U \to \mathcal{X}$ where $U$ is affine and the morphism is flat, finite, and finitely presented. In particular, the associated equivalence relation
+
+\begin{lemma}[Local Structure Theorem of Deligne-Mumford Stacks]\label{lem:local-structure-theorem-dm-stacks}
+	(\cite[][Theorem 4.2.11]{alper2026stacks})
+	Let $\mathcal{X}$ be a separated DM stack and let $x:\Specof{k} \to  \mathcal{X}$ be a point with geometric stabilizer $G_x$. Then there exists an affine \etale\ morphism 
 	\[
-	R = U \times_{\mathcal{X}} U
+	f: [\Specof{A}/ G_x] \to \mathcal{X}
 	\]
-	acquires good finiteness properties, which allows one to treat it similarly to a finite equivalence relation on an affine scheme.
-	
-	This additional structure is crucial in the construction of coarse moduli spaces, as it provides a local situation in which quotients can be formed and then glued via descent.
-\end{remark}
-
-\begin{lemma}[{\cite[Tag 0DUM]{stacks-project}}]
-	\label{lem-groupoid-representation-of-well-nigh-affine}
-	Let $\mathcal{X}$ be an algebraic stack. Then the following are equivalent:
-	\begin{enumerate}
-		\item $\mathcal{X}$ is well-nigh affine;
-		\item there exists a groupoid scheme $(U,R,s,t,c)$ with $U$ and $R$ affine and
-		$s,t \colon R \to U$ finite locally free such that
-		$\mathcal{X} \cong [U/R]$.
-	\end{enumerate}
-	If these conditions hold, then $\mathcal{X}$ is quasi-compact, quasi-DM, and separated.
+	sending $w\in |[\Specof{A}/ G_x]|$ to $x$, such that f induces an isomphism 
+	\[
+	G_w \xrightarrow{\simeq} G_x.
+	\]
 \end{lemma}
+
 
 
 \begin{lemma}[Affine invariant quotient construction]\label{lem:affine-invariant-quotient}
@@ -382,7 +366,7 @@ The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by fir
 	\]
 	which holds by construction of \(g_V\). Hence \(h=g\circ \pi\).
 	
-	Finally, suppose \(g,g':X\to Y\) both satisfy
+	Finally, suppose $g,g':X\to Y$ both satisfy
 	\[
 	g\circ \pi = h = g'\circ \pi.
 	\]
@@ -449,131 +433,48 @@ So far we have prooven the existence of a coarse moduli space for well-nigh affi
 
 
 \begin{theorem}[Keel-Mori Theorem]
-	Let $\mathcal{X}$ be an algebraic stack with finite inertia, i.e. $\mathcal{I_X}\to \mathcal{X}$ is a finite morphism. Then there exists a coarse moduli space
+	Let $\mathcal{X}$ be a Deligne-Mumford stack separated and of finite type over a field with finite inertia. Then there exists a coarse moduli space
 	\[
 	\pi: \mathcal{X}\to X.
 	\]
 \end{theorem}
 
 \begin{proof}
-	By lemma \ref{lem:wna-decomposition} there is a decomposition into well-nigh affine substacks $g_i:\mathcal{X}_i\to \mathcal{X}$. By  \ref{lem:local-ex-cms-in-affines} and \ref{lem:cms-universal-along-alg-spaces} there exists coarse moduli spaces $\pi_i:\mathcal{X}_i \to X_i$. We now have to ensure, that these constructed local coarse moduli spaces glue to a global coarse moduli space $X$.
-	Therefore let $\mathcal{X}_{ij}$ be the pullback
-	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhjYWx7WH1fe2lqfSJdLFsxLDAsIlxcbWF0aGNhbHtYfV9pIl0sWzAsMSwiXFxtYXRoY2Fse1h9X2oiXSxbMSwxLCJcXG1hdGhjYWx7WH0iXSxbMiwzLCJnX2oiLDJdLFsxLDMsImdfaSJdLFswLDFdLFswLDJdLFswLDMsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXIifX1dXQ==
+	Let $x:\Specof{k} \to \mathcal{X}$ be a geometric point. By the local structure theorem of DM stacks (\ref{lem:local-structure-theorem-dm-stacks}), we can find an \etale\ neighborhood of $x$ denoted by:
+	\[
+	f: (\mathcal{W},w) \to (\mathcal{X}, x),
+	\]
+	where $\mathcal{W} = [\Specof{A}/G_x]$, such that $f$ induces an isomorphism between the stabilizer groups
+	\[
+	G_w \xrightarrow{\simeq} G_x.
+	\]
+	We now shrink $\mathcal{W}$ to a smaller \etale\ neighbourhood, such that $f$ induces isomorphisms on all stabilizer groups.
+	
+	Let $\mathcal{U}\subset \mathcal{W}$ be the locus consisting of points $z\in |\mathcal{W}|$, such that $f$ induces isomorphisms $G_z \xrightarrow{\simeq} G_x$.
+	We claim, that $\mathcal{U}$ is open. 
+	TODO: Proof this holds
+	
+	
+	Now by the affince case, $\mathcal{W}$ admits a coarse moduli space
+	\[
+	\pi_\mathcal{W}: \mathcal{W} \to W = \Specof{A^{G_x}}.
+	\]
+	
+	Let $X_1$ be a principal affine neighbourhood of $\pi_\mathcal{W}(w)$ inside $W$.
+	Now since $W = \Specof{A^{G_x}}$ is affine, $X_1$ corresponds to $A^{G_x}[g^{-1}]$ for some $g\in A^{G_x}$.
+	By construction, the preimage of $X_1$ under $\Specof{A} \to \Specof{A^{G_x}}$ is a $G_x$-stable open subscheme of $\Specof{A}$, which we denote by $\Specof{A_1}$ as the pullback
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXFNwZWNvZntBXzF9Il0sWzEsMCwiWF8xIl0sWzAsMSwiXFxTcGVjb2Z7QX0iXSxbMSwxLCJcXFNwZWNvZntBXntHX3h9fSJdLFsyLDNdLFsxLDMsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsMV0sWzAsMl1d
 	\[\begin{tikzcd}
-		{\mathcal{X}_{ij}} & {\mathcal{X}_i} \\
-		{\mathcal{X}_j} & {\mathcal{X}}
+		{\Specof{A_1}} & {X_1} \\
+		{\Specof{A}} & {\Specof{A^{G_x}}}.
 		\arrow[from=1-1, to=1-2]
 		\arrow[from=1-1, to=2-1]
-		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
-		\arrow["{g_i}", from=1-2, to=2-2]
-		\arrow["{g_j}"', from=2-1, to=2-2]
-	\end{tikzcd}\]
-	By lemma \ref{lem:wna-decomposition} the morphisms $g_i$ are representable by algebraic spaces and \etale. Since \etale\ morphisms are stable under base change (\cite[see][Tag 0CIN]{stacks-project}) , all $\mathcal{X}_{ij}\to \mathcal{X}_i$ are \etale. All $\mathcal{X}_{ij}\to \mathcal{X}_i$ induce isomorphisms on automorphisms groups, seen by the following diagram:
-	% https://q.uiver.app/#q=WzAsOCxbMCwyLCJcXG1hdGhjYWx7WH1faiJdLFsyLDEsIlxcbWF0aGNhbHtJfV9cXG1hdGhjYWx7WF9pfSJdLFsxLDIsIlxcbWF0aGNhbHtYfSJdLFszLDEsIlxcbWF0aGNhbHtJX1h9Il0sWzMsMCwiXFxtYXRoY2Fse0l9X1xcbWF0aGNhbHtYX2l9Il0sWzIsMCwiXFxtYXRoY2Fse0l9X3tcXG1hdGhjYWx7WH1fe2lqfX0iXSxbMSwxLCJcXG1hdGhjYWx7WH1faSJdLFswLDEsIlxcbWF0aGNhbHtYfV97aWp9Il0sWzMsMl0sWzEsMF0sWzEsM10sWzAsMl0sWzEsMiwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzUsNF0sWzQsM10sWzUsMV0sWzcsMF0sWzcsNl0sWzYsMl0sWzcsMiwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzQsNl0sWzUsN10sWzQsMiwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
-	\[\begin{tikzcd}
-		&& {\mathcal{I}_{\mathcal{X}_{ij}}} & {\mathcal{I}_\mathcal{X_i}} \\
-		{\mathcal{X}_{ij}} & {\mathcal{X}_i} & {\mathcal{I}_\mathcal{X_i}} & {\mathcal{I_X}} \\
-		{\mathcal{X}_j} & {\mathcal{X}}
-		\arrow[from=1-3, to=1-4]
-		\arrow[from=1-3, to=2-1]
-		\arrow[from=1-3, to=2-3]
-		\arrow[from=1-4, to=2-2]
-		\arrow[from=1-4, to=2-4]
-		\arrow["\lrcorner"{anchor=center, pos=0.125, rotate=-90}, draw=none, from=1-4, to=3-2]
+		\arrow[hook, from=1-2, to=2-2]
 		\arrow[from=2-1, to=2-2]
-		\arrow[from=2-1, to=3-1]
-		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=2-1, to=3-2]
-		\arrow[from=2-2, to=3-2]
-		\arrow[from=2-3, to=2-4]
-		\arrow[from=2-3, to=3-1]
-		\arrow["\lrcorner"{anchor=center, pos=0.125, rotate=-90}, draw=none, from=2-3, to=3-2]
-		\arrow[from=2-4, to=3-2]
-		\arrow[from=3-1, to=3-2]
 	\end{tikzcd}\]
-	Since the front, the bottom and right squares are cartesian, the left back face is cartesian.
-	In general, the pullback of two well-nigh affine stacks is not again well-nigh affine. Hence, we can only apply lemma \ref{lem:cms-pullback-domain-non-well-nigh-affine} here.
-	Now since $\mathcal{X}_i$ is well-nigh affine, by lemma \ref{lem:cms-pullback-domain-non-well-nigh-affine} applied to $\mathcal{X}_{ij} \to \mathcal{X}_i$ we get cartesian squares
-	\begin{equation}
-		\label{diag:coarse-moduli-cartesian-square}
-		% https://q.uiver.app/#q=WzAsNixbMSwwLCJcXG1hdGhjYWx7WH1fe2lqfSJdLFsyLDAsIlxcbWF0aGNhbHtYfV9pIl0sWzAsMCwiXFxtYXRoY2Fse1h9X2oiXSxbMCwxLCJYX2oiXSxbMSwxLCJYX3tpan0iXSxbMiwxLCJYX2kiXSxbMCwxXSxbMCwyXSxbMSw1LCJcXHBpX2kiXSxbMCw0LCJcXHBpX3tpan0iXSxbMiwzLCJcXHBpX2oiXSxbNCwzXSxbNCw1XSxbMCw1LCIiLDAseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XSxbMCwzLCIiLDAseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
-		\begin{tikzcd}
-			{\mathcal{X}_j} & {\mathcal{X}_{ij}} & {\mathcal{X}_i} \\
-			{X_j} & {X_{ij}} & {X_i}
-			\arrow["{\pi_j}", from=1-1, to=2-1]
-			\arrow[from=1-2, to=1-1]
-			\arrow[from=1-2, to=1-3]
-			\arrow["\lrcorner"{anchor=center, pos=0.125, rotate=-90}, draw=none, from=1-2, to=2-1]
-			\arrow["{\pi_{ij}}", from=1-2, to=2-2]
-			\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-2, to=2-3]
-			\arrow["{\pi_i}", from=1-3, to=2-3]
-			\arrow[from=2-2, to=2-1]
-			\arrow[from=2-2, to=2-3]
-		\end{tikzcd}
-	\end{equation}
 
-	with $X_{ij}\to X_i$ \etale\ and $\pi_i:\mathcal{X}_i\to X_i$ coarse moduli spaces. We now glue the $X_i$ to a global coarse moduli space $X$ via \etale\ descent. Claim:
-	% https://q.uiver.app/#q=WzAsMixbMCwwLCJcXGNvcHJvZCBYX3tpan0iXSxbMSwwLCJcXGJpZyhcXGNvcHJvZCBYX2lcXGJpZylcXHRpbWVzIFxcYmlnKFxcY29wcm9kIFhfalxcYmlnKSJdLFswLDEsIihzLHQpIl1d
-	\[\begin{tikzcd}
-		{\coprod X_{ij}} & {\big(\coprod X_i\big)\times \big(\coprod X_j\big)}
-		\arrow["{(s,t)}", from=1-1, to=1-2]
-	\end{tikzcd}\]
-	is an \etale\ equivalence relation, where $s$ and $t$ are the induces morphisms from \ref{diag:coarse-moduli-cartesian-square}.
+	Since $X_1 = \Specof{A^{G_x}[g^{-1}]}$, we have $A_1 \cong A \otimes_{A^{G_x}} A^{G_x}[g^{-1}] \cong A[g^{-1}]$. Taking $G_x$-invariants we get $A_1^{G_x} \cong (A[g^{-1}])^{G_x} \cong A^{G_x}[g^{-1}]$, since localizing is exact. Hence, $X_1 \cong \Specof{A_1^{G_x}}$.
 	
-	Proof: We know that $s, t$ are \etale, since all $X_{ij} \to X_i$ are \etale. Setting $R=\coprod X_{ij}$ and $U=\coprod X_i$, diagram \ref{diag:coarse-moduli-cartesian-square} translates to 
-	\[
-	R \to U\times U.
-	\]
-	We now construct a groupoid structure on $\coprod X_i$ as in definition \ref{def:groupoid-in-alg-spaces}, in order to define the quotient algebraic space $U/R$.
+	 and consider $\mathcal{X}_1 = \pi_\mathcal{W}^{-1}(X_1)$.
 	
-	By associativity of the fibre product, we have 
-	\[
-	\mathcal{X}_{ijk}:= \mathcal{X}_i\times_\mathcal{X} \mathcal{X}_j \times_\mathcal{X} \mathcal{X}_k \cong \mathcal{X}_{ij} \times_{\mathcal{X}_j} \mathcal{X}_{jk}.
-	\]
-	The induced morphism $\mathcal{X}_{ijk} \to \mathcal{X}_j$ is again \etale\ and induces isomorphisms on automorphism groups as a base change along $g_i$ by lemma \ref{lem:wna-decomposition}.
-	Now apply lemma \ref{lem:cms-pullback-domain-non-well-nigh-affine} again to $\mathcal{X}_{ijk} \to \mathcal{X}_i$ to obtain a cartesian square:
-	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhjYWx7WH1fe2lqa30iXSxbMSwwLCJcXG1hdGhjYWx7WH1faSJdLFswLDEsIlhfe2lqa30iXSxbMSwxLCJYX2kiXSxbMCwxXSxbMCwyXSxbMiwzXSxbMSwzXSxbMCwzLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
-	\[\begin{tikzcd}
-		{\mathcal{X}_{ijk}} & {\mathcal{X}_i} \\
-		{X_{ijk}} & {X_i}
-		\arrow[from=1-1, to=1-2]
-		\arrow[from=1-1, to=2-1]
-		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
-		\arrow[from=1-2, to=2-2]
-		\arrow[from=2-1, to=2-2]
-	\end{tikzcd}\]
-	This diagram factors via the following:
-	% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXG1hdGhjYWx7WH1fe2lqa30iXSxbMSwwLCJcXG1hdGhjYWx7WH1fe2lqfSJdLFswLDEsIlhfe2lqa30iXSxbMSwxLCJYX3tpan0iXSxbMiwwLCJcXG1hdGhjYWx7WH1faiJdLFsyLDEsIlhfaiJdLFswLDFdLFswLDJdLFsxLDNdLFsyLDNdLFsxLDRdLFszLDVdLFs0LDVdXQ==
-	\[\begin{tikzcd}
-		{\mathcal{X}_{ijk}} & {\mathcal{X}_{ij}} & {\mathcal{X}_j} \\
-		{X_{ijk}} & {X_{ij}} & {X_j}
-		\arrow[from=1-1, to=1-2]
-		\arrow[from=1-1, to=2-1]
-		\arrow[from=1-2, to=1-3]
-		\arrow[from=1-2, to=2-2]
-		\arrow[from=1-3, to=2-3]
-		\arrow[from=2-1, to=2-2]
-		\arrow[from=2-2, to=2-3]
-	\end{tikzcd}\]
-	Since the right square and the outer rectagle is cartesian, the left square is also cartesian. 
-	Now consider the following commutative diagram:
-	% https://q.uiver.app/#q=WzAsOCxbMSwxLCJcXG1hdGhjYWx7WH1faiJdLFswLDEsIlxcbWF0aGNhbHtYfV97amt9Il0sWzMsMCwiXFxtYXRoY2Fse1h9X3tpan0iXSxbMiwwLCJcXG1hdGhjYWx7WH1fe2lqa30iXSxbMSwyLCJYX2oiXSxbMCwyLCJYX3tqa30iXSxbMiwxLCJYX3tpamt9Il0sWzMsMSwiWF97aWp9Il0sWzEsMF0sWzMsMV0sWzIsMF0sWzMsMl0sWzMsNl0sWzIsN10sWzYsNV0sWzcsNF0sWzUsNF0sWzEsNV0sWzAsNF0sWzYsN10sWzMsMF0sWzYsNF1d
-	\[\begin{tikzcd}
-		&& {\mathcal{X}_{ijk}} & {\mathcal{X}_{ij}} \\
-		{\mathcal{X}_{jk}} & {\mathcal{X}_j} & {X_{ijk}} & {X_{ij}} \\
-		{X_{jk}} & {X_j}
-		\arrow[from=1-3, to=1-4]
-		\arrow[from=1-3, to=2-1]
-		\arrow[from=1-3, to=2-2]
-		\arrow[from=1-3, to=2-3]
-		\arrow[from=1-4, to=2-2]
-		\arrow[from=1-4, to=2-4]
-		\arrow[from=2-1, to=2-2]
-		\arrow[from=2-1, to=3-1]
-		\arrow[from=2-2, to=3-2]
-		\arrow[from=2-3, to=2-4]
-		\arrow[from=2-3, to=3-1]
-		\arrow[from=2-3, to=3-2]
-		\arrow[from=2-4, to=3-2]
-		\arrow[from=3-1, to=3-2]
-	\end{tikzcd}\]
 \end{proof}
