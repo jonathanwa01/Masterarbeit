@@ -27,6 +27,9 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 \end{theorem}
 
 \begin{proof}
+	\medskip
+	\textbf{Construct covering with coarse moduli space}
+	
 	Let $x:\Specof{k} \to \mathcal{X}$ be a geometric point. By the local structure theorem of DM stacks (\ref{lem:local-structure-theorem-dm-stacks}), we can find an \etale\ neighborhood of $x$ denoted by:
 	\[
 	f: (\mathcal{W},w) \to (\mathcal{X}, x),
@@ -98,15 +101,10 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	
 	
 	\medskip
-	\textbf{Step 3: Constructing the global coarse moduli space by descent.}
-	
-	\medskip
+	\textbf{Descending the local maps to the overlaps}
 	
 	We first construct the global map $\pi : \mathcal{X} \to X$, then verify it
 	is a coarse moduli space.
-	
-	\medskip
-	\textbf{Step 3a: Descending the local maps to the overlaps.}
 	
 	For each pair $(i,j)$, consider the fiber product
 	\[
@@ -159,8 +157,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	The same argument applies to $\phi_{ji}$.
 	
 	\medskip
-	\textbf{Step 3b: Forming the global algebraic space via the étale
-		equivalence relation.}
+	\textbf{Forming the global algebraic space via the étale equivalence relation.}
 	
 	Define
 	\[
@@ -216,9 +213,9 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	is a coequalizer diagram.
 	
 	\medskip
-	\textbf{Step 3b$'$: Identifying the local coarse spaces as a descent datum.}
+	\textbf{Glue the local coarse moduli spaces via \etale\ descent.}
 	
-	We make explicit how Theorem~\ref{thm:fpqc-descent-affine-schemes} enters.
+	We make use of Theorem~\ref{thm:fpqc-descent-affine-schemes} and explicit explain how it enters.
 	The morphism $p : U \to X$ is an étale surjection, hence in particular an
 	fpqc cover. The fiber product $U \times_X U$ satisfies
 	\[
@@ -255,7 +252,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	reconstructed from the local data by fpqc descent.
 	
 	\medskip
-	\textbf{Step 3c: Constructing the morphism $\pi : \mathcal{X} \to X$.}
+	\textbf{Constructing the morphism $\pi : \mathcal{X} \to X$.}
 	
 	For each $i$, the composition
 	\[
@@ -281,7 +278,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	(descent of morphisms to algebraic spaces along étale covers).
 	
 	\medskip
-	\textbf{Step 3d: Verifying the coarse moduli space axioms.}
+	\textbf{Verifying the coarse moduli space axioms.}
 	
 	\emph{(i) Geometric points.}
 	Let $\kappa$ be an algebraically closed field and $\bar{x} : \Spec\kappa
