@@ -142,7 +142,7 @@ which underlies the Cech nerve and the notion of totalization.
 \end{example}
 
 \begin{example}[Very concrete example: sets]
-	Let $F$ be a presheaf of sets and let $U \to X$ be a covering.
+	Let $F: \Sch^\op \to \Set$ be a presheaf of sets and let $U \to X$ be a morphism.
 	Then the beginning of the cosimplicial diagram $F(U_\bullet)$ is
 	\[
 	F(U)
@@ -163,64 +163,6 @@ which underlies the Cech nerve and the notion of totalization.
 	\]
 	which is precisely the usual sheaf condition.
 \end{example}
-
-TODO: For strict $2$-cateogries
-\begin{lemma}[Truncated descent for sets and groupoids]
-	\label{lem:truncated-tot-for-stric-n-cats}
-	Let $X^\bullet : \Delta \to \mathcal{C}$ be a cosimplicial object in a category $\mathcal{C}$
-	
-	\begin{enumerate}
-		\item If $\mathcal{C} = \Set$, then the natural map
-		\[
-		\Tot(X^\bullet) \longrightarrow \Tot_1(X^\bullet)
-		=
-		\Eq\big(X^0 \rightrightarrows X^1\big)
-		\]
-		is an isomorphism.
-		
-		\item If $\mathcal{C} = \Grpd$, then the natural map
-		\[
-		\Tot(X^\bullet) \longrightarrow \Tot_2(X^\bullet)
-		\]
-		is an equivalence of categories.
-	\end{enumerate}
-\end{lemma}
-
-\begin{proof}
-	We describe explicitly what the totalization computes.
-	
-	\medskip
-	
-	(1) In $\Set$, the limit of a cosimplicial diagram consists of elements
-	$s \in X^0$ such that the two images in $X^1$ agree.
-	Higher compatibility conditions are automatic since equalities are strict.
-	Hence $\Tot(X^\bullet)$ is already the equalizer of
-	$X^0 \rightrightarrows X^1$.
-	
-	\medskip
-	
-	(2) In $\Grpd$, the totalization $\Tot(X^\bullet)$ is the category of descent data consisting of  objects: $(N, \alpha)$, with $N \in X^0$ and an isomorphism
-	$\alpha : d^0(N) \to d^1(N)$ in $X^1$ satisfying the cocycle condition
-	$d^2(\alpha) \circ d^0(\alpha) = d^1(\alpha)$, i.e. letting the following commute:
-	% https://q.uiver.app/#q=WzAsMyxbMCwxLCJkXjBkXjAoTikiXSxbMiwxLCJkXjFkXjEoTikiXSxbMSwwLCJkXjBkXjFOIl0sWzAsMSwiZF4xXFxhbHBoYSIsMl0sWzAsMiwiZF4wXFxhbHBoYSJdLFsyLDEsImReMlxcYWxwaGEiXV0=
-	\[\begin{tikzcd}
-		& {d^0d^1N} & \\
-		{d^0d^0(N)} && {d^1d^1(N)}
-		\arrow["{d^2\alpha}", from=1-2, to=2-3]
-		\arrow["{d^0\alpha}", from=2-1, to=1-2]
-		\arrow["{d^1\alpha}"', from=2-1, to=2-3]
-	\end{tikzcd}\]
-
-	Here we applied $d^0, d^1$ and $d^2$ to the morphism $\alpha$ and impliclty used the simplicial identities for the cofaces $d^i$.
-	
-	All higher compatibility conditions (in degrees $\ge 3$) are automatic,
-	because in a groupoid all higher diagrams commute uniquely once the
-	2-dimensional compatibility is satisfied.
-	
-	Hence $\Tot(X^\bullet)$ is already determined by the truncation
-	$\Delta_{\le 2}$, i.e.\ $\Tot_2(X^\bullet)$.
-\end{proof}
-
 
 \begin{definition}[Descent datum]
 	Let $\CatC$ be a category with pullbacks, $F: \CatC^\op\to \Cat$ a pseudo functor and $U \to X$ a morphism. A descent datum for $F$ along $U \to X$ consists of
@@ -686,7 +628,7 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	denotes the projection onto the \(i\)-th and \(j\)-th factors.
 \end{definition}
 
-\begin{theorem}[Faithfully flat descent for quasi-coherent sheaves]
+\begin{theorem}[Faithfully flat descent for quasi-coherent sheaves]\label{thm:fpqc-descent-qcoh}
 	(\cite[Tag 023T]{stacks-project})
 	Let $f : U \to X$ be an fpqc covering of schemes.
 	
@@ -889,13 +831,38 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 \end{remark}
 
 
-\begin{theorem}[Descent for affine schemes via relative spectrum]
-	Let $X$ be a scheme and let $U \to X$ be an fpqc covering with Cech nerve $U_\bullet$.
-	Then the functor
-	\[
-	\Aff/X \;\longrightarrow\; \Tot\big((\Aff/U_\bullet)\big)
-	\]
+\begin{theorem}[Fpqc descent for affine schemes]
+	Consider the pseudofunctor 
+	\begin{align*}
+		\AffOver{(-)}: \Sch^\op &\longrightarrow  \Cat\\
+		X &\mapsto \AffOver{X},
+	\end{align*}
+	sending a morphism $f: U \to X$ to the base change functor 
+	\begin{align*}
+		f^*: \AffOver{X} &\longrightarrow \AffOver{U} \\
+		(Z\xrightarrow{g} X) &\mapsto (Z\times_XU \to U).
+	\end{align*}
+
 	is an equivalence, where $\Aff/X$ denotes the category of affine schemes over $X$.
+	
+	We write
+	\[
+	\Desc(U/X) := \Desc_f\!\left(\AffOver{(-)}\right)
+	\]
+	for the category of descent data for $\AffOver{(-)}$ along $f:U \to X$.
+	
+	Let $f : U \to X$ be an fpqc covering of schemes.
+	Then the base-change functor induces an equivalence of categories
+	\[
+	\Aff_{/X} \;\longrightarrow\; \Desc(U/X),
+	\qquad
+	(Z \xrightarrow{g} X) \;\longmapsto\; (Z \times_X U,\, \alpha_Z),
+	\]
+	where $\alpha_Z$ is the canonical descent isomorphism
+	\[
+	\pi_1^*(Z \times_X U) \xrightarrow{\;\sim\;} \pi_2^*(Z \times_X U)
+	\]
+	induced by the projections $\pi_i : U \times_X U \to U$.
 	
 	Equivalently, for quasi-coherent $\mathcal{O}_X$-algebras one has
 	\[
@@ -905,40 +872,49 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	\]
 	and this equivalence is compatible with the relative spectrum construction
 	\[
-	\underline{\Spec}_X : \QCohAlg(X)^{op} \;\longrightarrow\; \Aff/X.
+	\underline{\Spec}_X : \QCohAlg(X)^{op} \xrightarrow{\simeq} \Aff/X.
 	\]
 \end{theorem}
 
 \begin{proof}
-	We first treat quasi-coherent algebras and then pass to affine schemes via
-	relative $\Spec$.
-	
-	Since quasi-coherent $\mathcal{O}_X$-modules satisfy fpqc descent, the same
-	is true for quasi-coherent $\mathcal{O}_X$-algebras: the algebra structure
-	(consisting of multiplication and unit maps) is given by morphisms in
-	$\QCoh(X)$ and is preserved under limits. Hence
+	The relative spectrum construction provides an antiequivalence
 	\[
-	\QCohAlg(X)
-	\cong
-	\Tot\big(\QCohAlg(U_\bullet)\big).
+	\underline{\Spec}_X : \QCohAlg(X)^{op} \xrightarrow{\sim} \Aff_{/X},
 	\]
-	
-	Now consider the relative spectrum construction
+	natural in $X$ and compatible with base change along any morphism of
+	schemes. 
+	Under this identification, a descent datum $(Z, \alpha)$
+	for $\AffOver{(-)}$ along $f$ corresponds bijectively to a descent
+	datum $(\mathcal{A}, \alpha^*)$ for $\QCohAlg(-)$ along $f$, where $\alpha^*$ is the isomorphism
 	\[
-	\underline{\Spec}_X : \QCohAlg(X)^{op} \to \Aff/X.
+	\pi_2^*\mathcal{A} \xrightarrow{\;\sim\;} \pi_1^*\mathcal{A}
 	\]
-	This functor is functorial and compatible with base change. Moreover, it
-	induces an equivalence between quasi-coherent algebras on $X$ and affine
-	schemes over $X$.
+	in $\QCohAlg(U \times_X U)$ obtained by applying
+	$\underline{\Spec}^{-1}$ to $\alpha$.
 	
-	The cosimplicial diagram
-	$\QCohAlg(U_\bullet)$ yields the cosimplicial diagram of affine schemes
-	$\Aff/U_\bullet$. Since $\underline{\Spec}$ is compatible with base change,
-	it preserves the descent data.
-	
-	Therefore the equivalence for quasi-coherent algebras induces an equivalence
+	Since a quasi-coherent $\mathcal{O}_U$-algebra is a quasi-coherent
+	$\mathcal{O}_U$-module equipped with multiplication and unit morphisms
 	\[
-	\Aff/X \cong \Tot\big(\Aff/U_\bullet\big).
+	\mu : \mathcal{A} \otimes_{\mathcal{O}_U} \mathcal{A} \to \mathcal{A},
+	\qquad
+	\eta : \mathcal{O}_U \to \mathcal{A}
+	\]
+	in $\QCoh(U)$, any descent datum for $\QCohAlg_{(-)}$ is in
+	particular a descent datum for $\QCoh_{(-)}$ carrying compatible
+	algebra structure. By faithfully flat descent for quasi-coherent
+	sheaves (Theorem~\ref{thm:fpqc-descent-qcoh}), the pullback functor
+	\[
+	\QCoh(X) \xrightarrow{\;\sim\;} \Desc_f(\QCoh)
+	\]
+	is an equivalence, and it restricts to an equivalence on full
+	subcategories of algebras:
+	\[
+	\QCohAlg(X) \xrightarrow{\;\sim\;} \Desc_f(\QCohAlg).
+	\]
+	Applying $\underline{\Spec}^{op}$ on both sides yields the desired
+	equivalence
+	\[
+	\AffOver{(-)}\xrightarrow{\;\sim\;} \Desc(U/X). \qedhere
 	\]
 \end{proof}
 
