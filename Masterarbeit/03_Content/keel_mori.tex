@@ -216,6 +216,45 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	is a coequalizer diagram.
 	
 	\medskip
+	\textbf{Step 3b$'$: Identifying the local coarse spaces as a descent datum.}
+	
+	We make explicit how Theorem~\ref{thm:fpqc-descent-affine-schemes} enters.
+	The morphism $p : U \to X$ is an étale surjection, hence in particular an
+	fpqc cover. The fiber product $U \times_X U$ satisfies
+	\[
+	U \times_X U \;\cong\; R \;=\; \coprod_{i,j} X_{ij},
+	\]
+	since $p$ coequalizes $s$ and $t$. Hence, two points of $U$ have the same image in $X$ if and only if they are related by $R$. Under this identification,
+	the two projections $\pi_1, \pi_2 : U \times_X U \to U$ correspond to $s$
+	and $t$ respectively.
+	
+	For each $i$, the affine scheme $X_i$ comes with its inclusion
+	$X_i \hookrightarrow U$, giving an object $(X_i \hookrightarrow U) \in
+	\AffOver{U}$. The morphisms $\phi_{ij} : X_{ij} \to X_i$ from Step~3a
+	assemble into a gluing isomorphism
+	\[
+	\alpha : \pi_1^*U \xrightarrow{\;\sim\;} \pi_2^*U
+	\]
+	in $\AffOver{U \times_X U}$, whose $(i,j)$-component is induced by
+	$\phi_{ij}$ and $\phi_{ji}$. The normalization condition $\Delta^*\alpha =
+	id$ holds by reflexivity of $R$ (i.e.\ $\phi_{ii} = id_{X_i}$), and the
+	cocycle condition
+	\[
+	\pi_{23}^*(\alpha) \circ \pi_{12}^*(\alpha) = \pi_{13}^*(\alpha)
+	\]
+	in $\AffOver{U \times_X U \times_X U}$ follows from transitivity of $R$
+	established above.
+	
+	Thus $(U, \alpha)$ is an object of $\Desc_p(\AffOver{(-)})$, i.e.\ a
+	descent datum for the pseudofunctor $\AffOver{(-)}$ along the fpqc cover
+	$p : U \to X$. By Theorem~\ref{thm:fpqc-descent-affine-schemes}, this
+	descent datum is effective, i.e. there exists a unique affine scheme over $X$
+	whose pullback along $p$ recovers $(U, \alpha)$. This descended object is
+	precisely $X$ itself, confirming that the local affine pieces $X_i$ are
+	the pullbacks of $X$ along $p$, and that $X$ is the global scheme
+	reconstructed from the local data by fpqc descent.
+	
+	\medskip
 	\textbf{Step 3c: Constructing the morphism $\pi : \mathcal{X} \to X$.}
 	
 	For each $i$, the composition
