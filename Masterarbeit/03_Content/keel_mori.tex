@@ -19,405 +19,6 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	\]
 \end{lemma}
 
-
-
-\begin{lemma}[Affine invariant quotient construction]\label{lem:affine-invariant-quotient}
-	Let
-	\[
-	\mathcal X=[U/R]
-	\]
-	be a quotient stack, where 
-	% https://q.uiver.app/#q=WzAsMixbMCwwLCJSPVxcU3BlY29me0J9Il0sWzEsMCwiVT1cXFNwZWNvZntBfSJdLFswLDEsInMiLDAseyJvZmZzZXQiOi0xfV0sWzAsMSwidCIsMix7Im9mZnNldCI6MX1dXQ==
-	\[\begin{tikzcd}
-		{R=\Specof{B}} & {U=\Specof{A}}
-		\arrow["s", shift left, from=1-1, to=1-2]
-		\arrow["t"', shift right, from=1-1, to=1-2]
-	\end{tikzcd}\]
-	is a groupoid in affine schemes. Let
-	\[
-	C=\{a\in A \mid s^\#(a)=t^\#(a)\}.
-	\]
-	Then the canonical morphism
-	\[
-	U\to \Specof{C}
-	\]
-	is $R$-invariant and therefore induces a morphism
-	\[
-	\mathcal X \to \Specof{C}.
-	\]
-\end{lemma}
-
-\begin{proof}
-	The condition
-	\[
-	C=\{a\in A \mid s^\#(a)=t^\#(a)\}
-	\]
-	means precisely that $C$ is the equalizer
-	\[
-	C=\operatorname{Eq}\big(A \rightrightarrows B\big),
-	\]
-	where the two maps are $s^\#$ and $t^\#$ corresponding to the morphisms
-	\[
-	s,t : R \to U.
-	\]
-	
-	The inclusion $C \hookrightarrow A$ induces a morphism of affine schemes
-	\[
-	U=\Spec(A) \longrightarrow \Spec(C).
-	\]
-	
-	We claim that this morphism is $R$-invariant. By definition, this means
-	that the two compositions
-	\[
-	R \rightrightarrows U \to \Spec(C)
-	\]
-	coincide.
-	
-	On the level of rings, these two morphisms correspond to the two maps
-	\[
-	C \hookrightarrow A \xrightarrow{s^\#} B
-	\qquad \text{and} \qquad
-	C \hookrightarrow A \xrightarrow{t^\#} B.
-	\]
-	But by definition of $C$, we have $s^\#(a)=t^\#(a)$ for all $a\in C$.
-	Hence these two ring maps agree, and therefore the two morphisms
-	\[
-	R \rightrightarrows U \to \Spec(C)
-	\]
-	are equal. This proves that $U \to \Spec(C)$ is $R$-invariant.
-	
-	It remains to show that such an invariant morphism descends to the quotient
-	stack $\mathcal X=[U/R]$.
-	
-	By definition of the quotient stack, a morphism
-	\[
-	\mathcal X \to Y
-	\]
-	to a scheme $Y$ is equivalent to the following data:
-	\begin{enumerate}
-		\item a morphism $U \to Y$,
-		\item such that the two pullbacks along $s,t : R \to U$ agree.
-	\end{enumerate}
-	
-	Since we have already shown that the morphism $U \to \Spec(C)$ satisfies
-	this invariance condition, it follows that it defines a morphism
-	\[
-	\pi : \mathcal X \to \Spec(C).
-	\]
-\end{proof}
-
-
-\begin{lemma}[Local existence of a coarse moduli space on well-nigh affine chart]\label{lem:local-ex-cms-in-affines}
-	(\cite[Tag 0DUP][]{stacks-project})
-	Let $\mathcal{X}$  be a well-nigh affine algebraic stack. Then there exists a coarse moduli space $\pi:\mathcal{X} \to X$ in the category of affine schemes. Moreover $\pi$ is separated, quasi-compact and a universal homeomorphism.
-\end{lemma}
-
-\begin{proof}
-	By \ref{lem-groupoid-representation-of-well-nigh-affine} there exists a presentation
-	\[
-	\mathcal X = [U/R],
-	\]
-	where
-	\[
-	U=\Spec(A)
-	\]
-	is an affine scheme and
-	\[
-	R = U \times_{\mathcal X} U = \Spec(B)
-	\]
-	is a groupoid in affine schemes such that the morphisms
-	\[
-	s,t : R \to U
-	\]
-	are finite locally free.
-	
-	Let
-	\[
-	C := \{ a \in A \mid s^\#(a) = t^\#(a) \}
-	\]
-	be the ring of invariant functions. Equivalently,
-	\[
-	C = \operatorname{Eq}\big(A \rightrightarrows B\big).
-	\]
-	
-	By Lemma~\ref{lem:affine-invariant-quotient}, the canonical morphism
-	\[
-	U \to \Spec(C)
-	\]
-	is $R$-invariant and therefore induces a morphism $\pi: \mathcal X \to \Spec(C).$	
-	Set
-	\[
-	X := \Spec(C).
-	\]
-	
-	It remains to show that $\pi$ is a coarse moduli space and satisfies the
-	stated properties. 
-	
-	By lemma \ref{lem-groupoid-representation-of-well-nigh-affine} $\mathcal{X}$ is separated. Since $X$ is affine, hence separated, $\pi$ is separated.
-	$U\to \mathcal{X}$ is surjective and $U\to X$ is quasi-compact, hence $\pi$ is quasi-compact by \cite[Tag 050X]{stacks-project}.
-	The details about $\pi$ being universially surjective is prooven in more detail in the proof here \cite[Tag 0DUP]{stacks-project}.
-	In particular, $X=\Spec(C)$ is the desired coarse moduli space of
-	$\mathcal X$ in the affine case.
-\end{proof}
-
-
-\begin{lemma}\label{lem:cms-universal-along-alg-spaces}
-	(\cite[Tag 0DUR][]{stacks-project})
-	The morphisms of lemma \ref{lem:local-ex-cms-in-affines} is universal for morphisms into algebraic spaces.
-\end{lemma}
-
-\begin{proof}
-	Let \(Y\) be an algebraic space and let
-	\(h:\mathcal X\to Y\) be a morphism. We construct a unique morphism
-	\(g:X\to Y\) such that \(h=g\circ \pi\).
-	
-	Choose an étale surjection \(p:V\to Y\), where \(V\) is a scheme. Put
-	\[
-	R=V\times_Y V.
-	\]
-	Then \(Y\) is the sheaf quotient of the étale equivalence relation
-	\[
-	R\rightrightarrows V.
-	\]
-	
-	Consider the base change of $h$ along the \etale\ cover $V\to Y$:
-	% https://q.uiver.app/#q=WzAsNCxbMSwxLCJZIl0sWzAsMCwiXFxtYXRoY2Fse1h9X1YiXSxbMCwxLCJWIl0sWzEsMCwiXFxtYXRoY2Fse1h9Il0sWzEsMCwiIiwwLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzEsMiwiaF9WIiwyXSxbMiwwXSxbMywwLCJoIiwyXSxbMSwzXV0=
-	\[\begin{tikzcd}
-		{\mathcal{X}_V} & {\mathcal{X}} \\
-		V & Y
-		\arrow[from=1-1, to=1-2]
-		\arrow["{h_V}"', from=1-1, to=2-1]
-		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
-		\arrow["h"', from=1-2, to=2-2]
-		\arrow[from=2-1, to=2-2]
-	\end{tikzcd}\]
-	
-	The morphism \(\mathcal X_V\to V\) has affine target $V$.
-	By Lemma \ref{lem:local-ex-cms-in-affines}, it factors uniquely as
-	\[
-	\mathcal X_V \xrightarrow{\pi_V} X_V
-	\xrightarrow{g_V} V.
-	\]
-	Here \(\pi_V:\mathcal{X}_V \to X_V\) is the coarse moduli space associated to \(\mathcal X_V\) by lemma \ref{lem:local-ex-cms-in-affines}.
-	Now consider
-	\[
-	\mathcal X_R:=\mathcal X\times_Y R,
-	\]
-	Equivalently, there is a canonical isomorphism
-	\[
-	\mathcal X_R
-	\cong
-	\mathcal X_V\times_{\mathcal X}\mathcal X_V,
-	\]
-	which can be verified by a straightforward diagram chase using the following:
-	% https://q.uiver.app/#q=WzAsOCxbMCwyLCJWIl0sWzEsMiwiWSJdLFszLDEsIlYiXSxbMiwxLCJSIl0sWzEsMSwiXFxtYXRoY2Fse1h9Il0sWzAsMSwiXFxtYXRoY2Fse1h9X1YiXSxbMywwLCJcXG1hdGhjYWx7WH1fViJdLFsyLDAsIlxcbWF0aGNhbHtYfV9SIl0sWzAsMV0sWzIsMV0sWzMsMl0sWzUsNF0sWzUsMF0sWzYsMl0sWzYsNF0sWzcsNV0sWzcsNl0sWzMsMV0sWzcsNF0sWzQsMV0sWzMsMF0sWzcsM11d
-	\[\begin{tikzcd}
-		&& {\mathcal{X}_R} & {\mathcal{X}_V} \\
-		{\mathcal{X}_V} & {\mathcal{X}} & R & V \\
-		V & Y
-		\arrow[from=1-3, to=1-4]
-		\arrow[from=1-3, to=2-1]
-		\arrow[from=1-3, to=2-2]
-		\arrow[from=1-3, to=2-3]
-		\arrow[from=1-4, to=2-2]
-		\arrow[from=1-4, to=2-4]
-		\arrow[from=2-1, to=2-2]
-		\arrow[from=2-1, to=3-1]
-		\arrow[from=2-2, to=3-2]
-		\arrow[from=2-3, to=2-4]
-		\arrow[from=2-3, to=3-1]
-		\arrow[from=2-3, to=3-2]
-		\arrow[from=2-4, to=3-2]
-		\arrow[from=3-1, to=3-2]
-	\end{tikzcd}\]
-	Let \(X_R\) be the algebraic space associated to \(\mathcal X_R\) by lemma \ref{lem:local-ex-cms-in-affines}, then the morphism
-	\[
-	\mathcal X_R\to R
-	\]
-	factors uniquely as
-	\[
-	\mathcal X_R \xrightarrow{\pi_R} X_R
-	\xrightarrow{g_R} R.
-	\]
-	All of this fit into the folllowing diagram:
-	% https://q.uiver.app/#q=WzAsOSxbMCwyLCJSIl0sWzEsMiwiViJdLFsyLDIsIlkiXSxbMiwxLCJYX1IiXSxbMywxLCJYX1YiXSxbNCwxLCJYIl0sWzEsMCwiXFxtYXRoY2Fse1h9X1IiXSxbMiwwLCJcXG1hdGhjYWx7WH1fViJdLFszLDAsIlxcbWF0aGNhbHtYfSJdLFszLDAsImdfUiIsMl0sWzQsMSwiZ19WIiwyXSxbNSwyLCJnIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzYsMCwiaF9SIiwyLHsibGFiZWxfcG9zaXRpb24iOjQwfV0sWzYsNywiIiwwLHsib2Zmc2V0IjotMX1dLFs3LDhdLFs3LDEsImhfViIsMix7ImxhYmVsX3Bvc2l0aW9uIjo0MH1dLFs2LDMsIlxccGlfUiJdLFs3LDQsIlxccGlfViJdLFs4LDUsIlxccGkiXSxbMCwxLCIiLDAseyJvZmZzZXQiOi0xfV0sWzAsMSwiIiwwLHsib2Zmc2V0IjoxfV0sWzYsNywiIiwwLHsib2Zmc2V0IjoxfV0sWzMsNCwiIiwxLHsib2Zmc2V0IjoxfV0sWzQsNV0sWzEsMl0sWzMsNCwiIiwxLHsib2Zmc2V0IjotMX1dLFs4LDIsImgiLDIseyJsYWJlbF9wb3NpdGlvbiI6NDB9XV0=
-	\begin{equation}
-		\label{fig:cms-prism}
-				\begin{tikzcd}
-				& {\mathcal{X}_R} & {\mathcal{X}_V} & {\mathcal{X}} & \\
-				&& {X_R} & {X_V} & X \\
-				R & V & Y
-				\arrow[shift left, from=1-2, to=1-3]
-				\arrow[shift right, from=1-2, to=1-3]
-				\arrow["{\pi_R}", from=1-2, to=2-3]
-				\arrow["{h_R}"'{pos=0.4}, from=1-2, to=3-1]
-				\arrow[from=1-3, to=1-4]
-				\arrow["{\pi_V}", from=1-3, to=2-4]
-				\arrow["{h_V}"'{pos=0.4}, from=1-3, to=3-2]
-				\arrow["\pi", from=1-4, to=2-5]
-				\arrow["h"'{pos=0.4}, from=1-4, to=3-3]
-				\arrow[shift right, from=2-3, to=2-4]
-				\arrow[shift left, from=2-3, to=2-4]
-				\arrow["{g_R}"', from=2-3, to=3-1]
-				\arrow[from=2-4, to=2-5]
-				\arrow["{g_V}"', from=2-4, to=3-2]
-				\arrow["g"', dashed, from=2-5, to=3-3]
-				\arrow[shift left, from=3-1, to=3-2]
-				\arrow[shift right, from=3-1, to=3-2]
-				\arrow[from=3-2, to=3-3]
-			\end{tikzcd}
-	\end{equation}
-	Our goal is to define $g:X\to Y$.
-	The morphisms $X_R\rightrightarrows X_V$ are \etale\ and induced by
-	$\mathcal{X}_R \rightrightarrows \mathcal{X}_V \to X_V$
-	via lemma \ref{lem:local-ex-cms-in-affines}. By lemma \ref{lem:cms-pullback} the following squares of the diagram is cartesian:
-	% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXG1hdGhjYWx7WH1fUiJdLFsxLDAsIlxcbWF0aGNhbHtYfV9WIl0sWzAsMSwiWF9SIl0sWzEsMSwiWF9WIl0sWzIsMCwiXFxtYXRoY2Fse1h9Il0sWzIsMSwiWCJdLFswLDEsInRfXFxtYXRoY2Fse1h9IiwyLHsib2Zmc2V0IjoxfV0sWzEsM10sWzIsMywidF9YIiwyLHsib2Zmc2V0IjoxfV0sWzAsMl0sWzAsMywiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzEsNF0sWzQsNV0sWzMsNV0sWzEsNSwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzAsMSwic19cXG1hdGhjYWx7WH0iLDAseyJvZmZzZXQiOi0xfV0sWzIsMywic19YIiwwLHsib2Zmc2V0IjotMX1dXQ==
-	\[\begin{tikzcd}
-		{\mathcal{X}_R} & {\mathcal{X}_V} & {\mathcal{X}} \\
-		{X_R} & {X_V} & X
-		\arrow["{t_\mathcal{X}}"', shift right, from=1-1, to=1-2]
-		\arrow["{s_\mathcal{X}}", shift left, from=1-1, to=1-2]
-		\arrow[from=1-1, to=2-1]
-		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
-		\arrow[from=1-2, to=1-3]
-		\arrow[from=1-2, to=2-2]
-		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-2, to=2-3]
-		\arrow[from=1-3, to=2-3]
-		\arrow["{t_X}"', shift right, from=2-1, to=2-2]
-		\arrow["{s_X}", shift left, from=2-1, to=2-2]
-		\arrow[from=2-2, to=2-3]
-	\end{tikzcd}\]
-	So the back and the front of the commutative prism \ref{fig:cms-prism} are cartesian.
-	Let
-	\[
-	s,t:R\rightrightarrows V
-	\qquad\text{and}\qquad
-	s_X,t_X:X_R\rightrightarrows X_V
-	\]
-	be the two projections. We claim that
-	\[
-	s\circ g_R = g_V\circ s_X,
-	\qquad
-	t\circ g_R = g_V\circ t_X.
-	\]
-	Indeed, after precomposing with \(\pi_R:\mathcal X_R\to X_R\), both
-	sides of the first equality give the same morphism
-	\(\mathcal X_R\to V\), namely 
-	\[
-		\mathcal{X}_R \xrightarrow{h_R} R \xrightarrow{s} V = \mathcal{X}_R \xrightarrow{s_\mathcal{X}} \mathcal{X}_V \xrightarrow{h_V} V.
-	\]
-	Since
-	\(\pi_R\) is universal for morphisms to affine schemes locally on \(V\),
-	uniqueness gives the equality. The second equality is analogous.
-	Thus \(g_V:X_V\to V\) is compatible with the descent data
-	\[
-	X_R\rightrightarrows X_V
-	\qquad\text{and}\qquad
-	R\rightrightarrows V.
-	\]
-	Equivalently, we have a morphism of étale equivalence relations
-	\[
-	(X_R\rightrightarrows X_V)
-	\longrightarrow
-	(R\rightrightarrows V).
-	\]
-	Since
-	\[
-	X \cong X_V/X_R
-	\qquad\text{and}\qquad
-	Y \cong V/R
-	\]
-	as sheaves for the \etale\ topology, by the universal property of the quotient sheaf and by $Y$ being a sheaf in the \etale\ topology this morphism of equivalence relations descends to a unique morphism
-	\[
-	g:X\to Y.
-	\]
-	In fact, this is precisely indicated via Yoneda in the equalizer diagram:
-	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJZKFgpIl0sWzEsMCwiWShYX1YpIl0sWzIsMCwiWShYX1IpIl0sWzAsMV0sWzEsMiwiIiwwLHsib2Zmc2V0IjotMX1dLFsxLDIsIiIsMCx7Im9mZnNldCI6MX1dXQ==
-	\[\begin{tikzcd}
-		{Y(X)} & {Y(X_V)} & {Y(X_R)}
-		\arrow[from=1-1, to=1-2]
-		\arrow[shift left, from=1-2, to=1-3]
-		\arrow[shift right, from=1-2, to=1-3]
-	\end{tikzcd}\]
-	
-	It remains to check that \(h=g\circ \pi\). This can be checked after the
-	étale surjection \(\mathcal X_V\to \mathcal X\). After pulling back to
-	\(\mathcal X_V\), the equality becomes
-	\[
-	\mathcal X_V \xrightarrow{\pi_V} X_V
-	\xrightarrow{g_V} V
-	\longrightarrow Y
-	=
-	\mathcal X_V\longrightarrow V\longrightarrow Y,
-	\]
-	which holds by construction of \(g_V\). Hence \(h=g\circ \pi\).
-	
-	Finally, suppose $g,g':X\to Y$ both satisfy
-	\[
-	g\circ \pi = h = g'\circ \pi.
-	\]
-	Pulling back along the étale cover \(X_V\to X\), the two morphisms
-	\(g|_{X_V}\) and \(g'|_{X_V}\) both factor the same morphism
-	\(\mathcal X_V\to V\). By the uniqueness part of
-	Lemma \ref{lem:local-ex-cms-in-affines}, they agree on \(X_V\).
-	Since \(X_V\to X\) is an étale surjection, it follows that
-	\(g=g'\).
-	
-	Thus \(f:\mathcal X\to X\) is universal for morphisms from
-	\(\mathcal X\) to any algebraic space.
-\end{proof}
-
-
-\begin{lemma}\label{lem:cms-pullback-domain-non-well-nigh-affine}
-	(\cite[Tag 0DUS][]{stacks-project})
-	Let $h:\mathcal{X'} \to \mathcal{X}$ be an \etale\ morphism of algebraic stacks, which induces isomorphism on automorphism groups and assume further that $\mathcal{X}$ is well-nigh affine. Then there exists a cartesian diagram 
-	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhjYWx7WH0nIl0sWzEsMCwiXFxtYXRoY2Fse1h9Il0sWzAsMSwiWCciXSxbMSwxLCJYIl0sWzAsMl0sWzAsMSwiaCIsMl0sWzEsM10sWzIsM10sWzAsMywiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
-	\[\begin{tikzcd}
-		{\mathcal{X}'} & {\mathcal{X}} \\
-		{X'} & X,
-		\arrow["h"', from=1-1, to=1-2]
-		\arrow[from=1-1, to=2-1]
-		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
-		\arrow[from=1-2, to=2-2]
-		\arrow[from=2-1, to=2-2]
-	\end{tikzcd}\]
-	such that $M'\to M$ is \etale\ and $\mathcal{X}\to X$ is a coarse moduli space.
-\end{lemma}
-
-So far we have prooven the existence of a coarse moduli space for well-nigh affine stacks. In the next part, we will construct for an algebraic stack with finite inertia a cover of such well-nigh affine stacks.
-
-
-\begin{lemma}\label{lem:wna-decomposition}
-	(\cite[Tag 0DUE]{stacks-project})
-	Let $\mathcal{X}$ be an algebraic stack with finite inertia. Then $\mathcal{X}$ admits an \etale\ cover by well-nigh affine stacks.
-	
-	More precisely, there exists a family of morphisms
-	\[
-	g_i : \mathcal{X}_i \to \mathcal{X}
-	\]
-	such that:
-	\begin{enumerate}
-		\item the morphisms $g_i$ are representable by algebraic spaces, separated, and étale,
-		
-		\item the induced map
-		\[
-		\coprod_i |\mathcal{X}_i| \to |\mathcal{X}|
-		\]
-		is surjective,
-		
-		\item each $\mathcal{X}_i$ is well-nigh affine,
-		
-		\item the natural morphism
-		\[
-		\mathcal{I}_{\mathcal{X}_i}
-		\longrightarrow
-		\mathcal{X}_i \times_{\mathcal{X}} \mathcal{I}_{\mathcal{X}}
-		\]
-		is an isomorphism.
-	\end{enumerate}
-\end{lemma}
-
-
 \begin{theorem}[Keel-Mori Theorem]
 	Let $\mathcal{X}$ be a Deligne-Mumford stack separated and of finite type over a field with finite inertia. Then there exists a coarse moduli space
 	\[
@@ -447,12 +48,12 @@ So far we have prooven the existence of a coarse moduli space for well-nigh affi
 	\]
 	
 	Since $\mathcal{U}$ is open and $\pi_\mathcal{W}$ is a homeomorphism, $\pi_\mathcal{W}(\mathcal{U})$ is open in $\Specof{A^{G_x}}$. 
-	Let $X_1$ be a principal affine neighbourhood of $\pi_\mathcal{W}(w)$ inside $\pi_\mathcal{W}(\mathcal{U})$.
-	Now since $W = \Specof{A^{G_x}}$ is affine, $X_1$ corresponds to $A^{G_x}[h^{-1}]$ for some $h\in A^{G_x}$.
-	By construction, the preimage of $X_1$ under $\Specof{A} \to \Specof{A^{G_x}}$ is a $G_x$-stable open subscheme of $\Specof{A}$, which we denote by $\Specof{A_1}$ as the following pullback indicates:
-	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXFNwZWNvZntBXzF9Il0sWzEsMCwiWF8xIl0sWzAsMSwiXFxTcGVjb2Z7QX0iXSxbMSwxLCJcXFNwZWNvZntBXntHX3h9fSJdLFsyLDNdLFsxLDMsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsMV0sWzAsMiwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMCwzLCIiLDIseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
+	Let $X'$ be a principal affine neighbourhood of $\pi_\mathcal{W}(w)$ inside $\pi_\mathcal{W}(\mathcal{U})$.
+	Now since $W = \Specof{A^{G_x}}$ is affine, $X'$ corresponds to $A^{G_x}[h^{-1}]$ for some $h\in A^{G_x}$.
+	By construction, the preimage of $X'$ under $\Specof{A} \to \Specof{A^{G_x}}$ is a $G_x$-stable open subscheme of $\Specof{A}$, which we denote by $\Specof{A'}$ as the following pullback indicates:
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXFNwZWNvZntBJ30iXSxbMSwwLCJYJyJdLFswLDEsIlxcU3BlY29me0F9Il0sWzEsMSwiXFxTcGVjb2Z7QV57R194fX0iXSxbMiwzXSxbMCwxXSxbMCwyLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDMsIiIsMix7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXIifX1dLFsxLDMsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV1d
 	\[\begin{tikzcd}
-		{\Specof{A_1}} & {X_1} \\
+		{\Specof{A'}} & {X'} \\
 		{\Specof{A}} & {\Specof{A^{G_x}}}
 		\arrow[from=1-1, to=1-2]
 		\arrow[hook, from=1-1, to=2-1]
@@ -461,17 +62,17 @@ So far we have prooven the existence of a coarse moduli space for well-nigh affi
 		\arrow[from=2-1, to=2-2]
 	\end{tikzcd}\]
 
-	Since $X_1 = \Specof{A^{G_x}[h^{-1}]}$, we have $A_1 \cong A \otimes_{A^{G_x}} A^{G_x}[h^{-1}] \cong A[h^{-1}]$. Taking $G_x$-invariants we get $A_1^{G_x} \cong (A[h^{-1}])^{G_x} \cong A^{G_x}[h^{-1}]$, since localizing is exact. Hence, $X_1 \cong \Specof{A_1^{G_x}}$.
-	Now consider $\pi_\mathcal{W}^{-1}(X_1)$ an open substack of $\mathcal{W}$. Open substacks of $\mathcal{W} = [\Specof{A}/G_x]$ correspond precisely to $G_x$-stable open subschemes $V\subset \Specof{A}$. 
-	Hence the open substack $\pi_\mathcal{W}^{-1}(X_1)$ must be given by $[V/ G_x]$ for 
+	Since $X' = \Specof{A^{G_x}[h^{-1}]}$, we have $A' \cong A \otimes_{A^{G_x}} A^{G_x}[h^{-1}] \cong A[h^{-1}]$. Taking $G_x$-invariants we get $A'^{G_x} \cong (A[h^{-1}])^{G_x} \cong A^{G_x}[h^{-1}]$, since localizing is exact. Hence, $X' \cong \Specof{A'^{G_x}}$.
+	Now consider $\pi_\mathcal{W}^{-1}(X')$ an open substack of $\mathcal{W}$. Open substacks of $\mathcal{W} = [\Specof{A}/G_x]$ correspond precisely to $G_x$-stable open subschemes $V\subset \Specof{A}$. 
+	Hence the open substack $\pi_\mathcal{W}^{-1}(X')$ must be given by $[V/ G_x]$ for 
 	\[
-	V = \Specof{A} \times_{[\Specof{A} / G_x]} \pi_\mathcal{W}^{-1}(X_1)
+	V = \Specof{A} \times_{[\Specof{A} / G_x]} \pi_\mathcal{W}^{-1}(X')
 	\]
 	Now consider the following diagram:
 	% https://q.uiver.app/#q=WzAsOCxbMCwxLCJcXFNwZWNvZntBfSJdLFsxLDEsIltcXFNwZWNvZntBfS9HX3hdIl0sWzIsMCwiViJdLFszLDAsIlxccGlfXFxtYXRoY2Fse1d9XnstMX0oWF8xKSJdLFszLDEsIlhfMSJdLFswLDIsIlxcU3BlY29me0F9Il0sWzEsMiwiXFxTcGVjb2Z7QV57R194fX0iXSxbMiwxLCJWIl0sWzIsM10sWzIsMF0sWzAsMV0sWzMsMV0sWzcsNV0sWzUsNl0sWzQsNl0sWzcsNF0sWzcsNiwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzIsMSwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzIsN10sWzEsNiwiXFxwaV9cXG1hdGhjYWx7V30iXSxbMyw0LCJcXHBpX1xcbWF0aGNhbHtXfSJdLFswLDVdXQ==
 	\[\begin{tikzcd}
-		&& V & {\pi_\mathcal{W}^{-1}(X_1)} \\
-		{\Specof{A}} & {[\Specof{A}/G_x]} & V & {X_1} \\
+		&& V & {\pi_\mathcal{W}^{-1}(X')} \\
+		{\Specof{A}} & {[\Specof{A}/G_x]} & V & {X'} \\
 		{\Specof{A}} & {\Specof{A^{G_x}}}
 		\arrow[from=1-3, to=1-4]
 		\arrow[from=1-3, to=2-1]
@@ -488,11 +89,207 @@ So far we have prooven the existence of a coarse moduli space for well-nigh affi
 		\arrow[from=2-4, to=3-2]
 		\arrow[from=3-1, to=3-2]
 	\end{tikzcd}\]
-	Hence, $V = \Specof{A_1}$ and $\pi_\mathcal{W}^{-1}(X_1) \cong [\Specof{A_1} / G_x]$. Now we have a morphism
+	Hence, $V = \Specof{A'}$ and $\pi_\mathcal{W}^{-1}(X') \cong [\Specof{A'} / G_x]$. Now we have a morphism
 	\[
-		g: \mathcal{X}_1 = ([\Specof{A_1} /G_x] , w) \to (\mathcal{X}, x)
+		g: \mathcal{X}' = ([\Specof{A'} /G_x] , w) \to (\mathcal{X}, x)
 	\]
-	which induces isomorphism on all geometric stabilizer groups, since $\mathcal{X}_1 \subset \mathcal{U}$.
+	which induces isomorphism on all geometric stabilizer groups, since $\mathcal{X}' \subset \mathcal{U}$.
+	This yields a cover $\{\mathcal{X}_i \xhookrightarrow{f_i} \mathcal{X}\}_i$ by open substacks of the form $[U_i/G_x]$ with affine $U_i = \Specof{A_i}$, such that $f_i$ induces isomorphism on all geometric stabilizer groups.
 	
-	Next we show, that $\mathcal{X}_0 := im(f)$ admits a coarse moduli space. Let $\mathcal{X}_2 := \mathcal{X}_1\times_{\mathcal{X}} \mathcal{X}_1$ and $\mathcal{X}_3 := \mathcal{X}_1 \times_\mathcal{X} \mathcal{X}_1 \times_\mathcal{X} \mathcal{X}_1$. Since $g$ is affine, each $\mathcal{X}_i = [\Specof{A_i} /G_x]$ and the coarse moduli spaces of $\mathcal{X}_i$ is given by $\Specof{A_i^{G_x}}$.
+	
+	\medskip
+	\textbf{Step 3: Constructing the global coarse moduli space by descent.}
+	
+	\medskip
+	
+	We first construct the global map $\pi : \mathcal{X} \to X$, then verify it
+	is a coarse moduli space.
+	
+	\medskip
+	\textbf{Step 3a: Descending the local maps to the overlaps.}
+	
+	For each pair $(i,j)$, consider the fiber product
+	\[
+	\mathcal{X}_{ij} := \mathcal{X}_i \times_{\mathcal{X}} \mathcal{X}_j.
+	\]
+	Since $f_i$ and $f_j$ are representable and étale, the two projections
+	\[
+	p_i : \mathcal{X}_{ij} \to \mathcal{X}_i,
+	\qquad
+	p_j : \mathcal{X}_{ij} \to \mathcal{X}_j
+	\]
+	are also representable and étale. Moreover, for every geometric point
+	$\bar{x} \to \mathcal{X}_{ij}$, the induced map on stabilizer groups
+	\[
+	\Aut_{\mathcal{X}_{ij}}(\bar{x})
+	\xrightarrow{\;\sim\;}
+	\Aut_{\mathcal{X}_i}(p_i(\bar{x}))
+	\]
+	is an isomorphism, since $f_i$ induces isomorphisms on all geometric
+	stabilizer groups by hypothesis, and $\mathcal{X}_{ij} \to \mathcal{X}_i$
+	is a base change of $f_j$ along $f_i$.
+	
+	In particular, $\mathcal{X}_{ij}$ is a Deligne--Mumford stack with finite
+	inertia. Since $\mathcal{X}_i = [U_i/G_i]$ is a quotient of an affine by
+	a finite group, the base change
+	\[
+	\mathcal{X}_{ij} \cong
+	[U_i \times_{\mathcal{X}} \mathcal{X}_j \;/\; G_i]
+	\]
+	is again a quotient of an affine scheme by a finite group. In particular,
+	$\mathcal{X}_{ij}$ admits a coarse moduli space
+	\[
+	\pi_{ij} : \mathcal{X}_{ij} \longrightarrow X_{ij},
+	\]
+	and the morphisms $\pi_i \circ p_i : \mathcal{X}_{ij} \to X_i$ and
+	$\pi_j \circ p_j : \mathcal{X}_{ij} \to X_j$ both factor uniquely through
+	$\pi_{ij}$, by the universal property of the coarse moduli space
+	(Proposition~\ref{prop:cms-universality}):
+	\[
+	\phi_{ij} : X_{ij} \to X_i,
+	\qquad
+	\phi_{ji} : X_{ij} \to X_j.
+	\]
+	We claim that $\phi_{ij}$ and $\phi_{ji}$ are both étale. Indeed,
+	$\pi_i \circ p_i$ is étale (as a composition of étale morphisms), and
+	$\pi_i$ is the coarse moduli space of $\mathcal{X}_i = [U_i/G_i]$. By
+	Lemma~\ref{lem:descending-etale-to-quotient}, any étale morphism from
+	$\mathcal{X}_{ij}$ to the algebraic space $X_i$ that is an isomorphism
+	on geometric stabilizers descends to an étale morphism $X_{ij} \to X_i$.
+	The same argument applies to $\phi_{ji}$.
+	
+	\medskip
+	\textbf{Step 3b: Forming the global algebraic space via the étale
+		equivalence relation.}
+	
+	Define
+	\[
+	U := \coprod_i X_i.
+	\]
+	This is a scheme (a disjoint union of affine schemes). Define
+	\[
+	R := \coprod_{i,j} X_{ij},
+	\]
+	with source and target maps
+	\[
+	s : R \to U, \quad s|_{X_{ij}} = \phi_{ij},
+	\qquad
+	t : R \to U, \quad t|_{X_{ij}} = \phi_{ji}.
+	\]
+	Both $s$ and $t$ are étale morphisms of schemes, since each component
+	$\phi_{ij}$ and $\phi_{ji}$ is étale by Step 3a.
+	
+	We verify that $(s,t) : R \rightrightarrows U$ is an étale equivalence
+	relation in the sense of Lemma~\ref{lem:etale-eq-quotient-of-affines}.
+	The key point is that the map
+	\[
+	j = (s,t) : R \to U \times U
+	\]
+	is a monomorphism: two sections in $X_{ij}(T)$ with the same image
+	in $(U \times U)(T) = X_i(T) \times X_j(T)$ must be equal, because
+	the coarse moduli space maps $\pi_i, \pi_j$ separate geometric points
+	(condition (2) of Definition~\ref{def:coarse-moduli-space}).
+	Reflexivity, symmetry, and transitivity of the relation follow from
+	the stack structure of $\mathcal{X}$: the diagonal
+	$\mathcal{X}_i \to \mathcal{X}_{ii}$ gives the identity sections,
+	the swap $\mathcal{X}_{ij} \cong \mathcal{X}_{ji}$ gives symmetry, and
+	the composition $\mathcal{X}_{ij} \times_{\mathcal{X}_j} \mathcal{X}_{jk}
+	\cong \mathcal{X}_{ik}$ gives transitivity. All of these pass to the
+	coarse moduli spaces $X_{ij}$ by the universal property.
+	
+	By Lemma~\ref{lem:etale-eq-quotient-of-affines}, the sheaf quotient
+	\[
+	X := (U / R)^\sharp
+	\]
+	is an algebraic space, and the canonical morphism
+	\[
+	p : U = \coprod_i X_i \longrightarrow X
+	\]
+	is surjective and \etale. In particular 
+	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJSIl0sWzEsMCwiVSJdLFsyLDAsIlgiXSxbMCwxLCJzIiwwLHsib2Zmc2V0IjotMX1dLFswLDEsInQiLDIseyJvZmZzZXQiOjF9XSxbMSwyLCJwIl1d
+	\[\begin{tikzcd}
+		R & U & X
+		\arrow["s", shift left, from=1-1, to=1-2]
+		\arrow["t"', shift right, from=1-1, to=1-2]
+		\arrow["p", from=1-2, to=1-3]
+	\end{tikzcd}\]
+	is a coequalizer diagram.
+	
+	\medskip
+	\textbf{Step 3c: Constructing the morphism $\pi : \mathcal{X} \to X$.}
+	
+	For each $i$, the composition
+	\[
+	\mathcal{X}_i \xrightarrow{\;\pi_i\;} X_i \hookrightarrow U
+	\xrightarrow{\;p\;} X
+	\]
+	gives a morphism $\mathcal{X}_i \to X$. On overlaps, the two composites
+	$\mathcal{X}_{ij} \rightrightarrows X$ coming from $i$ and $j$ agree, since by
+	Step 3a, both factor through $\pi_{ij} : \mathcal{X}_{ij} \to X_{ij}$,
+	and the two resulting maps $X_{ij} \rightrightarrows X$ are exactly
+	$p \circ \phi_{ij}$ and $p \circ \phi_{ji}$, which are equal in $X$
+	because $(X_{ij}, \phi_{ij}, \phi_{ji})$ is precisely one component of
+	the equivalence relation $R$ and $p$ coequalizes $s$ and $t$.
+	
+	Since $\{f_i : \mathcal{X}_i \to \mathcal{X}\}$ is an étale cover of
+	$\mathcal{X}$ and the morphisms $\mathcal{X}_i \to X$ are compatible
+	on overlaps, they descend to a unique morphism
+	\[
+	\pi : \mathcal{X} \longrightarrow X,
+	\]
+	by the sheaf property of $X$ as an algebraic space over the big étale
+	site: one applies Lemma~\ref{lem:descent-of-morphisms-over-etale-cover}
+	(descent of morphisms to algebraic spaces along étale covers).
+	
+	\medskip
+	\textbf{Step 3d: Verifying the coarse moduli space axioms.}
+	
+	\emph{(i) Geometric points.}
+	Let $\kappa$ be an algebraically closed field and $\bar{x} : \Spec\kappa
+	\to \mathcal{X}$ a geometric point. Choose $i$ such that $\bar{x}$ lifts
+	to $\bar{x}_i : \Spec\kappa \to \mathcal{X}_i$ (possible since the
+	$\mathcal{X}_i$ cover $\mathcal{X}$). Then
+	\[
+	\pi(\bar{x}) = p(\pi_i(\bar{x}_i)).
+	\]
+	Since $\pi_i$ is a coarse moduli space, $\pi_i$ identifies
+	$|\mathcal{X}_i(\kappa)|$ with $X_i(\kappa)$ via isomorphism classes.
+	Two geometric points $\bar{x}, \bar{y}$ of $\mathcal{X}$ satisfy
+	$\pi(\bar{x}) = \pi(\bar{y})$ in $X(\kappa)$ if and only if their images
+	in $U$ are identified by $R$, i.e.\ $(\pi_i(\bar{x}_i), \pi_j(\bar{y}_j))
+	\in X_{ij}(\kappa)$ for some $i,j$. By construction of $X_{ij}$ as the
+	coarse moduli space of $\mathcal{X}_{ij} = \mathcal{X}_i
+	\times_{\mathcal{X}} \mathcal{X}_j$, this happens if and only if $\bar{x}$
+	and $\bar{y}$ are isomorphic in $\mathcal{X}(\kappa)$.
+	Hence $|\mathcal{X}(\kappa)| \to X(\kappa)$ is a bijection.
+	
+	\emph{(ii) Universality.}
+	Let $Y$ be an algebraic space and $h : \mathcal{X} \to Y$ a morphism.
+	For each $i$, the restriction $h \circ f_i : \mathcal{X}_i \to Y$ factors
+	uniquely through $\pi_i$ by the universal property of the coarse moduli
+	space $X_i$ (Proposition~\ref{prop:cms-universality}), yielding a unique
+	morphism $g_i : X_i \to Y$.
+	On each overlap $X_{ij}$, the two morphisms
+	$g_i \circ \phi_{ij}$ and $g_j \circ \phi_{ji}$ are both equal to the
+	unique factorization of $h \circ f_i \circ p_i = h \circ f_j \circ p_j
+	: \mathcal{X}_{ij} \to Y$ through $X_{ij}$.
+	Hence the collection $(g_i)$ defines a morphism of the equivalence
+	relation $(R \rightrightarrows U) \to (Y \text{ trivially})$, and by
+	the universal property of the quotient $X = (U/R)^\sharp$, they glue
+	to a unique morphism
+	\[
+	g : X \longrightarrow Y.
+	\]
+	By construction, $g \circ \pi = h$.
+	Uniqueness of $g$: if $g' : X \to Y$ also satisfies $g' \circ \pi = h$,
+	then $g' \circ p \circ \pi_i = g \circ p \circ \pi_i$ for all $i$. Since
+	$\pi_i$ is an epimorphism (it is surjective), $g' \circ p|_{X_i} =
+	g \circ p|_{X_i}$, i.e.\ $g' = g$ after pullback along the étale
+	surjection $p : U \to X$. Since $p$ is an epimorphism of sheaves,
+	$g' = g$.
+	
+	\medskip
+	
+	This completes the construction of the coarse moduli space
+	$\pi : \mathcal{X} \to X$.
 \end{proof}
