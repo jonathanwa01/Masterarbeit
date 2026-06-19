@@ -638,7 +638,7 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 			\mathcal{F} &\mapsto (f^*\mathcal{F}, \alpha_{\mathcal{F}}),
 	\end{align*}
 	where $f^*\mathcal{F}$ is the pullback of the quasi coherent sheaf $\mathcal{F}$ along $f$ and $\alpha_{\mathcal{F}}:\pi_1^*(f^*\mathcal{F}) \xrightarrow{\sim}
-	\pi_2(^*f^*\mathcal G)$ is the canocical descent datum induced by the projections $\pi_i: U\times_X U\to U$.
+	\pi_2^*(f^*\mathcal G)$ is the canocical descent datum induced by the projections $\pi_i: U\times_X U\to U$.
 \end{theorem}
 
 \begin{proof}
@@ -840,10 +840,9 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	sending a morphism $f: U \to X$ to the base change functor 
 	\begin{align*}
 		f^*: \AffOver{X} &\longrightarrow \AffOver{U} \\
-		(Z\xrightarrow{g} X) &\mapsto (Z\times_XU \to U).
+		(Z\xrightarrow{g} X) &\mapsto (Z\times_XU \to U),
 	\end{align*}
-
-	is an equivalence, where $\Aff/X$ denotes the category of affine schemes over $X$.
+	where $\Aff/X$ denotes the category of affine schemes over $X$.
 	
 	We write
 	\[
@@ -863,17 +862,6 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	\pi_1^*(Z \times_X U) \xrightarrow{\;\sim\;} \pi_2^*(Z \times_X U)
 	\]
 	induced by the projections $\pi_i : U \times_X U \to U$.
-	
-	Equivalently, for quasi-coherent $\mathcal{O}_X$-algebras one has
-	\[
-	\QCohAlg(X)
-	\cong
-	\Tot\big(\QCohAlg(U_\bullet)\big),
-	\]
-	and this equivalence is compatible with the relative spectrum construction
-	\[
-	\underline{\Spec}_X : \QCohAlg(X)^{op} \xrightarrow{\simeq} \Aff/X.
-	\]
 \end{theorem}
 
 \begin{proof}
@@ -899,8 +887,8 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	\qquad
 	\eta : \mathcal{O}_U \to \mathcal{A}
 	\]
-	in $\QCoh(U)$, any descent datum for $\QCohAlg_{(-)}$ is in
-	particular a descent datum for $\QCoh_{(-)}$ carrying compatible
+	in $\QCoh(U)$, any descent datum for $\QCohAlg(-)$ is in
+	particular a descent datum for $\QCoh(-)$ carrying compatible
 	algebra structure. By faithfully flat descent for quasi-coherent
 	sheaves (Theorem~\ref{thm:fpqc-descent-qcoh}), the pullback functor
 	\[
@@ -914,7 +902,7 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 	Applying $\underline{\Spec}^{op}$ on both sides yields the desired
 	equivalence
 	\[
-	\AffOver{(-)}\xrightarrow{\;\sim\;} \Desc(U/X). \qedhere
+	\AffOver{X}\xrightarrow{\;\sim\;} \Desc(U/X). \qedhere
 	\]
 \end{proof}
 
