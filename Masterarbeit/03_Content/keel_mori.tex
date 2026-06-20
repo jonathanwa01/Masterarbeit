@@ -20,233 +20,112 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 \end{lemma}
 
 
-
-\begin{lemma}[Universality of the local coarse moduli space]
-	\label{lem:cms-universal-along-alg-spaces}
-	(\cite[Lemma~4.3.5]{alper2026stacks}, \cite[Tag~0DUR]{stacks-project})
-	Let $G$ be a finite group acting on an affine scheme $U = \Spec(A)$,
-	let $\mathcal{X} = [U/G]$ be the associated quotient stack, and let
+\begin{lemma}\label{lem:coarse-moduli-etale-local}
+	Let $\pi : \mathcal{X} \to X$ be a morphism to an algebraic space. Suppose
+	that there is an étale covering $\{f_i : X_i \to X\}$ such that
 	\[
-	\pi : \mathcal{X} \to X := \Spec(A^G)
+	\pi_i : \mathcal{X} \times_X X_i \longrightarrow X_i
 	\]
-	be the coarse moduli space of \cite[][Theorem 4.2.6.]{alper2026stacks}.
-	Then $\pi$ is universal for morphisms to algebraic spaces: for every
-	algebraic space $Y$ and every morphism $h : \mathcal{X} \to Y$, there
-	exists a unique morphism $g : X \to Y$ such that $h = g \circ \pi$.
+	is a coarse moduli space for each $i$. Then $\pi : \mathcal{X} \to X$ is a
+	coarse moduli space.
 \end{lemma}
 
-
 \begin{proof}
-	Let $Y$ be an algebraic space and let
-	\(h:\mathcal X\to Y\) be a morphism. We construct a unique morphism
-	\(g:X\to Y\) such that \(h=g\circ \pi\).
+	We verify the two axioms of Definition~\ref{def:coarse-moduli-space}.
 	
-	Choose an étale surjection \(p:V\to Y\), where \(V\) is a scheme. Put
+	\textbf{Geometric points}
+	Let $k$ be an algebraically closed field and let
+	$x : \Spec(k) \to X$ be a geometric point. Since $\{f_i : X_i \to X\}$
+	is an étale covering, there exists an  $i$ and a lift
+	$\tilde{x} : \Spec(k) \to X_i$ with $f_i \circ \tilde{x} = x$. Indeed,
+	algebraically closed fields admit no nontrivial étale extensions, so étale
+	covers are surjective on geometric points.
+	
+	Since $\pi_i$ is a coarse moduli space, the induced map
 	\[
-	R=V\times_Y V.
+	|(\mathcal{X} \times_X X_i)(k)| \longrightarrow X_i(k)
 	\]
-	Without loss of generality, we may assume $V$ is a disjoint union of
-	affine schemes. Indeed, since $Y$ is an algebraic space, any \etale\
-	surjection $V \to Y$ from a scheme admits a refinement by such a cover.
-	Since $U = \Spec(A)$ is affine and $G$ is finite, the base change
-	$U \times_Y V_\alpha$ is affine for each affine component $V_\alpha \subseteq V$
-	(as $U \to Y$ factors through the affine $X = \Spec(A^G)$, and affine
-	morphisms are stable under base change \cite[Tag~01S5]{stacks-project}).
-	Hence $\mathcal{X}_{V_\alpha} \cong [(U \times_Y V_\alpha)/G]$ is a
-	quotient of an affine scheme by a finite group action, and
-	\cite[][Theorem 4.2.6.]{alper2026stacks} applies.
-	
-	Then \(Y\) is the sheaf quotient of the étale equivalence relation
+	is a bijection onto isomorphism classes. The fiber of $\pi$ over $x$
+	is canonically identified with the fiber of $\pi_i$ over $\tilde{x}$,
+	via the base-change isomorphism
 	\[
-	R\rightrightarrows V.
+	\mathcal{X} \times_X \Spec(k)
+	\;\cong\;
+	(\mathcal{X} \times_X X_i) \times_{X_i} \Spec(k).
 	\]
+	Hence the bijection for $\pi_i$ implies the corresponding bijection for
+	$\pi$.
 	
-	Consider the base change of $h$ along the \etale\ cover $V\to Y$:
-	% https://q.uiver.app/#q=WzAsNCxbMSwxLCJZIl0sWzAsMCwiXFxtYXRoY2Fse1h9X1YiXSxbMCwxLCJWIl0sWzEsMCwiXFxtYXRoY2Fse1h9Il0sWzEsMCwiIiwwLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzEsMiwiaF9WIiwyXSxbMiwwXSxbMywwLCJoIiwyXSxbMSwzXV0=
+	\medskip
+	\textbf{Universality}
+	Let $Y$ be an algebraic space and $f : \mathcal{X} \to Y$ a morphism.
+	For each $i$, consider the composite
+	\[
+	\mathcal{X} \times_X X_i \longrightarrow \mathcal{X}
+	\xrightarrow{\;f\;} Y.
+	\]
+	Since $\pi_i$ is a coarse moduli space, there exists a unique morphism
+	$g_i : X_i \to Y$ such that the following commutes:
+	% https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXG1hdGhjYWx7WH1cXHRpbWVzX1ggWF9pIl0sWzEsMSwiWCJdLFsxLDAsIlxcbWF0aGNhbHtYfSJdLFswLDEsIlhfaSJdLFsyLDAsIlkiXSxbMCwyXSxbMCwzLCJcXHBpX2kiLDJdLFszLDFdLFsyLDFdLFsyLDQsImYiXSxbMyw0LCJnX2kiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
 	\[\begin{tikzcd}
-		{\mathcal{X}_V} & {\mathcal{X}} \\
-		V & Y
+		{\mathcal{X}\times_X X_i} & {\mathcal{X}} & Y \\
+		{X_i} & X
 		\arrow[from=1-1, to=1-2]
-		\arrow["{h_V}"', from=1-1, to=2-1]
-		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
-		\arrow["h"', from=1-2, to=2-2]
-		\arrow[from=2-1, to=2-2]
-	\end{tikzcd}\]
-	
-	The morphism \(\mathcal X_V\to V\) has affine target $V$.
-	By Lemma \cite[][Theorem 4.2.6.]{alper2026stacks}, it factors uniquely as
-	\[
-	\mathcal X_V \xrightarrow{\pi_V} X_V
-	\xrightarrow{g_V} V.
-	\]
-	Here \(\pi_V:\mathcal{X}_V \to X_V\) is the coarse moduli space associated to \(\mathcal X_V\) by lemma  \cite[][Theorem 4.2.6.]{alper2026stacks}.
-	Now consider
-	\[
-	\mathcal X_R:=\mathcal X\times_Y R,
-	\]
-	Equivalently, there is a canonical isomorphism
-	\[
-	\mathcal X_R
-	\cong
-	\mathcal X_V\times_{\mathcal X}\mathcal X_V,
-	\]
-	which can be verified by a straightforward diagram chase using the following:
-	% https://q.uiver.app/#q=WzAsOCxbMCwyLCJWIl0sWzEsMiwiWSJdLFszLDEsIlYiXSxbMiwxLCJSIl0sWzEsMSwiXFxtYXRoY2Fse1h9Il0sWzAsMSwiXFxtYXRoY2Fse1h9X1YiXSxbMywwLCJcXG1hdGhjYWx7WH1fViJdLFsyLDAsIlxcbWF0aGNhbHtYfV9SIl0sWzAsMV0sWzIsMV0sWzMsMl0sWzUsNF0sWzUsMF0sWzYsMl0sWzYsNF0sWzcsNV0sWzcsNl0sWzMsMV0sWzcsNF0sWzQsMV0sWzMsMF0sWzcsM11d
-	\[\begin{tikzcd}
-		&& {\mathcal{X}_R} & {\mathcal{X}_V} \\
-		{\mathcal{X}_V} & {\mathcal{X}} & R & V \\
-		V & Y
-		\arrow[from=1-3, to=1-4]
-		\arrow[from=1-3, to=2-1]
-		\arrow[from=1-3, to=2-2]
-		\arrow[from=1-3, to=2-3]
-		\arrow[from=1-4, to=2-2]
-		\arrow[from=1-4, to=2-4]
-		\arrow[from=2-1, to=2-2]
-		\arrow[from=2-1, to=3-1]
-		\arrow[from=2-2, to=3-2]
-		\arrow[from=2-3, to=2-4]
-		\arrow[from=2-3, to=3-1]
-		\arrow[from=2-3, to=3-2]
-		\arrow[from=2-4, to=3-2]
-		\arrow[from=3-1, to=3-2]
-	\end{tikzcd}\]
-	Let \(X_R\) be the algebraic space associated to \(\mathcal X_R\) by  \cite[][Theorem 4.2.6.]{alper2026stacks}, then the morphism
-	\[
-	\mathcal X_R\to R
-	\]
-	factors uniquely as
-	\[
-	\mathcal X_R \xrightarrow{\pi_R} X_R
-	\xrightarrow{g_R} R.
-	\]
-	All of this fit into the folllowing diagram:
-	% https://q.uiver.app/#q=WzAsOSxbMCwyLCJSIl0sWzEsMiwiViJdLFsyLDIsIlkiXSxbMiwxLCJYX1IiXSxbMywxLCJYX1YiXSxbNCwxLCJYIl0sWzEsMCwiXFxtYXRoY2Fse1h9X1IiXSxbMiwwLCJcXG1hdGhjYWx7WH1fViJdLFszLDAsIlxcbWF0aGNhbHtYfSJdLFszLDAsImdfUiIsMl0sWzQsMSwiZ19WIiwyXSxbNSwyLCJnIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzYsMCwiaF9SIiwyLHsibGFiZWxfcG9zaXRpb24iOjQwfV0sWzYsNywiIiwwLHsib2Zmc2V0IjotMX1dLFs3LDhdLFs3LDEsImhfViIsMix7ImxhYmVsX3Bvc2l0aW9uIjo0MH1dLFs2LDMsIlxccGlfUiJdLFs3LDQsIlxccGlfViJdLFs4LDUsIlxccGkiXSxbMCwxLCIiLDAseyJvZmZzZXQiOi0xfV0sWzAsMSwiIiwwLHsib2Zmc2V0IjoxfV0sWzYsNywiIiwwLHsib2Zmc2V0IjoxfV0sWzMsNCwiIiwxLHsib2Zmc2V0IjoxfV0sWzQsNV0sWzEsMl0sWzMsNCwiIiwxLHsib2Zmc2V0IjotMX1dLFs4LDIsImgiLDIseyJsYWJlbF9wb3NpdGlvbiI6NDB9XV0=
-	\begin{equation}
-		\label{fig:cms-prism}
-		\begin{tikzcd}
-			& {\mathcal{X}_R} & {\mathcal{X}_V} & {\mathcal{X}} & \\
-			&& {X_R} & {X_V} & X \\
-			R & V & Y
-			\arrow[shift left, from=1-2, to=1-3]
-			\arrow[shift right, from=1-2, to=1-3]
-			\arrow["{\pi_R}", from=1-2, to=2-3]
-			\arrow["{h_R}"'{pos=0.4}, from=1-2, to=3-1]
-			\arrow[from=1-3, to=1-4]
-			\arrow["{\pi_V}", from=1-3, to=2-4]
-			\arrow["{h_V}"'{pos=0.4}, from=1-3, to=3-2]
-			\arrow["\pi", from=1-4, to=2-5]
-			\arrow["h"'{pos=0.4}, from=1-4, to=3-3]
-			\arrow[shift right, from=2-3, to=2-4]
-			\arrow[shift left, from=2-3, to=2-4]
-			\arrow["{g_R}"', from=2-3, to=3-1]
-			\arrow[from=2-4, to=2-5]
-			\arrow["{g_V}"', from=2-4, to=3-2]
-			\arrow["g"', dashed, from=2-5, to=3-3]
-			\arrow[shift left, from=3-1, to=3-2]
-			\arrow[shift right, from=3-1, to=3-2]
-			\arrow[from=3-2, to=3-3]
-		\end{tikzcd}
-	\end{equation}
-	Our goal is to define $g:X\to Y$.
-	The morphisms $X_R\rightrightarrows X_V$ are \etale\ and induced by
-	$\mathcal{X}_R \rightrightarrows \mathcal{X}_V \to X_V$
-	via lemma \cite[][Theorem 4.2.6]{alper2026stacks}. By  \cite[][Remark 4.3.8.]{alper2026stacks} the following squares of the diagram is cartesian:
-	% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXG1hdGhjYWx7WH1fUiJdLFsxLDAsIlxcbWF0aGNhbHtYfV9WIl0sWzAsMSwiWF9SIl0sWzEsMSwiWF9WIl0sWzIsMCwiXFxtYXRoY2Fse1h9Il0sWzIsMSwiWCJdLFswLDEsInRfXFxtYXRoY2Fse1h9IiwyLHsib2Zmc2V0IjoxfV0sWzEsM10sWzIsMywidF9YIiwyLHsib2Zmc2V0IjoxfV0sWzAsMl0sWzAsMywiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzEsNF0sWzQsNV0sWzMsNV0sWzEsNSwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzAsMSwic19cXG1hdGhjYWx7WH0iLDAseyJvZmZzZXQiOi0xfV0sWzIsMywic19YIiwwLHsib2Zmc2V0IjotMX1dXQ==
-	\[\begin{tikzcd}
-		{\mathcal{X}_R} & {\mathcal{X}_V} & {\mathcal{X}} \\
-		{X_R} & {X_V} & X
-		\arrow["{t_\mathcal{X}}"', shift right, from=1-1, to=1-2]
-		\arrow["{s_\mathcal{X}}", shift left, from=1-1, to=1-2]
-		\arrow[from=1-1, to=2-1]
-		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
-		\arrow[from=1-2, to=1-3]
+		\arrow["{\pi_i}"', from=1-1, to=2-1]
+		\arrow["f", from=1-2, to=1-3]
 		\arrow[from=1-2, to=2-2]
-		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-2, to=2-3]
-		\arrow[from=1-3, to=2-3]
-		\arrow["{t_X}"', shift right, from=2-1, to=2-2]
-		\arrow["{s_X}", shift left, from=2-1, to=2-2]
-		\arrow[from=2-2, to=2-3]
+		\arrow["{g_i}", dashed, from=2-1, to=1-3]
+		\arrow[from=2-1, to=2-2]
 	\end{tikzcd}\]
-	So the back and the front of the commutative prism \ref{fig:cms-prism} are cartesian.
-	Let
-	\[
-	s,t:R\rightrightarrows V
-	\qquad\text{and}\qquad
-	s_X,t_X:X_R\rightrightarrows X_V
-	\]
-	be the two projections. We claim that
-	\[
-	s\circ g_R = g_V\circ s_X,
-	\qquad
-	t\circ g_R = g_V\circ t_X.
-	\]
-	Indeed, after precomposing with \(\pi_R:\mathcal X_R\to X_R\), both
-	sides of the first equality give the same morphism
-	\(\mathcal X_R\to V\), namely 
-	\[
-	\mathcal{X}_R \xrightarrow{h_R} R \xrightarrow{s} V = \mathcal{X}_R \xrightarrow{s_\mathcal{X}} \mathcal{X}_V \xrightarrow{h_V} V.
-	\]
-	Since
-	\(\pi_R\) is universal for morphisms to affine schemes locally on \(V\),
-	uniqueness gives the equality. The second equality is analogous.
-	Thus \(g_V:X_V\to V\) is compatible with the descent data
-	\[
-	X_R\rightrightarrows X_V
-	\qquad\text{and}\qquad
-	R\rightrightarrows V.
-	\]
-	Equivalently, we have a morphism of étale equivalence relations
-	\[
-	(X_R\rightrightarrows X_V)
-	\longrightarrow
-	(R\rightrightarrows V).
-	\]
-	Since
-	\[
-	X \cong X_V/X_R
-	\qquad\text{and}\qquad
-	Y \cong V/R
-	\]
-	as sheaves for the \etale\ topology, by the universal property of the quotient sheaf and by $Y$ being a sheaf in the \etale\ topology this morphism of equivalence relations descends to a unique morphism
-	\[
-	g:X\to Y.
-	\]
-	In fact, this is precisely indicated via Yoneda in the equalizer diagram:
-	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJZKFgpIl0sWzEsMCwiWShYX1YpIl0sWzIsMCwiWShYX1IpIl0sWzAsMV0sWzEsMiwiIiwwLHsib2Zmc2V0IjotMX1dLFsxLDIsIiIsMCx7Im9mZnNldCI6MX1dXQ==
+	
+	For $i,j$, set $X_{ij} := X_i \times_X X_j$. Consider the following diagram:
+	% https://q.uiver.app/#q=WzAsNyxbMCwzLCJYX3tpan0iXSxbMiwzLCJYIl0sWzAsMSwiXFxtYXRoY2Fse1h9XFx0aW1lc19YIFhfe2lqfSJdLFsyLDEsIlxcbWF0aGNhbHtYfSJdLFsxLDIsIlhfaSJdLFsxLDAsIlxcbWF0aGNhbHtYfVxcdGltZXNfWCBYX2kiXSxbMSw0LCJZIl0sWzAsMV0sWzIsMCwiXFxwaV97aWp9IiwxXSxbMywxXSxbMiwzXSxbMCw0XSxbNSw0LCJcXHBpX2kiLDEseyJsYWJlbF9wb3NpdGlvbiI6MzB9XSxbMiw1XSxbNCwxXSxbNSwzXSxbNCw2LCJnX2kiLDEseyJsYWJlbF9wb3NpdGlvbiI6MzB9XSxbMyw2LCJmIiwxLHsibGFiZWxfcG9zaXRpb24iOjMwfV0sWzAsNiwiZ197aWp9IiwxXSxbMSw2LCJnIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
 	\[\begin{tikzcd}
-		{Y(X)} & {Y(X_V)} & {Y(X_R)}
-		\arrow[from=1-1, to=1-2]
-		\arrow[shift left, from=1-2, to=1-3]
-		\arrow[shift right, from=1-2, to=1-3]
+		& {\mathcal{X}\times_X X_i} & \\
+		{\mathcal{X}\times_X X_{ij}} && {\mathcal{X}} \\
+		& {X_i} \\
+		{X_{ij}} && X \\
+		& Y
+		\arrow[from=1-2, to=2-3]
+		\arrow["{\pi_i}"{description, pos=0.3}, from=1-2, to=3-2]
+		\arrow[from=2-1, to=1-2]
+		\arrow[from=2-1, to=2-3]
+		\arrow["{\pi_{ij}}"{description}, from=2-1, to=4-1]
+		\arrow[from=2-3, to=4-3]
+		\arrow["f"{description, pos=0.3}, from=2-3, to=5-2]
+		\arrow[from=3-2, to=4-3]
+		\arrow["{g_i}"{description, pos=0.3}, from=3-2, to=5-2]
+		\arrow[from=4-1, to=3-2]
+		\arrow[from=4-1, to=4-3]
+		\arrow["{g_{ij}}"{description}, from=4-1, to=5-2]
+		\arrow["g"{description}, dashed, from=4-3, to=5-2]
 	\end{tikzcd}\]
-	
-	It remains to check that \(h=g\circ \pi\). This can be checked after the
-	étale surjection \(\mathcal X_V\to \mathcal X\). After pulling back to
-	\(\mathcal X_V\), the equality becomes
+	The two restrictions $g_i|_{X_{ij}}$ and $g_j|_{X_{ij}}$ both
+	factor the morphism
 	\[
-	\mathcal X_V \xrightarrow{\pi_V} X_V
-	\xrightarrow{g_V} V
-	\longrightarrow Y
-	=
-	\mathcal X_V\longrightarrow V\longrightarrow Y,
+	\mathcal{X} \times_X X_{ij} \longrightarrow Y
 	\]
-	which holds by construction of \(g_V\). Hence \(h=g\circ \pi\).
-	
-	Finally, suppose \(g,g':X\to Y\) both satisfy
+	through the coarse moduli space $\pi_{ij}$ of $\mathcal{X} \times_X X_{ij}$, which exists since $\{X_{ij} \to X_i\}$ refines the given cover and
+	$\mathcal{X} \times_X X_{ij}$ inherits a coarse moduli space. By
+	uniqueness in the universal property of $\pi_{ij}$, we conclude
 	\[
-	g\circ \pi = h = g'\circ \pi.
+	g_i|_{X_{ij}} = g_j|_{X_{ij}}.
 	\]
-	Pulling back along the étale cover \(X_V\to X\), the two morphisms
-	\(g|_{X_V}\) and \(g'|_{X_V}\) both factor the same morphism
-	\(\mathcal X_V\to V\). By the uniqueness part of
-	Lemma \ref{lem:local-ex-cms-in-affines}, they agree on \(X_V\).
-	Since \(X_V\to X\) is an étale surjection, it follows that
-	\(g=g'\).
 	
-	Thus \(f:\mathcal X\to X\) is universal for morphisms from
-	\(\mathcal X\) to any algebraic space.
+	The collection $\{g_i : X_i \to Y\}$ is compatible on the étale
+	cover $\{X_i \to X\}$. Since $Y$ is an algebraic space, it is a
+	sheaf in the étale topology, so the $g_i$ glue to a unique morphism
+	$g : X \to Y$.
+	
+
+	The identity $f = g \circ \pi$ holds because it holds after pulling back
+	along each $f_i$, and morphisms to algebraic spaces can be checked étale
+	locally. Uniqueness of $g$ follows from the sheaf property of $Y$: any
+	two morphisms $X \to Y$ agreeing on the cover $\{X_i \to X\}$ must
+	coincide. Hence Axiom~(1) holds.
 \end{proof}
+
+
 
 \begin{theorem}[Keel-Mori Theorem]
 	Let $\mathcal{X}$ be a Deligne-Mumford stack separated and of finite type over a field with finite inertia. Then there exists a coarse moduli space

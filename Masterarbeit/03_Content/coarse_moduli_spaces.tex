@@ -16,6 +16,7 @@ However, in general $\mathcal{X}$ is not representable by a scheme or algebraic 
 \section{Definition of Coarse Moduli Space}
 
 \begin{definition}[Coarse moduli space]
+	\label{def:coarse-moduli-space}
 	Let $\mathcal{X}$ be an algebraic stack. A morphism
 	\[
 	\pi : \mathcal{X} \to X
@@ -53,20 +54,6 @@ However, in general $\mathcal{X}$ is not representable by a scheme or algebraic 
 
 \section{Basic Properties}
 
-\begin{proposition}
-	(\cite[][Tag 04UX]{stacks-project})
-	Let $\pi : \mathcal{X} \to X$ be a coarse moduli space. Then:
-	\begin{enumerate}
-		\item $\pi$ is surjective,
-		\item $\pi$ is universally closed,
-		\item $\pi$ is universal for morphisms to algebraic spaces.
-	\end{enumerate}
-\end{proposition}
-
-\begin{remark}
-	In general, formation of coarse moduli spaces does not commute with arbitrary
-	base change, but only with flat base change.
-\end{remark}
 
 
 \section{Coarse Moduli as Quotients}
@@ -89,27 +76,6 @@ However, in general $\mathcal{X}$ is not representable by a scheme or algebraic 
 	from presentations of stacks.
 \end{remark}
 
-
-\section{Relation to Groupoids}
-
-\begin{proposition}
-	Let $\mathcal{X}$ be an algebraic stack and let $U \to \mathcal{X}$ be a smooth
-	surjective morphism. Set
-	\[
-	R := U \times_{\mathcal{X}} U.
-	\]
-	Then:
-	\begin{enumerate}
-		\item $R \rightrightarrows U$ is a groupoid in algebraic spaces,
-		\item a coarse moduli space $\mathcal{X} \to X$ corresponds to a coarse
-		quotient $U \to X$ of this groupoid.
-	\end{enumerate}
-\end{proposition}
-
-\begin{remark}
-	This reduces the construction of coarse moduli spaces to the construction of
-	quotients of groupoids in algebraic spaces.
-\end{remark}
 
 \section{Examples}
 
