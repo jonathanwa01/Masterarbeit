@@ -249,8 +249,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	\]
 	and the morphisms $\pi_i \circ p_i : \mathcal{X}_{ij} \to X_i$ and
 	$\pi_j \circ p_j : \mathcal{X}_{ij} \to X_j$ both factor uniquely through
-	$\pi_{ij}$, by the universal property of the coarse moduli space
-	(Proposition~\ref{prop:cms-universality}):
+	$\pi_{ij}$, by the universal property of the coarse moduli space of $\mathcal{X}_{ij}$:
 	\[
 	\phi_{ij} : X_{ij} \to X_i,
 	\qquad
@@ -323,7 +322,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	\medskip
 	\textbf{Glue the local coarse moduli spaces via \etale\ descent.}
 	
-	We make use of Theorem~\ref{thm:fpqc-descent-affine-schemes} and explicit explain how it enters.
+	We make use of Theorem~\ref{thm:fpqc-descent-affine-schemes} and explicitly explain how it enters.
 	The morphism $p : U \to X$ is an étale surjection, hence in particular an
 	fpqc cover. The fiber product $U \times_X U$ satisfies
 	\[
@@ -335,8 +334,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	
 	For each $i$, the affine scheme $X_i$ comes with its inclusion
 	$X_i \hookrightarrow U$, giving an object $(X_i \hookrightarrow U) \in
-	\AffOver{U}$. The morphisms $\phi_{ij} : X_{ij} \to X_i$ from Step~3a
-	assemble into a gluing isomorphism
+	\AffOver{U}$. The morphisms $\phi_{ij} : X_{ij} \to X_i$ induced by the universal property of the coarse moduli spaces of $\mathcal{X}_{ij}$ from earlier assemble into a gluing isomorphism
 	\[
 	\alpha : \pi_1^*U \xrightarrow{\;\sim\;} \pi_2^*U
 	\]
@@ -368,9 +366,8 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	\xrightarrow{\;p\;} X
 	\]
 	gives a morphism $\mathcal{X}_i \to X$. On overlaps, the two composites
-	$\mathcal{X}_{ij} \rightrightarrows X$ coming from $i$ and $j$ agree, since by
-	Step 3a, both factor through $\pi_{ij} : \mathcal{X}_{ij} \to X_{ij}$,
-	and the two resulting maps $X_{ij} \rightrightarrows X$ are exactly
+	$\mathcal{X}_{ij} \rightrightarrows X$ coming from $i$ and $j$ agree, since both factor through $\pi_{ij} : \mathcal{X}_{ij} \to X_{ij}$,
+	and the two maps $X_{ij} \rightrightarrows X$ are exactly
 	$p \circ \phi_{ij}$ and $p \circ \phi_{ji}$, which are equal in $X$
 	because $(X_{ij}, \phi_{ij}, \phi_{ji})$ is precisely one component of
 	the equivalence relation $R$ and $p$ coequalizes $s$ and $t$.
@@ -396,7 +393,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	\pi(\bar{x}) = p(\pi_i(\bar{x}_i)).
 	\]
 	Since $\pi_i$ is a coarse moduli space, $\pi_i$ identifies
-	$|\mathcal{X}_i(\kappa)|$ with $X_i(\kappa)$ via isomorphism classes.
+	$|\mathcal{X}_i(\kappa)|$ with $X_i(\kappa)$.
 	Two geometric points $\bar{x}, \bar{y}$ of $\mathcal{X}$ satisfy
 	$\pi(\bar{x}) = \pi(\bar{y})$ in $X(\kappa)$ if and only if their images
 	in $U$ are identified by $R$, i.e.\ $(\pi_i(\bar{x}_i), \pi_j(\bar{y}_j))
