@@ -140,9 +140,7 @@ This denotes that $\zeta$ lies over $U$ and $\phi$ lies over $f$, i.e. $p_\mathc
 	\]
 	
 	Conversely, a pseudofunctor determines a category fibred in groupoids
-	via the Grothendieck construction.
-	
-	See \cite[][Section~3.1.2]{vistoli2007notes} and
+	via the Grothendieck construction, see \cite[][Section~3.1.2]{vistoli2007notes} and
 	\cite[][Tags 02XJ, 003S]{stacks-project}.
 \end{proposition}
 
@@ -217,7 +215,7 @@ This denotes that $\zeta$ lies over $U$ and $\phi$ lies over $f$, i.e. $p_\mathc
 \section{Stacks}
 Conceptually, stacks generalize sheaves by allowing values in groupoids
 instead of sets. Equivalently, stacks are $2$-sheaves on a site,
-or sheaves valued in $\infty$-groupoids.
+or sheaves valued in groupoids.
 
 \begin{definition}[Stack]\label{def:stack}
 	(\cite[][Tag 02ZH]{stacks-project})
@@ -378,7 +376,7 @@ or sheaves valued in $\infty$-groupoids.
 	\[
 	\mathcal P
 	\subset
-	E\times^{O(q)} \operatorname{Sym}^2(V^\vee).
+	E\times_{O(q)} \operatorname{Sym}^2(V^\vee).
 	\]
 	Thus the stack \(\mathcal X\) classifies families of pencils of quadratic forms
 	on vector bundles locally isomorphic to \(V\), equipped with an orthogonal
@@ -418,7 +416,7 @@ or sheaves valued in $\infty$-groupoids.
 	\right]
 	\]
 	has nontrivial stabilizers at every point. In particular, it is a genuinely
-	stacky quotient rather than an ordinary quotient variety or algebraic space.
+	stacky quotient rather than an ordinary quotient scheme or algebraic space.
 \end{example}
 
 \begin{lemma}[Products and pullbacks of stacks]
@@ -462,7 +460,7 @@ or sheaves valued in $\infty$-groupoids.
 \end{proposition}
 
 \begin{proof}
-	This follows from the Grothendieck construction, proposition \ref{prop:grothendieck-construction}, and the fact that smooth morphisms are \etale.
+	This follows from the Grothendieck construction, proposition \ref{prop:grothendieck-construction}, and the fact that \etale\ morphisms are smooth.
 \end{proof}
 
 \begin{definition}[Points of algebraic stacks]
@@ -477,7 +475,7 @@ or sheaves valued in $\infty$-groupoids.
 		\arrow["p", from=1-2, to=2-2]
 		\arrow["q"', from=2-1, to=2-2]
 	\end{tikzcd}\]
-	A point of $\mathcal{X}$ is an equivalence class of morphisms $\Specof{K}\to \mathcal{X}$ for a field $K$. We write $|\mathcal{X}I$ for the set of points of $\mathcal{X}$.
+	A point of $\mathcal{X}$ is an equivalence class of morphisms $\Specof{K}\to \mathcal{X}$ for a field $K$. We write $|\mathcal{X}|$ for the set of points of $\mathcal{X}$.
 \end{definition}
 
 \begin{remark}
@@ -533,14 +531,16 @@ or sheaves valued in $\infty$-groupoids.
 	\[
 	\mathcal{I}_{[X/G]} \cong [\{(x,g)\in X\times G \mid g\cdot x = x\}/G]
 	\]
-	From a higher categorical perspective, when we view stacks as $2$-truncated $\infty$-stacks, we can view the inertia stack essentially as the loop stack 
+	A little excursion to what happens from a higher categorical perspective: When we view stacks as $2$-truncated $\infty$-stacks, we can view the inertia stack essentially as the loop stack 
 	\[
-	\mathcal{I}_\mathcal{X} \simeq \text{Map}(S^1, \mathcal{X}).
+	\mathcal{I}_\mathcal{X} \simeq \text{Map}(S^1, \mathcal{X}),
 	\]
+	see \cite[p.45]{benzvi2010loop}.
 	Thus, any non trivial, non free action of an algebraic group $G$ on a scheme $X$ induces a proper quotient stack.
 \end{remark}
 
 \begin{lemma}
+	(\cite[][Tag 036X]{stacks-project})
 	Let $\mathcal X$ be an algebraic stack over $S$. Then there is an isomorphism of stacks
 	\[
 	\mathcal{I}_{\mathcal X}
@@ -687,3 +687,18 @@ or sheaves valued in $\infty$-groupoids.
 	(x,\alpha) \mapsto x.
 	\]
 \end{corollary}
+
+
+\section{Delign-Mumford Stacks}
+
+Last but not least I want to introduce Delign-Mumford stacks which will be the object we are studying throughout the Keel-Mori section. They yield simplified version algebraic stacks and will essentially make the proof of Keel-Mori a bit easier without the need of introducing Hilbert stacks.
+
+
+\begin{definition}[Delign-Mumford stack]
+	(\cite[][Definition 3.1.4.]{alper2026stacks})
+	A Delign-Mumford stack $\mathcal{X}$, often just called a DM stack, is a stack over $\Sch_{et}$, such that there exists a scheme $U$ and a morphism $U\to \mathcal{X}$, which is surjective, representable by algebraic spaces and \etale.
+\end{definition}
+
+\begin{remark}
+	For algebraic stacks locally of finite type over a field, being DM is equivalent to having finite and reduced geometric stabilizer groups; equivalently, the diagonal is unramified, see \cite[][Theorem 3.6.4]{alper2026stacks}. In particular, every DM stack has finite inertia, so it satisfies the finiteness hypothesis appearing in the Keel-Mori theorem.
+\end{remark}

@@ -382,8 +382,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	\pi : \mathcal{X} \longrightarrow X,
 	\]
 	by the sheaf property of $X$ as an algebraic space over the big étale
-	site: one applies Lemma~\ref{lem:descent-of-morphisms-over-etale-cover}
-	(descent of morphisms to algebraic spaces along étale covers).
+	site.
 	
 	\medskip
 	\textbf{Verifying the coarse moduli space axioms.}
@@ -411,14 +410,14 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	Let $Y$ be an algebraic space and $h : \mathcal{X} \to Y$ a morphism.
 	For each $i$, the restriction $h \circ f_i : \mathcal{X}_i \to Y$ factors
 	uniquely through $\pi_i$ by the universal property of the coarse moduli
-	space $X_i$ (Proposition~\ref{prop:cms-universality}), yielding a unique
+	space $X_i$, yielding a unique
 	morphism $g_i : X_i \to Y$.
 	On each overlap $X_{ij}$, the two morphisms
 	$g_i \circ \phi_{ij}$ and $g_j \circ \phi_{ji}$ are both equal to the
 	unique factorization of $h \circ f_i \circ p_i = h \circ f_j \circ p_j
 	: \mathcal{X}_{ij} \to Y$ through $X_{ij}$.
 	Hence the collection $(g_i)$ defines a morphism of the equivalence
-	relation $(R \rightrightarrows U) \to (Y \text{ trivially})$, and by
+	relation $(R \rightrightarrows U) \to Y$, and by
 	the universal property of the quotient $X = (U/R)^\sharp$, they glue
 	to a unique morphism
 	\[
@@ -427,7 +426,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	By construction, $g \circ \pi = h$.
 	Uniqueness of $g$: if $g' : X \to Y$ also satisfies $g' \circ \pi = h$,
 	then $g' \circ p \circ \pi_i = g \circ p \circ \pi_i$ for all $i$. Since
-	$\pi_i$ is an epimorphism (it is surjective), $g' \circ p|_{X_i} =
+	$\pi_i$ is an epimorphism, $g' \circ p|_{X_i} =
 	g \circ p|_{X_i}$, i.e.\ $g' = g$ after pullback along the étale
 	surjection $p : U \to X$. Since $p$ is an epimorphism of sheaves,
 	$g' = g$.
