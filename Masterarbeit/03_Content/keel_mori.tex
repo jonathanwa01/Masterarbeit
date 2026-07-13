@@ -126,13 +126,32 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 \end{proof}
 
 
+\begin{lemma}
+	(\cite[][Corollary 4.3.9.]{alper2026stacks})
+	Let $G$ be a finite group, $f:\Specof{A} \to \Specof{B}$ a $G$-equivariant morphism of affine schemes, of finite type over a field. Assume further that for every closed point $x\in \Specof{A}$, $f$ is \etale\ at $x$ and the induced morphism on stabilizer group schemes $G_x \to G_{f(x)}$ is bijective. Then $\Specof{A^G} \to \Specof{B^G}$ is \etale\ and the following diagram is cartesian:
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJbXFxTcGVjb2Z7QX0vR10iXSxbMSwwLCJbXFxTcGVjb2Z7Qn0vR10iXSxbMCwxLCJcXFNwZWNvZihBXkcpIl0sWzEsMSwiXFxTcGVjb2Z7Ql5HfSJdLFswLDEsImYiXSxbMiwzXSxbMCwyXSxbMSwzXSxbMCwzLCIiLDIseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
+	\[\begin{tikzcd}
+		{[\Specof{A}/G]} & {[\Specof{B}/G]} \\
+		{\Specof(A^G)} & {\Specof{B^G}}
+		\arrow["f", from=1-1, to=1-2]
+		\arrow[from=1-1, to=2-1]
+		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+		\arrow[from=1-2, to=2-2]
+		\arrow[from=2-1, to=2-2]
+	\end{tikzcd}\]
+\end{lemma}
+
 
 \begin{theorem}[Keel-Mori Theorem]
-	Let $\mathcal{X}$ be a Deligne-Mumford stack separated and of finite type over a field with finite inertia. Then there exists a coarse moduli space
+	Let $\mathcal{X}$ be a Deligne-Mumford stack separated and of finite type over a field. Then there exists a coarse moduli space
 	\[
 	\pi: \mathcal{X}\to X.
 	\]
 \end{theorem}
+
+\begin{remark}
+	By remark \ref{rem:dm-stack-finite-inertia}, the classical finite inertia condition can be dropped.
+\end{remark}
 
 \begin{proof}
 	\medskip
@@ -174,7 +193,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	\end{tikzcd}\]
 
 	Since $X' = \Specof{A^{G_x}[h^{-1}]}$, we have $A' \cong A \otimes_{A^{G_x}} A^{G_x}[h^{-1}] \cong A[h^{-1}]$. Taking $G_x$-invariants we get $A'^{G_x} \cong (A[h^{-1}])^{G_x} \cong A^{G_x}[h^{-1}]$, since localizing is exact. Hence, $X' \cong \Specof{A'^{G_x}}$.
-	Now consider $\pi_\mathcal{W}^{-1}(X')$ an open substack of $\mathcal{W}$. Open substacks of $\mathcal{W} = [\Specof{A}/G_x]$ correspond precisely to $G_x$-stable open subschemes $V\subset \Specof{A}$. 
+	Now consider $\pi_\mathcal{W}^{-1}(X')$ as an open substack of $\mathcal{W}$. Open substacks of $\mathcal{W} = [\Specof{A}/G_x]$ correspond precisely to $G_x$-stable open subschemes $V\subset \Specof{A}$. 
 	Hence the open substack $\pi_\mathcal{W}^{-1}(X')$ must be given by $[V/ G_x]$ for 
 	\[
 	V = \Specof{A} \times_{[\Specof{A} / G_x]} \pi_\mathcal{W}^{-1}(X')

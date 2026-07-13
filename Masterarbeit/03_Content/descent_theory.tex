@@ -65,7 +65,7 @@ to be an equivalence of groupoids, respectively of categories.
 \section*{Simplicial and cosimplicial objects}
 
 Lets briefly recall the formalism of simplicial and cosimplicial objects
-which underlies the Cech.
+which underlies the Cech nerve.
 
 \begin{definition}[Simplicial and cosimplicial objects]
 	Let $\Delta$ denote the simplex category, whose objects are the finite ordered sets
@@ -169,7 +169,7 @@ which underlies the Cech.
 	\begin{enumerate}
 		\item an object $x\in F(U)$,
 		\item an isomorphism $\alpha:d^0(x) \xrightarrow{\sim} d^1(x)$ in $F(U\times_X U))$ between two pullbacks of $x$ to
-		$U\times_X U$, such that $s^0(\alpha) = id_\alpha$
+		$U\times_X U$, such that $s^0(\alpha) = id_x$
 		\item a cocycle condition $d^2(\alpha)\circ d^0(\alpha) = d^1(\alpha)$ in $F(U\times_X U\times_X U)$, i.e. the following commutes:
 		% https://q.uiver.app/#q=WzAsMyxbMCwxLCJkXjBkXjAoeCkiXSxbMiwxLCJkXjFkXjEoeCkiXSxbMSwwLCJkXjBkXjEoeCkiXSxbMCwxLCJkXjFcXGFscGhhIiwyXSxbMCwyLCJkXjBcXGFscGhhIl0sWzIsMSwiZF4yXFxhbHBoYSJdXQ==
 		\[\begin{tikzcd}
@@ -250,21 +250,15 @@ which underlies the Cech.
 	\[
 	\Desc_p(F)
 	\simeq
-	\operatorname{pslim}_{[n]\in\Delta_{\leq 2}} F(U_n),
+	\operatorname{PsLim}_{[n]\in\Delta_{\leq 2}} F(U_n),
 	\]
 	where the right-hand side denotes the 2-categorical totalization of the
 	2-truncated \v{C}ech diagram.
 	\footnote{
-		Strictly speaking, the displayed pseudo-limit notation suppresses the coherence
-		isomorphisms coming from the pseudofunctor \(F\). Hollander gives the corresponding
-		explicit description for cosimplicial groupoids: the homotopy limit, denoted
-		\(\operatorname{Tot}_2\), has objects \((x,\alpha)\) satisfying a unit condition and
-		a cocycle condition; see \cite[Corollary~2.11][]{hollander2001homotopy}. In the
-		proof of \cite[Theorem~3.9][]{hollander2001homotopy}, she identifies such objects
-		with classical descent data for a cover. For the \(\Cat\)-valued 2-categorical
-		formulation, Nunes defines the descent object of a pseudocosimplicial object as a right pseudo-Kan extension \cite[Definition~4.3][]{lucatellinunes2018pseudokan}, observes that it
-		is a conical bilimit \cite[Remark~4.4][]{lucatellinunes2018pseudokan}, compares this with the usual weighted definition of the descent object \cite[Definition~4.6 and Theorem~4.11][]
-		{lucatellinunes2018pseudokan}, and gives an explicit description of strict descent objects in $\Cat$ by an object together with an invertible comparison morphism satisfying associativity and identity conditions \cite[Remark~4.23]{lucatellinunes2018pseudokan}.
+		Strictly speaking, the displayed pseudo-limit notation suppresses the coherence isomorphisms coming from the pseudofunctor \(F\). Hollander gives the corresponding explicit description for cosimplicial groupoids: 
+		The 2-truncated totalization \(\operatorname{Tot}_2\), which models the homotopy limit, has objects \((x,\alpha)\) satisfying a unit condition and a cocycle condition (see \cite[Corollary~2.11][]{hollander2001homotopy}).
+		In the proof of \cite[Theorem~3.9][]{hollander2001homotopy}, she identifies such objects with classical descent data for a cover.
+		Be aware that Hollander uses the opposite sign convention \(d^1(a)\xrightarrow{\alpha}d^0(a)\) for the comparison isomorphism.
 	}
 \end{remark}
 
