@@ -126,20 +126,44 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 \end{proof}
 
 
-\begin{lemma}
-	(\cite[][Corollary 4.3.9.]{alper2026stacks})
-	Let $G$ be a finite group, $f:\Specof{A} \to \Specof{B}$ a $G$-equivariant morphism of affine schemes, of finite type over a field. Assume further that for every closed point $x\in \Specof{A}$, $f$ is \etale\ at $x$ and the induced morphism on stabilizer group schemes $G_x \to G_{f(x)}$ is bijective. Then $\Specof{A^G} \to \Specof{B^G}$ is \etale\ and the following diagram is cartesian:
-	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJbXFxTcGVjb2Z7QX0vR10iXSxbMSwwLCJbXFxTcGVjb2Z7Qn0vR10iXSxbMCwxLCJcXFNwZWNvZihBXkcpIl0sWzEsMSwiXFxTcGVjb2Z7Ql5HfSJdLFswLDEsImYiXSxbMiwzXSxbMCwyXSxbMSwzXSxbMCwzLCIiLDIseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
-	\[\begin{tikzcd}
-		{[\Specof{A}/G]} & {[\Specof{B}/G]} \\
-		{\Specof(A^G)} & {\Specof{B^G}}
-		\arrow["f", from=1-1, to=1-2]
-		\arrow[from=1-1, to=2-1]
-		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
-		\arrow[from=1-2, to=2-2]
-		\arrow[from=2-1, to=2-2]
-	\end{tikzcd}\]
+
+
+\begin{lemma}[Affine quotient by a finite group]\label{lem:affine-quotient-finite-group}
+	Let $G$ be a finite group acting on an affine scheme $\Spec(A)$. Then the canonical morphism
+	\[
+	\pi : \Spec(A) \longrightarrow \Spec(A^G)
+	\]
+	induces a morphism of stacks
+	\[
+	[\Spec(A)/G] \longrightarrow \Spec(A^G),
+	\]
+	and this morphism is a coarse moduli space.
 \end{lemma}
+
+\begin{proof}
+	We check the two defining properties of a coarse moduli space.
+	\emph{(i) Geometric points.}
+	The induced map on geometric points identifies the set of $G$-orbits in
+	$\Spec(A)(\bar{k})$ with the set of points of $\Spec(A^G)(\bar{k})$.
+	Indeed, the morphism $\Spec(A) \to \Spec(A^G)$ is finite and surjective, since
+	$A$ is integral over $A^G$ for a finite group action. In particular, two
+	geometric points have the same image in $\Spec(A^G)$ if and only if they lie in the same $G$-orbit.
+	
+	\emph{(2) Universality.}
+	Let $Y$ be an algebraic space and let
+	\[
+	f : [\Spec(A)/G] \longrightarrow Y
+	\]
+	be a morphism. Since $f$ is $G$-invariant, its restriction to $\Spec(A)$
+	corresponds locally on an étale cover of $Y$ to a $G$-invariant morphism of
+	affine schemes. Equivalently, on coordinate rings it is given by a
+	$G$-invariant homomorphism, hence factors uniquely through $A^G$.
+	By descent for morphisms to algebraic spaces, these local factorizations glue
+	to a unique morphism $\Spec(A^G)\to Y$ making the diagram commute.
+	
+	Thus $\pi : [\Spec(A)/G]\to \Spec(A^G)$ satisfies the universal property of a
+	coarse moduli space.
+\end{proof}
 
 
 \begin{theorem}[Keel-Mori Theorem]
@@ -172,7 +196,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	TODO: Proof this holds
 	
 	
-	Now by the affince case, $\mathcal{W}$ admits a coarse moduli space
+	Now by the affince case (lemma \ref{lem:affine-quotient-finite-group}), $\mathcal{W}$ admits a coarse moduli space
 	\[
 	\pi_\mathcal{W}: \mathcal{W} \to W = \Specof{A^{G_x}}.
 	\]
