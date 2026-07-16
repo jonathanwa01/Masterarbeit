@@ -192,23 +192,56 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	We now shrink $\mathcal{W}$ to a smaller \etale\ neighbourhood, such that $f$ induces isomorphisms on all stabilizer groups.
 	
 	Let $\mathcal{U}\subset \mathcal{W}$ be the locus consisting of points $z\in |\mathcal{W}|$, such that $f$ induces isomorphisms $G_z \xrightarrow{\simeq} G_x$.
+	
 	We claim, that $\mathcal{U}$ is open. 
 	
-	TODO: Proof this holds
+	\begin{proof}[Proof of the claim]
+		
+	By a diagram chase, the following is 2-cartesian:
+	
+	% % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhjYWx7SX1fXFxtYXRoY2Fse1d9Il0sWzAsMSwiXFxtYXRoY2Fse1d9Il0sWzEsMCwiXFxtYXRoY2Fse0l9X1xcbWF0aGNhbHtYfVxcdGltZXNfXFxtYXRoY2Fse1h9XFxtYXRoY2Fse1d9Il0sWzEsMSwiXFxtYXRoY2Fse1d9XFx0aW1lc19cXG1hdGhjYWx7WH0gXFxtYXRoY2Fse1d9Il0sWzAsMiwiXFxQaGkiXSxbMCwxXSxbMSwzXSxbMiwzXSxbMCwzLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
+	\begin{equation}\label{diag:inertia-pullback-open-substack}
+		\begin{tikzcd}
+			{\mathcal{I}_\mathcal{W}} & {\mathcal{I}_\mathcal{X}\times_\mathcal{X}\mathcal{W}} \\
+			{\mathcal{W}} & {\mathcal{W}\times_\mathcal{X} \mathcal{W}}
+			\arrow["\Phi", from=1-1, to=1-2]
+			\arrow[from=1-1, to=2-1]
+			\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+			\arrow[from=1-2, to=2-2]
+			\arrow[from=2-1, to=2-2]
+		\end{tikzcd}
+	\end{equation}
+	
+	Now by lemma \ref{lem:local-structure-theorem-dm-stacks} the morphism $\mathcal{W} \to \mathcal{X}$ is affine \etale, in particular representable and separated, since $\mathcal{X}$ is separated. Hence, the diagonal $\mathcal{W} \to \mathcal{W}\times_\mathcal{X}\mathcal{W}$ is an open and closed immersion, and by \ref{diag:inertia-pullback-open-substack}, so is $\Phi$. 
 	
 	
-	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhjYWx7SX1fXFxtYXRoY2Fse1d9Il0sWzAsMSwiXFxtYXRoY2Fse1d9Il0sWzEsMCwiXFxtYXRoY2Fse0l9X1xcbWF0aGNhbHtYfVxcdGltZXNfXFxtYXRoY2Fse1h9XFxtYXRoY2Fse1d9Il0sWzEsMSwiXFxtYXRoY2Fse1d9XFx0aW1lc19cXG1hdGhjYWx7WH0gXFxtYXRoY2Fse1d9Il0sWzAsMl0sWzAsMV0sWzEsM10sWzIsM10sWzAsMywiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
-	\[\begin{tikzcd}
-		{\mathcal{I}_\mathcal{W}} & {\mathcal{I}_\mathcal{X}\times_\mathcal{X}\mathcal{W}} \\
-		{\mathcal{W}} & {\mathcal{W}\times_\mathcal{X} \mathcal{W}}
-		\arrow[from=1-1, to=1-2]
-		\arrow[from=1-1, to=2-1]
-		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
-		\arrow[from=1-2, to=2-2]
-		\arrow[from=2-1, to=2-2]
-	\end{tikzcd}\]
 	
+	In particular, for every geometric point $z:\Spec{\bar{k}} \to \mathcal{W}$, the induced map on stabilizer groups
+	\[
+	\Phi_{z} \colon \mathrm{Aut}_W(z) \longrightarrow \mathrm{Aut}_X(z)
+	\]
+	is injective, and its image is an open and closed subgroup of $\mathrm{Aut}_X(z)$.
+	\[
+	\operatorname{pr}_2:\mathcal{I}_\mathcal{X} \times_\mathcal{X} \mathcal{W}\to \mathcal{W}
+	\]
+	is finite as a pullback of the finite morphism $\mathcal{I}_\mathcal{X} \to \mathcal{X}$. In particular, $\operatorname{pr}_2$ is closed. 
 	
+	Consider the closed subset 
+	\[
+	Z:= |\mathcal{I}_\mathcal{X}\times_\mathcal{X}\mathcal{W}| \setminus |\mathcal{I}_\mathcal{W}|.
+	\]
+	
+	This is the locus of points of the inertia of $\mathcal{X}$ over $\mathcal{W}$ that do not come from inertia of $\mathcal{W}$. Equivalently, for a geometric point $z:\Spec{\bar{k}} \to \mathcal{W}$, the fiber of $z$ over $Z$ is nonempty if and only if the map
+	\[
+	\Phi_{z} \colon \mathrm{Aut}_\mathcal{W}(z) \to \mathrm{Aut}_\mathcal{W}(z)
+	\]
+	fails to be surjective. Since $\Phi_{z}$ is injective and a closed and open immersion, the failure of $\Phi_{z}$ being an isomorphism is equivalent to $\Phi_{z}$ failing to be surjective.
+	Thus the image $\operatorname{pr}_2(Z) \subset |\mathcal{W}|$ is exactly the locus of points $z \in |W|$ at which $\Phi_z$ fails to be surjective and hence, $|\mathcal{W}|\setminus \operatorname{pr}_2(Z)$ is precisely the locus, where $\Phi_z$ is an isomorphism, which is identified with $\mathcal{U}$.
+	
+	Since $\operatorname{pr}_2$ is closed, $\operatorname{pr}_2(Z) \subset |\mathcal{W}|$ is closed.
+	and therefore, $\mathcal{U}$, as being identified with $\operatorname{pr}_2(Z) \subset |\mathcal{W}|$ in $|\mathcal{W}|$, is open.
+	
+	\end{proof}
 	
 	Now by the affince case (lemma \ref{lem:affine-quotient-finite-group}), $\mathcal{W}$ admits a coarse moduli space
 	\[
@@ -275,7 +308,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	\[
 	\mathcal{X}_{ij} := \mathcal{X}_i \times_{\mathcal{X}} \mathcal{X}_j.
 	\]
-	Since $f_i$ and $f_j$ are representable and étale, the two projections
+	Since $f_i$ and $f_j$ are representable and \etale, the two projections
 	\[
 	p_i : \mathcal{X}_{ij} \to \mathcal{X}_i,
 	\qquad
@@ -292,7 +325,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	stabilizer groups by hypothesis, and $\mathcal{X}_{ij} \to \mathcal{X}_i$
 	is a base change of $f_j$ along $f_i$.
 	
-	In particular, $\mathcal{X}_{ij}$ is a Deligne--Mumford stack with finite
+	In particular, $\mathcal{X}_{ij}$ is a DM stack with finite
 	inertia. Since $\mathcal{X}_i = [U_i/G_i]$ is a quotient of an affine by
 	a finite group, the base change
 	\[
@@ -312,10 +345,10 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	\qquad
 	\phi_{ji} : X_{ij} \to X_j.
 	\]
-	We claim that $\phi_{ij}$ and $\phi_{ji}$ are both étale. Indeed,
+	We claim that $\phi_{ij}$ and $\phi_{ji}$ are both \etale. Indeed,
 	$\pi_i \circ p_i$ is étale (as a composition of étale morphisms), and
 	$\pi_i$ is the coarse moduli space of $\mathcal{X}_i = [U_i/G_i]$. By
-	Lemma~\ref{lem:descending-etale-to-quotient}, any étale morphism from
+	Lemma~\ref{lem:descending-etale-to-quotient}, any \etale\ morphism from
 	$\mathcal{X}_{ij}$ to the algebraic space $X_i$ that is an isomorphism
 	on geometric stabilizers descends to an étale morphism $X_{ij} \to X_i$.
 	The same argument applies to $\phi_{ji}$.
@@ -325,165 +358,50 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	
 	Define
 	\[
-	U := \coprod_i X_i.
-	\]
-	This is a scheme (a disjoint union of affine schemes). Define
-	\[
-	R := \coprod_{i,j} X_{ij},
-	\]
-	with source and target maps
-	\[
-	s : R \to U, \quad s|_{X_{ij}} = \phi_{ij},
+	U := \coprod_i X_i,
 	\qquad
-	t : R \to U, \quad t|_{X_{ij}} = \phi_{ji}.
+	R := \coprod_{i,j} X_{ij}
 	\]
-	Both $s$ and $t$ are étale morphisms of schemes, since each component
-	$\phi_{ij}$ and $\phi_{ji}$ is étale by Step 3a.
-	
-	We verify that $(s,t) : R \rightrightarrows U$ is an étale equivalence
-	relation in the sense of Lemma~\ref{lem:etale-eq-quotient-of-affines}.
-	The key point is that the map
+	with source and target maps \(s,t:R\rightrightarrows U\). Those are \etale, and by construction they form an \etale\ equivalence relation. Hence, by Lemma~\ref{lem:etale-eq-quotient-of-affines}, the quotient sheaf
 	\[
-	j = (s,t) : R \to U \times U
+	X := (U/R)^\sharp
 	\]
-	is a monomorphism: two sections in $X_{ij}(T)$ with the same image
-	in $(U \times U)(T) = X_i(T) \times X_j(T)$ must be equal, because
-	the coarse moduli space maps $\pi_i, \pi_j$ separate geometric points
-	(condition (2) of Definition~\ref{def:coarse-moduli-space}).
-	Reflexivity, symmetry, and transitivity of the relation follow from
-	the stack structure of $\mathcal{X}$: the diagonal
-	$\mathcal{X}_i \to \mathcal{X}_{ii}$ gives the identity sections,
-	the swap $\mathcal{X}_{ij} \cong \mathcal{X}_{ji}$ gives symmetry, and
-	the composition $\mathcal{X}_{ij} \times_{\mathcal{X}_j} \mathcal{X}_{jk}
-	\cong \mathcal{X}_{ik}$ gives transitivity. All of these pass to the
-	coarse moduli spaces $X_{ij}$ by the universal property.
-	
-	By Lemma~\ref{lem:etale-eq-quotient-of-affines}, the sheaf quotient
-	\[
-	X := (U / R)^\sharp
-	\]
-	is an algebraic space, and the canonical morphism
-	\[
-	p : U = \coprod_i X_i \longrightarrow X
-	\]
-	is surjective and \etale. In particular 
-	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJSIl0sWzEsMCwiVSJdLFsyLDAsIlgiXSxbMCwxLCJzIiwwLHsib2Zmc2V0IjotMX1dLFswLDEsInQiLDIseyJvZmZzZXQiOjF9XSxbMSwyLCJwIl1d
-	\[\begin{tikzcd}
-		R & U & X
-		\arrow["s", shift left, from=1-1, to=1-2]
-		\arrow["t"', shift right, from=1-1, to=1-2]
-		\arrow["p", from=1-2, to=1-3]
-	\end{tikzcd}\]
-	is a coequalizer diagram.
+	is an algebraic space, and the canonical map \(p:U\to X\) is étale and surjective.
 	
 	\medskip
 	\textbf{Glue the local coarse moduli spaces via \etale\ descent.}
 	
-	We make use of Theorem~\ref{thm:fpqc-descent-affine-schemes} and explicitly explain how it enters.
-	The morphism $p : U \to X$ is an étale surjection, hence in particular an
-	fpqc cover. The fiber product $U \times_X U$ satisfies
-	\[
-	U \times_X U \;\cong\; R \;=\; \coprod_{i,j} X_{ij},
-	\]
-	since $p$ coequalizes $s$ and $t$. Hence, two points of $U$ have the same image in $X$ if and only if they are related by $R$. Under this identification,
-	the two projections $\pi_1, \pi_2 : U \times_X U \to U$ correspond to $s$
-	and $t$ respectively.
-	
-	For each $i$, the affine scheme $X_i$ comes with its inclusion
-	$X_i \hookrightarrow U$, giving an object $(X_i \hookrightarrow U) \in
-	\AffOver{U}$. The morphisms $\phi_{ij} : X_{ij} \to X_i$ induced by the universal property of the coarse moduli spaces of $\mathcal{X}_{ij}$ from earlier assemble into a gluing isomorphism
-	\[
-	\alpha : \pi_1^*U \xrightarrow{\;\sim\;} \pi_2^*U
-	\]
-	in $\AffOver{U \times_X U}$, whose $(i,j)$-component is induced by
-	$\phi_{ij}$ and $\phi_{ji}$. The normalization condition $\Delta^*\alpha =
-	id$ holds by reflexivity of $R$ (i.e.\ $\phi_{ii} = id_{X_i}$), and the
-	cocycle condition
-	\[
-	\pi_{23}^*(\alpha) \circ \pi_{12}^*(\alpha) = \pi_{13}^*(\alpha)
-	\]
-	in $\AffOver{U \times_X U \times_X U}$ follows from transitivity of $R$
-	established above.
-	
-	Thus $(U, \alpha)$ is an object of $\Desc_p(\AffOver{(-)})$, i.e.\ a
-	descent datum for the pseudofunctor $\AffOver{(-)}$ along the fpqc cover
-	$p : U \to X$. By Theorem~\ref{thm:fpqc-descent-affine-schemes}, this
-	descent datum is effective, i.e. there exists a unique affine scheme over $X$
-	whose pullback along $p$ recovers $(U, \alpha)$. This descended object is
-	precisely $X$ itself, confirming that the local affine pieces $X_i$ are
-	the pullbacks of $X$ along $p$, and that $X$ is the global scheme
-	reconstructed from the local data by fpqc descent.
+	The overlap maps \(X_{ij} \rightrightarrows X_i, X_j\) form fpqc descent data
+	for the affine schemes \(X_i\). Hence, by Theorem~\ref{thm:fpqc-descent-affine-schemes},
+	these local pieces glue to a global algebraic space \(X\).
 	
 	\medskip
 	\textbf{Constructing the morphism $\pi : \mathcal{X} \to X$.}
 	
-	For each $i$, the composition
+	The local morphisms $\mathcal{X}_i \to X$ are compatible on overlaps, since
+	the identifications on $X_{ij}$ are precisely the ones used in the quotient
+	construction of $X$. Hence they glue to a unique morphism
 	\[
-	\mathcal{X}_i \xrightarrow{\;\pi_i\;} X_i \hookrightarrow U
-	\xrightarrow{\;p\;} X
+	\pi : \mathcal{X} \longrightarrow X.
 	\]
-	gives a morphism $\mathcal{X}_i \to X$. On overlaps, the two composites
-	$\mathcal{X}_{ij} \rightrightarrows X$ coming from $i$ and $j$ agree, since both factor through $\pi_{ij} : \mathcal{X}_{ij} \to X_{ij}$,
-	and the two maps $X_{ij} \rightrightarrows X$ are exactly
-	$p \circ \phi_{ij}$ and $p \circ \phi_{ji}$, which are equal in $X$
-	because $(X_{ij}, \phi_{ij}, \phi_{ji})$ is precisely one component of
-	the equivalence relation $R$ and $p$ coequalizes $s$ and $t$.
-	
-	Since $\{f_i : \mathcal{X}_i \to \mathcal{X}\}$ is an étale cover of
-	$\mathcal{X}$ and the morphisms $\mathcal{X}_i \to X$ are compatible
-	on overlaps, they descend to a unique morphism
-	\[
-	\pi : \mathcal{X} \longrightarrow X,
-	\]
-	by the sheaf property of $X$ as an algebraic space over the big étale
-	site.
 	
 	\medskip
 	\textbf{Verifying the coarse moduli space axioms.}
 	
-	\emph{(i) Geometric points.}
-	Let $\kappa$ be an algebraically closed field and $\bar{x} : \Spec\kappa
-	\to \mathcal{X}$ a geometric point. Choose $i$ such that $\bar{x}$ lifts
-	to $\bar{x}_i : \Spec\kappa \to \mathcal{X}_i$ (possible since the
-	$\mathcal{X}_i$ cover $\mathcal{X}$). Then
-	\[
-	\pi(\bar{x}) = p(\pi_i(\bar{x}_i)).
-	\]
-	Since $\pi_i$ is a coarse moduli space, $\pi_i$ identifies
-	$|\mathcal{X}_i(\kappa)|$ with $X_i(\kappa)$.
-	Two geometric points $\bar{x}, \bar{y}$ of $\mathcal{X}$ satisfy
-	$\pi(\bar{x}) = \pi(\bar{y})$ in $X(\kappa)$ if and only if their images
-	in $U$ are identified by $R$, i.e.\ $(\pi_i(\bar{x}_i), \pi_j(\bar{y}_j))
-	\in X_{ij}(\kappa)$ for some $i,j$. By construction of $X_{ij}$ as the
-	coarse moduli space of $\mathcal{X}_{ij} = \mathcal{X}_i
-	\times_{\mathcal{X}} \mathcal{X}_j$, this happens if and only if $\bar{x}$
-	and $\bar{y}$ are isomorphic in $\mathcal{X}(\kappa)$.
-	Hence $|\mathcal{X}(\kappa)| \to X(\kappa)$ is a bijection.
+	\medskip
+	\textbf{Verifying the coarse moduli space axioms.}
 	
-	\emph{(ii) Universality.}
-	Let $Y$ be an algebraic space and $h : \mathcal{X} \to Y$ a morphism.
-	For each $i$, the restriction $h \circ f_i : \mathcal{X}_i \to Y$ factors
-	uniquely through $\pi_i$ by the universal property of the coarse moduli
-	space $X_i$, yielding a unique
-	morphism $g_i : X_i \to Y$.
-	On each overlap $X_{ij}$, the two morphisms
-	$g_i \circ \phi_{ij}$ and $g_j \circ \phi_{ji}$ are both equal to the
-	unique factorization of $h \circ f_i \circ p_i = h \circ f_j \circ p_j
-	: \mathcal{X}_{ij} \to Y$ through $X_{ij}$.
-	Hence the collection $(g_i)$ defines a morphism of the equivalence
-	relation $(R \rightrightarrows U) \to Y$, and by
-	the universal property of the quotient $X = (U/R)^\sharp$, they glue
-	to a unique morphism
+	The coarse moduli property is \etale\ local on the target. Therefore, by
+	Lemma~\ref{lem:coarse-moduli-etale-local}, it suffices to check the pullbacks
+	along the étale cover \(\{X_i \to X\}\). Since each
 	\[
-	g : X \longrightarrow Y.
+	\pi_i : \mathcal{X} \times_X X_i \to X_i
 	\]
-	By construction, $g \circ \pi = h$.
-	Uniqueness of $g$: if $g' : X \to Y$ also satisfies $g' \circ \pi = h$,
-	then $g' \circ p \circ \pi_i = g \circ p \circ \pi_i$ for all $i$. Since
-	$\pi_i$ is an epimorphism, $g' \circ p|_{X_i} =
-	g \circ p|_{X_i}$, i.e.\ $g' = g$ after pullback along the étale
-	surjection $p : U \to X$. Since $p$ is an epimorphism of sheaves,
-	$g' = g$.
+	is a coarse moduli space by construction, it follows that
+	\[
+	\pi : \mathcal{X} \to X
+	\]
+	is a coarse moduli space.
 	
 	\medskip
 	
