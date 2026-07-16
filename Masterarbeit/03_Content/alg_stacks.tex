@@ -296,6 +296,75 @@ or sheaves valued in groupoids.
 	to the usual sheaf condition for set-valued functors.
 \end{remark}
 
+\begin{lemma}[Products and pullbacks of stacks]
+	\cite[][04TD]{stacks-project}
+	The category of stacks over a base scheme $S$ is closed under products and pullbacks.
+\end{lemma}
+
+\section{Algebraic Stacks}
+
+\begin{definition}[Representable morphism of stacks]
+	(\cite[][Tag 02YQ]{stacks-project})
+	Let $\mathcal{X}, \mathcal{Y}$ be stacks over $(\SchOver{S})_{fppf}$ and let $f:\mathcal{X} \to \mathcal{Y}$ be a morphism of stacks. We call $f$ representable by algebraic spaces, if for all schemes $U$ over $S$ and $U\to \mathcal{Y}$, $U\times_{\mathcal{Y}} \mathcal{X}$ is an algebraic space.
+\end{definition}
+
+
+\begin{definition}[Algebraic Stack]
+	(\cite[][Tag 026O]{stacks-project})
+	Let $S$ be a scheme. An algebraic stack over $S$ is a category fibred in groupoids
+	\[
+	\mathcal{X} \to (\SchOver{S})_{\mathrm{fppf}}
+	\]
+	such that:
+	\begin{enumerate}
+		\item $\mathcal{X}$ is a stack in groupoids over $(\SchOver{S})_{\mathrm{fppf}}$;
+		\item the diagonal
+		\[
+		\Delta_{\mathcal{X}} \colon \mathcal{X} \to \mathcal{X} \times \mathcal{X}
+		\]
+		is representable by algebraic spaces;
+		\item there exists a scheme $U$ and a smooth surjective morphism
+		\[
+		U \to \mathcal{X}.
+		\]
+	\end{enumerate}
+\end{definition}
+
+\begin{proposition}
+	\label{prop:algspaces-are-algstacks}
+	There is a fully faithful embedding of algebraic spaces into algebraic stacks $\AlgSp \subset \AlgStk$.
+\end{proposition}
+
+\begin{proof}
+	This follows from the Grothendieck construction, proposition \ref{prop:grothendieck-construction}, and the fact that \etale\ morphisms are smooth.
+\end{proof}
+
+\begin{definition}[Points of algebraic stacks]
+	(\cite[][Tag 04XE]{stacks-project})
+	Let $\mathcal{X}$ be an algebraic stack, $K, L$ two fields and let $p:\Specof{K}\to \mathcal{X}$, $q: \Specof{L}\to \mathcal{X}$ be a morphisms of stacks. We call $p$ and $q$ equivalent, if there exists a field $\Omega$ such that the following diagram is $2$-commutative:
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXFNwZWNvZntcXE9tZWdhfSJdLFsxLDAsIlxcU3BlY29me0t9Il0sWzAsMSwiXFxTcGVjb2Z7TH0iXSxbMSwxLCJcXG1hdGhjYWx7WH0iXSxbMSwzLCJwIl0sWzIsMywicSIsMl0sWzAsMl0sWzAsMV1d
+	\[\begin{tikzcd}
+		{\Specof{\Omega}} & {\Specof{K}} \\
+		{\Specof{L}} & {\mathcal{X}}
+		\arrow[from=1-1, to=1-2]
+		\arrow[from=1-1, to=2-1]
+		\arrow["p", from=1-2, to=2-2]
+		\arrow["q"', from=2-1, to=2-2]
+	\end{tikzcd}\]
+	A point of $\mathcal{X}$ is an equivalence class of morphisms $\Specof{K}\to \mathcal{X}$ for a field $K$. We write $|\mathcal{X}|$ for the set of points of $\mathcal{X}$.
+\end{definition}
+
+\begin{remark}
+	The fact that $|\mathcal{X}|$ is a set rather than a proper class relies crucially on $\mathcal{X}$ being an algebraic stack. For a general stack, the collection of all isomorphism classes of morphisms $\Specof{K}\to \mathcal{X}$, as $K$ ranges over all fields, forms a priori only a proper class in ZFC set theory, since there is no bound on the cardinality of $K$.
+	
+	For an algebraic stack however, this issue is resolved by the existence of a smooth surjective presentation $U\to \mathcal{X}$ from a scheme $U$. Since $|U|$ is a genuine set and the map $U\to \mathcal{X}$ is surjective (\cite[][Tag 04XI]{stacks-project}), every point of $|\mathcal{X}|$ is represented by a point of $U$. One then sees, that $|\mathcal{X}|$ is the set-theoretic quotient $|U|/|R|$, where $R=U\times_X U$ is the algebraic space encoding the equivalence relation. This is indeed a set, and one verifies that it agrees with the description via field-valued points.
+\end{remark}
+
+\begin{definition}[\Etale\ morphism of algebraic stacks]
+	Let $f:\mathcal{X} \to \mathcal{Y}$ be a morphism of algebraic stacks. We call $f$ \etale, if it is representable and for all schemes $U\to \mathcal{Y}$, the morphism $U\times_\mathcal{Y}\mathcal{X}\to U$ is \etale.
+\end{definition}
+
+
 \begin{example}[A quotient stack of pencils of quadrics up to orthogonal action]
 	Let \(k\) be a field with \(\operatorname{char}(k)\neq 2\), and let \(V\) be an
 	\(n\)-dimensional \(k\)-vector space. Let
@@ -419,74 +488,8 @@ or sheaves valued in groupoids.
 	stacky quotient rather than an ordinary quotient scheme or algebraic space.
 \end{example}
 
-\begin{lemma}[Products and pullbacks of stacks]
-	\cite[][04TD]{stacks-project}
-	The category of stacks over a base scheme $S$ is closed under products and pullbacks.
-\end{lemma}
 
-\section{Algebraic Stacks}
-
-\begin{definition}[Representable morphism of stacks]
-	(\cite[][Tag 02YQ]{stacks-project})
-	Let $\mathcal{X}, \mathcal{Y}$ be stacks over $(\SchOver{S})_{fppf}$ and let $f:\mathcal{X} \to \mathcal{Y}$ be a morphism of stacks. We call $f$ representable by algebraic spaces, if for all schemes $U$ over $S$ and $U\to \mathcal{Y}$, $U\times_{\mathcal{Y}} \mathcal{X}$ is an algebraic space.
-\end{definition}
-
-
-
-\begin{definition}[Algebraic Stack]
-	(\cite[][Tag 026O]{stacks-project})
-	Let $S$ be a scheme. An algebraic stack over $S$ is a category fibred in groupoids
-	\[
-	\mathcal{X} \to (\SchOver{S})_{\mathrm{fppf}}
-	\]
-	such that:
-	\begin{enumerate}
-		\item $\mathcal{X}$ is a stack in groupoids over $(\SchOver{S})_{\mathrm{fppf}}$;
-		\item the diagonal
-		\[
-		\Delta_{\mathcal{X}} \colon \mathcal{X} \to \mathcal{X} \times \mathcal{X}
-		\]
-		is representable by algebraic spaces;
-		\item there exists a scheme $U$ and a smooth surjective morphism
-		\[
-		U \to \mathcal{X}.
-		\]
-	\end{enumerate}
-\end{definition}
-
-\begin{proposition}
-	\label{prop:algspaces-are-algstacks}
-	There is a fully faithful embedding of algebraic spaces into algebraic stacks $\AlgSp \subset \AlgStk$.
-\end{proposition}
-
-\begin{proof}
-	This follows from the Grothendieck construction, proposition \ref{prop:grothendieck-construction}, and the fact that \etale\ morphisms are smooth.
-\end{proof}
-
-\begin{definition}[Points of algebraic stacks]
-	(\cite[][Tag 04XE]{stacks-project})
-	Let $\mathcal{X}$ be an algebraic stack, $K, L$ two fields and let $p:\Specof{K}\to \mathcal{X}$, $q: \Specof{L}\to \mathcal{X}$ be a morphisms of stacks. We call $p$ and $q$ equivalent, if there exists a field $\Omega$ such that the following diagram is $2$-commutative:
-	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXFNwZWNvZntcXE9tZWdhfSJdLFsxLDAsIlxcU3BlY29me0t9Il0sWzAsMSwiXFxTcGVjb2Z7TH0iXSxbMSwxLCJcXG1hdGhjYWx7WH0iXSxbMSwzLCJwIl0sWzIsMywicSIsMl0sWzAsMl0sWzAsMV1d
-	\[\begin{tikzcd}
-		{\Specof{\Omega}} & {\Specof{K}} \\
-		{\Specof{L}} & {\mathcal{X}}
-		\arrow[from=1-1, to=1-2]
-		\arrow[from=1-1, to=2-1]
-		\arrow["p", from=1-2, to=2-2]
-		\arrow["q"', from=2-1, to=2-2]
-	\end{tikzcd}\]
-	A point of $\mathcal{X}$ is an equivalence class of morphisms $\Specof{K}\to \mathcal{X}$ for a field $K$. We write $|\mathcal{X}|$ for the set of points of $\mathcal{X}$.
-\end{definition}
-
-\begin{remark}
-	The fact that $|\mathcal{X}|$ is a set rather than a proper class relies crucially on $\mathcal{X}$ being an algebraic stack. For a general stack, the collection of all isomorphism classes of morphisms $\Specof{K}\to \mathcal{X}$, as $K$ ranges over all fields, forms a priori only a proper class in ZFC set theory, since there is no bound on the cardinality of $K$.
-	
-	For an algebraic stack however, this issue is resolved by the existence of a smooth surjective presentation $U\to \mathcal{X}$ from a scheme $U$. Since $|U|$ is a genuine set and the map $U\to \mathcal{X}$ is surjective (\cite[][Tag 04XI]{stacks-project}), every point of $|\mathcal{X}|$ is represented by a point of $U$. One then sees, that $|\mathcal{X}|$ is the set-theoretic quotient $|U|/|R|$, where $R=U\times_X U$ is the algebraic space encoding the equivalence relation. This is indeed a set, and one verifies that it agrees with the description via field-valued points.
-\end{remark}
-
-\begin{definition}[\Etale\ morphism of algebraic stacks]
-	Let $f:\mathcal{X} \to \mathcal{Y}$ be a morphism of algebraic stacks. We call $f$ \etale, if it is representable and for all schemes $U\to \mathcal{Y}$, the morphism $U\times_\mathcal{Y}\mathcal{X}\to U$ is \etale.
-\end{definition}
+\section{Inertia Stack}
 
 \begin{definition}[Inertia stack]
 	(\cite[][Tag 036X]{stacks-project})
