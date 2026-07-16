@@ -142,10 +142,11 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 
 \begin{proof}
 	We check the two defining properties of a coarse moduli space.
+	
 	\emph{(i) Geometric points.}
 	The induced map on geometric points identifies the set of $G$-orbits in
 	$\Spec(A)(\bar{k})$ with the set of points of $\Spec(A^G)(\bar{k})$.
-	Indeed, the morphism $\Spec(A) \to \Spec(A^G)$ is finite and surjective, since
+	The morphism $\Spec(A) \to \Spec(A^G)$ is finite and surjective, since
 	$A$ is integral over $A^G$ for a finite group action. In particular, two
 	geometric points have the same image in $\Spec(A^G)$ if and only if they lie in the same $G$-orbit.
 	
@@ -164,7 +165,6 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	Thus $\pi : [\Spec(A)/G]\to \Spec(A^G)$ satisfies the universal property of a
 	coarse moduli space.
 \end{proof}
-
 
 \begin{theorem}[Keel-Mori Theorem]
 	Let $\mathcal{X}$ be a Deligne-Mumford stack separated and of finite type over a field. Then there exists a coarse moduli space
@@ -193,7 +193,21 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	
 	Let $\mathcal{U}\subset \mathcal{W}$ be the locus consisting of points $z\in |\mathcal{W}|$, such that $f$ induces isomorphisms $G_z \xrightarrow{\simeq} G_x$.
 	We claim, that $\mathcal{U}$ is open. 
+	
 	TODO: Proof this holds
+	
+	
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhjYWx7SX1fXFxtYXRoY2Fse1d9Il0sWzAsMSwiXFxtYXRoY2Fse1d9Il0sWzEsMCwiXFxtYXRoY2Fse0l9X1xcbWF0aGNhbHtYfVxcdGltZXNfXFxtYXRoY2Fse1h9XFxtYXRoY2Fse1d9Il0sWzEsMSwiXFxtYXRoY2Fse1d9XFx0aW1lc19cXG1hdGhjYWx7WH0gXFxtYXRoY2Fse1d9Il0sWzAsMl0sWzAsMV0sWzEsM10sWzIsM10sWzAsMywiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
+	\[\begin{tikzcd}
+		{\mathcal{I}_\mathcal{W}} & {\mathcal{I}_\mathcal{X}\times_\mathcal{X}\mathcal{W}} \\
+		{\mathcal{W}} & {\mathcal{W}\times_\mathcal{X} \mathcal{W}}
+		\arrow[from=1-1, to=1-2]
+		\arrow[from=1-1, to=2-1]
+		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+		\arrow[from=1-2, to=2-2]
+		\arrow[from=2-1, to=2-2]
+	\end{tikzcd}\]
+	
 	
 	
 	Now by the affince case (lemma \ref{lem:affine-quotient-finite-group}), $\mathcal{W}$ admits a coarse moduli space
