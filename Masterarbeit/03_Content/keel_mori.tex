@@ -166,6 +166,8 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	coarse moduli space.
 \end{proof}
 
+
+
 \section{Keel Mori Theorem}
 
 \begin{theorem}[Keel-Mori Theorem]
@@ -316,11 +318,11 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	p_j : \mathcal{X}_{ij} \to \mathcal{X}_j
 	\]
 	are also representable and étale. Moreover, for every geometric point
-	$\bar{x} \to \mathcal{X}_{ij}$, the induced map on stabilizer groups
+	$x:\Specof{\bar{k}}\to \mathcal{X}_{ij}$, the induced map on stabilizer groups
 	\[
-	\Aut_{\mathcal{X}_{ij}}(\bar{x})
+	\Aut_{\mathcal{X}_{ij}}(x)
 	\xrightarrow{\;\sim\;}
-	\Aut_{\mathcal{X}_i}(p_i(\bar{x}))
+	\Aut_{\mathcal{X}_i}(p_i(x))
 	\]
 	is an isomorphism, since $f_i$ induces isomorphisms on all geometric
 	stabilizer groups by hypothesis, and $\mathcal{X}_{ij} \to \mathcal{X}_i$
@@ -340,19 +342,35 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	\]
 	and the morphisms $\pi_i \circ p_i : \mathcal{X}_{ij} \to X_i$ and
 	$\pi_j \circ p_j : \mathcal{X}_{ij} \to X_j$ both factor uniquely through
-	$\pi_{ij}$, by the universal property of the coarse moduli space of $\mathcal{X}_{ij}$:
+	$\pi_{ij}$, by the universal property of the coarse moduli space of $\mathcal{X}_{ij}$. Denote
 	\[
 	\phi_{ij} : X_{ij} \to X_i,
 	\qquad
-	\phi_{ji} : X_{ij} \to X_j.
+	\phi_{ji} : X_{ij} \to X_j,
 	\]
-	We claim that $\phi_{ij}$ and $\phi_{ji}$ are both \etale. Indeed,
-	$\pi_i \circ p_i$ is étale (as a composition of étale morphisms), and
-	$\pi_i$ is the coarse moduli space of $\mathcal{X}_i = [U_i/G_i]$. By
-	Lemma~\ref{lem:descending-etale-to-quotient}, any \etale\ morphism from
-	$\mathcal{X}_{ij}$ to the algebraic space $X_i$ that is an isomorphism
-	on geometric stabilizers descends to an étale morphism $X_{ij} \to X_i$.
-	The same argument applies to $\phi_{ji}$.
+	such that 
+	\[
+	\pi_i\circ p_i = \phi_{ij} \circ \pi_{ij}
+	\qquad
+	\pi_j \circ p_j = \phi_{ji} \circ \pi_{ij}.
+	\]
+	We claim that $\phi_{ij}$ and $\phi_{ji}$ are both \etale. 
+	
+	By construction, $p_i$ is \etale\ with isomorphism on stabilizers.
+	We claim that $\phi_{ij}$ and $\phi_{ji}$ are both \etale.
+	
+	Since $f_j : \mathcal{X}_j \hookrightarrow \mathcal{X}$ is \etale, its base change
+	\[
+	p_i : \mathcal{X}_{ij} = \mathcal{X}_i \times_{\mathcal{X}} \mathcal{X}_j
+	\longrightarrow \mathcal{X}_i
+	\]
+	is also \etale.
+	Locally, $\mathcal{X}_i \cong [U_i / G_i]$ and $\mathcal{X}_{ij} \cong [U_{ij}/G_i]$
+	for a $G_i$-stable open $U_{ij} \subset U_i$. The map $p_i$ corresponds to the
+	$G_i$-equivariant open immersion $U_{ij} \hookrightarrow U_i$, and $\phi_{ij}$
+	is the induced map $U_{ij}/G_i \to U_i/G_i$ on quotients. Since localizing
+	at $G_i$-invariant elements is compatible with \etale\ base change, the map
+	$\phi_{ij} : X_{ij} \to X_i$ is \etale. Analogously $\phi_{ji} : X_{ij} \to X_j$ is \etale.
 	
 	\medskip
 	\textbf{Forming the global algebraic space via the étale equivalence relation.}
