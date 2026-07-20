@@ -43,7 +43,7 @@ Conceptually, this follows the general Yoneda philosophy: A space (or more gener
 	Let $\Sch$ denote the category of schemes and let
 	\[
 	\tau \in 
-	\{\mathrm{Zariski}, \text{\etale}, \mathrm{smooth}, \mathrm{fppf}, \mathrm{fpqc}\}.
+	\{\mathrm{Zariski}, \text{\etale}, \mathrm{smooth}, \mathrm{fppf}\}.
 	\]
 	We write $\Sch_\tau$ for the big $\tau$-site $(\Sch, J_\tau)$, where a family
 	$\{U_i \to X\}_{i\in I}$ belongs to $J_\tau(X)$ if the following hold:
@@ -54,35 +54,34 @@ Conceptually, this follows the general Yoneda philosophy: A space (or more gener
 			\item[\etale:] $U_i \to X$ is \etale;
 			\item[smooth:] $U_i \to X$ is smooth;
 			\item[fppf:] $U_i \to X$ is flat and locally of finite presentation;
-			\item[fpqc:] $U_i \to X$ is flat.
 		\end{itemize}
 		\item The family is jointly surjective, i.e.
 		\[
 		\coprod_{i\in I} U_i \longrightarrow X
 		\]
 		is surjective. For $\tau = \mathrm{Zariski}$ this is equivalent to $\bigcup_i U_i = X$.
-		\item If $\tau = \mathrm{fpqc}$, the family additionally satisfies the following
-		quasi-compactness condition: for every affine open $V \subseteq X$ there exist
-		finitely many indices $i_1,\dots,i_n \in I$ and affine opens $V_{i_k}\subseteq U_{i_k}$
-		such that
-		\[
-		V = \bigcup_{k=1}^n f_{i_k}(V_{i_k}).
-		\]
 	\end{enumerate}
 \end{definition}
 
+\begin{remark}
+	The fpqc topology will be used in this thesis only as a descent topology, not as a Grothendieck site in the same sense as the Zariski, \etale, smooth or fppf topologies. For a nonzero ring $R$, there is no set of fpqc coverings of $\Specof{R}$ such that every fpqc covering is refined by one of them, see \cite[][Tag 0BBK]{stacks-project}. Thus the fpqc topology is set theoretically too large to fit the usual framework of big sites used elsewhere in this chapter.
+	Moreover, the Stacks Project explicitly notes that, if one ignores these set theoretic issues, one encounters presheaves that do not admit an fpqc sheafification, referring to Waterhouse’s 1975 example. For this reason, we do not introduce a big fpqc site, do not use general fpqc sheafification and we formulate fpqc statements only in terms of the sheaf property for coverings or in terms of fpqc descent data, see \cite[][Tag 022A]{stacks-project}.
+\end{remark}
+
 \begin{proposition}[Hierarchy of Grothendieck topologies]\label{prop:gross-topology-chain}
+	(\cite[][Tag 022I]{stacks-project})
 	The standard topologies used in this thesis satisfy
 	\[
-	\mathrm{Zariski} \subset \text{\etale} \subset \mathrm{smooth} \subset \mathrm{fppf} \subset \mathrm{fpqc}.
+	\mathrm{Zariski} \subset \text{\etale} \subset \mathrm{smooth} \subset \mathrm{fppf}.
 	\]
 \end{proposition}
+
 
 
 \begin{proposition}[Affine refinement of standard covering families]
 	\label{prop:affine-refinement-standard-topologies}
 	Let $X$ be a scheme and let $\tau \in 
-	\{\mathrm{Zariski}, \text{\etale}, \mathrm{smooth}, \mathrm{fppf}, \mathrm{fpqc}\}$.
+	\{\mathrm{Zariski}, \text{\etale}, \mathrm{smooth}, \mathrm{fppf}\}$.
 	Then every $\tau$-covering family
 	\[
 	\mathcal U = (U_i \to X)_{i\in I}
@@ -94,6 +93,10 @@ Conceptually, this follows the general Yoneda philosophy: A space (or more gener
 	such that each $V_j$ is affine.
 	If $X$ is quasi-compact, the refinement may be chosen finite.
 \end{proposition}
+
+\begin{remark}
+	This allows us to restrict to finite affine covers. Such reductions are standard in algebraic geometry, so many statements can then be checked on affines.
+\end{remark}
 
 \section{Sheaves on a site}
 
@@ -205,7 +208,7 @@ Conceptually, this follows the general Yoneda philosophy: A space (or more gener
 \end{lemma}
 
 \begin{proof}
-	Since $\Specof{R}$ is quasi compact, by \ref{prop:affine-etale-refinement} we can refine the cover to a finite cover. So without loss of generality we assume $I$ to be finite.
+	Since $\Specof{R}$ is quasi compact, by \ref{prop:affine-refinement-standard-topologies} we can refine the cover to a finite cover. So without loss of generality we assume $I$ to be finite.
 	
 	
 	Assume we are given $\varphi_i:A\to R_i$, such that 
@@ -298,9 +301,6 @@ Conceptually, this follows the general Yoneda philosophy: A space (or more gener
 	
 \end{proof}
 
-This allows us to restrict to finite affine \etale\ covers. Such reductions are standard in
-algebraic geometry: Many statements can then be checked on affines and translated into
-
 
 
 
@@ -317,7 +317,7 @@ algebraic geometry: Many statements can then be checked on affines and translate
 
 \begin{proof}
 	
-	We first assume $X$ to be an affine scheme. Let $U$ be a scheme and $\mathcal{U} = (U_i\to U)_{i\in I}$ be an \etale\ covering. By \ref{prop:affine-etale-refinement} without loss of generality we may assume the $U_i$ to be affine.
+	We first assume $X$ to be an affine scheme. Let $U$ be a scheme and $\mathcal{U} = (U_i\to U)_{i\in I}$ be an \etale\ covering. By \ref{prop:affine-refinement-standard-topologies} without loss of generality we may assume the $U_i$ to be affine.
 	We need to show, that the following diagram is exact:
 	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJoX1goVSkiXSxbMSwwLCJcXHByb2RfaSBoX1goVV9pKSJdLFsyLDAsIlxccHJvZF97aSxqfSBoX1goVV9pXFx0aW1lc19VIFVfaikiXSxbMCwxXSxbMSwyLCIiLDAseyJvZmZzZXQiOjJ9XSxbMSwyLCIiLDAseyJvZmZzZXQiOi0yfV1d
 	\[\begin{tikzcd}
@@ -356,8 +356,8 @@ algebraic geometry: Many statements can then be checked on affines and translate
 		\arrow[from=2-1, to=2-2]
 		\arrow[phantom, from=1-1, to=2-2, "\lrcorner", pos=0.15]
 	\end{tikzcd}\]
-	The morphisms $V_\alpha\times_UU_i \to V_\alpha$ are \etale\, since \etale morphisms are stable under pullbacks. The morphism $V_\alpha\hookrightarrow U$ is the inclusion of the affine open $V_\alpha$.
-	Write $V_{i, \alpha} := V_\alpha\times_UU_i$. Now by proposition \ref{prop:affine-etale-refinement} we can refine to an affine \etale\ cover
+	The morphisms $V_\alpha\times_UU_i \to V_\alpha$ are \etale\, since \etale\ morphisms are stable under pullbacks. The morphism $V_\alpha\hookrightarrow U$ is the inclusion of the affine open $V_\alpha$.
+	Write $V_{i, \alpha} := V_\alpha\times_UU_i$. Now by proposition \ref{prop:affine-refinement-standard-topologies} we can refine to an affine \etale\ cover
 	\[
 	\{W_{i, \alpha, \lambda} \hookrightarrow V_{i, \alpha} \to V_\alpha\}_{i, \lambda}.
 	\]
@@ -376,7 +376,6 @@ algebraic geometry: Many statements can then be checked on affines and translate
 	\end{equation}
 	
 	We write $f_{i, \alpha, \lambda}: W_{i, \alpha, \lambda}\hookrightarrow V_{i, \alpha}  \hookrightarrow U_i \xrightarrow{f_i} X$ for the restriction of $f_i$ to $W_{i, \alpha, \lambda}$. Define $W := W_{i, \alpha, \lambda}\times_{V_\alpha} W_{j, \alpha, \mu}$.
-	
 	We have canonical morphisms 
 	\begin{align*}
 		\varphi: W \xrightarrow{\pi_1} W_{i,\alpha,\lambda} \hookrightarrow V_{i,\alpha} = V_\alpha\times_UU_i \xrightarrow{\pi_{U_i}} U_i \\
@@ -435,7 +434,7 @@ algebraic geometry: Many statements can then be checked on affines and translate
 	Next we prove, that the $g_\alpha$ agree on overlaps $V_{\alpha\beta} := V_\alpha \cap V_\beta \cong V_\alpha\times_U V_\beta$ and glue Zariski locally.
 	Let $\{T_\eta\}_{\eta}$ be an affine open cover of $V_{\alpha\beta}$. 
 	
-	Again by proposition \ref{prop:etale-stable-under-pullback} the following pullback is \etale:
+	Again since \etale\ morphisms are stable under pullbacks, the following pullback is \etale:
 	% https://q.uiver.app/#q=WzAsNixbMiwwLCJVX2kiXSxbMSwxLCJWX3tcXGFscGhhXFxiZXRhfSJdLFsyLDEsIlUiXSxbMCwxLCJUX3tcXGV0YX0iXSxbMCwwLCJUX3tpLCBcXGV0YX0iXSxbMSwwLCJWX3tpLCBcXGFscGhhXFxiZXRhfSJdLFsxLDIsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsMl0sWzMsMSwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbNCwzXSxbNCwyLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XSxbNSwwXSxbNSwxXSxbNSwyLCIiLDAseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XSxbNCw1XV0=
 	\[\begin{tikzcd}
 		{T_{i, \eta}} & {V_{i, \alpha\beta}} & {U_i} \\
@@ -451,7 +450,7 @@ algebraic geometry: Many statements can then be checked on affines and translate
 		\arrow[hook, from=2-2, to=2-3]
 	\end{tikzcd}\]
 	
-	Again by proposition \ref{prop:affine-etale-refinement} we refine ${T_{i, \eta}}$ by an affine cover $\{T_{i, \eta, \lambda}\hookrightarrow T_{i, \eta} \to T_\eta\}_{i, \lambda}$. For each $i, \lambda$ we can restrict $f_i$ to $f_{i, \eta, \lambda}: T_{i, \eta, \lambda} \hookrightarrow T_{i, \eta} \to U_i \xrightarrow{f_i} X$. By construction $g_\alpha$ restrict uniquely to 
+	Again by proposition \ref{prop:affine-refinement-standard-topologies} we refine ${T_{i, \eta}}$ by an affine cover $\{T_{i, \eta, \lambda}\hookrightarrow T_{i, \eta} \to T_\eta\}_{i, \lambda}$. For each $i, \lambda$ we can restrict $f_i$ to $f_{i, \eta, \lambda}: T_{i, \eta, \lambda} \hookrightarrow T_{i, \eta} \to U_i \xrightarrow{f_i} X$. By construction $g_\alpha$ restrict uniquely to 
 	
 	
 	
