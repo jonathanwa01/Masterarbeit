@@ -33,15 +33,6 @@ Conceptually, this follows the general Yoneda philosophy: A space (or more gener
 	For a small category $\CatC$ and a Grothendieck topology $J$ we will call the pair $(\CatC, J)$  a site on $\CatC$.
 \end{definition}
 
-\begin{definition}[Matching family]
-	(\cite[][p.~121]{MacLaneMoerdijk1992})
-	Let $(\CatC, J)$ be a site, $P:\CatCop\to \Set$ a presheaf on $\CatC$ and $S\in J(C)$ a covering sieve. A matching familiy for $S$ of elements of $P$ is natural transformation $\eta:S\Rightarrow P$.
-	
-	This assigns to each $f:D\to C\in S(D)$ an element $x_f\in P(D)$, such that $P(g)(x_f) = x_{f\circ g}$ for all $g:E\to D\in \CatC$. Notice that $f\circ g\in S(E)$, since $S$ is a sieve.
-	
-	An amalgation of the matching family $\eta$ is an element $x\in P(C)$, such that $P(f)(x) = x_f$ for all $f\in S$
-\end{definition}
-
 \begin{definition}[Sheaf on a cite]\label{def:sheaf-on-cite}
 	(\cite[][Tag 00VM]{stacks-project})
 	Let $\CatC$ be a site which is closed under pullbacks. We call a presheaf $F$ on $\CatC$ a sheaf, if for every covering $\{U_i\to X\}_{i}$ the following diagramm is an equalizer:
@@ -84,7 +75,7 @@ Conceptually, this follows the general Yoneda philosophy: A space (or more gener
 	\cong
 	\coprod_{i,j} (U_i \times_X U_j),
 	\]
-	so Lemma~\ref{lem:sheaf-preserves-coproducts} gives canonical isomorphisms
+	so we have canonical isomorphisms
 	\[
 	F(U) \cong \prod_i F(U_i),
 	\qquad
