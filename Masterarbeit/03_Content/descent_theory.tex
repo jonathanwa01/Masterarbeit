@@ -165,7 +165,7 @@ which underlies the Cech nerve.
 \end{example}
 
 \begin{definition}[Descent datum]
-	Let $\CatC$ be a category with pullbacks, $F: \CatC^\op\to \Cat$ a pseudo functor and $U \to X$ a morphism. A descent datum for $F$ along $U \to X$ consists of
+	Let $\CatC$ be a category with pullbacks, $F: \CatC^\op\to \Cat$ a pseudo functor and $U \to X$ a morphism. A descent datum for $F$ along $p:U \to X$ consists of
 	\begin{enumerate}
 		\item an object $x\in F(U)$,
 		\item an isomorphism $\alpha:d^0(x) \xrightarrow{\sim} d^1(x)$ in $F(U\times_X U))$ between two pullbacks of $x$ to
@@ -285,26 +285,31 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 \begin{theorem}[Faithfully flat descent for modules]
 	\label{thm:faithfully-flat-descent-modules}
 	(\cite[Tag 023N]{stacks-project})
-	Let \(R\to S\) be a faithfully flat ring homomorphism, and consider the
-	pseudofunctor
+	Let \(R\to S\) be a faithfully flat ring homomorphism, and 
 	\[
-	\Mod_{(-)}:(\Alg_R)^{op}\to\Cat,
-	\qquad
-	A\longmapsto \Mod_A,
+		f:U:=\Spec(S)\longrightarrow X:=\Spec(R)
 	\]
-	which sends an $R$-algebra $A$ to the category of $A$-modules $\Mod_A$ and a morphism of $R$-algebras \(A\to B\) to the extension of
+	be the induced morphism of affine schemes. $U_\bullet$ denote the Čech nerve of $f$, so that
+	\[
+	U_n= \underbrace{U\times_X\cdots\times_X U}_{n+1\text{ factors}} \cong \Spec\bigl(S^{\otimes_R(n+1)}\bigr)
+	\]
+	Consider the pseudofunctor
+	\[
+		\mathcal M:\Aff^{\op}\longrightarrow\Cat, \qquad Y\longmapsto\Mod(Y),
+	\]
+	where $\Mod(Y)=\Mod_A$ for $Y=\Spec(A)$ and morphisms are sent to pullback functors, which are given by sending a morphism $g^*:\Spec(B)\to \Spec(A)$ to the extension of
 	scalars functor
 	\[
-	B\otimes_A -:\Mod_A\to\Mod_B.
+	B\otimes_A -:\Mod_A\to\Mod_B,
 	\]
-	We define
+	induced the morphism \(g:A\to B\).
+	Then the canonical functor
 	\[
-	\Desc(S/R)
-	:=
-	\Desc_{R\to S}(\Mod_{(-)}).
+		f^*:\Mod(X)\longrightarrow\Desc_f(\mathcal M)
 	\]
+	is an equivalence of categories.
 	
-	An object of \(\Desc(S/R)\) is an \(S\)-module \(N\), together
+	An object of \(\Desc_f(\mathcal M)\) is an \(S\)-module \(N\), together
 	with an isomorphism
 	\[
 	\alpha:d^0N\xrightarrow{\sim}d^1N
@@ -632,7 +637,7 @@ algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 			\mathcal{F} &\mapsto (f^*\mathcal{F}, \alpha_{\mathcal{F}}),
 	\end{align*}
 	where $f^*\mathcal{F}$ is the pullback of the quasi coherent sheaf $\mathcal{F}$ along $f$ and $\alpha_{\mathcal{F}}:\pi_1^*(f^*\mathcal{F}) \xrightarrow{\sim}
-	\pi_2^*(f^*\mathcal G)$ is the canocical descent datum induced by the projections $\pi_i: U\times_X U\to U$.
+	\pi_2^*(f^*\mathcal F)$ is the canocical descent datum induced by the projections $\pi_i: U\times_X U\to U$.
 \end{theorem}
 
 \begin{proof}
