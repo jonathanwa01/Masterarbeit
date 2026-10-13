@@ -40,6 +40,39 @@ We have seen in ... that the representable presheaf of a scheme is indeeed a she
 	The diagonal $\Delta_X: X\to X\times X$ of an algebraic space $X$ is represantable by schemes.
 \end{theorem}
 
+\begin{lemma}\label{lem:geometric-points-etale-cover}
+	(\cite[][Tag 05VN]{stacks-project})
+	Let $X$ be an algebraic space, and let
+	$\{f_i : X_i \to X\}_{i\in I}$ be an étale covering by algebraic
+	spaces. Let $k$ be an algebraically closed field and
+	$x : \Spec(k) \to X$ a geometric point. Then there exist an
+	index $i\in I$ and a morphism
+	$\tilde{x} : \Spec(k) \to X_i$ such that
+	\[
+	f_i \circ \tilde{x} = x.
+	\]
+\end{lemma}
+
+\begin{proof}
+	Since $\{f_i : X_i \to X\}_{i\in I}$ is an étale covering,
+	the base-changed family
+	\[
+	\left\{
+	X_i \times_X \Spec(k)
+	\longrightarrow \Spec(k)
+	\right\}_{i\in I}
+	\]
+	is an étale covering of $\Spec(k)$, i.e. a disjoint union of finite separable field extensions of $k$. In particular, there exists
+	an index $j\in I$ such that	$X_j \times_X \Spec(k)$ is nonempty. But since $k$ is algebraically closed, every finite separable extionsion is trivial, so $X_j\times_X \Specof{k} \cong \Specof{k}$.
+	This yields a point $y$ in $ X_i\times_X\Spec(k)$ given by
+	\[
+	\Spec(k)\longrightarrow X_i\times_X\Spec(k).
+	\]
+	Composing with the projection to $X_i$ yields a morphism
+	$\tilde{x}:\Spec(k)\to X_i$ satisfying
+	$f_i\circ\tilde{x}=x$.
+\end{proof}
+
 \section{\Etale\ Equivalence Relation}
 
 \begin{definition}[\Etale\ equivalence relation]
