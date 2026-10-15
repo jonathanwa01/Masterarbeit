@@ -61,7 +61,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	Let $Y$ be an algebraic space and $f : \mathcal{X} \to Y$ a morphism.
 	For each $i$, consider the composite
 	\[
-	f_i: \mathcal{X}_i \longrightarrow \mathcal{X}
+	f_i: \mathcal{X}_i \xrightarrow{\;p_i\;} \mathcal{X}
 	\xrightarrow{\;f\;} Y.
 	\]
 	Since $\pi_i$ is a coarse moduli space, there exists a unique morphism
@@ -69,7 +69,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	% https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXG1hdGhjYWx7WH1cXHRpbWVzX1ggWF9pIl0sWzEsMSwiWCJdLFsxLDAsIlxcbWF0aGNhbHtYfSJdLFswLDEsIlhfaSJdLFsyLDAsIlkiXSxbMCwyLCJwX2kiXSxbMCwzLCJcXHBpX2kiLDJdLFszLDFdLFsyLDFdLFsyLDQsImYiXSxbMyw0LCJnX2kiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
 	\begin{equation}\label{diag:extension-on-etale-cover-of-X}
 		\begin{tikzcd}
-			{\mathcal{X}\times_X X_i} & {\mathcal{X}} & Y \\
+			{\mathcal{X}_i} & {\mathcal{X}} & Y \\
 			{X_i} & X
 			\arrow["{p_i}", from=1-1, to=1-2]
 			\arrow["{\pi_i}"', from=1-1, to=2-1]
@@ -129,7 +129,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 		f\mid_{\mathcal{X}_{ij}} = (g_i \circ q_i) \circ \pi_{ij},
 	\]
 	as visualized in the following commutative diagram.
-	% https://q.uiver.app/#q=WzAsNyxbMCwwLCJcXG1hdGhjYWx7WH1fe2lqfSJdLFswLDEsIlhfe2lqfSJdLFsxLDAsIlxcbWF0aGNhbHtYfV9qIl0sWzEsMSwiWF9qIl0sWzIsMSwiWCJdLFsyLDAsIlxcbWF0aGNhbHtYfSJdLFszLDAsIlkiXSxbNSw0LCJcXHBpIl0sWzMsNCwiZl9qIiwyXSxbMiw1LCJwX2oiXSxbMiwzLCJcXHBpX2oiLDJdLFswLDEsIlxccGlfe2lqfSIsMl0sWzAsMl0sWzEsMywicV9qIiwyXSxbMiw0LCIiLDIseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XSxbNSw2LCJmIl0sWzMsNiwiZ19pIiwxLHsibGFiZWxfcG9zaXRpb24iOjMwfV1d
+	% https://q.uiver.app/#q=WzAsNyxbMCwwLCJcXG1hdGhjYWx7WH1fe2lqfSJdLFswLDEsIlhfe2lqfSJdLFsxLDAsIlxcbWF0aGNhbHtYfV9qIl0sWzEsMSwiWF9qIl0sWzIsMSwiWCJdLFsyLDAsIlxcbWF0aGNhbHtYfSJdLFszLDAsIlkiXSxbNSw0LCJcXHBpIl0sWzMsNCwiZl9qIiwyXSxbMiw1LCJwX2oiXSxbMiwzLCJcXHBpX2oiLDJdLFswLDEsIlxccGlfe2lqfSIsMl0sWzAsMl0sWzEsMywicV9qIiwyXSxbMiw0LCIiLDIseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XSxbNSw2LCJmIl0sWzMsNiwiZ19qIiwxLHsibGFiZWxfcG9zaXRpb24iOjMwfV1d
 	\[\begin{tikzcd}
 		{\mathcal{X}_{ij}} & {\mathcal{X}_j} & {\mathcal{X}} & Y \\
 		{X_{ij}} & {X_j} & X
@@ -141,7 +141,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 		\arrow["f", from=1-3, to=1-4]
 		\arrow["\pi", from=1-3, to=2-3]
 		\arrow["{q_j}"', from=2-1, to=2-2]
-		\arrow["{g_i}"{description, pos=0.3}, from=2-2, to=1-4]
+		\arrow["{g_j}"{description, pos=0.3}, from=2-2, to=1-4]
 		\arrow["{f_j}"', from=2-2, to=2-3]
 	\end{tikzcd}\]
 	
@@ -151,8 +151,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	\[
 	\mathcal{X}_{ij} \longrightarrow Y
 	\]
-	through the coarse moduli space $\pi_{ij}$ of $\mathcal{X}_{ij}$. By uniqueness of in the universial property of $\pi_{ij}$, we get 
-	we conclude
+	through the coarse moduli space $\pi_{ij}$ of $\mathcal{X}_{ij}$. By uniqueness of in the universial property of $\pi_{ij}$, we get
 	\[
 	g_i|_{X_{ij}} = g_j|_{X_{ij}}.
 	\]
@@ -167,7 +166,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	along each $f_i$, and morphisms to algebraic spaces can be checked étale
 	locally. Uniqueness of $g$ follows from the sheaf property of $Y$: any
 	two morphisms $X \to Y$ agreeing on the cover $\{X_i \to X\}$ must
-	coincide. Hence Axiom~(1) holds.
+	coincide.
 \end{proof}
 
 
@@ -240,7 +239,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	\]
 	We now shrink $\mathcal{W}$ to a smaller \etale\ neighbourhood, such that $f$ induces isomorphisms on all stabilizer groups.
 	
-	Let $\mathcal{U}\subset \mathcal{W}$ be the locus consisting of points $z\in |\mathcal{W}|$, such that $f$ induces isomorphisms $G_z \xrightarrow{\simeq} G_x$.
+	Let $\mathcal{U}\subset \mathcal{W}$ be the locus consisting of points $z\in |\mathcal{W}|$, such that $f$ induces isomorphisms $G_z \xrightarrow{\simeq} G_{f(z)}$.
 	
 	We claim, that $\mathcal{U}$ is open. 
 	
@@ -261,33 +260,65 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 		\end{tikzcd}
 	\end{equation}
 	
-	Now by lemma \ref{lem:local-structure-theorem-dm-stacks} the morphism $\mathcal{W} \to \mathcal{X}$ is affine \etale, in particular representable and separated, since $\mathcal{X}$ is separated. Hence, the diagonal $\mathcal{W} \to \mathcal{W}\times_\mathcal{X}\mathcal{W}$ is an open and closed immersion, and by \ref{diag:inertia-pullback-open-substack}, so is $\Phi$. 
+	Now by lemma \ref{lem:local-structure-theorem-dm-stacks} the morphism $\mathcal{W} \to \mathcal{X}$ is affine \etale, in particular representable and separated, since $\mathcal{X}$ is separated. 
+	Consider the diagonal $\Delta_{\mathcal{W}/\mathcal{X}}:\mathcal{W} \to \mathcal{W}\times_\mathcal{X}\mathcal{W}$.
+	Since $\mathcal{W}\to \mathcal{X}$ is separated, $\Delta_{\mathcal{W}/\mathcal{X}}$ is closed. Since $\mathcal{W}\to \mathcal{X}$ is representable and \etale, base change along a scheme $T$ induces an \etale\ morphism of algebraic spaces $T\times_{\mathcal{X}} \mathcal{W} \to T$, which is unramified. Hence, by \cite[][Tag 05W1]{stacks-project}, $\Delta_{\mathcal{W}/\mathcal{X}}$ is an open immersion. 
+	Hence, $\Delta_{\mathcal{W}/\mathcal{X}}$ is a closed and open immersion and by diagram \ref{diag:inertia-pullback-open-substack}, so is $\Phi$.
 	
+	Let
+	$$
+	Z:=
+	\left|\mathcal{I}_{\mathcal{X}}\times_{\mathcal{X}}\mathcal{W}\right|
+	\setminus
+	\left|\Phi(\mathcal{I}_{\mathcal{W}})\right|.
+	$$
 	
+	Since \(\Phi\) is an open and closed immersion, \(Z\) is a closed subset of \(\left|\mathcal{I}_{\mathcal{X}}\times_{\mathcal{X}}\mathcal{W}\right|\).
 	
-	In particular, for every geometric point $z:\Spec{\bar{k}} \to \mathcal{W}$, the induced map on stabilizer groups
+	For every geometric point \(z:\operatorname{Spec}\bar{k}\to\mathcal{W}\), the geometric fiber of
+	
+	$$
+	\operatorname{pr}_2:
+	\mathcal{I}_{\mathcal{X}}\times_{\mathcal{X}}\mathcal{W}
+	\longrightarrow\mathcal{W}
+	$$
+	
+	over \(z\) identifies with \(\operatorname{Aut}_{\mathcal{X}}(f(z))\), since 
+	
 	\[
-	\Phi_{z} \colon \mathrm{Aut}_W(z) \longrightarrow \mathrm{Aut}_X(z)
+		\Spec{\bar{k}}\times_\mathcal{W}(\mathcal{I}_\mathcal{X} \times_\mathcal{X} \mathcal{W}) \cong \Spec{\bar{k}} \times_\mathcal{X}\mathcal{I}_\mathcal{X} \cong \Aut_\mathcal{X}(f(x)),
 	\]
-	is injective, and its image is an open and closed subgroup of $\mathrm{Aut}_X(z)$.
-	\[
-	\operatorname{pr}_2:\mathcal{I}_\mathcal{X} \times_\mathcal{X} \mathcal{W}\to \mathcal{W}
-	\]
-	is finite as a pullback of the finite morphism $\mathcal{I}_\mathcal{X} \to \mathcal{X}$. In particular, $\operatorname{pr}_2$ is closed. 
+	where $\Spec{\bar{k}} \to \mathcal{X}$ is given by the composite $\Spec{\bar{k}}\to \mathcal{W} \xrightarrow{f} \mathcal{X}$.
 	
-	Consider the closed subset 
-	\[
-	Z:= |\mathcal{I}_\mathcal{X}\times_\mathcal{X}\mathcal{W}| \setminus |\mathcal{I}_\mathcal{W}|.
-	\]
 	
-	This is the locus of points of the inertia of $\mathcal{X}$ over $\mathcal{W}$ that do not come from inertia of $\mathcal{W}$. Equivalently, for a geometric point $z:\Spec{\bar{k}} \to \mathcal{W}$, the fiber of $z$ over $Z$ is nonempty if and only if the map
-	\[
-	\Phi_{z} \colon \mathrm{Aut}_\mathcal{W}(z) \to \mathrm{Aut}_\mathcal{W}(z)
-	\]
-	fails to be surjective. Since $\Phi_{z}$ is injective and a closed and open immersion, the failure of $\Phi_{z}$ being an isomorphism is equivalent to $\Phi_{z}$ failing to be surjective.
-	Thus the image $\operatorname{pr}_2(Z) \subset |\mathcal{W}|$ is exactly the locus of points $z \in |W|$ at which $\Phi_z$ fails to be surjective and hence, $|\mathcal{W}|\setminus \operatorname{pr}_2(Z)$ is precisely the locus, where $\Phi_z$ is an isomorphism, which is identified with $\mathcal{U}$.
+	Under this identification, the image of \(\Phi\) in the fiber is precisely the image of the induced homomorphism
 	
-	Since $\operatorname{pr}_2$ is closed, $\operatorname{pr}_2(Z) \subset |\mathcal{W}|$ is closed and therefore, $\mathcal{U}$, as being identified with $\operatorname{pr}_2(Z) \subset |\mathcal{W}|$ in $|\mathcal{W}|$, is open.
+	$$
+	\Phi_z:
+	\operatorname{Aut}_{\mathcal{W}}(z)
+	\longrightarrow
+	\operatorname{Aut}_{\mathcal{X}}(f(z)).
+	$$
+	
+	Consequently,
+	
+	$$
+	Z\times_{\mathcal{W}}\operatorname{Spec}\bar{k}
+	\neq\varnothing
+	\quad\Longleftrightarrow\quad
+	\Phi_z\text{ is not surjective}.
+	$$
+	
+	Since \(\Phi_z\) is injective, it is an isomorphism if and only if it is surjective. Hence
+	
+	$$
+	|\mathcal{U}|
+	=
+	|\mathcal{W}|\setminus\operatorname{pr}_2(Z).
+	$$
+	
+	Finally, the morphism \(\operatorname{pr}_2\) is finite, being the base change of the finite morphism \(\mathcal{I}_{\mathcal{X}}\to\mathcal{X}\). In particular, it is a closed map. Since \(Z\) is closed, \(\operatorname{pr}_2(Z)\) is closed in \(|\mathcal{W}|\). Therefore, \(|\mathcal{U}|\) is open in \(|\mathcal{W}|\), as desired.
+	
 	
 	\end{proof}
 	
@@ -343,7 +374,8 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 		g: \mathcal{X}' = ([\Specof{A'} /G_x] , w) \to (\mathcal{X}, x)
 	\]
 	which induces isomorphism on all geometric stabilizer groups, since $\mathcal{X}' \subset \mathcal{U}$.
-	This yields a cover $\{\mathcal{X}_i \xhookrightarrow{f_i} \mathcal{X}\}_i$ by open substacks of the form $[U_i/G_x]$ with affine $U_i = \Specof{A_i}$, such that $f_i$ induces isomorphism on all geometric stabilizer groups.
+	
+	Now doing this for all points yields a family $\{\mathcal{X}_i \xrightarrow{f_i} \mathcal{X}\}_i$, jointly surjective morphisms from stacks $\mathcal{X}_i$ of the form $[U_i/G_x]$ with affine $U_i = \Specof{A_i}$, such that $f_i$ is representable, \etale\ and induces isomorphism on all geometric stabilizer groups.
 	
 	
 	\medskip
