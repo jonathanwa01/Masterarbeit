@@ -55,7 +55,7 @@ Throughout, $\mathcal{O}:\Sch^{\op}\to\Ring$ denotes the presheaf of rings $T\ma
 For a general target, the only additional input is that open subsets descend along fpqc coverings.
 
 \begin{lemma}[Descent of open subsets]\label{lem:descent-open-subsets}
-	(\cite[][Tag 03N0]{stacks-project})
+	(\cite[][Tag pr]{stacks-project})
 	Let $p:U\to T$ be an fpqc covering, and let $W'\subset U$ be an open subset with $\mathrm{pr}_0^{-1}(W')=\mathrm{pr}_1^{-1}(W')$ in $U\times_TU$. Then there is a unique open subset $W\subset T$ with $p^{-1}(W)=W'$, namely $W=p(W')$.
 \end{lemma}
 
@@ -65,80 +65,43 @@ For a general target, the only additional input is that open subsets descend alo
 \end{theorem}
 
 \begin{proof}
-	Since morphisms of schemes glue uniquely along open coverings,
-	the presheaf $h_X$ is a sheaf for the Zariski topology.
+	Morphisms of schemes glue uniquely along open coverings.
 	By Corollary~\ref{cor:sheaf-via-cech}, it therefore suffices
-	to prove the sheaf condition for every single fpqc covering
-	$p:U\to T$. Let $\mathrm{pr}_0,\mathrm{pr}_1:U\times_T U\rightrightarrows U$
-	be the projections. We need to show that
+	to prove that, for every fpqc covering $p:U\to T$, the diagram
 	\[
-	\Hom(T,X)
-	\xrightarrow{\ p^*\ }
-	\Hom(U,X)
-	\ \substack{
-		\xrightarrow{\ \mathrm{pr}_0^*\ }\\[-0.3em]
-		\xrightarrow[\ \mathrm{pr}_1^*\ ]{}
-	}\
-	\Hom(U\times_T U,X)
+	\Hom(T,X)\longrightarrow \Hom(U,X)
+	\rightrightarrows \Hom(U\times_T U,X)
 	\]
-	is an equalizer diagram in the category of sets.
-	Equivalently, we must show that the map
-	\[
-	\Phi_p:\Hom(T,X)\longrightarrow
-	\bigl\{
-	f\in\Hom(U,X)
-	\mid
-	f\circ\mathrm{pr}_0=f\circ\mathrm{pr}_1
-	\bigr\},
-	\qquad
-	g\longmapsto g\circ p,
-	\]
-	is bijective.
-	This map is well-defined because
-	$p\circ\mathrm{pr}_0=p\circ\mathrm{pr}_1$.
+	is an equalizer. Write
+	$\mathrm{pr}_0,\mathrm{pr}_1:U\times_T U\rightrightarrows U$
+	for the projections, and choose an affine open covering
+	$X=\bigcup_{i\in I}X_i$.
 	
-	Choose an affine open covering $X=\bigcup_{i\in I}X_i$.
-	For an open subscheme $V\subseteq T$, write
-	\[
-	U_V:=U\times_T V=p^{-1}(V),
-	\qquad
-	p_V:U_V\longrightarrow V.
-	\]
-	The morphism $p_V$ is again an fpqc covering, by stability
-	under base change.
-	
-	\emph{Injectivity.}
-	Suppose that $g,g':T\to X$ satisfy $g\circ p=g'\circ p$.
-	For every $i\in I$, we have
+	\emph{Uniqueness.}
+	Let $g,g':T\to X$ satisfy $g\circ p=g'\circ p$.
+	Since $p$ is surjective, the equality
 	\[
 	p^{-1}\bigl(g^{-1}(X_i)\bigr)
 	=
-	(g\circ p)^{-1}(X_i)
-	=
-	(g'\circ p)^{-1}(X_i)
-	=
-	p^{-1}\bigl(g'^{-1}(X_i)\bigr).
+	p^{-1}\bigl(g'^{-1}(X_i)\bigr)
 	\]
-	Since $p$ is surjective, it follows that
+	implies
 	\[
 	T_i:=g^{-1}(X_i)=g'^{-1}(X_i).
 	\]
-	The restrictions $g|_{T_i}$ and $g'|_{T_i}$ are morphisms
-	$T_i\to X_i$ whose pullbacks along the fpqc covering
-	$p_{T_i}:U_{T_i}\to T_i$ agree.
-	Now $X_i$ is affine. Hence, Lemma~\ref{lem:representable-affine-target}
-	implies that
-	\[
-	g|_{T_i}=g'|_{T_i}.
-	\]
-	The open subschemes $T_i$ cover $T$, so $g=g'$.
+	Hence, the restrictions $g|_{T_i},g'|_{T_i}:T_i\to X_i$ agree
+	after pullback along the fpqc covering $p^{-1}(T_i)\to T_i$. Since $T_i$ are assumed to be affine, $g|_{T_i}$ and $g'|_{T_i}$ are equal by
+	Lemma~\ref{lem:representable-affine-target}.
+	As the $T_i$ cover $T$, we obtain $g=g'$.
 	
-	\emph{Surjectivity.}
-	Let $f:U\to X$ satisfy
+	\emph{Existence.}
+	Let $f:U\to X$ be a morphism such that
 	\[
 	f\circ\mathrm{pr}_0=f\circ\mathrm{pr}_1.
 	\]
-	For each $i\in I$, put $U_i:=f^{-1}(X_i)$. Then
+	Choose an affine open covering $X=\bigcup_{i\in I}X_i$,
+	and write $\iota_i:X_i\hookrightarrow X$ for the inclusions.
+	Set $U_i:=f^{-1}(X_i)$. Then
 	\[
 	\mathrm{pr}_0^{-1}(U_i)
 	=
@@ -148,83 +111,142 @@ For a general target, the only additional input is that open subsets descend alo
 	=
 	\mathrm{pr}_1^{-1}(U_i).
 	\]
-	By Lemma~\ref{lem:descent-open-subsets}, there is an open
-	subscheme $T_i\subseteq T$ such that
-	\[
-	p^{-1}(T_k)=U_k.
-	\]
-	Since the $U_k$ cover $U$ and $p$ is surjective, the $T_k$
-	cover $T$.
+	By Lemma~\ref{lem:descent-open-subsets}, there is a unique
+	open subset $T_i\subseteq T$ such that $p^{-1}(T_i)=U_i$. Hence, the following diagram is cartesian:
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJVX2kiXSxbMCwxLCJVIl0sWzEsMCwiVF9pIl0sWzEsMSwiVCJdLFsyLDMsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsMSwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMCwyLCJwX2kiXSxbMSwzLCJwIiwyXV0=
+	\[\begin{tikzcd}
+		{U_i} & {T_i} \\
+		U & T
+		\arrow["{p_i}", from=1-1, to=1-2]
+		\arrow[hook, from=1-1, to=2-1]
+		\arrow[hook, from=1-2, to=2-2]
+		\arrow["p"', from=2-1, to=2-2]
+	\end{tikzcd}\]
+	This implies, that $p_i:U_i\to T_i$ is an fpqc covering.
+	Moreover, the $T_i$ cover $T$: for every $t\in T$,
+	surjectivity of $p$ gives a point $u\in U$ over $t$,
+	and $u\in U_i$ for some $i$, whence $t\in T_i$.
 	
-	The restriction $f_k:=f|_{U_k}:U_k\to X_k$ satisfies the
-	compatibility condition on $U_k\times_{T_k}U_k$, obtained
-	by restricting the compatibility condition for $f$.
-	Since $U_k\to T_k$ is an fpqc covering and $X_k$ is affine,
-	Lemma~\ref{lem:representable-affine-target} gives a unique
-	morphism
+	Write $f_i:U_i\to X_i$ for the factorization of $f|_{U_i}$
+	through $X_i$:
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJVX2kiXSxbMSwwLCJYX2kiXSxbMCwxLCJVIl0sWzEsMSwiWCJdLFsxLDMsIlxcaW90YV9pIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMCwyLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFsyLDMsImYiLDJdLFswLDEsImZfaSJdLFswLDMsIiIsMCx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV1d
+	\[\begin{tikzcd}
+		{U_i} & {X_i} \\
+		U & X
+		\arrow["{f_i}", from=1-1, to=1-2]
+		\arrow[hook, from=1-1, to=2-1]
+		\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+		\arrow["{\iota_i}", hook, from=1-2, to=2-2]
+		\arrow["f"', from=2-1, to=2-2]
+	\end{tikzcd}\]
+	
+	Since $U_i=U\times_T T_i$, there is a canonical
+	identification
 	\[
-	g_k:T_k\longrightarrow X_k
-	\qquad\text{such that}\qquad
-	g_k\circ p_{T_k}=f_k.
+	U_i\times_{T_i}U_i
+	\cong (U\times_T U)\times_T T_i,
+	\]
+	as indicated in the following diagram:
+	% https://q.uiver.app/#q=WzAsNixbMCwxLCJVXFx0aW1lc19UIFUiXSxbMSwxLCJVIl0sWzIsMSwiVCJdLFsyLDAsIlRfaSJdLFsxLDAsIlVfaSJdLFswLDAsIlVfaVxcdGltZXNfe1RfaX1VX2kiXSxbMCwxLCIiLDAseyJvZmZzZXQiOi0xfV0sWzAsMSwiIiwyLHsib2Zmc2V0IjoxfV0sWzEsMiwicCIsMl0sWzMsMl0sWzQsMV0sWzQsM10sWzUsMF0sWzUsNCwiIiwxLHsib2Zmc2V0IjoxfV0sWzUsNCwiIiwxLHsib2Zmc2V0IjotMX1dLFs1LDEsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV0sWzQsMiwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XV0=
+	\[\begin{tikzcd}
+		{U_i\times_{T_i}U_i} & {U_i} & {T_i} \\
+		{U\times_T U} & U & T
+		\arrow[shift right, from=1-1, to=1-2]
+		\arrow[shift left, from=1-1, to=1-2]
+		\arrow[from=1-1, to=2-1]
+		\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+		\arrow[from=1-2, to=1-3]
+		\arrow[from=1-2, to=2-2]
+		\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=1-2, to=2-3]
+		\arrow[from=1-3, to=2-3]
+		\arrow[shift left, from=2-1, to=2-2]
+		\arrow[shift right, from=2-1, to=2-2]
+		\arrow["p"', from=2-2, to=2-3]
+	\end{tikzcd}\]
+	
+	Restricting the compatibility condition for $f$ therefore
+	gives
+	\[
+	\iota_i\circ f_i\circ q_0
+	=
+	\iota_i\circ f_i\circ q_1.
+	\]
+	As $j_i$ is a monomorphism, this implies
+	\[
+	f_i\circ q_0=f_i\circ q_1.
+	\]
+	Since $X_i$ is affine,
+	Lemma~\ref{lem:representable-affine-target} yields a unique
+	morphism $g_i:T_i\to X_i$ such that
+	\[
+	g_i\circ p_i=f_i.
 	\]
 	
-	Regard each $g_k$ as a morphism to $X$ via the open immersion
-	$X_k\hookrightarrow X$.
-	For $k,l\in K$, the restrictions
+	This diagram visualizes the current situation:
+	% https://q.uiver.app/#q=WzAsOCxbMSwxLCJVX2kiXSxbMSwyLCJVIl0sWzMsMCwiVF9pIl0sWzMsMSwiVCJdLFsyLDIsIlgiXSxbMiwxLCJYX2kiXSxbMCwxLCJVX2lcXHRpbWVzX3tUX2l9VV9pIl0sWzAsMiwiVVxcdGltZXNfVCBVIl0sWzAsMSwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMCw1LCJmX2kiLDJdLFsxLDQsImYiLDJdLFswLDIsInBfaSJdLFsxLDMsInAiLDAseyJsYWJlbF9wb3NpdGlvbiI6ODB9XSxbNSw0LCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFs2LDAsInByXzIiLDIseyJvZmZzZXQiOjF9XSxbNywxLCJwcl8xIiwwLHsib2Zmc2V0IjotMX1dLFs2LDddLFsyLDUsImdfaSIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFs2LDAsInByXzEiLDAseyJvZmZzZXQiOi0xfV0sWzcsMSwicHJfMiIsMix7Im9mZnNldCI6MX1dLFsyLDMsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV1d
+	\[\begin{tikzcd}
+		&&& {T_i} \\
+		{U_i\times_{T_i}U_i} & {U_i} & {X_i} & T \\
+		{U\times_T U} & U & X
+		\arrow["{g_i}", dashed, from=1-4, to=2-3]
+		\arrow[hook, from=1-4, to=2-4]
+		\arrow["{pr_2}"', shift right, from=2-1, to=2-2]
+		\arrow["{pr_1}", shift left, from=2-1, to=2-2]
+		\arrow[from=2-1, to=3-1]
+		\arrow["{p_i}", from=2-2, to=1-4]
+		\arrow["{f_i}"', from=2-2, to=2-3]
+		\arrow[hook, from=2-2, to=3-2]
+		\arrow[hook, from=2-3, to=3-3]
+		\arrow["{pr_1}", shift left, from=3-1, to=3-2]
+		\arrow["{pr_2}"', shift right, from=3-1, to=3-2]
+		\arrow["p"{pos=0.8}, from=3-2, to=2-4]
+		\arrow["f"', from=3-2, to=3-3]
+	\end{tikzcd}\]
+	
+	We now verify that the morphisms
 	\[
-	g_k|_{T_k\cap T_l},
+	\widetilde g_i:=\iota_i\circ g_i:T_i\to X
+	\]
+	agree on overlaps to glue them by Zariski descent.
+	For $i,j\in I$, let
+	\[
+	T_{ij}:=T_i\cap T_j,
 	\qquad
-	g_l|_{T_k\cap T_l}
+	U_{ij}:=p^{-1}(T_{ij})=U_i\cap U_j.
 	\]
-	have the same pullback along the fpqc covering
+	The morphism $p_{ij}:U_{ij}\to T_{ij}$ induced by $p$
+	is again an fpqc covering.
+	By construction,
 	\[
-	p_{T_k\cap T_l}:U_{T_k\cap T_l}\longrightarrow T_k\cap T_l,
+	\begin{aligned}
+		\bigl(\widetilde g_i|_{T_{ij}}\bigr)\circ p_{ij}
+		&=f|_{U_{ij}},\\
+		\bigl(\widetilde g_j|_{T_{ij}}\bigr)\circ p_{ij}
+		&=f|_{U_{ij}}.
+	\end{aligned}
 	\]
-	namely $f|_{U_{T_k\cap T_l}}$.
-	By the injectivity proved above, these restrictions agree.
-	Thus the $g_k$ glue uniquely to a morphism $g:T\to X$.
-	On each $U_k$ we have
+	The previous uniqueness statement proved above, applied to
+	$p_{ij}:U_{ij}\to T_{ij}$, implies
 	\[
-	(g\circ p)|_{U_k}
+	\widetilde g_i|_{T_{ij}}
 	=
-	g_k\circ p_{T_k}
-	=
-	f|_{U_k},
+	\widetilde g_j|_{T_{ij}}.
 	\]
-	where the middle expression is viewed as a morphism to $X$.
-	Since the $U_k$ cover $U$, it follows that $g\circ p=f$.
-	This proves surjectivity of $\Phi_p$.
+	Hence the $\widetilde g_i$ glue to a morphism $g:T\to X$ by Zariski descent, since $\{T_i\subset T\}$ is an open covering.
 	
-	Consequently, $\Phi_p$ is bijective, and the displayed
-	diagram is an equalizer. Hence $h_X$ is an fpqc sheaf.
-	The assertion for the other topologies follows because
-	their covering families are fpqc coverings.
+	Finally, on every $U_i$ we have
+	\[
+	(g\circ p)|_{U_i}
+	=
+	\widetilde g_i\circ p_i
+	=
+	j_i\circ f_i
+	=
+	f|_{U_i}.
+	\]
+	Since the $U_i$ cover $U$, it follows that $g\circ p=f$.
 \end{proof}
 
-\begin{proof}
-	\emph{Step 1: Reduction to single morphisms.}
-	Morphisms of schemes glue along open coverings (\cite[][Tag 01JB]{stacks-project}, mapping property), i.e.\ $h_X$ satisfies the sheaf condition for Zariski coverings. By Corollary~\ref{cor:sheaf-via-cech} it suffices to show that $h_X$ satisfies descent along every fpqc covering $p:U\to T$. By Proposition~\ref{prop:cech-descent-equalizer} this means:
-	\[
-	h_X(T)\xrightarrow{\ p^*\ }h_X(U)\ \substack{\xrightarrow{\ \mathrm{pr}_0^*\ }\\[-0.2em]\xrightarrow[\ \mathrm{pr}_1^*\ ]{}}\ h_X(U\times_T U)
-	\]
-	is exact.
-	 the map
-	\[
-	h_X(T)\longrightarrow\{f\in h_X(U)\mid f\circ\mathrm{pr}_0=f\circ\mathrm{pr}_1\},\qquad g\longmapsto g\circ p,
-	\]
-	is bijective. Let $X=\bigcup_{k\in K}X_k$ be an affine open cover. For an open $T'\subset T$ we write $U_{T'}:=p^{-1}(T')=U\times_TT'$. Then $\{U_{T'}\to T'\}$ is again an fpqc covering, as a base change of $p$ (Proposition~\ref{prop:gross-topology-chain}), and $U_{T'}\times_{T'}U_{T'}$ is the open subscheme $\mathrm{pr}_0^{-1}(U_{T'})\cap\mathrm{pr}_1^{-1}(U_{T'})$ of $U\times_TU$.
-	
-	\emph{Step 2: Injectivity.}
-	Let $g,g':T\to X$ with $g\circ p=g'\circ p$. For each $k$ we have $p^{-1}(g^{-1}(X_k))=p^{-1}(g'^{-1}(X_k))$, so $T_k:=g^{-1}(X_k)=g'^{-1}(X_k)$ because $p$ is surjective. The restrictions $g|_{T_k},g'|_{T_k}:T_k\to X_k$ agree after composition with the fpqc covering $U_{T_k}\to T_k$, so they are equal by Lemma~\ref{lem:representable-affine-target}. Since the $T_k$ cover $T$, we get $g=g'$.
-	
-	\emph{Step 3: Surjectivity.}
-	Let $f:U\to X$ with $f\circ\mathrm{pr}_0=f\circ\mathrm{pr}_1$ and put $U_k:=f^{-1}(X_k)$. Then
-	\[
-	\mathrm{pr}_0^{-1}(U_k)=(f\circ\mathrm{pr}_0)^{-1}(X_k)=(f\circ\mathrm{pr}_1)^{-1}(X_k)=\mathrm{pr}_1^{-1}(U_k),
-	\]
-	so by Lemma~\ref{lem:descent-open-subsets} there is an open $T_k\subset T$ with $U_{T_k}=U_k$. The $T_k$ cover $T$ because $p$ is surjective and the $U_k$ cover $U$. The morphism $f|_{U_k}:U_k\to X_k$ satisfies $f|_{U_k}\circ\mathrm{pr}_0=f|_{U_k}\circ\mathrm{pr}_1$ on $U_k\times_{T_k}U_k\subset U\times_TU$. By Lemma~\ref{lem:representable-affine-target} there is a unique $g_k:T_k\to X_k$ with $g_k\circ p|_{U_k}=f|_{U_k}$.
-	For $k,l\in K$, the two morphisms $g_k|_{T_k\cap T_l}$ and $g_l|_{T_k\cap T_l}$ from $T_k\cap T_l$ to $X$ both become $f|_{U_{T_k\cap T_l}}$ after composition with the fpqc covering $U_{T_k\cap T_l}\to T_k\cap T_l$. By Step~2, applied to this covering, they agree. Hence the $g_k$ glue to a morphism $g:T\to X$ (Step~1), and $g\circ p=f$ because both agree on each $U_k$.
-\end{proof}
 
 \begin{corollary}[Relative version]\label{cor:representable-relative}
 	Let $S$ be a scheme, $\tau\in\{\mathrm{Zariski}, \text{\etale}, \mathrm{smooth}, \mathrm{fppf}\}$, and $X$ a scheme over $S$. Then $h_{X/S}=\Hom_S(-,X)$ is a sheaf on $(\SchOver{S})_\tau$.
