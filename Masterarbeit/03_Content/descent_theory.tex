@@ -5,9 +5,9 @@ local data. Given a morphism \(U \to X\) in some category $\CatC$, one forms its
 \[
 U_\bullet \colon
 U
-\;\substack{\longrightarrow\\[-0.4em]\longrightarrow}\;
+\;\substack{\longleftarrow\\[-0.4em]\longleftarrow}\;
 U \times_X U
-\;\substack{\longrightarrow\\[-0.4em]\longrightarrow\\[-0.4em]\longrightarrow}\;
+\;\substack{\longleftarrow\\[-0.4em]\longleftarrow\\[-0.4em]\longleftarrow}\;
 U \times_X U \times_X U
 \;\cdots .
 \]
@@ -86,13 +86,6 @@ which underlies the Cech nerve.
 	Equivalently, a simplicial (resp.\ cosimplicial) object consists of objects
 	$X_n$ together with face and degeneracy maps satisfying the simplicial identities.
 \end{definition}
-
-\begin{remark}
-	A cosimplicial object in $\mathcal{C}$ is the same as a simplicial object
-	in the opposite category $\mathcal{C}^{op}$.
-	In practice, simplicial objects encode gluing diagrams, while
-	cosimplicial objects encode descent data.
-\end{remark}
 
 \begin{example}[Cech nerve as a simplicial object]
 	Let $f : U \to X$ be a morphism in a category with fiber products.
@@ -262,22 +255,15 @@ which underlies the Cech nerve.
 	}
 \end{remark}
 
-The Amitsur complex computes the totalization of the Čech nerve of
-$\Spec(B) \to \Spec(A)$, and faithfully flat descent for rings states
-that this totalization recovers the ring $A$. Thus descent theory in
-algebraic geometry ultimately reduces to exactness of the Amitsur complex.
 
 \begin{theorem}[Amitsur complex]
-	Let $A \to B$ be a faithfully flat morphism of rings.
-	Then the augmented Amitsur complex
+	Let $A \to B$ be a faithfully flat morphism of rings. Then for every $A$-module $M$ the augmented Amitsur complex
 	\[
-	0 \to A
-	\longrightarrow B
-	\longrightarrow B \otimes_A B
-	\longrightarrow B \otimes_A B \otimes_A B
+	0 \to M
+	\longrightarrow B \otimes_A M
+	\longrightarrow B \otimes_A B \otimes_A M
 	\longrightarrow \cdots
 	\]
-	with differentials given by the alternating sum of the coface maps
 	is exact.
 \end{theorem}
 
