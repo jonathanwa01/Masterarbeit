@@ -1,507 +1,248 @@
-\chapter{Grothendieck Topology}
+\chapter{Grothendieck Topologies}\label{chap:grothendieck-topologies}
 
+In this chapter, we introduce Grothendieck topologies on categories as a generalization of classical topologies on spaces. Given a topological space $X$, its open subsets form a category $\mathrm{Open}(X)$, whose objects are the open sets $U\subset X$ and whose morphisms are inclusions $V\hookrightarrow U$. Sheaves on $X$ can be viewed as contravariant functors on this category that satisfy a gluing condition with respect to open coverings. In this way, the usual notion of ``covering an open subset $U$ by smaller opens $\{U_i\subset U\}$'' is encoded purely in terms of the category $\mathrm{Open}(X)$.
 
+Grothendieck's idea is to abstract this picture: instead of restricting to open subsets and inclusion maps, one chooses a category $\CatC$ and specifies, for each object $U\in \CatC$, which families of morphisms $\{U_i \to U\}$ should be considered as ``coverings''. These covering families are required to satisfy axioms, which mimic those for open covers, and the resulting structure is called a Grothendieck topology on $\CatC$. In this way one can treat, for example, \etale\ or fppf coverings of schemes within the same framework as open coverings.
 
-In this chapter, we introduce Grothendieck topologies on categories as a generalization of classical topologies on spaces. Given a topological space 
-$X$, its open subsets form a category $Open(X)$, whose objects are the open sets $U\subset X$ and whose morphisms are inclusions $V\hookrightarrow U$. Sheaves on $X$ can be viewed equivalently as certain contravariant functors on this category that satisfy a gluing condition with respect to open coverings. In this way, the usual notion of “covering an open subset $U$ by smaller opens $\{U_i\subset U\}$" is encoded purely in terms of the category $Open(X)$.
+Conceptually, this follows the Yoneda philosophy: an object can be studied through the morphisms into it. Sheaves are then the presheaves which satisfy a descent condition with respect to the covering families. We formulate this descent condition via the \v{C}ech nerve of a covering. This viewpoint comes from simplicial homotopy theory: a covering $U\to X$ gives a simplicial object $\check{C}(U/X)_\bullet$ augmented over $X$, a presheaf $F$ turns it into a cosimplicial object $F(\check{C}(U/X)_\bullet)$, and the sheaf condition says that $F(X)$ is the totalization of this cosimplicial object. For presheaves of sets the totalization is an ordinary limit, which we compute in Lemma~\ref{lem:tot-cosimplicial-set}. For presheaves of groupoids it is the $2$-categorical totalization studied in Chapter~\ref{chap:descent-theory}.
 
-Grothendieck’s idea is to abstract this picture: Instead of restricting to open subsets and inclusion maps, one chooses a category $\CatC$ and specifies, for each object $U\in \CatC$, which families of morphisms  $\{U_i \to U\}$ should be considered  as "coverings”. These covering families are required to satisfy axioms modeled on the behavior of open covers in classical topology, and the resulting structure is called a Grothendieck topology on $\CatC$.
-
-By this approach, one can treat, for example, coverings of schemes (such as \etale\ or fppf covers) and coverings of rings (via their associated affine schemes) within the same framework.
-
-Conceptually, this follows the general Yoneda philosophy: A space (or more generally, an object) can be studied and reconstructed from its functor points, i.e. the morphisms into it. Grothendieck topologies implement this idea by replacing open subsets of a space with families of morphisms in an arbitrary category that behave like covers, and then defining sheaves as functors on $\CatC$ that satisfy a suitable descent condition with respect to these covering families.
-
+%==========================================================
 \section{Sites}
+%==========================================================
 
-\begin{definition}[Sieve]
-	(\cite[][p.~38]{MacLaneMoerdijk1992})
-	Let $X\in \CatC$ be an object of a small category. A sieve on $X$ is a subfunctor of the representable presheaf $\Hom_\CatC(-, X)$. We will write $h_X$ for the Yoneda embedding $\Hom_\CatC(-, X)$.
-\end{definition}
+We work with the formulation of Grothendieck topologies in terms of covering families, which is the one used in \cite{stacks-project} and \cite{vistoli2007notes}.
 
-\begin{definition}[Grothendieck Topology]
-	(\cite[(Definition 1), p. ~110]{MacLaneMoerdijk1992})
-	A Grothendieck topology $J$ on a small categrory $\CatC$ is a function that assigns to each object $X\in C$ a collection of sieves $J(X)$ called covering sieves, such that the following axioms are satisfied:
+\begin{definition}[Site]\label{def:site}
+	(\cite[][Definition~2.24]{vistoli2007notes}, \cite[][Tag 00VH]{stacks-project})
+	Let $\CatC$ be a category. A \emph{Grothendieck topology} on $\CatC$ assigns to each object $X\in\CatC$ a collection of families of morphisms $\{U_i\to X\}_{i\in I}$, called \emph{coverings} of $X$, such that:
 	\begin{enumerate}
-		\item For each object $X\in \CatC$, $\Hom_\CatC(-, X)$ is a sieve.
-		\item For each morphism $f:X\to Y$ in $\CatC$ and each sieve $S\in J(Y)$ the pullback $f^*(S)\in J(X)$ is a sieve on $X$.
-		\item For each covering sieve $S\in J(Y)$ and each sieve $R$ on $Y$, such that $f^*(R)\in J(X)$ for all $f:X\to Y\in S$, then $R\in J(Y)$
+		\item If $V\to X$ is an isomorphism, then $\{V\to X\}$ is a covering.
+		\item (Base change) If $\{U_i\to X\}_{i\in I}$ is a covering and $Y\to X$ is any morphism, then the fiber products $U_i\times_X Y$ exist and $\{U_i\times_X Y\to Y\}_{i\in I}$ is a covering of $Y$.
+		\item (Composition) If $\{U_i\to X\}_{i\in I}$ is a covering and for each $i$ the family $\{V_{ij}\to U_i\}_{j\in J_i}$ is a covering, then $\{V_{ij}\to U_i\to X\}_{i\in I,\,j\in J_i}$ is a covering of $X$.
 	\end{enumerate}
+	A category together with a Grothendieck topology is called a \emph{site}.
 \end{definition}
 
-\begin{remark}
-	For a sieve $S$ on $Y\in\CatC$ and any $f:X\to Y$ in $\CatC$ we have $f^*S = \{g:Z\to X\mid f\circ g\in S\}\subset \Hom_\CatC(-, X)$
+\begin{remark}[Sieves]\label{rem:sieves}
+	In \cite{MacLaneMoerdijk1992}, a Grothendieck topology is defined in terms of sieves. A \emph{sieve} on $X$ is a subfunctor $S\subset h_X=\Hom_\CatC(-,X)$ (\cite[][p.~38]{MacLaneMoerdijk1992}). A Grothendieck topology in this sense assigns to every $X$ a collection $J(X)$ of sieves on $X$, called \emph{covering sieves}, such that (\cite[][Sec.~III.2, Def.~1]{MacLaneMoerdijk1992}):
+	\begin{enumerate}
+		\item the maximal sieve $h_X$ belongs to $J(X)$;
+		\item if $S\in J(X)$ and $f:Y\to X$ is a morphism, then $f^*S=\{g:Z\to Y\mid f\circ g\in S\}$ belongs to $J(Y)$;
+		\item if $S\in J(X)$ and $R$ is any sieve on $X$ such that $f^*R\in J(Y)$ for all $f:Y\to X$ in $S$, then $R\in J(X)$.
+	\end{enumerate}
+	A Grothendieck topology in the sense of Definition~\ref{def:site} is called a \emph{basis} for a Grothendieck topology in \cite[][Sec.~III.2, Def.~2]{MacLaneMoerdijk1992} and a \emph{pretopology} in SGA~4. It generates a Grothendieck topology in the sense of sieves: a sieve is covering if and only if it contains the sieve generated by some covering family. The two notions have the same sheaves (\cite[][Remark~2.25 and Proposition~2.42]{vistoli2007notes}). Since all our arguments use covering families, we only work with Definition~\ref{def:site}.
 \end{remark}
 
-\begin{definition}[Site]
-	(\cite[][p. ~110]{MacLaneMoerdijk1992})
-	For a small category $\CatC$ and a Grothendieck topology $J$ we will call the pair $(\CatC, J)$  a site on $\CatC$.
-\end{definition}
-
-\begin{definition}[Standard sites on schemes]
-	\label{def:standard-sites}
-	(\cite[][Tag 020K]{stacks-project})
-	Let $\Sch$ denote the category of schemes and let
-	\[
-	\tau \in 
-	\{\mathrm{Zariski}, \text{\etale}, \mathrm{smooth}, \mathrm{fppf}\}.
-	\]
-	We write $\Sch_\tau$ for the big $\tau$-site $(\Sch, J_\tau)$, where a family
-	$\{U_i \to X\}_{i\in I}$ belongs to $J_\tau(X)$ if the following hold:
-	\begin{enumerate}
-		\item Each morphism $U_i \to X$ satisfies the defining property of $\tau$:
-		\begin{itemize}
-			\item[Zariski:] $U_i \to X$ is an open immersion;
-			\item[\etale:] $U_i \to X$ is \etale;
-			\item[smooth:] $U_i \to X$ is smooth;
-			\item[fppf:] $U_i \to X$ is flat and locally of finite presentation;
-		\end{itemize}
-		\item The family is jointly surjective, i.e.
-		\[
-		\coprod_{i\in I} U_i \longrightarrow X
-		\]
-		is surjective. For $\tau = \mathrm{Zariski}$ this is equivalent to $\bigcup_i U_i = X$.
-	\end{enumerate}
-\end{definition}
-
-\begin{remark}
-	The fpqc topology will be used in this thesis only as a descent topology, not as a Grothendieck site in the same sense as the Zariski, \etale, smooth or fppf topologies. For a nonzero ring $R$, there is no set of fpqc coverings of $\Specof{R}$ such that every fpqc covering is refined by one of them, see \cite[][Tag 0BBK]{stacks-project}. Thus the fpqc topology is set theoretically too large to fit the usual framework of big sites used elsewhere in this chapter.
-	Moreover, the Stacks Project explicitly notes that, if one ignores these set theoretic issues, one encounters presheaves that do not admit an fpqc sheafification, referring to Waterhouse’s 1975 example. For this reason, we do not introduce a big fpqc site, do not use general fpqc sheafification and we formulate fpqc statements only in terms of the sheaf property for coverings or in terms of fpqc descent data, see \cite[][Tag 022A]{stacks-project}. This is also the reason, why we later introduce algebriac stacks to satisfy descent with respect to the fppf topology.
+\begin{remark}[Set-theoretic issues]\label{rem:set-theory-sites}
+	The category $\Sch$ of all schemes is not small. To obtain honest sites one replaces $\Sch$ by a suitably large but small full subcategory, see \cite[][Tag 021A]{stacks-project} for the \etale\ case. None of the arguments in this thesis depend on this choice, so we suppress it from the notation.
 \end{remark}
 
-\begin{proposition}[Hierarchy of Grothendieck topologies]\label{prop:gross-topology-chain}
-	(\cite[][Tag 022I]{stacks-project})
-	The standard topologies used in this thesis satisfy
+\begin{definition}[Standard topologies on schemes]\label{def:standard-sites}
+	(\cite[][Tags 020N, 0215, 021M]{stacks-project})
+	Let $\tau \in \{\mathrm{Zariski}, \text{\etale}, \mathrm{smooth}, \mathrm{fppf}\}$. A family of morphisms of schemes $\{f_i:U_i \to X\}_{i\in I}$ is a \emph{$\tau$-covering} if
+	\begin{enumerate}
+		\item each $f_i$ is an open immersion (Zariski), \etale\ (\etale), smooth (smooth), or flat and locally of finite presentation (fppf), respectively, and
+		\item the family is jointly surjective, i.e.\ $X=\bigcup_{i\in I} f_i(U_i)$.
+	\end{enumerate}
+	We write $\Sch_\tau$ for the resulting site, and $(\SchOver{S})_\tau$ for the induced site on schemes over a fixed scheme $S$.
+\end{definition}
+
+\begin{definition}[fpqc covering]\label{def:fpqc-covering}
+	(\cite[][Tag 022B]{stacks-project})
+	A family of morphisms of schemes $\{f_i:U_i\to X\}_{i\in I}$ is an \emph{fpqc covering} if each $f_i$ is flat and for every affine open $V\subset X$ there are finitely many indices $i_1,\dots,i_n\in I$ and affine opens $W_k\subset U_{i_k}$ such that $V=\bigcup_{k=1}^n f_{i_k}(W_k)$.
+	In particular, an fpqc covering is jointly surjective.
+\end{definition}
+
+\begin{proposition}[Hierarchy of topologies]\label{prop:gross-topology-chain}
+	Each of the four classes of coverings in Definition~\ref{def:standard-sites}, and the class of fpqc coverings, satisfies the axioms of Definition~\ref{def:site}. Moreover,
 	\[
-	\mathrm{Zariski} \subset \text{\etale} \subset \mathrm{smooth} \subset \mathrm{fppf}.
+	\mathrm{Zariski} \subset \text{\etale} \subset \mathrm{smooth} \subset \mathrm{fppf} \subset \mathrm{fpqc}
 	\]
+	in the sense that every Zariski covering is an \etale\ covering, every \etale\ covering is a smooth covering, and so on.
 \end{proposition}
 
+\begin{proof}
+	For the axioms see \cite[][Chapter 020K]{stacks-project}; for fpqc coverings this is \cite[][Tag 022D]{stacks-project}. The first three inclusions follow from Lemma~\ref{lem:etale-permanence}(3) and Lemma~\ref{lem:etale-consequences}, since smooth morphisms are flat and locally of finite presentation (\cite[][Tag 021N]{stacks-project}). The last inclusion is \cite[][Tag 022C]{stacks-project}.
+\end{proof}
 
-
-\begin{proposition}[Affine refinement of standard covering families]
-	\label{prop:affine-refinement-standard-topologies}
-	Let $X$ be a scheme and let $\tau \in 
-	\{\mathrm{Zariski}, \text{\etale}, \mathrm{smooth}, \mathrm{fppf}\}$.
-	Then every $\tau$-covering family
-	\[
-	\mathcal U = (U_i \to X)_{i\in I}
-	\]
-	admits a refinement
-	\[
-	\mathcal V = (V_j \to X)_{j\in J}
-	\]
-	such that each $V_j$ is affine.
-	If $X$ is quasi-compact, the refinement may be chosen finite.
-\end{proposition}
-
-\begin{remark}
-	This allows us to restrict to finite affine covers. Such reductions are standard in algebraic geometry, so many statements can then be checked on affines.
+\begin{remark}[The fpqc topology]\label{rem:fpqc-not-a-site}
+	The fpqc coverings form a Grothendieck topology in the sense of Definition~\ref{def:site}, but this topology is set-theoretically too large: for a nonzero ring $R$, there is no set of fpqc coverings of $\Specof{R}$ such that every fpqc covering is refined by one of them (\cite[][Tag 0BBK]{stacks-project}). As a consequence, the usual construction of sheafification breaks down; the Stacks Project refers to an example of Waterhouse of a presheaf without fpqc sheafification (\cite[][Tag 022A]{stacks-project}). For this reason we never sheafify in the fpqc topology. We only use the sheaf \emph{condition} for fpqc coverings (Definition~\ref{def:sheaf-on-cite}), which makes sense for every presheaf on $\Sch$.
 \end{remark}
 
-\section{Sheaves on a site}
+\begin{lemma}[Refinement by affine schemes]\label{prop:affine-refinement-standard-topologies}
+	Let $\tau\in\{\mathrm{Zariski}, \text{\etale}, \mathrm{smooth}, \mathrm{fppf}\}$ and let $\{f_i:U_i\to X\}_{i\in I}$ be a $\tau$-covering. Choose affine open covers $U_i=\bigcup_{j\in J_i}V_{ij}$. Then $\{V_{ij}\to X\}_{i\in I, j\in J_i}$ is a $\tau$-covering by affine schemes. If $X$ is quasi-compact, finitely many of the $V_{ij}$ suffice.
+\end{lemma}
 
-\begin{definition}[Sheaf on a cite]\label{def:sheaf-on-cite}
+\begin{proof}
+	Open immersions \etale, smooth, and flat and locally of finite presentation, and each of these classes is stable under composition, so every $V_{ij}\to U_i\to X$ is of type $\tau$. The family is jointly surjective because the $V_{ij}$ cover $U_i$. Every flat morphism locally of finite presentation is open (\cite[][Tag 01UA]{stacks-project}), so the images $f_i(V_{ij})$ form an open cover of $X$. If $X$ is quasi-compact, finitely many of them cover $X$.
+\end{proof}
+
+\begin{remark}
+	A presheaf satisfying the sheaf condition for a refinement need not formally satisfy it for the original covering. We therefore never use Lemma~\ref{prop:affine-refinement-standard-topologies} to ``replace'' a covering in the verification of a sheaf condition, only to produce coverings with good properties.
+\end{remark}
+
+%==========================================================
+\section{Simplicial objects and the \v{C}ech nerve}
+%==========================================================
+
+\begin{definition}[Simplicial and cosimplicial objects]\label{def:simplicial-objects}
+	Let $\Delta$ denote the simplex category, whose objects are the finite ordered sets $[n]=\{0<1<\dots<n\}$ for $n\geq 0$ and whose morphisms are non-decreasing maps. For $0\le i\le n$ we write $\delta^i:[n-1]\to[n]$ for the injection omitting $i$ and $\sigma^i:[n+1]\to[n]$ for the surjection repeating $i$.
+	A \emph{simplicial object} in a category $\CatC$ is a functor $X_\bullet:\Delta^{\op}\to\CatC$, and a \emph{cosimplicial object} is a functor $X^\bullet:\Delta\to\CatC$. We write $d_i:=X(\delta^i)$, $s_i:=X(\sigma^i)$ for the face and degeneracy maps of a simplicial object, and $d^i:=X(\delta^i)$, $s^i:=X(\sigma^i)$ for the coface and codegeneracy maps of a cosimplicial object.
+\end{definition}
+
+\begin{definition}[\v{C}ech nerve]\label{def:cech-nerve}
+	Let $\CatC$ be a category with fiber products and let $p:U\to X$ be a morphism. The \emph{\v{C}ech nerve} of $p$ is the simplicial object $\check{C}(U/X)_\bullet$ in $\CatC_{/X}$ with
+	\[
+	\check{C}(U/X)_n = U^{\times_X(n+1)} = \underbrace{U\times_X\cdots\times_X U}_{n+1\text{ factors}},
+	\]
+	and, for $\theta:[m]\to[n]$ in $\Delta$, with $\theta^*:\check{C}(U/X)_n\to\check{C}(U/X)_m$ the unique morphism over $X$ whose $k$-th component is the projection $\mathrm{pr}_{\theta(k)}$. In particular, $d_i$ forgets the $i$-th factor and $s_i$ repeats the $i$-th factor. Together with $p$ it is an augmented simplicial object $\check{C}(U/X)_\bullet\to X$.
+	We draw it as
+	\[
+	\begin{tikzcd}
+		\cdots\ U\times_X U\times_X U
+		\arrow[r, shift left=2] \arrow[r] \arrow[r, shift right=2]
+		& U\times_X U
+		\arrow[r, shift left=1] \arrow[r, shift right=1]
+		& U \arrow[r, "p"] & X .
+	\end{tikzcd}
+	\]
+\end{definition}
+
+\begin{remark}[Homotopical meaning]\label{rem:cech-homotopy}
+	The \v{C}ech nerve is the $0$-coskeleton of $U$ in $\CatC_{/X}$: a morphism of simplicial objects $Y_\bullet\to\check{C}(U/X)_\bullet$ over $X$ is the same as a morphism $Y_0\to U$ over $X$. If $\CatC=\Set$ and $p$ is surjective, then $\check{C}(U/X)_\bullet$ is the nerve of the equivalence relation $U\times_X U\rightrightarrows U$, and every fiber of $\check{C}(U/X)_\bullet\to X$ is the nerve of a contractible groupoid (the indiscrete groupoid on a nonempty set). Hence $\check{C}(U/X)_\bullet\to X$ is a weak equivalence of simplicial sets, where $X$ is regarded as a constant simplicial set.
+	More generally, if $p$ admits a section $s$, the augmented \v{C}ech nerve has an \emph{extra degeneracy} induced by $s$, which gives a contraction (for the dual statement about cosimplicial objects see \cite[][Tag 019Z]{stacks-project}). Faithfully flat descent can be read as the algebraic shadow of this fact: after a faithfully flat base change along $p$ itself, $p$ acquires a section (the diagonal), and the corresponding Amitsur complex becomes contractible (\cite[][Tags 023L, 023M]{stacks-project}).
+\end{remark}
+
+\begin{lemma}[\v{C}ech nerve of a disjoint union]\label{lem:cech-nerve-coproduct}
+	Let $\{U_i\to X\}_{i\in I}$ be a family of morphisms of schemes and $U:=\coprod_{i\in I}U_i$. Then for every $n\ge 0$ there is a canonical isomorphism
+	\[
+	\check{C}(U/X)_n\cong\coprod_{(i_0,\dots,i_n)\in I^{n+1}}U_{i_0}\times_X\cdots\times_X U_{i_n},
+	\]
+	under which the face and degeneracy maps are given summand-wise by the projections and diagonals.
+\end{lemma}
+
+\begin{proof}
+	It suffices to show that $(\coprod_i U_i)\times_X Y\cong\coprod_i(U_i\times_X Y)$ for every $X$-scheme $Y$; the claim then follows by induction on $n$. The $U_i$ form a cover of $U$ by pairwise disjoint open subschemes. For the projection $\mathrm{pr}_1:U\times_XY\to U$, the open subscheme $\mathrm{pr}_1^{-1}(U_i)$ is canonically $U_i\times_XY$, and these open subschemes are pairwise disjoint and cover $U\times_XY$. This gives the isomorphism.
+\end{proof}
+
+\begin{lemma}[Totalization of a cosimplicial set]\label{lem:tot-cosimplicial-set}
+	Let $X^\bullet:\Delta\to\Set$ be a cosimplicial set. Then the map
+	\[
+	\lim_{[n]\in\Delta}X^n\longrightarrow\Eq\left(\begin{tikzcd}X^0\arrow[r, shift left, "d^0"]\arrow[r, shift right, "d^1"'] & X^1\end{tikzcd}\right),\qquad (x_n)_{n\ge 0}\longmapsto x_0,
+	\]
+	is a bijection. In other words, the limit of $X^\bullet$ only depends on its restriction to $\Delta_{\le 1}$.
+\end{lemma}
+
+\begin{proof}
+	An element of the limit is a family $(x_n)_n$, $x_n\in X^n$, with $X(\theta)(x_m)=x_n$ for all $\theta:[m]\to[n]$. For $0\le k\le n$ let $v_k:[0]\to[n]$ be the map with image $k$. Then $x_n=X(v_0)(x_0)$, so the family is determined by $x_0$, and the map is injective. Moreover $x_0$ lies in the equalizer, because $d^0(x_0)=x_1=d^1(x_0)$.
+	
+	Conversely, let $x_0\in X^0$ with $d^0x_0=d^1x_0$. For $0\le k\le n$, let $e:[1]\to[n]$ be the map with $e(0)=0$, $e(1)=k$. Then $v_0=e\circ\delta^1$ and $v_k=e\circ\delta^0$, hence
+	\[
+	X(v_k)(x_0)=X(e)\,d^0(x_0)=X(e)\,d^1(x_0)=X(v_0)(x_0).
+	\]
+	So $X(v)(x_0)$ does not depend on the choice of $v:[0]\to[n]$. Put $x_n:=X(v_0)(x_0)$. For $\theta:[m]\to[n]$ we get $X(\theta)(x_m)=X(\theta\circ v_0)(x_0)=x_n$, since $\theta\circ v_0:[0]\to[n]$. Thus $(x_n)_n$ lies in the limit and maps to $x_0$.
+\end{proof}
+
+\begin{remark}
+	Lemma~\ref{lem:tot-cosimplicial-set} is the $1$-categorical reason why the sheaf condition only involves $U$ and $U\times_X U$: the higher stages of the \v{C}ech nerve impose no further conditions on sets. For a cosimplicial groupoid, the $2$-categorical totalization depends on $\Delta_{\le 2}$, which produces the cocycle condition on $U\times_X U\times_X U$ (Chapter~\ref{chap:descent-theory}); for higher groupoids the whole of $\Delta$ is needed.
+\end{remark}
+
+%==========================================================
+\section{Sheaves and \v{C}ech descent}
+%==========================================================
+
+\begin{definition}[Sheaf on a site]\label{def:sheaf-on-cite}
 	(\cite[][Tag 00VM]{stacks-project})
-	Let $\CatC$ be a site which is closed under pullbacks. We call a presheaf $F$ on $\CatC$ a sheaf, if for every covering $\{U_i\to X\}_{i}$ the following diagramm is an equalizer:
-	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJGKFUpIl0sWzEsMCwiXFxwcm9kX2lGKFVfaSkiXSxbMiwwLCJcXHByb2Rfe2ksan1GKFVfaVxcdGltZXNfVSBVX2opIl0sWzAsMV0sWzEsMiwiXFxwaV8xXioiLDIseyJvZmZzZXQiOjF9XSxbMSwyLCJcXHBpXzBeKiIsMCx7Im9mZnNldCI6LTF9XV0=
+	Let $(\CatC,\tau)$ be a site and $F:\CatC^{\op}\to\Set$ a presheaf. Let $\mathcal{U}=\{f_i:U_i\to X\}_{i\in I}$ be a family of morphisms such that the fiber products $U_i\times_X U_j$ exist. We say that $F$ \emph{satisfies the sheaf condition for $\mathcal{U}$} if
 	\begin{equation}\label{eq:sheaf-condition-equalizer}
 		\begin{tikzcd}
 			{F(X)} & {\prod_iF(U_i)} & {\prod_{i,j}F(U_i\times_X U_j)}
-			\arrow[from=1-1, to=1-2]
-			\arrow["{\pi_1^*}"', shift right, from=1-2, to=1-3]
-			\arrow["{\pi_0^*}", shift left, from=1-2, to=1-3]
+			\arrow["{(f_i^*)_i}", from=1-1, to=1-2]
+			\arrow["{\mathrm{pr}_0^*}", shift left, from=1-2, to=1-3]
+			\arrow["{\mathrm{pr}_1^*}"', shift right, from=1-2, to=1-3]
 		\end{tikzcd}
 	\end{equation}
+	is an equalizer diagram, where $\mathrm{pr}_0:U_i\times_XU_j\to U_i$ and $\mathrm{pr}_1:U_i\times_XU_j\to U_j$ are the projections. We say $F$ is \emph{separated for $\mathcal{U}$} if the first map is injective. $F$ is a \emph{sheaf} if it satisfies the sheaf condition for every covering of the site. We write $\Sh{\CatC,\tau}\subset\PshC$ for the full subcategory of sheaves.
 \end{definition}
 
-\begin{lemma}\label{lem:sheaf-preserves-coproducts}
-	Let $F$ be a sheaf on a cite $(\CatC,J)$. Then
+\begin{definition}[\v{C}ech descent]\label{def:cech-descent}
+	Let $\CatC$ be a category with fiber products, $F:\CatC^{\op}\to\Set$ a presheaf and $p:U\to X$ a morphism. Applying $F$ to the augmented \v{C}ech nerve gives an augmented cosimplicial set $F(X)\to F(\check{C}(U/X)_\bullet)$. We say that $F$ \emph{satisfies descent along $p$} if the induced map
 	\[
-	F\big(\coprod_i U_i\big) \cong \prod_i F(U_i).
+	F(X)\longrightarrow\lim_{[n]\in\Delta}F\bigl(\check{C}(U/X)_n\bigr)
 	\]
-\end{lemma}
+	is a bijection.
+\end{definition}
 
-\begin{lemma}[Single-cover reformulation of the sheaf condition]\label{lem:sheaf-single-cover}
-	Let $(\CatC, J)$ be a site and let $F$ be a presheaf on $\CatC$. Let $\{U_i \to X\}_i$ be a covering and set
+\begin{proposition}\label{prop:cech-descent-equalizer}
+	In the situation of Definition~\ref{def:cech-descent}, $F$ satisfies descent along $p$ if and only if $F$ satisfies the sheaf condition for the single-morphism family $\{p:U\to X\}$, i.e.\ if and only if
 	\[
-	U := \coprod_i U_i .
+	F(X)\xrightarrow{\ p^*\ }F(U)\ \substack{\xrightarrow{\ \mathrm{pr}_0^*\ }\\[-0.2em]\xrightarrow[\ \mathrm{pr}_1^*\ ]{}}\ F(U\times_X U)
 	\]
-	Suppose $F$ satisfies $\prod_i F(U_i) \cong F(U)$ compatibly with the natural inclusion-induced maps (i.e. Lemma~\ref{lem:sheaf-preserves-coproducts} holds for $U$). Then $F$ satisfies the sheaf condition of Definition~\ref{def:sheaf-on-cite} for the covering $\{U_i \to X\}_i$ if and only if the diagram
+	is an equalizer.
+\end{proposition}
+
+\begin{proof}
+	The coface maps $d^0,d^1:F(U)\to F(U\times_XU)$ are $F(d_0)=\mathrm{pr}_1^*$ and $F(d_1)=\mathrm{pr}_0^*$, so the claim follows from Lemma~\ref{lem:tot-cosimplicial-set}. The comparison maps are compatible because both are induced by $p^*$.
+\end{proof}
+
+To pass from covering families to single morphisms we need that $F$ converts disjoint unions into products. This holds for every Zariski sheaf.
+
+\begin{lemma}[Zariski sheaves and disjoint unions]\label{lem:sheaf-preserves-coproducts}
+	Let $F$ be a presheaf on $\Sch$ satisfying the sheaf condition for all Zariski coverings. Then $F(\varnothing)$ is a point, and for every family of schemes $\{U_i\}_{i\in I}$ the restriction maps induce a bijection
 	\[
-	F(X) \longrightarrow F(U) \rightrightarrows F(U \times_X U)
+	F\Big(\coprod_{i\in I}U_i\Big)\xrightarrow{\ \sim\ }\prod_{i\in I}F(U_i).
 	\]
-	is an equalizer, where the two parallel arrows are induced by the two projections $U \times_X U \rightrightarrows U$.
 \end{lemma}
 
 \begin{proof}
-	By hypothesis and the distributivity of fiber products over coproducts,
-	\[
-	U \times_X U
-	=
-	\Bigl(\coprod_i U_i\Bigr) \times_X \Bigl(\coprod_j U_j\Bigr)
-	\cong
-	\coprod_{i,j} (U_i \times_X U_j),
-	\]
-	so we have canonical isomorphisms
-	\[
-	F(U) \cong \prod_i F(U_i),
-	\qquad
-	F(U \times_X U) \cong \prod_{i,j} F(U_i \times_X U_j).
-	\]
-	Under these identifications, the two projections $\pi_1, \pi_2 : U \times_X U \to U$ restrict on the summand $U_i \times_X U_j$ to the two projections $U_i \times_X U_j \to U_i$ and $U_i \times_X U_j \to U_j$. Hence, componentwise in $(i,j)$, the induced maps
-	\[
-	F(U) \rightrightarrows F(U \times_X U)
-	\]
-	agree with
-	\[
-	\pi_0^*, \pi_1^* : \prod_i F(U_i) \rightrightarrows \prod_{i,j} F(U_i \times_X U_j)
-	\]
-	from Definition~\ref{def:sheaf-on-cite}. Since these identifications are natural isomorphisms of diagrams commuting with the structure map from $F(X)$, the two equalizer diagrams are isomorphic as diagrams, and being an equalizer is invariant under such an isomorphism.
+	The empty family is a Zariski covering of $\varnothing$, and the sheaf condition for it says that $F(\varnothing)$ is the equalizer of two maps between empty products, i.e.\ a point. Next, $\{U_j\hookrightarrow\coprod_iU_i\}_{j\in I}$ is a Zariski covering with $U_j\times_{\coprod_iU_i}U_k=U_j\cap U_k$, which is $U_j$ for $j=k$ and $\varnothing$ otherwise. On the factors with $j\ne k$ both maps in~\eqref{eq:sheaf-condition-equalizer} land in the point $F(\varnothing)$, and on the factors with $j=k$ both are the identity of $F(U_j)$. Hence the equalizer is all of $\prod_jF(U_j)$, and the sheaf condition gives the claim.
+\end{proof}
+
+\begin{proposition}[Sheaf condition as \v{C}ech descent]\label{lem:sheaf-single-cover}
+	Let $F$ be a presheaf on $\Sch$ satisfying the sheaf condition for all Zariski coverings. Let $\mathcal{U}=\{U_i\to X\}_{i\in I}$ be a family of morphisms of schemes and set $U:=\coprod_iU_i$ with the induced morphism $p:U\to X$. Then $F$ satisfies the sheaf condition for $\mathcal{U}$ if and only if $F$ satisfies descent along $p$.
+\end{proposition}
+
+\begin{proof}
+	By Lemma~\ref{lem:cech-nerve-coproduct}, $U\times_XU\cong\coprod_{i,j}U_i\times_XU_j$, and the projections $U\times_XU\rightrightarrows U$ restrict on the summand $U_i\times_XU_j$ to the projections onto $U_i$ and $U_j$. Applying Lemma~\ref{lem:sheaf-preserves-coproducts} to $U$ and to $U\times_XU$ gives an isomorphism between the diagram of Proposition~\ref{prop:cech-descent-equalizer} and the diagram~\eqref{eq:sheaf-condition-equalizer}, which is the identity on $F(X)$. Being an equalizer is invariant under isomorphism of diagrams, so Proposition~\ref{prop:cech-descent-equalizer} gives the claim.
+\end{proof}
+
+\begin{lemma}\label{lem:coverings-vs-single-morphism}
+	Let $\tau\in\{\text{\etale}, \mathrm{smooth}, \mathrm{fppf}, \mathrm{fpqc}\}$. A family $\{U_i\to X\}_{i\in I}$ is a $\tau$-covering if and only if $\{\coprod_iU_i\to X\}$ is a $\tau$-covering.
+\end{lemma}
+
+\begin{proof}
+	For $\tau\ne\mathrm{fpqc}$, being \etale, smooth, resp.\ flat and locally of finite presentation is local on the source (\cite[][Tag 02GJ]{stacks-project} and its analogues), and joint surjectivity is the same condition for both. For fpqc, flatness is local on the source. An affine open $W\subset U_{i}$ is also an affine open of $\coprod_iU_i$, so the finiteness condition of Definition~\ref{def:fpqc-covering} for the family implies the one for $\coprod_iU_i\to X$. Conversely, an affine open $W\subset\coprod_iU_i$ is quasi-compact, hence meets only finitely many $U_i$, and $W\cap U_i$ is open and closed in $W$, hence affine. This gives the converse.
+\end{proof}
+
+\begin{corollary}[Sheaves via \v{C}ech descent]\label{cor:sheaf-via-cech}
+	Let $\tau\in\{\text{\etale}, \mathrm{smooth}, \mathrm{fppf}, \mathrm{fpqc}\}$ and let $F$ be a presheaf on $\Sch$. Then $F$ satisfies the sheaf condition for all $\tau$-coverings if and only if
+	\begin{enumerate}
+		\item $F$ satisfies the sheaf condition for all Zariski coverings, and
+		\item $F$ satisfies descent along every morphism $p:U\to X$ such that $\{p\}$ is a $\tau$-covering.
+	\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+	Zariski coverings are $\tau$-coverings by Proposition~\ref{prop:gross-topology-chain}, and by Proposition~\ref{prop:cech-descent-equalizer} condition (2) is the sheaf condition for the $\tau$-covering $\{p\}$, so both conditions are necessary. Conversely, given a $\tau$-covering $\{U_i\to X\}$, the morphism $\coprod_iU_i\to X$ forms a $\tau$-covering by Lemma~\ref{lem:coverings-vs-single-morphism}, and Proposition~\ref{lem:sheaf-single-cover} applies.
 \end{proof}
 
 \begin{remark}
-	The single-cover reformulation of Lemma~\ref{lem:sheaf-single-cover} is not just a notational convenience, but it identifies the sheaf condition with the equalizer of the first two stages of the Čech nerve
-	\[
-	U_\bullet \colon
-	U
-	\;\substack{\longrightarrow\\[-0.4em]\longrightarrow}\;
-	U \times_X U
-	\;\substack{\longrightarrow\\[-0.4em]\longrightarrow\\[-0.4em]\longrightarrow}\;
-	U \times_X U \times_X U
-	\;\cdots
-	\]
-	associated to the single morphism $U := \coprod_i U_i \to X$, as introduced in
-	Chapter \ref{chap:descent-theory}. Working with a single cover $U \to X$, rather than an indexed family $\{U_i \to X\}_i$, allows us to treat sheaf and descent conditions uniformly as statements about the cosimplicial diagram $F(U_\bullet)$, without carrying along the extra indices $i,j,k$ in each fiber product. This simplification becomes essential once we pass to presheaves valued in $\Grpd$ or $\Cat$ in Chapter \ref{chap:descent-theory}, where descent data and the cocycle condition are most naturally phrased in terms of the simplicial structure of $U_\bullet$ rather than in terms of an explicit covering family.
+	Corollary~\ref{cor:sheaf-via-cech} is the precise form of the slogan $F(X)\cong\Tot F(\check{C}(U/X)_\bullet)$ from the introduction to Chapter~\ref{chap:descent-theory}: up to the Zariski-local condition (1), being a sheaf means that $F$ sends augmented \v{C}ech nerves of single coverings to limit diagrams. Working with a single morphism $U\to X$ instead of a family removes the indices $i,j,k$ from all subsequent constructions, which becomes essential for presheaves valued in groupoids.
 \end{remark}
 
-\begin{lemma}[Sheafication]\label{lem:sheafification}
-	(\cite[p. 134]{MacLaneMoerdijk1992})
-	Let $(\CatC, J)$ be a site, then the fully faithful inclusion $\iota: \Sh{\CatC,J} \hookrightarrow \PshC$ admits a left adjoint $\adj{(-)^\sharp}{\iota}$.
-	We write $\eta^2: F \to F^\sharp$ for the unit evaluated at a presheaf $F$.
-\end{lemma}
-
-\begin{corollary}\label{cor:limit-sheaf}
-	By \cite[]{MacLaneCFWM}, the category $\Sh{\CatC,J}$ is complete. In particular the limit of sheaves is again a sheaf and can be calculated in the  category $\PshC$ of presheaves.
-\end{corollary}
-
-
-\begin{lemma}\label{lem:faithfully_flat_implies_injective}
-	(\cite[][Ch.~3, Ex.~16]{AtiyahMacdonaldICA})
-	Let $f:R\to S$ be faithfully flat ring, then $f$ is injective.
-\end{lemma}
-
-\begin{lemma}[Representable presheaves of affine schemes]\label{lem:repr-presheafs-of-affines}
-	Let $A$ be an commutative ring and let $\{\alpha_i: R\to R_i\}_{i\in I}$ be a morphism of \etale\ ring maps, such that the induced morphism of schemes 
-	\[
-	\coprod_{i\in I}\Specof{R_i} \to \Specof{R}
-	\]
-	is surjective, i.e. an \etale\ covering.\\
-	Then the sequence 
-	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXEhvbShBLCBSKSJdLFsxLDAsIlxccHJvZF9pXFxIb20oQSwgUl9pKSJdLFsyLDAsIlxccHJvZF97aSxqfVxcSG9tKEEsIFJfaVxcb3RpbWVzX1JSX2opIl0sWzAsMV0sWzEsMiwiXFxiZXRhIiwyLHsib2Zmc2V0IjoyfV0sWzEsMiwiXFxhbHBoYSIsMCx7Im9mZnNldCI6LTJ9XV0=
-	\[\begin{tikzcd}
-		{\Hom(A, R)} & {\prod_i\Hom(A, R_i)} & {\prod_{i,j}\Hom(A, R_i\otimes_RR_j)}
-		\arrow[from=1-1, to=1-2]
-		\arrow[shift right=2, from=1-2, to=1-3]
-		\arrow[shift left=2, from=1-2, to=1-3]
-	\end{tikzcd}\]
-	is exact, where the two parallel morphisms are induced by $R_i\to R_i\otimes_RR_j,r\mapsto r\otimes_R 1$ and $R_j\to R_i\otimes R_j, r\mapsto 1\otimes_R r$.
+\begin{lemma}[Limits of sheaves]\label{cor:limit-sheaf}
+	Let $(\CatC,\tau)$ be a site. Limits in $\PshC$ are computed objectwise, and a limit of sheaves computed in $\PshC$ is again a sheaf. In particular $\Sh{\CatC,\tau}$ is complete and the inclusion $\Sh{\CatC,\tau}\hookrightarrow\PshC$ preserves limits.
 \end{lemma}
 
 \begin{proof}
-	Since $\Specof{R}$ is quasi compact, by \ref{prop:affine-refinement-standard-topologies} we can refine the cover to a finite cover. So without loss of generality we assume $I$ to be finite.
-	
-	
-	Assume we are given $\varphi_i:A\to R_i$, such that 
-	\begin{align}\label{eq:affine_compatibility}
-		\varphi_i\otimes_R 1 = 1\otimes_R \varphi_j: A\to R_i\otimes_R R_j
-	\end{align}
-	for all $i,j$, i.e. the following commutes.
-	% https://q.uiver.app/#q=WzAsNSxbMCwxLCJBIl0sWzEsMV0sWzEsMCwiUl9pIl0sWzEsMiwiUl9qIl0sWzIsMSwiUl9pXFxvdGltZXNfUiBSX2oiXSxbMCwyLCJcXHZhcnBoaV9pIl0sWzAsMywiXFx2YXJwaGlfaiIsMl0sWzMsNCwiMVxcb3RpbWVzIGlkIiwyXSxbMiw0LCJpZFxcb3RpbWVzX1IgMSJdXQ==
-	\[\begin{tikzcd}
-		& {R_i} \\
-		A & {} & {R_i\otimes_R R_j} \\
-		& {R_j}
-		\arrow["{id\otimes_R 1}", from=1-2, to=2-3]
-		\arrow["{\varphi_i}", from=2-1, to=1-2]
-		\arrow["{\varphi_j}"', from=2-1, to=3-2]
-		\arrow["{1\otimes id}"', from=3-2, to=2-3]
-	\end{tikzcd}\]
-	
-	We will construct a morphism unique $\varphi: A\to R$, such that $\alpha_i\circ \varphi = \varphi_i$, i.e. the following commutes:
-	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJBIl0sWzEsMCwiUiJdLFsxLDEsIlJfaSJdLFswLDEsIlxcdmFycGhpIl0sWzEsMiwiXFxhbHBoYV9pIl0sWzAsMiwiXFx2YXJwaGlfaSIsMl1d
-	\begin{equation}\label{diagram:lift_varphi}
-		\begin{tikzcd}
-			A & R \\
-			& {R_i}
-			\arrow["\varphi", from=1-1, to=1-2]
-			\arrow["{\varphi_i}"', from=1-1, to=2-2]
-			\arrow["{\alpha_i}", from=1-2, to=2-2]
-		\end{tikzcd}
-	\end{equation}
-	
-	Let $S:= \prod_i R_i$ and $\alpha: R\to S$ be the canonical ring map induced by the $\alpha_i$, i.e. $\alpha(r) = (\alpha_i(r))_i$. The $\varphi_i:A\to R_i$ induce a morphism $\Phi:A \to S$ given by $\Phi(a) = (\varphi_i(a))_i$.  By \cite[][Tag 00HQ]{stacks-project}, a flat ring map $R \to S$ is faithfully flat if and only if $\Spec(S) \to \Spec(R)$ is surjective. Since the $\Specof{R_i}$ cover $\Specof{R}$, and $S$ is free, hence flat, the induced map $R\to S$ is faithfully flat.
-	
-	
-	Let $\delta_1, \delta_2:S\to S\otimes_R S$ be given by $\delta_1 = id\otimes_R 1, \delta_2 = 1\otimes_R  id$. Since, the cover is finite, $S$ is finitely generated. Hence we obtain a natural isomorphism
-	\[
-	S\otimes_R S \cong \big(\prod_i R_i \big)\otimes_R \big(\prod_j R_j\big) \cong \prod_i \big( R_i\otimes_R \prod_jR_j) \cong \prod_{i,j} \big(R_i\otimes_R R_j\big)
-	\]
-	The morphisms $\delta_1, \delta_2$ induce $\tilde{\delta_1}, \tilde{\delta_2}: S\to \prod_{i,j} R_i\otimes_R R_j$ defined by $\tilde{\delta_1}((r_i)_i) = (r_i\otimes_R 1)_{i,j}$ and $\tilde{\delta_2} = (1\otimes_R r_j)_{i,j}$.
-	Now precomposing with $\Phi$ yields 
-	\begin{align*}
-		\tilde{\delta_1}(\Phi(a)) = (\varphi_i(a)\otimes_R 1)_{i,j} \\
-		\tilde{\delta_2}(\Phi(a)) = (1\otimes_R \varphi_j(a))_{i,j}
-	\end{align*}
-	Now the compatibility assumption \ref{eq:affine_compatibility} yields 
-	\begin{align}\label{eq:delta_phi}
-		\delta_1 \circ \Phi = \delta_2 \circ \Phi
-	\end{align}
-	
-	Consider the following diagram:
-	% https://q.uiver.app/#q=WzAsNCxbMCwwLCIwIl0sWzEsMCwiUiJdLFsyLDAsIlMiXSxbMywwLCJTXFxvdGltZXNfUiBTIl0sWzAsMV0sWzEsMiwiXFxhbHBoYSJdLFsyLDMsIlxcZGVsdGFfMS1cXGRlbHRhXzIiXV0=
-	\begin{equation}\label{diagram:exactness_R_S}
-		\begin{tikzcd}
-			0 & R & S & {S\otimes_R S}
-			\arrow[from=1-1, to=1-2]
-			\arrow["\alpha", from=1-2, to=1-3]
-			\arrow["{\delta_1-\delta_2}", from=1-3, to=1-4]
-		\end{tikzcd}
-	\end{equation}
-	
-	
-	Claim: This is exact, i.e. $R \cong ker(\delta_1-\delta_2) \cong Eq(\delta_1, \delta_2)$.
-	
-	By lemma \ref{lem:faithfully_flat_implies_injective} $\alpha$ is injective.
-	Let $r\in R$, then $\delta_1(\alpha(r)) = \alpha(r) \otimes_R 1 = 1\otimes_R  \alpha(r) = \delta_2 (\alpha(r))$, so $im(\alpha) \subset Eq(\delta_1, \delta_2)$.
-	
-	Now assume $s\in ker(\delta_1 - \delta_2)$, i.e. $s\otimes_R 1 = 1\otimes_R s$. Let $\bar{s}$ be the image in $\pi: S\to S/\alpha(R)$. Tensoring $\pi$ with $S$ yields $\pi\otimes_R id: S\otimes_R S\to (S/\alpha(R))\otimes_R S$. Next apply this to  $s\otimes_R 1 = 1\otimes_R s$ yields
-	\[
-	\bar{s}\otimes 1 = (\pi\otimes_R id)(s\otimes_R 1) = (\pi\otimes_R id)(1\otimes_R s) = \pi(1)\otimes_R s = 0\otimes s = 0.
-	\]
-	
-	So $\bar{s} \otimes_R 1 = 0$ in $(S/\alpha(R))\otimes_R S$. Now since $\alpha$ is faithfully flat, 
-	\[
-	S/\alpha(R) \to (S/\alpha(R))\otimes_R S
-	\]is injective. Hence $\bar{s} = 0$, i.e. $s \in \alpha(R)$, which proves the claim.
-	
-	Now by \ref{eq:delta_phi} and by exactness of \ref{diagram:exactness_R_S}, the universal property of the kernal $R$ induces a unique morphism $\varphi:A\to R$, such that the following commutes:
-	% https://q.uiver.app/#q=WzAsNSxbMSwxLCJSIl0sWzIsMSwiUyJdLFsyLDAsIkEiXSxbMCwxLCIwIl0sWzMsMSwiU1xcb3RpbWVzX1IgUyJdLFsyLDEsIlxcUGhpIl0sWzAsMSwiXFxhbHBoYSJdLFszLDBdLFsxLDQsIlxcZGVsdGFfMSAtXFxkZWx0YV8yIiwyXSxbMiw0XSxbMiwwLCJcXHZhcnBoaSIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
-	\[\begin{tikzcd}
-		&& A \\
-		0 & R & S & {S\otimes_R S}
-		\arrow["\varphi"', dashed, from=1-3, to=2-2]
-		\arrow["\Phi", from=1-3, to=2-3]
-		\arrow[from=1-3, to=2-4]
-		\arrow[from=2-1, to=2-2]
-		\arrow["\alpha", from=2-2, to=2-3]
-		\arrow["{\delta_1 -\delta_2}"', from=2-3, to=2-4]
-	\end{tikzcd}\]
-	
-	Hence, $(\alpha_i(\varphi(a))_i = \alpha(\varphi(a)) = \Phi(a) = (\varphi_i(a))_i$, which proves commutativity of \ref{diagram:lift_varphi}.
-	
+	The first statement is standard, see \cite[][Sec.~V.3]{MacLaneCFWM}. Let $F=\lim_kF_k$ be a limit of sheaves and $\{U_i\to X\}$ a covering. The diagram~\eqref{eq:sheaf-condition-equalizer} for $F$ is the limit over $k$ of the corresponding diagrams for the $F_k$, which are equalizers. Since limits commute with limits (\cite[][Sec.~IX.2]{MacLaneCFWM}), it is an equalizer as well.
 \end{proof}
 
+\begin{lemma}[Sheafification]\label{lem:sheafification}
+	(\cite[][p.~134]{MacLaneMoerdijk1992})
+	Let $(\CatC,\tau)$ be a small site. Then the inclusion $\iota:\Sh{\CatC,\tau}\hookrightarrow\PshC$ admits a left adjoint $(-)^\sharp$, called \emph{sheafification}.
+\end{lemma}
 
-
-
-
-
-
-
-
-\begin{theorem}[Representable presheaves of schemes]
-	Let $X$ be a scheme. Consider the representable presheaf 
-	\[h_X: (\SchOver{Et})^\op \to \Set\]
-	on the \etale\ site of \Sch. Then $h_X$ is a sheaf in the \etale\ topology.
-\end{theorem}
-
-\begin{proof}
-	
-	We first assume $X$ to be an affine scheme. Let $U$ be a scheme and $\mathcal{U} = (U_i\to U)_{i\in I}$ be an \etale\ covering. By \ref{prop:affine-refinement-standard-topologies} without loss of generality we may assume the $U_i$ to be affine.
-	We need to show, that the following diagram is exact:
-	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJoX1goVSkiXSxbMSwwLCJcXHByb2RfaSBoX1goVV9pKSJdLFsyLDAsIlxccHJvZF97aSxqfSBoX1goVV9pXFx0aW1lc19VIFVfaikiXSxbMCwxXSxbMSwyLCIiLDAseyJvZmZzZXQiOjJ9XSxbMSwyLCIiLDAseyJvZmZzZXQiOi0yfV1d
-	\[\begin{tikzcd}
-		{h_X(U)} & {\prod_i h_X(U_i)} & {\prod_{i,j} h_X(U_i\times_U U_j)}
-		\arrow[from=1-1, to=1-2]
-		\arrow[shift right=2, from=1-2, to=1-3]
-		\arrow[shift left=2, from=1-2, to=1-3]
-	\end{tikzcd}\]
-	Obviously the composite is equal by the pullback property.
-	
-	We will first reduce $U$ to the affine case.
-	Let $U = \bigcup_\alpha V_\alpha$ be an affine open cover.  Assume $f_i:U_i\to X$, such that $U_i\times_U U_j\to U_i \xrightarrow{f_i} X$ and $U_i\times_U U_j\to U_j \xrightarrow{f_j} X$ coincide, i.e. the following commutes:
-	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJVX2lcXHRpbWVzX1VVX2oiXSxbMSwwLCJVX2oiXSxbMCwxLCJVX2kiXSxbMSwxLCJYIl0sWzAsMV0sWzAsMl0sWzIsMywiZl9pIiwyXSxbMSwzLCJmX2oiXV0=
-	\begin{equation}\label{diag:fi-fj-agree-on-uij}
-		\begin{tikzcd}
-			{U_i\times_UU_j} & {U_j} \\
-			{U_i} & X
-			\arrow[from=1-1, to=1-2]
-			\arrow[from=1-1, to=2-1]
-			\arrow["{f_j}", from=1-2, to=2-2]
-			\arrow["{f_i}"', from=2-1, to=2-2]
-		\end{tikzcd}
-	\end{equation}
-	
-	
-	To construct a unique morphism $f:U\to X$ it suffices to construct compatible morphisms $g_\alpha:V_\alpha \to X$ for all $\alpha$ and then glue Zariski locally.
-	
-	Consider the following pullback diagram.
-	% https://q.uiver.app/#q=WzAsNCxbMSwwLCJVX2kiXSxbMSwxLCJVIl0sWzAsMSwiVl9cXGFscGhhIl0sWzAsMCwiVl9cXGFscGhhXFx0aW1lc19VVV9pIl0sWzIsMV0sWzAsMV0sWzMsMl0sWzMsMF1d
-	\[\begin{tikzcd}
-		{V_\alpha\times_UU_i} & {U_i} \\
-		{V_\alpha} & U
-		\arrow[from=1-1, to=1-2]
-		\arrow[from=1-1, to=2-1]
-		\arrow[from=1-2, to=2-2]
-		\arrow[from=2-1, to=2-2]
-		\arrow[phantom, from=1-1, to=2-2, "\lrcorner", pos=0.15]
-	\end{tikzcd}\]
-	The morphisms $V_\alpha\times_UU_i \to V_\alpha$ are \etale\, since \etale\ morphisms are stable under pullbacks. The morphism $V_\alpha\hookrightarrow U$ is the inclusion of the affine open $V_\alpha$.
-	Write $V_{i, \alpha} := V_\alpha\times_UU_i$. Now by proposition \ref{prop:affine-refinement-standard-topologies} we can refine to an affine \etale\ cover
-	\[
-	\{W_{i, \alpha, \lambda} \hookrightarrow V_{i, \alpha} \to V_\alpha\}_{i, \lambda}.
-	\]
-	
-	In particular $V_{i, \alpha} = \bigcup_{\lambda} W_{i, \alpha, \lambda}$.
-	Now $X$, $V_\alpha$ and $W_{i, \alpha, \lambda}$ are affine.
-	By lemma \ref{lem:repr-presheafs-of-affines} sheaf condition holds for $\{W_{i, \alpha, \lambda}\to V_\alpha\}_{i, \lambda}$ for all $\alpha$, i.e. the following diagram is a exact:
-	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJoX1goVl9cXGFscGhhKSJdLFsxLDAsIlxccHJvZF9pIGhfWChXX3tpLCBcXGFscGhhLCBcXGxhbWJkYX0pIl0sWzIsMCwiXFxwcm9kX3tpLGp9aF9YKFdfe2ksIFxcYWxwaGEsIFxcbGFtYmRhfVxcdGltZXNfe1ZfXFxhbHBoYX0gV197aiwgXFxhbHBoYSwgXFxsYW1iZGF9KSJdLFswLDFdLFsxLDIsIiIsMCx7Im9mZnNldCI6Mn1dLFsxLDIsIiIsMCx7Im9mZnNldCI6LTJ9XV0=
-	\begin{equation}\label{eq:eq-affine-V-W}
-		\begin{tikzcd}
-			{h_X(V_\alpha)} & {\prod_{(i,\lambda)} h_X(W_{i, \alpha, \lambda})} & {\prod_{(i, \lambda),(j, \mu)}h_X(W_{i, \alpha, \lambda}\times_{V_\alpha} W_{j, \alpha, \mu})}
-			\arrow[from=1-1, to=1-2]
-			\arrow[shift right=2, from=1-2, to=1-3]
-			\arrow[shift left=2, from=1-2, to=1-3]
-		\end{tikzcd}
-	\end{equation}
-	
-	We write $f_{i, \alpha, \lambda}: W_{i, \alpha, \lambda}\hookrightarrow V_{i, \alpha}  \hookrightarrow U_i \xrightarrow{f_i} X$ for the restriction of $f_i$ to $W_{i, \alpha, \lambda}$. Define $W := W_{i, \alpha, \lambda}\times_{V_\alpha} W_{j, \alpha, \mu}$.
-	We have canonical morphisms 
-	\begin{align*}
-		\varphi: W \xrightarrow{\pi_1} W_{i,\alpha,\lambda} \hookrightarrow V_{i,\alpha} = V_\alpha\times_UU_i \xrightarrow{\pi_{U_i}} U_i \\
-		\psi: W \xrightarrow{\pi_1} W_{j,\alpha, \mu} \hookrightarrow V_{j,\alpha} = V_\alpha\times_UU_j\xrightarrow{\pi_{U_j}} U_j 
-	\end{align*}
-	We will now proof, that $f_i\circ \varphi = f_j\circ \psi$. \\	
-	Since $W$ is the fibre product over $V_\alpha$, the following commute:	
-	% https://q.uiver.app/#q=WzAsOSxbMSwwLCJXIl0sWzAsMSwiV197aSwgXFxhbHBoYSwgXFxsYW1iZGF9Il0sWzIsMSwiV197aiwgXFxhbHBoYSwgXFxtdX0iXSxbMCwyLCJWX3tpLCBcXGFscGhhfSJdLFsyLDIsIlZfe2osIFxcYWxwaGF9Il0sWzEsMiwiVl9cXGFscGhhIl0sWzAsMywiVV9pIl0sWzIsMywiVV9qIl0sWzEsMywiVSJdLFswLDFdLFsxLDMsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzIsNCwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMCwyXSxbMyw2XSxbNSw4XSxbNiw4XSxbNyw4XSxbNCw3XSxbNCw1XSxbMyw1XSxbMyw4LCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XSxbNCw4LCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XV0=
-	\[\begin{tikzcd}
-		& W & \\
-		{W_{i, \alpha, \lambda}} && {W_{j, \alpha, \mu}} \\
-		{V_{i, \alpha}} & {V_\alpha} & {V_{j, \alpha}} \\
-		{U_i} & U & {U_j}
-		\arrow[from=1-2, to=2-1]
-		\arrow[from=1-2, to=2-3]
-		\arrow[hook, from=2-1, to=3-1]
-		\arrow[hook, from=2-3, to=3-3]
-		\arrow[from=3-1, to=3-2]
-		\arrow[from=3-1, to=4-1]
-		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=3-1, to=4-2]
-		\arrow[from=3-2, to=4-2]
-		\arrow[from=3-3, to=3-2]
-		\arrow["\lrcorner"{anchor=center, pos=0.125, rotate=-90}, draw=none, from=3-3, to=4-2]
-		\arrow[from=3-3, to=4-3]
-		\arrow[from=4-1, to=4-2]
-		\arrow[from=4-3, to=4-2]
-	\end{tikzcd}\]
-	
-	By commutativity of \ref{diag:fi-fj-agree-on-uij}, there is a unique $\delta$ fitting into the following diagram:
-	% https://q.uiver.app/#q=WzAsMTAsWzEsMCwiV197aSxcXGFscGhhLFxcbGFtYmRhfVxcdGltZXNfe1ZfXFxhbHBoYX0gV197aixcXGFscGhhLFxcbXV9Il0sWzAsMSwiV197aSxcXGFscGhhLFxcbGFtYmRhfSJdLFsyLDEsIldfe2osXFxhbHBoYSxcXG11fSJdLFswLDIsIlZfe2ksXFxhbHBoYX09Vl9cXGFscGhhXFx0aW1lc19VIFVfaSAiXSxbMiwyLCJWX3tqLFxcYWxwaGF9PVZfXFxhbHBoYVxcdGltZXNfVSBVX2oiXSxbMSwyLCJVX2lcXHRpbWVzX1UgVV9qIl0sWzEsNCwiWCJdLFswLDMsIlVfaSJdLFsyLDMsIlVfaiJdLFsxLDMsIlUiXSxbMCwxXSxbMCwyXSxbMiw0XSxbMSwzXSxbNSw4LCJcXHBpX3tVX2p9Il0sWzUsNywiXFxwaV97VV9pfSIsMl0sWzcsOV0sWzgsOV0sWzUsOSwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzMsN10sWzQsOF0sWzcsNiwiZl9pIiwyXSxbOCw2LCJmX2oiXSxbMCw1LCJcXGRlbHRhIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
-	\[\begin{tikzcd}
-		& {W} & \\
-		{W_{i,\alpha,\lambda}} && {W_{j,\alpha,\mu}} \\
-		{V_{i,\alpha}=V_\alpha\times_U U_i } & {U_i\times_U U_j} & {V_{j,\alpha}=V_\alpha\times_U U_j} \\
-		{U_i} & U & {U_j} \\
-		& X
-		\arrow[from=1-2, to=2-1]
-		\arrow[from=1-2, to=2-3]
-		\arrow["\delta", dashed, from=1-2, to=3-2]
-		\arrow[from=2-1, to=3-1]
-		\arrow[from=2-3, to=3-3]
-		\arrow[from=3-1, to=4-1]
-		\arrow["{\pi_{U_i}}"', from=3-2, to=4-1]
-		\arrow["\lrcorner"{anchor=center, pos=0.125, rotate=-45}, draw=none, from=3-2, to=4-2]
-		\arrow["{\pi_{U_j}}", from=3-2, to=4-3]
-		\arrow[from=3-3, to=4-3]
-		\arrow[from=4-1, to=4-2]
-		\arrow["{f_i}"', from=4-1, to=5-2]
-		\arrow[from=4-3, to=4-2]
-		\arrow["{f_j}", from=4-3, to=5-2]
-	\end{tikzcd}\]
-	Hence $f_i\circ \pi_{U_i} = f_j\circ \pi_{U_j}$ pulls back to $W$ via $\delta$, which yields $f_{i, \alpha, \lambda}\mid_W = f_{j, \alpha, \mu}\mid_W$.
-	By the sheaf condition \ref{eq:eq-affine-V-W}, the $f_{i, \alpha, \lambda}$ glue together to a unique $g_\alpha: V_\alpha \to X$.
-	
-	
-	Next we prove, that the $g_\alpha$ agree on overlaps $V_{\alpha\beta} := V_\alpha \cap V_\beta \cong V_\alpha\times_U V_\beta$ and glue Zariski locally.
-	Let $\{T_\eta\}_{\eta}$ be an affine open cover of $V_{\alpha\beta}$. 
-	
-	Again since \etale\ morphisms are stable under pullbacks, the following pullback is \etale:
-	% https://q.uiver.app/#q=WzAsNixbMiwwLCJVX2kiXSxbMSwxLCJWX3tcXGFscGhhXFxiZXRhfSJdLFsyLDEsIlUiXSxbMCwxLCJUX3tcXGV0YX0iXSxbMCwwLCJUX3tpLCBcXGV0YX0iXSxbMSwwLCJWX3tpLCBcXGFscGhhXFxiZXRhfSJdLFsxLDIsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsMl0sWzMsMSwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbNCwzXSxbNCwyLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XSxbNSwwXSxbNSwxXSxbNSwyLCIiLDAseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XSxbNCw1XV0=
-	\[\begin{tikzcd}
-		{T_{i, \eta}} & {V_{i, \alpha\beta}} & {U_i} \\
-		{T_{\eta}} & {V_{\alpha\beta}} & U
-		\arrow[from=1-1, to=1-2]
-		\arrow[from=1-1, to=2-1]
-		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-3]
-		\arrow[from=1-2, to=1-3]
-		\arrow[from=1-2, to=2-2]
-		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-2, to=2-3]
-		\arrow[from=1-3, to=2-3]
-		\arrow[hook, from=2-1, to=2-2]
-		\arrow[hook, from=2-2, to=2-3]
-	\end{tikzcd}\]
-	
-	Again by proposition \ref{prop:affine-refinement-standard-topologies} we refine ${T_{i, \eta}}$ by an affine cover $\{T_{i, \eta, \lambda}\hookrightarrow T_{i, \eta} \to T_\eta\}_{i, \lambda}$. For each $i, \lambda$ we can restrict $f_i$ to $f_{i, \eta, \lambda}: T_{i, \eta, \lambda} \hookrightarrow T_{i, \eta} \to U_i \xrightarrow{f_i} X$. By construction $g_\alpha$ restrict uniquely to 
-	
-	
-	
-	
-	
-	The $V_{i, \alpha\beta}$ cover $V_{\alpha\beta}$, because $U_i$ cover $U$.
-	Since $g_\alpha$ restrict to $f_{i, \alpha,\lambda}$ on the affine open $W_{i,\alpha,\lambda}$, we get $g_\alpha \mid_{V_{i, \alpha\beta}} = f_i\mid_{V_{i, \alpha\beta}}$ for all $i$. Analogously $g_\beta \mid_{V_{i, \alpha\beta}} = f_i\mid_{V_{i, \alpha\beta}}$. 
-	So all $g_\alpha$ can be glued together to a unique morphism $f:U\to X$, since $h_X$ is a sheaf in the Zariski site.
-	
-	
-	
-	Now we assume $X$ to be any scheme.
-	Let $\{W_i \hookrightarrow X\}_{i\in I}$ be an open affine cover of the scheme $X$, and set
-	\[
-	W_{ij} := W_i \cap W_j \qquad (i,j\in I).
-	\]
-	
-	Then via Zariksi gluing we have a natural isomorphim of schemes
-	\[
-	X \cong \Coeq\big(\coprod_{i, j} W_{ij}  \;\rightrightarrows\; \coprod_i W_i\big).
-	\]
-	
-	Then  for every scheme $S$, by continuity of $\Hom$ there is a natural isomorphism
-	\[
-	h_X(S)=\Hom_\Sch(S,X)
-	\;\cong\;
-	\Eq\!\left(
-	\prod_{i} \Hom_\Sch(S,W_i)
-	\;\rightrightarrows\;
-	\prod_{i,j} \Hom_\Sch(S,W_{ij})
-	\right),
-	\]
-	where the two arrows are induced by restricting a morphism $S\to W_i$ to
-	$S\to W_{ij}$ along the open immersions $W_{ij}\hookrightarrow W_i$ and
-	$W_{ij}\hookrightarrow W_j$.
-	
-	\medskip
-	
-	Via Yoneda, this is equivalent to an isomorphism of presheaves in $\Psh{\Sch}$,
-	\[
-	h_X \;\cong\;
-	\Eq\!\left(
-	\prod_{i} h_{W_i}
-	\;\rightrightarrows\;
-	\prod_{i,j} h_{W_{ij}}
-	\right).
-	\]
-	In particular, $h_X$ is a limit of the diagram of the $h_{W_i}$
-	and $h_{W_{ij}}$, hence also
-	computed sectionwise for presheaves. 
-	
-	By the frist part of the proof, $h_{W_i}$ and all $h_{W_{ij}}$ are sheaves.
-	By corrolary \ref{cor:limit-sheaf}, the category $\Sh{\Sch_{et}}$ is closed under limits, hence $h_X$ is a sheaf too.
-\end{proof}
+\begin{remark}[Representable presheaves]\label{rem:representable-forward}
+	A site is \emph{subcanonical} if every representable presheaf $h_X=\Hom_\CatC(-,X)$ is a sheaf. The most important example for us is that all sites $\Sch_\tau$ of Definition~\ref{def:standard-sites} are subcanonical. In fact $h_X$ satisfies the sheaf condition even for all fpqc coverings. We prove this in Theorem~\ref{thm:representable-fpqc-sheaf} as a consequence of fpqc descent for quasi-coherent sheaves (Theorem~\ref{thm:fpqc-descent-qcoh}). By the Yoneda lemma, the functor $X\mapsto h_X$ is then a fully faithful embedding of $\Sch$ into $\Sh{\Sch_\tau}$, and we will identify a scheme with the sheaf it represents.
+\end{remark}

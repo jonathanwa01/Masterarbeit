@@ -1,50 +1,228 @@
-\chapter{\Etale\ Morphisms}
+\chapter{\Etale\ Morphisms}\label{ch:etale-morphisms}
 
-\Etale\ morphisms are the central class of morphisms in this thesis, since they form the basic building blocks of the étale Grothendieck topology on schemes. Before we dive deeper into general schemes, we first recall the relevant notions for rings and affine schemes.
+\Etale\ morphisms are the central class of morphisms in this thesis: they define the \etale\ topology, algebraic spaces and Deligne--Mumford stacks are \etale\ locally schemes, and the Keel--Mori theorem is proven by gluing local coarse moduli spaces along \etale\ morphisms.
+In this chapter we collect the definitions and properties of \etale\ morphisms of schemes that are used later. We do not reprove the foundational results; instead we give precise statements together with references to the Stacks Project and explain where each result is used.
+
+Throughout, $f:X\to S$ denotes a morphism of schemes.
+
+\section{Infinitesimal lifting properties}
 
 
-\section{Étale Morphisms}
-
-\begin{definition}[Étale morphism]\label{def:etale-morphism-foundational}
-	Let $f:X\to S$ be a morphism of schemes. We call $f$ \emph{étale} if it is locally of finite presentation and formally étale, i.e. if for every first order thickening $T_0\hookrightarrow T$ with $T$ affine, every commutative diagram
+\begin{definition}[First order thickening]\label{def:first-order-thickening}
+	(\cite[][Tag 04EX]{stacks-project})
+	A closed immersion $i:T_0\hookrightarrow T$ of schemes is called a \emph{first order thickening} if $i$ is a homeomorphism on underlying topological spaces and the quasi-coherent ideal sheaf
 	\[
-	\begin{tikzcd}
-		T_0 \arrow[r] \arrow[d, hook] & X \arrow[d] \\
-		T \arrow[r] & S
-	\end{tikzcd}
+	\mathcal{I}:=\ker\left(\mathcal{O}_T\to i_*\mathcal{O}_{T_0}\right)
 	\]
-	admits a unique lift $T\to X$.
+	satisfies $\mathcal{I}^2=0$. If $T$ is affine, say $T=\Specof{B}$, this means that $T_0=\Specof{B/I}$ for an ideal $I\subset B$ with $I^2=0$.
 \end{definition}
 
-\begin{lemma}[Basic properties of étale morphisms]\label{lem:etale-basic-properties}
+\begin{definition}[Formally unramified, smooth and \etale\ morphisms]\label{def:formally-etale}
+	(\cite[][Tags 02H8, 02H0, 02HG]{stacks-project})
+	Consider every commutative diagram
+	\begin{equation}\label{diag:infinitesimal-lifting}
+		\begin{tikzcd}
+			T_0 \arrow[r, "a"] \arrow[d, hook, "i"'] & X \arrow[d, "f"] \\
+			T \arrow[r, "b"'] \arrow[ru, dashed] & S
+		\end{tikzcd}
+	\end{equation}
+	where $i:T_0\hookrightarrow T$ is a first order thickening of affine schemes over $S$. We call $f$
 	\begin{enumerate}
-		\item Étale morphisms are stable under composition.
-		\item Étale morphisms are stable under base change.
-		\item Every open immersion is étale.
-		\item Étale morphisms are smooth.
-		\item Étale morphisms are unramified.
-		\item Étale morphisms are locally of finite presentation.
-		\item The diagonal of an étale morphism is an open immersion.
+		\item \emph{formally unramified} if for every such diagram there exists \emph{at most one} morphism $T\to X$ making both triangles commute;
+		\item \emph{formally smooth} if for every such diagram there exists \emph{at least one} such morphism;
+		\item \emph{formally \etale} if for every such diagram there exists \emph{exactly one} such morphism.
+	\end{enumerate}
+\end{definition}
+
+\begin{remark}\label{rem:formally-etale-is-smooth-and-unramified}
+	By definition, $f$ is formally \etale\ if and only if it is formally smooth and formally unramified, see also \cite[][Tag 02HH]{stacks-project}. Formal unramifiedness has a purely algebraic description: $f$ is formally unramified if and only if $\Omega_{X/S}=0$ (\cite[][Tag 02H9]{stacks-project}).
+\end{remark}
+
+%==========================================================
+\section{Smooth, unramified and \etale\ morphisms}
+%==========================================================
+
+The formal notions are combined with the following finiteness conditions.
+
+\begin{definition}[Finiteness conditions]\label{def:lft-lfp}
+	(\cite[][Tags 01T2, 01TQ]{stacks-project})
+	The morphism $f: X\to S$ is said to be locally of finite type (resp. locally of finite presentation) if for all affine opens $U\subset X$, $V\subset S$ with $f(U)\subset V$ the ring map $\mathcal{O}_S(V)\to\mathcal{O}_X(U)$ is of finite type (resp.\ of finite presentation).
+\end{definition}
+
+\begin{definition}[Smooth, unramified and \etale\ morphisms]\label{def:etale-morphism}
+	We call $f$
+	\begin{enumerate}
+		\item \emph{smooth} if $f$ is locally of finite presentation and formally smooth;
+		\item \emph{unramified} if $f$ is locally of finite type and formally unramified;
+		\item \emph{\etale} if $f$ is locally of finite presentation and formally \etale.
+	\end{enumerate}
+	We say $f$ is \etale\ \emph{at} $x\in X$ if there is an open neighbourhood $U\subset X$ of $x$ such that $f|_U:U\to S$ is \etale.
+\end{definition}
+
+\begin{remark}\label{rem:etale-definitions-agree}
+	The Stacks Project defines smooth, unramified and \etale\ morphisms Zariski locally via the corresponding notions for ring maps (\cite[][Tags 01V5, 02G4, 02GI]{stacks-project}). Our definitions agree with these by the infinitesimal lifting criteria: for smooth morphisms see \cite[][Tag 02H6]{stacks-project}, for unramified morphisms \cite[][Tag 02HE]{stacks-project} and for \etale\ morphisms \cite[][Tag 02HM]{stacks-project}. In particular, every result about \etale\ morphisms in the Stacks Project applies to \etale\ morphisms in the sense of Definition~\ref{def:etale-morphism}.
+\end{remark}
+
+\begin{proposition}[Characterisations of \etale\ morphisms]\label{prop:etale-characterisations}
+	Let $f:X\to S$ be locally of finite presentation. The following are equivalent:
+	\begin{enumerate}
+		\item $f$ is \etale;
+		\item $f$ is smooth and unramified;
+		\item $f$ is flat and unramified;
+		\item $f$ is flat and for every $s\in S$ the fibre $X_s = X\times_S\Specof{\kappa(s)}$ is a disjoint union of spectra of finite separable field extensions of $\kappa(s)$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+	(1)$\Leftrightarrow$(2) is \cite[][Tag 02GK]{stacks-project}.
+	(1)$\Leftrightarrow$(3): by \cite[][Tag 02GV]{stacks-project}, $f$ is \etale\ if and only if it is flat and G-unramified, where G-unramified means unramified and locally of finite presentation (\cite[][Tag 00UT]{stacks-project}). Since $f$ is locally of finite presentation by assumption, G-unramified is the same as unramified.
+	(1)$\Rightarrow$(4): $f$ is flat by \cite[][Tag 02GS]{stacks-project}, and $X_s\to\Specof{\kappa(s)}$ is \etale\ as a base change of $f$ (\cite[][Tag 02GO]{stacks-project}), so $X_s$ has the asserted form by \cite[][Tag 02GL]{stacks-project}.
+	(4)$\Rightarrow$(1) is \cite[][Tag 02GM]{stacks-project}.
+\end{proof}
+
+\begin{remark}
+	Characterisation (4) explains the intuition: an \etale\ morphism is a flat family of finite, reduced, separable sets of points; Lemma~\ref{lem:etale-over-field} makes this precise over a field. Characterisation (3) is what we use most often: it is how we get flatness, which is needed to apply faithfully flat descent from Chapter~\ref{chap:descent-theory} to \etale\ coverings.
+\end{remark}
+
+\begin{lemma}[\Etale\ is local on the source]\label{lem:etale-local-on-source}
+	(\cite[][Tag 02GJ]{stacks-project})
+	The following are equivalent:
+	\begin{enumerate}
+		\item $f$ is \etale;
+		\item for all affine opens $U\subset X$, $V\subset S$ with $f(U)\subset V$ the ring map $\mathcal{O}_S(V)\to\mathcal{O}_X(U)$ is \etale;
+		\item there is an open cover $X=\bigcup_j X_j$ such that each $f|_{X_j}:X_j\to S$ is \etale.
+	\end{enumerate}
+	In particular, if $U\subset X$ and $V\subset S$ are open with $f(U)\subset V$ and $f$ is \etale, then $f|_U:U\to V$ is \etale.
+\end{lemma}
+
+\begin{corollary}[Disjoint unions]\label{cor:etale-disjoint-union}
+	Let $\{X_i\to S\}_{i\in I}$ be a family of morphisms of schemes. Then $\coprod_{i\in I}X_i\to S$ is \etale\ if and only if every $X_i\to S$ is \etale.
+\end{corollary}
+
+\begin{proof}
+	This follows from Lemma~\ref{lem:etale-local-on-source}, since the $X_i$ form an open cover of $\coprod_i X_i$, and the restriction of $\coprod_i X_i\to S$ to $X_i$ is $X_i\to S$.
+\end{proof}
+
+\begin{lemma}[\Etale\ is local on the target]\label{lem:etale-local-on-target}
+	(\cite[][Tag 02VN]{stacks-project})
+	Let $\{S_i\to S\}_{i\in I}$ be an fpqc covering, e.g.\ a Zariski, \etale, smooth or fppf covering (Lemma~\ref{lem:etale-coverings-fpqc}). If every base change $X\times_S S_i\to S_i$ is \etale, then $f$ is \etale.
+\end{lemma}
+
+\begin{remark}
+	Lemma~\ref{lem:etale-local-on-target} is what makes the notion of a (representable) \etale\ morphism of sheaves, algebraic spaces and stacks well behaved: whether a morphism representable by schemes is \etale\ may be tested after base change along any \etale\ covering of the target. We use it in the proof of Lemma~\ref{lem:quotient-by-etale-eq}.
+\end{remark}
+
+%==========================================================
+\section{Permanence properties}
+%==========================================================
+
+\begin{lemma}[Permanence properties]\label{lem:etale-permanence}
+	\begin{enumerate}
+		\item Compositions of \etale\ morphisms are \etale\ (\cite[][Tag 02GN]{stacks-project}).
+		\item Base changes of \etale\ morphisms are \etale: if $f:X\to S$ is \etale\ and $S'\to S$ is any morphism, then $X\times_S S'\to S'$ is \etale\ (\cite[][Tag 02GO]{stacks-project}).
+		\item Every open immersion is \etale\ (\cite[][Tag 02GP]{stacks-project}).
+		\item If $X\to S$ and $Y\to S$ are \etale, then every $S$-morphism $X\to Y$ is \etale\ (\cite[][Tag 02GW]{stacks-project}).
 	\end{enumerate}
 \end{lemma}
 
-TODO: Etale morphisms of fields are separable extensions
+\begin{remark}
+	Parts (1)--(3) are exactly what is needed for the \etale\ coverings to form a Grothendieck topology (Definition~\ref{def:standard-sites}) which is finer than the Zariski topology. Part (4) is the ``two-out-of-three'' property. This is used to show that comparison maps between objects \etale\ over a common base are \etale.
+\end{remark}
 
-
-\begin{lemma}[Étale topology as a refinement of the Zariski topology]\label{lem:zariski-etale}
-	Every Zariski open immersion is an étale morphism. Hence every Zariski cover is an étale cover, and the Zariski topology is coarser than the étale topology.
+\begin{lemma}\label{lem:etale-consequences}
+	Let $f:X\to S$ be \etale. Then $f$ is
+	\begin{enumerate}
+		\item locally of finite presentation (\cite[][Tag 02GR]{stacks-project});
+		\item flat (\cite[][Tag 02GS]{stacks-project});
+		\item smooth (of relative dimension $0$) and unramified (\cite[][Tag 02GK]{stacks-project});
+		\item locally quasi-finite (\cite[][Tag 03WS]{stacks-project});
+		\item open (\cite[][Tag 03WT]{stacks-project}); since \etale\ morphisms are stable under base change, $f$ is even universally open.
+	\end{enumerate}
 \end{lemma}
 
-\begin{lemma}[Étale morphisms are smooth]\label{lem:etale-smooth}
-	Every étale morphism is smooth of relative dimension $0$.
+\begin{lemma}\label{lem:unramified-diagonal}
+	(\cite[][Tag 02GE]{stacks-project})
+	If $f: X\to S$ is unramified, then the diagonal $\Delta_{X/S}:X\to X\times_S X$ is an open immersion. Conversely, if $f$ is locally of finite type and $\Delta_{X/S}$ is an open immersion, then $f$ is unramified.
 \end{lemma}
 
-\begin{lemma}[Smooth morphisms are fppf locally presentable]\label{lem:smooth-fppf}
-	Every smooth morphism is faithfully flat and locally of finite presentation. In particular, every smooth cover is an fppf cover.
+\begin{corollary}[Diagonal of separated \etale\ morphisms]\label{cor:etale-separated-diagonal}
+	If $f:X \to S$ is \etale, then $\Delta_{X/S}$ is an open immersion. If $f$ is moreover separated, then $\Delta_{X/S}$ is an open and closed immersion, so that
+	\[
+	X\times_S X = \Delta_{X/S}(X)\ \sqcup\ \left(X\times_S X\setminus \Delta_{X/S}(X)\right)
+	\]
+	is a decomposition into open and closed subschemes.
+\end{corollary}
+
+\begin{proof}
+	By Lemma~\ref{lem:etale-consequences}, $f$ is unramified, so $\Delta_{X/S}$ is an open immersion by Lemma~\ref{lem:unramified-diagonal}. If $f$ is separated, $\Delta_{X/S}$ is a closed immersion by definition. Its image is therefore open and closed, and so is its complement.
+\end{proof}
+
+\begin{remark}
+	The analogue of Corollary~\ref{cor:etale-separated-diagonal} for representable \etale\ separated morphisms of stacks, deduced via \cite[][Tag 05W1]{stacks-project}, is the key input for showing that the stabilizer-preserving locus is open in the proof of the Keel--Mori theorem.
+\end{remark}
+
+\begin{lemma}[Unramified monomorphisms]\label{lem:unramified-monomorphism}
+	(\cite[][Tag 05VH]{stacks-project})
+	Let $f$ be unramified. Then $f$ is a monomorphism if and only if $f$ is universally injective.
 \end{lemma}
 
-\begin{lemma}[Fppf morphisms are fpqc morphisms]\label{lem:fppf-fpqc}
-	Every faithfully flat morphism that is locally of finite presentation is fpqc. Hence every fppf cover is an fpqc cover.
+\begin{remark}
+	Lemma~\ref{lem:unramified-monomorphism} is used to check that a pair of \etale\ morphisms $s,t:R\rightrightarrows U$ defines an \etale\ equivalence relation: the map $(s,t):R\to U\times_S U$ is a morphism of schemes over $U$ (via $s$ and $\mathrm{pr}_1$), and $R$ is unramified over $U$ because $s$ is \etale. Hence $(s,t)$ is unramified by \cite[][Tag 02GG]{stacks-project}, and it is a monomorphism as soon as it is universally injective.
+\end{remark}
+
+%==========================================================
+\section{\Etale\ morphisms over a field}
+%==========================================================
+
+\begin{lemma}[\Etale\ schemes over a field]\label{lem:etale-over-field}
+	(\cite[][Tag 02GL]{stacks-project})
+	Let $k$ be a field and $X$ a scheme over $k$. Then $X\to\Specof{k}$ is \etale\ if and only if
+	\[
+	X\cong\coprod_{i\in I}\Specof{k_i}
+	\]
+	where each $k_i/k$ is a finite separable field extension. Consequently, for an \etale\ morphism $f:X\to S$ and $s\in S$, the fibre $X_s$ is a disjoint union of spectra of finite separable field extensions of $\kappa(s)$.
 \end{lemma}
 
+\begin{corollary}[Algebraically closed fields]\label{cor:etale-over-alg-closed}
+	Let $k$ be an algebraically closed field and $X\to\Specof{k}$ \etale. Then $X\cong\coprod_{i\in I}\Specof{k}$. In particular, if $X\neq\varnothing$, then $X\to\Specof{k}$ admits a section.
+\end{corollary}
 
+\begin{proof}
+	By Lemma~\ref{lem:etale-over-field}, $X\cong\coprod_i\Specof{k_i}$ with $k_i/k$ finite separable, hence algebraic. Since $k$ is algebraically closed, $k_i=k$. If $X\ne\varnothing$, the inclusion of any component $\Specof{k}\hookrightarrow X$ is a section.
+\end{proof}
+
+\begin{remark}
+	Corollary~\ref{cor:etale-over-alg-closed} is exactly the input for Lemma~\ref{lem:geometric-points-etale-cover}: geometric points lift along \etale\ coverings, because the base change of the covering to a geometric point $\Specof{k}$ is a nonempty scheme \etale\ over $\Specof{k}$. More generally, for an unramified morphism every residue field extension $\kappa(x)/\kappa(f(x))$ is finite separable (\cite[][Tag 02G8]{stacks-project}).
+\end{remark}
+
+%==========================================================
+\section{\Etale\ coverings}
+%==========================================================
+
+\begin{definition}[\Etale\ covering]\label{def:etale-covering}
+	(\cite[][Tag 0215]{stacks-project})
+	An \emph{\etale\ covering} of a scheme $T$ is a family of morphisms $\{f_i:T_i\to T\}_{i\in I}$ such that each $f_i$ is \etale\ and $T=\bigcup_{i\in I}f_i(T_i)$.
+\end{definition}
+
+\begin{lemma}\label{lem:etale-coverings-fpqc}
+	\begin{enumerate}
+		\item Every Zariski covering is an \etale\ covering (\cite[][Tag 0216]{stacks-project}).
+		\item Every \etale\ covering is a smooth covering, every smooth covering is an fppf covering, and every fppf covering is an fpqc covering (\cite[][Tags 022I, 022C]{stacks-project}).
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	(1) follows from Lemma~\ref{lem:etale-permanence}(3). For (2), \etale\ morphisms are smooth by Lemma~\ref{lem:etale-consequences}; smooth morphisms are flat and locally of finite presentation; the statement for fpqc coverings is \cite[][Tag 022C]{stacks-project}.
+\end{proof}
+
+\begin{lemma}[Finite affine \etale\ coverings are faithfully flat]\label{lem:finite-affine-etale-cover-ff}
+	Let $\{\Specof{R_i}\to\Specof{R}\}_{i=1}^n$ be a finite \etale\ covering by affine schemes and set $S:=\prod_{i=1}^n R_i$. Then the induced ring map $R\to S$ is faithfully flat and $\Specof{S}\cong\coprod_{i=1}^n\Specof{R_i}$.
+\end{lemma}
+
+\begin{proof}
+	Since the product is finite, $\Specof{S}\cong\coprod_i\Specof{R_i}$. Each $R\to R_i$ is flat by Lemma~\ref{lem:etale-consequences}(2). As an $R$-module, $S=\bigoplus_{i=1}^n R_i$ is a finite direct sum of flat modules, hence flat: for an injection $N\hookrightarrow N'$ of $R$-modules the map $N\otimes_R S\to N'\otimes_R S$ is the direct sum of the injections $N\otimes_R R_i\to N'\otimes_R R_i$, so it is injective (\cite[][Tag 00HD]{stacks-project}). Finally, $\Specof{S}\to\Specof{R}$ is surjective because the $\Specof{R_i}$ cover $\Specof{R}$, so $R\to S$ is faithfully flat by \cite[][Tag 00HQ]{stacks-project}.
+\end{proof}
+
+\begin{remark}
+	Lemma~\ref{lem:finite-affine-etale-cover-ff} reduces the sheaf property of representable presheaves for \etale\ coverings (Lemma~\ref{lem:repr-presheafs-of-affines}) to faithfully flat descent for rings. Note that $S$ is in general \emph{not} a free $R$-module; flatness comes from the flatness of the individual \etale\ maps $R\to R_i$.
+\end{remark}
