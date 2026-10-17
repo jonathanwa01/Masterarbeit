@@ -29,7 +29,7 @@ Throughout, $\mathcal{O}:\Sch^{\op}\to\Ring$ denotes the presheaf of rings $T\ma
 \end{proof}
 
 \begin{remark}
-	If $T=\Specof{R}$ and $U=\Specof{S}$ are affine, Corollary~\ref{cor:structure-sheaf-fpqc} is the exactness of $0\to R\to S\to S\otimes_RS$, i.e.\ the Amitsur complex in degrees $\le 1$ (\cite[][Tag 023M]{stacks-project}). Corollary~\ref{cor:structure-sheaf-fpqc} is the only input from descent theory that we need below.
+	If $T=\Specof{R}$ and $U=\Specof{S}$ are affine, Corollary~\ref{cor:structure-sheaf-fpqc} is the exactness of $0\to R\to S\to S\otimes_RS$, i.e.\ the Amitsur complex in degrees $\le 1$ (\cite[][Tag 023M]{stacks-project}).
 \end{remark}
 
 \begin{lemma}[Affine targets]\label{lem:representable-affine-target}
@@ -55,7 +55,7 @@ Throughout, $\mathcal{O}:\Sch^{\op}\to\Ring$ denotes the presheaf of rings $T\ma
 For a general target, the only additional input is that open subsets descend along fpqc coverings.
 
 \begin{lemma}[Descent of open subsets]\label{lem:descent-open-subsets}
-	(\cite[][Tag pr]{stacks-project})
+	(\cite[][Tag 03N0]{stacks-project})
 	Let $p:U\to T$ be an fpqc covering, and let $W'\subset U$ be an open subset with $\mathrm{pr}_0^{-1}(W')=\mathrm{pr}_1^{-1}(W')$ in $U\times_TU$. Then there is a unique open subset $W\subset T$ with $p^{-1}(W)=W'$, namely $W=p(W')$.
 \end{lemma}
 
@@ -73,7 +73,7 @@ For a general target, the only additional input is that open subsets descend alo
 	\rightrightarrows \Hom(U\times_T U,X)
 	\]
 	is an equalizer. Write
-	$\mathrm{pr}_0,\mathrm{pr}_1:U\times_T U\rightrightarrows U$
+	$\mathrm{pr}_1,\mathrm{pr}_2:U\times_T U\rightrightarrows U$
 	for the projections, and choose an affine open covering
 	$X=\bigcup_{i\in I}X_i$.
 	
@@ -90,26 +90,26 @@ For a general target, the only additional input is that open subsets descend alo
 	T_i:=g^{-1}(X_i)=g'^{-1}(X_i).
 	\]
 	Hence, the restrictions $g|_{T_i},g'|_{T_i}:T_i\to X_i$ agree
-	after pullback along the fpqc covering $p^{-1}(T_i)\to T_i$. Since $T_i$ are assumed to be affine, $g|_{T_i}$ and $g'|_{T_i}$ are equal by
+	after pullback along the fpqc covering $p^{-1}(T_i)\to T_i$. Since $X_i$ are assumed to be affine, $g|_{T_i}$ and $g'|_{T_i}$ are equal by
 	Lemma~\ref{lem:representable-affine-target}.
 	As the $T_i$ cover $T$, we obtain $g=g'$.
 	
 	\emph{Existence.}
 	Let $f:U\to X$ be a morphism such that
-	\[
-	f\circ\mathrm{pr}_0=f\circ\mathrm{pr}_1.
-	\]
+	\begin{align}\label{eq:compability-condition}
+		f\circ\mathrm{pr}_1=f\circ\mathrm{pr}_2.
+	\end{align}
 	Choose an affine open covering $X=\bigcup_{i\in I}X_i$,
 	and write $\iota_i:X_i\hookrightarrow X$ for the inclusions.
 	Set $U_i:=f^{-1}(X_i)$. Then
 	\[
-	\mathrm{pr}_0^{-1}(U_i)
-	=
-	(f\circ\mathrm{pr}_0)^{-1}(X_i)
+	\mathrm{pr}_1^{-1}(U_i)
 	=
 	(f\circ\mathrm{pr}_1)^{-1}(X_i)
 	=
-	\mathrm{pr}_1^{-1}(U_i).
+	(f\circ\mathrm{pr}_2)^{-1}(X_i)
+	=
+	\mathrm{pr}_2^{-1}(U_i).
 	\]
 	By Lemma~\ref{lem:descent-open-subsets}, there is a unique
 	open subset $T_i\subseteq T$ such that $p^{-1}(T_i)=U_i$. Hence, the following diagram is cartesian:
@@ -146,34 +146,32 @@ For a general target, the only additional input is that open subsets descend alo
 	U_i\times_{T_i}U_i
 	\cong (U\times_T U)\times_T T_i,
 	\]
-	as indicated in the following diagram:
-	% https://q.uiver.app/#q=WzAsNixbMCwxLCJVXFx0aW1lc19UIFUiXSxbMSwxLCJVIl0sWzIsMSwiVCJdLFsyLDAsIlRfaSJdLFsxLDAsIlVfaSJdLFswLDAsIlVfaVxcdGltZXNfe1RfaX1VX2kiXSxbMCwxLCIiLDAseyJvZmZzZXQiOi0xfV0sWzAsMSwiIiwyLHsib2Zmc2V0IjoxfV0sWzEsMiwicCIsMl0sWzMsMl0sWzQsMV0sWzQsM10sWzUsMF0sWzUsNCwiIiwxLHsib2Zmc2V0IjoxfV0sWzUsNCwiIiwxLHsib2Zmc2V0IjotMX1dLFs1LDEsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV0sWzQsMiwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XV0=
+	and hence the following diagram is commutes:
+	% https://q.uiver.app/#q=WzAsNixbMCwxLCJVXFx0aW1lc19UIFUiXSxbMSwxLCJVIl0sWzIsMSwiVCJdLFsyLDAsIlRfaSJdLFsxLDAsIlVfaSJdLFswLDAsIlVfaVxcdGltZXNfe1RfaX1VX2kiXSxbMCwxLCJcXG1hdGhybXtwcn1fMSIsMCx7Im9mZnNldCI6LTF9XSxbMCwxLCJcXG1hdGhybXtwcn1fMiIsMix7Im9mZnNldCI6MX1dLFsxLDIsInAiLDJdLFszLDJdLFs0LDFdLFs0LDNdLFs1LDBdLFs1LDQsIlxcbWF0aHJte3ByfV8xIiwwLHsib2Zmc2V0IjotMX1dLFs1LDQsIlxcbWF0aHJte3ByfV8yIiwyLHsib2Zmc2V0IjoxfV1d
 	\[\begin{tikzcd}
 		{U_i\times_{T_i}U_i} & {U_i} & {T_i} \\
 		{U\times_T U} & U & T
-		\arrow[shift right, from=1-1, to=1-2]
-		\arrow[shift left, from=1-1, to=1-2]
+		\arrow["{\mathrm{pr}_1}", shift left, from=1-1, to=1-2]
+		\arrow["{\mathrm{pr}_2}"', shift right, from=1-1, to=1-2]
 		\arrow[from=1-1, to=2-1]
-		\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
 		\arrow[from=1-2, to=1-3]
 		\arrow[from=1-2, to=2-2]
-		\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=1-2, to=2-3]
 		\arrow[from=1-3, to=2-3]
-		\arrow[shift left, from=2-1, to=2-2]
-		\arrow[shift right, from=2-1, to=2-2]
+		\arrow["{\mathrm{pr}_1}", shift left, from=2-1, to=2-2]
+		\arrow["{\mathrm{pr}_2}"', shift right, from=2-1, to=2-2]
 		\arrow["p"', from=2-2, to=2-3]
 	\end{tikzcd}\]
 	
-	Restricting the compatibility condition for $f$ therefore
+	Restricting the compatibility condition (\ref{eq:compability-condition}) for $f$ therefore
 	gives
 	\[
-	\iota_i\circ f_i\circ q_0
+	\iota_i\circ f_i\circ \mathrm{pr}_1
 	=
-	\iota_i\circ f_i\circ q_1.
+	\iota_i\circ f_i\circ \mathrm{pr}_2.
 	\]
-	As $j_i$ is a monomorphism, this implies
+	As $\iota_i$ is a monomorphism, this implies
 	\[
-	f_i\circ q_0=f_i\circ q_1.
+	f_i\circ \mathrm{pr}_1=f_i\circ \mathrm{pr}_2.
 	\]
 	Since $X_i$ is affine,
 	Lemma~\ref{lem:representable-affine-target} yields a unique
@@ -182,8 +180,8 @@ For a general target, the only additional input is that open subsets descend alo
 	g_i\circ p_i=f_i.
 	\]
 	
-	This diagram visualizes the current situation:
-	% https://q.uiver.app/#q=WzAsOCxbMSwxLCJVX2kiXSxbMSwyLCJVIl0sWzMsMCwiVF9pIl0sWzMsMSwiVCJdLFsyLDIsIlgiXSxbMiwxLCJYX2kiXSxbMCwxLCJVX2lcXHRpbWVzX3tUX2l9VV9pIl0sWzAsMiwiVVxcdGltZXNfVCBVIl0sWzAsMSwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMCw1LCJmX2kiLDJdLFsxLDQsImYiLDJdLFswLDIsInBfaSJdLFsxLDMsInAiLDAseyJsYWJlbF9wb3NpdGlvbiI6ODB9XSxbNSw0LCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFs2LDAsInByXzIiLDIseyJvZmZzZXQiOjF9XSxbNywxLCJwcl8xIiwwLHsib2Zmc2V0IjotMX1dLFs2LDddLFsyLDUsImdfaSIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFs2LDAsInByXzEiLDAseyJvZmZzZXQiOi0xfV0sWzcsMSwicHJfMiIsMix7Im9mZnNldCI6MX1dLFsyLDMsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV1d
+	This all fits into the following commutative diagram:
+	% https://q.uiver.app/#q=WzAsOCxbMSwxLCJVX2kiXSxbMSwyLCJVIl0sWzMsMCwiVF9pIl0sWzMsMSwiVCJdLFsyLDIsIlgiXSxbMiwxLCJYX2kiXSxbMCwxLCJVX2lcXHRpbWVzX3tUX2l9VV9pIl0sWzAsMiwiVVxcdGltZXNfVCBVIl0sWzAsMSwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMCw1LCJmX2kiLDJdLFsxLDQsImYiLDJdLFswLDIsInBfaSJdLFsxLDMsInAiLDAseyJsYWJlbF9wb3NpdGlvbiI6ODB9XSxbNSw0LCJcXGlvdGFfaSIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzYsMCwicHJfMiIsMix7Im9mZnNldCI6MX1dLFs3LDEsInByXzEiLDAseyJvZmZzZXQiOi0xfV0sWzYsN10sWzIsNSwiZ19pIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzYsMCwicHJfMSIsMCx7Im9mZnNldCI6LTF9XSxbNywxLCJwcl8yIiwyLHsib2Zmc2V0IjoxfV0sWzIsMywiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XV0=
 	\[\begin{tikzcd}
 		&&& {T_i} \\
 		{U_i\times_{T_i}U_i} & {U_i} & {X_i} & T \\
@@ -196,7 +194,7 @@ For a general target, the only additional input is that open subsets descend alo
 		\arrow["{p_i}", from=2-2, to=1-4]
 		\arrow["{f_i}"', from=2-2, to=2-3]
 		\arrow[hook, from=2-2, to=3-2]
-		\arrow[hook, from=2-3, to=3-3]
+		\arrow["{\iota_i}", hook, from=2-3, to=3-3]
 		\arrow["{pr_1}", shift left, from=3-1, to=3-2]
 		\arrow["{pr_2}"', shift right, from=3-1, to=3-2]
 		\arrow["p"{pos=0.8}, from=3-2, to=2-4]
