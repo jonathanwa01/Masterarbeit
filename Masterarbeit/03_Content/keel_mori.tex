@@ -400,16 +400,51 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 		\arrow[from=2-4, to=3-2]
 		\arrow[from=3-1, to=3-2]
 	\end{tikzcd}\]
-	Hence, $V = \Specof{A'}$ and $\pi_\mathcal{W}^{-1}(X') \cong [\Specof{A'} / G_x]$. Now we have an affine \etale\ morphism
+	Hence $V=\Specof{A'}$ and
 	\[
-		g: \mathcal{X}' = ([\Specof{A'} /G_x] , w) \to (\mathcal{X}, x)
+	\pi_{\mathcal W}^{-1}(X')
+	\cong [\Specof{A'}/G_x].
 	\]
-	which induces isomorphism on all geometric stabilizer groups, since $\mathcal{X}' \subset \mathcal{U}$.
+	Set $\mathcal X':=\pi_{\mathcal W}^{-1}(X')$.
+	The inclusion
+	$j:\mathcal X'\hookrightarrow\mathcal W$
+	is the base change of the affine open immersion
+	$X'\hookrightarrow W$ along $\pi_{\mathcal W}$.
+	It is therefore affine and étale.
+	Hence, the composite
+	\[
+	g:(\mathcal X',w)
+	=([\Specof{A'}/G_x],w)
+	\xrightarrow{\,j\,}(\mathcal W,w)
+	\xrightarrow{\,f\,}(\mathcal X,x)
+	\]
+	is affine and étale and induces isomorphism on all geometric stabilizer groups, since $\mathcal{X}' \subset \mathcal{U}$.
 	
-	We now prove, that the substack $\operatorname{im}(f)$
+	We now prove, that the substack $\operatorname{im}(g)$ admits a coarse moduli space.
+	Set 
+	\begin{alignat*}{4}
+		G &:= G_x
+		&\qquad A_1 &:= A'
+		&\qquad \mathcal{X}_1 &:= \mathcal{X}'
+		&\qquad \mathcal{X}_0 &:= \operatorname{im}(g)
+	\end{alignat*}
 	
+	By Lemma \ref{lem:affine-quotient-finite-group} we have a coarse moduli space 
+	\[
+	\pi_1 : \mathcal{X}_1\to X_1:= \Specof{A_1^G}.
+	\]
 	
+	\medskip
+	\textbf{Construct the overlap as another affine finite-group quotient}
 	
+	Define 
+	% https://q.uiver.app/#q=WzAsMixbMCwwLCJcXG1hdGhjYWx7WH1fMiA6PSBcXG1hdGhjYWx7WH1fMVxcdGltZXNfXFxtYXRoY2Fse1hfMH1cXG1hdGhjYWx7WH1fMSJdLFsxLDAsIlxcbWF0aGNhbHtYfV8xIl0sWzAsMSwicF8xIiwwLHsib2Zmc2V0IjotMX1dLFswLDEsInBfMiIsMix7Im9mZnNldCI6MX1dXQ==
+	\[\begin{tikzcd}
+		{\mathcal{X}_2 := \mathcal{X}_1\times_{\mathcal{X}_0}\mathcal{X}_1} & {\mathcal{X}_1}
+		\arrow["{p_1}", shift left, from=1-1, to=1-2]
+		\arrow["{p_2}"', shift right, from=1-1, to=1-2]
+	\end{tikzcd}\]
+	Since $\mathcal{X}_0 \hookrightarrow \mathcal{X}$ is an open immersion, $\mathcal{X}_2 \cong \mathcal{X}_1\times_{\mathcal{X}}\mathcal{X}_1$.
 	
 	
 	
