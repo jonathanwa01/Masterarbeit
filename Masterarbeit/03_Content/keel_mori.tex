@@ -265,7 +265,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	\[
 	f: (\mathcal{W},w) \to (\mathcal{X}, x),
 	\]
-	where $\mathcal{W} = [\Specof{A}/G_x]$, such that $f$ induces an isomorphism between the stabilizer groups
+	where $\mathcal{W} = [\Specof{A}/G_x]$, such that $f$ is affine, \etale, and induces an isomorphism between the stabilizer groups
 	\[
 	G_w \xrightarrow{\simeq} G_x.
 	\]
@@ -292,7 +292,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 		\end{tikzcd}
 	\end{equation}
 	
-	Now by lemma \ref{lem:local-structure-theorem-dm-stacks} the morphism $\mathcal{W} \to \mathcal{X}$ is affine \etale, in particular representable and separated, since $\mathcal{X}$ is separated. 
+	Now by Lemma \ref{lem:local-structure-theorem-dm-stacks} the morphism $\mathcal{W} \to \mathcal{X}$ is affine \etale, in particular representable and separated, since $\mathcal{X}$ is separated. 
 	Consider the diagonal $\Delta_{\mathcal{W}/\mathcal{X}}:\mathcal{W} \to \mathcal{W}\times_\mathcal{X}\mathcal{W}$.
 	Since $\mathcal{W}\to \mathcal{X}$ is separated, $\Delta_{\mathcal{W}/\mathcal{X}}$ is closed. Since $\mathcal{W}\to \mathcal{X}$ is representable and \etale, base change along a scheme $T$ induces an \etale\ morphism of algebraic spaces $T\times_{\mathcal{X}} \mathcal{W} \to T$, which is unramified. Hence, by \cite[][Tag 05W1]{stacks-project}, $\Delta_{\mathcal{W}/\mathcal{X}}$ is an open immersion. 
 	Hence, $\Delta_{\mathcal{W}/\mathcal{X}}$ is a closed and open immersion and by diagram \ref{diag:inertia-pullback-open-substack}, so is $\Phi$.
@@ -353,8 +353,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	
 	
 	\end{proof}
-	
-	Now by the affince case (lemma \ref{lem:affine-quotient-finite-group}), $\mathcal{W}$ admits a coarse moduli space
+	Now by the affince case (Lemma \ref{lem:affine-quotient-finite-group}), $\mathcal{W}$ admits a coarse moduli space
 	\[
 	\pi_\mathcal{W}: \mathcal{W} \to W = \Specof{A^{G_x}}.
 	\]
@@ -401,142 +400,17 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 		\arrow[from=2-4, to=3-2]
 		\arrow[from=3-1, to=3-2]
 	\end{tikzcd}\]
-	Hence, $V = \Specof{A'}$ and $\pi_\mathcal{W}^{-1}(X') \cong [\Specof{A'} / G_x]$. Now we have an \etale\ morphism
+	Hence, $V = \Specof{A'}$ and $\pi_\mathcal{W}^{-1}(X') \cong [\Specof{A'} / G_x]$. Now we have an affine \etale\ morphism
 	\[
 		g: \mathcal{X}' = ([\Specof{A'} /G_x] , w) \to (\mathcal{X}, x)
 	\]
 	which induces isomorphism on all geometric stabilizer groups, since $\mathcal{X}' \subset \mathcal{U}$.
 	
+	We now prove, that the substack $\operatorname{im}(f)$
 	
 	
 	
 	
 	
 	
-	Now doing this for all points yields a family $\{\mathcal{X}_i \xrightarrow{f_i} \mathcal{X}\}_i$, jointly surjective morphisms from stacks $\mathcal{X}_i$ of the form $[U_i/G_x]$ with affine $U_i = \Specof{A_i}$, such that $f_i$ is representable, \etale\ and induces isomorphism on all geometric stabilizer groups.
-	
-	
-	\medskip
-	\textbf{Descending the local maps to the overlaps}
-	
-	We first construct the global map $\pi : \mathcal{X} \to X$, then verify it
-	is a coarse moduli space.
-	
-	For each pair $(i,j)$, consider the fiber product
-	\[
-	\mathcal{X}_{ij} := \mathcal{X}_i \times_{\mathcal{X}} \mathcal{X}_j.
-	\]
-	Since $f_i$ and $f_j$ are representable and \etale, the two projections
-	\[
-	p_i : \mathcal{X}_{ij} \to \mathcal{X}_i,
-	\qquad
-	p_j : \mathcal{X}_{ij} \to \mathcal{X}_j
-	\]
-	are also representable and étale. Moreover, for every geometric point
-	$x:\Specof{\bar{k}}\to \mathcal{X}_{ij}$, the induced map on stabilizer groups
-	\[
-	\Aut_{\mathcal{X}_{ij}}(x)
-	\xrightarrow{\;\sim\;}
-	\Aut_{\mathcal{X}_i}(p_i(x))
-	\]
-	is an isomorphism, since $f_i$ induces isomorphisms on all geometric
-	stabilizer groups by hypothesis, and $\mathcal{X}_{ij} \to \mathcal{X}_i$
-	is a base change of $f_j$ along $f_i$.
-	
-	In particular, $\mathcal{X}_{ij}$ is a DM stack with finite
-	inertia. Since $\mathcal{X}_i = [U_i/G_i]$ is a quotient of an affine by
-	a finite group, the base change
-	\[
-	\mathcal{X}_{ij} \cong
-	[U_i \times_{\mathcal{X}} \mathcal{X}_j \;/\; G_i]
-	\]
-	is again a quotient of an affine scheme by a finite group. In particular,
-	$\mathcal{X}_{ij}$ admits a coarse moduli space
-	\[
-	\pi_{ij} : \mathcal{X}_{ij} \longrightarrow X_{ij},
-	\]
-	and the morphisms $\pi_i \circ p_i : \mathcal{X}_{ij} \to X_i$ and
-	$\pi_j \circ p_j : \mathcal{X}_{ij} \to X_j$ both factor uniquely through
-	$\pi_{ij}$, by the universal property of the coarse moduli space of $\mathcal{X}_{ij}$. Denote
-	\[
-	\phi_{ij} : X_{ij} \to X_i,
-	\qquad
-	\phi_{ji} : X_{ij} \to X_j,
-	\]
-	such that 
-	\[
-	\pi_i\circ p_i = \phi_{ij} \circ \pi_{ij}
-	\qquad
-	\pi_j \circ p_j = \phi_{ji} \circ \pi_{ij}.
-	\]
-	We claim that $\phi_{ij}$ and $\phi_{ji}$ are both \etale. 
-	
-	By construction, $p_i$ is \etale\ with isomorphism on stabilizers.
-	We claim that $\phi_{ij}$ and $\phi_{ji}$ are both \etale.
-	
-	Since $f_j : \mathcal{X}_j \hookrightarrow \mathcal{X}$ is \etale, its base change
-	\[
-	p_i : \mathcal{X}_{ij} = \mathcal{X}_i \times_{\mathcal{X}} \mathcal{X}_j
-	\longrightarrow \mathcal{X}_i
-	\]
-	is also \etale.
-	Locally, $\mathcal{X}_i \cong [U_i / G_i]$ and $\mathcal{X}_{ij} \cong [U_{ij}/G_i]$
-	for a $G_i$-stable open $U_{ij} \subset U_i$. The map $p_i$ corresponds to the
-	$G_i$-equivariant open immersion $U_{ij} \hookrightarrow U_i$, and $\phi_{ij}$
-	is the induced map $U_{ij}/G_i \to U_i/G_i$ on quotients. Since localizing
-	at $G_i$-invariant elements is compatible with \etale\ base change, the map
-	$\phi_{ij} : X_{ij} \to X_i$ is \etale. Analogously $\phi_{ji} : X_{ij} \to X_j$ is \etale.
-	
-	\medskip
-	\textbf{Forming the global algebraic space via the étale equivalence relation.}
-	
-	Define
-	\[
-	U := \coprod_i X_i,
-	\qquad
-	R := \coprod_{i,j} X_{ij}
-	\]
-	with source and target maps \(s,t:R\rightrightarrows U\). Those are \etale, and by construction they form an \etale\ equivalence relation. Hence, by
-	Lemma~\ref{lem:quotient-by-etale-eq}, the quotient sheaf
-	\[
-	X := (U/R)^\sharp
-	\]
-	is an algebraic space, and the canonical map \(p:U\to X\) is étale and surjective.
-	
-	\medskip
-	\textbf{Glue the local coarse moduli spaces via \etale\ descent.}
-	
-	The overlap maps \(X_{ij} \rightrightarrows X_i, X_j\) form fpqc descent data
-	for the affine schemes \(X_i\). Hence, by Theorem~\ref{thm:fpqc-descent-affine-schemes},
-	these local pieces glue to a global algebraic space \(X\).
-	
-	\medskip
-	\textbf{Constructing the morphism $\pi : \mathcal{X} \to X$.}
-	
-	The local morphisms $\mathcal{X}_i \to X$ are compatible on overlaps, since
-	the identifications on $X_{ij}$ are precisely the ones used in the quotient
-	construction of $X$. Hence they glue to a unique morphism
-	\[
-	\pi : \mathcal{X} \longrightarrow X.
-	\]
-	
-	\medskip
-	\textbf{Verifying the coarse moduli space axioms.}
-	
-	The coarse moduli property is \etale\ local on the target. Therefore, by
-	Lemma~\ref{lem:coarse-moduli-etale-local}, it suffices to check the pullbacks
-	along the étale cover \(\{X_i \to X\}\). Since each
-	\[
-	\pi_i : \mathcal{X} \times_X X_i \to X_i
-	\]
-	is a coarse moduli space by construction, it follows that
-	\[
-	\pi : \mathcal{X} \to X
-	\]
-	is a coarse moduli space.
-	
-	\medskip
-	
-	This completes the construction of the coarse moduli space
-	$\pi : \mathcal{X} \to X$.
 \end{proof}
