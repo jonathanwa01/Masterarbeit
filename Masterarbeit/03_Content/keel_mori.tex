@@ -488,7 +488,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	\[
 	\pi_2: \mathcal{X}_2 \to X_2 = \Specof{A_2^G}.
 	\]
-	Applying Lemma \ref{lem:etale-descent-finite-group-quotients} to $\Specof{A_2}\to \Specof{A_1}$ yields a commutative diagram, such that the induced morphisms $X_2 \to X_1$ are \etale\ and both left squares are 2-cartesian.
+	Applying Lemma \ref{lem:etale-descent-finite-group-quotients} to $\Specof{A_2}\to \Specof{A_1}$ yields a commutative diagram, such that the induced morphisms $s, t: X_2 \to X_1$ are \etale\ and both left squares are 2-cartesian.
 	% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXG1hdGhjYWx7WH1fMiJdLFswLDEsIlhfMiJdLFsxLDAsIlxcbWF0aGNhbHtYfV8xIl0sWzEsMSwiWF8xIl0sWzIsMCwiXFxtYXRoY2Fse1h9XzAiXSxbMiwxLCJYXzAiXSxbMCwyLCJwXzIiLDIseyJvZmZzZXQiOjF9XSxbMCwyLCJwXzEiLDAseyJvZmZzZXQiOi0xfV0sWzEsMywidCIsMix7Im9mZnNldCI6MX1dLFsxLDMsInMiLDAseyJvZmZzZXQiOi0xfV0sWzAsMSwiXFxwaV8yIiwyXSxbMiwzLCJcXHBpXzEiLDJdLFs0LDUsIiIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFsyLDQsImciXSxbMyw1LCIiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMCwzLCIiLDAseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dXQ==
 	\[\begin{tikzcd}
 		{\mathcal{X}_2} & {\mathcal{X}_1} & {\mathcal{X}_0} \\
@@ -524,29 +524,8 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 		\]
 		is an open immersion by
 		\cite[Tag 02GE]{stacks-project}.
-		Consider the following commutative diagram:
-		% https://q.uiver.app/#q=WzAsOCxbMSwwLCJYXzJcXHRpbWVzX3tYXzFcXHRpbWVzIFhfMX1YXzIiXSxbMywwLCJYXzIiXSxbMiwxLCJYXzIiXSxbMCwxLCJYXzJcXHRpbWVzX3tzLFhfMSxzfVhfMiJdLFsxLDIsIlhfMiJdLFszLDIsIlhfMVxcdGltZXMgWF8xIl0sWzAsMywiWF8yIl0sWzIsMywiWF8xIl0sWzAsMywiIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzMsMl0sWzAsMV0sWzEsMiwiIiwyLHsib2Zmc2V0IjotMSwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFswLDRdLFsxLDUsImoiXSxbMiw3LCJzIiwwLHsibGFiZWxfcG9zaXRpb24iOjMwfV0sWzYsNywicyIsMl0sWzMsNl0sWzQsNiwiIiwyLHsib2Zmc2V0IjotMSwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs0LDYsIiIsMix7Im9mZnNldCI6MSwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsxLDIsIiIsMSx7Im9mZnNldCI6MSwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs0LDUsImoiLDIseyJsYWJlbF9wb3NpdGlvbiI6NDB9XSxbNSw3LCJcXG9wZXJhdG9ybmFtZXtwcn1fMSJdXQ==
-		\[\begin{tikzcd}
-			& {X_2\times_{X_1\times X_1}X_2} && {X_2} \\
-			{X_2\times_{s,X_1,s}X_2} && {X_2} \\
-			& {X_2} && {X_1\times X_1} \\
-			{X_2} && {X_1}
-			\arrow[from=1-2, to=1-4]
-			\arrow[dashed, from=1-2, to=2-1]
-			\arrow[from=1-2, to=3-2]
-			\arrow[shift left, no head, from=1-4, to=2-3]
-			\arrow[shift right, no head, from=1-4, to=2-3]
-			\arrow["j", from=1-4, to=3-4]
-			\arrow[from=2-1, to=2-3]
-			\arrow[from=2-1, to=4-1]
-			\arrow["s"{pos=0.3}, from=2-3, to=4-3]
-			\arrow["j"'{pos=0.4}, from=3-2, to=3-4]
-			\arrow[shift left, no head, from=3-2, to=4-1]
-			\arrow[shift right, no head, from=3-2, to=4-1]
-			\arrow["{\operatorname{pr}_1}", from=3-4, to=4-3]
-			\arrow["s"', from=4-1, to=4-3]
-		\end{tikzcd}\]
-		By definition of $j$, the right and the bottom face are cartesian. The front face and back face are cartesian by definition. Hence, the top and left face are cartesian, visualized in this diagram:
+		By the universal property of fiber products there is a
+		cartesian diagram
 		\[
 		\begin{tikzcd}
 			X_2
@@ -560,22 +539,8 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 		\end{tikzcd}
 		\]
 		Thus, $\Delta_j$ is an open immersion, since open
-		immersions are preserved by base change;
+		immersions are preserved under base change;
 		see \cite[Tag 01JY]{stacks-project}.
-		
-		By the preceding geometric-point argument, the map
-		\[
-		X_2(\Omega)\longrightarrow
-		(X_1\times_k X_1)(\Omega)
-		\]
-		is injective for every algebraically closed field $\Omega$.
-		Consequently, every geometric point of
-		$X_2\times_{X_1\times_k X_1}X_2$
-		is represented by a pair $(r,r)$ and lies in the image
-		of $\Delta_j$.
-		Hence $\Delta_j$ is surjective.
-		Being a surjective open immersion, $\Delta_j$ is an
-		isomorphism.
 	\end{proof}
 	
 \end{proof}
