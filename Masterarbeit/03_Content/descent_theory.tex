@@ -1,816 +1,435 @@
 \chapter{Descent Theory}\label{chap:descent-theory}
 
-Descent theory provides a framework for reconstructing global objects from
-local data. Given a morphism \(U \to X\) in some category $\CatC$, one forms its Cech nerve
+In Chapter~\ref{chap:grothendieck-topologies} we formulated the sheaf condition via the \v{C}ech nerve: a presheaf of sets $F$ satisfies descent along $p:U\to X$ if
 \[
-U_\bullet \colon
-U
-\;\substack{\longleftarrow\\[-0.4em]\longleftarrow}\;
-U \times_X U
-\;\substack{\longleftarrow\\[-0.4em]\longleftarrow\\[-0.4em]\longleftarrow}\;
-U \times_X U \times_X U
-\;\cdots .
+F(X)\xrightarrow{\ \sim\ }\lim_{[n]\in\Delta}F\bigl(\check{C}(U/X)_n\bigr),
 \]
-A presheaf-like object \(F\) satisfies descent with respect to this covering
-if the value of \(F\) on \(X\) can be recovered from the cosimplicial diagram
-\(F(U_\bullet)\). The guiding principle of this chapter is therefore:
+and by Lemma~\ref{lem:tot-cosimplicial-set} only the truncation $\Delta_{\le 1}$ of the indexing category matters. The guiding principle of this chapter is the same slogan one categorical level higher,
 \[
-F(X) \simeq \Tot\bigl(F(U_\bullet)\bigr).
+F(X)\;\simeq\;\Tot F\bigl(\check{C}(U/X)_\bullet\bigr),
 \]
-Here \(\Tot\) should be understood as the appropriate limit of the
-cosimplicial descent diagram. In higher-categorical treatments of descent,
-this totalization is a homotopy limit over the Cech nerve; for instance,
-Khan formulates descent in terms of the totalization of a cosimplicial diagram associated to an augmented Cech nerve, see \cite{khan2022stacks}.
-For the purposes of this chapter, it will suffice to consider this principle
-only in the $1$-categorical and $2$-categorical settings.
+for $F$ valued in categories, where $\Tot$ is now a $2$-categorical (homotopy) limit. In higher-categorical treatments, descent is formulated as such a totalization over the augmented \v{C}ech nerve, see \cite{khan2022stacks}. Two problems have to be addressed before the slogan becomes a definition.
+\begin{enumerate}
+	\item The examples we care about, quasi-coherent sheaves and modules, are not functors $\Sch^{\op}\to\Cat$ but only pseudofunctors: $(g\circ f)^*$ and $f^*g^*$ agree only up to canonical isomorphism. Hence $F(\check{C}(U/X)_\bullet)$ is not a cosimplicial category.
+	\item The limit has to remember isomorphisms instead of equalities.
+\end{enumerate}
+Both problems are solved in the same way. We replace the pseudofunctor by the associated fibred category $p:\mathcal{S}\to\CatC$ (Grothendieck construction), and a ``compatible family over the \v{C}ech nerve'' by a \emph{simplicial object of $\mathcal{S}$ lying over the \v{C}ech nerve all of whose structure maps are cartesian}. This is a definition entirely in the language of simplicial objects. It is strict, so no coherence isomorphisms have to be tracked and it computes the $2$-categorical limit (Remark~\ref{rem:desc-as-tot}). In Proposition~\ref{prop:desc-2-truncation} we prove that this category only depends on $\Delta_{\le 2}$: Vertices give an object, edges give a gluing isomorphism and triangles give the cocycle condition. This is the $2$-categorical analogue of Lemma~\ref{lem:tot-cosimplicial-set}.
 
-For presheaves of sets, the above condition reduces to the ordinary sheaf
-condition. Since \(\Set\) is a \(1\)-category, the totalization is the
-usual limit. Thus the descent condition says that \(F(X)\) is the equalizer
+\subsection*{What the Keel--Mori theorem needs}
+
+We only develop as much descent theory as is used later.
+\begin{enumerate}
+	\item \textbf{Representable functors are fpqc sheaves} (Section~\ref{sec:representable-fpqc}). This uses that the structure sheaf satisfies fpqc descent, which is the fully faithful part of descent for quasi-coherent sheaves (Theorem~\ref{thm:fpqc-descent-qcoh}).
+	\item \textbf{Descent of affine morphisms} (Corollary~\ref{thm:fpqc-descent-affine-schemes}). It is used to see that quotient stacks $[\Specof{A}/G]$ by finite groups are stacks (torsors under a finite constant group are finite \etale, in particular affine) and it is the base case of effective descent for quasi-affine and for separated, locally quasi-finite morphisms (\cite[][Tags 0245, 0247, 02W8]{stacks-project}), which enters the proof that the quotient of a scheme by an \etale\ equivalence relation is an algebraic space (\cite[][Proposition~2.2.15, Theorem~3.4.11]{alper2026stacks}).
+	\item In the proof of the Keel--Mori theorem itself one only uses \etale\ descent of morphisms and of isomorphisms between algebraic spaces and the theorem on quotients by \etale\ equivalence relations (\cite[][Theorem~4.3.12]{alper2026stacks}). The first two are formal consequences of the fact that algebraic spaces are sheaves for the \etale\ topology; for schemes this is~(1).
+\end{enumerate}
+Accordingly, the chapter proceeds along the following chain:
 \[
-F(X)
-\longrightarrow
-F(U)
-\;\substack{\longrightarrow\\[-0.4em]\longrightarrow}\;
-F(U \times_X U),
+\begin{tikzcd}[column sep=small, row sep=small]
+	\text{Amitsur complex} \arrow[r, Rightarrow] & \text{faithfully flat descent for modules} \arrow[d, Rightarrow] \\
+	\text{descent of affine morphisms} & \text{fpqc descent for }\QCoh \arrow[l, Rightarrow]
+\end{tikzcd}
 \]
-which is precisely the usual gluing condition from
-Definition~\ref{def:sheaf-on-cite}. In this case, the higher terms of the
-Cech nerve impose no additional coherence beyond equality.
+All other descent statements are quoted from \cite{stacks-project} when they are needed.
 
-For presheaves valued in groupoids or categories, however, descent data must
-remember isomorphisms and their coherences. An object over $X$ is described
-locally by objects over \(U\), together with isomorphisms between their two
-pullbacks to \(U \times_X U\). These isomorphisms are not arbitrary: on the
-triple overlap \(U \times_X U \times_X U\), they must satisfy the familiar
-cocycle condition. In the language of the Cech nerve, this cocycle
-condition is the coherence imposed by the $2$-simplices of the associated
-cosimplicial diagram. Thus the classical descent datum for stacks is exactly
-the \(2\)-categorical form of the totalization of \(F(U_\bullet)\).
+%==========================================================
+\section{Fibred categories and cartesian lifts}
+%==========================================================
 
-We shall make this precise without developing the general theory of
-homotopy limits and $\infty$-categories. Instead, we use the $2$-categorical notion of a
-pseudolimit. Gambino shows that, in a suitable homotopical setting for \(2\)-categories,
-a pseudolimit, viewed in the corresponding homotopy category $\text{Ho}(\Cat)$,
-is a homotopy limit, see \cite[p. 15][]{gambino2008homotopy}.
-This justifies taking the pseudolimit of the Cech descent diagram as the
-correct \(2\)-categorical replacement for the ordinary limit. Accordingly,
-for \(F\) valued in \(\Grpd\) or \(\Cat\), we view descent with respect to
-\(U \to X\) by requiring the canonical functor
-\[
-F(X) \longrightarrow \operatorname{PsLim}_{[n]\in\Delta} F(U_n)
-\]
-to be an equivalence of groupoids, respectively of categories.
-
-\section*{Simplicial and cosimplicial objects}
-
-Lets briefly recall the formalism of simplicial and cosimplicial objects
-which underlies the Cech nerve.
-
-\begin{definition}[Simplicial and cosimplicial objects]
-	Let $\Delta$ denote the simplex category, whose objects are the finite ordered sets
-	$[n]=\{0,\dots,n\}$ and whose morphisms are non-decreasing maps.
+\begin{definition}[Cartesian morphisms, fibred categories]\label{def:fibred-category}
+	(\cite[][Definitions~3.1 and 3.5]{vistoli2007notes})
+	Let $p:\mathcal{S}\to\CatC$ be a functor. A morphism $\phi:\xi\to\eta$ in $\mathcal{S}$ is \emph{cartesian} if for every $\psi:\zeta\to\eta$ in $\mathcal{S}$ and every $h:p(\zeta)\to p(\xi)$ in $\CatC$ with $p(\phi)\circ h=p(\psi)$ there is a unique $\chi:\zeta\to\xi$ with $p(\chi)=h$ and $\phi\circ\chi=\psi$. The functor $p$ is a \emph{fibred category} if for every $f:T'\to T$ in $\CatC$ and every $\eta$ over $T$ there is a cartesian morphism $\xi\to\eta$ over $f$.
 	
-	\begin{enumerate}
-		\item A simplicial object in a category $\mathcal{C}$ is a functor
-		\[
-		X_\bullet : \Delta^{op} \to \mathcal{C}.
-		\]
-		
-		\item A cosimplicial object in $\mathcal{C}$ is a functor
-		\[
-		X^\bullet : \Delta \to \mathcal{C}.
-		\]
-	\end{enumerate}
-	
-	Equivalently, a simplicial (resp.\ cosimplicial) object consists of objects
-	$X_n$ together with face and degeneracy maps satisfying the simplicial identities.
+	The \emph{fibre} $\mathcal{S}(T)$ over $T\in\CatC$ is the subcategory of objects over $T$ and morphisms over $\mathrm{id}_T$. We fix a choice of cartesian morphisms $f^*\eta\to\eta$ over every $f$ (a cleavage). This gives pullback functors $f^*:\mathcal{S}(T)\to\mathcal{S}(T')$ and canonical isomorphisms $g^*f^*\cong(f\circ g)^*$, i.e.\ a pseudofunctor $\CatC^{\op}\to\Cat$, $T\mapsto\mathcal{S}(T)$. Conversely every pseudofunctor arises in this way (Grothendieck construction, compare Proposition~\ref{prop:grothendieck-construction}).
 \end{definition}
 
-\begin{example}[Cech nerve as a simplicial object]
-	Let $f : U \to X$ be a morphism in a category with fiber products.
-	The Čech nerve
-	\[
-	U_\bullet : \Delta^{op} \to \mathcal{C},
-	\qquad
-	U_n = \underbrace{U \times_X \cdots \times_X U}_{n+1 \text{ times}}.
-	\]
-	is a simplicial object.
-	
-	\begin{itemize}
-		\item The face maps forget one factor:
-		\[
-		d^i : U_n \to U_{n-1}, \qquad
-		(u_0,\dots,u_n) \mapsto (u_0,\dots,\widehat{u_i},\dots,u_n).
-		\]
-		
-		\item The degeneracy maps repeat a factor via diagonals:
-		\[
-		s^i : U_n \to U_{n+1}, \qquad
-		(u_0,\dots,u_n) \mapsto (u_0,\dots,u_i,u_i,\dots,u_n).
-		\]
-	\end{itemize}
-\end{example}
-
-\begin{example}[From simplicial to cosimplicial via a presheaf]
-	Let $F : \mathcal{C}^{op} \to \mathcal{D}$ be a presheaf.
-	Applying $F$ to a simplicial object $U_\bullet$ produces a cosimplicial object
-	\[
-	F(U_\bullet) : \Delta \to \mathcal{D}, \qquad
-	[n] \mapsto F(U_n).
-	\]
-	
-	Concretely, the two face maps
-	\[
-	U \times_X U \rightrightarrows U
-	\]
-	induce two maps
-	\[
-	F(U) \rightrightarrows F(U \times_X U),
-	\]
-	and similarly in higher degrees.
-	
-	This reversal of arrows is the reason why descent naturally involves
-	\emph{cosimplicial} objects.
-\end{example}
-
-\begin{example}[Very concrete example: sets]
-	Let $F: \Sch^\op \to \Set$ be a presheaf of sets and let $U \to X$ be a morphism.
-	Then the beginning of the cosimplicial diagram $F(U_\bullet)$ is
-	\[
-	F(U)
-	\rightrightarrows
-	F(U \times_X U).
-	\]
-	
-	The totalization reduces to the equalizer
-	\[
-	F(X)
-	\cong
-	\left\{
-	s \in F(U)
-	\;\middle|\;
-	\pi_1^*(s) = \pi_2^*(s)
-	\;\text{in } F(U \times_X U)
-	\right\},
-	\]
-	which is precisely the usual sheaf condition.
-\end{example}
-
-\begin{definition}[Descent datum]
-	Let $\CatC$ be a category with pullbacks, $F: \CatC^\op\to \Cat$ a pseudo functor and $U \to X$ a morphism. A descent datum for $F$ along $p:U \to X$ consists of
+\begin{lemma}[Calculus of cartesian morphisms]\label{lem:cartesian-calculus}
+	(\cite[][Proposition~3.4]{vistoli2007notes})
+	Let $p:\mathcal{S}\to\CatC$ be a functor.
 	\begin{enumerate}
-		\item an object $x\in F(U)$,
-		\item an isomorphism $\alpha:d^0(x) \xrightarrow{\sim} d^1(x)$ in $F(U\times_X U))$ between two pullbacks of $x$ to
-		$U\times_X U$, such that $s^0(\alpha) = id_x$
-		\item a cocycle condition $d^2(\alpha)\circ d^0(\alpha) = d^1(\alpha)$ in $F(U\times_X U\times_X U)$, i.e. the following commutes:
-		% https://q.uiver.app/#q=WzAsMyxbMCwxLCJkXjBkXjAoeCkiXSxbMiwxLCJkXjFkXjEoeCkiXSxbMSwwLCJkXjBkXjEoeCkiXSxbMCwxLCJkXjFcXGFscGhhIiwyXSxbMCwyLCJkXjBcXGFscGhhIl0sWzIsMSwiZF4yXFxhbHBoYSJdXQ==
-		\[\begin{tikzcd}
-			& {d^0d^1(x)} & \\
-			{d^0d^0(x)} && {d^1d^1(x)}
-			\arrow["{d^2\alpha}", from=1-2, to=2-3]
-			\arrow["{d^0\alpha}", from=2-1, to=1-2]
-			\arrow["{d^1\alpha}"', from=2-1, to=2-3]
-		\end{tikzcd}\]
+		\item Composites of cartesian morphisms are cartesian.
+		\item If $\phi:\xi\to\eta$ and $\psi:\eta\to\zeta$ are morphisms with $\psi$ and $\psi\circ\phi$ cartesian, then $\phi$ is cartesian.
+		\item A morphism over an identity is cartesian if and only if it is an isomorphism.
+		\item If $\phi:\xi\to\eta$ and $\phi':\xi'\to\eta$ are cartesian over the same $f$, there is a unique isomorphism $\xi'\to\xi$ over $\mathrm{id}$ compatible with $\phi,\phi'$.
 	\end{enumerate}
-	A morphism of descent data
+\end{lemma}
+
+\begin{proof}
+	(1), (2) and (4) follow directly from the uniqueness in the universal property; (3) follows from (4) applied to $\phi$ and $\mathrm{id}_\eta$.
+\end{proof}
+
+The universal property will mostly be used in the following form: if $\phi:\xi\to\eta$ is cartesian over $f$, then morphisms $\zeta\to\xi$ over a fixed $h$ correspond bijectively, via $\phi\circ-$, to morphisms $\zeta\to\eta$ over $f\circ h$.
+
+\begin{example}\label{ex:fibred-categories}
+	\leavevmode
+	\begin{enumerate}
+		\item \textbf{Quasi-coherent sheaves.} Let $\QCoh\to\Sch$ be the category of pairs $(T,\mathcal{E})$ with $\mathcal{E}\in\QCoh(T)$, where a morphism $(T',\mathcal{E}')\to(T,\mathcal{E})$ is a pair $(g,u)$ of a morphism $g:T'\to T$ and an $\OO_{T'}$-linear map $u:g^*\mathcal{E}\to\mathcal{E}'$. It is a fibred category with fibres $\QCoh(T)$, and $(g,u)$ is cartesian if and only if $u$ is an isomorphism (\cite[][Section~3.2]{vistoli2007notes}).
+		\item \textbf{Modules.} Let $\mathcal{M}\to\Aff$ be the category of pairs $(\Specof{A},M)$ with $M\in\Mod_A$, where a morphism $(\Specof{B},N)\to(\Specof{A},M)$ over $g:\Specof{B}\to\Specof{A}$ is a $B$-linear map $u:B\otimes_AM\to N$, equivalently an $A$-linear map $M\to N$. Again $(g,u)$ is cartesian if and only if $u$ is an isomorphism. By \cite[][Tags 01IB, 01I9]{stacks-project}, $M\mapsto\widetilde{M}$ is an equivalence of fibred categories $\mathcal{M}\simeq\QCoh|_{\Aff}$ over $\Aff$.
+		\item \textbf{Presheaves of sets.} A presheaf $F:\CatC^{\op}\to\Set$ gives the fibred category $\int F\to\CatC$ of pairs $(T,s)$, $s\in F(T)$, with a unique morphism $(T',s')\to(T,s)$ over $g$ if $g^*s=s'$. Its fibres are discrete and every morphism is cartesian.
+	\end{enumerate}
+\end{example}
+
+%==========================================================
+\section{The descent category}
+%==========================================================
+
+We use the notation of Definitions~\ref{def:simplicial-objects} and~\ref{def:cech-nerve}. In addition, for $0\le k\le l\le m\le n$ we write
+\[
+\begin{aligned}
+	v_k&:[0]\to[n], & 0&\mapsto k,\\
+	e_{kl}&:[1]\to[n], & (0,1)&\mapsto(k,l),\\
+	t_{klm}&:[2]\to[n], & (0,1,2)&\mapsto(k,l,m)
+\end{aligned}
+\]
+for the vertices, edges and triangles of $\Delta^n$. For a simplicial object $Y_\bullet$ and $\theta:[m]\to[n]$ we write $Y(\theta):Y_n\to Y_m$. For the \v{C}ech nerve, $Y(v_k)=\mathrm{pr}_k$ and $Y(e_{kl})=\mathrm{pr}_{kl}$ are the projections. Note that $e_{kl}\circ\delta^1=v_k$ and $e_{kl}\circ\delta^0=v_l$, and that $t_{klm}\circ\delta^2=e_{kl}$, $t_{klm}\circ\delta^0=e_{lm}$, $t_{klm}\circ\delta^1=e_{km}$.
+
+\begin{definition}[Descent category]\label{def:descent-category}
+	Let $p:\mathcal{S}\to\CatC$ be a fibred category and let $Y_\bullet:\Delta^{\op}\to\CatC$ be a simplicial object.
+	\begin{enumerate}
+		\item A \emph{cartesian lift} of $Y_\bullet$ is a simplicial object $\xi_\bullet:\Delta^{\op}\to\mathcal{S}$ with $p\circ\xi_\bullet=Y_\bullet$ such that $\xi(\theta):\xi_n\to\xi_m$ is cartesian for every $\theta:[m]\to[n]$.
+		\item A morphism of cartesian lifts $a_\bullet:\xi_\bullet\to\eta_\bullet$ is a natural transformation with $p(a_n)=\mathrm{id}_{Y_n}$ for all $n$.
+	\end{enumerate}
+	We write $\Desc(Y_\bullet;\mathcal{S})$ for the resulting category. For a morphism $f:U\to X$ in a category with fibre products, the \emph{category of descent data along $f$} is
 	\[
-	f:(x,\alpha)\longrightarrow (y,\beta)
+	\Desc_f(\mathcal{S}):=\Desc\bigl(\check{C}(U/X)_\bullet;\mathcal{S}\bigr).
 	\]
-	is a morphism
-	\[
-	f:x\to y
-	\]
-	in $F(U)$ such that the diagram
-	\[
-	\begin{tikzcd}
-		d^0(x) \arrow[r,"\alpha"] \arrow[d,"d^0(f)"'] &
-		d^1(x) \arrow[d,"d^1(f)"] \\
-		d^0(y) \arrow[r,"\beta"'] &
-		d^1(y)
-	\end{tikzcd}
-	\]
-	commutes in $F(U\times_X U)$.
-	We write $\Desc_p(F)$ for the category whose objects are descent data and
-	whose morphisms are morphisms of descent data.
+	For $\mathcal{S}=\QCoh$ we also write $\Desc(U/X):=\Desc_f(\QCoh)$.
 \end{definition}
 
-\begin{remark}[Descent data as a 2-categorical totalization]
-	Let \(p:U\to X\) be a cover and let
+\begin{definition}[Pullback to descent data]\label{con:pullback-to-descent}
+	Let $\varepsilon_n:\check{C}(U/X)_n\to X$ be the augmentation, so $\varepsilon_m\circ Y(\theta)=\varepsilon_n$. For $\xi\in\mathcal{S}(X)$ set $\xi_n:=\varepsilon_n^*\xi$ with its cartesian morphism $\gamma_n:\xi_n\to\xi$. For $\theta:[m]\to[n]$ let $\xi(\theta):\xi_n\to\xi_m$ be the unique morphism over $Y(\theta)$ with $\gamma_m\circ\xi(\theta)=\gamma_n$. Uniqueness gives functoriality, and $\xi(\theta)$ is cartesian by Lemma~\ref{lem:cartesian-calculus}(2). This defines a functor
 	\[
-	U_\bullet
+	f^*:\mathcal{S}(X)\longrightarrow\Desc_f(\mathcal{S}),
 	\]
-	be its \v{C}ech nerve. Applying the pseudofunctor
-	\[
-	F:\CatC^{op}\to\Cat
-	\]
-	gives a pseudocosimplicial category
-	\[
-	F(U_\bullet):\Delta\to\Cat .
-	\]
-	From a 2-categorical point of view, the category of descent data should be thought of as the pseudo-limit of the beginning of this cosimplicial diagram:
-	\[
-	\begin{tikzcd}
-		{F(U)} & {F(U\times_XU)} & {F(U\times_XU\times_XU)} .
-		\arrow[shift left, from=1-1, to=1-2]
-		\arrow[shift right, from=1-1, to=1-2]
-		\arrow[from=1-2, to=1-3]
-		\arrow[shift left=2, from=1-2, to=1-3]
-		\arrow[shift right=2, from=1-2, to=1-3]
-	\end{tikzcd}
-	\]
-	Thus an object of this pseudo-limit consists of an object \(x\in F(U)\), together
-	with an invertible comparison morphism
-	\[
-	\alpha:d^0x\xrightarrow{\sim}d^1x
-	\]
-	in \(F(U\times_XU)\). The compatibility of the pseudo-cone with the degeneracy map
-	gives the normalization condition
-	\[
-	s^0(\alpha)=id_x,
-	\]
-	and the compatibility with the three coface maps gives the cocycle condition
-	\[
-	d^2(\alpha)\circ d^0(\alpha)=d^1(\alpha)
-	\]
-	in \(F(U\times_XU\times_XU)\), up to the coherence isomorphisms of the
-	pseudofunctor \(F\). 
-	Thus the cocycle condition fits naturally into the higher-categorical
-	descent picture: It is the coherence condition appearing in
-	the corresponding totalization diagram.
-	
-	Equivalently, one may write informally
-	\[
-	\Desc_p(F)
-	\simeq
-	\operatorname{PsLim}_{[n]\in\Delta_{\leq 2}} F(U_n),
-	\]
-	where the right-hand side denotes the 2-categorical totalization of the
-	2-truncated \v{C}ech diagram.
-	\footnote{
-		Strictly speaking, the displayed pseudo-limit notation suppresses the coherence isomorphisms coming from the pseudofunctor \(F\). Hollander gives the corresponding explicit description for cosimplicial groupoids: 
-		The 2-truncated totalization \(\operatorname{Tot}_2\), which models the homotopy limit, has objects \((x,\alpha)\) satisfying a unit condition and a cocycle condition (see \cite[Corollary~2.11][]{hollander2001homotopy}).
-		In the proof of \cite[Theorem~3.9][]{hollander2001homotopy}, she identifies such objects with classical descent data for a cover.
-		Be aware that Hollander uses the opposite sign convention \(d^1(a)\xrightarrow{\alpha}d^0(a)\) for the comparison isomorphism.
-	}
+	and we say that $\mathcal{S}$ \emph{satisfies descent along $f$} if $f^*$ is an equivalence of categories. Descent data in the essential image of $f^*$ are called \emph{effective}.
+\end{definition}
+
+\begin{example}[Presheaves of sets]\label{ex:desc-sets}
+	For $\mathcal{S}=\int F$ as in Example~\ref{ex:fibred-categories}(3), a cartesian lift of $Y_\bullet$ is a family $s_n\in F(Y_n)$ with $Y(\theta)^*s_m=s_n$, and there are only identity morphisms. Hence $\Desc(Y_\bullet;\int F)$ is the discrete category $\lim_{\Delta}F(Y_\bullet)$, and $\int F$ satisfies descent along $f$ in the sense of Definition~\ref{con:pullback-to-descent} if and only if $F$ satisfies descent along $f$ in the sense of Definition~\ref{def:cech-descent}. Thus Definition~\ref{def:descent-category} literally extends the $1$-categorical sheaf condition.
+\end{example}
+
+\begin{remark}[The descent category as a totalization]\label{rem:desc-as-tot}
+	Definition~\ref{def:descent-category} is the categorical version of the totalization of a cosimplicial object.
+	\begin{enumerate}
+		\item \textbf{Pseudolimit.} Restricting $\mathcal{S}$ along $Y_\bullet$ gives a fibred category over $\Delta^{\op}$, i.e.\ by the Grothendieck construction the pseudo-cosimplicial category $[n]\mapsto\mathcal{S}(Y_n)$. Cartesian sections of a fibred category over an index category $I$ form the $2$-categorical (pseudo)limit of the corresponding diagram $I\to\Cat$ (\cite[][Example~3.14]{halpernleistner2020moduli}), and Halpern-Leistner accordingly uses the notation $\Tot\{\mathcal{S}(Y_\bullet)\}$ for the category $\Desc(Y_\bullet;\mathcal{S})$ (\cite[][Section~3.3.3]{halpernleistner2020moduli}). Pseudolimits of this kind are homotopy limits for the canonical model structure on $\Cat$ (\cite{gambino2008homotopy}). Hence
+		\[
+		\Desc_f(\mathcal{S})\simeq\operatorname{holim}_{[n]\in\Delta}\mathcal{S}\bigl(\check{C}(U/X)_n\bigr),
+		\]
+		which is the precise form of the slogan above.
+		\item \textbf{Simplicial sets.} Let $G^\bullet$ be a strict cosimplicial groupoid (for instance, a split model of the fibred category). The Bousfield--Kan totalization of the cosimplicial simplicial set $N(G^\bullet)$ is $\Tot N(G^\bullet)=\mathrm{Map}(\Delta^\bullet,N(G^\bullet))$. A map of simplicial sets $\Delta^n\times\Delta^k\to N(G^n)$ is a functor $[n]\times[k]\to G^n$, and since $G^n$ is a groupoid, this is the same as a functor out of the fundamental groupoid $\Pi_1(\Delta^n)\times\Pi_1(\Delta^k)$, where $\Pi_1(\Delta^n)$ is the indiscrete groupoid on $\{0,\dots,n\}$. Hence
+		\[
+		\Tot N(G^\bullet)\cong N\,\mathrm{Hom}_{c\Grpd}\bigl(\Pi_1(\Delta^\bullet),G^\bullet\bigr),
+		\]
+		which is Hollander's model for the homotopy limit of a cosimplicial groupoid (\cite[][Theorem~2.9]{hollander2001homotopy}). Since $\Pi_1(\Delta^n)$ is generated by the edges of $\Delta^n$ subject to the relations given by the $2$-simplices, i.e.\ $\Pi_1(\mathrm{sk}_2\Delta^\bullet)=\Pi_1(\Delta^\bullet)$, only $\Delta_{\le 2}$ matters. Hollander makes this explicit in \cite[][Corollary~2.11]{hollander2001homotopy}; Proposition~\ref{prop:desc-2-truncation} below is the corresponding statement for $\Desc(Y_\bullet;\mathcal{S})$, and its proof follows exactly this pattern of vertices, edges and triangles.
+	\end{enumerate}
 \end{remark}
 
-
-\begin{theorem}[Amitsur complex]
-	Let $A \to B$ be a faithfully flat morphism of rings. Then for every $A$-module $M$ the augmented Amitsur complex
+\begin{definition}[Classical descent data]\label{def:classical-descent-data}
+	Let $p:\mathcal{S}\to\CatC$ be a fibred category with a cleavage and $Y_\bullet$ a simplicial object of $\CatC$. We suppress the canonical isomorphisms $g^*f^*\cong(fg)^*$ from the notation. Let $\Desc^{\mathrm{cl}}(Y_\bullet;\mathcal{S})$ be the category whose objects are pairs $(\xi,\varphi)$ of an object $\xi\in\mathcal{S}(Y_0)$ and an isomorphism
 	\[
-	0 \to M
-	\longrightarrow B \otimes_A M
-	\longrightarrow B \otimes_A B \otimes_A M
-	\longrightarrow \cdots
+	\varphi:d_1^*\xi\xrightarrow{\ \sim\ }d_0^*\xi\qquad\text{in }\mathcal{S}(Y_1)
 	\]
-	is exact.
-\end{theorem}
-
-
-\begin{theorem}[Faithfully flat descent for modules]
-	\label{thm:faithfully-flat-descent-modules}
-	(\cite[Tag 023N]{stacks-project})
-	Let \(R\to S\) be a faithfully flat ring homomorphism, and 
+	satisfying the cocycle condition
 	\[
-		f:U:=\Spec(S)\longrightarrow X:=\Spec(R)
+	d_1^*\varphi=d_0^*\varphi\circ d_2^*\varphi\qquad\text{in }\mathcal{S}(Y_2).
 	\]
-	be the induced morphism of affine schemes. $U_\bullet$ denote the Čech nerve of $f$, so that
-	\[
-	U_n= \underbrace{U\times_X\cdots\times_X U}_{n+1\text{ factors}} \cong \Spec\bigl(S^{\otimes_R(n+1)}\bigr)
-	\]
-	Consider the pseudofunctor
-	\[
-		\mathcal M:\Aff^{\op}\longrightarrow\Cat, \qquad Y\longmapsto\Mod(Y),
-	\]
-	where $\Mod(Y)=\Mod_A$ for $Y=\Spec(A)$ and morphisms are sent to pullback functors, which are given by sending a morphism $g^*:\Spec(B)\to \Spec(A)$ to the extension of
-	scalars functor
-	\[
-	B\otimes_A -:\Mod_A\to\Mod_B,
-	\]
-	induced the morphism \(g:A\to B\).
-	Then the canonical functor
-	\[
-		f^*:\Mod(X)\longrightarrow\Desc_f(\mathcal M)
-	\]
-	is an equivalence of categories.
-	
-	An object of \(\Desc_f(\mathcal M)\) is an \(S\)-module \(N\), together
-	with an isomorphism
-	\[
-	\alpha:d^0N\xrightarrow{\sim}d^1N
-	\]
-	in \(\Mod_{S\otimes_R S}\), satisfying
-	\[
-	s^0(\alpha)=id_N
-	\]
-	and
-	\[
-	d^2(\alpha)\circ d^0(\alpha)=d^1(\alpha)
-	\]
-	in \(\Mod_{S\otimes_R S\otimes_R S}\).
-	
-	Equivalently, if
-	\[
-	\pi_1,\pi_2:S\to S\otimes_R S
-	\]
-	are given by
-	\[
-	\pi_1(s)=s\otimes 1,
-	\qquad
-	\pi_2(s)=1\otimes s,
-	\]
-	then
-	\[
-	d^0N=\pi_1^*N,
-	\qquad
-	d^1N=\pi_2^*N,
-	\]
-	and \(\alpha\) is an isomorphism
-	\[
-	\alpha:
-	\pi_1^*N\xrightarrow{\sim}\pi_2^*N.
-	\]
-	The cocycle condition becomes
-	\[
-	\pi_{23}^*(\alpha)\circ \pi_{12}^*(\alpha)
-	=
-	\pi_{13}^*(\alpha)
-	\]
-	in \(\Mod_{S\otimes_R S\otimes_R S}\), where
-	\[
-	\pi_{12},\pi_{13},\pi_{23}:S\otimes_R S
-	\to S\otimes_R S\otimes_R S
-	\]
-	are defined by
-	\[
-	\pi_{12}(s\otimes t)=s\otimes t\otimes 1,
-	\qquad
-	\pi_{13}(s\otimes t)=s\otimes 1\otimes t,
-	\qquad
-	\pi_{23}(s\otimes t)=1\otimes s\otimes t.
-	\]
-	
-
-	Then the canonical functor
-	\[
-	\Mod_R\longrightarrow \Desc(S/R)
-	\]
-	is an equivalence of categories. Explicitly, it sends an \(R\)-module \(M\)
-	to
-	\[
-	M\longmapsto (S\otimes_R M,\alpha_M),
-	\]
-	where \(\alpha_M\) is the canonical descent isomorphism
-	\[
-	d^0(S\otimes_R M)
-	\xrightarrow{\sim}
-	d^1(S\otimes_R M),
-	\]
-	equivalently
-	\[
-	\pi_1^*(S\otimes_R M)
-	\xrightarrow{\sim}
-	\pi_2^*(S\otimes_R M).
-	\]
-\end{theorem}
-
-\begin{proof}
-	For an $R$-module $M$, set
-	\[
-	F(M):=(S\otimes_R M,\alpha_M),
-	\]
-	where $\alpha_M$ is the canonical descent datum. This defines a functor
-	\[
-	F:\Mod_R\to \Desc(S/R).
-	\]
-	
-	Conversely, let $(N,\alpha)\in \Desc(S/R)$. Define
-	\[
-	G(N,\alpha):=
-	\{\,n\in N \mid \alpha(1\otimes n)=n\otimes 1\,\}.
-	\]
-	Equivalently, $G(N,\alpha)$ is the equalizer of the two maps
-	\[
-	N \rightrightarrows N\otimes_R S,
-	\qquad
-	n\mapsto \alpha(n\otimes 1),\quad n\mapsto n\otimes 1.
-	\]
-	This gives a functor
-	\[
-	G:\Desc(S/R)\to \Mod_R.
-	\]
-	
-	We show that $F$ and $G$ are quasi-inverse.
-	
-	First, let $M\in \Mod_R$. Then
-	\[
-	G(F(M))
-	=
-	\{\,x\in S\otimes_R M \mid x\otimes 1 = \alpha_M(1\otimes x)\,\}.
-	\]
-	By the exactness of the Amitsur complex for the faithfully flat map
-	$R\to S$, the sequence
-	\[
-	0\to M \to S\otimes_R M \rightrightarrows S\otimes_R S\otimes_R M
-	\]
-	is exact. Hence the equalizer above is canonically identified with $M$.
-	Thus
-	\[
-	G(F(M))\cong M.
-	\]
-	
-	Now let $(N,\alpha)\in \Desc(S/R)$. Set $M:=G(N,\alpha)$. There is a natural
-	$S$-linear map
-	\[
-	\theta:S\otimes_R M\longrightarrow N,\qquad s\otimes m\longmapsto sm.
-	\]
-	We claim that $\theta$ is an isomorphism.
-	
-	To prove this, consider the augmented twisted Amitsur complex $s(N_\bullet)$ associated to the descent datum $(N,\alpha)$, given by $s(N_n) = N \otimes_R S^{\otimes_R n}$ with $s(N_{-1}) = M$:
-	% https://q.uiver.app/#q=WzAsNixbMCwwLCIwIl0sWzEsMCwiTSJdLFsyLDAsIk4iXSxbMywwLCJOXFxvdGltZXNfUiBTIl0sWzQsMCwiTlxcb3RpbWVzX1IgU1xcb3RpbWVzX1IgUyJdLFs1LDAsIlxcY2RvdHMiXSxbMCwxXSxbMSwyLCJcXGlvdGEiXSxbMiwzLCJuXFxtYXBzdG8gXFxhbHBoYSgxXFxvdGltZXMgbikiLDIseyJvZmZzZXQiOjF9XSxbMiwzLCJuXFxtYXBzdG8gblxcb3RpbWVzIDEiLDAseyJvZmZzZXQiOi0xfV0sWzMsNF0sWzMsNCwiIiwwLHsib2Zmc2V0IjotMn1dLFszLDQsIiIsMCx7Im9mZnNldCI6Mn1dLFs0LDUsIiIsMCx7Im9mZnNldCI6LTF9XSxbNCw1LCIiLDAseyJvZmZzZXQiOi0zfV0sWzQsNSwiIiwwLHsib2Zmc2V0IjoxfV0sWzQsNSwiIiwwLHsib2Zmc2V0IjozfV1d
-	\[\begin{tikzcd}
-		0 & M & N & {N\otimes_R S} & {N\otimes_R S\otimes_R S} & \cdots
-		\arrow[from=1-1, to=1-2]
-		\arrow["\iota", from=1-2, to=1-3]
-		\arrow["{n\mapsto \alpha(1\otimes n)}"', shift right, from=1-3, to=1-4]
-		\arrow["{n\mapsto n\otimes 1}", shift left, from=1-3, to=1-4]
-		\arrow[from=1-4, to=1-5]
-		\arrow[shift left=2, from=1-4, to=1-5]
-		\arrow[shift right=2, from=1-4, to=1-5]
-		\arrow[shift left, from=1-5, to=1-6]
-		\arrow[shift left=3, from=1-5, to=1-6]
-		\arrow[shift right, from=1-5, to=1-6]
-		\arrow[shift right=3, from=1-5, to=1-6]
-	\end{tikzcd}\]
-	This is exact by construction of $M$ and faithfully flatness of $R\to S$, i.e. $H^0(s(N_\bullet)) = M$.
-	
-	Now we tensor this complex with $S\otimes_R - $ and untwist the sequence using the descent datum $\alpha$:
-	
-	% https://q.uiver.app/#q=WzAsMTAsWzAsMCwiMCJdLFsxLDAsIlNcXG90aW1lc19SIE0iXSxbMiwwLCJTXFxvdGltZXNfUk4iXSxbMywwLCJTXFxvdGltZXNfUiBOXFxvdGltZXNfUiBTIl0sWzQsMCwiU1xcb3RpbWVzX1IgTlxcb3RpbWVzX1IgU1xcb3RpbWVzX1IgUyJdLFswLDEsIjAiXSxbMSwxLCJTXFxvdGltZXNfUk0iXSxbMiwxLCJOXFxvdGltZXNfUiBTIl0sWzMsMSwiTlxcb3RpbWVzX1IgU1xcb3RpbWVzX1IgUyJdLFs0LDEsIk5cXG90aW1lc19SIFNcXG90aW1lc19SIFNcXG90aW1lc19SIFMiXSxbMCwxXSxbMSwyXSxbMiwzLCIiLDAseyJvZmZzZXQiOi0xfV0sWzIsMywiIiwwLHsib2Zmc2V0IjoxfV0sWzMsNF0sWzMsNCwiIiwwLHsib2Zmc2V0IjotMn1dLFszLDQsIiIsMCx7Im9mZnNldCI6Mn1dLFsxLDYsIj0iXSxbNSw2XSxbNiw3LCJcXHBzaSJdLFsyLDcsIlxcYWxwaGEiXSxbNyw4LCIiLDAseyJvZmZzZXQiOi0xfV0sWzMsOCwiXFxhbHBoYVxcb3RpbWVzIGlkIl0sWzgsOV0sWzgsOSwiIiwwLHsib2Zmc2V0IjotMn1dLFs4LDksIiIsMCx7Im9mZnNldCI6Mn1dLFs0LDksIlxcYWxwaGFcXG90aW1lcyBpZFxcb3RpbWVzIGlkIl0sWzcsOCwiIiwwLHsib2Zmc2V0IjoxfV1d
-	\[\begin{tikzcd}
-		0 & {S\otimes_R M} & {S\otimes_RN} & {S\otimes_R N\otimes_R S} & {S\otimes_R N\otimes_R S\otimes_R S} \\
-		0 & {S\otimes_RM} & {N\otimes_R S} & {N\otimes_R S\otimes_R S} & {N\otimes_R S\otimes_R S\otimes_R S}
-		\arrow[from=1-1, to=1-2]
-		\arrow[from=1-2, to=1-3]
-		\arrow["{=}", from=1-2, to=2-2]
-		\arrow[shift left, from=1-3, to=1-4]
-		\arrow[shift right, from=1-3, to=1-4]
-		\arrow["\alpha", from=1-3, to=2-3]
-		\arrow[from=1-4, to=1-5]
-		\arrow[shift left=2, from=1-4, to=1-5]
-		\arrow[shift right=2, from=1-4, to=1-5]
-		\arrow["{\alpha\otimes id}", from=1-4, to=2-4]
-		\arrow["{\alpha\otimes id\otimes id}", from=1-5, to=2-5]
-		\arrow[from=2-1, to=2-2]
-		\arrow["\psi", from=2-2, to=2-3]
-		\arrow[shift left, from=2-3, to=2-4]
-		\arrow[shift right, from=2-3, to=2-4]
-		\arrow[from=2-4, to=2-5]
-		\arrow[shift left=2, from=2-4, to=2-5]
-		\arrow[shift right=2, from=2-4, to=2-5]
-	\end{tikzcd}\]
-
-	The morphism $\psi: S\otimes_R M \to N\otimes_R S$ factors as 
-	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJTXFxvdGltZXNfUk0iXSxbMSwwLCJTXFxvdGltZXNfUk4iXSxbMiwwLCJOXFxvdGltZXNfUlMiXSxbMCwxLCJTXFxvdGltZXNfUlxcaW90YSJdLFsxLDIsIlxcYWxwaGEiXV0=
-	\[\begin{tikzcd}
-		{S\otimes_RM} & {S\otimes_RN} & {N\otimes_RS},
-		\arrow["{S\otimes_R\iota}", from=1-1, to=1-2]
-		\arrow["\alpha", from=1-2, to=1-3]
-	\end{tikzcd}\]
-
-	where $\iota$ is the inclusion $M\subset N$. Since for all $m\in M$ we have $\alpha(1\otimes m) = m\otimes 1$, we get 
-	$\psi(s\otimes m) = \alpha(s\otimes m) = \alpha((s\otimes 1)(1\otimes m)) = (s\otimes 1)\alpha(1\otimes m) = (s\otimes 1)(m\otimes 1) = (sm)\otimes 1$ by $S\otimes_R S$-linearity of $\alpha$. Hence, this morphisms $\psi$ is given by $s\otimes m\mapsto (sm)\otimes 1$.
-	
-	Now we compare the second row to the Amitsur complex $N_\bullet$ of $N$:
-	% https://q.uiver.app/#q=WzAsMTUsWzAsMCwiMCJdLFsxLDAsIlNcXG90aW1lc19SIE0iXSxbMiwwLCJTXFxvdGltZXNfUk4iXSxbMywwLCJTXFxvdGltZXNfUiBOXFxvdGltZXNfUiBTIl0sWzQsMCwiU1xcb3RpbWVzX1IgTlxcb3RpbWVzX1IgU1xcb3RpbWVzX1IgUyJdLFswLDEsIjAiXSxbMSwxLCJTXFxvdGltZXNfUk0iXSxbMiwxLCJOXFxvdGltZXNfUiBTIl0sWzMsMSwiTlxcb3RpbWVzX1IgU1xcb3RpbWVzX1IgUyJdLFs0LDEsIk5cXG90aW1lc19SIFNcXG90aW1lc19SIFNcXG90aW1lc19SIFMiXSxbMCwyLCIwIl0sWzEsMiwiTiJdLFsyLDIsIk5cXG90aW1lc19SIFMiXSxbMywyLCJOXFxvdGltZXNfUiBTXFxvdGltZXNfUiBTIl0sWzQsMiwiTlxcb3RpbWVzX1IgU1xcb3RpbWVzX1IgU1xcb3RpbWVzX1IgUyJdLFswLDFdLFsxLDJdLFsyLDMsIiIsMCx7Im9mZnNldCI6LTF9XSxbMiwzLCIiLDAseyJvZmZzZXQiOjF9XSxbMyw0XSxbMyw0LCIiLDAseyJvZmZzZXQiOi0yfV0sWzMsNCwiIiwwLHsib2Zmc2V0IjoyfV0sWzEsNiwiPSJdLFs1LDZdLFs2LDcsIlxccHNpIl0sWzIsNywiXFxhbHBoYSJdLFs3LDgsIiIsMCx7Im9mZnNldCI6LTF9XSxbMyw4LCJcXGFscGhhXFxvdGltZXMgaWQiXSxbOCw5XSxbOCw5LCIiLDAseyJvZmZzZXQiOi0yfV0sWzgsOSwiIiwwLHsib2Zmc2V0IjoyfV0sWzQsOSwiXFxhbHBoYVxcb3RpbWVzIGlkXFxvdGltZXMgaWQiXSxbNyw4LCIiLDAseyJvZmZzZXQiOjF9XSxbNiwxMSwiXFx0aGV0YSJdLFsxMCwxMV0sWzExLDEyXSxbMTIsMTMsIiIsMix7Im9mZnNldCI6MX1dLFsxMiwxMywiIiwyLHsib2Zmc2V0IjotMX1dLFsxMywxNF0sWzEzLDE0LCIiLDIseyJvZmZzZXQiOi0yfV0sWzEzLDE0LCIiLDIseyJvZmZzZXQiOjJ9XSxbNywxMiwiPSJdLFs4LDEzLCI9Il0sWzksMTQsIj0iXV0=
-	\[\begin{tikzcd}
-		0 & {S\otimes_R M} & {S\otimes_RN} & {S\otimes_R N\otimes_R S} & {S\otimes_R N\otimes_R S\otimes_R S} \\
-		0 & {S\otimes_RM} & {N\otimes_R S} & {N\otimes_R S\otimes_R S} & {N\otimes_R S\otimes_R S\otimes_R S} \\
-		0 & N & {N\otimes_R S} & {N\otimes_R S\otimes_R S} & {N\otimes_R S\otimes_R S\otimes_R S}
-		\arrow[from=1-1, to=1-2]
-		\arrow[from=1-2, to=1-3]
-		\arrow["{=}", from=1-2, to=2-2]
-		\arrow[shift left, from=1-3, to=1-4]
-		\arrow[shift right, from=1-3, to=1-4]
-		\arrow["\alpha", from=1-3, to=2-3]
-		\arrow[from=1-4, to=1-5]
-		\arrow[shift left=2, from=1-4, to=1-5]
-		\arrow[shift right=2, from=1-4, to=1-5]
-		\arrow["{\alpha\otimes id}", from=1-4, to=2-4]
-		\arrow["{\alpha\otimes id\otimes id}", from=1-5, to=2-5]
-		\arrow[from=2-1, to=2-2]
-		\arrow["\psi", from=2-2, to=2-3]
-		\arrow["\theta", from=2-2, to=3-2]
-		\arrow[shift left, from=2-3, to=2-4]
-		\arrow[shift right, from=2-3, to=2-4]
-		\arrow["{=}", from=2-3, to=3-3]
-		\arrow[from=2-4, to=2-5]
-		\arrow[shift left=2, from=2-4, to=2-5]
-		\arrow[shift right=2, from=2-4, to=2-5]
-		\arrow["{=}", from=2-4, to=3-4]
-		\arrow["{=}", from=2-5, to=3-5]
-		\arrow[from=3-1, to=3-2]
-		\arrow[from=3-2, to=3-3]
-		\arrow[shift right, from=3-3, to=3-4]
-		\arrow[shift left, from=3-3, to=3-4]
-		\arrow[from=3-4, to=3-5]
-		\arrow[shift left=2, from=3-4, to=3-5]
-		\arrow[shift right=2, from=3-4, to=3-5]
-	\end{tikzcd}\]
-	
-	By definition of $\theta$, this diagram commutes, i.e. $\psi(s\otimes m) = sm\otimes 1 = \theta(s\otimes m)\otimes 1$.
-	
-	Since $R\to S$ is faithfully flat, the Amitsur $N_\bullet$ complex is exact.
-	
-	% https://q.uiver.app/#q=WzAsMTAsWzAsMCwiMCJdLFsxLDAsIlNcXG90aW1lc19STSJdLFsyLDAsIlNcXG90aW1lc19SIE4iXSxbMywwLCJTXFxvdGltZXNfUiBOXFxvdGltZXNfUiBTIl0sWzQsMCwiXFxjZG90cyJdLFswLDEsIjAiXSxbMSwxLCJOIl0sWzIsMSwiTlxcb3RpbWVzX1IgUyJdLFszLDEsIk5cXG90aW1lc19SIFNcXG90aW1lc19SIFMiXSxbNCwxLCJcXGNkb3RzIl0sWzAsMV0sWzEsMiwiXFxwc2kiXSxbMiwzLCIiLDAseyJvZmZzZXQiOi0xfV0sWzMsNF0sWzMsNCwiIiwwLHsib2Zmc2V0IjotMn1dLFszLDQsIiIsMCx7Im9mZnNldCI6Mn1dLFsyLDMsIiIsMCx7Im9mZnNldCI6MX1dLFsxLDYsIlxcdGhldGEiXSxbNSw2XSxbNiw3XSxbNyw4LCIiLDIseyJvZmZzZXQiOjF9XSxbNyw4LCIiLDIseyJvZmZzZXQiOi0xfV0sWzgsOV0sWzgsOSwiIiwyLHsib2Zmc2V0IjotMn1dLFs4LDksIiIsMix7Im9mZnNldCI6Mn1dLFsyLDcsIj0iXSxbMyw4LCI9Il1d
-	\[\begin{tikzcd}
-		0 & {S\otimes_RM} & {S\otimes_R N} & {S\otimes_R N\otimes_R S} & \cdots \\
-		0 & N & {N\otimes_R S} & {N\otimes_R S\otimes_R S} & \cdots
-		\arrow[from=1-1, to=1-2]
-		\arrow["\psi", from=1-2, to=1-3]
-		\arrow["\theta", from=1-2, to=2-2]
-		\arrow[shift left, from=1-3, to=1-4]
-		\arrow[shift right, from=1-3, to=1-4]
-		\arrow["{=}", from=1-3, to=2-3]
-		\arrow[from=1-4, to=1-5]
-		\arrow[shift left=2, from=1-4, to=1-5]
-		\arrow[shift right=2, from=1-4, to=1-5]
-		\arrow["{=}", from=1-4, to=2-4]
-		\arrow[from=2-1, to=2-2]
-		\arrow[from=2-2, to=2-3]
-		\arrow[shift right, from=2-3, to=2-4]
-		\arrow[shift left, from=2-3, to=2-4]
-		\arrow[from=2-4, to=2-5]
-		\arrow[shift left=2, from=2-4, to=2-5]
-		\arrow[shift right=2, from=2-4, to=2-5]
-	\end{tikzcd}\]
-	
-	
-	
-	 Hence, we obtain an isomorphism
-	\[
-	S\otimes_R M \xrightarrow{\theta} H^0(N_\bullet) \cong N
-	\]
-	Moreover, under this isomorphism the canonical descent
-	datum on $S\otimes_R M$ identifies with the given descent datum $\alpha$ on
-	$N$. Hence
-	\[
-	F(G(N,\alpha))\cong (N,\alpha).
-	\]
-	
-	Therefore $F$ and $G$ are quasi-inverse equivalences.
-\end{proof}
-
-\begin{definition}[Descent category for quasi-coherent sheaves]
-	Let \(f:U\to X\) be a morphism of schemes. Consider the pseudofunctor
-	\[
-	\QCoh:\Sch^{op}\to\Cat,
-	\qquad
-	X\longmapsto \QCoh(X).
-	\]
-	We write
-	\[
-	\Desc(U/X)
-	:=
-	\Desc_f(\QCoh)
-	\]
-	for the category of descent data for \(\QCoh\) along \(f\).
-	
-	Concretely, an object of \(\Desc(U/X)\) is a pair
-	\[
-	(\mathcal F,\alpha)
-	\]
-	consisting of a quasi-coherent sheaf \(\mathcal F\in\QCoh(U)\), together with
-	an isomorphism
-	\[
-	\alpha:\pi_1^*\mathcal F\xrightarrow{\sim}\pi_2^*\mathcal F
-	\]
-	in \(\QCoh(U\times_X U)\), where
-	\[
-	\pi_1,\pi_2:U\times_X U\to U
-	\]
-	are the two projections.
-	
-	This isomorphism is required to satisfy the normalization condition
-	\[
-	\Delta^*(\alpha)=id_{\mathcal F},
-	\]
-	where
-	\[
-	\Delta:U\to U\times_X U
-	\]
-	is the diagonal, and the cocycle condition
-	\[
-	\pi_{23}^*(\alpha)\circ \pi_{12}^*(\alpha)
-	=
-	\pi_{13}^*(\alpha)
-	\]
-	in \(\QCoh(U\times_X U\times_X U)\). Here
-	\[
-	\pi_{ij}:U\times_X U\times_X U\to U\times_X U
-	\]
-	denotes the projection onto the \(i\)-th and \(j\)-th factors.
+	A morphism $(\xi,\varphi)\to(\xi',\varphi')$ is a morphism $a:\xi\to\xi'$ in $\mathcal{S}(Y_0)$ with $\varphi'\circ d_1^*a=d_0^*a\circ\varphi$.
 \end{definition}
 
-\begin{theorem}[Faithfully flat descent for quasi-coherent sheaves]\label{thm:fpqc-descent-qcoh}
-	(\cite[Tag 023T]{stacks-project})
-	Let $f : U \to X$ be an fpqc covering of schemes.
+\begin{remark}[Edge notation and the \v{C}ech case]\label{rem:classical-descent-cech}
+	For $0\le k\le l\le n$ write $\varphi_{kl}:=Y(e_{kl})^*\varphi:Y(v_k)^*\xi\to Y(v_l)^*\xi$ in $\mathcal{S}(Y_n)$. Then $\varphi=\varphi_{01}$, and since $d_2,d_0,d_1:Y_2\to Y_1$ are $Y(e_{01}),Y(e_{12}),Y(e_{02})$, the cocycle condition reads
+	\[
+	\varphi_{02}=\varphi_{12}\circ\varphi_{01},
+	\]
+	i.e.\ it is the relation imposed by the $2$-simplex $t_{012}$. For the \v{C}ech nerve of $f:U\to X$ we have $d_1=\mathrm{pr}_0$ and $d_0=\mathrm{pr}_1$ on $U\times_XU$, so $\varphi:\mathrm{pr}_0^*\xi\to\mathrm{pr}_1^*\xi$ and the cocycle condition is $\mathrm{pr}_{02}^*\varphi=\mathrm{pr}_{12}^*\varphi\circ\mathrm{pr}_{01}^*\varphi$ on $U\times_XU\times_XU$. This is the convention of \cite[][Tag 02ZC]{stacks-project}, of \cite[][Corollary~2.11]{hollander2001homotopy} and of Definition~\ref{def:stack}.
+\end{remark}
+
+\begin{remark}[The normalization is automatic]\label{rem:normalization-automatic}
+	Some authors additionally require $s_0^*\varphi=\mathrm{id}_\xi$. This follows from the cocycle condition: let $\sigma:[2]\to[0]$ be the unique map. Then $\sigma\circ\delta^i:[1]\to[0]$ is the unique map for $i=0,1,2$, so pulling back the cocycle condition along $Y(\sigma):Y_0\to Y_2$ gives $s_0^*\varphi=s_0^*\varphi\circ s_0^*\varphi$. Since $\varphi$ is an isomorphism, $s_0^*\varphi=\mathrm{id}$. In particular $\varphi_{kk}=\mathrm{id}$ for all vertices $k$.
+\end{remark}
+
+\begin{proposition}[Descent data are $2$-truncated]\label{prop:desc-2-truncation}
+	Let $p:\mathcal{S}\to\CatC$ be a fibred category with a cleavage and $Y_\bullet$ a simplicial object of $\CatC$. The functor
+	\[
+	R:\Desc(Y_\bullet;\mathcal{S})\longrightarrow\Desc^{\mathrm{cl}}(Y_\bullet;\mathcal{S}),\qquad\xi_\bullet\longmapsto(\xi_0,\varphi),\qquad a_\bullet\longmapsto a_0,
+	\]
+	is an equivalence of categories, where $\varphi$ is defined in the proof. Under $R$, the functor $f^*$ of Definition~\ref{con:pullback-to-descent} corresponds to $\xi\mapsto(f^*\xi,\mathrm{can})$, where $\mathrm{can}:\mathrm{pr}_0^*f^*\xi\cong(f\mathrm{pr}_0)^*\xi=(f\mathrm{pr}_1)^*\xi\cong\mathrm{pr}_1^*f^*\xi$.
+\end{proposition}
+
+\begin{proof}
+	\emph{The functor.} Let $\xi_\bullet$ be a cartesian lift and put $\xi:=\xi_0$. For every $n$ and every vertex $v_k$ of $[n]$, the morphism $\xi(v_k):\xi_n\to\xi$ is cartesian over $Y(v_k)$, so by Lemma~\ref{lem:cartesian-calculus}(4) there is a unique isomorphism $c^n_k:\xi_n\to Y(v_k)^*\xi$ in $\mathcal{S}(Y_n)$ identifying $\xi(v_k)$ with the chosen cartesian morphism. Define
+	\[
+	\varphi^{(n)}_{kl}:=c^n_l\circ(c^n_k)^{-1}:Y(v_k)^*\xi\xrightarrow{\ \sim\ }Y(v_l)^*\xi,\qquad\varphi:=\varphi^{(1)}_{01}:d_1^*\xi\to d_0^*\xi .
+	\]
+	For $\theta:[m]\to[n]$ we have $\xi(v_k)\circ\xi(\theta)=\xi(\theta\circ v_k)=\xi(v_{\theta(k)})$, and $\xi(\theta)$ is cartesian over $Y(\theta)$. By uniqueness of factorizations through cartesian morphisms, this means $Y(\theta)^*c^m_k=c^n_{\theta(k)}$ under $\xi_n\cong Y(\theta)^*\xi_m$, hence
+	\[
+	Y(\theta)^*\varphi^{(m)}_{kl}=\varphi^{(n)}_{\theta(k)\theta(l)}.\tag{$\ast$}
+	\]
+	With $\theta=e_{kl}$ this gives $\varphi_{kl}=\varphi^{(n)}_{kl}$ in the notation of Remark~\ref{rem:classical-descent-cech}. The cocycle condition is now a tautology: $\varphi^{(2)}_{02}=c_2c_0^{-1}=c_2c_1^{-1}\,c_1c_0^{-1}=\varphi^{(2)}_{12}\circ\varphi^{(2)}_{01}$. For a morphism $a_\bullet$, naturality $a_0\circ\xi(v_k)=\eta(v_k)\circ a_n$ says that $a_n$ corresponds to $Y(v_k)^*a_0$ under $c^n_k$ for every $k$. For $n=1$ and $k=0,1$ this gives $\varphi'\circ d_1^*a_0=d_0^*a_0\circ\varphi$. Hence $R$ is a well-defined functor.
 	
-	Then the pullback functor induces an equivalence of categories
-	\begin{align*}
-			\QCoh(X) &\longrightarrow \Desc(U/X) \\
-			\mathcal{F} &\mapsto (f^*\mathcal{F}, \alpha_{\mathcal{F}}),
-	\end{align*}
-	where $f^*\mathcal{F}$ is the pullback of the quasi coherent sheaf $\mathcal{F}$ along $f$ and $\alpha_{\mathcal{F}}:\pi_1^*(f^*\mathcal{F}) \xrightarrow{\sim}
-	\pi_2^*(f^*\mathcal F)$ is the canocical descent datum induced by the projections $\pi_i: U\times_X U\to U$.
+	\emph{$R$ is fully faithful.} A morphism $a_\bullet$ is determined by $a_0$: since $\eta(v_0)$ is cartesian, $a_n$ is the unique morphism over $\mathrm{id}_{Y_n}$ with $\eta(v_0)\circ a_n=a_0\circ\xi(v_0)$. So $R$ is faithful. Conversely, let $a_0:\xi_0\to\eta_0$ be a morphism of classical descent data and define $a_n$ by the displayed formula. To check naturality $\eta(\theta)\circ a_n=a_m\circ\xi(\theta)$ it suffices to compose with the cartesian morphism $\eta(v_0):\eta_m\to\eta_0$. This reduces the claim to $\eta(v_k)\circ a_n=a_0\circ\xi(v_k)$ for $k=\theta(0)$, i.e.\ to the statement that $a_n$ also corresponds to $Y(v_k)^*a_0$ under $c^n_k$. Since it corresponds to $Y(v_0)^*a_0$ under $c^n_0$, this amounts to $Y(v_k)^*a_0\circ\varphi_{0k}=\varphi'_{0k}\circ Y(v_0)^*a_0$, which is the pullback of the compatibility of $a_0$ with $\varphi,\varphi'$ along $Y(e_{0k})$.
+	
+	\emph{$R$ is essentially surjective.} Let $(\xi,\varphi)$ be a classical descent datum and set $\varphi_{kl}:=Y(e_{kl})^*\varphi$. Put $\xi_n:=Y(v_0)^*\xi$ with its cartesian morphism $\gamma_n:\xi_n\to\xi$ over $Y(v_0)$, and write $\kappa_k:Y(v_k)^*\xi\to\xi$ for the chosen cartesian morphisms. For $\theta:[m]\to[n]$ define $\xi(\theta):\xi_n\to\xi_m$ as the unique morphism over $Y(\theta)$ with
+	\[
+	\gamma_m\circ\xi(\theta)=\kappa_{\theta(0)}\circ\varphi_{0\,\theta(0)}.
+	\]
+	This makes sense because $Y(v_0)\circ Y(\theta)=Y(\theta\circ v_0)=Y(v_{\theta(0)})$. The right hand side is cartesian, so $\xi(\theta)$ is cartesian by Lemma~\ref{lem:cartesian-calculus}(2). We have $\xi(\mathrm{id})=\mathrm{id}$ because $\varphi_{00}=\mathrm{id}$ (Remark~\ref{rem:normalization-automatic}). For $\psi:[l]\to[m]$ and $\theta:[m]\to[n]$, composing with $\gamma_l$ shows that $\xi(\psi)\circ\xi(\theta)=\xi(\theta\circ\psi)$ is equivalent to
+	\[
+	\varphi_{0\,\theta\psi(0)}=Y(\theta)^*\bigl(\varphi_{0\,\psi(0)}\bigr)\circ\varphi_{0\,\theta(0)}=\varphi_{\theta(0)\,\theta\psi(0)}\circ\varphi_{0\,\theta(0)}
+	\]
+	in $\mathcal{S}(Y_n)$, where we used $\theta\circ e_{0\psi(0)}=e_{\theta(0)\theta\psi(0)}$. Since $0\le\theta(0)\le\theta\psi(0)$, this is the pullback of the cocycle condition $\varphi_{02}=\varphi_{12}\circ\varphi_{01}$ along $Y(t_{0\,\theta(0)\,\theta\psi(0)}):Y_n\to Y_2$. Hence $\xi_\bullet$ is a cartesian lift. Finally $\xi_0=\xi$ and, with the notation of the first step, $c^1_0=\mathrm{id}$ and $c^1_1=\varphi_{01}=\varphi$, so $R(\xi_\bullet)=(\xi,\varphi)$.
+	
+	\emph{Compatibility with $f^*$.} For $\xi_\bullet=f^*\xi$ the morphisms $\xi(v_k)$ are the cartesian morphisms $\varepsilon_n^*\xi\to f^*\xi$ over $\mathrm{pr}_k$, so $c^1_k$ is the canonical isomorphism $\varepsilon_1^*\xi\cong\mathrm{pr}_k^*f^*\xi$ and $\varphi=\mathrm{can}$.
+\end{proof}
+
+\begin{remark}
+	Proposition~\ref{prop:desc-2-truncation} is to Definition~\ref{def:descent-category} what Lemma~\ref{lem:tot-cosimplicial-set} is to Definition~\ref{def:cech-descent}: in both proofs the value in degree $n$ is transported from degree $0$ along the vertex $v_0$. For sets, edges impose equalities and the triangles impose nothing new. For categories, edges carry isomorphisms and the triangles impose the cocycle condition. For higher groupoids, higher simplices would carry higher coherences, and no finite truncation of $\Delta$ suffices. From now on we freely pass between the two descriptions, using the simplicial one for definitions and the classical one for computations.
+\end{remark}
+
+%==========================================================
+\section{The Amitsur complex}
+%==========================================================
+
+Let $R\to S$ be a ring map, $X=\Specof{R}$ and $U=\Specof{S}$. Since fibre products of affine schemes are computed by tensor products, $\check{C}(U/X)_n=\Specof{S^{\otimes_R(n+1)}}$. Applying $\Gamma(-,\OO)$ to the \v{C}ech nerve therefore gives a cosimplicial ring.
+
+\begin{definition}[Amitsur complex]\label{def:amitsur}
+	(\cite[][Section~023F]{stacks-project})
+	Let $(S/R)^\bullet$ be the cosimplicial $R$-algebra with $(S/R)^n=S^{\otimes_R(n+1)}$, where $\theta:[m]\to[n]$ acts by
+	\[
+	s_0\otimes\dots\otimes s_m\longmapsto t_0\otimes\dots\otimes t_n,\qquad t_j=\prod_{\theta(i)=j}s_i .
+	\]
+	In particular, the coface $d^i:(S/R)^{n-1}\to(S/R)^n$ inserts a $1$ in position $i$, dual to the face $d_i$ of the \v{C}ech nerve forgetting the $i$-th factor. For an $R$-module $M$, the cosimplicial $(S/R)^\bullet$-module $(S/R)^\bullet\otimes_RM$ is augmented by $\varepsilon:M\to S\otimes_RM$, $m\mapsto1\otimes m$. The associated cochain complex
+	\[
+	0\to M\xrightarrow{\ \varepsilon\ }S\otimes_RM\xrightarrow{\ \partial\ }S\otimes_RS\otimes_RM\xrightarrow{\ \partial\ }\cdots,\qquad\partial=\sum_{i}(-1)^id^i,
+	\]
+	is the \emph{(augmented) Amitsur complex} of $M$.
+\end{definition}
+
+The homotopical input is the following standard fact: an augmented cosimplicial object with an extra codegeneracy is contractible. To state it uniformly, regard the augmentation as the coface $d^0:M^{-1}\to M^0$.
+
+\begin{lemma}[Extra codegeneracy]\label{lem:extra-codegeneracy}
+	Let $M^{-1}\xrightarrow{d^0}M^\bullet$ be an augmented cosimplicial abelian group, with cofaces $d^0,\dots,d^n:M^{n-1}\to M^n$ for $n\ge0$. Suppose there are homomorphisms $h:M^n\to M^{n-1}$ for $n\ge0$ such that
+	\[
+	h\circ d^0=\mathrm{id}_{M^{n-1}}\qquad\text{and}\qquad h\circ d^i=d^{i-1}\circ h\quad(1\le i\le n)
+	\]
+	as maps $M^{n-1}\to M^{n-1}$, for all $n\ge0$. Then $h\partial+\partial h=\mathrm{id}$ on $M^n$ for $n\ge0$ and $h\partial=\mathrm{id}$ on $M^{-1}$. In particular the augmented complex $0\to M^{-1}\to M^0\to M^1\to\cdots$ is exact.
+\end{lemma}
+
+\begin{proof}
+	On $M^{-1}$ we have $h\partial=hd^0=\mathrm{id}$. For $x\in M^n$ with $n\ge0$,
+	\[
+	h\partial x=\sum_{i=0}^{n+1}(-1)^ihd^ix=x+\sum_{i=1}^{n+1}(-1)^id^{i-1}hx=x-\sum_{j=0}^{n}(-1)^jd^jhx=x-\partial hx .
+	\]
+	So $h$ is a contracting homotopy, and a contractible complex is exact.
+\end{proof}
+
+\begin{lemma}[The split case]\label{lem:amitsur-split}
+	(\cite[][Lemma~35.3.5, Tag 023F]{stacks-project})
+	Suppose $R\to S$ has a retraction $\sigma:S\to R$ of $R$-algebras. Then for every $R$-module $M$ the augmented Amitsur complex is exact.
+\end{lemma}
+
+\begin{proof}
+	Define $h:S^{\otimes_R(n+1)}\otimes_RM\to S^{\otimes_Rn}\otimes_RM$ by
+	\[
+	h(s_0\otimes s_1\otimes\dots\otimes s_n\otimes m)=\sigma(s_0)s_1\otimes\dots\otimes s_n\otimes m,
+	\]
+	and $h(s_0\otimes m)=\sigma(s_0)m$ for $n=0$. This is well defined because the expression is $R$-multilinear. Since $d^0$ inserts $1$ in position $0$ and $\sigma(1)=1$, we get $h\circ d^0=\mathrm{id}$. For $i\ge1$, $d^i$ inserts $1$ in position $i\ge1$, which commutes with multiplying $\sigma(s_0)\in R$ into the next factor, so $h\circ d^i=d^{i-1}\circ h$. Lemma~\ref{lem:extra-codegeneracy} applies.
+\end{proof}
+
+\begin{theorem}[Amitsur]\label{thm:amitsur}
+	(\cite[][Lemma~35.3.6, Tag 023M]{stacks-project})
+	Let $R\to S$ be faithfully flat. Then for every $R$-module $M$ the augmented Amitsur complex is exact. In particular
+	\[
+	M\xrightarrow{\ \varepsilon\ }S\otimes_RM\ \substack{\xrightarrow{\ d^0\ }\\[-0.2em]\xrightarrow[\ d^1\ ]{}}\ S\otimes_RS\otimes_RM,\qquad d^0(s\otimes m)=1\otimes s\otimes m,\quad d^1(s\otimes m)=s\otimes1\otimes m,
+	\]
+	is an equalizer diagram.
 \end{theorem}
 
 \begin{proof}
-	We first reduce to the affine case and then glue the local statements.
-	
-	Choose an affine open basis
+	Let $C(M)$ denote the augmented Amitsur complex of $M$ over $R$. Base change along $R\to S$: for the $S$-algebra $S':=S\otimes_RS$ (via $s\mapsto s\otimes1$) and the $S$-module $S\otimes_RM$ there are isomorphisms
 	\[
-	X = \bigcup_{j \in J} V_j,
-	\qquad
-	V_j = \Spec A_j,
+	S\otimes_R\bigl(S^{\otimes_R(n+1)}\otimes_RM\bigr)\cong S'^{\otimes_S(n+1)}\otimes_S(S\otimes_RM),
 	\]
-	which is closed under intersection.
-	Then each intersection $V_j\cap V_{j'}$ is again affine.
-	For each $j$, set
-	\[
-	U_j := U \times_X V_j.
-	\]
-	Since fpqc morphisms are stable under base change, each morphism
-	\[
-	U_j \to V_j
-	\]
-	is again fpqc.
-	
-	We claim that it suffices to prove that for each $j$ the pullback functor
-	\begin{align}\label{diag:descent-qcoh-affine-restriction}
-			\QCoh(V_j) \longrightarrow \Desc (U_j/X)
-	\end{align}
-	is an equivalence.
-	Assume \ref{diag:descent-qcoh-affine-restriction} is an equivalence for all $j$.
-	For essential surjectivity, let
-	\[
-	(\mathcal F_U,\alpha)\in \Desc(U/X)
-	\]
-	be a descent datum on $U$. Restricting to $U_j$ yields for each $j$ an object
-	\[
-	(\mathcal F_{U_j},\alpha_j)\in  \Desc(U_j/X)).
-	\]
-	Assuming the affine case, there exists a quasi-coherent sheaf
-	\[
-	\mathcal F_j\in \QCoh(V_j)
-	\]
-	whose pullback along $U_j\to V_j$ is identified with
-	$(\mathcal F_{U_j},\alpha_j)$.
-	Write $U_{jj'}$ for the pullback $U\times_X(V_j\cap V_{j'})$.
-	In the following diagram, the squiggly morphisms denote the category over the schemes $U,U_J, V_j, X$.
-	
-	% https://q.uiver.app/#q=WzAsMTIsWzAsNCwiVSJdLFsxLDQsIlgiXSxbMiwzLCJWX2oiXSxbMSwzLCJVX2oiXSxbMCwyLCJcXERlc2Nfe1xcUUNvaH0oVS9YKSJdLFsxLDEsIlxcRGVzY197XFxRQ29ofShVX2opIl0sWzIsMSwiXFxRQ29oKFZfaikiXSxbMSwyLCJcXFFDb2goWCkiXSxbMywyLCJWX2pcXGNhcCBWX3tqJ30iXSxbMiwyLCJVX3tqaid9Il0sWzIsMCwiXFxEZXNjX3tcXFFDb2h9KFVfe2pqJ30pIl0sWzMsMCwiXFxRQ29oKFZfalxcY2FwIFZfe2onfSkiXSxbMCwxXSxbMiwxXSxbMywwXSxbMywyXSxbNCwwLCIiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJzcXVpZ2dseSJ9fX1dLFs1LDMsIiIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6InNxdWlnZ2x5In19fV0sWzMsMSwiIiwyLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzYsMiwiIiwyLHsib2Zmc2V0IjotMywic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoic3F1aWdnbHkifX19XSxbNSw2LCJcXGNvbmciXSxbNywxLCIiLDAseyJvZmZzZXQiOi0zLCJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJzcXVpZ2dseSJ9fX1dLFs0LDddLFs2LDddLFs1LDRdLFs5LDhdLFs5LDNdLFs4LDJdLFsxMCw5LCIiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJzcXVpZ2dseSJ9fX1dLFsxMSw4LCIiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJzcXVpZ2dseSJ9fX1dLFsxMCw1XSxbMTEsNl0sWzEwLDExLCJcXGNvbmciXV0=
-	\[\begin{tikzcd}
-		&& {\Desc(U_{jj'}/X)} & {\QCoh(V_j\cap V_{j'})} \\
-		& {\Desc(U_j/X)} & {\QCoh(V_j)} \\
-		{\Desc(U/X)} & {\QCoh(X)} & {U_{jj'}} & {V_j\cap V_{j'}} \\
-		& {U_j} & {V_j} \\
-		U & X
-		\arrow["\cong", from=1-3, to=1-4]
-		\arrow[from=1-3, to=2-2]
-		\arrow[squiggly, from=1-3, to=3-3]
-		\arrow[from=1-4, to=2-3]
-		\arrow[squiggly, from=1-4, to=3-4]
-		\arrow["\cong", from=2-2, to=2-3]
-		\arrow[from=2-2, to=3-1]
-		\arrow[squiggly, from=2-2, to=4-2]
-		\arrow[from=2-3, to=3-2]
-		\arrow[shift left=3, squiggly, from=2-3, to=4-3]
-		\arrow[from=3-1, to=3-2]
-		\arrow[squiggly, from=3-1, to=5-1]
-		\arrow[shift left=3, squiggly, from=3-2, to=5-2]
-		\arrow[from=3-3, to=3-4]
-		\arrow[from=3-3, to=4-2]
-		\arrow[from=3-4, to=4-3]
-		\arrow[from=4-2, to=4-3]
-		\arrow[from=4-2, to=5-1]
-		\arrow["\lrcorner"{anchor=center, pos=0.125, rotate=-45}, draw=none, from=4-2, to=5-2]
-		\arrow[from=4-3, to=5-2]
-		\arrow[from=5-1, to=5-2]
-	\end{tikzcd}\]
-
-	By assumption on the cover, the intersection $V_j\cap V_{j'}$ is affine.
-	Now for $j,j'\in J$, the restrictions
-	\[
-	\mathcal F_j|_{V_j\cap V_{j'}}
-	\qquad\text{and}\qquad
-	\mathcal F_{j'}|_{V_j\cap V_{j'}}
-	\]
-	induce the same descent datum on
-	\[
-	U_{jj'} \to V_j\cap V_{j'},
-	\]
-	because both $\mathcal{F}_j|_{V_j\cap V_{j'}}$ and $\mathcal{F}_{j'}|_{V_j\cap V_{j'}}$ pull back to the same object $(\mathcal{F}_U|_{U_{jj'}}, \alpha)$ in $\Desc(U_{jj'}/X)$ with the same cocycle isomorphism $\alpha$.
-	Hence they define the same object of 
-	\[
-	\Desc(U_{jj'}/X).
-	\]
-	
-	By the affine case, for $V_j\cap V_{j'}$ and the fpqc morphism 
-	\[
-	U_{jj'} \to V_j\cap V_{j'},
-	\]
-	there is therefore a unique isomorphism
-	\[
-	\theta_{jj'}:
-	\mathcal F_j|_{V_j\cap V_{j'}}
-	\xrightarrow{\sim}
-	\mathcal F_{j'}|_{V_j\cap V_{j'}}
-	\]
-	whose pullback to $U_{jj'}$ is the identity on $\mathcal{F}_U|_{U_{jj'}}$. By uniqueness, these isomorphisms satisfy
-	the cocycle condition on triple overlaps. Hence the sheaves $\mathcal F_j$
-	glue to a quasi-coherent sheaf
-	\[
-	\mathcal F\in \QCoh(X).
-	\]
-	By construction, $f^*\mathcal{F}$ with its canonical descent datum is identified with $(\mathcal{F}_U, \alpha)$.
-	This proves essential surjectivity globally.
-	
-	Now for fully faithfulness let $\mathcal{F}, \mathcal{G}\in \QCoh(X)$. We show that there is a bijection
-	\[
-	\Hom_{\QCohX}(\mathcal{F}, \mathcal{G}) \to \Hom_{\Desc(U/X)}(f^*\mathcal{F}, f^*\mathcal{G}).
-	\]	
-	
-	Injectivity: 
-	
-	Let $\varphi, \psi: \mathcal{F}\to \mathcal{G}$ have the same pullback to $U$, then for every $V_j$ their restrictions
-	\[
-	\varphi|_{V_j}, \psi|_{V_j}: \mathcal{F}|_{V_j} \to \mathcal{G}|_{V_j}
-	\]
-	have the same pullback to $U_j$. By the affine case for $V_j$, we get $\varphi|_{V_j} = \psi|_{V_j}$. Since they agree on an open cover, $\varphi = \psi$. 
-	
-	Surjectivity:
-	
-	Let $\theta:f^*\mathcal{F} \to f^*\mathcal{G}$ be a morphism in $\Desc_{\QCoh}(U/X)$. Restricting to $U_j$ yields a morphism in $\theta_{j}:f^*\mathcal{F}|_{U_j}\to f^*\mathcal{G}|_{U_j}$ in $\Desc_{\QCoh}(U_j/X)$. By the affine case this corresponds to a morphism $\mathcal{F}|_{U_j} \to \mathcal{G}|_{U_j}$. Now for $j, j'$, the morphism
-	$\theta_{j}|_{U_{jj'}}$ and $\theta_{j'}|_{U_{jj'}}$ restrict to the same pullback $\theta_{jj'}$ in 
-	\[
-	\Desc(U_{jj'}/X),
-	\]
-	which corresponds to a morphism $\mathcal{F}|_{U_{jj'}} \to \mathcal{G}|_{U_{jj'}}$, again by the affine version. 
-	By the sheaf property, these morphisms agree on overlaps and therefore glue uniquely to a morphism
-	\[
-	\mathcal F \to \mathcal G.
-	\]
-	By construction, this morphism pulls back to $\theta$ in $\Desc(U/X)$, which proves surjectivity.
-	
-	Hence, it remains to prove the affine case. Thus assume
-	\[
-	X=\Spec A
-	\]
-	is affine. Since $U\to X$ is fpqc, we may choose a finite affine open covering
-	\[
-	U=\bigcup_{i\in I} U_i,
-	\qquad
-	U_i=\Spec B_i.
-	\]
-	Then
-	\[
-	\coprod_{i\in I} U_i \to X
-	\]
-	is again an fpqc covering, and its Cech nerve refines the Cech nerve of
-	$U\to X$.
-	Since descent for quasi-coherent sheaves is local on the source, replacing $U$ by the fpqc covering $\coprod_{i\in I} U_i \to X$ does not change the category of descent data (\cite[Tag 02L4]{stacks-project}). Hence, it suffices to prove the statement for the affine fpqc cover
-	\[
-	\coprod_{i\in I}\Spec B_i \to \Spec A.
-	\]
-	For an affine scheme, we have equivalence of categories, see \cite[Tag 01IB]{stacks-project}:
-	\[
-	\QCoh(\Spec A)\cong \Mod_A
-	\]
-	and
-	\[
-	\QCoh(\Spec B_i)\cong \Mod_{B_i}
-	\]
-	Under these identifications, the Cech nerve of the covering
-	\[
-	\coprod_i \Spec B_i \to \Spec A
-	\]
-	corresponds to the cosimplicial ring obtained from the fpqc algebra
-	\[
-	A \to \prod_i B_i.
-	\]
-	Since a finite product of faithfully flat $A$-algebras is again faithfully
-	flat, descent for quasi-coherent sheaves over this affine fpqc cover reduces
-	to faithfully flat descent for modules (Thm \ref{thm:faithfully-flat-descent-modules}):
-	\[
-	\Mod_A \cong \Desc(B/A),
-	\]
-	where $B=\prod_i B_i$.
+	natural in $[n]$ and compatible with the augmentations. So $S\otimes_RC(M)$ is the augmented Amitsur complex of $S\otimes_RM$ for $S\to S'$. The multiplication $\mu:S\otimes_RS\to S$ is a retraction of $S\to S'$ as $S$-algebras, so $S\otimes_RC(M)$ is exact by Lemma~\ref{lem:amitsur-split}. Since $S$ is flat over $R$, $H^i(S\otimes_RC(M))=S\otimes_RH^i(C(M))$, and since $S$ is faithfully flat, $S\otimes_RH^i(C(M))=0$ implies $H^i(C(M))=0$ (\cite[][Tag 00HP]{stacks-project}). The last claim is exactness in degrees $-1$ and $0$.
 \end{proof}
 
+\begin{remark}[Homotopical meaning]\label{rem:amitsur-homotopical}
+	Geometrically, $\Specof{\mu}$ is the diagonal $U\to U\times_XU$, a section of the base change $\mathrm{pr}_0:U\times_XU\to U$ of $f$ along itself. The augmented \v{C}ech nerve of a morphism with a section has an extra degeneracy and is therefore simplicially contractible (\cite[][Tag 019Z]{stacks-project}). Theorem~\ref{thm:amitsur} says: \emph{after the faithfully flat base change along $f$ itself, the \v{C}ech nerve of $f$ becomes contractible, and faithfully flat base change detects exactness.} Only exactness in degrees $\le0$ is needed for descent. The higher exactness says that quasi-coherent sheaves have vanishing \v{C}ech cohomology for affine fpqc coverings, which we will not need.
+\end{remark}
+
+%==========================================================
+\section{Faithfully flat descent for modules}
+%==========================================================
+
+Let $R\to S$ be a ring map and $f:U=\Specof{S}\to X=\Specof{R}$. By Example~\ref{ex:fibred-categories}(2), a cartesian lift of $\check{C}(U/X)_\bullet=\Specof{(S/R)^\bullet}$ to $\mathcal{M}$ is the same as a cosimplicial abelian group $N^\bullet$ such that each $N^n$ is an $(S/R)^n$-module, each $N(\theta):N^m\to N^n$ is $(S/R)(\theta)$-semilinear, and the induced maps
+\[
+(S/R)^n\otimes_{(S/R)^m}N^m\longrightarrow N^n
+\]
+are isomorphisms. Following \cite[][Remark~35.3.11, Section~023F]{stacks-project} we call these \emph{cartesian $(S/R)^\bullet$-modules} and write
+\[
+\Desc(S/R):=\Desc_f(\mathcal{M})
+\]
+for the category of cartesian $(S/R)^\bullet$-modules and cosimplicial module maps. In this language:
+\begin{itemize}
+	\item the pullback functor $f^*$ of Definition~\ref{con:pullback-to-descent} is $M\mapsto(S/R)^\bullet\otimes_RM$, i.e.\ \emph{the Amitsur complex of $M$ is the descent datum of $M$};
+	\item by Proposition~\ref{prop:desc-2-truncation}, $\Desc(S/R)$ is equivalent to the category of pairs $(N,\varphi)$ of an $S$-module $N$ and an $S\otimes_RS$-linear isomorphism
+	\[
+	\varphi:N\otimes_RS\xrightarrow{\ \sim\ }S\otimes_RN\qquad\text{with}\qquad\varphi_{02}=\varphi_{12}\circ\varphi_{01},
+	\]
+	where $d_1^*N=N\otimes_RS$ and $d_0^*N=S\otimes_RN$ because $d^1(s)=s\otimes1$ and $d^0(s)=1\otimes s$. Here $\varphi_{01}=\varphi\otimes\mathrm{id}_S$, $\varphi_{12}=\mathrm{id}_S\otimes\varphi$, and $\varphi_{02}$ is the base change of $\varphi$ along $d^1:S\otimes_RS\to S^{\otimes_R3}$, $s\otimes t\mapsto s\otimes1\otimes t$. This is exactly \cite[][Definition~35.3.1, Tag 023F]{stacks-project}.
+\end{itemize}
+For a cartesian module $N^\bullet$, the limit of the underlying cosimplicial $R$-module is, by Lemma~\ref{lem:tot-cosimplicial-set} (limits of modules are computed on underlying sets),
+\[
+\lim_\Delta N^\bullet=\Eq\bigl(N^0\rightrightarrows N^1\bigr)=\{\,n\in N\mid\varphi(n\otimes1)=1\otimes n\,\},
+\]
+where the second description uses the classical datum $(N,\varphi)=R(N^\bullet)$. Indeed, under $N^1\cong d_0^*N=S\otimes_RN$ the coface $N(\delta^0)$ is $n\mapsto1\otimes n$ and $N(\delta^1)$ is $n\mapsto\varphi(n\otimes1)$.
+
+\begin{theorem}[Faithfully flat descent for modules]\label{thm:faithfully-flat-descent-modules}
+	(\cite[][Proposition~35.3.9, Tag 023N]{stacks-project})
+	Let $R\to S$ be faithfully flat and $f:\Specof{S}\to\Specof{R}$. Then
+	\[
+	f^*:\Mod_R\longrightarrow\Desc(S/R),\qquad M\longmapsto(S/R)^\bullet\otimes_RM,
+	\]
+	is an equivalence of categories with quasi-inverse
+	\[
+	\lim_\Delta:\Desc(S/R)\longrightarrow\Mod_R,\qquad N^\bullet\longmapsto\lim_\Delta N^\bullet .
+	\]
+	In classical terms, $M\mapsto(S\otimes_RM,\mathrm{can})$ is an equivalence with quasi-inverse $(N,\varphi)\mapsto\{n\in N\mid\varphi(n\otimes1)=1\otimes n\}$.
+\end{theorem}
+
+\begin{proof}
+	It suffices to construct natural isomorphisms $\eta:\mathrm{id}\Rightarrow\lim_\Delta\circ f^*$ and $\epsilon:f^*\circ\lim_\Delta\Rightarrow\mathrm{id}$.
+	
+	\emph{Unit.} For an $R$-module $M$, the augmentation induces $\eta_M:M\to\lim_\Delta\bigl((S/R)^\bullet\otimes_RM\bigr)=\Eq\bigl(S\otimes_RM\rightrightarrows S\otimes_RS\otimes_RM\bigr)$. It is an isomorphism by Theorem~\ref{thm:amitsur}.
+	
+	\emph{Counit.} Let $N^\bullet$ be a cartesian module, $M:=\lim_\Delta N^\bullet$, and for $m\in M$ write $m_n\in N^n$ for its components. Then
+	\[
+	\epsilon^n:(S/R)^n\otimes_RM\longrightarrow N^n,\qquad x\otimes m\longmapsto x\cdot m_n,
+	\]
+	is a map of cosimplicial modules, since $N(\theta)(x\cdot m_m)=(S/R)(\theta)(x)\cdot m_n$. A map of cartesian modules is an isomorphism as soon as it is one in degree $0$, because degree $n$ is the base change of degree $0$ along $(S/R)(v_0)$. It therefore remains to show that
+	\[
+	\epsilon^0:S\otimes_RM\longrightarrow N,\qquad s\otimes m\longmapsto sm,
+	\]
+	is bijective, where $(N,\varphi)$ is the classical datum and $M=\{n\in N\mid\varphi(n\otimes1)=1\otimes n\}$.
+	
+	Since $S$ is flat over $R$, applying $-\otimes_RS$ to the equalizer defining $M$ gives the equalizer in the top row of
+	\[
+	\begin{tikzcd}[column sep=large]
+		M\otimes_RS \arrow[r] & N\otimes_RS \arrow[r, shift left, "a_0"] \arrow[r, shift right, "a_1"'] \arrow[d, "\varphi"', "\cong"] & S\otimes_RN\otimes_RS \arrow[d, "\varphi_{12}", "\cong"'] \\
+		N \arrow[r, "\varepsilon"] & S\otimes_RN \arrow[r, shift left, "d^0"] \arrow[r, shift right, "d^1"'] & S\otimes_RS\otimes_RN
+	\end{tikzcd}
+	\]
+	with $a_0(n\otimes s)=1\otimes n\otimes s$ and $a_1(n\otimes s)=\varphi(n\otimes1)\otimes s$. The bottom row is the beginning of the augmented Amitsur complex of the $R$-module $N$, hence an equalizer by Theorem~\ref{thm:amitsur}. Both squares commute:
+	\[
+	\begin{aligned}
+		\varphi_{12}\,a_0(n\otimes s)&=1\otimes\varphi(n\otimes s)=d^0\varphi(n\otimes s),\\
+		\varphi_{12}\,a_1(n\otimes s)&=\varphi_{12}\varphi_{01}(n\otimes1\otimes s)=\varphi_{02}(n\otimes1\otimes s)=d^1\varphi(n\otimes s),
+	\end{aligned}
+	\]
+	where the second computation uses the cocycle condition and the definition of $\varphi_{02}$ as a base change along $d^1$. So the vertical isomorphisms identify the two parallel pairs, and hence their equalizers: $\varphi$ restricts to an isomorphism from $M\otimes_RS$ onto $\varepsilon(N)\cong N$. For $m\in M$ and $s\in S$, $S\otimes_RS$-linearity of $\varphi$ gives
+	\[
+	\varphi(m\otimes s)=(1\otimes s)\cdot\varphi(m\otimes1)=(1\otimes s)\cdot(1\otimes m)=1\otimes sm=\varepsilon(sm).
+	\]
+	Hence the induced isomorphism $M\otimes_RS\to N$ is $m\otimes s\mapsto sm$, i.e.\ $\epsilon^0$ is bijective.
+	
+	Naturality of $\eta$ and $\epsilon$ is clear from the formulas.
+\end{proof}
 
 \begin{remark}
-	This shows that quasi-coherent sheaves satisfy effective descent with respect
-	to fpqc coverings, hence define a stack in groupoids on the fpqc site.
+	The proof uses exactly two inputs: the Amitsur complex is exact in degrees $\le0$ (for the unit, and for the $R$-module $N$ in the counit), and $-\otimes_RS$ preserves equalizers (flatness). Faithful flatness is used only through Theorem~\ref{thm:amitsur}. Conceptually, Theorem~\ref{thm:faithfully-flat-descent-modules} says that the adjunction ``$f^*\dashv\lim_\Delta$'' between $R$-modules and cartesian $(S/R)^\bullet$-modules, i.e.\ between constant cosimplicial modules and their totalization, is an equivalence.
+\end{remark}
+
+%==========================================================
+\section{fpqc descent for quasi-coherent sheaves}
+%==========================================================
+
+We now globalize. For a morphism $f:U\to X$ of schemes, an object of $\Desc(U/X)=\Desc_f(\QCoh)$ is, by Proposition~\ref{prop:desc-2-truncation}, a pair $(\mathcal{E},\varphi)$ of $\mathcal{E}\in\QCoh(U)$ and an isomorphism $\varphi:\mathrm{pr}_0^*\mathcal{E}\to\mathrm{pr}_1^*\mathcal{E}$ on $U\times_XU$ with $\mathrm{pr}_{02}^*\varphi=\mathrm{pr}_{12}^*\varphi\circ\mathrm{pr}_{01}^*\varphi$, and morphisms are maps $a:\mathcal{E}\to\mathcal{E}'$ with $\varphi'\circ\mathrm{pr}_0^*a=\mathrm{pr}_1^*a\circ\varphi$. In particular, for $\mathcal{F},\mathcal{G}\in\QCoh(X)$, $f^*$ is bijective on $\Hom(\mathcal{F},\mathcal{G})$ if and only if
+\[
+\Hom(\mathcal{F},\mathcal{G})\xrightarrow{\ f^*\ }\Hom(f^*\mathcal{F},f^*\mathcal{G})\ \substack{\xrightarrow{\ \mathrm{pr}_0^*\ }\\[-0.2em]\xrightarrow[\ \mathrm{pr}_1^*\ ]{}}\ \Hom\bigl((f\mathrm{pr}_0)^*\mathcal{F},(f\mathrm{pr}_0)^*\mathcal{G}\bigr)
+\]
+is an equalizer. To keep the formulas readable we use the following convention: on a fibre product of copies of $U$ and $U'$, an index such as $\varphi_{u_0u}$ denotes the pullback of $\varphi$ along the projection to the indicated two factors (composed with $g:U'\to U$ where necessary).
+
+\begin{lemma}[Flat pullback is faithful]\label{lem:flat-pullback-faithful}
+	Let $g:T'\to T$ be flat and surjective. Then $g^*:\Mod(\OO_T)\to\Mod(\OO_{T'})$ is faithful.
+\end{lemma}
+
+\begin{proof}
+	Since $g^*$ is additive, it suffices to show that $g^*u=0$ implies $u=0$ for $u:\mathcal{F}\to\mathcal{G}$. Let $x\in T$ and choose $x'\in T'$ with $g(x')=x$. Then $(g^*u)_{x'}=u_x\otimes_{\OO_{T,x}}\OO_{T',x'}$, and $\OO_{T,x}\to\OO_{T',x'}$ is a flat local homomorphism, hence faithfully flat (\cite[][Tag 00HR]{stacks-project}). By flatness $\mathrm{im}(u_x)\otimes\OO_{T',x'}=\mathrm{im}(u_x\otimes\OO_{T',x'})=0$, hence $\mathrm{im}(u_x)=0$ by faithful flatness (\cite[][Tag 00HP]{stacks-project}). So $u_x=0$ for all $x$, i.e.\ $u=0$.
+\end{proof}
+
+\begin{lemma}[The affine case]\label{lem:qcoh-descent-affine}
+	Let $h:\Specof{S}\to\Specof{R}$ be flat and surjective. Then $\QCoh$ satisfies descent along $h$.
+\end{lemma}
+
+\begin{proof}
+	The ring map $R\to S$ is faithfully flat (\cite[][Tag 00HQ]{stacks-project}), and the \v{C}ech nerve of $h$ is the simplicial affine scheme $\Specof{(S/R)^\bullet}$. The equivalence of fibred categories $\mathcal{M}\simeq\QCoh|_{\Aff}$ of Example~\ref{ex:fibred-categories}(2) preserves cartesian morphisms and therefore induces an equivalence $\Desc(S/R)\simeq\Desc_h(\QCoh)$ compatible with the pullback functors from $\Mod_R\simeq\QCoh(\Specof{R})$. Now apply Theorem~\ref{thm:faithfully-flat-descent-modules}.
+\end{proof}
+
+\begin{theorem}[fpqc descent for quasi-coherent sheaves]\label{thm:fpqc-descent-qcoh}
+	(\cite[][Proposition~35.5.2, Tag 023T]{stacks-project})
+	Let $f:U\to X$ be a morphism of schemes such that $\{f\}$ is an fpqc covering. Then
+	\[
+	f^*:\QCoh(X)\longrightarrow\Desc(U/X),\qquad\mathcal{F}\longmapsto(f^*\mathcal{F},\mathrm{can}),
+	\]
+	is an equivalence of categories.
+\end{theorem}
+
+\begin{proof}
+	Throughout, we use that base changes of fpqc coverings are fpqc coverings (Proposition~\ref{prop:gross-topology-chain}), in particular they are flat and surjective.
+	
+	\emph{Step 1: $f^*$ is fully faithful if $X$ is affine.} Faithfulness is Lemma~\ref{lem:flat-pullback-faithful}. For fullness, let $\beta:f^*\mathcal{F}\to f^*\mathcal{G}$ with $\mathrm{pr}_0^*\beta=\mathrm{pr}_1^*\beta$. By Definition~\ref{def:fpqc-covering} there are affine opens $W_1,\dots,W_r\subset U$ with $X=\bigcup_kf(W_k)$. Then $U':=\coprod_kW_k$ is affine, and with $g:U'\to U$ the induced morphism, $h:=f\circ g:U'\to X$ is a flat surjective morphism of affine schemes. The pullback $g^*\beta$ is a morphism in $\Desc(U'/X)$ (pull back the compatibility along $g\times g$), so by Lemma~\ref{lem:qcoh-descent-affine} there is $\alpha:\mathcal{F}\to\mathcal{G}$ with $h^*\alpha=g^*\beta$. To see $f^*\alpha=\beta$, let $q:P:=U'\times_XU\to U$ be the second projection, which is flat and surjective as a base change of $h$. With $p_1:P\to U'$ the first projection we get
+	\[
+	q^*f^*\alpha=p_1^*h^*\alpha=p_1^*g^*\beta=(g\times\mathrm{id})^*\mathrm{pr}_0^*\beta=(g\times\mathrm{id})^*\mathrm{pr}_1^*\beta=q^*\beta,
+	\]
+	hence $f^*\alpha=\beta$ by Lemma~\ref{lem:flat-pullback-faithful}.
+	
+	\emph{Step 2: $f^*$ is fully faithful in general.} Let $X=\bigcup_jX_j$ be an affine open cover and $U_j:=f^{-1}(X_j)$. Given $\beta$ as in Step 1, Step 1 for the fpqc covering $U_j\to X_j$ gives $\alpha_j:\mathcal{F}|_{X_j}\to\mathcal{G}|_{X_j}$ with $f^*\alpha_j=\beta|_{U_j}$. The restrictions of $\alpha_j$ and $\alpha_k$ to $X_j\cap X_k$ have the same pullback along the flat surjection $f^{-1}(X_j\cap X_k)\to X_j\cap X_k$, so they agree by Lemma~\ref{lem:flat-pullback-faithful}. Hence they glue to $\alpha:\mathcal{F}\to\mathcal{G}$ (\cite[][Lemma~6.33.1, Tag 00AK]{stacks-project}), and $f^*\alpha=\beta$ because this holds on every $U_j$. Faithfulness is again Lemma~\ref{lem:flat-pullback-faithful}.
+	
+	\emph{Step 3: effectivity if $X$ is affine.} Let $(\mathcal{E},\varphi)\in\Desc(U/X)$ and choose $g:U'\to U$, $h=fg$ as in Step 1. Then $(g^*\mathcal{E},(g\times g)^*\varphi)\in\Desc(U'/X)$, so by Lemma~\ref{lem:qcoh-descent-affine} there are $\mathcal{F}\in\QCoh(X)$ and an isomorphism $a:h^*\mathcal{F}\to g^*\mathcal{E}$ of descent data. With the index convention above, the latter says $a_{u'_1}=\varphi_{gu'_0\,gu'_1}\circ a_{u'_0}$ on $U'\times_XU'$. On $P=U'\times_XU$ consider the isomorphism
+	\[
+	b:=\varphi_{gu'\,u}\circ a_{u'}:\ q^*f^*\mathcal{F}=p_1^*h^*\mathcal{F}\longrightarrow q^*\mathcal{E}.
+	\]
+	The two pullbacks of $b$ to $P\times_UP=U'\times_XU'\times_XU$ (points $(u'_0,u'_1,u)$) agree:
+	\[
+	\varphi_{gu'_1\,u}\circ a_{u'_1}=\varphi_{gu'_1\,u}\circ\varphi_{gu'_0\,gu'_1}\circ a_{u'_0}=\varphi_{gu'_0\,u}\circ a_{u'_0},
+	\]
+	by the compatibility of $a$ and the cocycle condition. Hence $b$ is a morphism in $\Desc(P/U)$ between the canonical descent data of $f^*\mathcal{F}$ and $\mathcal{E}$, and since $\{q\}$ is an fpqc covering, Step 2 gives a unique $c:f^*\mathcal{F}\to\mathcal{E}$ with $q^*c=b$. Applying the same to $b^{-1}$ shows that $c$ is an isomorphism. Finally, $c$ is a morphism of descent data, i.e.\ $\varphi_{u_0u_1}\circ c_{u_0}=c_{u_1}$ on $U\times_XU$: by Lemma~\ref{lem:flat-pullback-faithful} this may be checked after pulling back to $U'\times_XU\times_XU$ (points $(u',u_0,u_1)$), where it becomes $\varphi_{u_0u_1}\circ\varphi_{gu'\,u_0}\circ a_{u'}=\varphi_{gu'\,u_1}\circ a_{u'}$, which is again the cocycle condition.
+	
+	\emph{Step 4: effectivity in general.} Let $(\mathcal{E},\varphi)\in\Desc(U/X)$ and let $X_j$, $U_j$ be as in Step 2. By Step 3 there are $\mathcal{F}_j\in\QCoh(X_j)$ and isomorphisms $c_j:f^*\mathcal{F}_j\to\mathcal{E}|_{U_j}$ of descent data. On $X_{jk}:=X_j\cap X_k$, the isomorphism $c_k^{-1}\circ c_j$ is an isomorphism of descent data along $f^{-1}(X_{jk})\to X_{jk}$, so by Step 2 there is a unique isomorphism $\theta_{jk}:\mathcal{F}_j|_{X_{jk}}\to\mathcal{F}_k|_{X_{jk}}$ with $f^*\theta_{jk}=c_k^{-1}c_j$. By uniqueness, $\theta_{kl}\circ\theta_{jk}=\theta_{jl}$ on triple intersections. So the $\mathcal{F}_j$ glue to an $\OO_X$-module $\mathcal{F}$ (\cite[][Lemmas~6.33.2 and 6.33.3, Tag 00AK]{stacks-project}), which is quasi-coherent since quasi-coherence is local. The $c_j$ agree on overlaps by construction, hence glue to an isomorphism $c:f^*\mathcal{F}\to\mathcal{E}$, and $c$ is compatible with the descent data because this can be checked on the open cover of $U\times_XU$ by the preimages of the $X_j$.
+\end{proof}
+
+\begin{remark}
+	The structure of the proof is that of \cite[][Lemma~4.25]{vistoli2007notes}: Zariski gluing together with the affine case suffices. The only non-formal inputs are Theorem~\ref{thm:faithfully-flat-descent-modules} and Lemma~\ref{lem:flat-pullback-faithful}. In Step~3 we avoid comparing the descent categories for $U$ and $U'$ directly: we descend the comparison isomorphism along the auxiliary covering $U'\times_XU\to U$, which only requires the fully faithful part. Combined with the passage from covering families to single morphisms (as in Proposition~\ref{lem:sheaf-single-cover}, see \cite[][Lemma~4.25, Step~2]{vistoli2007notes}), Theorem~\ref{thm:fpqc-descent-qcoh} shows that $\QCoh$ is a stack for the fpqc topology in the sense of Definition~\ref{def:stack}, except that its fibres are categories rather than groupoids.
+\end{remark}
+
+%==========================================================
+\section{Descent of affine morphisms}
+%==========================================================
+
+Pullback of quasi-coherent sheaves is strong monoidal: $f^*(\mathcal{F}\otimes\mathcal{G})\cong f^*\mathcal{F}\otimes f^*\mathcal{G}$ and $f^*\OO_X\cong\OO_U$, compatibly with the canonical isomorphisms. Hence the fibred category $\QCohAlg\to\Sch$ of quasi-coherent algebras is defined as in Example~\ref{ex:fibred-categories}(1), and a cartesian lift to $\QCohAlg$ is a cartesian lift to $\QCoh$ whose objects are algebras and whose structure maps are algebra maps. Similarly, let $\mathcal{A}\mathit{ff}\to\Sch$ be the fibred category whose objects over $T$ are affine morphisms $V\to T$ and whose morphisms are commutative squares; a morphism is cartesian if and only if the square is cartesian.
+
+\begin{corollary}[fpqc descent of affine morphisms]\label{thm:fpqc-descent-affine-schemes}
+	(\cite[][Lemma~35.37.1, Tag 0245]{stacks-project})
+	Let $f:U\to X$ be a morphism of schemes such that $\{f\}$ is an fpqc covering. Then
+	\begin{enumerate}
+		\item $f^*:\QCohAlg(X)\to\Desc_f(\QCohAlg)$ is an equivalence of categories, and
+		\item $f^*:\{\text{affine morphisms }V\to X\}\to\Desc_f(\mathcal{A}\mathit{ff})$, $V\mapsto V\times_XU$, is an equivalence of categories.
+	\end{enumerate}
+	In other words, every affine $U$-scheme $V'$ with an isomorphism $\varphi:V'\times_{U,\mathrm{pr}_0}(U\times_XU)\cong(U\times_XU)\times_{\mathrm{pr}_1,U}V'$ over $U\times_XU$ satisfying the cocycle condition is isomorphic, compatibly with $\varphi$, to $V\times_XU$ for an affine $X$-scheme $V$, which is unique up to unique isomorphism; and morphisms of affine $X$-schemes descend uniquely.
+\end{corollary}
+
+\begin{proof}
+	(1) Full faithfulness: an algebra map between quasi-coherent algebras on $X$ is a morphism of modules compatible with multiplication and unit. By Theorem~\ref{thm:fpqc-descent-qcoh} a morphism of descent data of algebras descends uniquely to a module map, and it is compatible with multiplication and unit because it is so after applying the faithful functor $f^*$. Effectivity: let $(\mathcal{B}',\varphi)$ be a descent datum of algebras. By Theorem~\ref{thm:fpqc-descent-qcoh} there is $\mathcal{B}\in\QCoh(X)$ with $f^*\mathcal{B}\cong\mathcal{B}'$ compatibly with the descent data. Since $\varphi$ is an algebra isomorphism, multiplication $\mathcal{B}'\otimes\mathcal{B}'\to\mathcal{B}'$ and unit $\OO_U\to\mathcal{B}'$ are morphisms of descent data, where $\mathcal{B}'\otimes\mathcal{B}'\cong f^*(\mathcal{B}\otimes\mathcal{B})$ and $\OO_U\cong f^*\OO_X$ carry the canonical data. By full faithfulness they descend to $\mathcal{B}\otimes\mathcal{B}\to\mathcal{B}$ and $\OO_X\to\mathcal{B}$, and associativity, commutativity and unitality hold because they hold after applying the faithful functor $f^*$.
+	
+	(2) The relative spectrum $V\mapsto(V\to T)_*\OO_V$ is an anti-equivalence between affine morphisms $V\to T$ and quasi-coherent $\OO_T$-algebras, compatible with arbitrary base change (\cite[][Lemma~29.11.5, Section~01S5]{stacks-project} and \cite[][Lemma~27.4.6, Tag 01LX]{stacks-project}). Hence it induces an equivalence of fibred categories $\mathcal{A}\mathit{ff}\simeq\QCohAlg^{\op}$ (fibrewise opposite) over $\Sch$, preserving cartesian morphisms, and thus an equivalence between the categories of cartesian lifts of $\check{C}(U/X)_\bullet$ compatible with $f^*$. Now apply (1).
+\end{proof}
+
+\begin{remark}[What is quoted rather than proved]\label{rem:descent-quoted}
+	Later chapters use, in addition, the following descent statements, which we quote:
+	\begin{enumerate}
+		\item descent of open subsets along fpqc coverings (\cite[][Tag 03N0]{stacks-project}, Lemma~\ref{lem:descent-open-subsets});
+		\item effective descent for quasi-affine morphisms (\cite[][Tag 0247]{stacks-project}) and, for fppf coverings, for separated and locally quasi-finite morphisms (\cite[][Tag 02W8]{stacks-project}); the proofs in loc.\ cit.\ build on Corollary~\ref{thm:fpqc-descent-affine-schemes};
+		\item ``being an isomorphism'' is fpqc local on the base (\cite[][Tag 02L4]{stacks-project}).
+	\end{enumerate}
+	Item~(2) is what makes the quotient of a scheme by an \etale\ equivalence relation an algebraic space; this, and not descent of affine schemes, is what glues the local coarse moduli spaces in the proof of the Keel--Mori theorem.
 \end{remark}

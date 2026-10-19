@@ -247,7 +247,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 \section{Keel Mori Theorem}
 
 \begin{theorem}[Keel-Mori Theorem]
-	Let $\mathcal{X}$ be a Deligne-Mumford stack separated and of finite type over a field. Then there exists a coarse moduli space
+	Let $\mathcal{X}$ be a Deligne-Mumford stack separated and of finite type over a field $k$. Then there exists a coarse moduli space
 	\[
 	\pi: \mathcal{X}\to X.
 	\]
@@ -407,16 +407,16 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	\]
 	Set $\mathcal X':=\pi_{\mathcal W}^{-1}(X')$.
 	The inclusion
-	$j:\mathcal X'\hookrightarrow\mathcal W$
+	$\mathcal X'\hookrightarrow\mathcal W$
 	is the base change of the affine open immersion
 	$X'\hookrightarrow W$ along $\pi_{\mathcal W}$.
 	It is therefore affine and étale.
 	Hence, the composite
 	\[
-	g:(\mathcal X',w)
+	g:(\mathcal {X}',w)
 	=([\Specof{A'}/G_x],w)
-	\xrightarrow{\,j\,}(\mathcal W,w)
-	\xrightarrow{\,f\,}(\mathcal X,x)
+	\hookrightarrow(\mathcal{W},w)
+	\xrightarrow{f}(\mathcal{X},x)
 	\]
 	is affine and étale and induces isomorphism on all geometric stabilizer groups, since $\mathcal{X}' \subset \mathcal{U}$.
 	
@@ -513,34 +513,79 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 		\arrow["s", shift left, from=1-1, to=1-2]
 	\end{tikzcd}\]
 	such that $\pi_1 p_1 = s\pi_2$ and $\pi_1 p_2 = t\pi_2$, which we will now varify to be an \etale\ eqivalence relation. 
-	We claim, that $j := (s, t): X_2 \to X_1\times X_1$ is a monomorphism.
+	We claim, that $j := (s, t): X_2 \to X_1\times_k X_1$ is a monomorphism.
 	
 	\begin{proof}[Proof of the claim]
-		Note, that both $X_1 = \Specof{A_1^G}$ and $X_2 = \Specof{A_2^G}$ are schemes.
-		By \cite[Tag 01L3]{stacks-project}, it suffices to show that $\Delta_j$ is an isomorphism.
-		Since $s$ is étale, it is in particular unramified. Hence, its diagonal
+		Note, that both $X_1 = \Specof{A_1^G}$ and $X_2 = \Specof{A_2^G}$ are schemes and $j$ is \etale, since both $s$ and $t$ are \etale, in particular unramified. 
+		
+		Since $X_1$ is separated over $k$, the graph
+		$\Gamma_t:X_2\to X_2\times_k X_1$ is a closed
+		immersion. We can factorize $j$ as
 		\[
-		\Delta_s:X_2\longrightarrow X_2\times_{s,X_1,s}X_2
+		j:
+		X_2
+		\xrightarrow{\Gamma_t}
+		X_2\times_k X_1
+		\xrightarrow{s\times\operatorname{id}_{X_1}}
+		X_1\times_k X_1.
 		\]
-		is an open immersion by
-		\cite[Tag 02GE]{stacks-project}.
-		By the universal property of fiber products there is a
-		cartesian diagram
+		Since $\Gamma_t$ is a closed immersion, it is unramified. $s\times \operatorname{id}_{X_1}$ is the base change of the \etale\ morphism $s$, hence \etale\ and in particular unramified. This shows that $j$ is unramified.
+		
+		By \cite[Tag 05VH]{stacks-project} it suffices to show, that $j$ is a univerally injective, and by \cite[Tag 01S4]{stacks-project} it suffices to show injectivity on geometric points $\Specof{\bar{k}} \to X_2$ for an algebraically closed extension  $\bar{k}/k$ of $k$.
+		
+		So let $x, x' \in X_2(\bar{k})$, such that $j(x) = j(x')$.
+		Since $\pi_1$ and $\pi_2$ are coarse moduli spaces, they induce a bijection on geometric points 
 		\[
-		\begin{tikzcd}
-			X_2
-			\arrow[r, "\Delta_j"]
-			\arrow[d, equal]
-			& X_2\times_{X_1\times_k X_1}X_2
-			\arrow[d] \\
-			X_2
-			\arrow[r, "\Delta_s"']
-			& X_2\times_{s,X_1,s}X_2.
-		\end{tikzcd}
+		|\mathcal{X}_2(\bar{k})| \to X_2(\bar{k}) \qquad |\mathcal{X}_1(\bar{k})| \to X_1(\bar{k}).
 		\]
-		Thus, $\Delta_j$ is an open immersion, since open
-		immersions are preserved under base change;
-		see \cite[Tag 01JY]{stacks-project}.
+		Chose lifts $\xi = (a, b, \alpha)$ and $\xi' = (a', b', \beta)$ in $\mathcal{X}_2(\bar{k}) = (\mathcal{X}_1 \times_{\mathcal{X}_0} \mathcal{X}_1)(\bar{k})$, where
+		\[
+			\alpha: g(a) \xrightarrow{\sim} g(b) \qquad \beta: g(a') \xrightarrow{\sim} g(b').
+		\]
+		This means $\pi_2(\xi) = r$ and $\pi_2(\xi') = r'$.
+		Consider the following commutative diagram:
+		% https://q.uiver.app/#q=WzAsNSxbMCwwLCJ8XFxtYXRoY2Fse1h9XzIoXFxiYXJ7a30pfCJdLFswLDEsIlhfMihcXGJhcntrfSkiXSxbMiwwLCJ8XFxtYXRoY2Fse1h9XzEoXFxiYXJ7a30pfCJdLFsyLDEsIlhfMShcXGJhcntrfSkiXSxbMSwyLCIoWF8xXFx0aW1lcyBYXzEpKFxcYmFye2t9KSJdLFswLDEsIlxccGlfMiJdLFsyLDMsIlxccGlfMSIsMl0sWzEsNCwiaiIsMl0sWzQsMywiXFxvcGVyYXRvcm5hbWV7cHJ9XzEiLDAseyJvZmZzZXQiOi0xfV0sWzQsMywiXFxvcGVyYXRvcm5hbWV7cHJ9XzIiLDIseyJvZmZzZXQiOjF9XSxbMSwzLCJ0IiwyLHsib2Zmc2V0IjoxfV0sWzEsMywicyIsMCx7Im9mZnNldCI6LTF9XSxbMCwyLCJwXzEiLDAseyJvZmZzZXQiOi0xfV0sWzAsMiwicF8yIiwyLHsib2Zmc2V0IjoxfV1d
+		\[\begin{tikzcd}
+			{|\mathcal{X}_2(\bar{k})|} && {|\mathcal{X}_1(\bar{k})|} \\
+			{X_2(\bar{k})} && {X_1(\bar{k})} \\
+			& {(X_1\times X_1)(\bar{k})}
+			\arrow["{p_1}", shift left, from=1-1, to=1-3]
+			\arrow["{p_2}"', shift right, from=1-1, to=1-3]
+			\arrow["{\pi_2}", from=1-1, to=2-1]
+			\arrow["{\pi_1}"', from=1-3, to=2-3]
+			\arrow["t"', shift right, from=2-1, to=2-3]
+			\arrow["s", shift left, from=2-1, to=2-3]
+			\arrow["j"', from=2-1, to=3-2]
+			\arrow["{\operatorname{pr}_1}", shift left, from=3-2, to=2-3]
+			\arrow["{\operatorname{pr}_2}"', shift right, from=3-2, to=2-3]
+		\end{tikzcd}\]
+		Hence,
+		\[
+			j(x) = (\pi_1 (a), \pi_1 (b))
+		\]
+		and 
+		\[
+			j(x') = (\pi_1 (a'), \pi_1 (b'))
+		\]
+		Now the equality $j(x) = j(x')$ enforces $\pi_1(a) = \pi_1(a')$ and $\pi_1(b) = \pi_1(b')$. But $\pi_1$ is a coarse moduli space, so injectivity on geometric points yields $[a] = [a']$ and $[b] = [b']$. Equality of the isomorphism classes imply that there exists isomorphisms $v: a\to a'$ and $w: b \to b'$. 
+		We will now construct an isomorphisms $\tilde{v}$, such that the following diagram commutes:
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJnKGEpIl0sWzEsMCwiZyhiKSJdLFsxLDEsImcoYicpIl0sWzAsMSwiZyhhJykiXSxbMCwxLCJcXGFscGhhIl0sWzEsMiwiZyhcXHRpbGRle3d9KSJdLFswLDMsImcoXFx0aWxkZXt2fSkiLDJdLFszLDIsIlxcYmV0YSIsMl1d
+		\[\begin{tikzcd}
+			{g(a)} & {g(b)} \\
+			{g(a')} & {g(b')}
+			\arrow["\alpha", from=1-1, to=1-2]
+			\arrow["{g(\tilde{v})}"', from=1-1, to=2-1]
+			\arrow["{g(\tilde{w})}", from=1-2, to=2-2]
+			\arrow["\beta"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		
+		Consider the composite $\eta := g(v)^{-1} \circ \beta^{-1} \circ g(w) \circ \alpha \in \Aut_{\mathcal{X}_0(\bar{k})}(g(a))$.
+		Since $g$ induces isomorphism on the stabilizer of $a$, there exists a $\varphi \in \Aut_{\mathcal{X}_1(\bar{k})}(a)$, such that $g(\varphi) = \eta$.
+		Let $\tilde{v} = v \circ \varphi$, then 
+		\[
+			\beta \circ g(\tilde{v}) = \beta \circ g(v) \circ g(\varphi)  = g(w) \circ \alpha.
+		\]
+		Hence, $(\tilde{v}, w): \xi = (a, b, \alpha) \xrightarrow{\sim} (a', b', \beta) = \xi'$ is an isomorphism in $\mathcal{X}_2(\bar{k})$. But the image of this isomorphism under $\pi_2$ is just $\operatorname{id}_r$, since $X_2(\bar{k})$ is a set, i.e. a discrete groupoid, which means $r = r'$.
 	\end{proof}
 	
 \end{proof}
