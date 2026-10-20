@@ -2,15 +2,29 @@
 
 In Chapter~\ref{chap:grothendieck-topologies} we formulated the sheaf condition via the \v{C}ech nerve: a presheaf of sets $F$ satisfies descent along $p:U\to X$ if
 \[
-F(X)\xrightarrow{\ \sim\ }\lim_{[n]\in\Delta}F\bigl(\check{C}(U/X)_n\bigr),
+F(X)\xrightarrow{\ \sim\ }\lim_{[n]\in\Delta}F\bigl((U/X)_n\bigr),
 \]
-and by Lemma~\ref{lem:tot-cosimplicial-set} only the truncation $\Delta_{\le 1}$ of the indexing category matters, so that the condition becomes an equalizer condition on $U$ and $U\times_XU$. In this chapter $F$ takes values in categories, the main examples being quasi-coherent sheaves and modules. Two things change. First, pullbacks compose only up to canonical isomorphism, so $F$ is a \emph{pseudofunctor} rather than a functor. This is not an obstacle: the coherence isomorphisms are part of the data of a pseudofunctor, and we simply carry them along. Second, compatibility of local data is no longer an equality on $U\times_XU$ but a specified isomorphism, which in turn has to satisfy a cocycle condition on $U\times_XU\times_XU$.
+and by Lemma~\ref{lem:tot-cosimplicial-set} only the truncation $\Delta_{\le 1}$ of the indexing category matters, since $\Set$ is a $1$ category and all higher coherence are automatic. Hence, the condition becomes an equalizer condition on $U$ and $U\times_XU$. In this chapter $F$ takes values in categories and groupoids, the main examples being quasi-coherent sheaves and modules. Two things change. First, pullbacks compose only up to canonical isomorphism, so $F$ is a \emph{pseudofunctor} rather than a functor.
+Second, compatibility of local data is no longer an equality on $U\times_XU$ but a specified isomorphism, which in turn has to satisfy a cocycle condition on $U\times_XU\times_XU$.
+These changes reflect the $2$-categorical nature of \Cat and \Grpd.
 
 We take this explicit description, an object over $U$, an isomorphism over $U\times_XU$ and a cocycle condition over $U\times_XU\times_XU$, as the definition of the descent category (Definition~\ref{def:classical-descent-data}); it is the description used in all computations below. Its conceptual meaning, the $2$-categorical analogue of the limit above,
 \[
-F(X)\;\simeq\;\Tot F\bigl(\check{C}(U/X)_\bullet\bigr),
+F(X)\;\simeq\;\Tot F\bigl((U/X)_\bullet\bigr),
 \]
-is explained in Section~\ref{sec:descent-totalization} in a sequence of remarks. There we also explain why the classical description is not an ad hoc choice: the totalization only depends on $\Delta_{\le 2}$ (Remark~\ref{rem:desc-2-truncation}), which is the $2$-categorical analogue of Lemma~\ref{lem:tot-cosimplicial-set}. In higher-categorical treatments, descent is formulated as such a totalization over the augmented \v{C}ech nerve, see \cite{khan2022stacks}. None of the remarks in Section~\ref{sec:descent-totalization} is used in the rest of the thesis.
+is explained in Section~\ref{sec:descent-totalization} in a sequence of remarks. There we also explain how the classical description arises naturally from the $2$-categorical totalization depending only on $\Delta_{\le 2}$ (Remark~\ref{rem:desc-2-truncation}), which is the $2$-categorical analogue of Lemma~\ref{lem:tot-cosimplicial-set}, and visualize as the following limit diagram:
+% https://q.uiver.app/#q=WzAsNCxbMSwwLCJGKFUpIl0sWzAsMCwiRihYKSJdLFsyLDAsIkYoVVxcdGltZXNfWFUpIl0sWzMsMCwiRihVXFx0aW1lc19YVVxcdGltZXNfWFUpIl0sWzEsMF0sWzAsMiwiIiwwLHsib2Zmc2V0IjoxfV0sWzAsMiwiIiwwLHsib2Zmc2V0IjotMX1dLFsyLDNdLFsyLDMsIiIsMCx7Im9mZnNldCI6LTJ9XSxbMiwzLCIiLDAseyJvZmZzZXQiOjJ9XV0=
+\[\begin{tikzcd}
+	{F(X)} & {F(U)} & {F(U\times_XU)} & {F(U\times_XU\times_XU)}
+	\arrow[from=1-1, to=1-2]
+	\arrow[shift right, from=1-2, to=1-3]
+	\arrow[shift left, from=1-2, to=1-3]
+	\arrow[from=1-3, to=1-4]
+	\arrow[shift left=2, from=1-3, to=1-4]
+	\arrow[shift right=2, from=1-3, to=1-4]
+\end{tikzcd}\]
+In higher-categorical treatments, descent is formulated as such a totalization over the augmented \v{C}ech nerve, see \cite{khan2022stacks}. 
+None of the remarks in Section~\ref{sec:descent-totalization} is used in the rest of the thesis.
 
 \subsection*{What the Keel--Mori theorem needs}
 
@@ -66,21 +80,192 @@ All other descent statements are quoted from \cite{stacks-project} when they are
 	\end{enumerate}
 \end{example}
 
-The pseudofunctor formalism is equivalent to the formalism of fibred categories with a cleavage via the Grothendieck construction (\cite[][Section~3.1.3]{vistoli2007notes}, compare Proposition~\ref{prop:grothendieck-construction}). For descent we do not need this equivalence and work with pseudofunctors throughout.
+\section{Fibred Categories}
 
-%==========================================================
+In this section we will consider commutative diagrams of the following form:
+% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXHpldGEiXSxbMSwwLCJcXGV0YSJdLFswLDEsIlUiXSxbMSwxLCJWIl0sWzIsMCwiXFxtYXRoY2Fse0Z9Il0sWzIsMSwiXFxtYXRoY2Fse0N9Il0sWzAsMiwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dLFsyLDMsImYiXSxbMSwzLCIiLDIseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzAsMSwiXFxwaGkiXSxbNCw1LCJwX1xcbWF0aGNhbHtGfSJdXQ==
+\[\begin{tikzcd}
+	\zeta & \eta & {\mathcal{F}} \\
+	U & V & {\mathcal{C}}
+	\arrow["\phi", from=1-1, to=1-2]
+	\arrow[maps to, from=1-1, to=2-1]
+	\arrow[maps to, from=1-2, to=2-2]
+	\arrow["{p_\mathcal{F}}", from=1-3, to=2-3]
+	\arrow["f", from=2-1, to=2-2]
+\end{tikzcd}\]
+This denotes that $\zeta$ lies over $U$ and $\phi$ lies over $f$, i.e. $p_\mathcal{F}(\zeta) = U$ and $p_\mathcal{F}(\phi) = f$.
+
+
+\begin{definition}[Category fibred in Groupoids]\label{def:category-fibred-in-groupoids}
+	(\cite[][p. 9, Definition 2.15]{Gomez2001AlgebraicStacks})
+	Let $\mathcal{F}$ be a category over $\mathcal{C}$. We call it a category fibred in groupoids (CFG), if 
+	\begin{enumerate}
+		\item Pullbacks exists, i.e. for all morphisms $f:B'\to B$ in $\mathcal{C}$ and every object $X$ lying over $B$ there exists an object $X'$ and a morphism $\phi:X'\to X$ lying over $B'$ and $f$ resp.
+		% https://q.uiver.app/#q=WzAsNCxbMSwwLCJYIl0sWzAsMCwiWCciXSxbMCwxLCJCJyJdLFsxLDEsIkIiXSxbMiwzLCJmIiwyXSxbMCwzLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzEsMiwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9LCJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMSwwLCJcXHBoaSIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+		\[\begin{tikzcd}
+			{X'} & X \\
+			{B'} & B
+			\arrow["\phi", dashed, from=1-1, to=1-2]
+			\arrow[dashed, maps to, from=1-1, to=2-1]
+			\arrow[maps to, from=1-2, to=2-2]
+			\arrow["f"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		\item Every diagram 
+		% https://q.uiver.app/#q=WzAsNixbMCwwLCJYXzMiXSxbMiwwLCJYXzEiXSxbMSwxLCJYXzIiXSxbMCwyLCJCXzMiXSxbMSwzLCJCXzIiXSxbMiwyLCJCXzEiXSxbMyw0LCJmJyIsMl0sWzQsNSwiZiIsMl0sWzMsNSwiZlxcY2lyYyBmJyIsMCx7ImxhYmVsX3Bvc2l0aW9uIjo4MH1dLFswLDEsIlxccHNpIl0sWzIsMSwiXFxwaGkiLDJdLFsyLDQsIiIsMSx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbMSw1LCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzAsMywiIiwxLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dLFswLDIsIlxcdmFycGhpIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+		\[\begin{tikzcd}
+			{X_3} && {X_1} \\
+			& {X_2} \\
+			{B_3} && {B_1} \\
+			& {B_2}
+			\arrow["\psi", from=1-1, to=1-3]
+			\arrow["\varphi"', dashed, from=1-1, to=2-2]
+			\arrow[maps to, from=1-1, to=3-1]
+			\arrow[maps to, from=1-3, to=3-3]
+			\arrow["\phi"', from=2-2, to=1-3]
+			\arrow[maps to, from=2-2, to=4-2]
+			\arrow["{f\circ f'}"{pos=0.8}, from=3-1, to=3-3]
+			\arrow["{f'}"', from=3-1, to=4-2]
+			\arrow["f"', from=4-2, to=3-3]
+		\end{tikzcd}\]
+		admits a unique morphism $\varphi$ lying over $f'$ and letting the upper triangle commute.
+	\end{enumerate}
+\end{definition}
+
+
+\begin{definition}[Morphism of CFG]
+	Let $\mathcal{F},\mathcal{G}$ be categories fibred in groupoids over $\CatC$. A morphism of categories fibred in groupoids is a functor $f:\mathcal{F}\to \mathcal{G}$ 
+\end{definition}
+
+\begin{definition}
+	Let $\mathcal{F}\to \mathcal{C}$ be a category fibred in groupoids and let $B\in \mathcal{C}$. We call the subcategory of $\mathcal{F}$ of objects lying over $B$ and morphisms lying over $id_B$ the fibre of $\mathcal{F}$ over $B$ and denote it by $\mathcal{F}(B)$.
+\end{definition}
+
+\begin{proposition}
+	In definition \ref{def:category-fibred-in-groupoids} 2), $f$ is an isomorphism if and only if $\phi$ is an isomorphism.
+\end{proposition}
+
+\begin{proof}
+	One direction is obvious, since $p_\mathcal{F}$ is a functor. For the other direction consider the following diagram:
+	% https://q.uiver.app/#q=WzAsNixbMCwwLCJYXzEiXSxbMiwwLCJYXzEiXSxbMSwxLCJYXzIiXSxbMCwyLCJCXzEiXSxbMSwzLCJCXzIiXSxbMiwyLCJCXzEiXSxbMyw0LCJmXnstMX0iLDJdLFs0LDUsImYiLDJdLFszLDUsImlkIiwwLHsibGFiZWxfcG9zaXRpb24iOjgwfV0sWzAsMSwiaWQiXSxbMiwxLCJcXHBoaSIsMl0sWzIsNCwiIiwxLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dLFsxLDUsIiIsMSx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbMCwzLCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzAsMiwiXFxwaGleey0xfSIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+	\[\begin{tikzcd}
+		{X_1} && {X_1} \\
+		& {X_2} \\
+		{B_1} && {B_1} \\
+		& {B_2}
+		\arrow["id", from=1-1, to=1-3]
+		\arrow["{\phi^{-1}}"', dashed, from=1-1, to=2-2]
+		\arrow[maps to, from=1-1, to=3-1]
+		\arrow[maps to, from=1-3, to=3-3]
+		\arrow["\phi"', from=2-2, to=1-3]
+		\arrow[maps to, from=2-2, to=4-2]
+		\arrow["id"{pos=0.8}, from=3-1, to=3-3]
+		\arrow["{f^{-1}}"', from=3-1, to=4-2]
+		\arrow["f"', from=4-2, to=3-3]
+	\end{tikzcd}\]
+\end{proof}
+
+\begin{proposition}\label{prop:unique-pullback}
+	The pullback $X'$ of $X$ along $f$ is unique up to a unique isomorphism. We will denote it by $f^*X$
+\end{proposition}
+
+\begin{proof}
+	Assume there is a nother $X''$ satisfying 1). Applying 2) to this diagramm
+	% https://q.uiver.app/#q=WzAsNixbMCwwLCJYJyciXSxbMiwwLCJYIl0sWzEsMSwiWCciXSxbMCwyLCJCJyJdLFsxLDMsIkInIl0sWzIsMiwiQiJdLFszLDQsImlkX3tCJ30iLDJdLFs0LDUsImYiLDJdLFszLDUsImYiLDAseyJsYWJlbF9wb3NpdGlvbiI6ODB9XSxbMCwxLCJcXHBzaSJdLFsyLDEsIlxccGhpIiwyXSxbMiw0LCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzEsNSwiIiwxLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dLFswLDMsIiIsMSx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbMCwyLCJcXHZhcnBoaSIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+	\[\begin{tikzcd}
+		{X''} && X \\
+		& {X'} \\
+		{B'} && B \\
+		& {B'}
+		\arrow["\psi", from=1-1, to=1-3]
+		\arrow["\varphi"', dashed, from=1-1, to=2-2]
+		\arrow[maps to, from=1-1, to=3-1]
+		\arrow[maps to, from=1-3, to=3-3]
+		\arrow["\phi"', from=2-2, to=1-3]
+		\arrow[maps to, from=2-2, to=4-2]
+		\arrow["f"{pos=0.8}, from=3-1, to=3-3]
+		\arrow["{id_{B'}}"', from=3-1, to=4-2]
+		\arrow["f"', from=4-2, to=3-3]
+	\end{tikzcd}\]
+	we optain a unique morphism $\varphi:X''\to X'$ over $id_{B'}$. Then exchanging roles yields a unique morphism $\eta:X'\to X''$  over $id_{B'}$. Then by uniqueness we get $\varphi\circ\eta = id_{X''}$ and  $\eta \circ \varphi= id_{X'}$.
+\end{proof}
+
+\begin{corollary}
+	Let $\mathcal{F}\to \mathcal{C}$ be a category fibred in groupoids. Then the fibres $\mathcal{F}(B)$ of $\mathcal{F}$ over every object $B\in\CatC$ is a groupoid.
+\end{corollary}
+
+\begin{definition}
+	Given CFG $\mathcal{F},\mathcal{G}$ over $\CatC$, we call a natural
+\end{definition}
+
+
+\begin{proposition}[Grothendieck construction]\label{prop:grothendieck-construction}
+	Let $\mathcal C$ be a category. There is an equivalence between
+	\begin{enumerate}
+		\item categories fibred in groupoids over $\mathcal C$, and
+		\item pseudofunctors
+		\[
+		F : \mathcal C^{op} \to \Grpd.
+		\]
+	\end{enumerate}
+	
+	Under this equivalence, a fibred category $\mathcal F \to \mathcal C$
+	is sent to the pseudofunctor
+	\[
+	B \longmapsto \mathcal F(B),
+	\]
+	which assigns to each object its fibre and to each morphism
+	$f : B' \to B$ the pullback functor
+	\[
+	f^* : \mathcal F(B) \to \mathcal F(B').
+	\]
+	
+	Conversely, a pseudofunctor determines a category fibred in groupoids
+	via the Grothendieck construction, see \cite[][Section~3.1.2]{vistoli2007notes} and
+	\cite[][Tags 02XJ, 003S]{stacks-project}.
+\end{proposition}
+
+\begin{remark}
+	This construction originates in SGA~1, Exp.~VI, due to
+	Alexander Grothendieck, where categories fibred in groupoids are introduced as a framework for descent.
+	
+	The appearance of pseudofunctors rather than ordinary functors reflects
+	the fact that pullbacks in a fibred category are only defined up to
+	canonical isomorphism. In particular, for composable morphisms
+	\[
+	B'' \xrightarrow{f} B' \xrightarrow{g} B
+	\]
+	one has a natural isomorphism
+	\[
+	f^* g^* \Rightarrow (g \circ f)^*,
+	\]
+	and similarly for identities. These isomorphisms satisfy coherence
+	conditions, giving rise to a pseudofunctor rather than a strict functor.
+	
+	From a modern higher-categorical point of view, this is not a defect
+	but the correct notion of functoriality. The failure of strict
+	functoriality is resolved by passing to homotopy-coherent functors.
+	Accordingly, the Grothendieck construction may be viewed as a special
+	case of a more general principle, namely that Grothendieck fibrations
+	classify functors valued in categories. In higher category theory, this
+	extends to the straightening-unstraightening equivalence between
+	functors into $\infty$-categories and cartesian fibrations, see
+	\cite[Chapter~2.4 and Section~3.2]{lurie2008higher}.
+\end{remark}
+
 \section{The descent category}
-%==========================================================
 
 Let $\CatC$ be a category with fibre products and $f:U\to X$ a morphism. We write
-\[
-\mathrm{pr}_0,\mathrm{pr}_1:U\times_XU\to U,\qquad\mathrm{pr}_{01},\mathrm{pr}_{12},\mathrm{pr}_{02}:U\times_XU\times_XU\to U\times_XU,\qquad q_0,q_1,q_2:U\times_XU\times_XU\to U
-\]
-for the projections. In the notation of Definition~\ref{def:cech-nerve}, $\mathrm{pr}_0=d_1$ and $\mathrm{pr}_1=d_0$ on $\check{C}(U/X)_1$, and $\mathrm{pr}_{01}=d_2$, $\mathrm{pr}_{12}=d_0$, $\mathrm{pr}_{02}=d_1$ on $\check{C}(U/X)_2$. Moreover $\mathrm{pr}_0\circ\mathrm{pr}_{ij}=q_i$ and $\mathrm{pr}_1\circ\mathrm{pr}_{ij}=q_j$.
+\begin{align*}
+	\mathrm{pr}_0,\mathrm{pr}_1 &:U\times_XU \to U \\
+	\mathrm{pr}_{01},\mathrm{pr}_{12},\mathrm{pr}_{02} &:U\times_XU\times_XU \to U\times_XU \\
+	\mathrm{pr}_0,\mathrm{pr}_1,\mathrm{pr}_2&:U\times_XU\times_XU \to U
+\end{align*}
+
+for the projections. In the notation of Definition~\ref{def:cech-nerve}, $\mathrm{pr}_0=d_1$ and $\mathrm{pr}_1=d_0$ on $(U/X)_1$, and $\mathrm{pr}_{01}=d_2$, $\mathrm{pr}_{12}=d_0$, $\mathrm{pr}_{02}=d_1$ on $(U/X)_2$. Moreover $\mathrm{pr}_0\circ\mathrm{pr}_{ij}=q_i$ and $\mathrm{pr}_1\circ\mathrm{pr}_{ij}=q_j$.
 
 \begin{definition}[Descent data]\label{def:classical-descent-data}
-	(\cite[][Definition~4.2]{vistoli2007notes}, for a single morphism and with the opposite orientation of $\varphi$)
-	Let $F:\CatC^{\op}\to\Cat$ be a pseudofunctor and $f:U\to X$ a morphism in $\CatC$. The \emph{category of descent data along $f$}, denoted $\Desc_f(F)$, is defined as follows.
+	(\cite[][Definition~4.2]{vistoli2007notes}, for a single morphism)
+	Let $(\CatC, \mathcal{J})$ be a cite, let $F:\CatC^{\op}\to\Cat$ be a pseudofunctor and $f:U\to X$ a covering in $\CatC$. The \emph{category of descent data along $f$}, denoted $\Desc_f(F)$, is defined as follows.
 	\begin{enumerate}
 		\item An object is a pair $(\xi,\varphi)$ of an object $\xi\in F(U)$ and an isomorphism
 		\[
@@ -98,18 +283,6 @@ for the projections. In the notation of Definition~\ref{def:cech-nerve}, $\mathr
 	Composition is composition in $F(U)$. For $F=\QCoh$ we write $\Desc(U/X):=\Desc_f(\QCoh)$.
 \end{definition}
 
-\begin{remark}[The cocycle condition with coherence isomorphisms]\label{rem:cocycle-explicit}
-	The condition on morphisms takes place in $F(U\times_XU)$ and needs no identifications. In the cocycle condition, however, the three morphisms $\mathrm{pr}_{ij}^*\varphi:\mathrm{pr}_{ij}^*\mathrm{pr}_0^*\xi\to\mathrm{pr}_{ij}^*\mathrm{pr}_1^*\xi$ have different sources and targets, and the composite only makes sense after the identifications of Remark~\ref{rem:pseudofunctor-convention}. Explicitly, put
-	\[
-	\varphi_{ij}:=\alpha_{\mathrm{pr}_{ij},\mathrm{pr}_1}(\xi)\circ\mathrm{pr}_{ij}^*\varphi\circ\alpha_{\mathrm{pr}_{ij},\mathrm{pr}_0}(\xi)^{-1}:\ q_i^*\xi\longrightarrow q_j^*\xi\qquad(0\le i<j\le2),
-	\]
-	using $\mathrm{pr}_0\circ\mathrm{pr}_{ij}=q_i$ and $\mathrm{pr}_1\circ\mathrm{pr}_{ij}=q_j$. The cocycle condition is the equation
-	\[
-	\varphi_{02}=\varphi_{12}\circ\varphi_{01}:\ q_0^*\xi\longrightarrow q_2^*\xi
-	\]
-	of morphisms in $F(U\times_XU\times_XU)$. In words: the gluing isomorphism from the $0$-th to the $2$-nd factor is the composite of the gluing isomorphisms through the $1$-st factor. This is the convention of \cite[][Tag 02ZC]{stacks-project}, of \cite[][Corollary~2.11]{hollander2001homotopy} and of Definition~\ref{def:stack}.
-\end{remark}
-
 \begin{definition}[Canonical descent data]\label{con:pullback-to-descent}
 	In the situation of Definition~\ref{def:classical-descent-data}, let $\zeta\in F(X)$. Since $f\circ\mathrm{pr}_0=f\circ\mathrm{pr}_1$, the coherence isomorphisms give an isomorphism
 	\[
@@ -121,14 +294,6 @@ for the projections. In the notation of Definition~\ref{def:cech-nerve}, $\mathr
 	\]
 	We say that $F$ \emph{satisfies descent along $f$} if this functor is an equivalence of categories. Descent data in its essential image are called \emph{effective}.
 \end{definition}
-
-\begin{proof}[Proof that $f^*$ is well defined]
-	Put $r:=f\circ q_0=f\circ q_1=f\circ q_2$ and $s:=f\circ\mathrm{pr}_0=f\circ\mathrm{pr}_1$. Condition~(A) for $\mathrm{pr}_{ij}$, $\mathrm{pr}_0$, $f$ gives $\alpha_{\mathrm{pr}_{ij},s}\circ\mathrm{pr}_{ij}^*\alpha_{\mathrm{pr}_0,f}=\alpha_{q_i,f}\circ\alpha_{\mathrm{pr}_{ij},\mathrm{pr}_0}f^*$, and similarly with $\mathrm{pr}_1$ and $q_j$. Substituting both identities into the definition of $(\mathrm{can}_\zeta)_{ij}$ in Remark~\ref{rem:cocycle-explicit}, the terms $\alpha_{\mathrm{pr}_{ij},s}$ cancel and we obtain
-	\[
-	(\mathrm{can}_\zeta)_{ij}=\alpha_{q_j,f}(\zeta)^{-1}\circ\alpha_{q_i,f}(\zeta):\ q_i^*f^*\zeta\longrightarrow r^*\zeta\longrightarrow q_j^*f^*\zeta .
-	\]
-	The cocycle condition $(\mathrm{can}_\zeta)_{02}=(\mathrm{can}_\zeta)_{12}\circ(\mathrm{can}_\zeta)_{01}$ is now a telescoping identity. For $b:\zeta\to\zeta'$ in $F(X)$, the equation $\mathrm{can}_{\zeta'}\circ\mathrm{pr}_0^*f^*b=\mathrm{pr}_1^*f^*b\circ\mathrm{can}_\zeta$ follows from the naturality of $\alpha_{\mathrm{pr}_0,f}$ and $\alpha_{\mathrm{pr}_1,f}$.
-\end{proof}
 
 Concretely, $f^*$ is fully faithful if and only if morphisms between pullbacks that are compatible with the canonical descent data descend uniquely, and $F$ satisfies descent along $f$ if in addition every descent datum is effective.
 
@@ -143,18 +308,22 @@ Concretely, $f^*$ is fully faithful if and only if morphisms between pullbacks t
 		\item \textbf{Groupoids.} If $F$ takes values in $\Grpd$, the gluing isomorphisms are additional data and the cocycle condition is a genuine condition. Every morphism of descent data is invertible, so $\Desc_f(F)$ is a groupoid. This is the situation of Definition~\ref{def:stack}.
 		\item \textbf{Categories.} If $F$ takes values in $\Cat$, as for $\QCoh$, objects of $\Desc_f(F)$ are described exactly as for groupoids, but morphisms of descent data need not be invertible.
 	\end{enumerate}
-	Thus the passage from sets to groupoids replaces equalities on $U\times_XU$ by isomorphisms, and the price for this is the cocycle condition on $U\times_XU\times_XU$.
+	Thus the passage from sets to groupoids replaces equalities on $U\times_XU$ by isomorphisms and the cocycle condition on $U\times_XU\times_XU$.
 \end{remark}
 
 The following functoriality is used to compare $\QCoh$ with modules and with affine morphisms.
 
-\begin{lemma}[Change of pseudofunctor]\label{lem:desc-pseudonatural}
+\begin{lemma}\label{lem:desc-pseudonatural}
 	Let $F,G:\CatC^{\op}\to\Cat$ be pseudofunctors and $f:U\to X$ a morphism in $\CatC$.
 	\begin{enumerate}
-		\item Let $\Phi:F\Rightarrow G$ be a \emph{pseudonatural transformation}, i.e.\ functors $\Phi_T:F(T)\to G(T)$ together with natural isomorphisms $\beta_g:g^*\Phi_T\Rightarrow\Phi_{T'}g^*$ for $g:T'\to T$, compatible with the coherence isomorphisms: $\beta_{gh}\circ\alpha^G_{h,g}\Phi_T=\Phi_{T''}\alpha^F_{h,g}\circ\beta_hg^*\circ h^*\beta_g$ for $T''\xrightarrow{h}T'\xrightarrow{g}T$, and similarly for $\epsilon$. Then
-		\[
-		\Phi_*:\Desc_f(F)\longrightarrow\Desc_f(G),\qquad(\xi,\varphi)\longmapsto\bigl(\Phi_U\xi,\ \beta_{\mathrm{pr}_1}^{-1}\circ\Phi_{U\times_XU}(\varphi)\circ\beta_{\mathrm{pr}_0}\bigr),\qquad a\longmapsto\Phi_U(a),
-		\]
+		\item Let $\Phi:F\Rightarrow G$ be a \emph{pseudonatural transformation}, i.e.\ functors $\Phi_T:F(T)\to G(T)$ together with natural isomorphisms $\beta_g:g^*\Phi_T\Rightarrow\Phi_{T'}g^*$ for $g:T'\to T$, compatible with the coherence isomorphisms: $\beta_{gh}\circ\alpha^G_{h,g}\Phi_T=\Phi_{T''}\alpha^F_{h,g}\circ\beta_hg^*\circ h^*\beta_g$ for $T''\xrightarrow{h}T'\xrightarrow{g}T$, and similarly for $\epsilon$. 
+		
+		Then
+		\begin{align*}
+			\Phi_*:\Desc_f(F) &\longrightarrow\Desc_f(G) \\
+			(\xi,\varphi) &\longmapsto\bigl(\Phi_U\xi, \beta_{\mathrm{pr}_1}^{-1}\circ\Phi_{U\times_XU}(\varphi)\circ\beta_{\mathrm{pr}_0}\bigr)\\
+			a &\longmapsto\Phi_U(a),
+		\end{align*}
 		is a functor, and $\beta_f$ induces an isomorphism $\Phi_*\circ f^*\cong f^*\circ\Phi_X$. If every $\Phi_T$ is an equivalence of categories, then so is $\Phi_*$. In this case $F$ satisfies descent along $f$ if and only if $G$ does.
 		\item Let $F^{\op}$ denote the pseudofunctor $T\mapsto F(T)^{\op}$ with the same pullback functors and the inverse coherence isomorphisms. Then $(\xi,\varphi)\mapsto(\xi,\varphi^{-1})$ is an isomorphism of categories $\Desc_f(F^{\op})\cong\Desc_f(F)^{\op}$, compatible with $f^*$.
 	\end{enumerate}
@@ -168,65 +337,7 @@ The following functoriality is used to compare $\QCoh$ with modules and with aff
 	(2) An object of $\Desc_f(F^{\op})$ consists of $\xi$ and an isomorphism $\mathrm{pr}_0^*\xi\to\mathrm{pr}_1^*\xi$ in $F(U\times_XU)^{\op}$, i.e.\ an isomorphism $\varphi:\mathrm{pr}_1^*\xi\to\mathrm{pr}_0^*\xi$ in $F(U\times_XU)$, and the cocycle condition in $F^{\op}$ reads $\varphi_{02}=\varphi_{01}\circ\varphi_{12}$, which is equivalent to $\varphi_{02}^{-1}=\varphi_{12}^{-1}\circ\varphi_{01}^{-1}$. Morphisms are reversed in the same way.
 \end{proof}
 
-%==========================================================
-\section{Descent as a totalization}\label{sec:descent-totalization}
-%==========================================================
-
-This section explains the conceptual meaning of Definition~\ref{def:classical-descent-data}. It consists of remarks only and is not used later. Let $F:\CatC^{\op}\to\Cat$ be a pseudofunctor and $Y_\bullet:\Delta^{\op}\to\CatC$ a simplicial object; for $\theta:[m]\to[n]$ we write $Y(\theta):Y_n\to Y_m$. The main case is the \v{C}ech nerve $Y_\bullet=\check{C}(U/X)_\bullet$ of Definition~\ref{def:cech-nerve}. For $0\le k\le l\le m\le n$ we write
-\[
-\begin{aligned}
-	v_k&:[0]\to[n], & 0&\mapsto k,\\
-	e_{kl}&:[1]\to[n], & (0,1)&\mapsto(k,l),\\
-	t_{klm}&:[2]\to[n], & (0,1,2)&\mapsto(k,l,m)
-\end{aligned}
-\]
-for the vertices, edges and triangles of $\Delta^n$. For the \v{C}ech nerve, $Y(v_k)$ and $Y(e_{kl})$ are the projections $\mathrm{pr}_k$ and $\mathrm{pr}_{kl}$. Note that $e_{kl}\circ\delta^1=v_k$, $e_{kl}\circ\delta^0=v_l$, and $t_{klm}\circ\delta^2=e_{kl}$, $t_{klm}\circ\delta^0=e_{lm}$, $t_{klm}\circ\delta^1=e_{km}$.
-
-\begin{remark}[The general descent category]\label{rem:descent-category}
-	The \emph{descent category} $\Desc(Y_\bullet;F)$ has as objects families $(\xi_n,\xi_\theta)$ of objects $\xi_n\in F(Y_n)$ for $n\ge0$ and isomorphisms
-	\[
-	\xi_\theta:Y(\theta)^*\xi_m\xrightarrow{\ \sim\ }\xi_n\qquad\text{for }\theta:[m]\to[n],
-	\]
-	such that $\xi_{\mathrm{id}}=\epsilon$ and, for $\psi:[l]\to[m]$ and $\theta:[m]\to[n]$,
-	\[
-	\xi_{\theta\psi}\circ\alpha_{Y(\theta),Y(\psi)}(\xi_l)=\xi_\theta\circ Y(\theta)^*\xi_\psi:\ Y(\theta)^*Y(\psi)^*\xi_l\longrightarrow\xi_n .
-	\]
-	A morphism $(\xi_n,\xi_\theta)\to(\eta_n,\eta_\theta)$ is a family $a_n:\xi_n\to\eta_n$ with $\eta_\theta\circ Y(\theta)^*a_m=a_n\circ\xi_\theta$ for all $\theta$. In other words, $\Desc(Y_\bullet;F)$ is the category of pseudo-cones over the pseudo-cosimplicial category $[n]\mapsto F(Y_n)$ with vertex the terminal category, i.e.\ its $2$-categorical (pseudo)limit. Under the Grothendieck construction an object is the same as a simplicial object of the fibred category associated with $F$ lying over $Y_\bullet$, all of whose structure maps are cartesian (a \emph{cartesian lift} of $Y_\bullet$); this is the formulation of \cite[][Section~3.3.3]{halpernleistner2020moduli}, where cartesian sections are shown to compute the $2$-categorical limit (\cite[][Example~3.14]{halpernleistner2020moduli}). For $\zeta\in F(X)$ the objects $\varepsilon_n^*\zeta$, where $\varepsilon_n:\check{C}(U/X)_n\to X$ is the augmentation, together with the coherence isomorphisms $Y(\theta)^*\varepsilon_m^*\zeta\cong\varepsilon_n^*\zeta$, form an object of $\Desc(\check{C}(U/X)_\bullet;F)$. For a presheaf of sets, $\Desc(Y_\bullet;F)$ is the discrete category $\lim_\Delta F(Y_\bullet)$, so that descent in this sense literally extends Definition~\ref{def:cech-descent}.
-\end{remark}
-
-\begin{remark}[The descent category as a totalization]\label{rem:desc-as-tot}
-	Remark~\ref{rem:descent-category} is the categorical version of the totalization of a cosimplicial object.
-	\begin{enumerate}
-		\item \textbf{Homotopy limit.} Halpern-Leistner uses the notation $\Tot\{F(Y_\bullet)\}$ for $\Desc(Y_\bullet;F)$ (\cite[][Section~3.3.3]{halpernleistner2020moduli}). Pseudolimits of this kind are homotopy limits for the canonical model structure on $\Cat$ (\cite{gambino2008homotopy}). Hence
-		\[
-		\Desc(\check{C}(U/X)_\bullet;F)\simeq\operatorname{holim}_{[n]\in\Delta}F\bigl(\check{C}(U/X)_n\bigr),
-		\]
-		which is the precise form of the slogan in the introduction.
-		\item \textbf{Simplicial sets.} Let $G^\bullet$ be a strict cosimplicial groupoid (for instance, a strictification of $[n]\mapsto F(Y_n)$). The Bousfield--Kan totalization of the cosimplicial simplicial set $N(G^\bullet)$ is $\Tot N(G^\bullet)=\mathrm{Map}(\Delta^\bullet,N(G^\bullet))$. A map of simplicial sets $\Delta^n\times\Delta^k\to N(G^n)$ is a functor $[n]\times[k]\to G^n$, and since $G^n$ is a groupoid, this is the same as a functor out of the fundamental groupoid $\Pi_1(\Delta^n)\times\Pi_1(\Delta^k)$, where $\Pi_1(\Delta^n)$ is the indiscrete groupoid on $\{0,\dots,n\}$. Hence
-		\[
-		\Tot N(G^\bullet)\cong N\,\mathrm{Hom}_{c\Grpd}\bigl(\Pi_1(\Delta^\bullet),G^\bullet\bigr),
-		\]
-		which is Hollander's model for the homotopy limit of a cosimplicial groupoid (\cite[][Theorem~2.9]{hollander2001homotopy}). Since $\Pi_1(\Delta^n)$ is generated by the edges of $\Delta^n$ subject to the relations given by the $2$-simplices, i.e.\ $\Pi_1(\mathrm{sk}_2\Delta^\bullet)=\Pi_1(\Delta^\bullet)$, only $\Delta_{\le 2}$ matters. Hollander makes this explicit in \cite[][Corollary~2.11]{hollander2001homotopy}; Remark~\ref{rem:desc-2-truncation} below is the corresponding statement for $\Desc(Y_\bullet;F)$, and it follows exactly this pattern of vertices, edges and triangles.
-	\end{enumerate}
-\end{remark}
-
-\begin{remark}[Descent data are $2$-truncated]\label{rem:desc-2-truncation}
-	The following statement is the reason why Definition~\ref{def:classical-descent-data} is the correct definition, and it motivates the shape of the classical descent datum. For the \v{C}ech nerve $Y_\bullet=\check{C}(U/X)_\bullet$ of $f:U\to X$, the functor
-	\[
-	R:\Desc(Y_\bullet;F)\longrightarrow\Desc_f(F),\qquad(\xi_n,\xi_\theta)\longmapsto\bigl(\xi_0,\ \xi_{\delta^0}^{-1}\circ\xi_{\delta^1}\bigr),\qquad(a_n)\longmapsto a_0,
-	\]
-	is an equivalence of categories, and it identifies the object $(\varepsilon_n^*\zeta)$ of Remark~\ref{rem:descent-category} with $(f^*\zeta,\mathrm{can}_\zeta)$ (\cite[][Lemma~3.28]{halpernleistner2020moduli}; see \cite[][Tags 023H, 0D7I]{stacks-project} for this argument in specific cases). Here $\xi_{\delta^0}^{-1}\circ\xi_{\delta^1}:d_1^*\xi_0\to\xi_1\to d_0^*\xi_0$, and $d_1=\mathrm{pr}_0$, $d_0=\mathrm{pr}_1$. The proof is the $2$-categorical version of the proof of Lemma~\ref{lem:tot-cosimplicial-set}:
-	\begin{enumerate}
-		\item \textbf{Vertices give the object.} The isomorphism $\xi_{v_0}:Y(v_0)^*\xi_0\cong\xi_n$ shows that $\xi_n$ is determined by $\xi_0$, and likewise a morphism $(a_n)$ is determined by $a_0$. Hence $R$ is faithful.
-		\item \textbf{Edges give the gluing isomorphism.} Every vertex $v_k$ gives an identification $\xi_{v_k}:Y(v_k)^*\xi_0\cong\xi_n$, and $\varphi^{(n)}_{kl}:=\xi_{v_l}^{-1}\circ\xi_{v_k}:Y(v_k)^*\xi_0\to Y(v_l)^*\xi_0$ is, by the coherence condition for the factorizations $v_k=e_{kl}\circ\delta^1$ and $v_l=e_{kl}\circ\delta^0$, the pullback of $\varphi=\varphi^{(1)}_{01}$ along the edge $Y(e_{kl})$. A morphism $a_0$ of classical descent data extends to a family $(a_n)$ by transport along $\xi_{v_0}$, and its compatibility with $\xi_\theta$ is the pullback of the compatibility of $a_0$ with $\varphi$ along an edge. Hence $R$ is full.
-		\item \textbf{Triangles give the cocycle condition.} Write $\varphi_{kl}:=Y(e_{kl})^*\varphi:Y(v_k)^*\xi\to Y(v_l)^*\xi$. The cocycle condition for $R(\xi_n,\xi_\theta)$ is the tautology $\xi_{v_2}^{-1}\xi_{v_0}=(\xi_{v_2}^{-1}\xi_{v_1})(\xi_{v_1}^{-1}\xi_{v_0})$ in degree $2$. Conversely, given $(\xi,\varphi)\in\Desc_f(F)$, put $\xi_n:=Y(v_0)^*\xi$ and let $\xi_\theta:Y(\theta)^*Y(v_0)^*\xi=Y(v_{\theta(0)})^*\xi\to Y(v_0)^*\xi$ be the inverse of the pullback of $\varphi$ along the edge $e_{0\,\theta(0)}$ of $[n]$. The coherence condition for $\theta\circ\psi$ then becomes $\varphi_{0\,\theta\psi(0)}=\varphi_{\theta(0)\,\theta\psi(0)}\circ\varphi_{0\,\theta(0)}$, which is the pullback of the cocycle condition along the triangle $Y(t_{0\,\theta(0)\,\theta\psi(0)})$, and $\xi_{\mathrm{id}}=\epsilon$ holds by Remark~\ref{rem:normalization-automatic}. Hence $R$ is essentially surjective.
-	\end{enumerate}
-	This is to Remark~\ref{rem:descent-category} what Lemma~\ref{lem:tot-cosimplicial-set} is to Definition~\ref{def:cech-descent}: in both cases the value in degree $n$ is transported from degree $0$ along the vertex $v_0$. For sets, edges impose equalities and the triangles impose nothing new. For groupoids and categories, edges carry isomorphisms and the triangles impose the cocycle condition. In higher-categorical analogues, higher simplices carry higher coherences, and correspondingly larger parts of $\Delta$ are needed.
-\end{remark}
-
-%==========================================================
 \section{The Amitsur complex}
-%==========================================================
 
 Let $R\to S$ be a ring map, $X=\Specof{R}$ and $U=\Specof{S}$. Since fibre products of affine schemes are computed by tensor products, $\check{C}(U/X)_n=\Specof{S^{\otimes_R(n+1)}}$. Applying $\Gamma(-,\OO)$ to the \v{C}ech nerve therefore gives a cosimplicial ring.
 
@@ -308,9 +419,10 @@ Here $U\times_XU=\Specof{S\otimes_RS}$, and $\mathrm{pr}_0=d_1$, $\mathrm{pr}_1=
 \varphi:N\otimes_RS\xrightarrow{\ \sim\ }S\otimes_RN\qquad\text{with}\qquad\varphi_{02}=\varphi_{12}\circ\varphi_{01}.
 \]
 Here $\varphi_{01}=\varphi\otimes\mathrm{id}_S$, $\varphi_{12}=\mathrm{id}_S\otimes\varphi$, and $\varphi_{02}$ is the base change of $\varphi$ along $d^1:S\otimes_RS\to S^{\otimes_R3}$, $s\otimes t\mapsto s\otimes1\otimes t$, since $\mathrm{pr}_{01},\mathrm{pr}_{12},\mathrm{pr}_{02}$ correspond to $d^2,d^0,d^1$. Morphisms are $S$-linear maps $a:N\to N'$ with $\varphi'\circ(a\otimes\mathrm{id}_S)=(\mathrm{id}_S\otimes a)\circ\varphi$. This is exactly \cite[][Definition~35.3.1, Tag 023F]{stacks-project}. For an $R$-module $M$, the canonical descent datum of Definition~\ref{con:pullback-to-descent} is
-\[
-f^*M=(S\otimes_RM,\mathrm{can}),\qquad\mathrm{can}:(S\otimes_RM)\otimes_RS\longrightarrow S\otimes_R(S\otimes_RM),\quad s\otimes m\otimes t\longmapsto s\otimes t\otimes m .
-\]
+\begin{align*}
+	f^*M=(S\otimes_RM,\mathrm{can})\\
+	\mathrm{can}:(S\otimes_RM)\otimes_RS\longrightarrow S\otimes_R(S\otimes_RM),\quad s\otimes m\otimes t\longmapsto s\otimes t\otimes m .
+\end{align*}
 
 For a descent datum $(N,\varphi)$ we put
 \[
@@ -341,9 +453,11 @@ an $R$-submodule of $N$. If $a:(N,\varphi)\to(N',\varphi')$ is a morphism, then 
 	\epsilon:S\otimes_RM\longrightarrow N,\qquad s\otimes m\longmapsto sm .
 	\]
 	It is a morphism of descent data $(S\otimes_RM,\mathrm{can})\to(N,\varphi)$: for $s,t\in S$ and $m\in M$, $S\otimes_RS$-linearity of $\varphi$ gives
-	\[
-	\varphi\bigl((\epsilon\otimes\mathrm{id}_S)(s\otimes m\otimes t)\bigr)=\varphi\bigl((s\otimes t)\cdot(m\otimes1)\bigr)=(s\otimes t)\cdot(1\otimes m)=s\otimes tm=(\mathrm{id}_S\otimes\epsilon)\bigl(\mathrm{can}(s\otimes m\otimes t)\bigr).
-	\]
+	\begin{align*}
+			\varphi\bigl((\epsilon\otimes\mathrm{id}_S)(s\otimes m\otimes t)\bigr) &= \varphi\bigl((s\otimes t)\cdot(m\otimes1)\bigr)=(s\otimes t)\cdot(1\otimes m) \\
+			&= s\otimes tm = (\mathrm{id}_S\otimes\epsilon)\bigl(\mathrm{can}(s\otimes m\otimes t)\bigr).
+	\end{align*}
+
 	It remains to show that $\epsilon$ is bijective.
 	
 	Since $S$ is flat over $R$, applying $-\otimes_RS$ to the equalizer defining $M$ gives the equalizer in the top row of
@@ -401,7 +515,7 @@ is an equalizer. To keep the formulas readable we use the following convention: 
 
 \begin{theorem}[fpqc descent for quasi-coherent sheaves]\label{thm:fpqc-descent-qcoh}
 	(\cite[][Proposition~35.5.2, Tag 023T]{stacks-project})
-	Let $f:U\to X$ be a morphism of schemes such that $\{f\}$ is an fpqc covering. Then
+	Let $f:U\to X$ be an fpqc covering of schemes. Then
 	\[
 	f^*:\QCoh(X)\longrightarrow\Desc(U/X),\qquad\mathcal{F}\longmapsto(f^*\mathcal{F},\mathrm{can}),
 	\]
@@ -444,7 +558,7 @@ Pullback of quasi-coherent sheaves is strong monoidal: $f^*(\mathcal{F}\otimes\m
 
 \begin{corollary}[fpqc descent of affine morphisms]\label{thm:fpqc-descent-affine-schemes}
 	(\cite[][Lemma~35.37.1, Tag 0245]{stacks-project})
-	Let $f:U\to X$ be a morphism of schemes such that $\{f\}$ is an fpqc covering. Then
+	Let $f:U\to X$ be an fpqc covering morphism of schemes. Then
 	\begin{enumerate}
 		\item $f^*:\QCohAlg(X)\to\Desc_f(\QCohAlg)$ is an equivalence of categories, and
 		\item $f^*:\{\text{affine morphisms }V\to X\}\to\Desc_f(\mathcal{A}\mathit{ff})$, $V\mapsto V\times_XU$, is an equivalence of categories.

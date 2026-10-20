@@ -91,11 +91,11 @@ We work with the formulation of Grothendieck topologies in terms of covering fam
 \end{definition}
 
 \begin{definition}[\v{C}ech nerve]\label{def:cech-nerve}
-	Let $\CatC$ be a category with fiber products and let $p:U\to X$ be a morphism. The \emph{\v{C}ech nerve} of $p$ is the simplicial object $\check{C}(U/X)_\bullet$ in $\CatC_{/X}$ with
+	Let $\CatC$ be a category with fiber products and let $p:U\to X$ be a morphism. The \emph{\v{C}ech nerve} of $p$ is the simplicial object $(U/X)_\bullet$ in $\CatC_{/X}$ with
 	\[
-	\check{C}(U/X)_n = U^{\times_X(n+1)} = \underbrace{U\times_X\cdots\times_X U}_{n+1\text{ factors}},
+	(U/X)_n = U^{\times_X(n+1)} = \underbrace{U\times_X\cdots\times_X U}_{n+1\text{ factors}},
 	\]
-	and, for $\theta:[m]\to[n]$ in $\Delta$, with $\theta^*:\check{C}(U/X)_n\to\check{C}(U/X)_m$ the unique morphism over $X$ whose $k$-th component is the projection $\mathrm{pr}_{\theta(k)}$. In particular, $d_i$ forgets the $i$-th factor and $s_i$ repeats the $i$-th factor. Together with $p$ it is an augmented simplicial object $\check{C}(U/X)_\bullet\to X$.
+	and, for $\theta:[m]\to[n]$ in $\Delta$, with $\theta^*:(U/X)_n\to(U/X)_m$ the unique morphism over $X$ whose $k$-th component is the projection $\mathrm{pr}_{\theta(k)}$. In particular, $d_i$ forgets the $i$-th factor and $s_i$ repeats the $i$-th factor. Together with $p$ it is an augmented simplicial object $(U/X)_\bullet\to X$.
 	We draw it as
 	\[
 	\begin{tikzcd}
@@ -109,14 +109,14 @@ We work with the formulation of Grothendieck topologies in terms of covering fam
 \end{definition}
 
 \begin{remark}[Homotopical meaning]\label{rem:cech-homotopy}
-	The \v{C}ech nerve is the $0$-coskeleton of $U$ in $\CatC_{/X}$: a morphism of simplicial objects $Y_\bullet\to\check{C}(U/X)_\bullet$ over $X$ is the same as a morphism $Y_0\to U$ over $X$. If $\CatC=\Set$ and $p$ is surjective, then $\check{C}(U/X)_\bullet$ is the nerve of the equivalence relation $U\times_X U\rightrightarrows U$, and every fiber of $\check{C}(U/X)_\bullet\to X$ is the nerve of a contractible groupoid (the indiscrete groupoid on a nonempty set). Hence $\check{C}(U/X)_\bullet\to X$ is a weak equivalence of simplicial sets, where $X$ is regarded as a constant simplicial set.
+	The \v{C}ech nerve is the $0$-coskeleton of $U$ in $\CatC_{/X}$: a morphism of simplicial objects $Y_\bullet\to(U/X)_\bullet$ over $X$ is the same as a morphism $Y_0\to U$ over $X$. If $\CatC=\Set$ and $p$ is surjective, then $(U/X)_\bullet$ is the nerve of the equivalence relation $U\times_X U\rightrightarrows U$, and every fiber of $(U/X)_\bullet\to X$ is the nerve of a contractible groupoid (the indiscrete groupoid on a nonempty set). Hence $(U/X)_\bullet\to X$ is a weak equivalence of simplicial sets, where $X$ is regarded as a constant simplicial set.
 	More generally, if $p$ admits a section $s$, the augmented \v{C}ech nerve has an \emph{extra degeneracy} induced by $s$, which gives a contraction (for the dual statement about cosimplicial objects see \cite[][Tag 019Z]{stacks-project}). Faithfully flat descent can be read as the algebraic shadow of this fact: after a faithfully flat base change along $p$ itself, $p$ acquires a section (the diagonal), and the corresponding Amitsur complex becomes contractible (\cite[][Tags 023L, 023M]{stacks-project}).
 \end{remark}
 
 \begin{lemma}[\v{C}ech nerve of a disjoint union]\label{lem:cech-nerve-coproduct}
 	Let $\{U_i\to X\}_{i\in I}$ be a family of morphisms of schemes and $U:=\coprod_{i\in I}U_i$. Then for every $n\ge 0$ there is a canonical isomorphism
 	\[
-	\check{C}(U/X)_n\cong\coprod_{(i_0,\dots,i_n)\in I^{n+1}}U_{i_0}\times_X\cdots\times_X U_{i_n},
+	(U/X)_n\cong\coprod_{(i_0,\dots,i_n)\in I^{n+1}}U_{i_0}\times_X\cdots\times_X U_{i_n},
 	\]
 	under which the face and degeneracy maps are given summand-wise by the projections and diagonals.
 \end{lemma}
@@ -126,6 +126,7 @@ We work with the formulation of Grothendieck topologies in terms of covering fam
 \end{proof}
 
 \begin{lemma}[Totalization of a cosimplicial set]\label{lem:tot-cosimplicial-set}
+	(\cite[][Section~1, Lemma~1]{jardine2019cosimplicial})
 	Let $X^\bullet:\Delta\to\Set$ be a cosimplicial set. Then the map
 	\[
 	\lim_{[n]\in\Delta}X^n\longrightarrow\Eq\left(\begin{tikzcd}X^0\arrow[r, shift left, "d^0"]\arrow[r, shift right, "d^1"'] & X^1\end{tikzcd}\right),\qquad (x_n)_{n\ge 0}\longmapsto x_0,
@@ -134,7 +135,7 @@ We work with the formulation of Grothendieck topologies in terms of covering fam
 \end{lemma}
 
 \begin{proof}
-	An element of the limit is a family $(x_n)_n$, $x_n\in X^n$, with $X(\theta)(x_m)=x_n$ for all $\theta:[m]\to[n]$. For $0\le k\le n$ let $v_k:[0]\to[n]$ be the map with image $k$. Then $x_n=X(v_0)(x_0)$, so the family is determined by $x_0$, and the map is injective. Moreover $x_0$ lies in the equalizer, because $d^0(x_0)=x_1=d^1(x_0)$.
+	An element of the limit is a family $(x_n)_n$, $x_n\in X^n$, with $X(\theta)(x_m)=x_n$ for all $\theta:[m]\to[n]$. For $0\le k\le n$ let $v_k:[0]\to[n]$ be the map with image $k$. Then $x_k=X(v_0)(x_0)$, so the family is determined by $x_0$, and the map is injective. Moreover $x_0$ lies in the equalizer, because $d^0(x_0)=x_1=d^1(x_0)$.
 	
 	Conversely, let $x_0\in X^0$ with $d^0x_0=d^1x_0$. For $0\le k\le n$, let $e:[1]\to[n]$ be the map with $e(0)=0$, $e(1)=k$. Then $v_0=e\circ\delta^1$ and $v_k=e\circ\delta^0$, hence
 	\[
@@ -166,9 +167,9 @@ We work with the formulation of Grothendieck topologies in terms of covering fam
 \end{definition}
 
 \begin{definition}[\v{C}ech descent]\label{def:cech-descent}
-	Let $\CatC$ be a category with fiber products, $F:\CatC^{\op}\to\Set$ a presheaf and $p:U\to X$ a morphism. Applying $F$ to the augmented \v{C}ech nerve gives an augmented cosimplicial set $F(X)\to F(\check{C}(U/X)_\bullet)$. We say that $F$ \emph{satisfies descent along $p$} if the induced map
+	Let $\CatC$ be a category with fiber products, $F:\CatC^{\op}\to\Set$ a presheaf and $p:U\to X$ a morphism. Applying $F$ to the augmented \v{C}ech nerve gives an augmented cosimplicial set $F(X)\to F((U/X)_\bullet)$. We say that $F$ \emph{satisfies descent along $p$} if the induced map
 	\[
-	F(X)\longrightarrow\lim_{[n]\in\Delta}F\bigl(\check{C}(U/X)_n\bigr)
+	F(X)\longrightarrow\lim_{[n]\in\Delta}F\bigl((U/X)_n\bigr)
 	\]
 	is a bijection.
 \end{definition}
@@ -203,7 +204,22 @@ To pass from covering families to single morphisms we need that $F$ converts dis
 \end{proposition}
 
 \begin{proof}
-	By Lemma~\ref{lem:cech-nerve-coproduct}, $U\times_XU\cong\coprod_{i,j}U_i\times_XU_j$, and the projections $U\times_XU\rightrightarrows U$ restrict on the summand $U_i\times_XU_j$ to the projections onto $U_i$ and $U_j$. Applying Lemma~\ref{lem:sheaf-preserves-coproducts} to $U$ and to $U\times_XU$ gives an isomorphism between the diagram of Proposition~\ref{prop:cech-descent-equalizer} and the diagram~\eqref{eq:sheaf-condition-equalizer}, which is the identity on $F(X)$. Being an equalizer is invariant under isomorphism of diagrams, so Proposition~\ref{prop:cech-descent-equalizer} gives the claim.
+	By Lemma~\ref{lem:cech-nerve-coproduct}, $U\times_XU\cong\coprod_{i,j}U_i\times_XU_j$, and the projections $U\times_XU\rightrightarrows U$ restrict on the summand $U_i\times_XU_j$ to the projections onto $U_i$ and $U_j$. Applying Lemma~\ref{lem:sheaf-preserves-coproducts} to $U$ and to $U\times_XU$ gives an isomorphism between the diagram of Proposition~\ref{prop:cech-descent-equalizer} and the diagram~\eqref{eq:sheaf-condition-equalizer}, which is the identity on $F(X)$:
+	% https://q.uiver.app/#q=WzAsNixbMCwwLCJGKFgpIl0sWzEsMCwiRihVKSJdLFsyLDAsIkYoVVxcdGltZXNfWCBVKSJdLFswLDEsIkYoWCkiXSxbMSwxLCJcXHByb2RfaUYoVV9pKSJdLFsyLDEsIlxccHJvZF97aSxqfUYoVV9pXFx0aW1lc19VVV9qKSJdLFswLDNdLFswLDFdLFsxLDIsIiIsMix7Im9mZnNldCI6MX1dLFsyLDVdLFszLDRdLFs0LDUsIiIsMCx7Im9mZnNldCI6MX1dLFs0LDUsIiIsMSx7Im9mZnNldCI6LTF9XSxbMSwyLCIiLDEseyJvZmZzZXQiOi0xfV0sWzEsNF1d
+	\[\begin{tikzcd}
+		{F(X)} & {F(U)} & {F(U\times_X U)} \\
+		{F(X)} & {\prod_iF(U_i)} & {\prod_{i,j}F(U_i\times_UU_j)}
+		\arrow[from=1-1, to=1-2]
+		\arrow[from=1-1, to=2-1]
+		\arrow[shift right, from=1-2, to=1-3]
+		\arrow[shift left, from=1-2, to=1-3]
+		\arrow[from=1-2, to=2-2]
+		\arrow[from=1-3, to=2-3]
+		\arrow[from=2-1, to=2-2]
+		\arrow[shift right, from=2-2, to=2-3]
+		\arrow[shift left, from=2-2, to=2-3]
+	\end{tikzcd}\]
+	Being an equalizer is invariant under isomorphism of diagrams, the rest follows from Proposition~\ref{prop:cech-descent-equalizer}.
 \end{proof}
 
 \begin{lemma}\label{lem:coverings-vs-single-morphism}
@@ -211,7 +227,7 @@ To pass from covering families to single morphisms we need that $F$ converts dis
 \end{lemma}
 
 \begin{proof}
-	For $\tau\ne\mathrm{fpqc}$, being \etale, smooth, resp.\ flat and locally of finite presentation is local on the source (\cite[][Tag 02GJ]{stacks-project} and its analogues), and joint surjectivity is the same condition for both. For fpqc, flatness is local on the source. An affine open $W\subset U_{i}$ is also an affine open of $\coprod_iU_i$, so the finiteness condition of Definition~\ref{def:fpqc-covering} for the family implies the one for $\coprod_iU_i\to X$. Conversely, an affine open $W\subset\coprod_iU_i$ is quasi-compact, hence meets only finitely many $U_i$, and $W\cap U_i$ is open and closed in $W$, hence affine. This gives the converse.
+	For $\tau\ne\mathrm{fpqc}$, being \etale, smooth, resp.\ flat and locally of finite presentation is local on the source (\cite[][Tag 02GJ, 01V6, 01U4]{stacks-project}), and joint surjectivity is the same condition for both. For fpqc, flatness is local on the source. An affine open $W\subset U_{i}$ is also an affine open of $\coprod_iU_i$, so the finiteness condition of Definition~\ref{def:fpqc-covering} for the family implies the one for $\coprod_iU_i\to X$. Conversely, an affine open $W\subset\coprod_iU_i$ is quasi-compact, hence meets only finitely many $U_i$, and $W\cap U_i$ is open and closed in $W$, hence affine. This gives the converse.
 \end{proof}
 
 \begin{corollary}[Sheaves via \v{C}ech descent]\label{cor:sheaf-via-cech}
@@ -223,11 +239,11 @@ To pass from covering families to single morphisms we need that $F$ converts dis
 \end{corollary}
 
 \begin{proof}
-	Zariski coverings are $\tau$-coverings by Proposition~\ref{prop:gross-topology-chain}, and by Proposition~\ref{prop:cech-descent-equalizer} condition (2) is the sheaf condition for the $\tau$-covering $\{p\}$, so both conditions are necessary. Conversely, given a $\tau$-covering $\{U_i\to X\}$, the morphism $\coprod_iU_i\to X$ forms a $\tau$-covering by Lemma~\ref{lem:coverings-vs-single-morphism}, and Proposition~\ref{lem:sheaf-single-cover} applies.
+	Zariski coverings are $\tau$-coverings by Proposition~\ref{prop:gross-topology-chain}, and by Proposition~\ref{prop:cech-descent-equalizer} condition (2) is the sheaf condition for the $\tau$-covering $p$. Conversely, given a $\tau$-covering $\{U_i\to X\}$, the morphism $\coprod_iU_i\to X$ forms a $\tau$-covering by Lemma~\ref{lem:coverings-vs-single-morphism}, and Proposition~\ref{lem:sheaf-single-cover} applies.
 \end{proof}
 
 \begin{remark}
-	Corollary~\ref{cor:sheaf-via-cech} is the precise form of the slogan $F(X)\cong\Tot F(\check{C}(U/X)_\bullet)$ from the introduction to Chapter~\ref{chap:descent-theory}: up to the Zariski-local condition (1), being a sheaf means that $F$ sends augmented \v{C}ech nerves of single coverings to limit diagrams. Working with a single morphism $U\to X$ instead of a family removes the indices $i,j,k$ from all subsequent constructions, which becomes essential for presheaves valued in groupoids.
+	Corollary~\ref{cor:sheaf-via-cech} is precisely the reason, why $F(X)\cong\Tot F((U/X)_\bullet)$ from the introduction to Chapter~\ref{chap:descent-theory}: up to the Zariski-local condition (1), being a sheaf means that $F$ sends augmented \v{C}ech nerves of single coverings to limit diagrams. Working with a single morphism $U\to X$ instead of a family removes the indices $i,j,k$ from all subsequent constructions, which becomes essential for presheaves valued in groupoids.
 \end{remark}
 
 \begin{lemma}[Limits of sheaves]\label{cor:limit-sheaf}

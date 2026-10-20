@@ -28,9 +28,6 @@ Throughout, $\mathcal{O}:\Sch^{\op}\to\Ring$ denotes the presheaf of rings $T\ma
 	Full faithfulness thus says that $p^*$ is a bijection onto the equalizer of $\mathrm{pr}_0^*$ and $\mathrm{pr}_1^*$. Since $p^*$ is a ring map and equalizers of rings are computed on underlying sets, the diagram is an equalizer of rings.
 \end{proof}
 
-\begin{remark}
-	If $T=\Specof{R}$ and $U=\Specof{S}$ are affine, Corollary~\ref{cor:structure-sheaf-fpqc} is the exactness of $0\to R\to S\to S\otimes_RS$, i.e.\ the Amitsur complex in degrees $\le 1$ (\cite[][Tag 023M]{stacks-project}).
-\end{remark}
 
 \begin{lemma}[Affine targets]\label{lem:representable-affine-target}
 	Let $X=\Specof{A}$ be an affine scheme and let $p:U\to T$ be an fpqc covering. Then $h_X$ satisfies descent along $p$.
@@ -43,8 +40,9 @@ Throughout, $\mathcal{O}:\Sch^{\op}\to\Ring$ denotes the presheaf of rings $T\ma
 				 f &\mapsto f^\sharp,
 	\end{align*} see (\cite[][Tag 01I1]{stacks-project}). Hence there is a natural isomorphism of presheaves
 	\[
-	h_X\cong\Hom_{\Ring}(A,-)\circ\mathcal{O}.
+	h_X\cong\Hom_{\Ring}(A,-)\circ\mathcal{O},
 	\]
+	where $\mathcal{O}:\Sch^\op \to \Ring$ denotes structure sheaf.
 	The representable functor $\Hom_{\Ring}(A,-):\Ring\to\Set$ preserves all limits, in particular equalizers. Applying it to the equalizer of Corollary~\ref{cor:structure-sheaf-fpqc} shows that
 	\[
 	h_X(T)\longrightarrow h_X(U)\rightrightarrows h_X(U\times_TU)
