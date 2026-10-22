@@ -183,7 +183,7 @@ The formal notions are combined with the following finiteness conditions.
 	where each $k_i/k$ is a finite separable field extension. Consequently, for an \etale\ morphism $f:X\to S$ and $s\in S$, the fibre $X_s$ is a disjoint union of spectra of finite separable field extensions of $\kappa(s)$.
 \end{lemma}
 
-\begin{corollary}[Algebraically closed fields]\label{cor:etale-over-alg-closed}
+\begin{corollary}\label{cor:etale-over-alg-closed}
 	Let $k$ be an algebraically closed field and $X\to\Specof{k}$ \etale. Then $X\cong\coprod_{i\in I}\Specof{k}$. In particular, if $X\neq\varnothing$, then $X\to\Specof{k}$ admits a section.
 \end{corollary}
 
@@ -223,6 +223,3 @@ The formal notions are combined with the following finiteness conditions.
 	Since the product is finite, $\Specof{S}\cong\coprod_i\Specof{R_i}$. Each $R\to R_i$ is flat by Lemma~\ref{lem:etale-consequences}(2). As an $R$-module, $S=\bigoplus_{i=1}^n R_i$ is a finite direct sum of flat modules, hence flat: for an injection $N\hookrightarrow N'$ of $R$-modules the map $N\otimes_R S\to N'\otimes_R S$ is the direct sum of the injections $N\otimes_R R_i\to N'\otimes_R R_i$, so it is injective (\cite[][Tag 00HD]{stacks-project}). Finally, $\Specof{S}\to\Specof{R}$ is surjective because the $\Specof{R_i}$ cover $\Specof{R}$, so $R\to S$ is faithfully flat by \cite[][Tag 00HQ]{stacks-project}.
 \end{proof}
 
-\begin{remark}
-	Lemma~\ref{lem:finite-affine-etale-cover-ff} reduces the sheaf property of representable presheaves for \etale\ coverings (Lemma~\ref{lem:repr-presheafs-of-affines}) to faithfully flat descent for rings. Note that $S$ is in general \emph{not} a free $R$-module; flatness comes from the flatness of the individual \etale\ maps $R\to R_i$.
-\end{remark}
