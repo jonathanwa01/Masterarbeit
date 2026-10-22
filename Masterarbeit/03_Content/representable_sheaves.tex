@@ -42,12 +42,12 @@ Throughout, $\mathcal{O}:\Sch^{\op}\to\Ring$ denotes the presheaf of rings $T\ma
 	\[
 	h_X\cong\Hom_{\Ring}(A,-)\circ\mathcal{O},
 	\]
-	where $\mathcal{O}:\Sch^\op \to \Ring$ denotes structure sheaf $\Gamma(-, \mathcal{-})$.
-	The representable functor $\Hom_{\Ring}(A,-):\Ring\to\Set$ preserves all limits, in particular equalizers. Applying it to the equalizer of Corollary~\ref{cor:structure-sheaf-fpqc} shows that
+	where $\mathcal{O}:\Sch^\op \to \Ring$ denotes presheaf of rings $\Gamma(-, \mathcal{-})$.
+	The representable functor $\Hom_{\Ring}(A,-):\Ring\to\Set$ preserves all limits, in particular equalizers. Hence, applying it to the equalizer of Corollary \ref{cor:structure-sheaf-fpqc} shows that
 	\[
 	h_X(T)\longrightarrow h_X(U)\rightrightarrows h_X(U\times_TU)
 	\]
-	is an equalizer, which by Proposition~\ref{prop:cech-descent-equalizer} means that $h_X$ satisfies descent along $p$.
+	is an equalizer, which means that $h_X$ satisfies descent along $p$ by Proposition \ref{prop:cech-descent-equalizer}.
 \end{proof}
 
 For a general target, the only additional input is that open subsets descend along fpqc coverings.
@@ -120,9 +120,7 @@ For a general target, the only additional input is that open subsets descend alo
 		\arrow[hook, from=1-2, to=2-2]
 		\arrow["p"', from=2-1, to=2-2]
 	\end{tikzcd}\]
-	This implies, that $p_i:U_i\to T_i$ is an fpqc covering.
-	Moreover, the $T_i$ cover $T$: for every $t\in T$,
-	surjectivity of $p$ gives a point $u\in U$ over $t$,
+	Hence, $p_i:U_i\to T_i$ is an fpqc covering. Moreover, the $T_i$ cover $T$: For every $t\in T$, surjectivity of $p$ gives a point $u\in U$ over $t$,
 	and $u\in U_i$ for some $i$, whence $t\in T_i$.
 	
 	Write $f_i:U_i\to X_i$ for the factorization of $f|_{U_i}$
@@ -221,14 +219,14 @@ For a general target, the only additional input is that open subsets descend alo
 		&=f|_{U_{ij}}.
 	\end{aligned}
 	\]
-	The previous uniqueness statement proved above, applied to
+	By uniqueness, applied to
 	$p_{ij}:U_{ij}\to T_{ij}$, implies
 	\[
 	\widetilde g_i|_{T_{ij}}
 	=
 	\widetilde g_j|_{T_{ij}}.
 	\]
-	Hence the $\widetilde g_i$ glue to a morphism $g:T\to X$ by Zariski descent, since $\{T_i\subset T\}$ is an open covering.
+	Hence the $\widetilde g_i$ glue to a morphism $g:T\to X$ by Zariski descent, since $\{T_i\subset T\}_{i\in I}$ is an open covering.
 	
 	Finally, on every $U_i$ we have
 	\[
