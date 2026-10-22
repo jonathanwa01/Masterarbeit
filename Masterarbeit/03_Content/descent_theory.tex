@@ -8,11 +8,11 @@ and by Lemma~\ref{lem:tot-cosimplicial-set} only the truncation $\Delta_{\le 1}$
 Second, compatibility of local data is no longer an equality on $U\times_XU$ but a specified isomorphism, which in turn has to satisfy a cocycle condition on $U\times_XU\times_XU$.
 These changes reflect the $2$-categorical nature of \Cat and \Grpd.
 
-We take this explicit description, an object over $U$, an isomorphism over $U\times_XU$ and a cocycle condition over $U\times_XU\times_XU$, as the definition of the descent category (Definition~\ref{def:classical-descent-data}); it is the description used in all computations below. Its conceptual meaning, the $2$-categorical analogue of the limit above,
+We take this explicit description, an object over $U$, an isomorphism over $U\times_XU$ and a cocycle condition over $U\times_XU\times_XU$, as the definition of the descent category (Definition~\ref{def:classical-descent-data}); it is the description used in all computations below. Its conceptual meaning however is the $2$-categorical analogue of the limit
 \[
-F(X)\;\simeq\;\Tot F\bigl((U/X)_\bullet\bigr),
+F(X)\;\simeq\;\Tot F\bigl((U/X)_\bullet\bigr).
 \]
-is explained in Section~\ref{sec:descent-totalization} in a sequence of remarks. There we also explain how the classical description arises naturally from the $2$-categorical totalization depending only on $\Delta_{\le 2}$ (Remark~\ref{rem:desc-2-truncation}), which is the $2$-categorical analogue of Lemma~\ref{lem:tot-cosimplicial-set}, and visualize as the following limit diagram:
+The classical description arises naturally from the $2$-categorical totalization depending only on $\Delta_{\le 2}$, which is the $2$-categorical analogue of Lemma~\ref{lem:tot-cosimplicial-set}, of the following diagram:
 % https://q.uiver.app/#q=WzAsNCxbMSwwLCJGKFUpIl0sWzAsMCwiRihYKSJdLFsyLDAsIkYoVVxcdGltZXNfWFUpIl0sWzMsMCwiRihVXFx0aW1lc19YVVxcdGltZXNfWFUpIl0sWzEsMF0sWzAsMiwiIiwwLHsib2Zmc2V0IjoxfV0sWzAsMiwiIiwwLHsib2Zmc2V0IjotMX1dLFsyLDNdLFsyLDMsIiIsMCx7Im9mZnNldCI6LTJ9XSxbMiwzLCIiLDAseyJvZmZzZXQiOjJ9XV0=
 \[\begin{tikzcd}
 	{F(X)} & {F(U)} & {F(U\times_XU)} & {F(U\times_XU\times_XU)}
@@ -24,7 +24,6 @@ is explained in Section~\ref{sec:descent-totalization} in a sequence of remarks.
 	\arrow[shift right=2, from=1-3, to=1-4]
 \end{tikzcd}\]
 In higher-categorical treatments, descent is formulated as such a totalization over the augmented \v{C}ech nerve, see \cite{khan2022stacks}. 
-None of the remarks in Section~\ref{sec:descent-totalization} is used in the rest of the thesis.
 
 \subsection*{What the Keel--Mori theorem needs}
 
@@ -67,10 +66,6 @@ All other descent statements are quoted from \cite{stacks-project} when they are
 	If all $\epsilon_T$ and $\alpha_{h,g}$ are identities, $F$ is a functor $\CatC^{\op}\to\Cat$. If all $F(T)$ are groupoids (resp.\ discrete categories), we speak of a pseudofunctor with values in $\Grpd$ (resp.\ $\Set$).
 \end{definition}
 
-\begin{remark}[Convention on coherence isomorphisms]\label{rem:pseudofunctor-convention}
-	Conditions~(U) and~(A) imply that any two ways of identifying an iterated pullback $g_n^*\cdots g_1^*\xi$ with $(g_1\circ\dots\circ g_n)^*\xi$ by composites of the $\alpha$'s and $\epsilon$'s agree. Hence, for any two composable strings of morphisms with the same composite, there is a \emph{unique} canonical isomorphism between the corresponding iterated pullbacks. (One way to see this is via the fibred category associated with $F$ (\cite[][Section~3.1.3]{vistoli2007notes}): there all these iterated pullbacks come with cartesian morphisms over the same composite, and are therefore uniquely isomorphic compatibly with them.) In what follows we use these canonical isomorphisms tacitly, and write equalities such as $\mathrm{pr}_{01}^*\mathrm{pr}_0^*\xi=q_0^*\xi$. This is a notational convention, not the assumption that $F$ is a strict functor; the one place where the identifications are needed to make sense of a definition is made explicit in Remark~\ref{rem:cocycle-explicit}.
-\end{remark}
-
 \begin{example}\label{ex:pseudofunctors}
 	\leavevmode
 	\begin{enumerate}
@@ -95,53 +90,123 @@ In this section we will consider commutative diagrams of the following form:
 \end{tikzcd}\]
 This denotes that $\zeta$ lies over $U$ and $\phi$ lies over $f$, i.e. $p_\mathcal{F}(\zeta) = U$ and $p_\mathcal{F}(\phi) = f$.
 
+\begin{definition}[Fibred categories]
+	\label{def:fibred-categories}
+	Let $\mathcal{C}$ be a category.
+	A \emph{category over $\mathcal{C}$} is a category
+	$\mathcal{F}$ equipped with a functor
+	\[
+	p:\mathcal{F}\longrightarrow\mathcal{C}.
+	\]
+	An object $\xi$ lies \emph{over} $U$ if $p(\xi)=U$, and
+	a morphism $a$ lies over $f$ if $p(a)=f$.
+	
+	The \emph{fibre} over $U$, denoted $\mathcal{F}(U)$, is the
+	category whose objects lie over $U$ and whose morphisms lie
+	over $\mathrm{id}_U$.
+\end{definition}
 
-\begin{definition}[Category fibred in Groupoids]\label{def:category-fibred-in-groupoids}
-	(\cite[][p. 9, Definition 2.15]{Gomez2001AlgebraicStacks})
-	Let $\mathcal{F}$ be a category over $\mathcal{C}$. We call it a category fibred in groupoids (CFG), if 
-	\begin{enumerate}
-		\item Pullbacks exists, i.e. for all morphisms $f:B'\to B$ in $\mathcal{C}$ and every object $X$ lying over $B$ there exists an object $X'$ and a morphism $\phi:X'\to X$ lying over $B'$ and $f$ resp.
-		% https://q.uiver.app/#q=WzAsNCxbMSwwLCJYIl0sWzAsMCwiWCciXSxbMCwxLCJCJyJdLFsxLDEsIkIiXSxbMiwzLCJmIiwyXSxbMCwzLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzEsMiwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9LCJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMSwwLCJcXHBoaSIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
-		\[\begin{tikzcd}
-			{X'} & X \\
-			{B'} & B
-			\arrow["\phi", dashed, from=1-1, to=1-2]
-			\arrow[dashed, maps to, from=1-1, to=2-1]
-			\arrow[maps to, from=1-2, to=2-2]
-			\arrow["f"', from=2-1, to=2-2]
-		\end{tikzcd}\]
-		\item Every diagram 
-		% https://q.uiver.app/#q=WzAsNixbMCwwLCJYXzMiXSxbMiwwLCJYXzEiXSxbMSwxLCJYXzIiXSxbMCwyLCJCXzMiXSxbMSwzLCJCXzIiXSxbMiwyLCJCXzEiXSxbMyw0LCJmJyIsMl0sWzQsNSwiZiIsMl0sWzMsNSwiZlxcY2lyYyBmJyIsMCx7ImxhYmVsX3Bvc2l0aW9uIjo4MH1dLFswLDEsIlxccHNpIl0sWzIsMSwiXFxwaGkiLDJdLFsyLDQsIiIsMSx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbMSw1LCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzAsMywiIiwxLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dLFswLDIsIlxcdmFycGhpIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
-		\[\begin{tikzcd}
-			{X_3} && {X_1} \\
-			& {X_2} \\
-			{B_3} && {B_1} \\
-			& {B_2}
-			\arrow["\psi", from=1-1, to=1-3]
-			\arrow["\varphi"', dashed, from=1-1, to=2-2]
-			\arrow[maps to, from=1-1, to=3-1]
-			\arrow[maps to, from=1-3, to=3-3]
-			\arrow["\phi"', from=2-2, to=1-3]
-			\arrow[maps to, from=2-2, to=4-2]
-			\arrow["{f\circ f'}"{pos=0.8}, from=3-1, to=3-3]
-			\arrow["{f'}"', from=3-1, to=4-2]
-			\arrow["f"', from=4-2, to=3-3]
-		\end{tikzcd}\]
-		admits a unique morphism $\varphi$ lying over $f'$ and letting the upper triangle commute.
-	\end{enumerate}
+\begin{definition}[Cartesian morphism]
+	\label{def:cartesian-morphism}
+	Let $p:\mathcal{F}\to\mathcal{C}$ be a category over
+	$\mathcal{C}$. A morphism
+	\[
+	a:\xi\longrightarrow\eta
+	\]
+	over $f:U\to V$ is cartesian if, for every morphism
+	$b:\zeta\to\eta$ and every morphism $h:p(\zeta)\to U$
+	satisfying $p(b)=f\circ h$, there exists a unique morphism
+	$c:\zeta\to\xi$ such that
+	\[
+	p(c)=h,
+	\qquad
+	a\circ c=b.
+	\]
+	Thus the diagram
+	% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXHpldGEiXSxbMSwxLCJcXHhpIl0sWzIsMCwiXFxldGEiXSxbMSwzLCJVIl0sWzAsMiwicChcXHpldGEpIl0sWzIsMiwiViJdLFswLDEsImMiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMCwyLCJiIl0sWzEsMiwiYSIsMl0sWzAsNCwiIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoic3F1aWdnbHkifX19XSxbMiw1LCIiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJzcXVpZ2dseSJ9fX1dLFs0LDUsInAoYikiLDAseyJsYWJlbF9wb3NpdGlvbiI6NzB9XSxbNCwzLCJoIiwyXSxbMyw1LCJmIiwyXSxbMSwzXV0=
+	\[\begin{tikzcd}
+		\zeta && \eta \\
+		& \xi \\
+		{p(\zeta)} && V \\
+		& U
+		\arrow["b", from=1-1, to=1-3]
+		\arrow["c"', dashed, from=1-1, to=2-2]
+		\arrow[squiggly, from=1-1, to=3-1]
+		\arrow[squiggly, from=1-3, to=3-3]
+		\arrow["a"', from=2-2, to=1-3]
+		\arrow[from=2-2, to=4-2]
+		\arrow["{p(b)}"{pos=0.7}, from=3-1, to=3-3]
+		\arrow["h"', from=3-1, to=4-2]
+		\arrow["f"', from=4-2, to=3-3]
+	\end{tikzcd}\]
+	admits a unique lift of the lower factorization.
+	
+	This is the notion called strongly cartesian, see
+	\cite[][Tag 02XJ]{stacks-project}.
 \end{definition}
 
 
-\begin{definition}[Morphism of CFG]
-	Let $\mathcal{F},\mathcal{G}$ be categories fibred in groupoids over $\CatC$. A morphism of categories fibred in groupoids is a functor $f:\mathcal{F}\to \mathcal{G}$ 
+\begin{definition}[Morphisms of fibred categories]
+	\label{def:morphism-fibred-categories}
+	(\cite[][Tag 02XP]{stacks-project})
+	Let $p:\mathcal{F}\to\mathcal{C}$ and
+	$q:\mathcal{G}\to\mathcal{C}$ be fibred categories.
+	A morphism of fibred categories is a functor $H:\mathcal{F} \to \mathcal{G}$ satisfying $qH=p$ and preserving cartesian
+	morphisms.
+	
+	A $2$-morphism $t:H\Rightarrow K$, for
+	$1$-morphisms
+	$H,K:(\mathcal{F},p)\to(\mathcal{G},q)$,
+	are natural transformations satisfying
+	\[
+	q(t_\xi)=\mathrm{id}_{p(\xi)}
+	\qquad
+	\text{for every }\xi\in\mathcal{F}.
+	\]
+
+	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG1hdGhjYWx7Rn0iXSxbMiwwLCJcXG1hdGhjYWx7R30iXSxbMSwxLCJcXG1hdGhjYWx7Q30iXSxbMCwxLCJIIiwxLHsiY3VydmUiOi0yfV0sWzAsMiwicCIsMl0sWzEsMiwicSJdLFswLDEsIkciLDEseyJjdXJ2ZSI6Mn1dLFszLDYsInQiLDAseyJzaG9ydGVuIjp7InNvdXJjZSI6MjAsInRhcmdldCI6MjB9fV1d
+	\[
+	\begin{tikzcd}
+		\mathcal{F} && \mathcal{G} \\
+		& \mathcal{C}
+		\arrow[""{name=Hmid, anchor=center, inner sep=0},
+		"H"{description}, bend left=20,
+		from=1-1, to=1-3]
+		\arrow[""{name=Gmid, anchor=center, inner sep=0},
+		"G"{description}, bend right=20,
+		from=1-1, to=1-3]
+		\arrow["p"', from=1-1, to=2-2]
+		\arrow["q", from=1-3, to=2-2]
+		\arrow["t", Rightarrow, from=Hmid, to=Gmid]
+	\end{tikzcd}
+	\]
+	These objects, morphisms, and $2$-morphisms form the
+	$2$-category of fibred categories over $\mathcal{C}$.
 \end{definition}
+
 
 \begin{definition}
 	Let $\mathcal{F}\to \mathcal{C}$ be a category fibred in groupoids and let $B\in \mathcal{C}$. We call the subcategory of $\mathcal{F}$ of objects lying over $B$ and morphisms lying over $id_B$ the fibre of $\mathcal{F}$ over $B$ and denote it by $\mathcal{F}(B)$.
 \end{definition}
 
+\begin{definition}[Category fibred in groupoids]
+	\label{def:category-fibred-in-groupoids}
+	A category fibred in groupoids, a CFG,
+	is a fibred category whose fibres are groupoids.
+\end{definition}
+
+\begin{example}\label{ex:fibred-categories}
+	\leavevmode
+	\begin{enumerate}
+		\item \textbf{Quasi-coherent sheaves.} Let $\QCoh\to\Sch$ be the category of pairs $(T,\mathcal{E})$ with $\mathcal{E}\in\QCoh(T)$, where a morphism $(T',\mathcal{E}')\to(T,\mathcal{E})$ is a pair $(g,u)$ of a morphism $g:T'\to T$ and an $\OO_{T'}$-linear map $u:g^*\mathcal{E}\to\mathcal{E}'$. It is a fibred category with fibres $\QCoh(T)$, and $(g,u)$ is cartesian if and only if $u$ is an isomorphism (\cite[][Section~3.2]{vistoli2007notes}).
+		\item \textbf{Modules.} Let $\mathcal{M}\to\Aff$ be the category of pairs $(\Specof{A},M)$ with $M\in\Mod_A$, where a morphism $(\Specof{B},N)\to(\Specof{A},M)$ over $g:\Specof{B}\to\Specof{A}$ is a $B$-linear map $u:B\otimes_AM\to N$, equivalently an $A$-linear map $M\to N$. Again $(g,u)$ is cartesian if and only if $u$ is an isomorphism. By \cite[][Tags 01IB, 01I9]{stacks-project}, $M\mapsto\widetilde{M}$ is an equivalence of fibred categories $\mathcal{M}\simeq\QCoh|_{\Aff}$ over $\Aff$.
+		\item \textbf{Presheaves of sets.} A presheaf $F:\CatC^{\op}\to\Set$ gives the fibred category $\int F\to\CatC$ of pairs $(T,s)$, $s\in F(T)$, with a unique morphism $(T',s')\to(T,s)$ over $g$ if $g^*s=s'$. Its fibres are discrete and every morphism is cartesian.
+	\end{enumerate}
+\end{example}
+
+
 \begin{proposition}
-	In definition \ref{def:category-fibred-in-groupoids} 2), $f$ is an isomorphism if and only if $\phi$ is an isomorphism.
+	In definition \ref{def:fibred-categories}, $f$ is an isomorphism if and only if $a$ is an isomorphism.
 \end{proposition}
 
 \begin{proof}
@@ -153,10 +218,10 @@ This denotes that $\zeta$ lies over $U$ and $\phi$ lies over $f$, i.e. $p_\mathc
 		{B_1} && {B_1} \\
 		& {B_2}
 		\arrow["id", from=1-1, to=1-3]
-		\arrow["{\phi^{-1}}"', dashed, from=1-1, to=2-2]
+		\arrow["{a^{-1}}"', dashed, from=1-1, to=2-2]
 		\arrow[maps to, from=1-1, to=3-1]
 		\arrow[maps to, from=1-3, to=3-3]
-		\arrow["\phi"', from=2-2, to=1-3]
+		\arrow["a"', from=2-2, to=1-3]
 		\arrow[maps to, from=2-2, to=4-2]
 		\arrow["id"{pos=0.8}, from=3-1, to=3-3]
 		\arrow["{f^{-1}}"', from=3-1, to=4-2]
@@ -220,33 +285,6 @@ This denotes that $\zeta$ lies over $U$ and $\phi$ lies over $f$, i.e. $p_\mathc
 	\cite[][Tags 02XJ, 003S]{stacks-project}.
 \end{proposition}
 
-\begin{remark}
-	This construction originates in SGA~1, Exp.~VI, due to
-	Alexander Grothendieck, where categories fibred in groupoids are introduced as a framework for descent.
-	
-	The appearance of pseudofunctors rather than ordinary functors reflects
-	the fact that pullbacks in a fibred category are only defined up to
-	canonical isomorphism. In particular, for composable morphisms
-	\[
-	B'' \xrightarrow{f} B' \xrightarrow{g} B
-	\]
-	one has a natural isomorphism
-	\[
-	f^* g^* \Rightarrow (g \circ f)^*,
-	\]
-	and similarly for identities. These isomorphisms satisfy coherence
-	conditions, giving rise to a pseudofunctor rather than a strict functor.
-	
-	From a modern higher-categorical point of view, this is not a defect
-	but the correct notion of functoriality. The failure of strict
-	functoriality is resolved by passing to homotopy-coherent functors.
-	Accordingly, the Grothendieck construction may be viewed as a special
-	case of a more general principle, namely that Grothendieck fibrations
-	classify functors valued in categories. In higher category theory, this
-	extends to the straightening-unstraightening equivalence between
-	functors into $\infty$-categories and cartesian fibrations, see
-	\cite[Chapter~2.4 and Section~3.2]{lurie2008higher}.
-\end{remark}
 
 \section{The descent category}
 
@@ -493,13 +531,6 @@ We now globalize. For a morphism $f:U\to X$ of schemes, an object of $\Desc(U/X)
 \]
 is an equalizer. To keep the formulas readable we use the following convention: on a fibre product of copies of $U$ and $U'$, an index such as $\varphi_{u_0u}$ denotes the pullback of $\varphi$ along the projection to the indicated two factors (composed with $g:U'\to U$ where necessary).
 
-\begin{lemma}[Flat pullback is faithful]\label{lem:flat-pullback-faithful}
-	Let $g:T'\to T$ be flat and surjective. Then $g^*:\Mod(\OO_T)\to\Mod(\OO_{T'})$ is faithful.
-\end{lemma}
-
-\begin{proof}
-	Since $g^*$ is additive, it suffices to show that $g^*u=0$ implies $u=0$ for $u:\mathcal{F}\to\mathcal{G}$. Let $x\in T$ and choose $x'\in T'$ with $g(x')=x$. Then $(g^*u)_{x'}=u_x\otimes_{\OO_{T,x}}\OO_{T',x'}$, and $\OO_{T,x}\to\OO_{T',x'}$ is a flat local homomorphism, hence faithfully flat (\cite[][Tag 00HR]{stacks-project}). By flatness $\mathrm{im}(u_x)\otimes\OO_{T',x'}=\mathrm{im}(u_x\otimes\OO_{T',x'})=0$, hence $\mathrm{im}(u_x)=0$ by faithful flatness (\cite[][Tag 00HP]{stacks-project}). So $u_x=0$ for all $x$, i.e.\ $u=0$.
-\end{proof}
 
 \begin{lemma}[The affine case]\label{lem:qcoh-descent-affine}
 	Let $h:\Specof{S}\to\Specof{R}$ be flat and surjective. Then $\QCoh$ satisfies descent along $h$.
@@ -510,7 +541,7 @@ is an equalizer. To keep the formulas readable we use the following convention: 
 \end{proof}
 
 \begin{theorem}[fpqc descent for quasi-coherent sheaves]\label{thm:fpqc-descent-qcoh}
-	(\cite[][Proposition~35.5.2, Tag 023T]{stacks-project})
+	(\cite[][Tag 023T]{stacks-project})
 	Let $f:U\to X$ be an fpqc covering of schemes. Then
 	\[
 	f^*:\QCoh(X)\longrightarrow\Desc(U/X),\qquad\mathcal{F}\longmapsto(f^*\mathcal{F},\mathrm{can}),
@@ -518,37 +549,9 @@ is an equalizer. To keep the formulas readable we use the following convention: 
 	is an equivalence of categories.
 \end{theorem}
 
-\begin{proof}
-	Throughout, we use that base changes of fpqc coverings are fpqc coverings (Proposition~\ref{prop:gross-topology-chain}), in particular they are flat and surjective.
-	
-	\emph{Step 1: $f^*$ is fully faithful if $X$ is affine.} Faithfulness is Lemma~\ref{lem:flat-pullback-faithful}. For fullness, let $\beta:f^*\mathcal{F}\to f^*\mathcal{G}$ with $\mathrm{pr}_0^*\beta=\mathrm{pr}_1^*\beta$. By Definition~\ref{def:fpqc-covering} there are affine opens $W_1,\dots,W_r\subset U$ with $X=\bigcup_kf(W_k)$. Then $U':=\coprod_kW_k$ is affine, and with $g:U'\to U$ the induced morphism, $h:=f\circ g:U'\to X$ is a flat surjective morphism of affine schemes. The pullback $g^*\beta$ is a morphism in $\Desc(U'/X)$ (pull back the compatibility along $g\times g$), so by Lemma~\ref{lem:qcoh-descent-affine} there is $\alpha:\mathcal{F}\to\mathcal{G}$ with $h^*\alpha=g^*\beta$. To see $f^*\alpha=\beta$, let $q:P:=U'\times_XU\to U$ be the second projection, which is flat and surjective as a base change of $h$. With $p_1:P\to U'$ the first projection we get
-	\[
-	q^*f^*\alpha=p_1^*h^*\alpha=p_1^*g^*\beta=(g\times\mathrm{id})^*\mathrm{pr}_0^*\beta=(g\times\mathrm{id})^*\mathrm{pr}_1^*\beta=q^*\beta,
-	\]
-	hence $f^*\alpha=\beta$ by Lemma~\ref{lem:flat-pullback-faithful}.
-	
-	\emph{Step 2: $f^*$ is fully faithful in general.} Let $X=\bigcup_jX_j$ be an affine open cover and $U_j:=f^{-1}(X_j)$. Given $\beta$ as in Step 1, Step 1 for the fpqc covering $U_j\to X_j$ gives $\alpha_j:\mathcal{F}|_{X_j}\to\mathcal{G}|_{X_j}$ with $f^*\alpha_j=\beta|_{U_j}$. The restrictions of $\alpha_j$ and $\alpha_k$ to $X_j\cap X_k$ have the same pullback along the flat surjection $f^{-1}(X_j\cap X_k)\to X_j\cap X_k$, so they agree by Lemma~\ref{lem:flat-pullback-faithful}. Hence they glue to $\alpha:\mathcal{F}\to\mathcal{G}$ (\cite[][Lemma~6.33.1, Tag 00AK]{stacks-project}), and $f^*\alpha=\beta$ because this holds on every $U_j$. Faithfulness is again Lemma~\ref{lem:flat-pullback-faithful}.
-	
-	\emph{Step 3: effectivity if $X$ is affine.} Let $(\mathcal{E},\varphi)\in\Desc(U/X)$ and choose $g:U'\to U$, $h=fg$ as in Step 1. Then $(g^*\mathcal{E},(g\times g)^*\varphi)\in\Desc(U'/X)$, so by Lemma~\ref{lem:qcoh-descent-affine} there are $\mathcal{F}\in\QCoh(X)$ and an isomorphism $a:h^*\mathcal{F}\to g^*\mathcal{E}$ of descent data. With the index convention above, the latter says $a_{u'_1}=\varphi_{gu'_0\,gu'_1}\circ a_{u'_0}$ on $U'\times_XU'$. On $P=U'\times_XU$ consider the isomorphism
-	\[
-	b:=\varphi_{gu'\,u}\circ a_{u'}:\ q^*f^*\mathcal{F}=p_1^*h^*\mathcal{F}\longrightarrow q^*\mathcal{E}.
-	\]
-	The two pullbacks of $b$ to $P\times_UP=U'\times_XU'\times_XU$ (points $(u'_0,u'_1,u)$) agree:
-	\[
-	\varphi_{gu'_1\,u}\circ a_{u'_1}=\varphi_{gu'_1\,u}\circ\varphi_{gu'_0\,gu'_1}\circ a_{u'_0}=\varphi_{gu'_0\,u}\circ a_{u'_0},
-	\]
-	by the compatibility of $a$ and the cocycle condition. Hence $b$ is a morphism in $\Desc(P/U)$ between the canonical descent data of $f^*\mathcal{F}$ and $\mathcal{E}$, and since $\{q\}$ is an fpqc covering, Step 2 gives a unique $c:f^*\mathcal{F}\to\mathcal{E}$ with $q^*c=b$. Applying the same to $b^{-1}$ shows that $c$ is an isomorphism. Finally, $c$ is a morphism of descent data, i.e.\ $\varphi_{u_0u_1}\circ c_{u_0}=c_{u_1}$ on $U\times_XU$: by Lemma~\ref{lem:flat-pullback-faithful} this may be checked after pulling back to $U'\times_XU\times_XU$ (points $(u',u_0,u_1)$), where it becomes $\varphi_{u_0u_1}\circ\varphi_{gu'\,u_0}\circ a_{u'}=\varphi_{gu'\,u_1}\circ a_{u'}$, which is again the cocycle condition.
-	
-	\emph{Step 4: effectivity in general.} Let $(\mathcal{E},\varphi)\in\Desc(U/X)$ and let $X_j$, $U_j$ be as in Step 2. By Step 3 there are $\mathcal{F}_j\in\QCoh(X_j)$ and isomorphisms $c_j:f^*\mathcal{F}_j\to\mathcal{E}|_{U_j}$ of descent data. On $X_{jk}:=X_j\cap X_k$, the isomorphism $c_k^{-1}\circ c_j$ is an isomorphism of descent data along $f^{-1}(X_{jk})\to X_{jk}$, so by Step 2 there is a unique isomorphism $\theta_{jk}:\mathcal{F}_j|_{X_{jk}}\to\mathcal{F}_k|_{X_{jk}}$ with $f^*\theta_{jk}=c_k^{-1}c_j$. By uniqueness, $\theta_{kl}\circ\theta_{jk}=\theta_{jl}$ on triple intersections. So the $\mathcal{F}_j$ glue to an $\OO_X$-module $\mathcal{F}$ (\cite[][Lemmas~6.33.2 and 6.33.3, Tag 00AK]{stacks-project}), which is quasi-coherent since quasi-coherence is local. The $c_j$ agree on overlaps by construction, hence glue to an isomorphism $c:f^*\mathcal{F}\to\mathcal{E}$, and $c$ is compatible with the descent data because this can be checked on the open cover of $U\times_XU$ by the preimages of the $X_j$.
-\end{proof}
 
-\begin{remark}
-	The structure of the proof is that of \cite[][Lemma~4.25]{vistoli2007notes}: Zariski gluing together with the affine case suffices. The only non-formal inputs are Theorem~\ref{thm:faithfully-flat-descent-modules} and Lemma~\ref{lem:flat-pullback-faithful}. In Step~3 we avoid comparing the descent categories for $U$ and $U'$ directly: we descend the comparison isomorphism along the auxiliary covering $U'\times_XU\to U$, which only requires the fully faithful part. Combined with the passage from covering families to single morphisms (as in Proposition~\ref{lem:sheaf-single-cover}, see \cite[][Lemma~4.25, Step~2]{vistoli2007notes}), Theorem~\ref{thm:fpqc-descent-qcoh} shows that $\QCoh$ is a stack for the fpqc topology in the sense of Definition~\ref{def:stack} (applied to the fibred category associated with $\QCoh$ by the Grothendieck construction), except that its fibres are categories rather than groupoids.
-\end{remark}
-
-%==========================================================
 \section{Descent of affine morphisms}
-%==========================================================
+
 
 Pullback of quasi-coherent sheaves is strong monoidal: $f^*(\mathcal{F}\otimes\mathcal{G})\cong f^*\mathcal{F}\otimes f^*\mathcal{G}$ and $f^*\OO_X\cong\OO_U$, compatibly with the canonical isomorphisms. Hence $T\mapsto\QCohAlg(T)$, with the pullback functors and coherence isomorphisms of Example~\ref{ex:pseudofunctors}(1), is a pseudofunctor $\QCohAlg:\Sch^{\op}\to\Cat$; the coherence isomorphisms are algebra isomorphisms. An object of $\Desc_f(\QCohAlg)$ is an object $(\mathcal{B}',\varphi)$ of $\Desc_f(\QCoh)$ such that $\mathcal{B}'$ is a quasi-coherent $\OO_U$-algebra and $\varphi$ is an algebra isomorphism, and morphisms are morphisms of descent data that are algebra maps. Similarly, let $\mathcal{A}\mathit{ff}:\Sch^{\op}\to\Cat$ be the pseudofunctor sending $T$ to the category of affine morphisms $V\to T$ (with morphisms over $T$), and $g:T'\to T$ to the base change $V\mapsto V\times_TT'$ for a chosen fibre product; the coherence isomorphisms are the canonical isomorphisms between iterated fibre products given by their universal properties.
 
@@ -568,12 +571,3 @@ Pullback of quasi-coherent sheaves is strong monoidal: $f^*(\mathcal{F}\otimes\m
 	(2) The relative spectrum $V\mapsto(V\to T)_*\OO_V$ is an anti-equivalence between affine morphisms $V\to T$ and quasi-coherent $\OO_T$-algebras, compatible with arbitrary base change (\cite[][Lemma~29.11.5, Section~01S5]{stacks-project} and \cite[][Lemma~27.4.6, Tag 01LX]{stacks-project}). Hence the relative spectrum is a pseudonatural equivalence $\QCohAlg^{\op}\simeq\mathcal{A}\mathit{ff}$, where $\QCohAlg^{\op}$ is the fibrewise opposite. By Lemma~\ref{lem:desc-pseudonatural} we obtain equivalences $\Desc_f(\mathcal{A}\mathit{ff})\simeq\Desc_f(\QCohAlg^{\op})\cong\Desc_f(\QCohAlg)^{\op}$, compatible with the canonical functors from $\{\text{affine morphisms }V\to X\}\simeq\QCohAlg(X)^{\op}$. Now apply (1).
 \end{proof}
 
-\begin{remark}[What is quoted rather than proved]\label{rem:descent-quoted}
-	Later chapters use, in addition, the following descent statements, which we quote:
-	\begin{enumerate}
-		\item descent of open subsets along fpqc coverings (\cite[][Tag 03N0]{stacks-project}, Lemma~\ref{lem:descent-open-subsets});
-		\item effective descent for quasi-affine morphisms (\cite[][Tag 0247]{stacks-project}) and, for fppf coverings, for separated and locally quasi-finite morphisms (\cite[][Tag 02W8]{stacks-project}); the proofs in loc.\ cit.\ build on Corollary~\ref{thm:fpqc-descent-affine-schemes};
-		\item ``being an isomorphism'' is fpqc local on the base (\cite[][Tag 02L4]{stacks-project}).
-	\end{enumerate}
-	Item~(2) is what makes the quotient of a scheme by an \etale\ equivalence relation an algebraic space; this, and not descent of affine schemes, is what glues the local coarse moduli spaces in the proof of the Keel--Mori theorem.
-\end{remark}

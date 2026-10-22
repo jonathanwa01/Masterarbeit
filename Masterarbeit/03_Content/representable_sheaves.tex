@@ -9,7 +9,7 @@ We now deduce from fpqc descent for quasi-coherent sheaves that every scheme def
 \end{enumerate}
 Throughout, $\mathcal{O}:\Sch^{\op}\to\Ring$ denotes the presheaf of rings $T\mapsto\Gamma(T,\mathcal{O}_T)$.
 
-\begin{corollary}[The structure sheaf satisfies fpqc descent]\label{cor:structure-sheaf-fpqc}
+\begin{corollary}\label{cor:structure-sheaf-fpqc}
 	Let $p:U\to T$ be a morphism of schemes such that $p$ is an fpqc covering. Then
 	\[
 	\begin{tikzcd}
@@ -29,7 +29,7 @@ Throughout, $\mathcal{O}:\Sch^{\op}\to\Ring$ denotes the presheaf of rings $T\ma
 \end{proof}
 
 
-\begin{lemma}[Affine targets]\label{lem:representable-affine-target}
+\begin{lemma}\label{lem:representable-affine-target}
 	Let $X=\Specof{A}$ be an affine scheme and let $p:U\to T$ be an fpqc covering. Then $h_X$ satisfies descent along $p$.
 \end{lemma}
 
@@ -42,7 +42,7 @@ Throughout, $\mathcal{O}:\Sch^{\op}\to\Ring$ denotes the presheaf of rings $T\ma
 	\[
 	h_X\cong\Hom_{\Ring}(A,-)\circ\mathcal{O},
 	\]
-	where $\mathcal{O}:\Sch^\op \to \Ring$ denotes structure sheaf.
+	where $\mathcal{O}:\Sch^\op \to \Ring$ denotes structure sheaf $\Gamma(-, \mathcal{-})$.
 	The representable functor $\Hom_{\Ring}(A,-):\Ring\to\Set$ preserves all limits, in particular equalizers. Applying it to the equalizer of Corollary~\ref{cor:structure-sheaf-fpqc} shows that
 	\[
 	h_X(T)\longrightarrow h_X(U)\rightrightarrows h_X(U\times_TU)
@@ -57,7 +57,7 @@ For a general target, the only additional input is that open subsets descend alo
 	Let $p:U\to T$ be an fpqc covering, and let $W'\subset U$ be an open subset with $\mathrm{pr}_0^{-1}(W')=\mathrm{pr}_1^{-1}(W')$ in $U\times_TU$. Then there is a unique open subset $W\subset T$ with $p^{-1}(W)=W'$, namely $W=p(W')$.
 \end{lemma}
 
-\begin{theorem}[Grothendieck]\label{thm:representable-fpqc-sheaf}
+\begin{theorem}\label{thm:representable-fpqc-sheaf}
 	(\cite[][Tag 023Q]{stacks-project}, \cite[][Theorem~2.55]{vistoli2007notes})
 	Let $X$ be a scheme. Then the representable presheaf $h_X=\Hom_\Sch(-,X)$ satisfies the sheaf condition for every fpqc covering. In particular, $h_X$ is a sheaf on $\Sch_\tau$ for $\tau\in\{\mathrm{Zariski}, \text{\etale}, \mathrm{smooth}, \mathrm{fppf}\}$.
 \end{theorem}
