@@ -90,8 +90,7 @@ In this section we will consider commutative diagrams of the following form:
 \end{tikzcd}\]
 This denotes that $\zeta$ lies over $U$ and $\phi$ lies over $f$, i.e. $p_\mathcal{F}(\zeta) = U$ and $p_\mathcal{F}(\phi) = f$.
 
-\begin{definition}[Fibred categories]
-	\label{def:fibred-categories}
+\begin{definition}
 	Let $\mathcal{C}$ be a category.
 	A \emph{category over $\mathcal{C}$} is a category
 	$\mathcal{F}$ equipped with a functor
@@ -145,6 +144,43 @@ This denotes that $\zeta$ lies over $U$ and $\phi$ lies over $f$, i.e. $p_\mathc
 	\cite[][Tag 02XJ]{stacks-project}.
 \end{definition}
 
+\begin{definition}[Fibred category and choice of pullbacks]
+	\label{def:fibred-category}
+	\cite[][Tag 02XM and 02XN]{stacks-project}
+	A category $p:\mathcal{F}\to\mathcal{C}$ is
+	fibred if, for every morphism $f:U\to V$
+	and every $\eta\in\mathcal{F}(V)$, there exists a
+	cartesian morphism
+	\[
+	c_{f,\eta}:f^*\eta\longrightarrow\eta
+	\]
+	over $f$.
+	
+	A choice of pullbacks is a simultaneous choice
+	of such cartesian morphisms for every $f$ and $\eta$.
+\end{definition}
+
+\begin{proposition}[Basic properties of cartesian morphisms]
+	\label{prop:cartesian-properties}
+	\cite[][02XJ]{stacks-project}
+	Let $p:\mathcal{F}\to\mathcal{C}$ be a category over
+	$\mathcal{C}$.
+	\begin{enumerate}
+		\item
+		Isomorphisms are cartesian, and composites of
+		cartesian morphisms are cartesian.
+		
+		\item
+		A cartesian morphism whose image in $\mathcal{C}$
+		is an isomorphism is itself an isomorphism.
+		
+		\item
+		Two cartesian morphisms with the same target
+		lying over the same base morphism are uniquely
+		isomorphic compatibly with their maps to the
+		target.
+	\end{enumerate}
+\end{proposition}
 
 \begin{definition}[Morphisms of fibred categories]
 	\label{def:morphism-fibred-categories}
@@ -184,7 +220,6 @@ This denotes that $\zeta$ lies over $U$ and $\phi$ lies over $f$, i.e. $p_\mathc
 	$2$-category of fibred categories over $\mathcal{C}$.
 \end{definition}
 
-
 \begin{definition}
 	Let $\mathcal{F}\to \mathcal{C}$ be a category fibred in groupoids and let $B\in \mathcal{C}$. We call the subcategory of $\mathcal{F}$ of objects lying over $B$ and morphisms lying over $id_B$ the fibre of $\mathcal{F}$ over $B$ and denote it by $\mathcal{F}(B)$.
 \end{definition}
@@ -203,8 +238,6 @@ This denotes that $\zeta$ lies over $U$ and $\phi$ lies over $f$, i.e. $p_\mathc
 		\item \textbf{Presheaves of sets.} A presheaf $F:\CatC^{\op}\to\Set$ gives the fibred category $\int F\to\CatC$ of pairs $(T,s)$, $s\in F(T)$, with a unique morphism $(T',s')\to(T,s)$ over $g$ if $g^*s=s'$. Its fibres are discrete and every morphism is cartesian.
 	\end{enumerate}
 \end{example}
-
-
 
 \begin{proposition}[Grothendieck construction]\label{prop:grothendieck-construction}
 	Let $\mathcal C$ be a category. There is an equivalence between
@@ -232,6 +265,23 @@ This denotes that $\zeta$ lies over $U$ and $\phi$ lies over $f$, i.e. $p_\mathc
 	\cite[][Tags 02XJ, 003S]{stacks-project}.
 \end{proposition}
 
+\begin{remark}[Relation with pseudofunctors]
+	A choice of pullbacks in a fibred category gives a
+	pseudofunctor
+	\[
+	\mathcal{C}^{\op}\longrightarrow\Cat,
+	\qquad U\longmapsto\mathcal{F}(U).
+	\]
+	Conversely, the Grothendieck construction associates
+	a fibred category to a category-valued pseudofunctor.
+	These constructions give a biequivalence of
+	$2$-categories, restricting to groupoid-valued
+	pseudofunctors and CFGs; see
+	\cite[][Section~3.1.3]{vistoli2007notes}.
+	
+	We use fibred categories as the working definition for stacks and descent theory. Pseudofunctors however give an alternative description and a motivation for studying stacks in section \ref{sec:stacks}.
+\end{remark}
+
 
 \section{The descent category}
 
@@ -246,13 +296,13 @@ for the projections. In the notation of Definition~\ref{def:cech-nerve}, $\mathr
 
 \begin{definition}[Descent data]\label{def:classical-descent-data}
 	(\cite[][Definition~4.2]{vistoli2007notes}, for a single morphism)
-	Let $(\CatC, \mathcal{J})$ be a cite, let $F:\CatC^{\op}\to\Cat$ be a pseudofunctor and $f:U\to X$ a covering in $\CatC$. The \emph{category of descent data along $f$}, denoted $\Desc_f(F)$, is defined as follows.
+	Let $\mathcal{C}$ be a category and let $F:\mathcal{S}\to\mathcal{C}$ be a fibred category with a choice of pullbacks. Let $f:U\to X$ be a morphism in $\CatC$ and assume all fibre products exist in $\CatC$. The category of descent data along $f$, denoted $\Desc_f(F)$, is defined as follows.
 	\begin{enumerate}
 		\item An object is a pair $(\xi,\varphi)$ of an object $\xi\in F(U)$ and an isomorphism
 		\[
 		\varphi:\mathrm{pr}_0^*\xi\xrightarrow{\ \sim\ }\mathrm{pr}_1^*\xi\qquad\text{in }F(U\times_XU)
 		\]
-		satisfying the \emph{cocycle condition}
+		satisfying the cocycle condition
 		\[
 		\mathrm{pr}_{02}^*\varphi=\mathrm{pr}_{12}^*\varphi\circ\mathrm{pr}_{01}^*\varphi\qquad\text{in }F(U\times_XU\times_XU).
 		\]
@@ -286,8 +336,8 @@ Concretely, $f^*$ is fully faithful if and only if morphisms between pullbacks t
 	Definition~\ref{def:classical-descent-data} contains the sheaf condition of Chapter~\ref{chap:grothendieck-topologies} and the descent condition for stacks as special cases.
 	\begin{enumerate}
 		\item \textbf{Sets.} Let $F:\CatC^{\op}\to\Set$ be a presheaf, regarded as a pseudofunctor with discrete values. An isomorphism $\mathrm{pr}_0^*\xi\to\mathrm{pr}_1^*\xi$ in the discrete category $F(U\times_XU)$ exists if and only if $\mathrm{pr}_0^*\xi=\mathrm{pr}_1^*\xi$, and then it is the identity; the cocycle condition is automatic. Hence $\Desc_f(F)$ is the discrete category on $\Eq\bigl(F(U)\rightrightarrows F(U\times_XU)\bigr)$, and $F$ satisfies descent along $f$ in the sense of Definition~\ref{con:pullback-to-descent} if and only if it does so in the sense of Definition~\ref{def:cech-descent}, by Proposition~\ref{prop:cech-descent-equalizer}.
-		\item \textbf{Groupoids.} If $F$ takes values in $\Grpd$, the gluing isomorphisms are additional data and the cocycle condition is a genuine condition. Every morphism of descent data is invertible, so $\Desc_f(F)$ is a groupoid. This is the situation of Definition~\ref{def:stack}.
-		\item \textbf{Categories.} If $F$ takes values in $\Cat$, as for $\QCoh$, objects of $\Desc_f(F)$ are described exactly as for groupoids, but morphisms of descent data need not be invertible.
+		\item \textbf{Groupoids.} If $F$ is fibred in groupoids, the gluing isomorphisms are additional data and the cocycle condition is a genuine condition. Every morphism of descent data is invertible, so $\Desc_f(F)$ is a groupoid. This is the situation of Definition~\ref{def:stack}.
+		\item \textbf{Categories.} For $\QCoh$, objects of $\Desc_f(F)$ are described exactly as for groupoids, but morphisms of descent data need not be invertible.
 	\end{enumerate}
 	Thus the passage from sets to groupoids replaces equalities on $U\times_XU$ by isomorphisms and the cocycle condition on $U\times_XU\times_XU$.
 \end{remark}
