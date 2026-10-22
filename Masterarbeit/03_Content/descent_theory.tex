@@ -205,59 +205,6 @@ This denotes that $\zeta$ lies over $U$ and $\phi$ lies over $f$, i.e. $p_\mathc
 \end{example}
 
 
-\begin{proposition}
-	In definition \ref{def:fibred-categories}, $f$ is an isomorphism if and only if $a$ is an isomorphism.
-\end{proposition}
-
-\begin{proof}
-	One direction is obvious, since $p_\mathcal{F}$ is a functor. For the other direction consider the following diagram:
-	% https://q.uiver.app/#q=WzAsNixbMCwwLCJYXzEiXSxbMiwwLCJYXzEiXSxbMSwxLCJYXzIiXSxbMCwyLCJCXzEiXSxbMSwzLCJCXzIiXSxbMiwyLCJCXzEiXSxbMyw0LCJmXnstMX0iLDJdLFs0LDUsImYiLDJdLFszLDUsImlkIiwwLHsibGFiZWxfcG9zaXRpb24iOjgwfV0sWzAsMSwiaWQiXSxbMiwxLCJcXHBoaSIsMl0sWzIsNCwiIiwxLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dLFsxLDUsIiIsMSx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbMCwzLCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzAsMiwiXFxwaGleey0xfSIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
-	\[\begin{tikzcd}
-		{X_1} && {X_1} \\
-		& {X_2} \\
-		{B_1} && {B_1} \\
-		& {B_2}
-		\arrow["id", from=1-1, to=1-3]
-		\arrow["{a^{-1}}"', dashed, from=1-1, to=2-2]
-		\arrow[maps to, from=1-1, to=3-1]
-		\arrow[maps to, from=1-3, to=3-3]
-		\arrow["a"', from=2-2, to=1-3]
-		\arrow[maps to, from=2-2, to=4-2]
-		\arrow["id"{pos=0.8}, from=3-1, to=3-3]
-		\arrow["{f^{-1}}"', from=3-1, to=4-2]
-		\arrow["f"', from=4-2, to=3-3]
-	\end{tikzcd}\]
-\end{proof}
-
-\begin{proposition}\label{prop:unique-pullback}
-	The pullback $X'$ of $X$ along $f$ is unique up to a unique isomorphism. We will denote it by $f^*X$
-\end{proposition}
-
-\begin{proof}
-	Assume there is a nother $X''$ satisfying 1). Applying 2) to this diagramm
-	% https://q.uiver.app/#q=WzAsNixbMCwwLCJYJyciXSxbMiwwLCJYIl0sWzEsMSwiWCciXSxbMCwyLCJCJyJdLFsxLDMsIkInIl0sWzIsMiwiQiJdLFszLDQsImlkX3tCJ30iLDJdLFs0LDUsImYiLDJdLFszLDUsImYiLDAseyJsYWJlbF9wb3NpdGlvbiI6ODB9XSxbMCwxLCJcXHBzaSJdLFsyLDEsIlxccGhpIiwyXSxbMiw0LCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzEsNSwiIiwxLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dLFswLDMsIiIsMSx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbMCwyLCJcXHZhcnBoaSIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
-	\[\begin{tikzcd}
-		{X''} && X \\
-		& {X'} \\
-		{B'} && B \\
-		& {B'}
-		\arrow["\psi", from=1-1, to=1-3]
-		\arrow["\varphi"', dashed, from=1-1, to=2-2]
-		\arrow[maps to, from=1-1, to=3-1]
-		\arrow[maps to, from=1-3, to=3-3]
-		\arrow["\phi"', from=2-2, to=1-3]
-		\arrow[maps to, from=2-2, to=4-2]
-		\arrow["f"{pos=0.8}, from=3-1, to=3-3]
-		\arrow["{id_{B'}}"', from=3-1, to=4-2]
-		\arrow["f"', from=4-2, to=3-3]
-	\end{tikzcd}\]
-	we optain a unique morphism $\varphi:X''\to X'$ over $id_{B'}$. Then exchanging roles yields a unique morphism $\eta:X'\to X''$  over $id_{B'}$. Then by uniqueness we get $\varphi\circ\eta = id_{X''}$ and  $\eta \circ \varphi= id_{X'}$.
-\end{proof}
-
-\begin{corollary}
-	Let $\mathcal{F}\to \mathcal{C}$ be a category fibred in groupoids. Then the fibres $\mathcal{F}(B)$ of $\mathcal{F}$ over every object $B\in\CatC$ is a groupoid.
-\end{corollary}
-
 
 \begin{proposition}[Grothendieck construction]\label{prop:grothendieck-construction}
 	Let $\mathcal C$ be a category. There is an equivalence between
