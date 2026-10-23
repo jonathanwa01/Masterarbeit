@@ -105,7 +105,7 @@ The formal notions are combined with the following finiteness conditions.
 
 \begin{lemma}[\Etale\ is local on the target]\label{lem:etale-local-on-target}
 	(\cite[][Tag 02VN]{stacks-project})
-	Let $\{S_i\to S\}_{i\in I}$ be an fpqc covering, e.g.\ a Zariski, \etale, smooth or fppf covering (Lemma~\ref{lem:etale-coverings-fpqc}). If every base change $X\times_S S_i\to S_i$ is \etale, then $f$ is \etale.
+	Let $\{S_i\to S\}_{i\in I}$ be an fpqc covering, e.g.\ a Zariski, \etale, smooth or fppf covering (Lemma \ref{lem:etale-coverings-fpqc}). If every base change $X\times_S S_i\to S_i$ is \etale, then $f$ is \etale.
 \end{lemma}
 
 \begin{remark}
@@ -166,13 +166,9 @@ The formal notions are combined with the following finiteness conditions.
 	Let $f$ be unramified. Then $f$ is a monomorphism if and only if $f$ is universally injective.
 \end{lemma}
 
-\begin{remark}
-	Lemma~\ref{lem:unramified-monomorphism} is used to check that a pair of \etale\ morphisms $s,t:R\rightrightarrows U$ defines an \etale\ equivalence relation: the map $(s,t):R\to U\times_S U$ is a morphism of schemes over $U$ (via $s$ and $\mathrm{pr}_1$), and $R$ is unramified over $U$ because $s$ is \etale. Hence $(s,t)$ is unramified by \cite[][Tag 02GG]{stacks-project}, and it is a monomorphism as soon as it is universally injective.
-\end{remark}
 
-%==========================================================
 \section{\Etale\ morphisms over a field}
-%==========================================================
+
 
 \begin{lemma}[\Etale\ schemes over a field]\label{lem:etale-over-field}
 	(\cite[][Tag 02GL]{stacks-project})
@@ -214,12 +210,3 @@ The formal notions are combined with the following finiteness conditions.
 \begin{proof}
 	(1) follows from Lemma~\ref{lem:etale-permanence}(3). For (2), \etale\ morphisms are smooth by Lemma~\ref{lem:etale-consequences}; smooth morphisms are flat and locally of finite presentation; the statement for fpqc coverings is \cite[][Tag 022C]{stacks-project}.
 \end{proof}
-
-\begin{lemma}[Finite affine \etale\ coverings are faithfully flat]\label{lem:finite-affine-etale-cover-ff}
-	Let $\{\Specof{R_i}\to\Specof{R}\}_{i=1}^n$ be a finite \etale\ covering by affine schemes and set $S:=\prod_{i=1}^n R_i$. Then the induced ring map $R\to S$ is faithfully flat and $\Specof{S}\cong\coprod_{i=1}^n\Specof{R_i}$.
-\end{lemma}
-
-\begin{proof}
-	Since the product is finite, $\Specof{S}\cong\coprod_i\Specof{R_i}$. Each $R\to R_i$ is flat by Lemma~\ref{lem:etale-consequences}(2). As an $R$-module, $S=\bigoplus_{i=1}^n R_i$ is a finite direct sum of flat modules, hence flat: for an injection $N\hookrightarrow N'$ of $R$-modules the map $N\otimes_R S\to N'\otimes_R S$ is the direct sum of the injections $N\otimes_R R_i\to N'\otimes_R R_i$, so it is injective (\cite[][Tag 00HD]{stacks-project}). Finally, $\Specof{S}\to\Specof{R}$ is surjective because the $\Specof{R_i}$ cover $\Specof{R}$, so $R\to S$ is faithfully flat by \cite[][Tag 00HQ]{stacks-project}.
-\end{proof}
-
