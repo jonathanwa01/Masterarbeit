@@ -110,7 +110,7 @@ We work with the formulation of Grothendieck topologies in terms of covering fam
 
 \begin{remark}[Homotopical meaning]\label{rem:cech-homotopy}
 	The \v{C}ech nerve is the $0$-coskeleton of $U$ in $\CatC_{/X}$: a morphism of simplicial objects $Y_\bullet\to(U/X)_\bullet$ over $X$ is the same as a morphism $Y_0\to U$ over $X$. If $\CatC=\Set$ and $p$ is surjective, then $(U/X)_\bullet$ is the nerve of the equivalence relation $U\times_X U\rightrightarrows U$, and every fiber of $(U/X)_\bullet\to X$ is the nerve of a contractible groupoid (the indiscrete groupoid on a nonempty set). Hence $(U/X)_\bullet\to X$ is a weak equivalence of simplicial sets, where $X$ is regarded as a constant simplicial set.
-	More generally, if $p$ admits a section $s$, the augmented \v{C}ech nerve has an \emph{extra degeneracy} induced by $s$, which gives a contraction (for the dual statement about cosimplicial objects see \cite[][Tag 019Z]{stacks-project}). Faithfully flat descent can be read as the algebraic shadow of this fact: after a faithfully flat base change along $p$ itself, $p$ acquires a section (the diagonal), and the corresponding Amitsur complex becomes contractible (\cite[][Tags 023L, 023M]{stacks-project}).
+	More generally, if $p$ admits a section $s$, the augmented \v{C}ech nerve has an \emph{extra degeneracy} induced by $s$, which gives a contraction (see \cite[][Tag 019Z]{stacks-project}). Faithfully flat descent can be read as the algebraic analogue of this fact, which we see later in Chapter \ref{chap:descent-theory}.
 \end{remark}
 
 \begin{lemma}[\v{C}ech nerve of a disjoint union]\label{lem:cech-nerve-coproduct}
@@ -122,7 +122,7 @@ We work with the formulation of Grothendieck topologies in terms of covering fam
 \end{lemma}
 
 \begin{proof}
-	It suffices to show that $(\coprod_i U_i)\times_X Y\cong\coprod_i(U_i\times_X Y)$ for every $X$-scheme $Y$; the claim then follows by induction on $n$. The $U_i$ form a cover of $U$ by pairwise disjoint open subschemes. For the projection $\mathrm{pr}_1:U\times_XY\to U$, the open subscheme $\mathrm{pr}_1^{-1}(U_i)$ is canonically $U_i\times_XY$, and these open subschemes are pairwise disjoint and cover $U\times_XY$. This gives the isomorphism.
+	It suffices to show that $(\coprod_i U_i)\times_X Y\cong\coprod_i(U_i\times_X Y)$ for every $X$-scheme $Y$, since the claim then follows by induction on $n$. The $U_i$ form a cover of $U$ by pairwise disjoint open subschemes. For the projection $\mathrm{pr}_1:U\times_XY\to U$, the open subscheme $\mathrm{pr}_1^{-1}(U_i)$ is canonically $U_i\times_XY$, and these open subschemes are pairwise disjoint and cover $U\times_XY$. This gives the isomorphism.
 \end{proof}
 
 \begin{lemma}[Totalization of a cosimplicial set]\label{lem:tot-cosimplicial-set}
@@ -135,7 +135,7 @@ We work with the formulation of Grothendieck topologies in terms of covering fam
 \end{lemma}
 
 \begin{proof}
-	An element of the limit is a family $(x_n)_n$, $x_n\in X^n$, with $X(\theta)(x_m)=x_n$ for all $\theta:[m]\to[n]$. For $0\le k\le n$ let $v_k:[0]\to[n]$ be the map with image $k$. Then $x_k=X(v_0)(x_0)$, so the family is determined by $x_0$, and the map is injective. Moreover $x_0$ lies in the equalizer, because $d^0(x_0)=x_1=d^1(x_0)$.
+	An element of the limit is a family $(x_n)_n$, $x_n\in X^n$, with $X(\theta)(x_m)=x_n$ for all $\theta:[m]\to[n]$. For $0\le k\le n$ let $v_k:[0]\to[n]$ be the map with image $k$. Then $x_k=X(v_k)(x_0)$, so the family is determined by $x_0$, and the map is injective. Moreover $x_0$ lies in the equalizer, because $d^0(x_0)=x_1=d^1(x_0)$.
 	
 	Conversely, let $x_0\in X^0$ with $d^0x_0=d^1x_0$. For $0\le k\le n$, let $e:[1]\to[n]$ be the map with $e(0)=0$, $e(1)=k$. Then $v_0=e\circ\delta^1$ and $v_k=e\circ\delta^0$, hence
 	\[
@@ -145,7 +145,8 @@ We work with the formulation of Grothendieck topologies in terms of covering fam
 \end{proof}
 
 \begin{remark}
-	Lemma~\ref{lem:tot-cosimplicial-set} is the $1$-categorical reason why the sheaf condition only involves $U$ and $U\times_X U$: the higher stages of the \v{C}ech nerve impose no further conditions on sets. For a cosimplicial groupoid, the $2$-categorical totalization depends on $\Delta_{\le 2}$, which produces the cocycle condition on $U\times_X U\times_X U$ (Remark~\ref{rem:desc-2-truncation}); for higher groupoids, higher simplices are needed.
+	Lemma~\ref{lem:tot-cosimplicial-set} is the $1$-categorical reason why the sheaf condition only involves $U$ and $U\times_X U$. The higher terms of the \v{C}ech nerve add no additional conditions on sets. For a cosimplicial groupoid, the $2$-categorical totalization depends on $\Delta_{\le 2}$, which produces the cocycle condition on $U\times_X U\times_X U$ (Remark~\ref{rem:desc-2-truncation}).
+	For higher groupoids, higher simplices are needed.
 \end{remark}
 
 %==========================================================
@@ -196,7 +197,7 @@ To pass from covering families to single morphisms we need that $F$ converts dis
 \end{lemma}
 
 \begin{proof}
-	The empty family is a Zariski covering of $\varnothing$, and the sheaf condition for it says that $F(\varnothing)$ is the equalizer of two maps between empty products, i.e.\ a point. Next, $\{U_j\hookrightarrow\coprod_iU_i\}_{j\in I}$ is a Zariski covering with $U_j\times_{\coprod_iU_i}U_k=U_j\cap U_k$, which is $U_j$ for $j=k$ and $\varnothing$ otherwise. On the factors with $j\ne k$ both maps in~\eqref{eq:sheaf-condition-equalizer} land in the point $F(\varnothing)$, and on the factors with $j=k$ both are the identity of $F(U_j)$. Hence the equalizer is all of $\prod_jF(U_j)$, and the sheaf condition gives the claim.
+	The empty family is a Zariski covering of $\varnothing$, and the sheaf condition for it says that $F(\varnothing)$ is the equalizer of two maps between empty products, i.e.\ a point. $\{U_j\hookrightarrow\coprod_iU_i\}_{j\in I}$ is a Zariski covering with $U_j\times_{\coprod_iU_i}U_k=U_j\cap U_k$ and since the $U_i$ are disjoint this is $U_j$ for $j=k$ and $\varnothing$ otherwise. On the factors with $j\ne k$ both maps in diagram \eqref{eq:sheaf-condition-equalizer} land in the point $F(\varnothing)$, and on the factors with $j=k$ both are the identity of $F(U_j)$. Hence the equalizer is all of $\prod_jF(U_j)$, and the sheaf condition gives the claim.
 \end{proof}
 
 \begin{proposition}[Sheaf condition as \v{C}ech descent]\label{lem:sheaf-single-cover}
@@ -204,7 +205,7 @@ To pass from covering families to single morphisms we need that $F$ converts dis
 \end{proposition}
 
 \begin{proof}
-	By Lemma~\ref{lem:cech-nerve-coproduct}, $U\times_XU\cong\coprod_{i,j}U_i\times_XU_j$, and the projections $U\times_XU\rightrightarrows U$ restrict on the summand $U_i\times_XU_j$ to the projections onto $U_i$ and $U_j$. Applying Lemma~\ref{lem:sheaf-preserves-coproducts} to $U$ and to $U\times_XU$ gives an isomorphism between the diagram of Proposition~\ref{prop:cech-descent-equalizer} and the diagram~\eqref{eq:sheaf-condition-equalizer}, which is the identity on $F(X)$:
+	By Lemma \ref{lem:cech-nerve-coproduct}, $U\times_XU\cong\coprod_{i,j}U_i\times_XU_j$, and the projections $U\times_XU\rightrightarrows U$ restrict on the summand $U_i\times_XU_j$ to the projections onto $U_i$ and $U_j$. Applying Lemma \ref{lem:sheaf-preserves-coproducts} to $U$ and to $U\times_XU$ yields  an isomorphism between the diagram of Proposition \ref{prop:cech-descent-equalizer} and the diagram \eqref{eq:sheaf-condition-equalizer}, which is the identity on $F(X)$:
 	% https://q.uiver.app/#q=WzAsNixbMCwwLCJGKFgpIl0sWzEsMCwiRihVKSJdLFsyLDAsIkYoVVxcdGltZXNfWCBVKSJdLFswLDEsIkYoWCkiXSxbMSwxLCJcXHByb2RfaUYoVV9pKSJdLFsyLDEsIlxccHJvZF97aSxqfUYoVV9pXFx0aW1lc19VVV9qKSJdLFswLDNdLFswLDFdLFsxLDIsIiIsMix7Im9mZnNldCI6MX1dLFsyLDVdLFszLDRdLFs0LDUsIiIsMCx7Im9mZnNldCI6MX1dLFs0LDUsIiIsMSx7Im9mZnNldCI6LTF9XSxbMSwyLCIiLDEseyJvZmZzZXQiOi0xfV0sWzEsNF1d
 	\[\begin{tikzcd}
 		{F(X)} & {F(U)} & {F(U\times_X U)} \\
@@ -227,7 +228,7 @@ To pass from covering families to single morphisms we need that $F$ converts dis
 \end{lemma}
 
 \begin{proof}
-	For $\tau\ne\mathrm{fpqc}$, being \etale, smooth, resp.\ flat and locally of finite presentation is local on the source (\cite[][Tag 02GJ, 01V6, 01U4]{stacks-project}), and joint surjectivity is the same condition for both. For fpqc, flatness is local on the source. An affine open $W\subset U_{i}$ is also an affine open of $\coprod_iU_i$, so the finiteness condition of Definition~\ref{def:fpqc-covering} for the family implies the one for $\coprod_iU_i\to X$. Conversely, an affine open $W\subset\coprod_iU_i$ is quasi-compact, hence meets only finitely many $U_i$, and $W\cap U_i$ is open and closed in $W$, hence affine. This gives the converse.
+	For $\tau\ne\mathrm{fpqc}$, being \etale, smooth, resp.\ flat and locally of finite presentation is local on the source (\cite[][Tag 02GJ, 01V6, 01U4]{stacks-project}), and joint surjectivity is the same condition for both. For fpqc, flatness is local on the source. An affine open $W\subset U_{i}$ is also an affine open of $\coprod_iU_i$, so the finiteness condition of Definition \ref{def:fpqc-covering} implies the finiteness condition for $\coprod_iU_i\to X$. Conversely, an affine open $W\subset\coprod_iU_i$ is quasi-compact, hence meets only finitely many $U_i$, and $W\cap U_i$ is open and closed in $W$, hence affine. This gives the converse.
 \end{proof}
 
 \begin{corollary}[Sheaves via \v{C}ech descent]\label{cor:sheaf-via-cech}
@@ -243,7 +244,7 @@ To pass from covering families to single morphisms we need that $F$ converts dis
 \end{proof}
 
 \begin{remark}
-	Corollary~\ref{cor:sheaf-via-cech} is precisely the reason, why $F(X)\cong\Tot F((U/X)_\bullet)$ from the introduction to Chapter~\ref{chap:descent-theory}: up to the Zariski-local condition (1), being a sheaf means that $F$ sends augmented \v{C}ech nerves of single coverings to limit diagrams. Working with a single morphism $U\to X$ instead of a family removes the indices $i,j,k$ from all subsequent constructions, which becomes essential for presheaves valued in groupoids.
+	Corollary~\ref{cor:sheaf-via-cech} is precisely the reason, why $F(X)\cong\Tot F((U/X)_\bullet)$ from the introduction to Chapter~\ref{chap:descent-theory}. Up to the Zariski-local condition (1), being a sheaf means that $F$ sends augmented \v{C}ech nerves of single coverings to limit diagrams. Working with a single morphism $U\to X$ instead of a family removes the indices $i,j,k$ from all subsequent constructions, which becomes essential for presheaves valued in groupoids.
 \end{remark}
 
 \begin{lemma}[Limits of sheaves]\label{cor:limit-sheaf}
