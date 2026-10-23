@@ -131,7 +131,7 @@ We work with the formulation of Grothendieck topologies in terms of covering fam
 	\[
 	\lim_{[n]\in\Delta}X^n\longrightarrow\Eq\left(\begin{tikzcd}X^0\arrow[r, shift left, "d^0"]\arrow[r, shift right, "d^1"'] & X^1\end{tikzcd}\right),\qquad (x_n)_{n\ge 0}\longmapsto x_0,
 	\]
-	is a bijection. In other words, the limit of $X^\bullet$ only depends on its restriction to $\Delta_{\le 1}$.
+	is a bijection. 
 \end{lemma}
 
 \begin{proof}
@@ -145,7 +145,7 @@ We work with the formulation of Grothendieck topologies in terms of covering fam
 \end{proof}
 
 \begin{remark}
-	Lemma~\ref{lem:tot-cosimplicial-set} is the $1$-categorical reason why the sheaf condition only involves $U$ and $U\times_X U$. The higher terms of the \v{C}ech nerve add no additional conditions on sets. For a cosimplicial groupoid, the $2$-categorical totalization depends on $\Delta_{\le 2}$, which produces the cocycle condition on $U\times_X U\times_X U$ (Remark~\ref{rem:desc-2-truncation}).
+	The limit of $X^\bullet$ only depends on its restriction to $\Delta_{\le 1}$, which is the $1$-categorical reason why the sheaf condition only involves $U$ and $U\times_X U$. The higher terms of the \v{C}ech nerve add no additional conditions on sets. For a cosimplicial groupoid, the $2$-categorical totalization depends on $\Delta_{\le 2}$, which produces the cocycle condition on $U\times_X U\times_X U$ (Remark~\ref{rem:desc-2-truncation}).
 	For higher groupoids, higher simplices are needed.
 \end{remark}
 
@@ -244,7 +244,7 @@ To pass from covering families to single morphisms we need that $F$ converts dis
 \end{proof}
 
 \begin{remark}
-	Corollary~\ref{cor:sheaf-via-cech} is precisely the reason, why $F(X)\cong\Tot F((U/X)_\bullet)$ from the introduction to Chapter~\ref{chap:descent-theory}. Up to the Zariski-local condition (1), being a sheaf means that $F$ sends augmented \v{C}ech nerves of single coverings to limit diagrams. Working with a single morphism $U\to X$ instead of a family removes the indices $i,j,k$ from all subsequent constructions, which becomes essential for presheaves valued in groupoids.
+	Corollary~\ref{cor:sheaf-via-cech} is precisely the reason, why $F(X)\cong\Tot F((U/X)_\bullet)$ from the introduction to Chapter~\ref{chap:descent-theory}. Up to the Zariski-local condition (1), being a sheaf means that $F$ sends augmented \v{C}ech nerves of single coverings to limit diagrams. Working with a single morphism $U\to X$ instead of a family removes the indices $i,j,k$ from all subsequent constructions.
 \end{remark}
 
 \begin{lemma}[Limits of sheaves]\label{cor:limit-sheaf}

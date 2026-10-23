@@ -7,7 +7,6 @@ We now deduce from fpqc descent for quasi-coherent sheaves that every scheme def
 	\item Morphisms into an affine scheme $\Specof{A}$ are ring maps out of $A$, and $\Hom_{\Ring}(A,-)$ preserves limits. This gives the case of affine targets without any computation.
 	\item For an arbitrary target we descend open subsets along the covering and reduce to (2).
 \end{enumerate}
-Throughout, $\mathcal{O}:\Sch^{\op}\to\Ring$ denotes the presheaf of rings $T\mapsto\Gamma(T,\mathcal{O}_T)$.
 
 \begin{corollary}\label{cor:structure-sheaf-fpqc}
 	Let $p:U\to T$ be an fpqc covering of schemes. Then
@@ -16,16 +15,17 @@ Throughout, $\mathcal{O}:\Sch^{\op}\to\Ring$ denotes the presheaf of rings $T\ma
 		\Gamma(T,\mathcal{O}_T) \arrow[r, "p^*"] & \Gamma(U,\mathcal{O}_U) \arrow[r, shift left, "\mathrm{pr}_0^*"] \arrow[r, shift right, "\mathrm{pr}_1^*"'] & \Gamma(U\times_TU,\mathcal{O}_{U\times_TU})
 	\end{tikzcd}
 	\]
-	is an equalizer diagram of rings. In other words, $\mathcal{O}$ satisfies descent along $p$.
+	is an equalizer diagram of rings.
 \end{corollary}
 
 \begin{proof}
 	By Theorem~\ref{thm:fpqc-descent-qcoh}, the functor $\QCoh(T)\to\Desc(U/T)$, $\mathcal{F}\mapsto(p^*\mathcal{F},\mathrm{can}_\mathcal{F})$ (Definition~\ref{con:pullback-to-descent}), is fully faithful. We apply this to $\mathcal{F}=\mathcal{G}=\mathcal{O}_T$.
 	
 	On the left, evaluation at $1$ identifies $\Hom_{\QCoh(T)}(\mathcal{O}_T,\mathcal{O}_T)$ with $\Gamma(T,\mathcal{O}_T)$.
-	On the right, $p^*\mathcal{O}_T=\mathcal{O}_U$ canonically, and under the identifications $\mathrm{pr}_0^*\mathcal{O}_U=\mathcal{O}_{U\times_TU}=\mathrm{pr}_1^*\mathcal{O}_U$ the canonical descent datum $\mathrm{can}_{\mathcal{O}_T}$ is the identity. A morphism of descent data $(\mathcal{O}_U,\mathrm{id})\to(\mathcal{O}_U,\mathrm{id})$ is therefore an endomorphism of $\mathcal{O}_U$, i.e.\ a section $s\in\Gamma(U,\mathcal{O}_U)$, such that $\mathrm{pr}_0^*(s)=\mathrm{pr}_1^*(s)$. Under these identifications, the map on morphism sets is $p^*:\Gamma(T,\mathcal{O}_T)\to\Gamma(U,\mathcal{O}_U)$.
+	On the right, $p^*\mathcal{O}_T=\mathcal{O}_U$ canonically, and under the identifications $\mathrm{pr}_0^*\mathcal{O}_U=\mathcal{O}_{U\times_TU}=\mathrm{pr}_1^*\mathcal{O}_U$ the canonical descent datum $\mathrm{can}_{\mathcal{O}_T}$ is the identity. A morphism of descent data $(\mathcal{O}_U,\mathrm{id})\to(\mathcal{O}_U,\mathrm{id})$ is therefore an endomorphism of $\mathcal{O}_U$, i.e.\ a section $s\in\Gamma(U,\mathcal{O}_U)$, such that $\mathrm{pr}_0^*(s)=\mathrm{pr}_1^*(s)$.
+	Under these identifications, the map on morphism sets is $p^*:\Gamma(T,\mathcal{O}_T)\to\Gamma(U,\mathcal{O}_U)$.
 	
-	Full faithfulness thus says that $p^*$ is a bijection onto the equalizer of $\mathrm{pr}_0^*$ and $\mathrm{pr}_1^*$. Since $p^*$ is a ring map and equalizers of rings are computed on underlying sets, the diagram is an equalizer of rings.
+	By full faithfulness, $p^*$ is a bijection onto the equalizer of $\mathrm{pr}_0^*$ and $\mathrm{pr}_1^*$. Since $p^*$ is a ring map and equalizers of rings are computed on underlying sets, the diagram is an equalizer of rings.
 \end{proof}
 
 
@@ -40,10 +40,9 @@ Throughout, $\mathcal{O}:\Sch^{\op}\to\Ring$ denotes the presheaf of rings $T\ma
 				 f &\mapsto f^\sharp,
 	\end{align*} see (\cite[][Tag 01I1]{stacks-project}). Hence there is a natural isomorphism of presheaves
 	\[
-	h_X\cong\Hom_{\Ring}(A,-)\circ\mathcal{O},
+	h_X\cong\Hom_{\Ring}(A,-)\circ\Gamma(-, \mathcal{O}_{(-)}).
 	\]
-	where $\mathcal{O}:\Sch^\op \to \Ring$ denotes presheaf of rings $\Gamma(-, \mathcal{-})$.
-	The representable functor $\Hom_{\Ring}(A,-):\Ring\to\Set$ preserves all limits, in particular equalizers. Hence, applying it to the equalizer of Corollary \ref{cor:structure-sheaf-fpqc} shows that
+	The representable functor $\Hom_{\Ring}(A,-):\Ring\to\Set$ preserves all limits, in particular equalizers and by the adjunction$\Gamma \dashv \Spec$, $\Gamma$ preserves all limites. Hence, applying $h_X$ it to the equalizer of Corollary \ref{cor:structure-sheaf-fpqc} shows that
 	\[
 	h_X(T)\longrightarrow h_X(U)\rightrightarrows h_X(U\times_TU)
 	\]
@@ -243,7 +242,8 @@ For a general target, the only additional input is that open subsets descend alo
 
 
 \begin{corollary}[Relative version]\label{cor:representable-relative}
-	Let $S$ be a scheme, $\tau\in\{\mathrm{Zariski}, \text{\etale}, \mathrm{smooth}, \mathrm{fppf}\}$, and $X$ a scheme over $S$. Then $h_{X/S}=\Hom_S(-,X)$ is a sheaf on $(\SchOver{S})_\tau$.
+	Let $S$ be a scheme,\\
+	$\tau\in\{\mathrm{Zariski}, \text{\etale}, \mathrm{smooth}, \mathrm{fppf}\}$, and $X$ a scheme over $S$. Then $h_{X/S}=\Hom_S(-,X)$ is a sheaf on $(\SchOver{S})_\tau$.
 \end{corollary}
 
 \begin{proof}
