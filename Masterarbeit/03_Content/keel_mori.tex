@@ -497,7 +497,8 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	\pi_2: \mathcal{X}_2 \to X_2 = \Specof{A_2^G}.
 	\]
 	Applying Lemma \ref{lem:etale-descent-finite-group-quotients} to $\Specof{A_2}\to \Specof{A_1}$ yields a commutative diagram, such that the induced morphisms $s, t: X_2 \to X_1$ are \etale\ and both left squares are 2-cartesian.
-	% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXG1hdGhjYWx7WH1fMiJdLFswLDEsIlhfMiJdLFsxLDAsIlxcbWF0aGNhbHtYfV8xIl0sWzEsMSwiWF8xIl0sWzIsMCwiXFxtYXRoY2Fse1h9XzAiXSxbMiwxLCJYXzAiXSxbMCwyLCJ0X1xcbWF0aGNhbHtYfSIsMix7Im9mZnNldCI6MX1dLFswLDIsInNfXFxtYXRoY2Fse1h9IiwwLHsib2Zmc2V0IjotMX1dLFsxLDMsInQiLDIseyJvZmZzZXQiOjF9XSxbMSwzLCJzIiwwLHsib2Zmc2V0IjotMX1dLFswLDEsIlxccGlfMiIsMl0sWzIsMywiXFxwaV8xIiwyXSxbNCw1LCIiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMiw0LCJnIl0sWzMsNSwiIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzAsMywiIiwwLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XV0=
+	% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXG1hdGhjYWx7WH1fMiJdLFswLDEsIlhfMiJdLFsxLDAsIlxcbWF0aGNhbHtYfV8xIl0sWzEsMSwiWF8xIl0sWzIsMCwiXFxtYXRoY2Fse1h9XzAiXSxbMiwxLCJYXzAiXSxbMCwyLCJ0X1xcbWF0aGNhbHtYfSIsMix7Im9mZnNldCI6MX1dLFswLDIsInNfXFxtYXRoY2Fse1h9IiwwLHsib2Zmc2V0IjotMX1dLFsxLDMsInQiLDIseyJvZmZzZXQiOjF9XSxbMSwzLCJzIiwwLHsib2Zmc2V0IjotMX1dLFswLDEsIlxccGlfMiIsMl0sWzIsMywiXFxwaV8xIiwyXSxbNCw1LCJcXHBpXzAiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMiw0LCJnIl0sWzMsNSwicSIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFswLDMsIiIsMCx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV1d
+	
 	\begin{equation}\label{eq:groupoid-moduli-space}
 		\begin{tikzcd}
 			{\mathcal{X}_2} & {\mathcal{X}_1} & {\mathcal{X}_0} \\
@@ -508,10 +509,10 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 			\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
 			\arrow["g", from=1-2, to=1-3]
 			\arrow["{\pi_1}"', from=1-2, to=2-2]
-			\arrow[dashed, from=1-3, to=2-3]
+			\arrow["{\pi_0}"', dashed, from=1-3, to=2-3]
 			\arrow["t"', shift right, from=2-1, to=2-2]
 			\arrow["s", shift left, from=2-1, to=2-2]
-			\arrow[dashed, from=2-2, to=2-3]
+			\arrow["q", dashed, from=2-2, to=2-3]
 		\end{tikzcd}
 	\end{equation}
 	
@@ -525,23 +526,24 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 			&\cong \mathcal{X}_2 \times_{\pi_2, X_2, \operatorname{pr}_1} P
 	\end{align*}
 	as visualized in the following diagram:
-	% https://q.uiver.app/#q=WzAsOCxbMCwxLCJcXG1hdGhjYWx7WH1fMiJdLFsxLDEsIlxcbWF0aGNhbHtYfV8xIl0sWzMsMCwiXFxtYXRoY2Fse1h9XzIiXSxbMiwwLCJcXG1hdGhjYWx7UH0iXSxbMCwyLCJYXzIiXSxbMSwyLCJYXzEiXSxbMiwxLCJQIl0sWzMsMSwiWF8yIl0sWzIsMSwidF9cXG1hdGhjYWx7WH0iLDAseyJsYWJlbF9wb3NpdGlvbiI6MjAsIm9mZnNldCI6LTF9XSxbMCwxLCJzX1xcbWF0aGNhbHtYfSIsMl0sWzMsMl0sWzMsMF0sWzAsNF0sWzQsNSwicyIsMl0sWzEsNV0sWzcsNSwidCJdLFsyLDcsIlxccGlfMiJdLFszLDZdLFs2LDRdLFs2LDcsIlxcb3BlcmF0b3JuYW1le3ByfV8xIl1d
+	% https://q.uiver.app/#q=WzAsOCxbMCwzLCJYXzIiXSxbMiwzLCJYXzEiXSxbMCwxLCJcXG1hdGhjYWx7WH1fMiJdLFsyLDEsIlxcbWF0aGNhbHtYfV8xIl0sWzEsMCwiXFxtYXRoY2Fse1B9Il0sWzEsMiwiUCJdLFszLDAsIlxcbWF0aGNhbHtYfV8yIl0sWzMsMiwiWF8yIl0sWzIsMF0sWzMsMV0sWzAsMSwicyIsMl0sWzIsMywic19cXG1hdGhjYWx7WH0iLDIseyJsYWJlbF9wb3NpdGlvbiI6NzB9XSxbNCwyXSxbNiwzLCJ0X1xcbWF0aGNhbHtYfSJdLFs0LDZdLFs0LDVdLFs2LDcsIlxccGlfMiJdLFs1LDcsIlxcb3BlcmF0b3JuYW1le3ByfV8xIiwwLHsibGFiZWxfcG9zaXRpb24iOjcwfV0sWzcsMSwidCJdLFs1LDBdXQ==
 	\[\begin{tikzcd}
-		&& {\mathcal{P}} & {\mathcal{X}_2} \\
-		{\mathcal{X}_2} & {\mathcal{X}_1} & P & {X_2} \\
-		{X_2} & {X_1}
-		\arrow[from=1-3, to=1-4]
-		\arrow[from=1-3, to=2-1]
-		\arrow[from=1-3, to=2-3]
-		\arrow["{t_\mathcal{X}}"{pos=0.2}, shift left, from=1-4, to=2-2]
-		\arrow["{\pi_2}", from=1-4, to=2-4]
-		\arrow["{s_\mathcal{X}}"', from=2-1, to=2-2]
-		\arrow[from=2-1, to=3-1]
-		\arrow[from=2-2, to=3-2]
-		\arrow["{\operatorname{pr}_1}", from=2-3, to=2-4]
-		\arrow[from=2-3, to=3-1]
-		\arrow["t", from=2-4, to=3-2]
-		\arrow["s"', from=3-1, to=3-2]
+		& {\mathcal{P}} && {\mathcal{X}_2} \\
+		{\mathcal{X}_2} && {\mathcal{X}_1} \\
+		& P && {X_2} \\
+		{X_2} && {X_1}
+		\arrow[from=1-2, to=1-4]
+		\arrow[from=1-2, to=2-1]
+		\arrow[from=1-2, to=3-2]
+		\arrow["{t_\mathcal{X}}", from=1-4, to=2-3]
+		\arrow["{\pi_2}", from=1-4, to=3-4]
+		\arrow["{s_\mathcal{X}}"'{pos=0.7}, from=2-1, to=2-3]
+		\arrow[from=2-1, to=4-1]
+		\arrow[from=2-3, to=4-3]
+		\arrow["{\operatorname{pr}_1}"{pos=0.7}, from=3-2, to=3-4]
+		\arrow[from=3-2, to=4-1]
+		\arrow["t", from=3-4, to=4-3]
+		\arrow["s"', from=4-1, to=4-3]
 	\end{tikzcd}\]
 
 	Hence, we optain a cartesian diagram:
@@ -596,13 +598,13 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 		\]
 		This means $\pi_2(\xi) = r$ and $\pi_2(\xi') = r'$.
 		Consider the following commutative diagram:
-		% https://q.uiver.app/#q=WzAsNSxbMCwwLCJ8XFxtYXRoY2Fse1h9XzIoXFxiYXJ7a30pfCJdLFswLDEsIlhfMihcXGJhcntrfSkiXSxbMiwwLCJ8XFxtYXRoY2Fse1h9XzEoXFxiYXJ7a30pfCJdLFsyLDEsIlhfMShcXGJhcntrfSkiXSxbMSwyLCIoWF8xXFx0aW1lcyBYXzEpKFxcYmFye2t9KSJdLFswLDEsIlxccGlfMiJdLFsyLDMsIlxccGlfMSIsMl0sWzEsNCwiaiIsMl0sWzQsMywiXFxvcGVyYXRvcm5hbWV7cHJ9XzEiLDAseyJvZmZzZXQiOi0xfV0sWzQsMywiXFxvcGVyYXRvcm5hbWV7cHJ9XzIiLDIseyJvZmZzZXQiOjF9XSxbMSwzLCJ0IiwyLHsib2Zmc2V0IjoxfV0sWzEsMywicyIsMCx7Im9mZnNldCI6LTF9XSxbMCwyLCJwXzEiLDAseyJvZmZzZXQiOi0xfV0sWzAsMiwicF8yIiwyLHsib2Zmc2V0IjoxfV1d
+		% https://q.uiver.app/#q=WzAsNSxbMCwwLCJ8XFxtYXRoY2Fse1h9XzIoXFxiYXJ7a30pfCJdLFswLDEsIlhfMihcXGJhcntrfSkiXSxbMiwwLCJ8XFxtYXRoY2Fse1h9XzEoXFxiYXJ7a30pfCJdLFsyLDEsIlhfMShcXGJhcntrfSkiXSxbMSwyLCIoWF8xXFx0aW1lcyBYXzEpKFxcYmFye2t9KSJdLFswLDEsIlxccGlfMiJdLFsyLDMsIlxccGlfMSIsMl0sWzEsNCwiaiIsMl0sWzQsMywiXFxvcGVyYXRvcm5hbWV7cHJ9XzEiLDAseyJvZmZzZXQiOi0xfV0sWzQsMywiXFxvcGVyYXRvcm5hbWV7cHJ9XzIiLDIseyJvZmZzZXQiOjF9XSxbMSwzLCJ0IiwyLHsib2Zmc2V0IjoxfV0sWzEsMywicyIsMCx7Im9mZnNldCI6LTF9XSxbMCwyLCJzX1xcbWF0aGNhbHtYfSIsMCx7Im9mZnNldCI6LTF9XSxbMCwyLCJ0X1xcbWF0aGNhbHtYfSIsMix7Im9mZnNldCI6MX1dXQ==
 		\[\begin{tikzcd}
 			{|\mathcal{X}_2(\bar{k})|} && {|\mathcal{X}_1(\bar{k})|} \\
 			{X_2(\bar{k})} && {X_1(\bar{k})} \\
 			& {(X_1\times X_1)(\bar{k})}
-			\arrow["{p_1}", shift left, from=1-1, to=1-3]
-			\arrow["{p_2}"', shift right, from=1-1, to=1-3]
+			\arrow["{s_\mathcal{X}}", shift left, from=1-1, to=1-3]
+			\arrow["{t_\mathcal{X}}"', shift right, from=1-1, to=1-3]
 			\arrow["{\pi_2}", from=1-1, to=2-1]
 			\arrow["{\pi_1}"', from=1-3, to=2-3]
 			\arrow["t"', shift right, from=2-1, to=2-3]
@@ -640,6 +642,21 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 		Hence, $(\tilde{v}, w): \xi = (a, b, \alpha) \xrightarrow{\sim} (a', b', \beta) = \xi'$ is an isomorphism in $\mathcal{X}_2(\bar{k})$. But the image of this isomorphism under $\pi_2$ is just $\operatorname{id}_r$, since $X_2(\bar{k})$ is a set, i.e. a discrete groupoid, which means $r = r'$.
 	\end{proof}
 	
-	Now we apply \ref{lem:quotient-by-etale-eq} and obtain a sheaf $X_0$ fitting into Diagram \ref{eq:groupoid-moduli-space}.
+	Now we apply \ref{lem:quotient-by-etale-eq} and obtain an algebraic space $X_0$ fitting into Diagram \ref{eq:groupoid-moduli-space} and equalizing $s,t$. Denote by $q: X_1 \to X_0$ the quotient map. By commutativity of  \ref{eq:groupoid-moduli-space} we obtain 
+	\begin{align*}
+		q \pi_1 s_\mathcal{X} = q s \pi_2 = q t \pi_2 = q\pi_1 t_\mathcal{X}.
+	\end{align*}
+	
+	By $X_0$ being an \etale\ sheaf, we obtain an equalizer digramm
+	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXEhvbXtcXG1hdGhjYWx7WH1fMCwgWF8wfSJdLFsxLDAsIlxcSG9te1xcbWF0aGNhbHtYXzF9LCBYXzB9Il0sWzIsMCwiXFxIb217XFxtYXRoY2Fse1hfMn0sIFhfMH0iXSxbMCwxLCJnIl0sWzEsMiwidF9cXG1hdGhjYWx7WH1eKiIsMix7Im9mZnNldCI6MX1dLFsxLDIsInNfXFxtYXRoY2Fse1h9XioiLDAseyJvZmZzZXQiOi0xfV1d
+	\[\begin{tikzcd}
+		{\Hom(\mathcal{X}_0, X_0)} & {\Hom(\mathcal{X}_1, X_0)} & {\Hom(\mathcal{X}_2, X_0),}
+		\arrow["g", from=1-1, to=1-2]
+		\arrow["{t_\mathcal{X}^*}"', shift right, from=1-2, to=1-3]
+		\arrow["{s_\mathcal{X}^*}", shift left, from=1-2, to=1-3]
+	\end{tikzcd}\]
+	and hence, applied to $q\pi_1: \mathcal{X}_1 \to X_0$, we obtain a unique morphism $\pi_0:\mathcal{X}_0 \to X_0$ letting the right square of diagram \ref{eq:groupoid-moduli-space}.
+	We are now left to prove, that $\pi_0$ is a coarse moduli space.
+	This follows by Lemma \ref{lem:coarse-moduli-etale-local} applied to the \etale\ cover $X_1 \to X_0$, stating that being a coarse moduli space is local on the target.
 	
 \end{proof}

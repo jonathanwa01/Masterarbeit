@@ -42,7 +42,7 @@ We now deduce from fpqc descent for quasi-coherent sheaves that every scheme def
 	\[
 	h_X\cong\Hom_{\Ring}(A,-)\circ\Gamma(-, \mathcal{O}_{(-)}).
 	\]
-	The representable functor $\Hom_{\Ring}(A,-):\Ring\to\Set$ preserves all limits, in particular equalizers and by the adjunction$\Gamma \dashv \Spec$, $\Gamma$ preserves all limites. Hence, applying $h_X$ it to the equalizer of Corollary \ref{cor:structure-sheaf-fpqc} shows that
+	The representable functor $\Hom_{\Ring}(A,-):\Ring\to\Set$ preserves all limits, in particular equalizers and by the adjunction $\Gamma \dashv \Spec$, $\Gamma$ preserves all limites. Hence, applying $h_X$ it to the equalizer of Corollary \ref{cor:structure-sheaf-fpqc} shows that
 	\[
 	h_X(T)\longrightarrow h_X(U)\rightrightarrows h_X(U\times_TU)
 	\]
@@ -109,18 +109,18 @@ For a general target, the only additional input is that open subsets descend alo
 	\mathrm{pr}_2^{-1}(U_i).
 	\]
 	By Lemma~\ref{lem:descent-open-subsets}, there is a unique
-	open subset $T_i\subseteq T$ such that $p^{-1}(T_i)=U_i$. Hence, the following diagram is cartesian:
-	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJVX2kiXSxbMCwxLCJVIl0sWzEsMCwiVF9pIl0sWzEsMSwiVCJdLFsyLDMsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsMSwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMCwyLCJwX2kiXSxbMSwzLCJwIiwyXV0=
+	open subset $T_i\subseteq T$ such that $p^{-1}(T_i)=U_i$. Hence, the following diagram is cartesian and $p_i:U_i\to T_i$ is an fpqc covering:
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJVX2kiXSxbMCwxLCJVIl0sWzEsMCwiVF9pIl0sWzEsMSwiVCJdLFsyLDMsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsMSwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMCwyLCJwX2kiXSxbMSwzLCJwIiwyXSxbMCwzLCIiLDAseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dXQ==
 	\[\begin{tikzcd}
 		{U_i} & {T_i} \\
 		U & T
 		\arrow["{p_i}", from=1-1, to=1-2]
 		\arrow[hook, from=1-1, to=2-1]
+		\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
 		\arrow[hook, from=1-2, to=2-2]
 		\arrow["p"', from=2-1, to=2-2]
 	\end{tikzcd}\]
-	Hence, $p_i:U_i\to T_i$ is an fpqc covering. Moreover, the $T_i$ cover $T$: For every $t\in T$, surjectivity of $p$ gives a point $u\in U$ over $t$,
-	and $u\in U_i$ for some $i$, whence $t\in T_i$.
+	Moreover, the $T_i$ cover $T$, since for every $t\in T$, surjectivity of $p$ gives a point $u\in U$ over $t$, and $u\in U_i$ for some $i$, i.e. $t\in T_i$.
 	
 	Write $f_i:U_i\to X_i$ for the factorization of $f|_{U_i}$
 	through $X_i$:
@@ -141,7 +141,7 @@ For a general target, the only additional input is that open subsets descend alo
 	U_i\times_{T_i}U_i
 	\cong (U\times_T U)\times_T T_i,
 	\]
-	and hence the following diagram is commutes:
+	and hence the following diagram commutes:
 	% https://q.uiver.app/#q=WzAsNixbMCwxLCJVXFx0aW1lc19UIFUiXSxbMSwxLCJVIl0sWzIsMSwiVCJdLFsyLDAsIlRfaSJdLFsxLDAsIlVfaSJdLFswLDAsIlVfaVxcdGltZXNfe1RfaX1VX2kiXSxbMCwxLCJcXG1hdGhybXtwcn1fMSIsMCx7Im9mZnNldCI6LTF9XSxbMCwxLCJcXG1hdGhybXtwcn1fMiIsMix7Im9mZnNldCI6MX1dLFsxLDIsInAiLDJdLFszLDJdLFs0LDFdLFs0LDNdLFs1LDBdLFs1LDQsIlxcbWF0aHJte3ByfV8xIiwwLHsib2Zmc2V0IjotMX1dLFs1LDQsIlxcbWF0aHJte3ByfV8yIiwyLHsib2Zmc2V0IjoxfV1d
 	\[\begin{tikzcd}
 		{U_i\times_{T_i}U_i} & {U_i} & {T_i} \\
@@ -157,12 +157,11 @@ For a general target, the only additional input is that open subsets descend alo
 		\arrow["p"', from=2-2, to=2-3]
 	\end{tikzcd}\]
 	
-	Restricting the compatibility condition (\ref{eq:compability-condition}) for $f$ therefore
-	gives
+	Restricting the compatibility condition (\ref{eq:compability-condition}) for $f$ along $U_i \hookrightarrow U$ therefore gives
 	\[
-	\iota_i\circ f_i\circ \mathrm{pr}_1
-	=
-	\iota_i\circ f_i\circ \mathrm{pr}_2.
+	\iota_i\circ f_i\circ \mathrm{pr}_1 = f_{\mid U_i} \circ \mathrm{pr}_1
+	= f_{\mid U_i} \circ \mathrm{pr}_2
+	= \iota_i\circ f_i\circ \mathrm{pr}_2.
 	\]
 	As $\iota_i$ is a monomorphism, this implies
 	\[
@@ -176,31 +175,35 @@ For a general target, the only additional input is that open subsets descend alo
 	\]
 	
 	This all fits into the following commutative diagram:
-	% https://q.uiver.app/#q=WzAsOCxbMSwxLCJVX2kiXSxbMSwyLCJVIl0sWzMsMCwiVF9pIl0sWzMsMSwiVCJdLFsyLDIsIlgiXSxbMiwxLCJYX2kiXSxbMCwxLCJVX2lcXHRpbWVzX3tUX2l9VV9pIl0sWzAsMiwiVVxcdGltZXNfVCBVIl0sWzAsMSwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMCw1LCJmX2kiLDJdLFsxLDQsImYiLDJdLFswLDIsInBfaSJdLFsxLDMsInAiLDAseyJsYWJlbF9wb3NpdGlvbiI6ODB9XSxbNSw0LCJcXGlvdGFfaSIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzYsMCwicHJfMiIsMix7Im9mZnNldCI6MX1dLFs3LDEsInByXzEiLDAseyJvZmZzZXQiOi0xfV0sWzYsN10sWzIsNSwiZ19pIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzYsMCwicHJfMSIsMCx7Im9mZnNldCI6LTF9XSxbNywxLCJwcl8yIiwyLHsib2Zmc2V0IjoxfV0sWzIsMywiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XV0=
-	\[\begin{tikzcd}
-		&&& {T_i} \\
-		{U_i\times_{T_i}U_i} & {U_i} & {X_i} & T \\
-		{U\times_T U} & U & X
-		\arrow["{g_i}", dashed, from=1-4, to=2-3]
-		\arrow[hook, from=1-4, to=2-4]
-		\arrow["{pr_2}"', shift right, from=2-1, to=2-2]
-		\arrow["{pr_1}", shift left, from=2-1, to=2-2]
-		\arrow[from=2-1, to=3-1]
-		\arrow["{p_i}", from=2-2, to=1-4]
-		\arrow["{f_i}"', from=2-2, to=2-3]
-		\arrow[hook, from=2-2, to=3-2]
-		\arrow["{\iota_i}", hook, from=2-3, to=3-3]
-		\arrow["{pr_1}", shift left, from=3-1, to=3-2]
-		\arrow["{pr_2}"', shift right, from=3-1, to=3-2]
-		\arrow["p"{pos=0.8}, from=3-2, to=2-4]
-		\arrow["f"', from=3-2, to=3-3]
-	\end{tikzcd}\]
+	
+	\begin{equation}\label{diag:representable-sheaf-zariski-descent}
+		% https://q.uiver.app/#q=WzAsOCxbMSwxLCJVX2kiXSxbMSwyLCJVIl0sWzMsMCwiVF9pIl0sWzMsMSwiVCJdLFsyLDIsIlgiXSxbMiwxLCJYX2kiXSxbMCwxLCJVX2lcXHRpbWVzX3tUX2l9VV9pIl0sWzAsMiwiVVxcdGltZXNfVCBVIl0sWzAsMSwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMCw1LCJmX2kiLDJdLFsxLDQsImYiLDJdLFswLDIsInBfaSJdLFsxLDMsInAiLDAseyJsYWJlbF9wb3NpdGlvbiI6ODB9XSxbNSw0LCJcXGlvdGFfaSIsMCx7ImxhYmVsX3Bvc2l0aW9uIjo3MCwic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbNiwwLCJwcl8yIiwyLHsib2Zmc2V0IjoxfV0sWzcsMSwicHJfMSIsMCx7Im9mZnNldCI6LTF9XSxbNiw3XSxbMiw1LCJnX2kiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbNiwwLCJwcl8xIiwwLHsib2Zmc2V0IjotMX1dLFs3LDEsInByXzIiLDIseyJvZmZzZXQiOjF9XSxbMiwzLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFszLDQsImciLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+		\begin{tikzcd}
+			&&& {T_i} \\
+			{U_i\times_{T_i}U_i} & {U_i} & {X_i} & T \\
+			{U\times_T U} & U & X
+			\arrow["{g_i}", dashed, from=1-4, to=2-3]
+			\arrow[hook, from=1-4, to=2-4]
+			\arrow["{pr_2}"', shift right, from=2-1, to=2-2]
+			\arrow["{pr_1}", shift left, from=2-1, to=2-2]
+			\arrow[from=2-1, to=3-1]
+			\arrow["{p_i}", from=2-2, to=1-4]
+			\arrow["{f_i}"', from=2-2, to=2-3]
+			\arrow[hook, from=2-2, to=3-2]
+			\arrow["{\iota_i}"{pos=0.7}, hook, from=2-3, to=3-3]
+			\arrow["g", dashed, from=2-4, to=3-3]
+			\arrow["{pr_1}", shift left, from=3-1, to=3-2]
+			\arrow["{pr_2}"', shift right, from=3-1, to=3-2]
+			\arrow["p"{pos=0.8}, from=3-2, to=2-4]
+			\arrow["f"', from=3-2, to=3-3]
+		\end{tikzcd}
+	\end{equation}
 	
 	We now verify that the morphisms
 	\[
 	\widetilde g_i:=\iota_i\circ g_i:T_i\to X
 	\]
-	agree on overlaps to glue them by Zariski descent.
+	agree on overlaps to glue them to the morphism $g: T\to X$ fitting into diagram \ref{diag:representable-sheaf-zariski-descent} by Zariski descent.
 	For $i,j\in I$, let
 	\[
 	T_{ij}:=T_i\cap T_j,
@@ -233,7 +236,7 @@ For a general target, the only additional input is that open subsets descend alo
 	=
 	\widetilde g_i\circ p_i
 	=
-	j_i\circ f_i
+	\iota_i\circ f_i
 	=
 	f|_{U_i}.
 	\]
