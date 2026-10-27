@@ -22,9 +22,10 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 
 
 \begin{lemma}[Affine quotient by a finite group]\label{lem:affine-quotient-finite-group}
+	(\cite[Theorem 4.3.6. (1)]{alper2026stacks})
 	Let $G$ be a finite group acting on an affine scheme $\Spec(A)$. Then the canonical morphism
 	\[
-	\pi : \Spec(A) \longrightarrow \Spec(A^G)
+	\Spec(A) \longrightarrow \Spec(A^G)
 	\]
 	induces a morphism of stacks
 	\[
@@ -94,12 +95,6 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	\end{tikzcd}\]
 	is $2$-cartesian, and both horizontal morphisms are étale.
 \end{lemma}
-
-
-\begin{lemma}[Coarse moduli spaces are stable under pullback]
-	Let $\pi:\mathcal{X} \to X$ be a coarse moduli space and let $p:U \to X$ be an \etale\ morphism of algebraic spaces. Then the base change $U\times_X \mathcal{X} \to U$ of $\pi$ along $p$ is a coarse moduli space.
-\end{lemma}
-
 
 
 \begin{lemma}\label{lem:coarse-moduli-etale-local}\label{lem:coarse-moduli-space-local-on-target}
@@ -251,6 +246,34 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	coincide.
 \end{proof}
 
+
+\begin{lemma}\label{lem:invariants-flat-base-change}
+	(\cite[Lemma 4.2.4]{alper2026stacks})
+	Let $G$ be a finite abstract group acting on an affine scheme $\Specof{A}$ and let $A^G \to B$ be a flat ring morphism. Then the action of $G$ on $\Specof{A}$ induces an action on $\Spec(B\times_{A^G} A)$ and $(B\times_{A^G} A)^G = B$.
+\end{lemma}
+
+\begin{lemma}\label{lem:coarse-moduli-flat-base-change}
+	(\cite[Theorem 4.3.6. (1)]{alper2026stacks})
+	Let $G$ be a finite abstract group acting on an affine scheme $\Specof{A}$ and let $\pi: [\Specof{A} / G] \to \Specof{A^G}$ be the coarse moduli space by Lemma \ref{lem:coarse-moduli-etale-local}. 
+	Then the base change of $\pi$ along any flat morphism $X' \to \Specof{A^G}$ of algebraic spaces is a corase moduli space:
+	% https://q.uiver.app/#q=WzAsNCxbMSwwLCJbXFxTcGVjb2Z7QX0gL0ddIl0sWzEsMSwiXFxTcGVjb2Z7QV5HfSJdLFswLDEsIlgnIl0sWzAsMCwiWCdcXHRpbWVzX3tcXFNwZWNvZntBXkd9fVtcXFNwZWNvZntBfSAvR10iXSxbMiwxXSxbMCwxLCJcXHBpIl0sWzMsMF0sWzMsMl1d
+	\[\begin{tikzcd}
+		{X'\times_{\Specof{A^G}}[\Specof{A} /G]} & {[\Specof{A} /G]} \\
+		{X'} & {\Specof{A^G}}
+		\arrow[from=1-1, to=1-2]
+		\arrow[from=1-1, to=2-1]
+		\arrow["\pi", from=1-2, to=2-2]
+		\arrow[from=2-1, to=2-2]
+	\end{tikzcd}\]
+\end{lemma}
+
+\begin{proof}
+	By Lemma \ref{lem:coarse-moduli-etale-local} being a coarse moduli space is \etale\ local on the target. Hence, without loss of generality we may assume $X' = \Specof{B}$ to be affine. The flat morphism $X' \to \Specof{A^G}$ is induced by the flat morphism $A^G \to B$. 
+	UNSURE: \ref{lem:etale-descent-finite-group-quotients} induces a $G$ action on $X'$.
+	TODO: FINISH ARGUMENT
+	Now by Lemma \ref{lem:invariants-flat-base-change} 
+
+\end{proof}
 
 \section{Keel Mori Theorem}
 
@@ -453,7 +476,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 		\arrow["{t_\mathcal{X}}"', shift right, from=1-1, to=1-2]
 	\end{tikzcd}\]
 	Since $\mathcal{X}_0 \hookrightarrow \mathcal{X}$ is an open immersion, $\mathcal{X}_2 \cong \mathcal{X}_1\times_{\mathcal{X}}\mathcal{X}_1$.
-	Since $g$ is affine, $p_1,p_2$ are affine. Hence, pulling back the standard $G$ torsor $\Specof{A_1} \to \mathcal{X}_1$ along $p_1$ yields:
+	Since $g$ is affine, $s_\mathcal{X}, t_\mathcal{X}$ are affine. Hence, pulling back the standard $G$ torsor $\Specof{A_1} \to \mathcal{X}_1$ along $s_\mathcal{X}$ yields:
 	% https://q.uiver.app/#q=WzAsNixbMCwxLCJcXG1hdGhjYWx7WH1fMiJdLFsxLDEsIlxcbWF0aGNhbHtYfV8xIl0sWzAsMiwiXFxtYXRoY2Fse1h9XzEiXSxbMSwyLCJcXG1hdGhjYWx7WH1fMCJdLFsxLDAsIlxcU3BlY3tBXzF9Il0sWzAsMCwiXFxTcGVje0FfMn0iXSxbMCwxLCJwXzEiXSxbMCwyLCJwXzIiLDJdLFsyLDMsImciLDJdLFsxLDMsImciXSxbMCwzLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dLFs0LDFdLFs1LDRdLFs1LDBdLFs1LDEsIiIsMCx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV1d
 	\[\begin{tikzcd}
 		{\Spec{A_2}} & {\Spec{A_1}} \\
@@ -517,16 +540,18 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	\end{equation}
 	
 	Now since $X_1$ is a coarse moduli space, the diagonal $e_\mathcal{X} = \Delta: \mathcal{X}_1 \to \mathcal{X}_2$ yields the identity $e_X:X_1 \to X_2$, such that $e_X\pi_1 = e_\mathcal{X}\pi_2$. 
-	Similarily the changing the factors yields a morphism $i_\mathcal{X} = (t_\mathcal{X}, s_\mathcal{X}):\mathcal{X}_2 \to \mathcal{X}_2$, which descends to the inverse morphism $i_X: X_2\to X_2$.
+	Similarily changing the factors yields a morphism $i_\mathcal{X} = (t_\mathcal{X}, s_\mathcal{X}):\mathcal{X}_2 \to \mathcal{X}_2$, which descends to the inverse morphism $i_X: X_2\to X_2$.
 	For the composition morphism let $P := X_2\times_{t, X_1, s} X_2$ and $\mathcal{P} := \mathcal{X}_2 \times_{t_\mathcal{X}, \mathcal{X}_1, s_\mathcal{X}} \mathcal{X}_2$. Since the left square of \ref{eq:groupoid-moduli-space} is cartesian and by associativity of the fibre product, we optain a natural isomorphism:
 	\begin{align*}
 			\mathcal{P} &\cong \mathcal{X}_2 \times_{t_\mathcal{X}, \mathcal{X}_1, s_\mathcal{X}} \mathcal{X}_2 \\
 			&\cong \mathcal{X}_2\times_{t_\mathcal{X}, \mathcal{X}_1} (\mathcal{X}_1\times_{\pi_1, X_1, s} X_2)  \\
 			&\cong \mathcal{X}_2 \times_{t\pi_2, X_1, s} X_2 \\
+			&\cong  \mathcal{X}_2 \times_{t\pi_2, X_1, s\operatorname{pr}_1} (X_2 \times_{X_2} X_2) \\
+			&\cong \mathcal{X}_2 \times_{\pi_2, X_2, \operatorname{pr}_1} (X_2 \times_{t, X_1, s} X_2) \\
 			&\cong \mathcal{X}_2 \times_{\pi_2, X_2, \operatorname{pr}_1} P
 	\end{align*}
 	as visualized in the following diagram:
-	% https://q.uiver.app/#q=WzAsOCxbMCwzLCJYXzIiXSxbMiwzLCJYXzEiXSxbMCwxLCJcXG1hdGhjYWx7WH1fMiJdLFsyLDEsIlxcbWF0aGNhbHtYfV8xIl0sWzEsMCwiXFxtYXRoY2Fse1B9Il0sWzEsMiwiUCJdLFszLDAsIlxcbWF0aGNhbHtYfV8yIl0sWzMsMiwiWF8yIl0sWzIsMF0sWzMsMV0sWzAsMSwicyIsMl0sWzIsMywic19cXG1hdGhjYWx7WH0iLDIseyJsYWJlbF9wb3NpdGlvbiI6NzB9XSxbNCwyXSxbNiwzLCJ0X1xcbWF0aGNhbHtYfSJdLFs0LDZdLFs0LDVdLFs2LDcsIlxccGlfMiJdLFs1LDcsIlxcb3BlcmF0b3JuYW1le3ByfV8xIiwwLHsibGFiZWxfcG9zaXRpb24iOjcwfV0sWzcsMSwidCJdLFs1LDBdXQ==
+	% https://q.uiver.app/#q=WzAsOCxbMCwzLCJYXzIiXSxbMiwzLCJYXzEiXSxbMCwxLCJcXG1hdGhjYWx7WH1fMiJdLFsyLDEsIlxcbWF0aGNhbHtYfV8xIl0sWzEsMCwiXFxtYXRoY2Fse1B9Il0sWzEsMiwiUCJdLFszLDAsIlxcbWF0aGNhbHtYfV8yIl0sWzMsMiwiWF8yIl0sWzIsMF0sWzMsMSwiXFxwaV8xIiwyLHsibGFiZWxfcG9zaXRpb24iOjcwfV0sWzAsMSwicyIsMl0sWzIsMywic19cXG1hdGhjYWx7WH0iLDIseyJsYWJlbF9wb3NpdGlvbiI6NzB9XSxbNCwyXSxbNiwzLCJ0X1xcbWF0aGNhbHtYfSJdLFs0LDZdLFs0LDVdLFs2LDcsIlxccGlfMiJdLFs1LDcsIlxcb3BlcmF0b3JuYW1le3ByfV8xIiwwLHsibGFiZWxfcG9zaXRpb24iOjcwfV0sWzcsMSwidCJdLFs1LDBdXQ==
 	\[\begin{tikzcd}
 		& {\mathcal{P}} && {\mathcal{X}_2} \\
 		{\mathcal{X}_2} && {\mathcal{X}_1} \\
@@ -539,7 +564,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 		\arrow["{\pi_2}", from=1-4, to=3-4]
 		\arrow["{s_\mathcal{X}}"'{pos=0.7}, from=2-1, to=2-3]
 		\arrow[from=2-1, to=4-1]
-		\arrow[from=2-3, to=4-3]
+		\arrow["{\pi_1}"'{pos=0.7}, from=2-3, to=4-3]
 		\arrow["{\operatorname{pr}_1}"{pos=0.7}, from=3-2, to=3-4]
 		\arrow[from=3-2, to=4-1]
 		\arrow["t", from=3-4, to=4-3]
@@ -557,7 +582,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 		\arrow["{\operatorname{pr}_1}", from=2-1, to=2-2]
 	\end{tikzcd}\]
 
-	Since $\operatorname{pr}_1$ is \etale, by \cite[Theorem~3.1(1)]{ConradKeelMori}  \etale\ base change of the coarse moduli space $\pi_2$ yields a coarse moduli space $\pi_\mathcal{P}$.
+	Since $\operatorname{pr}_1$ is \etale, in particular flat, by Lemma \ref{lem:coarse-moduli-flat-base-change} flat base change of the coarse moduli space $\pi_2$ yields a coarse moduli space $\pi_\mathcal{P}$, since $\pi_2:\mathcal{X}_2 = [\Specof{A_2} / G] \to \Specof{A_2^G}$ is a coarse moduli space.
 	Now multiplication $m_\mathcal{X}: \mathcal{P} \to \mathcal{X}_2$ descends down to $m_X: P \to X_2$, such that $m_x\pi_P = \pi_2 m_\mathcal{X}$, by $P$ being a coarse moduli space.
 	This induces an \etale\ groupoid structure
 	% https://q.uiver.app/#q=WzAsMixbMCwwLCJYXzIiXSxbMSwwLCJYXzEiXSxbMCwxLCJ0IiwyLHsib2Zmc2V0IjoxfV0sWzAsMSwicyIsMCx7Im9mZnNldCI6LTF9XV0=
