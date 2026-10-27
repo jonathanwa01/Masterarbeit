@@ -582,7 +582,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 		\arrow["{\operatorname{pr}_1}", from=2-1, to=2-2]
 	\end{tikzcd}\]
 
-	Since $\operatorname{pr}_1$ is \etale, in particular flat, by Lemma \ref{lem:coarse-moduli-flat-base-change} flat base change of the coarse moduli space $\pi_2$ yields a coarse moduli space $\pi_\mathcal{P}$, since $\pi_2:\mathcal{X}_2 = [\Specof{A_2} / G] \to \Specof{A_2^G}$ is a coarse moduli space.
+	Since $\operatorname{pr}_1$ is \etale, in particular flat, by Lemma \ref{lem:coarse-moduli-flat-base-change} flat base change of the coarse moduli space $\pi_2$ yields a coarse moduli space $\pi_\mathcal{P}$.
 	Now multiplication $m_\mathcal{X}: \mathcal{P} \to \mathcal{X}_2$ descends down to $m_X: P \to X_2$, such that $m_x\pi_P = \pi_2 m_\mathcal{X}$, by $P$ being a coarse moduli space.
 	This induces an \etale\ groupoid structure
 	% https://q.uiver.app/#q=WzAsMixbMCwwLCJYXzIiXSxbMSwwLCJYXzEiXSxbMCwxLCJ0IiwyLHsib2Zmc2V0IjoxfV0sWzAsMSwicyIsMCx7Im9mZnNldCI6LTF9XV0=
@@ -672,11 +672,17 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 		q \pi_1 s_\mathcal{X} = q s \pi_2 = q t \pi_2 = q\pi_1 t_\mathcal{X}.
 	\end{align*}
 	
-	By $X_0$ being an \etale\ sheaf, we obtain an equalizer digramm
-	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXEhvbXtcXG1hdGhjYWx7WH1fMCwgWF8wfSJdLFsxLDAsIlxcSG9te1xcbWF0aGNhbHtYXzF9LCBYXzB9Il0sWzIsMCwiXFxIb217XFxtYXRoY2Fse1hfMn0sIFhfMH0iXSxbMCwxLCJnIl0sWzEsMiwidF9cXG1hdGhjYWx7WH1eKiIsMix7Im9mZnNldCI6MX1dLFsxLDIsInNfXFxtYXRoY2Fse1h9XioiLDAseyJvZmZzZXQiOi0xfV1d
+	Now for every scheme $T$ and every $x\in \mathcal{X}_0(T)$ let $V:= T\times_{\mathcal{X_0}} \mathcal{X}_1$, where $x:T \to \mathcal{X}_0$ via Yoneda.
+	Since $g$ is \etale\, surjective and representable by algebraic spaces, $V\to T$ is an an \etale\ surjection of algebraic spaces. Now chosing an \etale\ cover $\{T_i \to V\}_i$ yields an \etale\ cover $\{T_i \to T\}_i$ after composing with $V\to T$.
+	
+	TODO: Finish argument
+	
+	
+	By $X_0$ being an \etale\ sheaf and by $g$ being an \etale\ surjection, we obtain an equalizer digramm
+	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXEhvbXtcXG1hdGhjYWx7WH1fMCwgWF8wfSJdLFsxLDAsIlxcSG9te1xcbWF0aGNhbHtYXzF9LCBYXzB9Il0sWzIsMCwiXFxIb217XFxtYXRoY2Fse1hfMn0sIFhfMH0iXSxbMCwxLCJnXioiXSxbMSwyLCJ0X1xcbWF0aGNhbHtYfV4qIiwyLHsib2Zmc2V0IjoxfV0sWzEsMiwic19cXG1hdGhjYWx7WH1eKiIsMCx7Im9mZnNldCI6LTF9XV0=
 	\[\begin{tikzcd}
-		{\Hom(\mathcal{X}_0, X_0)} & {\Hom(\mathcal{X}_1, X_0)} & {\Hom(\mathcal{X}_2, X_0),}
-		\arrow["g", from=1-1, to=1-2]
+		{\Hom{\mathcal{X}_0, X_0}} & {\Hom{\mathcal{X_1}, X_0}} & {\Hom{\mathcal{X_2}, X_0}}
+		\arrow["{g^*}", from=1-1, to=1-2]
 		\arrow["{t_\mathcal{X}^*}"', shift right, from=1-2, to=1-3]
 		\arrow["{s_\mathcal{X}^*}", shift left, from=1-2, to=1-3]
 	\end{tikzcd}\]
