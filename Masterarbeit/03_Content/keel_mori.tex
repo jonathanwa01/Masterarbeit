@@ -673,50 +673,224 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	\end{align*}
 	
 	
-	Claim: The following diagram is an equalizer:
-	TODO: Check manually
-	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXEhvbShcXG1hdGhjYWx7WH1fMCwgWF8wKSJdLFsxLDAsIlxcSG9tKFxcbWF0aGNhbHtYfV8xLCBYXzApIl0sWzIsMCwiXFxIb20oXFxtYXRoY2Fse1h9XzIsIFhfMCkiXSxbMCwxLCJnXioiXSxbMSwyLCJ0X1xcbWF0aGNhbHtYfV4qIiwyLHsib2Zmc2V0IjoxfV0sWzEsMiwic19cXG1hdGhjYWx7WH1eKiIsMCx7Im9mZnNldCI6LTF9XV0=
+	
+	We will now use \etale\ descent to construct a morphism $\pi_0:\mathcal{X}_0 \to X_0$.
+	Set $\alpha = q\pi_1: \mathcal{X}_1 \to X_0$. on the overlaps we have $\alpha s_\mathcal{X} = \alpha t_\mathcal{X}$.
+	Now for every scheme $T$ and every $\xi\in \mathcal{X}_0(T)$ let $V:= T\times_{\mathcal{X}_0} \mathcal{X}_1$, where $\xi:T \to \mathcal{X}_0$ via Yoneda.
+	Since $g$ is \etale\, surjective and representable by algebraic spaces, $V\to T$ is an an \etale\ surjection of algebraic spaces. Now chosing an \etale\ cover of schemes $\{T_i \to V\}_i$ yields an \etale\ cover $\{T_i \to T\}_i$ after composing with $V\to T$. Write $u_i: T_i \to T$and $l_i: T_i \to \mathcal{X}_1$ for the composite and consider the following diagram:
+	% https://q.uiver.app/#q=WzAsNSxbMSwyLCJcXG1hdGhjYWx7WH1fMCJdLFswLDIsIlxcbWF0aGNhbHtYfV8xIl0sWzEsMSwiVCJdLFswLDEsIlYiXSxbMCwwLCJUX2kiXSxbMiwwLCJ4Il0sWzEsMCwiZyIsMl0sWzMsMl0sWzMsMV0sWzQsM10sWzQsMiwidV9pIl0sWzMsMCwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XSxbNCwxLCJsX2kiLDIseyJjdXJ2ZSI6Mn1dXQ==
+	\[
+	\begin{tikzcd}
+		{T_i} & \\
+		V & T \\
+		{\mathcal{X}_1} & {\mathcal{X}_0}
+		\arrow[from=1-1, to=2-1]
+		\arrow["{u_i}", from=1-1, to=2-2]
+		\arrow["{l_i}"', bend right=30, from=1-1, to=3-1]
+		\arrow[from=2-1, to=2-2]
+		\arrow[from=2-1, to=3-1]
+		\arrow["\ulcorner"{anchor=center, pos=0.125},
+		draw=none, from=2-1, to=3-2]
+		\arrow["\xi", from=2-2, to=3-2]
+		\arrow["g"', from=3-1, to=3-2]
+	\end{tikzcd}
+	\]
+
+	By definition of the $2$-fiber product we obtain isomorphisms
+	\[
+	\theta_i: g\circ l_i \xrightarrow{\simeq} \xi\circ u_i.
+	\]
+	Set
+	\[
+	a_i:=\alpha\circ l_i:T_i\to X_0.
+	\]
+	
+	For every pair $i,j$, put $T_{ij}:=T_i\times_T T_j$ and
+	write $p_i:T_{ij}\to T_i$ and $p_j:T_{ij}\to T_j$ for
+	the projections. The above isomorphisms $\theta_i$ induce an isomorphism
+	\[
+	g\circ l_i\circ p_i
+	\simeq \xi \circ u_i \circ p_i 
+	\simeq \xi \circ u_j \circ p_j
+	\simeq
+	g\circ l_j\circ p_j.
+	\]
+	
+	% https://q.uiver.app/#q=WzAsOCxbMSwzLCJcXG1hdGhjYWx7WH1fMCJdLFswLDMsIlxcbWF0aGNhbHtYfV8xIl0sWzEsMiwiVCJdLFswLDIsIlYiXSxbMCwxLCJUX2kiXSxbMSw0LCJYXzAiXSxbMCw0LCJYXzEiXSxbMCwwLCJUX3tpan0iXSxbMiwwLCJcXHhpIl0sWzEsMCwiZyIsMl0sWzMsMl0sWzMsMV0sWzQsM10sWzQsMiwidV9pIl0sWzMsMCwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XSxbNCwxLCJsX2kiLDIseyJjdXJ2ZSI6Mn1dLFswLDUsIiIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFsxLDYsIlxccGlfMSIsMl0sWzYsNSwicSIsMl0sWzcsNCwicF9pIiwyXV0=
+	\[
+	\begin{tikzcd}
+		{T_{ij}} & \\
+		{T_i} & \\
+		V & T \\
+		{\mathcal{X}_1} & {\mathcal{X}_0}
+		\arrow["{p_i}"', from=1-1, to=2-1]
+		\arrow[from=2-1, to=3-1]
+		\arrow["{u_i}", from=2-1, to=3-2]
+		\arrow["{l_i}"', bend right=30, from=2-1, to=4-1]
+		\arrow[from=3-1, to=3-2]
+		\arrow[from=3-1, to=4-1]
+		\arrow["\ulcorner"{anchor=center, pos=0.125},
+		draw=none, from=3-1, to=4-2]
+		\arrow["\xi", from=3-2, to=4-2]
+		\arrow["g"', from=4-1, to=4-2]
+	\end{tikzcd}
+	\]
+	
+	By the universal property of the $2$-fiber product, this determines
+	a morphism
+	\[
+	r_{ij}:T_{ij}\longrightarrow
+	\mathcal{X}_1\times_{\mathcal{X}_0}\mathcal{X}_1
+	=\mathcal{X}_2
+	\]
+	whose compositions with $s_{\mathcal X}$ and $t_{\mathcal X}$
+	are isomorphic to $l_i\circ p_i$ and $l_j\circ p_j$,
+	respectively.
+	
+	% https://q.uiver.app/#q=WzAsNSxbMSwxLCJcXG1hdGhjYWx7WH1fMiJdLFsyLDIsIlxcbWF0aGNhbHtYfV8wIl0sWzIsMSwiXFxtYXRoY2Fse1h9XzEiXSxbMSwyLCJcXG1hdGhjYWx7WH1fMSJdLFswLDAsIlRfe2lqfSJdLFszLDFdLFsyLDFdLFswLDIsInRfXFxtYXRoY2Fse1h9Il0sWzAsMywic19cXG1hdGhjYWx7WH0iLDJdLFs0LDAsInJfe2lqfSIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFs0LDMsInBfamxfaiIsMix7ImN1cnZlIjoyfV0sWzQsMiwicF9pbF9pIiwwLHsiY3VydmUiOi0yfV1d
+	\[
+	\begin{tikzcd}
+		{T_{ij}} && \\
+		& {\mathcal{X}_2} & {\mathcal{X}_1} \\
+		& {\mathcal{X}_1} & {\mathcal{X}_0}
+		\arrow["{r_{ij}}", dashed, from=1-1, to=2-2]
+		\arrow["{l_ip_i}", bend left=30, from=1-1, to=2-3]
+		\arrow["{l_jp_j}"', bend right=30, from=1-1, to=3-2]
+		\arrow["{t_\mathcal{X}}", from=2-2, to=2-3]
+		\arrow["{s_\mathcal{X}}"', from=2-2, to=3-2]
+		\arrow[from=2-3, to=3-3]
+		\arrow[from=3-2, to=3-3]
+	\end{tikzcd}
+	\]
+
+	Consequently,
+	\[
+	a_i\circ p_i
+	=
+	\alpha\circ s_{\mathcal X}\circ r_{ij}
+	=
+	\alpha\circ t_{\mathcal X}\circ r_{ij}
+	=
+	a_j\circ p_j.
+	\]
+	Here the isomorphisms become equalities after composition with
+	$\alpha$, since $X_0$ is a sheaf of sets, i.e. a discrete stack.
+	Since $X_0$ is an \etale\ sheaf, the $a_i: T_i \to X_0$ glue uniquely to an $a_\xi: T\to X_0$.
+	
+	This is welldefined: Chosing a different cover $\{T_i' \to V\}$, we consider the refinement $T_i'\times_T T_i$. Now by the same argument, using $\alpha s_\mathcal{X} = \alpha t_\mathcal{X}$, we see that the these two maps agree by the sheaf property of $X_0$.
+	
+	Now we check functoriality: Let $h: T' \to T$ be a morphism of schemes, then we want to show that 
+	\[
+		a_{h^*\xi}=a_\xi\circ h.
+	\]
+	We check this locally on an \etale\ cover of $t'$. So let $T_i' = T_i \times_T T'$, so the following diagram is cartesian:
+	% https://q.uiver.app/#q=WzAsNCxbMSwwLCJUX2kiXSxbMSwxLCJUIl0sWzAsMSwiVCciXSxbMCwwLCJUX2knIl0sWzAsMSwidV9pIl0sWzIsMSwiaCIsMl0sWzMsMiwidV9pJyIsMl0sWzMsMCwiaF9pIl0sWzMsMSwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XV0=
 	\[\begin{tikzcd}
-		{\Hom(\mathcal{X}_0, X_0)} & {\Hom(\mathcal{X}_1, X_0)} & {\Hom(\mathcal{X}_2, X_0)}
-		\arrow["{g^*}", from=1-1, to=1-2]
-		\arrow["{t_\mathcal{X}^*}"', shift right, from=1-2, to=1-3]
-		\arrow["{s_\mathcal{X}^*}", shift left, from=1-2, to=1-3]
+		{T_i'} & {T_i} \\
+		{T'} & T
+		\arrow["{h_i}", from=1-1, to=1-2]
+		\arrow["{u_i'}"', from=1-1, to=2-1]
+		\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+		\arrow["{u_i}", from=1-2, to=2-2]
+		\arrow["h"', from=2-1, to=2-2]
+	\end{tikzcd}\]
+	Now the $u_i'$ yield an \etale\ cover of $T'$. Pulling back $l_i$ along $h_i$ yields 
+	$l_i': T_i' \to \mathcal{X}_1$. By pulling back $\theta_i: gl_i \xrightarrow{\simeq} \xi u_i$ we obtain:
+	\[
+		g \circ l_i'  \simeq_{} gl_i h_i \simeq \xi u_i h_i \simeq h^*\xi u_i',
+	\]
+	where the last identification comes from $hu_i' = u_i h_i$.
+	
+	
+	% https://q.uiver.app/#q=WzAsNixbMiwzLCJcXG1hdGhjYWx7WH1fMCJdLFsyLDEsIlQiXSxbMywwLCJUJyJdLFswLDMsIlxcbWF0aGNhbHtYfV8xIl0sWzAsMSwiVF9pIl0sWzEsMCwiVF9pJyJdLFsyLDEsImgiLDJdLFsyLDAsImheKlxceGkiXSxbMSwwLCJcXHhpIiwyXSxbMywwLCJnIiwyXSxbNCwzLCJsX2kiLDJdLFs0LDEsInVfaSIsMl0sWzUsMywibF9pJyIsMix7ImxhYmVsX3Bvc2l0aW9uIjo2MH1dLFs1LDIsInVfaSciXSxbNSw0LCJoX2kiLDJdXQ==
+	\[\begin{tikzcd}[column sep=large, row sep=large]
+		& {T_i'} && {T'} \\
+		{T_i} && T \\
+		\\
+		{\mathcal{X}_1} && {\mathcal{X}_0}
+		\arrow["{u_i'}", from=1-2, to=1-4]
+		\arrow["{h_i}"', from=1-2, to=2-1]
+		\arrow["{l_i'}"'{pos=0.6}, from=1-2, to=4-1]
+		\arrow["h"', from=1-4, to=2-3]
+		\arrow["{h^*\xi}", from=1-4, to=4-3]
+		\arrow["{u_i}"', from=2-1, to=2-3]
+		\arrow["{l_i}"', from=2-1, to=4-1]
+		\arrow["\xi"', from=2-3, to=4-3]
+		\arrow["g"', from=4-1, to=4-3]
+	\end{tikzcd}
+	\quad \theta_i: g\circ l_i \xrightarrow{\simeq} \xi\circ u_i
+	\]
+
+	Hence, we get
+	\[
+		a_{h^*\xi}\circ u_i' = \alpha\circ l_i' = \alpha\circ l_i \circ h_i = \alpha_ \circ h_i = a_\xi \circ u_i \circ h_i = a_\xi \circ h \circ u_i'.
+	\] 
+	Since $\{T_i \to T\}$ is an \etale\ covering and $X_0$ is an \etale\ sheaf, we obtain $a_{h^*\xi} = a_{\xi}\circ h$ by uniqueness.
+		
+	Thus the assignments $\xi\mapsto a_\xi$ define a morphism
+	of stacks
+	\[
+	\pi_0:\mathcal{X}_0\longrightarrow X_0.
+	\]
+	By construction,
+	\[
+	\pi_0\circ g=\alpha=q\circ\pi_1.
+	\]
+	
+	
+	Next, we will prove, that the right square of diamgram \ref{eq:groupoid-moduli-space} is $2$-cartesian. 
+	Therefore consider the commutative cube:
+	
+	% https://q.uiver.app/#q=WzAsOCxbMCwzLCJYXzEiXSxbMiwzLCJYXzAiXSxbMywyLCJYXzEiXSxbMSwyLCJYXzIiXSxbMSwwLCJcXG1hdGhjYWx7WH1fMiJdLFswLDEsIlxcbWF0aGNhbHtYfV8xIl0sWzMsMCwiXFxtYXRoY2Fse1h9XzEiXSxbMiwxLCJcXG1hdGhjYWx7WH1fMCJdLFswLDFdLFszLDJdLFszLDBdLFsyLDFdLFs0LDNdLFs1LDBdLFs0LDVdLFs2LDJdLFs3LDFdLFs0LDZdLFs1LDddLFs2LDddXQ==
+	\[\begin{tikzcd}
+		& {\mathcal{X}_2} && {\mathcal{X}_1} \\
+		{\mathcal{X}_1} && {\mathcal{X}_0} \\
+		& {X_2} && {X_1} \\
+		{X_1} && {X_0}
+		\arrow[from=1-2, to=1-4]
+		\arrow[from=1-2, to=2-1]
+		\arrow[from=1-2, to=3-2]
+		\arrow[from=1-4, to=2-3]
+		\arrow[from=1-4, to=3-4]
+		\arrow[from=2-1, to=2-3]
+		\arrow[from=2-1, to=4-1]
+		\arrow[from=2-3, to=4-3]
+		\arrow[from=3-2, to=3-4]
+		\arrow[from=3-2, to=4-1]
+		\arrow[from=3-4, to=4-3]
+		\arrow[from=4-1, to=4-3]
 	\end{tikzcd}\]
 
-	\begin{proof}[Proof of claim]
-		Let $\varphi \in \Homof{\mathcal{X}_1}{X_0}$, such that $\varphi\circ s_\mathcal{X} = \varphi\circ t_\mathcal{X}$. We want to construct a morphism $\pi_0: \mathcal{X}_0 \to X_0$, such that $\pi_0 g = \varphi$.
-		
-		Now for every scheme $T$ and every $x\in \mathcal{X}_0(T)$ let $V:= T\times_{\mathcal{X}_0} \mathcal{X}_1$, where $x:T \to \mathcal{X}_0$ via Yoneda.
-		Since $g$ is \etale\, surjective and representable by algebraic spaces, $V\to T$ is an an \etale\ surjection of algebraic spaces. Now chosing an \etale\ cover $\{T_i \to V\}_i$ yields an \etale\ cover $\{T_i \to T\}_i$ after composing with $V\to T$.
-		Now by the description $2$-fibre products, the $x$ lift to $x_i: T_i \to \mathcal{X}_1$, such that $gx_1 \cong x\mid_{T_i}$
-		% https://q.uiver.app/#q=WzAsNSxbMSwyLCJcXG1hdGhjYWx7WH1fMCJdLFswLDEsIlYiXSxbMSwxLCJcXG1hdGhjYWx7WH1fMSJdLFswLDIsIlQiXSxbMCwwLCJUX2kiXSxbMiwwLCJnIl0sWzEsM10sWzEsMl0sWzMsMCwieCIsMl0sWzQsMV0sWzQsMiwieF9pIl0sWzEsMCwiIiwwLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XV0=
-		\[\begin{tikzcd}
-			{T_i} & \\
-			V & {\mathcal{X}_1} \\
-			T & {\mathcal{X}_0}
-			\arrow[from=1-1, to=2-1]
-			\arrow["{x_i}", from=1-1, to=2-2]
-			\arrow[from=2-1, to=2-2]
-			\arrow[from=2-1, to=3-1]
-			\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=2-1, to=3-2]
-			\arrow["g", from=2-2, to=3-2]
-			\arrow["x"', from=3-1, to=3-2]
-		\end{tikzcd}\]
-	
-		Now the maps $\varphi x_i: T_i \to X_0$
-	
-		Now since $\varphi s_\mathcal{X} = \varphi t_\mathcal{X}$, we get 
-	\end{proof}
-	
-	By $X_0$ being an \etale\ sheaf and by $g$ being an \etale\ surjection, we obtain an equalizer digramm
-	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXEhvbShcXG1hdGhjYWx7WH1fMCwgWF8wKSJdLFsxLDAsIlxcSG9tKFxcbWF0aGNhbHtYfV8xLCBYXzApIl0sWzIsMCwiXFxIb20oXFxtYXRoY2Fse1h9XzIsIFhfMCkiXSxbMCwxLCJnXioiXSxbMSwyLCJ0X1xcbWF0aGNhbHtYfV4qIiwyLHsib2Zmc2V0IjoxfV0sWzEsMiwic19cXG1hdGhjYWx7WH1eKiIsMCx7Im9mZnNldCI6LTF9XV0=
+	The top, bottom, left and back face are cartesian. Consider the natural morphism \[
+		 \eta = (g, \pi_0): \mathcal{X}_1 \to \mathcal{X}_0\times_{X_0} X_1.
+	\]
+	We wan to prove that this is an isomorphism. We check this \etale\ locally on the target and use that $g$ is an \etale\ cover.
+	Pulling back $\eta$ along $g$, i.e. applying $(-)\times_{\mathcal{X}_0}\mathcal{X}_1$, yields a morphism $\eta'$. By definition of $\mathcal{X}_2$ and associativity of the $2$-fibre product, we have a commutative diagram:
+	% https://q.uiver.app/#q=WzAsNCxbMCwxLCJcXG1hdGhjYWx7WH1fMVxcdGltZXNfe1xcbWF0aGNhbHtYfV8wfVxcbWF0aGNhbHtYfV8xIl0sWzIsMSwiKFxcbWF0aGNhbHtYfV8wXFx0aW1lc197WF8wfVhfMSlcXHRpbWVzX3tcXG1hdGhjYWx7WH1fMH1cXG1hdGhjYWx7WH1fMSJdLFswLDAsIlxcbWF0aGNhbHtYfV8yIl0sWzIsMCwiWF8xXFx0aW1lc197WF8wfVxcbWF0aGNhbHtYfV8xIl0sWzAsMSwiXFxldGEnIl0sWzIsMCwiXFxjb25nIiwyXSxbMiwzLCJcXGV0YScnIl0sWzMsMSwiXFxjb25nIl0sWzIsMCwiKHNfXFxtYXRoY2Fse1h9LCB0X1xcbWF0aGNhbHtYfSkiXV0=
 	\[\begin{tikzcd}
-		{\Hom(\mathcal{X}_0, X_0)} & {\Hom(\mathcal{X}_1, X_0)} & {\Hom(\mathcal{X}_2, X_0)}
-		\arrow["{g^*}", from=1-1, to=1-2]
-		\arrow["{t_\mathcal{X}^*}"', shift right, from=1-2, to=1-3]
-		\arrow["{s_\mathcal{X}^*}", shift left, from=1-2, to=1-3]
+		{\mathcal{X}_2} && {X_1\times_{X_0}\mathcal{X}_1} \\
+		{\mathcal{X}_1\times_{\mathcal{X}_0}\mathcal{X}_1} && {(\mathcal{X}_0\times_{X_0}X_1)\times_{\mathcal{X}_0}\mathcal{X}_1}
+		\arrow["{\eta''}", from=1-1, to=1-3]
+		\arrow["\cong"', from=1-1, to=2-1]
+		\arrow["{(s_\mathcal{X}, t_\mathcal{X})}", from=1-1, to=2-1]
+		\arrow["\cong", from=1-3, to=2-3]
+		\arrow["{\eta'}", from=2-1, to=2-3]
 	\end{tikzcd}\]
-	and hence, applied to $q\pi_1: \mathcal{X}_1 \to X_0$, we obtain a unique morphism $\pi_0:\mathcal{X}_0 \to X_0$ letting the right square of diagram \ref{eq:groupoid-moduli-space}.
+	where the morphism $\mathcal{X}_1 \to X_0$ is given by $\pi_0g = q\pi_1$. Under these identifications $\eta''$ is given by $(\pi_1s_\mathcal{X}, t_\mathcal{X})$.
+	
+	Again by associativity we get 
+	\begin{align*}
+			X_1 \times_{X_0} \mathcal{X}_1  &\cong
+			X_1 \times_{X_1} (X_1 \times_{X_0} \mathcal{X}_1)\\ 
+			&\cong X_1 \times_{X_0} (X_1 \times_{X_1} \mathcal{X}_1)\\
+			&\cong (X_1 \times_{X_0} X_1) \times_{X_1} \mathcal{X}_1)\\
+			&\cong X_2 \times_{X_1} \mathcal{X}_1.
+	\end{align*}
+	
+	Hence, $\mathcal{X}_2 \xrightarrow{\eta''} X_1 \times_{X_0} \mathcal{X}_1 \xrightarrow{\cong} X_2 \times_{X_1} \mathcal{X}_1$ is given by $(\pi_2, t_\mathcal{X})$. Since the left square of diagram \ref{eq:groupoid-moduli-space} is cartesian, $\eta''$ is an isomorphism, and hence, $\eta$ is an isomorphism.
+	
+
+	
 	We are now left to prove, that $\pi_0$ is a coarse moduli space.
 	This follows by Lemma \ref{lem:coarse-moduli-etale-local} applied to the \etale\ cover $X_1 \to X_0$, stating that being a coarse moduli space is local on the target.
 	
