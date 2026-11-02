@@ -39,9 +39,9 @@ We work with the formulation of Grothendieck topologies in terms of covering fam
 
 \begin{definition}[Standard topologies on schemes]\label{def:standard-sites}
 	(\cite[][Tags 020N, 0215, 021M]{stacks-project})
-	Let $\tau \in \{\mathrm{Zariski}, \text{\etale}, \mathrm{smooth}, \mathrm{fppf}\}$. A family of morphisms of schemes $\{f_i:U_i \to X\}_{i\in I}$ is a \emph{$\tau$-covering} if
+	Let $\tau \in \{\mathrm{Zariski}, \text{\etale}, \mathrm{fppf}\}$. A family of morphisms of schemes $\{f_i:U_i \to X\}_{i\in I}$ is a \emph{$\tau$-covering} if
 	\begin{enumerate}
-		\item each $f_i$ is an open immersion (Zariski), \etale\ (\etale), smooth (smooth), or flat and locally of finite presentation (fppf), respectively, and
+		\item each $f_i$ is an open immersion (Zariski), \etale\ (\etale), or flat and locally of finite presentation (fppf), respectively, and
 		\item the family is jointly surjective, i.e.\ $X=\bigcup_{i\in I} f_i(U_i)$.
 	\end{enumerate}
 	We write $\Sch_\tau$ for the resulting site, and $(\SchOver{S})_\tau$ for the induced site on schemes over a fixed scheme $S$.
@@ -54,11 +54,11 @@ We work with the formulation of Grothendieck topologies in terms of covering fam
 \end{definition}
 
 \begin{proposition}[Hierarchy of topologies]\label{prop:gross-topology-chain}
-	Each of the four classes of coverings in Definition~\ref{def:standard-sites}, and the class of fpqc coverings, satisfies the axioms of Definition~\ref{def:site}. Moreover,
+	Each of the classes of coverings in Definition~\ref{def:standard-sites}, and the class of fpqc coverings, satisfies the axioms of Definition~\ref{def:site}. Moreover,
 	\[
-	\mathrm{Zariski} \subset \text{\etale} \subset \mathrm{smooth} \subset \mathrm{fppf} \subset \mathrm{fpqc}
+	\mathrm{Zariski} \subset \text{\etale} \subset \mathrm{fppf} \subset \mathrm{fpqc}
 	\]
-	in the sense that every Zariski covering is an \etale\ covering, every \etale\ covering is a smooth covering, and so on.
+	in the sense that every Zariski covering is an \etale\ covering, every \etale\ covering is an fppf covering, and every fppf covering is an fpqc covering.
 \end{proposition}
 
 \begin{proof}
@@ -70,11 +70,11 @@ We work with the formulation of Grothendieck topologies in terms of covering fam
 \end{remark}
 
 \begin{lemma}[Refinement by affine schemes]\label{prop:affine-refinement-standard-topologies}
-	Let $\tau\in\{\mathrm{Zariski}, \text{\etale}, \mathrm{smooth}, \mathrm{fppf}\}$ and let $\{f_i:U_i\to X\}_{i\in I}$ be a $\tau$-covering. Choose affine open covers $U_i=\bigcup_{j\in J_i}V_{ij}$. Then $\{V_{ij}\to X\}_{i\in I, j\in J_i}$ is a $\tau$-covering by affine schemes. If $X$ is quasi-compact, finitely many of the $V_{ij}$ suffice.
+	Let $\tau\in\{\mathrm{Zariski}, \text{\etale}, \mathrm{fppf}\}$ and let $\{f_i:U_i\to X\}_{i\in I}$ be a $\tau$-covering. Choose affine open covers $U_i=\bigcup_{j\in J_i}V_{ij}$. Then $\{V_{ij}\to X\}_{i\in I, j\in J_i}$ is a $\tau$-covering by affine schemes. If $X$ is quasi-compact, finitely many of the $V_{ij}$ suffice.
 \end{lemma}
 
 \begin{proof}
-	Open immersions \etale, smooth, and flat and locally of finite presentation, and each of these classes is stable under composition, so every $V_{ij}\to U_i\to X$ is of type $\tau$. The family is jointly surjective because the $V_{ij}$ cover $U_i$. Every flat morphism locally of finite presentation is open (\cite[][Tag 01UA]{stacks-project}), so the images $f_i(V_{ij})$ form an open cover of $X$. If $X$ is quasi-compact, finitely many of them cover $X$.
+	Open immersions, \etale, flat and locally of finite presentation, and each of these classes is stable under composition, so every $V_{ij}\to U_i\to X$ is of type $\tau$. The family is jointly surjective because the $V_{ij}$ cover $U_i$. Every flat morphism locally of finite presentation is open (\cite[][Tag 01UA]{stacks-project}), so the images $f_i(V_{ij})$ form an open cover of $X$. If $X$ is quasi-compact, finitely many of them cover $X$.
 \end{proof}
 
 \begin{remark}
@@ -192,7 +192,7 @@ To pass from covering families to single morphisms we need that $F$ converts dis
 \begin{lemma}[Zariski sheaves and disjoint unions]\label{lem:sheaf-preserves-coproducts}
 	Let $F$ be a presheaf on $\Sch$ satisfying the sheaf condition for all Zariski coverings. Then $F(\varnothing)$ is a point, and for every family of schemes $\{U_i\}_{i\in I}$ the restriction maps induce a bijection
 	\[
-	F\Big(\coprod_{i\in I}U_i\Big)\xrightarrow{\ \sim\ }\prod_{i\in I}F(U_i).
+	F\Big(\coprod_{i\in I}U_i\Big)\xrightarrow{\ \cong\ }\prod_{i\in I}F(U_i).
 	\]
 \end{lemma}
 
@@ -224,15 +224,15 @@ To pass from covering families to single morphisms we need that $F$ converts dis
 \end{proof}
 
 \begin{lemma}\label{lem:coverings-vs-single-morphism}
-	Let $\tau\in\{\text{\etale}, \mathrm{smooth}, \mathrm{fppf}, \mathrm{fpqc}\}$. A family $\{U_i\to X\}_{i\in I}$ is a $\tau$-covering if and only if $\{\coprod_iU_i\to X\}$ is a $\tau$-covering.
+	Let $\tau\in\{\text{\etale}, \mathrm{fppf}, \mathrm{fpqc}\}$. A family $\{U_i\to X\}_{i\in I}$ is a $\tau$-covering if and only if $\{\coprod_iU_i\to X\}$ is a $\tau$-covering.
 \end{lemma}
 
 \begin{proof}
-	For $\tau\ne\mathrm{fpqc}$, being \etale, smooth, resp.\ flat and locally of finite presentation is local on the source (\cite[][Tag 02GJ, 01V6, 01U4]{stacks-project}), and joint surjectivity is the same condition for both. For fpqc, flatness is local on the source. An affine open $W\subset U_{i}$ is also an affine open of $\coprod_iU_i$, so the finiteness condition of Definition \ref{def:fpqc-covering} implies the finiteness condition for $\coprod_iU_i\to X$. Conversely, an affine open $W\subset\coprod_iU_i$ is quasi-compact, hence meets only finitely many $U_i$, and $W\cap U_i$ is open and closed in $W$, hence affine. This gives the converse.
+	For $\tau\ne\mathrm{fpqc}$, being \etale, resp.\ flat and locally of finite presentation is local on the source (\cite[][Tag 02GJ, 01V6, 01U4]{stacks-project}), and joint surjectivity is the same condition for both. For fpqc, flatness is local on the source. An affine open $W\subset U_{i}$ is also an affine open of $\coprod_iU_i$, so the finiteness condition of Definition \ref{def:fpqc-covering} implies the finiteness condition for $\coprod_iU_i\to X$. Conversely, an affine open $W\subset\coprod_iU_i$ is quasi-compact, hence meets only finitely many $U_i$, and $W\cap U_i$ is open and closed in $W$, hence affine. This gives the converse.
 \end{proof}
 
 \begin{corollary}[Sheaves via \v{C}ech descent]\label{cor:sheaf-via-cech}
-	Let $\tau\in\{\text{\etale}, \mathrm{smooth}, \mathrm{fppf}, \mathrm{fpqc}\}$ and let $F$ be a presheaf on $\Sch$. Then $F$ satisfies the sheaf condition for all $\tau$-coverings if and only if
+	Let $\tau\in\{\text{\etale}, \mathrm{fppf}, \mathrm{fpqc}\}$ and let $F$ be a presheaf on $\Sch$. Then $F$ satisfies the sheaf condition for all $\tau$-coverings if and only if
 	\begin{enumerate}
 		\item $F$ satisfies the sheaf condition for all Zariski coverings, and
 		\item $F$ satisfies descent along every $\tau$-covering $p:U\to X$.

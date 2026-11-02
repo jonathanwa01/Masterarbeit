@@ -6,9 +6,9 @@ F(X)\xrightarrow{\ \sim\ }\lim_{[n]\in\Delta}F\bigl((U/X)_n\bigr),
 \]
 and by Lemma~\ref{lem:tot-cosimplicial-set} only the truncation $\Delta_{\le 1}$ of the indexing category matters, since $\Set$ is a $1$ category and all higher coherence are automatic. Hence, the condition becomes an equalizer condition on $U$ and $U\times_XU$. In this chapter $F$ takes values in categories and groupoids, the main examples being quasi-coherent sheaves and modules. Two things change. First, pullbacks compose only up to canonical isomorphism, so $F$ is a \emph{pseudofunctor} rather than a functor.
 Second, compatibility of local data is no longer an equality on $U\times_XU$ but a specified isomorphism, which in turn has to satisfy a cocycle condition on $U\times_XU\times_XU$.
-These changes reflect the $2$-categorical nature of \Cat and \Grpd.
+These changes reflect the $2$-categorical nature of \Cat\ and \Grpd.
 
-We take this explicit description, an object over $U$, an isomorphism over $U\times_XU$ and a cocycle condition over $U\times_XU\times_XU$, as the definition of the descent category (Definition~\ref{def:classical-descent-data}); it is the description used in all computations below. Its conceptual meaning however is the $2$-categorical analogue of the limit
+We take this explicit description, an object over $U$, an isomorphism over $U\times_XU$ and a cocycle condition over $U\times_XU\times_XU$, as the definition of the descent category (Definition~\ref{def:classical-descent-data}). It is the description used in all computations below. Its conceptual meaning however is the $2$-categorical analogue of the limit
 \[
 F(X)\;\simeq\;\Tot F\bigl((U/X)_\bullet\bigr).
 \]
@@ -86,7 +86,7 @@ Fibred categories organize objects over varying bases and encode pullback throug
 
 \begin{definition}[Fibred category and choice of pullbacks]
 	\label{def:fibred-category}
-	\cite[][Tag 02XM and 02XN]{stacks-project}
+	(\cite[][Tag 02XM and 02XN]{stacks-project})
 	A category $p:\mathcal{F}\to\mathcal{C}$ is
 	fibred if, for every morphism $f:U\to V$
 	and every $\eta\in\mathcal{F}(V)$, there exists a
@@ -161,7 +161,7 @@ Fibred categories organize objects over varying bases and encode pullback throug
 \end{definition}
 
 \begin{definition}
-	Let $\mathcal{F}\to \mathcal{C}$ be a category fibred in groupoids and let $B\in \mathcal{C}$. We call the subcategory of $\mathcal{F}$ of objects lying over $B$ and morphisms lying over $id_B$ the fibre of $\mathcal{F}$ over $B$ and denote it by $\mathcal{F}(B)$.
+	Let $\mathcal{F}\to \mathcal{C}$ be a fibred category and let $B\in \mathcal{C}$. We call the subcategory of $\mathcal{F}$ of objects lying over $B$ and morphisms lying over $id_B$ the fibre of $\mathcal{F}$ over $B$ and denote it by $\mathcal{F}(B)$.
 \end{definition}
 
 \begin{definition}[Category fibred in groupoids]
@@ -175,11 +175,11 @@ Fibred categories organize objects over varying bases and encode pullback throug
 	\begin{enumerate}
 		\item \emph{Quasi-coherent sheaves.}
 		Let $\mathcal{Q}\to\Sch$ be the category whose objects
-		are pairs $(T,\mathcal{E})$ with
+		are pairs $(T, \mathcal{E})$ with
 		$\mathcal{E}\in\QCoh(T)$.
 		A morphism
 		\[
-		(T',\mathcal{E}')\longrightarrow(T,\mathcal{E})
+		(T', \mathcal{E}')\longrightarrow(T, \mathcal{E})
 		\]
 		consists of a morphism $g:T'\to T$ and an
 		$\mathcal{O}_{T'}$-linear map
@@ -187,7 +187,7 @@ Fibred categories organize objects over varying bases and encode pullback throug
 		u:\mathcal{E}'\longrightarrow g^*\mathcal{E}.
 		\]
 		Composition uses the canonical comparison
-		isomorphisms for pullback.
+		isomorphisms $g^*f^* \simeq (fg)^*$ for pullback.
 		The projection $\mathcal{Q}\to\Sch$ is fibred,
 		with fibre $\QCoh(T)$ over $T$.
 		The arrow $(g,u)$ is cartesian if and only if
@@ -196,10 +196,10 @@ Fibred categories organize objects over varying bases and encode pullback throug
 		
 		\item \emph{Modules.}
 		Let $\mathcal{M}\to\Aff$ have objects
-		$(\Specof{A},M)$ with $M\in\Mod_A$.
+		$(\Specof{A}, M)$ with $M\in\Mod_A$.
 		A morphism
 		\[
-		(\Specof{B},N)\longrightarrow(\Specof{A},M)
+		(\Specof{B}, N)\longrightarrow(\Specof{A}, M)
 		\]
 		over $g:\Specof{B}\to\Specof{A}$ is a
 		$B$-linear map
@@ -208,7 +208,7 @@ Fibred categories organize objects over varying bases and encode pullback throug
 		\]
 		This defines a fibred category with fibre
 		$\Mod_A$ over $\Specof{A}$.
-		Again, $(g,u)$ is cartesian if and only if
+		Again, $(g, u)$ is cartesian if and only if
 		$u$ is an isomorphism (\cite[][Tags 01IB, 01I9]{stacks-project}, $M\mapsto\widetilde{M}$)
 	\end{enumerate}
 \end{example}
