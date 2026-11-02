@@ -321,7 +321,7 @@ The following functoriality is used to compare $\QCoh$ with modules and with aff
 
 \begin{lemma}[Functoriality of descent categories]
 	\label{lem:desc-pseudonatural}
-	(\cite[][Vistoli, §4.1.4]{vistoli2007notes})
+	(\cite[][Vistoli, §4.1.4, Prop. 4.12.]{vistoli2007notes})
 	Let $\mathcal{C}$ be a category with fibre products,
 	let
 	\[
@@ -343,8 +343,14 @@ The following functoriality is used to compare $\QCoh$ with modules and with aff
 	\[
 	H_*\circ f_{\mathcal{F}}^*
 	\cong
-	f_{\mathcal{G}}^*\circ H_X.
+	f_{\mathcal{G}}^*\circ H_X,
 	\]
+	where 
+	\begin{align*}
+			f_\mathcal{F}^*: \mathcal{F}(X) &\to \Desc_f(\mathcal{F})
+	\end{align*}
+	is defined by $f^*_\mathcal{F}(\zeta) = (f^*\zeta, \mathrm{can}_\zeta)$ for $\zeta \in \mathcal{F}(X)$.
+	
 	If each induced functor on fibres
 	\[
 	H_T:\mathcal{F}(T)\longrightarrow\mathcal{G}(T)
