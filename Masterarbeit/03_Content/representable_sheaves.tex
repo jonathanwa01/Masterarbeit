@@ -21,7 +21,7 @@ We now deduce from fpqc descent for quasi-coherent sheaves that every scheme def
 \begin{proof}
 	By Theorem~\ref{thm:fpqc-descent-qcoh}, the functor $\QCoh(T)\to\Desc(U/T)$, $\mathcal{F}\mapsto(p^*\mathcal{F},\mathrm{can}_\mathcal{F})$ (Definition~\ref{con:pullback-to-descent}), is fully faithful. We apply this to $\mathcal{F}=\mathcal{G}=\mathcal{O}_T$.
 	
-	On the left, evaluation at $1$ identifies $\Hom_{\QCoh(T)}(\mathcal{O}_T,\mathcal{O}_T)$ with $\Gamma(T,\mathcal{O}_T)$.
+	On the left, evaluation at $1_T\in \Gamma(T, \mathcal{O}_T)$ identifies $\Hom_{\QCoh(T)}(\mathcal{O}_T,\mathcal{O}_T)$ with $\Gamma(T,\mathcal{O}_T)$ via .
 	On the right, $p^*\mathcal{O}_T=\mathcal{O}_U$ canonically, and under the identifications $\mathrm{pr}_0^*\mathcal{O}_U=\mathcal{O}_{U\times_TU}=\mathrm{pr}_1^*\mathcal{O}_U$ the canonical descent datum $\mathrm{can}_{\mathcal{O}_T}$ is the identity. A morphism of descent data $(\mathcal{O}_U,\mathrm{id})\to(\mathcal{O}_U,\mathrm{id})$ is therefore an endomorphism of $\mathcal{O}_U$, i.e.\ a section $s\in\Gamma(U,\mathcal{O}_U)$, such that $\mathrm{pr}_0^*(s)=\mathrm{pr}_1^*(s)$.
 	Under these identifications, the map on morphism sets is $p^*:\Gamma(T,\mathcal{O}_T)\to\Gamma(U,\mathcal{O}_U)$.
 	
