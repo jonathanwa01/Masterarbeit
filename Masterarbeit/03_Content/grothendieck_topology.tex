@@ -37,6 +37,45 @@ We work with the formulation of Grothendieck topologies in terms of covering fam
 	The category $\Sch$ of all schemes is not small. To obtain honest sites one replaces $\Sch$ by a suitably large but small full subcategory, see \cite[][Tag 021A]{stacks-project} for the \etale\ case. None of the arguments in this thesis depend on this choice, so we suppress it from the notation.
 \end{remark}
 
+
+\begin{lemma}[Lifting geometric points]
+	\label{lem:scheme-geometric-points-etale-cover}
+	Let $\{f_i:X_i\to Y\}_{i\in I}$ be an \etale\
+	covering, let $k$ be an algebraically closed field,
+	and let
+	\[
+	y:\Specof{k}\longrightarrow Y
+	\]
+	be a geometric point.
+	Then there exist an index $i$ and a morphism
+	\[
+	\widetilde{y}:\Specof{k}\longrightarrow X_i
+	\]
+	such that $f_i\circ\widetilde{y}=y$.
+\end{lemma}
+
+\begin{proof}
+	Base change gives an \etale\ covering
+	\[
+	\{X_i\times_Y\Specof{k}\to\Specof{k}\}_i.
+	\]
+	Since the family is jointly surjective, one
+	member is nonempty.
+	By Corollary~\ref{cor:etale-over-alg-closed},
+	its structure morphism admits a section.
+	Composing this section with the projection
+	to $X_i$ gives the required lift.
+\end{proof}
+
+\begin{remark}
+	The corresponding statement for algebraic spaces
+	is used in Lemma~\ref{lem:geometric-points-etale-cover}.
+	It ensures that geometric points of a prospective
+	coarse moduli space can be studied after passing
+	to an \etale\ covering.
+\end{remark}
+
+
 \begin{definition}[Standard topologies on schemes]\label{def:standard-sites}
 	(\cite[][Tags 020N, 0215, 021M]{stacks-project})
 	Let $\tau \in \{\mathrm{Zariski}, \text{\etale}, \mathrm{fppf}\}$. A family of morphisms of schemes $\{f_i:U_i \to X\}_{i\in I}$ is a \emph{$\tau$-covering} if
