@@ -10,54 +10,54 @@
 %------------------------------
 % DATE
 %------------------------------
-\makeatletter					% new date type of month and year only
+\makeatletter
 \newcommand{\monthyeardate}{%
 	\iflanguage{english}{\DTMenglishmonthname{\@dtm@month} \@dtm@year}{%
-  \DTMgermanmonthname{\@dtm@month} \@dtm@year
-  }
+		\DTMgermanmonthname{\@dtm@month} \@dtm@year
+	}
 }
-\makeatother	
+\makeatother
 %------------------------------
 % FIGURES, TABLES, LISTS, NUMERATIONS, COUNTER
 %------------------------------
-\graphicspath{{Figures/}} 		% directory in which LaTeX searches for figures
-\newcounter{includepdfpage}		% counter for pdfpages page references
+\graphicspath{{Figures/}}
+\newcounter{includepdfpage}
 \newlist{myList}{itemize}{1}
 \setlist[myList]{leftmargin=0.0cm,nosep,label={}}
-\newcolumntype{s}{>{\collectcell\unit}c<{\endcollectcell}}	% column type for SI units
-\renewcommand{\topfraction}{0.98} 
-\renewcommand{\bottomfraction}{0.98} 
+\newcolumntype{s}{>{\collectcell\unit}c<{\endcollectcell}}
+\renewcommand{\topfraction}{0.98}
+\renewcommand{\bottomfraction}{0.98}
 %------------------------------
 % DEDICATION
 %------------------------------
-\newenvironment{dedication_env}	% defines the dedication environment
+\newenvironment{dedication_env}
 {\Large\begin{quote}\begin{center}\begin{em}}
-{\par\end{em}\end{center}\end{quote}}
+			{\par\end{em}\end{center}\end{quote}}
 %------------------------------
 % HEADER
 %------------------------------
-\lehead{\scshape\leftmark}		% left-even-head
-\cehead{}						% center-even-head
-\rehead{}						% right-even-head
-\lohead{}						% left-odd-head
-\cohead{}						% center-odd-head
-\rohead{\scshape\rightmark}		% right-odd-head
+\lehead{\scshape\leftmark}
+\cehead{}
+\rehead{}
+\lohead{}
+\cohead{}
+\rohead{\scshape\rightmark}
 %------------------------------
 % FOOTER
 %------------------------------
-\lefoot[\pagemark]{\pagemark}	% left-even-foot
-\cefoot{}						% center-even-foot
-\refoot{}						% right-even-foot
-\lofoot{} 						% left-odd-foot
-\cofoot{}						% center-odd-foot
-\rofoot[\pagemark]{\pagemark}	% right-odd-foot
+\lefoot[\pagemark]{\pagemark}
+\cefoot{}
+\refoot{}
+\lofoot{}
+\cofoot{}
+\rofoot[\pagemark]{\pagemark}
 \renewcommand*{\chapterpagestyle}{plain}
 %------------------------------
 % LISTS OF ...
 %------------------------------
-\makeatletter					%
-\renewcommand*{\@pnumwidth}{2.5em}% column width for page numbers
-\makeatother					%
+\makeatletter
+\renewcommand*{\@pnumwidth}{2.5em}
+\makeatother
 %------------------------------
 % LIST OF ABBREVIATIONS
 %------------------------------
@@ -67,28 +67,28 @@
 \setlength{\mydescriptionwidth}{\linewidth-2\tabcolsep-\myabbrevlength}
 \iflanguage{english}{
 	\newcommand{\abbrevname}{List of Abbreviations}
-    }{\iflanguage{ngerman}{
-    	\newcommand{\abbrevname}{Abkürzungsverzeichnis}}{}
+}{\iflanguage{ngerman}{
+		\newcommand{\abbrevname}{Abkürzungsverzeichnis}}{}
 }
 \NewAcroTemplate[list]{dbtalongtable}{
 	\AcroNeedPackage{array}%
 	\def\arraystretch{1.2}
-    \acronymsmapF{%
+	\acronymsmapF{%
 		\AcroAddRow{%
 			\leavevmode\acrowrite{short} & \acrowrite{list} \acropagefill \tabularnewline}
-    }
+	}
 	{\AcroRerun}%
 	\acroheading%
 	\acropreamble%
-    \setlength\LTleft{0.5ex}    % Adjustment of left margin
-    \begin{longtable}{>{\bfseries\sffamily}lp{\mydescriptionwidth}}
-        \AcronymTable
-    \end{longtable}
+	\setlength\LTleft{0.5ex}
+	\begin{longtable}{>{\bfseries\sffamily}lp{\mydescriptionwidth}}
+		\AcronymTable
+	\end{longtable}
 }
-\acsetup{	
-	format/first-long=\itshape, % first appearence is set in italics
-	index/use=true,				% add abbrevs to index
-	make-links=true				% make links for abbrevs
+\acsetup{
+	format/first-long=\itshape,
+	index/use=true,
+	make-links=true
 }
 %------------------------------
 % TODOS
@@ -97,22 +97,22 @@
 \iflanguage{ngerman}{
 	\renewcommand{\@todonotes@todolistname}{ToDo-Verzeichnis}
 }{
-\iflanguage{english}{
-	\renewcommand{\@todonotes@todolistname}{List of ToDos}
-}{}
+	\iflanguage{english}{
+		\renewcommand{\@todonotes@todolistname}{List of ToDos}
+	}{}
 }
 \makeatother
 %------------------------------
 % THEOREM STYLE
 %------------------------------
-\newtheoremstyle{mytheoremstyle}	% own theorem style
-{\topsep}   
-{\topsep}   
-{\itshape}  
-{0pt}       
-{\bfseries} 
-{}         
-{5pt plus 1pt minus 1pt} 
+\newtheoremstyle{mytheoremstyle}
+{\topsep}
+{\topsep}
+{\itshape}
+{0pt}
+{\bfseries}
+{}
+{5pt plus 1pt minus 1pt}
 {\thmname{#1} \thmnumber{#2} \thmnote{\ (#3)}:}
 %------------------------------
 % COMMANDS FOR THEOREM, ...
@@ -130,7 +130,7 @@
 	\renewcommand{\examplename}{Example}
 	\renewcommand{\remarkname}{Remark}
 	\renewcommand{\corollaryname}{Corollary}
-	}{\iflanguage{ngerman}{
+}{\iflanguage{ngerman}{
 		\renewcommand{\theoremname}{Satz}
 		\renewcommand{\lemmaname}{Hilfssatz}
 		\renewcommand{\examplename}{Beispiel}
@@ -138,30 +138,33 @@
 		\renewcommand{\remarkname}{Bemerkung}
 		\renewcommand{\corollaryname}{Korollar}
 	}{}
-	}
+}
 %------------------------------
 % SET THEOREM STYLE
 %------------------------------
-\theoremstyle{mytheoremstyle}	% definition via amsthm package
-\newtheorem{theorem}{\theoremname}
-\newtheorem{lemma}{\lemmaname}
-\newtheorem{remark}{\remarkname}
-\newtheorem{corollary}{\corollaryname}
+\theoremstyle{mytheoremstyle}
 %------------------------------
-% THEOREM ENVIRONMENT
+% THEOREM ENVIRONMENT AND SHARED COUNTER
 %------------------------------
 \newmdtheoremenv[
-  linecolor=black,
-  roundcorner=2pt,
-  linewidth=2pt
+linecolor=black,
+roundcorner=2pt,
+linewidth=2pt
 ]{theoremenv}{\theoremname}[chapter]
+
+% Unboxed environments share the same chapter-based counter.
+% Define them after theoremenv, which owns the counter.
+\newtheorem{theorem}[theoremenv]{\theoremname}
+\newtheorem{lemma}[theoremenv]{\lemmaname}
+\newtheorem{remark}[theoremenv]{\remarkname}
+\newtheorem{corollary}[theoremenv]{\corollaryname}
 %------------------------------
 % LEMMA ENVIRONMENT
 %------------------------------
 \newmdtheoremenv[
-	linecolor=blue,
-	roundcorner=2pt,
-	linewidth=1pt
+linecolor=blue,
+roundcorner=2pt,
+linewidth=1pt
 ]{lemmaenv}[theoremenv]{\lemmaname}
 %------------------------------
 % EXAMPLE ENVIRONMENT
@@ -183,58 +186,58 @@ linewidth=1pt
 % REMARK ENVIRONMENT
 %------------------------------
 \newmdtheoremenv[
-	linecolor=red,
-	roundcorner=2pt,
-	linewidth=0.5pt
+linecolor=red,
+roundcorner=2pt,
+linewidth=0.5pt
 ]{remarkenv}[theoremenv]{\remarkname}
 %------------------------------
 % DEFINITION ENVIRONMENT
 %------------------------------
 \newmdtheoremenv[
-	linecolor=black,
-	roundcorner=2pt,
-	linewidth=1pt
+linecolor=black,
+roundcorner=2pt,
+linewidth=1pt
 ]{definition}[theoremenv]{Definition}
 %------------------------------
 % PROPOSITION ENVIRONMENT
 %------------------------------
 \newmdtheoremenv[
-	linecolor=black,
-	roundcorner=2pt,
-	linewidth=1pt
+linecolor=black,
+roundcorner=2pt,
+linewidth=1pt
 ]{proposition}[theoremenv]{\propositionname}
 %------------------------------
 % MATH AND OPERATORS
 %------------------------------
-\DeclareMathOperator{\rot}{rot}	% declares the rot math operator
-\newcommand*\diff{\mathop{}\!\textrm{d}}	% differential d, e.g. in integrals
+\DeclareMathOperator{\rot}{rot}
+\newcommand*\diff{\mathop{}\!\textrm{d}}
 %------------------------------
 % UNITS
 %------------------------------
 \newcommand{\SIRangePhrase}{}
 \sisetup{
-	detect-family=true,			% adapt unit typesetting to surrounding font family
-	detect-mode=true,			% adapt output to surrounding text style
-	mode=text,					% text mode 
-	range-units=single,			% it is 4 to 10 K and not 4K to 10K
-	retain-explicit-plus,		% \SI{1E+4}{} = 1E+04 in the text
-	retain-unity-mantissa=false,% no mantissa for numbers like 1e4
-	retain-zero-exponent=false,	% no exponent for numbers like 1e0
-	separate-uncertainty=true,	% uncertainties are separated from numbers
+	detect-family=true,
+	detect-mode=true,
+	mode=text,
+	range-units=single,
+	retain-explicit-plus,
+	retain-unity-mantissa=false,
+	retain-zero-exponent=false,
+	separate-uncertainty=true,
 }
-\DeclareSIUnit\torr{Torr}		% defines the unit Torr
-\DeclareSIUnit\fahrenheit{\degree F}% defines the unit °F
-\DeclareSIUnit\atm{atm}			% defines the unit atm
-\DeclareSIUnit\anno{a}			% defines the unit a for year
-\DeclareSIUnit\bar{bar}			% defines the unit bar
-\DeclareSIUnit\kJmol{\kilo\joule\per\mole} % defines the unit kJ/mol
-\DeclareSIUnit\kJmolK{\kilo\joule\per\mole\per\kelvin} % defines the unit kJ/(molK)
+\DeclareSIUnit\torr{Torr}
+\DeclareSIUnit\fahrenheit{\degree F}
+\DeclareSIUnit\atm{atm}
+\DeclareSIUnit\anno{a}
+\DeclareSIUnit\bar{bar}
+\DeclareSIUnit\kJmol{\kilo\joule\per\mole}
+\DeclareSIUnit\kJmolK{\kilo\joule\per\mole\per\kelvin}
 %------------------------------
 % CHEMISTRY
 %------------------------------
 \chemsetup{%
-	formula=chemformula,		% use the chemformula package for typesetting formulas
-	greek=upgreek,				% upright typesetting according to upgreek package
+	formula=chemformula,
+	greek=upgreek,
 }
 %------------------------------
 % COLORS
@@ -244,55 +247,54 @@ linewidth=1pt
 %------------------------------
 % XPARSE
 %------------------------------
-% O is an optional argument and {} is the default, m ist the must-have argument
-\NewDocumentCommand{\pder}{ O{} O{} m }{\dfrac{\partial^{#2}#1}{\partial#3^{#2}}}				% a short command for partial derivatives
-\NewDocumentCommand{\roundbrack}{ m }{\left(#1 \right)} % a short command for round brackets
-\NewDocumentCommand{\squarebrack}{ m }{\left[#1 \right]}% a short command for squared brackets
-\NewDocumentCommand{\ind}{m O{}}{\mathrm{#1}\mathnormal{,#2}}			% a short command for indices, the first argument is printed as text, the second in math mode
+\NewDocumentCommand{\pder}{ O{} O{} m }{\dfrac{\partial^{#2}#1}{\partial#3^{#2}}}
+\NewDocumentCommand{\roundbrack}{ m }{\left(#1 \right)}
+\NewDocumentCommand{\squarebrack}{ m }{\left[#1 \right]}
+\NewDocumentCommand{\ind}{m O{}}{\mathrm{#1}\mathnormal{,#2}}
 %------------------------------
 % CODE
 %------------------------------
-\renewcommand{\lstlistingname}{Code}	% rename listings
+\renewcommand{\lstlistingname}{Code}
 %------------------------------
 % ENUMERATE ENVIRONMENT
 %------------------------------
-\renewcommand{\labelenumi}{\arabic{enumi})} 				% 1)
-\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}	% 1.1)
-\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}	% 1.1.1)
+\renewcommand{\labelenumi}{\arabic{enumi})}
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
 \setlist[enumerate,1]{%
-	before*=\onehalfspacing,	% onehalfspacing in environments
-	itemsep=0.15\baselineskip,	% vertical space between items
-	labelindent=\parindent,		% labels are indented by this length
+	before*=\onehalfspacing,
+	itemsep=0.15\baselineskip,
+	labelindent=\parindent,
 }%
 %------------------------------
 % ITEMIZE ENVIRONMENT
 %------------------------------
 \setlist[itemize,1]{%
-	label={--},					% standard label is --
-	before*=\onehalfspacing,	% onehalfspacing in environments
-	itemsep=0.15\baselineskip,	% vertical space between items
-	labelindent=\parindent,		% labels are indented by this length
+	label={--},
+	before*=\onehalfspacing,
+	itemsep=0.15\baselineskip,
+	labelindent=\parindent,
 }%
 %------------------------------
 % GERMAN CAPTION REDEFINITIONS
 %------------------------------
-\addto\captionsngerman{%		
-\renewcommand{\figurename}{Abb.}% changes german figure caption to Abb. chapter.number
-\renewcommand{\tablename}{Tab.} % changes german table caption to Tab. chapter.number
-\SetAlgorithmName{Algorithmus}{Algorithmus}{Algorithmenverzeichnis}	% german name of list of algorithms
-\renewcommand{\nomname}{Symbolverzeichnis}	% german name of list of symbols		
-\renewcommand{\lstlistlistingname}{Codeverzeichnis} % german name of list of codes
-\def\indexname{Indexverzeichnis}
+\addto\captionsngerman{%
+	\renewcommand{\figurename}{Abb.}
+	\renewcommand{\tablename}{Tab.}
+	\SetAlgorithmName{Algorithmus}{Algorithmus}{Algorithmenverzeichnis}
+	\renewcommand{\nomname}{Symbolverzeichnis}
+	\renewcommand{\lstlistlistingname}{Codeverzeichnis}
+	\def\indexname{Indexverzeichnis}
 }
 %------------------------------
 % ENGLISH CAPTION REDEFINITIONS
 %------------------------------
-\addto\captionsenglish{	
-\renewcommand{\figurename}{Fig.}% changes english figure caption to Fig. chapter.number
-\renewcommand{\tablename}{Tab.}	% changes english table caption to Tab. chapter.number
-\renewcommand{\nomname}{List of Symbols} % english name of list of symbols
-\renewcommand{\lstlistlistingname}{List of Codes} % english name of list of codes
-\def\indexname{Index}
+\addto\captionsenglish{
+	\renewcommand{\figurename}{Fig.}
+	\renewcommand{\tablename}{Tab.}
+	\renewcommand{\nomname}{List of Symbols}
+	\renewcommand{\lstlistlistingname}{List of Codes}
+	\def\indexname{Index}
 }
 %------------------------------
 % ADD TOCLIST ALGORITHM
@@ -324,7 +326,7 @@ linewidth=1pt
 	\def\chapterautorefnamelong{Kapitel}%
 	\def\sectionautorefnamelong{Abschnitt}%
 	\def\subsectionautorefnamelong{Abschnitt}%
-	\def\subsubsectionautorefnamelong{Abschnitt}%	
+	\def\subsubsectionautorefnamelong{Abschnitt}%
 	\def\figureautorefnamelong{Abbildung}%
 	\def\tableautorefnamelong{Tabelle}%
 	\def\equationautorefnamelong~#1\null{Gleichung~(#1)\null}%
@@ -336,9 +338,9 @@ linewidth=1pt
 	\def\algorithmautorefnamelong{Algorithmus}%
 	\renewcommand{\SIRangePhrase}{~bis~}%
 	\sisetup{%
-	locale = DE,%
-	range-phrase={\SIRangePhrase},	% for unit range "4 bis 10 K"
-	}%	
+		locale = DE,%
+		range-phrase={\SIRangePhrase},
+	}%
 }
 %------------------------------
 % AUTOREF ENGLISH
@@ -347,7 +349,7 @@ linewidth=1pt
 	\def\chapterautorefname{Chap.}%
 	\def\sectionautorefname{Sec.}%
 	\def\subsectionautorefname{Sec.}%
-	\def\subsubsectionautorefname{Sec.}%	
+	\def\subsubsectionautorefname{Sec.}%
 	\def\figureautorefname{Fig.}%
 	\def\tableautorefname{Tab.}%
 	\def\exampleautorefname{Example}%
@@ -363,7 +365,7 @@ linewidth=1pt
 	\def\chapterautorefnamelong{Chapter}%
 	\def\sectionautorefnamelong{Section}%
 	\def\subsectionautorefnamelong{Section}%
-	\def\subsubsectionautorefnamelong{Section}%	
+	\def\subsubsectionautorefnamelong{Section}%
 	\def\figureautorefnamelong{Figure}%
 	\def\tableautorefnamelong{Table}%
 	\def\equationautorefnamelong~#1\null{Equation~(#1)\null}%
@@ -375,109 +377,109 @@ linewidth=1pt
 	\def\algorithmautorefnamelong{Algorithm}%
 	\renewcommand{\SIRangePhrase}{~to~}%
 	\sisetup{%
-	locale = US,%
-	range-phrase={\SIRangePhrase},	% for unit range "4 to 10 K"
-	}%	
+		locale = US,%
+		range-phrase={\SIRangePhrase},
+	}%
 }
 %------------------------------
 % AUTOREF (LONG FORM)
 %------------------------------
 \newcommand{\Autoref}[1]{%
-  \begingroup%
-  \renewcommand{\chapterautorefname}{\chapterautorefnamelong}%
-  \renewcommand{\sectionautorefname}{\subsectionautorefnamelong}%
-  \renewcommand{\subsectionautorefname}{\subsectionautorefnamelong}%
-  \renewcommand{\subsubsectionautorefname}{\subsubsectionautorefnamelong}%
-  \renewcommand{\exampleautorefname}{\exampleautorefnamelong}%
-  \renewcommand{\figureautorefname}{\figureautorefnamelong}%
-  \renewcommand{\tableautorefname}{\tableautorefnamelong}%
-  \renewcommand{\equationautorefname}{\equationautorefnamelong}%
-  \renewcommand{\theoremenvautorefname}{\theoremenvautorefnamelong}%
-  \renewcommand{\corollaryenvautorefname}{\corollaryenvautorefnamelong}%
-  \renewcommand{\lemmaenvautorefname}{\lemmaenvautorefnamelong}%
-  \renewcommand{\remarkenvautorefname}{\remarkenvautorefnamelong}%
-  \renewcommand{\definitionautorefname}{\definitionautorefnamelong}%
-  \renewcommand{\algorithmautorefname}{\algorithmautorefnamelong}%
-  \renewcommand{\assumptionautorefname}{\assumptionautorefnamelong}%
-  \autoref{#1}%
-  \endgroup%
+	\begingroup%
+	\renewcommand{\chapterautorefname}{\chapterautorefnamelong}%
+	\renewcommand{\sectionautorefname}{\subsectionautorefnamelong}%
+	\renewcommand{\subsectionautorefname}{\subsectionautorefnamelong}%
+	\renewcommand{\subsubsectionautorefname}{\subsectionautorefnamelong}%
+	\renewcommand{\exampleautorefname}{\exampleautorefnamelong}%
+	\renewcommand{\figureautorefname}{\figureautorefnamelong}%
+	\renewcommand{\tableautorefname}{\tableautorefnamelong}%
+	\renewcommand{\equationautorefname}{\equationautorefnamelong}%
+	\renewcommand{\theoremenvautorefname}{\theoremenvautorefnamelong}%
+	\renewcommand{\corollaryenvautorefname}{\corollaryenvautorefnamelong}%
+	\renewcommand{\lemmaenvautorefname}{\lemmaenvautorefnamelong}%
+	\renewcommand{\remarkenvautorefname}{\remarkenvautorefnamelong}%
+	\renewcommand{\definitionautorefname}{\definitionautorefnamelong}%
+	\renewcommand{\algorithmautorefname}{\algorithmautorefnamelong}%
+	\renewcommand{\assumptionautorefname}{\assumptionautorefnamelong}%
+	\autoref{#1}%
+	\endgroup%
 }
 %------------------------------
 % REFERENCES AND CITATIONS
 %------------------------------
 \renewcaptionname{english}{\bibname}{List of References}
 \renewcaptionname{ngerman}{\bibname}{Literaturverzeichnis}
-\setlength\bibitemsep{0.5\baselineskip}	% distance between two references
-\setlength{\bibhang}{5ex}		% indent below first line of reference
-\DeclareFieldFormat[			% no quotation marks in citetitle
-	article,
-	inbook,
-	incollection,
-	inproceedings,
-	patent,
-	thesis,
-	unpublished
-]{citetitle}{#1\midsentence\isdot}						
-\DeclareFieldFormat[			% no quotation marks in title
-	article,
-	inbook,
-	incollection,
-	inproceedings,
-	patent,
-	thesis,
-	unpublished
-]{title}{#1\midsentence\isdot} 	
-\DeclareFieldFormat[			% remove capitalization in title and use grammar of a sentence instead
+\setlength\bibitemsep{0.5\baselineskip}
+\setlength{\bibhang}{5ex}
+\DeclareFieldFormat[
+article,
+inbook,
+incollection,
+inproceedings,
+patent,
+thesis,
+unpublished
+]{citetitle}{#1\midsentence\isdot}
+\DeclareFieldFormat[
+article,
+inbook,
+incollection,
+inproceedings,
+patent,
+thesis,
+unpublished
+]{title}{#1\midsentence\isdot}
+\DeclareFieldFormat[
 article,
 ]{titlecase:title}{\MakeSentenceCase*{#1}}
-\DeclareFieldFormat[			% no quotation marks in title
-	inproceedings,
+\DeclareFieldFormat[
+inproceedings,
 ]{booktitle}{\itshape #1}
-\renewcommand*{\nameyeardelim}{\addcomma\space}			% comma between author and year	
-\DeclareFieldFormat{pages}{#1}	% no S. or pp. before pages
-\DeclareFieldFormat{type}{\itshape #1}	% print bachelor or master thesis in italics
-\DefineBibliographyStrings{english}{% for backreferencing in list of references
-  backrefpage = {cit. on p.},	
-  backrefpages = {cit. on pp.},
+\renewcommand*{\nameyeardelim}{\addcomma\space}
+\DeclareFieldFormat{pages}{#1}
+\DeclareFieldFormat{type}{\itshape #1}
+\DefineBibliographyStrings{english}{
+	backrefpage = {cit. on p.},
+	backrefpages = {cit. on pp.},
 }
-\DefineBibliographyStrings{ngerman}{%
-  backrefpage = {zit. auf S.},	
-  backrefpages = {zit. auf den S.},	
+\DefineBibliographyStrings{ngerman}{
+	backrefpage = {zit. auf S.},
+	backrefpages = {zit. auf den S.},
 }
-\renewbibmacro{in:}{%			% suppress in: before name of journal, book, etc.
-  \ifboolexpr{%
-     test {\ifentrytype{article}}%
-     or
-     test {\ifentrytype{book}}%
-     or
-     test {\ifentrytype{inproceedings}}%     
-  }{}{\printtext{\bibstring{in}\intitlepunct}}%
-}							
-\DefineBibliographyStrings{ngerman}{% before URL german
-urlseen = {letzter Zugriff},
+\renewbibmacro{in:}{%
+	\ifboolexpr{%
+		test {\ifentrytype{article}}%
+		or
+		test {\ifentrytype{book}}%
+		or
+		test {\ifentrytype{inproceedings}}%
+	}{}{\printtext{\bibstring{in}\intitlepunct}}%
 }
-\DefineBibliographyStrings{english}{% before URL english
-urlseen = {last access},
+\DefineBibliographyStrings{ngerman}{
+	urlseen = {letzter Zugriff},
 }
-\renewbibmacro*{volume+number+eid}{	% how volume and issue are printed in list of references
-  \printfield{volume}
-  \printfield[parens]{number}%
-  \setunit{\addcomma\space}%
-  \printfield{eid}
+\DefineBibliographyStrings{english}{
+	urlseen = {last access},
 }
-\DeclareDelimFormat[bib]{nametitledelim}{\addcolon\space} % use colon after year in list of references
-\DeclareDelimFormat{finalnamedelim}{\addcomma\space}	  % delimiter between authors	
-\DeclareDelimFormat[textcite]{finalnamedelim}{			  % delimiter for textcite
-  \addspace\&\space}
-\DeclareDelimFormat[parencite]{finalnamedelim}{			  % delimiter for parencite
-  \addspace\bibstring{and}\space}
+\renewbibmacro*{volume+number+eid}{
+	\printfield{volume}
+	\printfield[parens]{number}%
+	\setunit{\addcomma\space}%
+	\printfield{eid}
+}
+\DeclareDelimFormat[bib]{nametitledelim}{\addcolon\space}
+\DeclareDelimFormat{finalnamedelim}{\addcomma\space}
+\DeclareDelimFormat[textcite]{finalnamedelim}{
+	\addspace\&\space}
+\DeclareDelimFormat[parencite]{finalnamedelim}{
+	\addspace\bibstring{and}\space}
 
 \renewbibmacro*{begentry}{%
 	\iffieldundef{shorthand}{}{%
 		\printfield{shorthand}\addspace ---\addspace
 	}
 }
-\DeclareSortingTemplate{nyt}{%		sorting template for shorthand
+\DeclareSortingTemplate{nyt}{
 	\sort{%
 		\field{presort}%
 	}%
@@ -498,85 +500,85 @@ urlseen = {last access},
 	}%
 }
 
-\renewbibmacro*{textcite}{%			redefines textcite so that shorthands also work with it
-    \ifnameundef{labelname}{%
-    	\iffieldundef{shorthand}{%
-    		\usebibmacro{cite:label}%
-            \setunit{%
-                \global\booltrue{cbx:parens}%
-                \printdelim{nonameyeardelim}\bibopenparen%
-            }%
-            \ifnumequal{%
-            	\value{citecount}%
-            }{1}{%
-            	\usebibmacro{prenote}%
-            }{}%
-            \usebibmacro{cite:labeldate+extradate}%
-        }{%
-        	\usebibmacro{cite:shorthand}%
-        }}{%
-        \iffieldundef{shorthand}{%
-        	\printnames{labelname}%
-            \setunit{%
-                \global\booltrue{cbx:parens}%
-                \printdelim{nameyeardelim}\bibopenparen%
-            }%
-           	\ifnumequal{%
-           		\value{citecount}%
-           	}{1}{%
-           		\usebibmacro{prenote}%
-           	}{}%
-            \usebibmacro{citeyear}%
-        }{%
-        	\ifciteseen{%
-        		\usebibmacro{cite:shorthand}%
-        	}{%
-        		\printnames{labelname}%
-                \setunit{%
-                    \global\booltrue{cbx:parens}%
-                    \printdelim{nameyeardelim}\bibopenparen%
-                }%
-                \ifnumequal{%
-                	\value{citecount}%
-                }{1}{%
-                	\usebibmacro{prenote}%
-               	}{}%
-                \iffieldundef{labelyear}{%
-                	\usebibmacro{cite:label}%
-                    \setunit{%
-                    	\addcomma%
-                    	\addspace%
-                    }%
-                    \iffieldundef{shorthandintro}{%
-	                	\printtext{\bibstring{citedas}}%
-	                }{%
-	                	\printtext{\printfield{shorthandintro}}%
-	                }%
-	                \addspace%
-                    \usebibmacro{cite:shorthand}%
-                }{%
-                	\usebibmacro{cite:labeldate+extradate}%
-                    \setunit{%
-                    	\addcomma%
-                    	\addspace%
-                    }%
-                    \iffieldundef{shorthandintro}{%
-	                    \printtext{\bibstring{citedas}}%
-	                }{%
-	                	\printtext{\printfield{shorthandintro}}%
-	                }%
-	                \addspace%
-                    \usebibmacro{cite:shorthand}}}}}}%
+\renewbibmacro*{textcite}{%
+	\ifnameundef{labelname}{%
+		\iffieldundef{shorthand}{%
+			\usebibmacro{cite:label}%
+			\setunit{%
+				\global\booltrue{cbx:parens}%
+				\printdelim{nameyeardelim}\bibopenparen%
+			}%
+			\ifnumequal{%
+				\value{citecount}%
+			}{1}{%
+				\usebibmacro{prenote}%
+			}{}%
+			\usebibmacro{cite:labeldate+extradate}%
+		}{%
+			\usebibmacro{cite:shorthand}%
+	}}{%
+		\iffieldundef{shorthand}{%
+			\printnames{labelname}%
+			\setunit{%
+				\global\booltrue{cbx:parens}%
+				\printdelim{nameyeardelim}\bibopenparen%
+			}%
+			\ifnumequal{%
+				\value{citecount}%
+			}{1}{%
+				\usebibmacro{prenote}%
+			}{}%
+			\usebibmacro{citeyear}%
+		}{%
+			\ifciteseen{%
+				\usebibmacro{cite:shorthand}%
+			}{%
+				\printnames{labelname}%
+				\setunit{%
+					\global\booltrue{cbx:parens}%
+					\printdelim{nameyeardelim}\bibopenparen%
+				}%
+				\ifnumequal{%
+					\value{citecount}%
+				}{1}{%
+					\usebibmacro{prenote}%
+				}{}%
+				\iffieldundef{labelyear}{%
+					\usebibmacro{cite:label}%
+					\setunit{%
+						\addcomma%
+						\addspace%
+					}%
+					\iffieldundef{shorthandintro}{%
+						\printtext{\bibstring{citedas}}%
+					}{%
+						\printtext{\printfield{shorthandintro}}%
+					}%
+					\addspace%
+					\usebibmacro{cite:shorthand}%
+				}{%
+					\usebibmacro{cite:labeldate+extradate}%
+					\setunit{%
+						\addcomma%
+						\addspace%
+					}%
+					\iffieldundef{shorthandintro}{%
+						\printtext{\bibstring{citedas}}%
+					}{%
+						\printtext{\printfield{shorthandintro}}%
+					}%
+					\addspace%
+					\usebibmacro{cite:shorthand}}}}}}%
 %------------------------------
 % ONLY FOR DISSERTATIONS
 %------------------------------
-\DeclareBibliographyCategory{inbib}	% a specific category for all citations in the text, NOT in the publication list
-\newcommand{\printpublication}[1]{\AtNextCite{\defcounter{maxnames}{99}}\fullcite{#1}}						% print all authors in case the \printpublication command is used
-\makeatletter										
+\DeclareBibliographyCategory{inbib}
+\newcommand{\printpublication}[1]{\AtNextCite{\defcounter{maxnames}{99}}\fullcite{#1}}
+\makeatletter
 \AtEveryCitekey{%
-  \ifcsstring{blx@delimcontext}{fullcite}	% if a citation is made with the fullcite command, do not show it in the references
-    {}
-    {\addtocategory{inbib}{\thefield{entrykey}}}}	% if is is normally cited later, add it to the references
+	\ifcsstring{blx@delimcontext}{fullcite}
+	{}
+	{\addtocategory{inbib}{\thefield{entrykey}}}}
 \makeatother
 %------------------------------
 % INTERNET
@@ -586,40 +588,36 @@ urlseen = {last access},
 % HYPERREF
 %------------------------------
 \hypersetup{%
-   	bookmarksnumbered=true,		% bookmarks are numbered in PDF
-   	bookmarksopen=false,			% bookmarks are closed when PDF is opened
-   	citebordercolor=blue,		% border color for citations
-   	colorlinks=false,			% if true: color the font, if false: put boxes around the links
-   	hypertexnames=true, 			% use guessable names for links
-   	linkbordercolor=red, 		% color for links
-   	linktocpage, 				% use page numbers as links in table of contents    
-   	pdfpagelayout=TwoPageRight, 	% automatically open PDF as double page, odd pages to the right
-   	urlbordercolor=cyan,			% border color for URLs
+	bookmarksnumbered=true,
+	bookmarksopen=false,
+	citebordercolor=blue,
+	colorlinks=false,
+	hypertexnames=true,
+	linkbordercolor=red,
+	linktocpage,
+	pdfpagelayout=TwoPageRight,
+	urlbordercolor=cyan,
 }%
 %------------------------------
 % MAKEINDEX
 %------------------------------
-\makenomenclature				% generate an .nlo file for the List of Symbols
+\makenomenclature
 \iflanguage{ngerman}{
 	\newcommand{\indextitle}{Indexverzeichnis}
 }{
-\iflanguage{english}{
-	\newcommand{\indextitle}{Index}
-}{}
+	\iflanguage{english}{
+		\newcommand{\indextitle}{Index}
+	}{}
 }
 \makeindex[
-	columns=2,					% number of columns
-	intoc=true,					% add to List of Contents
-	options= -s 05_Literature_and_Index/myindexstyle.ist,	% index style file
-	title={\indextitle},	    		% title of the Index
-	]							% generate an .idx file for the Index
+columns=2,
+intoc=true,
+options= -s 05_Literature_and_Index/myindexstyle.ist,
+title={\indextitle},
+]
 %------------------------------
 % OWN COMMANDS
 %------------------------------
-% You can use this area for additional own commands
-% in this way, it is simpler to pull a new version of the template - you can simply copy this area to the new version
-% make sure that these commands do not require or override commands from above
-
 % ---------- commonly used sets ----------
 \DeclareMathOperator{\N}{\mathbb{N}}
 \DeclareMathOperator{\C}{\mathbb{C}}
@@ -629,33 +627,24 @@ urlseen = {last access},
 \DeclareRobustCommand{\CatD}{\ensuremath{\mathcal{D}}}
 \DeclareRobustCommand{\Cat}[1]{\ensuremath{\mathcal{#1}}}
 \DeclareMathOperator{\Ob}{Ob}
-% adjoint
 \NewDocumentCommand{\adj}{mm}{\ensuremath{#1 \dashv #2}}
 
 % ---------- (Pre)Sheaves ----------
-% Presheaves on C: Set^{C^op}
 \DeclareRobustCommand{\Psh}[1]{\ensuremath{\cat{PSh}\!\left(#1\right)}}
-\DeclareRobustCommand{\PshC}{\Psh{\CatC}}              % \Psh(\mathscr{C})
-
-% Sheaves on C (requires you to have fixed a Grothendieck topology on C)
+\DeclareRobustCommand{\PshC}{\Psh{\CatC}}
 \DeclareRobustCommand{\Sh}[1]{\ensuremath{\cat{Sh}\!\left(#1\right)}}
-\DeclareRobustCommand{\ShC}{\Sh{\CatC}}                % \Sh(\mathscr{C})
-% explicit presheaves on set
+\DeclareRobustCommand{\ShC}{\Sh{\CatC}}
 \DeclareRobustCommand{\PshSet}[1]{\ensuremath{\Set^{\Opp{#1}}}}
-\DeclareRobustCommand{\PshSetC}{\PshSet{\CatC}}        % \Set^{\mathscr{C}^{op}}
-
+\DeclareRobustCommand{\PshSetC}{\PshSet{\CatC}}
 
 % ---------- Opposite category ----------
 \DeclareRobustCommand{\op}{\mathrm{op}}
 \NewDocumentCommand{\Opp}{m}{\ensuremath{#1^{\op}}}
-% Convenience shorthands for your default categories
 \DeclareRobustCommand{\CatCop}{\Opp{\CatC}}
 \DeclareRobustCommand{\CatDop}{\Opp{\CatD}}
 
-
 % ---------- Categories (sans serif) ----------
 \DeclareRobustCommand{\cat}[1]{\ensuremath{\mathsf{#1}}}
-
 \DeclareRobustCommand{\Cat}{\cat{Cat}}
 \DeclareRobustCommand{\Sch}{\cat{Sch}}
 \DeclareRobustCommand{\Set}{\cat{Set}}
@@ -666,20 +655,17 @@ urlseen = {last access},
 \DeclareRobustCommand{\Ab}{\cat{Ab}}
 \DeclareRobustCommand{\Ring}{\cat{Ring}}
 \DeclareRobustCommand{\CRing}{\cat{CRing}}
-\DeclareRobustCommand{\Mod}{\cat{Mod}} % use as \Mod_A
+\DeclareRobustCommand{\Mod}{\cat{Mod}}
 
-% Colimit
+% ---------- Limits and colimits ----------
 \DeclareMathOperator*{\colim}{colim}
 \DeclareMathOperator*{\Lim}{lim}
 \DeclareMathOperator*{\Eq}{Eq}
 \DeclareMathOperator*{\Coeq}{Coeq}
 
-
-% Over/under categories
-\NewDocumentCommand{\Over}{mm}{\ensuremath{#1_{/#2}}}  % \Over{\Sch}{S} -> \Sch_{/S}
-\NewDocumentCommand{\Under}{mm}{\ensuremath{#1_{#2/}}} % \Under{\Sch}{S} -> \Sch_{S/}
-
-% Convenience wrappers
+% ---------- Over/under categories ----------
+\NewDocumentCommand{\Over}{mm}{\ensuremath{#1_{/#2}}}
+\NewDocumentCommand{\Under}{mm}{\ensuremath{#1_{#2/}}}
 \NewDocumentCommand{\SchOver}{m}{\Over{\Sch}{#1}}
 \NewDocumentCommand{\SchUnder}{m}{\Under{\Sch}{#1}}
 
@@ -689,15 +675,13 @@ urlseen = {last access},
 \DeclareMathOperator{\Hom}{Hom}
 \DeclareMathOperator{\End}{End}
 \DeclareMathOperator{\Aut}{Aut}
-
-% (Optional) bracketed forms
 \NewDocumentCommand{\Specof}{m}{\ensuremath{\Spec\!\left(#1\right)}}
 \NewDocumentCommand{\Homof}{mm}{\ensuremath{\Hom\!\left(#1,#2\right)}}
 
-% --- Structure sheaf ---
-\DeclareRobustCommand{\OO}{\mathscr{O}}             % calligraphic O
-\DeclareRobustCommand{\OOX}{\mathscr{O}_X}		% Structure sheaf of X
-\NewDocumentCommand{\res}{mm}{#1\!\mid_{#2}}  % Restriction: \res{F}{U} = F|_U
+% ---------- Structure sheaf ----------
+\DeclareRobustCommand{\OO}{\mathscr{O}}
+\DeclareRobustCommand{\OOX}{\mathscr{O}_X}
+\NewDocumentCommand{\res}{mm}{#1\!\mid_{#2}}
 
 % ---------- Algebraic spaces ----------
 \DeclareRobustCommand{\AlgSp}{\cat{AlgSp}}
@@ -717,8 +701,6 @@ urlseen = {last access},
 \NewDocumentCommand{\StkOver}{m}{\Over{\Stk}{#1}}
 \NewDocumentCommand{\StkUnder}{m}{\Under{\Stk}{#1}}
 \NewDocumentCommand{\Stacksof}{m}{\ensuremath{\Stk\!\left(#1\right)}}
-
-% ---------- Stacks ----------
 \DeclareRobustCommand{\AlgStk}{\cat{AlgStk}}
 \NewDocumentCommand{\AlgStkOver}{m}{\Over{\AlgStk}{#1}}
 \NewDocumentCommand{\AlgStkUnder}{m}{\Under{\AlgStk}{#1}}
@@ -730,7 +712,7 @@ urlseen = {last access},
 \NewDocumentCommand{\inftyStkOver}{m}{\Over{\inftyStk}{#1}}
 \NewDocumentCommand{\inftyStkUnder}{m}{\Under{\inftyStk}{#1}}
 
-% ---------- Affine-schemes  ----------
+% ---------- Affine schemes ----------
 \DeclareRobustCommand{\Aff}{\cat{Aff}}
 \NewDocumentCommand{\AffOver}{m}{\Over{\Aff}{#1}}
 \NewDocumentCommand{\AffUnder}{m}{\Under{\Aff}{#1}}
@@ -740,6 +722,6 @@ urlseen = {last access},
 \NewDocumentCommand{\Totof}{m}{\ensuremath{\Tot\!\left(#1\right)}}
 \DeclareMathOperator{\Desc}{Desc}
 
-% --- Frequently used terms ---
+% ---------- Frequently used terms ----------
 \DeclareRobustCommand{\etale}{\'etal\'e}
 \DeclareRobustCommand{\Etale}{\'Etal\'e}
