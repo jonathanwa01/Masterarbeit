@@ -191,13 +191,22 @@ The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by fir
 	\end{tikzcd}\]
 \end{lemma}
 
-\begin{lemma}\label{lem:cms-universal-along-alg-spaces}
-	(\cite[Tag 0DUR][]{stacks-project})
-	The morphisms of lemma \ref{lem:local-ex-cms-in-affines} is universal for morphisms into algebraic spaces.
+\begin{lemma}[Universality of the local coarse moduli space]
+	\label{lem:cms-universal-along-alg-spaces}
+	(\cite[Lemma~4.3.5]{alper2026stacks}, \cite[Tag~0DUR]{stacks-project})
+	Let $G$ be a finite group acting on an affine scheme $U = \Spec(A)$,
+	let $\mathcal{X} = [U/G]$ be the associated quotient stack, and let
+	\[
+	\pi : \mathcal{X} \to X := \Spec(A^G)
+	\]
+	be the coarse moduli space of Lemma~\ref{lem:local-ex-cms-in-affines}.
+	Then $\pi$ is universal for morphisms to algebraic spaces: for every
+	algebraic space $Y$ and every morphism $h : \mathcal{X} \to Y$, there
+	exists a unique morphism $g : X \to Y$ such that $h = g \circ \pi$.
 \end{lemma}
 
 \begin{proof}
-	Let \(Y\) be an algebraic space and let
+	Let $Y$ be an algebraic space and let
 	\(h:\mathcal X\to Y\) be a morphism. We construct a unique morphism
 	\(g:X\to Y\) such that \(h=g\circ \pi\).
 	
@@ -205,6 +214,17 @@ The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by fir
 	\[
 	R=V\times_Y V.
 	\]
+	Without loss of generality, we may assume $V$ is a disjoint union of
+	affine schemes. Indeed, since $Y$ is an algebraic space, any \etale\
+	surjection $V \to Y$ from a scheme admits a refinement by such a cover.
+	Since $U = \Spec(A)$ is affine and $G$ is finite, the base change
+	$U \times_Y V_\alpha$ is affine for each affine component $V_\alpha \subseteq V$
+	(as $U \to Y$ factors through the affine $X = \Spec(A^G)$, and affine
+	morphisms are stable under base change \cite[Tag~01S5]{stacks-project}).
+	Hence $\mathcal{X}_{V_\alpha} \cong [(U \times_Y V_\alpha)/G]$ is a
+	quotient of an affine scheme by a finite group action, and
+	Lemma~\ref{lem:local-ex-cms-in-affines} applies.
+	
 	Then \(Y\) is the sheaf quotient of the étale equivalence relation
 	\[
 	R\rightrightarrows V.
