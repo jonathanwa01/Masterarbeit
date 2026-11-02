@@ -1,39 +1,94 @@
-# Masterarbeit
+# Master’s Thesis — The Keel–Mori Theorem
 
-## Overview
+Jonathan Wassermann
 
-This repository contains the source files for my Master’s Thesis, including the main document, figures, references, and build scripts required to generate the final PDF.
+A master's thesis on Deligne–Mumford stacks and coarse moduli spaces,
+with an emphasis on descent, finite-group quotients, and
+local-to-global constructions.
 
-## Building the Thesis PDF
+## Read the thesis
 
-To compile and build the final PDF, run the build script from the root directory:
+- [Thesis website](https://jonathanwa01.github.io/Masterarbeit/)
+- [Latest deployed PDF](https://jonathanwa01.github.io/Masterarbeit/thesis.pdf)
+
+The published document is a working draft and may contain incomplete
+arguments or material subject to revision.
+
+The website serves the most recently deployed successful build from
+the `main` branch. If a build or deployment fails, the previously
+published version remains available.
+
+## Mathematical focus
+
+- Delign-Mumford stacks and coarse moduli spaces
+- Descent and the reconstruction of global objects from local data
+- Quotients by finite groups and invariant rings
+- Étale local constructions and gluing
+- The Keel–Mori theorem
+
+The exposition follows an approach informed by Jarod Alper's notes.
+
+## Build locally
+
+### Requirements
+
+- Bash
+- A LaTeX distribution providing `pdflatex` and the required packages
+- Biber
+
+From the repository root, run:
 
 ```bash
+chmod +x build.sh
 ./build.sh
 ```
 
-This script will automatically compile the LaTeX sources and generate the final PDF output.
+The generated PDF is:
 
-## Project Structure
+```text
+Masterarbeit/main.pdf
+```
 
-* `src/` – Main LaTeX source files
+The script runs PDFLaTeX, Biber, and two further PDFLaTeX passes
+to resolve the bibliography and cross-references.
 
-## Requirements
+## Repository structure
 
-Make sure the following tools are installed:
+```text
+.
+├── .github/
+│   └── workflows/
+│       └── build-thesis.yml   # Compilation and Pages deployment
+├── Masterarbeit/             # LaTeX sources and supporting files
+├── website/
+│   └── index.html            # Thesis landing and download page
+├── build.sh                  # Local and CI build script
+├── LICENSE
+└── README.md
+```
 
-* LaTeX distribution (e.g., TeX Live or MiKTeX)
-* Bash shell
-* Standard LaTeX packages (included in most distributions)
+## Automated publication
 
-## Notes
+GitHub Actions compiles and publishes the thesis whenever `main`
+is updated.
 
-If the build fails, try running the build script again or clean the build files if a clean script is provided.
+The workflow:
+
+1. Installs the LaTeX build dependencies.
+2. Compiles the thesis using `./build.sh`.
+3. Uploads the PDF as a workflow artifact.
+4. Packages the landing page and PDF.
+5. Deploys the website to GitHub Pages.
+
+Feature-branch pushes do not trigger this workflow.
+
+[View workflow runs](https://github.com/jonathanwa01/Masterarbeit/actions)
 
 ## Author
 
-Mastersterarbeit - Jonathan Wassermann
+Jonathan Wassermann  
+[GitHub](https://github.com/jonathanwa01)
 
 ## License
 
-This project is for academic purposes.
+See [LICENSE](LICENSE) for the repository's license terms.
