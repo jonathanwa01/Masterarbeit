@@ -52,7 +52,7 @@ jobs:
       - name: Prepare website
         run: |
           mkdir -p _site
-          cp website/index.html _site/index.html
+          cp -r website/* _site/
           cp Masterarbeit/main.pdf _site/thesis.pdf
 
       - name: Upload Pages website
