@@ -2,9 +2,9 @@
 
 In this chapter, we introduce Grothendieck topologies on categories as a generalization of classical topologies on spaces. Given a topological space $X$, its open subsets form a category $\mathrm{Open}(X)$, whose objects are the open sets $U\subset X$ and whose morphisms are inclusions $V\hookrightarrow U$. Sheaves on $X$ can be viewed as contravariant functors on this category that satisfy a gluing condition with respect to open coverings. In this way, the usual notion of ``covering an open subset $U$ by smaller opens $\{U_i\subset U\}$'' is encoded purely in terms of the category $\mathrm{Open}(X)$.
 
-Grothendieck's idea is to abstract this picture: instead of restricting to open subsets and inclusion maps, one chooses a category $\CatC$ and specifies, for each object $U\in \CatC$, which families of morphisms $\{U_i \to U\}$ should be considered as ``coverings''. These covering families are required to satisfy axioms, which mimic those for open covers, and the resulting structure is called a Grothendieck topology on $\CatC$. In this way one can treat, for example, \etale\ or fppf coverings of schemes within the same framework as open coverings.
+Grothendieck's idea is to abstract this picture: Instead of restricting to open subsets and inclusion maps, one chooses a category $\CatC$ and specifies, for each object $U\in \CatC$, which families of morphisms $\{U_i \to U\}$ should be considered as ``coverings''. These covering families are required to satisfy axioms, which mimic those for open covers, and the resulting structure is called a Grothendieck topology on $\CatC$. In this way one can treat, for example, \etale\ or fppf coverings of schemes within the same framework as open coverings.
 
-Conceptually, this follows the Yoneda philosophy: an object can be studied through the morphisms into it. Sheaves are then the presheaves which satisfy a descent condition with respect to the covering families. We formulate this descent condition via the \v{C}ech nerve of a covering. This viewpoint comes from simplicial homotopy theory: a covering $U\to X$ gives a simplicial object $\check{C}(U/X)_\bullet$ augmented over $X$, a presheaf $F$ turns it into a cosimplicial object $F(\check{C}(U/X)_\bullet)$, and the sheaf condition says that $F(X)$ is the totalization of this cosimplicial object. For presheaves of sets the totalization is an ordinary limit, which we compute in Lemma~\ref{lem:tot-cosimplicial-set}. For presheaves of groupoids it is the $2$-categorical totalization studied in Chapter~\ref{chap:descent-theory}.
+Conceptually, this follows the Yoneda philosophy, saying that an object can be studied through the morphisms into it. Sheaves are then the presheaves which satisfy a descent condition with respect to the covering families. We formulate this descent condition via the \v{C}ech nerve of a covering. This viewpoint comes from simplicial homotopy theory: A covering $U\to X$ gives a simplicial object $\check{C}(U/X)_\bullet$ augmented over $X$, a presheaf $F$ turns it into a cosimplicial object $F(\check{C}(U/X)_\bullet)$, and the sheaf condition says that $F(X)$ is the totalization of this cosimplicial object. For presheaves of sets the totalization is an ordinary limit, which we compute in Lemma \ref{lem:tot-cosimplicial-set}. For presheaves of groupoids it is the $2$-categorical totalization studied in Chapter \ref{chap:descent-theory}.
 
 %==========================================================
 \section{Sites}
@@ -13,7 +13,7 @@ Conceptually, this follows the Yoneda philosophy: an object can be studied throu
 We work with the formulation of Grothendieck topologies in terms of covering families, which is the one used in \cite{stacks-project} and \cite{vistoli2007notes}.
 
 \begin{definition}[Site]\label{def:site}
-	(\cite[][Definition~2.24]{vistoli2007notes}, \cite[][Tag 00VH]{stacks-project})
+	(\cite[][Definition 2.24]{vistoli2007notes}, \cite[][Tag 00VH]{stacks-project})
 	Let $\CatC$ be a category. A \emph{Grothendieck topology} on $\CatC$ assigns to each object $X\in\CatC$ a collection of families of morphisms $\{U_i\to X\}_{i\in I}$, called \emph{coverings} of $X$, such that:
 	\begin{enumerate}
 		\item If $V\to X$ is an isomorphism, then $\{V\to X\}$ is a covering.
@@ -35,44 +35,6 @@ We work with the formulation of Grothendieck topologies in terms of covering fam
 
 \begin{remark}[Set-theoretic issues]\label{rem:set-theory-sites}
 	The category $\Sch$ of all schemes is not small. To obtain honest sites one replaces $\Sch$ by a suitably large but small full subcategory, see \cite[][Tag 021A]{stacks-project} for the \etale\ case. None of the arguments in this thesis depend on this choice, so we suppress it from the notation.
-\end{remark}
-
-
-\begin{lemma}[Lifting geometric points]
-	\label{lem:scheme-geometric-points-etale-cover}
-	Let $\{f_i:X_i\to Y\}_{i\in I}$ be an \etale\
-	covering, let $k$ be an algebraically closed field,
-	and let
-	\[
-	y:\Specof{k}\longrightarrow Y
-	\]
-	be a geometric point.
-	Then there exist an index $i$ and a morphism
-	\[
-	\widetilde{y}:\Specof{k}\longrightarrow X_i
-	\]
-	such that $f_i\circ\widetilde{y}=y$.
-\end{lemma}
-
-\begin{proof}
-	Base change gives an \etale\ covering
-	\[
-	\{X_i\times_Y\Specof{k}\to\Specof{k}\}_i.
-	\]
-	Since the family is jointly surjective, one
-	member is nonempty.
-	By Corollary~\ref{cor:etale-over-alg-closed},
-	its structure morphism admits a section.
-	Composing this section with the projection
-	to $X_i$ gives the required lift.
-\end{proof}
-
-\begin{remark}
-	The corresponding statement for algebraic spaces
-	is used in Lemma~\ref{lem:geometric-points-etale-cover}.
-	It ensures that geometric points of a prospective
-	coarse moduli space can be studied after passing
-	to an \etale\ covering.
 \end{remark}
 
 
@@ -120,9 +82,47 @@ We work with the formulation of Grothendieck topologies in terms of covering fam
 	A presheaf satisfying the sheaf condition for a refinement need not formally satisfy it for the original covering. We therefore never use Lemma~\ref{prop:affine-refinement-standard-topologies} to ``replace'' a covering in the verification of a sheaf condition, only to produce coverings with good properties.
 \end{remark}
 
-%==========================================================
+
+\begin{lemma}[Lifting geometric points]
+	\label{lem:scheme-geometric-points-etale-cover}
+	Let $\{f_i:X_i\to Y\}_{i\in I}$ be an \etale\
+	covering, let $k$ be an algebraically closed field,
+	and let
+	\[
+	y:\Specof{k}\longrightarrow Y
+	\]
+	be a geometric point.
+	Then there exist an index $i$ and a morphism
+	\[
+	\widetilde{y}:\Specof{k}\longrightarrow X_i
+	\]
+	such that $f_i\circ\widetilde{y}=y$.
+\end{lemma}
+
+\begin{proof}
+	Base change gives an \etale\ covering
+	\[
+	\{X_i\times_Y\Specof{k}\to\Specof{k}\}_i.
+	\]
+	Since the family is jointly surjective, one
+	member is nonempty.
+	By Corollary~\ref{cor:etale-over-alg-closed},
+	its structure morphism admits a section.
+	Composing this section with the projection
+	to $X_i$ gives the required lift.
+\end{proof}
+
+\begin{remark}
+	The corresponding statement for algebraic spaces
+	is used in Lemma~\ref{lem:geometric-points-etale-cover}.
+	It ensures that geometric points of a prospective
+	coarse moduli space can be studied after passing
+	to an \etale\ covering.
+\end{remark}
+
+
 \section{Simplicial objects and the \v{C}ech nerve}
-%==========================================================
+
 
 \begin{definition}[Simplicial and cosimplicial objects]\label{def:simplicial-objects}
 	Let $\Delta$ denote the simplex category, whose objects are the finite ordered sets $[n]=\{0<1<\dots<n\}$ for $n\geq 0$ and whose morphisms are non-decreasing maps. For $0\le i\le n$ we write $\delta^i:[n-1]\to[n]$ for the injection omitting $i$ and $\sigma^i:[n+1]\to[n]$ for the surjection repeating $i$.
@@ -148,7 +148,7 @@ We work with the formulation of Grothendieck topologies in terms of covering fam
 \end{definition}
 
 \begin{remark}[Homotopical meaning]\label{rem:cech-homotopy}
-	The \v{C}ech nerve is the $0$-coskeleton of $U$ in $\CatC_{/X}$: a morphism of simplicial objects $Y_\bullet\to(U/X)_\bullet$ over $X$ is the same as a morphism $Y_0\to U$ over $X$. If $\CatC=\Set$ and $p$ is surjective, then $(U/X)_\bullet$ is the nerve of the equivalence relation $U\times_X U\rightrightarrows U$, and every fiber of $(U/X)_\bullet\to X$ is the nerve of a contractible groupoid (the indiscrete groupoid on a nonempty set). Hence $(U/X)_\bullet\to X$ is a weak equivalence of simplicial sets, where $X$ is regarded as a constant simplicial set.
+	The \v{C}ech nerve is the $0$-coskeleton of $U$ in $\CatC_{/X}$: a morphism of simplicial objects $Y_\bullet\to(U/X)_\bullet$ over $X$ is the same as a morphism $Y_0\to U$ over $X$. If $\CatC=\Set$ and $p$ is surjective, then $(U/X)_\bullet$ is the nerve of the equivalence relation $U\times_X U\rightrightarrows U$, and every fiber of $(U/X)_\bullet\to X$ is the nerve of a contractible groupoid (the indiscrete groupoid on a nonempty set). Hence, $(U/X)_\bullet\to X$ is a weak equivalence of simplicial sets, where $X$ is regarded as a constant simplicial set.
 	More generally, if $p$ admits a section $s$, the augmented \v{C}ech nerve has an \emph{extra degeneracy} induced by $s$, which gives a contraction (see \cite[][Tag 019Z]{stacks-project}). Faithfully flat descent can be read as the algebraic analogue of this fact, which we see later in Chapter \ref{chap:descent-theory}.
 \end{remark}
 
@@ -161,7 +161,7 @@ We work with the formulation of Grothendieck topologies in terms of covering fam
 \end{lemma}
 
 \begin{proof}
-	It suffices to show that $(\coprod_i U_i)\times_X Y\cong\coprod_i(U_i\times_X Y)$ for every $X$-scheme $Y$, since the claim then follows by induction on $n$. The $U_i$ form a cover of $U$ by pairwise disjoint open subschemes. For the projection $\mathrm{pr}_1:U\times_XY\to U$, the open subscheme $\mathrm{pr}_1^{-1}(U_i)$ is canonically $U_i\times_XY$, and these open subschemes are pairwise disjoint and cover $U\times_XY$. This gives the isomorphism.
+	It suffices to show that $(\coprod_i U_i)\times_X Y\cong\coprod_i(U_i\times_X Y)$ for every $X$-scheme $Y$, since the claim then follows by induction on $n$. The $U_i$ form a cover of $U$ by pairwise disjoint open subschemes. For the projection $\mathrm{pr}_1:U\times_XY\to U$, the open subscheme $\mathrm{pr}_1^{-1}(U_i)$ is canonically identified with $U_i\times_XY$, and these open subschemes are pairwise disjoint and cover $U\times_XY$. This gives the isomorphism.
 \end{proof}
 
 \begin{lemma}[Totalization of a cosimplicial set]\label{lem:tot-cosimplicial-set}
@@ -184,7 +184,7 @@ We work with the formulation of Grothendieck topologies in terms of covering fam
 \end{proof}
 
 \begin{remark}
-	The limit of $X^\bullet$ only depends on its restriction to $\Delta_{\le 1}$, which is the $1$-categorical reason why the sheaf condition only involves $U$ and $U\times_X U$. The higher terms of the \v{C}ech nerve add no additional conditions on sets. For a cosimplicial groupoid, the $2$-categorical totalization depends on $\Delta_{\le 2}$, which produces the cocycle condition on $U\times_X U\times_X U$ (Remark~\ref{rem:desc-2-truncation}).
+	The limit of $X^\bullet$ only depends on its restriction to $\Delta_{\le 1}$, which is the $1$-categorical reason why the sheaf condition only involves $U$ and $U\times_X U$. The higher terms of the \v{C}ech nerve add no additional conditions on sets. For a cosimplicial groupoid however, the $2$-categorical totalization depends on $\Delta_{\le 2}$, which produces the cocycle condition on $U\times_X U\times_X U$ (Remark~\ref{rem:desc-2-truncation}).
 	For higher groupoids, higher simplices are needed.
 \end{remark}
 
@@ -236,7 +236,7 @@ To pass from covering families to single morphisms we need that $F$ converts dis
 \end{lemma}
 
 \begin{proof}
-	The empty family is a Zariski covering of $\varnothing$, and the sheaf condition for it says that $F(\varnothing)$ is the equalizer of two maps between empty products, i.e.\ a point. $\{U_j\hookrightarrow\coprod_iU_i\}_{j\in I}$ is a Zariski covering with $U_j\times_{\coprod_iU_i}U_k=U_j\cap U_k$ and since the $U_i$ are disjoint this is $U_j$ for $j=k$ and $\varnothing$ otherwise. On the factors with $j\ne k$ both maps in diagram \eqref{eq:sheaf-condition-equalizer} land in the point $F(\varnothing)$, and on the factors with $j=k$ both are the identity of $F(U_j)$. Hence the equalizer is all of $\prod_jF(U_j)$, and the sheaf condition gives the claim.
+	The empty family is a Zariski covering of $\varnothing$, and the sheaf condition for it says that $F(\varnothing)$ is the equalizer of two maps between empty products, i.e.\ a point. $\{U_j\hookrightarrow\coprod_iU_i\}_{j\in I}$ is a Zariski covering with $U_j\times_{\coprod_iU_i}U_k=U_j\cap U_k$ and since the $U_i$ are disjoint this is $U_j$ for $j=k$ and $\varnothing$ otherwise. On the factors with $j\ne k$ both maps in diagram \eqref{eq:sheaf-condition-equalizer} land in the point $F(\varnothing)$, and on the factors with $j=k$ both are the identity of $F(U_j)$. Hence the equalizer is all of $\prod_jF(U_j)$, and the sheaf condition proves the claim.
 \end{proof}
 
 \begin{proposition}[Sheaf condition as \v{C}ech descent]\label{lem:sheaf-single-cover}

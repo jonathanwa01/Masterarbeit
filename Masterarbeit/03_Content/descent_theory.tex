@@ -1,6 +1,6 @@
 \chapter{Descent Theory}\label{chap:descent-theory}
 
-In Chapter~\ref{chap:grothendieck-topologies} we formulated the sheaf condition via the \v{C}ech nerve: a presheaf of sets $F$ satisfies descent along $p:U\to X$ if
+In Chapter~\ref{chap:grothendieck-topologies} we formulated the sheaf condition via the \v{C}ech nerve: A presheaf of sets $F$ satisfies descent along $p:U\to X$ if
 \[
 F(X)\xrightarrow{\ \sim\ }\lim_{[n]\in\Delta}F\bigl((U/X)_n\bigr),
 \]
@@ -303,7 +303,8 @@ for the projections. In the notation of Definition~\ref{def:cech-nerve}, $\mathr
 Concretely, $f^*$ is fully faithful if and only if morphisms between pullbacks that are compatible with the canonical descent data descend uniquely, and $F$ satisfies descent along $f$ if in addition every descent datum is effective.
 
 \begin{remark}[The normalization is automatic]\label{rem:normalization-automatic}
-	Some authors additionally require $\Delta^*\varphi=\mathrm{id}_\xi$, where $\Delta:U\to U\times_XU$ is the diagonal and $\Delta^*\mathrm{pr}_0^*\xi=\xi=\Delta^*\mathrm{pr}_1^*\xi$. This follows from the cocycle condition: let $\Delta_3:U\to U\times_XU\times_XU$ be the small diagonal. Then $\mathrm{pr}_{ij}\circ\Delta_3=\Delta$ for all $i<j$, so pulling the cocycle condition back along $\Delta_3$ gives $\Delta^*\varphi=\Delta^*\varphi\circ\Delta^*\varphi$. Since $\varphi$ is an isomorphism, $\Delta^*\varphi=\mathrm{id}_\xi$.
+	Some authors additionally require $\Delta^*\varphi=\mathrm{id}_\xi$, where $\Delta:U\to U\times_XU$ is the diagonal and $\Delta^*\mathrm{pr}_0^*\xi=\xi=\Delta^*\mathrm{pr}_1^*\xi$, but this follows from the cocycle condition: 
+	Let $\Delta_3:U\to U\times_XU\times_XU$ be the small diagonal. Then $\mathrm{pr}_{ij}\circ\Delta_3=\Delta$ for all $i<j$, so pulling the cocycle condition back along $\Delta_3$ gives $\Delta^*\varphi=\Delta^*\varphi\circ\Delta^*\varphi$. Since $\varphi$ is an isomorphism, $\Delta^*\varphi=\mathrm{id}_\xi$.
 \end{remark}
 
 \begin{remark}[Sets, groupoids and categories]\label{rem:desc-sets}
@@ -379,13 +380,16 @@ The homotopical input is the following standard fact: an augmented cosimplicial 
 	\[
 	h\circ d^0=\mathrm{id}_{M^{n-1}}\qquad\text{and}\qquad h\circ d^i=d^{i-1}\circ h\quad(1\le i\le n)
 	\]
-	as maps $M^{n-1}\to M^{n-1}$, for all $n\ge0$. Then $h\partial+\partial h=\mathrm{id}$ on $M^n$ for $n\ge0$ and $h\partial=\mathrm{id}$ on $M^{-1}$. In particular the augmented complex $0\to M^{-1}\to M^0\to M^1\to\cdots$ is exact.
+	as maps $M^{n-1}\to M^{n-1}$, for all $n\ge0$. Then $h\partial+\partial h=\mathrm{id}$ on $M^n$ for $n\ge0$ and $h\partial=\mathrm{id}$ on $M^{-1}$. In particular the augmented complex 
+	\[
+		0\to M^{-1}\to M^0\to M^1\to\cdots
+	\] is exact.
 \end{lemma}
 
 \begin{proof}
 	On $M^{-1}$ we have $h\partial=hd^0=\mathrm{id}$. For $x\in M^n$ with $n\ge0$,
 	\[
-	h\partial x=\sum_{i=0}^{n+1}(-1)^ihd^ix=x+\sum_{i=1}^{n+1}(-1)^id^{i-1}hx=x-\sum_{j=0}^{n}(-1)^jd^jhx=x-\partial hx .
+	h\partial (x) = \sum_{i=0}^{n+1}(-1)^ihd^i(x)=x+\sum_{i=1}^{n+1}(-1)^id^{i-1}h(x)=x-\sum_{j=0}^{n}(-1)^jd^jh(x)=x-\partial h(x) .
 	\]
 	So $h$ is a contracting homotopy, and a contractible complex is exact.
 \end{proof}
