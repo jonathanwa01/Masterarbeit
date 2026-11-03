@@ -289,6 +289,103 @@ algebraically.
 \end{example}
 
 
+\section{\Etale\ morphisms over fields}
+
+
+Over a field, \etale\ schemes have a particularly simple
+description.
+
+\begin{lemma}[\Etale\ schemes over a field]
+	\label{lem:etale-over-field}
+	(\cite[][Tag 02GL]{stacks-project})
+	Let $k$ be a field and let $X$ be a $k$-scheme.
+	Then $X\to\Specof{k}$ is \etale\ if and only if
+	\[
+	X\cong\coprod_{i\in I}\Specof{k_i},
+	\]
+	where each $k_i/k$ is a finite separable field
+	extension.
+\end{lemma}
+
+\begin{remark}
+	The index set $I$ need not be finite.
+	Thus an \etale\ scheme over a field is a disjoint
+	union of finite separable points, but need not
+	be a finite scheme over that field.
+\end{remark}
+
+\begin{corollary}[Geometric fibres]
+	\label{cor:etale-geometric-fibres}
+	Let $f:X\to Y$ be \etale.
+	For every $y\in Y$, the fibre
+	\[
+	X_y=X\times_Y\Specof{\kappa(y)}
+	\]
+	is a disjoint union of spectra of finite
+	separable extensions of $\kappa(y)$.
+	For every geometric point
+	$\bar{y}:\Specof{k}\to Y$, the geometric fibre
+	is a disjoint union of copies of $\Specof{k}$.
+\end{corollary}
+
+\begin{proof}
+	Both fibre morphisms are \etale\ by base-change
+	stability. Apply Lemma~\ref{lem:etale-over-field}.
+	If $k$ is algebraically closed, every finite
+	separable extension of $k$ equals $k$.
+\end{proof}
+
+\begin{corollary}\label{cor:etale-over-alg-closed}
+	Let $k$ be algebraically closed and let
+	$X\to\Specof{k}$ be \etale.
+	Then
+	\[
+	X\cong\coprod_{i\in I}\Specof{k}.
+	\]
+	If $X$ is nonempty, the morphism
+	$X\to\Specof{k}$ admits a section.
+\end{corollary}
+
+\begin{proof}
+	The decomposition follows from
+	Lemma~\ref{lem:etale-over-field}.
+	If $X$ is nonempty, choose one component.
+	Its inclusion into $X$ is a section.
+\end{proof}
+
+\begin{proposition}[Fibrewise characterisation]
+	\label{prop:etale-characterisations}
+	(\cite[][Tag 02GM]{stacks-project})
+	Let $f:X\to Y$ be locally of finite presentation.
+	The following are equivalent:
+	\begin{enumerate}
+		\item $f$ is \etale;
+		\item $f$ is flat and unramified;
+		\item $f$ is flat and, for every $y\in Y$,
+		the fibre $X_y$ is a disjoint union of
+		spectra of finite separable extensions of
+		$\kappa(y)$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+	The equivalence of (1) and (2) is our definition
+	under the stated finite-presentation hypothesis.
+	The implication (1)$\Rightarrow$(3) follows from
+	Corollary~\ref{cor:etale-geometric-fibres}.
+	The converse is
+	\cite[][Tag 02GM]{stacks-project}.
+\end{proof}
+
+\begin{remark}
+	This characterisation gives a geometric picture:
+	an \etale\ morphism is a flat, locally finitely
+	presented family whose geometric fibres are
+	discrete reduced schemes.
+	It need not be finite or surjective.
+\end{remark}
+
+
 \section{Diagonals and open immersions}
 
 
@@ -554,99 +651,3 @@ moduli spaces.
 	an open covering of the target.
 \end{remark}
 
-
-\section{\Etale\ morphisms over fields}
-
-
-Over a field, \etale\ schemes have a particularly simple
-description.
-
-\begin{lemma}[\Etale\ schemes over a field]
-	\label{lem:etale-over-field}
-	(\cite[][Tag 02GL]{stacks-project})
-	Let $k$ be a field and let $X$ be a $k$-scheme.
-	Then $X\to\Specof{k}$ is \etale\ if and only if
-	\[
-	X\cong\coprod_{i\in I}\Specof{k_i},
-	\]
-	where each $k_i/k$ is a finite separable field
-	extension.
-\end{lemma}
-
-\begin{remark}
-	The index set $I$ need not be finite.
-	Thus an \etale\ scheme over a field is a disjoint
-	union of finite separable points, but need not
-	be a finite scheme over that field.
-\end{remark}
-
-\begin{corollary}[Geometric fibres]
-	\label{cor:etale-geometric-fibres}
-	Let $f:X\to Y$ be \etale.
-	For every $y\in Y$, the fibre
-	\[
-	X_y=X\times_Y\Specof{\kappa(y)}
-	\]
-	is a disjoint union of spectra of finite
-	separable extensions of $\kappa(y)$.
-	For every geometric point
-	$\bar{y}:\Specof{k}\to Y$, the geometric fibre
-	is a disjoint union of copies of $\Specof{k}$.
-\end{corollary}
-
-\begin{proof}
-	Both fibre morphisms are \etale\ by base-change
-	stability. Apply Lemma~\ref{lem:etale-over-field}.
-	If $k$ is algebraically closed, every finite
-	separable extension of $k$ equals $k$.
-\end{proof}
-
-\begin{corollary}\label{cor:etale-over-alg-closed}
-	Let $k$ be algebraically closed and let
-	$X\to\Specof{k}$ be \etale.
-	Then
-	\[
-	X\cong\coprod_{i\in I}\Specof{k}.
-	\]
-	If $X$ is nonempty, the morphism
-	$X\to\Specof{k}$ admits a section.
-\end{corollary}
-
-\begin{proof}
-	The decomposition follows from
-	Lemma~\ref{lem:etale-over-field}.
-	If $X$ is nonempty, choose one component.
-	Its inclusion into $X$ is a section.
-\end{proof}
-
-\begin{proposition}[Fibrewise characterisation]
-	\label{prop:etale-characterisations}
-	(\cite[][Tag 02GM]{stacks-project})
-	Let $f:X\to Y$ be locally of finite presentation.
-	The following are equivalent:
-	\begin{enumerate}
-		\item $f$ is \etale;
-		\item $f$ is flat and unramified;
-		\item $f$ is flat and, for every $y\in Y$,
-		the fibre $X_y$ is a disjoint union of
-		spectra of finite separable extensions of
-		$\kappa(y)$.
-	\end{enumerate}
-\end{proposition}
-
-\begin{proof}
-	The equivalence of (1) and (2) is our definition
-	under the stated finite-presentation hypothesis.
-	The implication (1)$\Rightarrow$(3) follows from
-	Corollary~\ref{cor:etale-geometric-fibres}.
-	The converse is
-	\cite[][Tag 02GM]{stacks-project}.
-\end{proof}
-
-\begin{remark}
-	This characterisation gives a geometric picture:
-	an \etale\ morphism is a flat, locally finitely
-	presented family whose geometric fibres are
-	discrete reduced schemes.
-	It need not be finite or surjective.
-\end{remark}
