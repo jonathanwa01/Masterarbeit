@@ -14,9 +14,7 @@ Stacks Project.
 Throughout this chapter, all morphisms are morphisms of
 schemes unless explicitly stated otherwise.
 
-%==========================================================
 \section{Definitions}
-%==========================================================
 
 \begin{definition}[Finiteness conditions]\label{def:lft-lfp}
 	(\cite[][Tags 01T2, 01TQ]{stacks-project})
@@ -102,8 +100,9 @@ algebraically.
 	
 \end{remark}
 
+
 \begin{definition}
-	(\cite[][Tag 01UM]{stacks-project})
+	(\cite[][Tag 01UU]{stacks-project})
 	Let $f:X\to Y$ be a morphism. The
 	sheaf of  differentials
 	$\Omega_{X/Y}$ is the quasi-coherent
@@ -394,6 +393,77 @@ moduli spaces.
 	\end{enumerate}
 \end{lemma}
 
+\begin{proof}[Proof of 1) and 2)]
+	\begin{enumerate}
+		\item 	Let $f:X\to Y$ and $g:Y\to Z$ be \etale.
+		Their composition is flat and locally of finite
+		presentation. It remains to show that
+		$\Omega_{X/Z}=0$, which can be checked on affine charts, since being $0$ is a local property.
+		
+		Choose compatible affine open subschemes
+		\[
+		U=\Specof{C}\subseteq X,\qquad
+		V=\Specof{B}\subseteq Y,\qquad
+		W=\Specof{A}\subseteq Z
+		\]
+		with $f(U)\subseteq V$ and $g(V)\subseteq W$.
+		Since $f$ and $g$ are \etale, we have
+		\[
+		\Omega_{C/B}=0,
+		\qquad
+		\Omega_{B/A}=0.
+		\]
+		
+		Let $M$ be a $C$-module and let $D:C\to M$
+		be an $A$-derivation.
+		Its restriction along $B\to C$ is an
+		$A$-derivation $B\to M$ and hence vanishes,
+		since $\Omega_{B/A}=0$.
+		Thus $D$ is a $B$-derivation.
+		Since $\Omega_{C/B}=0$, it follows that $D=0$.
+		
+		By the universal property, $\Omega_{C/A}=0$.
+		Therefore $\Omega_{X/Z}=0$, and $g\circ f$ is \etale.
+		
+		\item Let $f:X\to Y$ be \etale, let $Y'\to Y$ be
+		any morphism, and let $X'=X\times_Y Y'$.
+		The projection $f':X'\to Y'$ is flat and
+		locally of finite presentation.
+		
+		Again, to prove that $\Omega_{X'/Y'}=0$, we work on
+		affine charts. Let  $A\to B$ describe an affine
+		restriction of $f$, and let $A\to A'$ describe
+		a compatible affine restriction of $Y'\to Y$.
+		Set
+		\[
+		B'=B\otimes_A A'.
+		\]
+		Since $f$ is \etale, $\Omega_{B/A}=0$.
+		
+		Let $M$ be a $B'$-module and let $D:B'\to M$
+		be an $A'$-derivation.
+		The map
+		\[
+		B\longrightarrow M,
+		\qquad b\longmapsto D(b\otimes 1),
+		\]
+		is an $A$-derivation by $A$ bilinearity of the tensor product. Since  $\Omega_{B/A} = 0$, we have $D(b\otimes 1) = 0$ for all $b\in B$.
+		Moreover, $D(1\otimes a')=0$ for every $a'\in A'$, since $D$ is an $A'$-derivation.
+		The Leibniz rule therefore gives
+		\begin{align*}
+			D(b\otimes a')
+			&= D\bigl((b\otimes 1)(1\otimes a')\bigr) \\
+			&= (b\otimes 1)D(1\otimes a') + (1\otimes a')D(b\otimes 1) = 0.
+		\end{align*}
+		Since every element of $B'$ is a finite sum of elementary tensors, $D=0$.
+		Hence $\Omega_{B'/A'}=0$.
+		
+		These affine fibre products cover $X'$,
+		so $\Omega_{X'/Y'}=0$. Thus $f'$ is \etale.
+	\end{enumerate}
+\end{proof}
+
+
 \begin{remark}
 	The first three properties allow us to form
 	\etale\ coverings, pull them back, refine them
@@ -484,9 +554,9 @@ moduli spaces.
 	an open covering of the target.
 \end{remark}
 
-%==========================================================
+
 \section{\Etale\ morphisms over fields}
-%==========================================================
+
 
 Over a field, \etale\ schemes have a particularly simple
 description.
