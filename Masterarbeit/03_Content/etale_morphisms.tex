@@ -183,6 +183,7 @@ algebraically.
 \end{remark}
 
 \begin{example}[Standard \Etale\ morphisms]
+	\label{ex:standard-etale}
 	Let $A$ be a ring and $g,h \in A[X]$, such that $g$ is monic and the formal derivative $g'$ is invertible in $B:=A[X]_h/(g)$. Let $f:A \to B$ be the morphism given by $A \to A[X] \to A[X]_h \to B$, then the induced morphism $f^*:\Specof{B} \to \Specof{A}$ is \etale. We call this morphism the standard \etale\ morphism.
 \end{example}
 
@@ -223,9 +224,65 @@ algebraically.
 	In fact, all \etale\ morphisms are Zariski locally of this form, see \cite[Tag 02GT]{stacks-project}.
 \end{remark}
 
-%==========================================================
+\begin{corollary}\label{cor:etale-polynomial-local-ring}
+	Let $(A,\mathfrak{m})$ be a local ring with residue
+	field $k=A/\mathfrak{m}$, and let $g\in A[X]$ be a
+	monic polynomial of degree $n\geq 1$. Suppose that its reduction
+	$\bar{g} \in k[X]$ is separable, i.e.
+	\[
+	\gcd(\bar g,\bar g')=1.
+	\]
+	Then the morphism
+	\[
+	\Specof{A[X]/(g)}\longrightarrow\Specof{A}
+	\]
+	is finite and \etale.
+\end{corollary}
+
+\begin{proof}
+	Set $B=A[X]/(g)$ and write $x$ for the image of $X$
+	in $B$. Since $g$ is monic, $B$ is finite free over
+	$A$. In particular, $B$ is integral over $A$, so
+	every maximal ideal of $B$ contracts to
+	$\mathfrak m$, since $(A, \mathfrak{m})$ is local. Consequently,
+	\[
+	\mathfrak mB\subseteq\operatorname{Jac}(B).
+	\]
+	
+	By the separability assumption, the image of $g'(x)$
+	in
+	\[
+	B/\mathfrak mB\cong k[X]/(\bar g)
+	\]
+	is a unit. Since $\mathfrak mB$ is contained in the
+	Jacobson radical, $g'(x)$ is therefore a unit in $B$.
+	Example~\ref{ex:standard-etale}, applied with $h=1$,
+	shows that the morphism is \etale.
+	It is finite because $B$ is finite over $A$.
+\end{proof}
+
+\begin{example}[Finite separable field extensions]
+	\label{ex:finite-separable-etale}
+	Let $L/k$ be a finite separable field extension.
+	By the primitive element theorem, there exists
+	$\alpha\in L$ such that $L=k(\alpha)$.
+	If $g\in k[X]$ denotes the minimal polynomial of
+	$\alpha$, then
+	\[
+	L\cong k[X]/(g).
+	\]
+	Since $L/k$ is separable, $g$ is separable.
+	Applying Corollary~\ref{cor:etale-polynomial-local-ring}
+	to the local ring $(k, (0))$ shows that
+	\[
+	\Specof{L}\longrightarrow\Specof{k}
+	\]
+	is finite and \etale.
+\end{example}
+
+
 \section{Diagonals and open immersions}
-%==========================================================
+
 
 The following geometric characterisation of unramifiedness
 is especially important in the construction of coarse
