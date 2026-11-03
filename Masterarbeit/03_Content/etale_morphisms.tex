@@ -225,14 +225,11 @@ algebraically.
 \end{remark}
 
 \begin{corollary}\label{cor:etale-polynomial-local-ring}
-	Let $(A,\mathfrak{m})$ be a local ring with residue
-	field $k=A/\mathfrak{m}$, and let $g\in A[X]$ be a
-	monic polynomial of degree $n\geq 1$. Suppose that its reduction
-	$\bar{g} \in k[X]$ is separable, i.e.
-	\[
-	\gcd(\bar g,\bar g')=1.
-	\]
-	Then the morphism
+	Let $(A, \mathfrak{m})$ be a local ring with residue
+	field $\kappa(\mathfrak{m})$, and let
+	$g\in A[X]$ be a monic polynomial of degree $\geq 1$.
+	Suppose that its reduction $\bar{g}\in\kappa(\mathfrak{m}[X]$
+	is separable. Then
 	\[
 	\Specof{A[X]/(g)}\longrightarrow\Specof{A}
 	\]
@@ -240,23 +237,35 @@ algebraically.
 \end{corollary}
 
 \begin{proof}
-	Set $B=A[X]/(g)$ and write $x$ for the image of $X$
-	in $B$. Since $g$ is monic, $B$ is finite free over
-	$A$. In particular, $B$ is integral over $A$, so
-	every maximal ideal of $B$ contracts to
-	$\mathfrak m$, since $(A, \mathfrak{m})$ is local. Consequently,
+	Set $B=A[X]/(g)$ and write $x$ for the image of $X$.
+	Since $g$ is monic, $B$ is finite free over $A$.
+	Moreover,
 	\[
-	\mathfrak mB\subseteq\operatorname{Jac}(B).
+	B\otimes_A\kappa(\mathfrak{m}\cong\kappa(\mathfrak{m}[X]/(\bar g).
 	\]
+	Since $\gcd(\bar g,\bar g')=1$, the image of $g'(x)$
+	in $B\otimes_A\kappa(\mathfrak{m}$ is a unit. Thus, the
+	multiplication map
+	\[
+	\mu:B\longrightarrow B,\qquad
+	b\longmapsto g'(x)b
+	\]
+	becomes an isomorphism after tensoring with $\kappa(\mathfrak{m}$.
 	
-	By the separability assumption, the image of $g'(x)$
-	in
+	Let $M=\operatorname{coker}(\mu)$.
+	This is a finite $A$-module, since it is a quotient
+	of $B$. By right exactness of tensor products,
 	\[
-	B/\mathfrak mB\cong k[X]/(\bar g)
+	M\otimes_A\kappa(\mathfrak{m}
+	\cong\operatorname{coker}(\mu\otimes_A\kappa(\mathfrak{m})
+	=0.
 	\]
-	is a unit. Since $\mathfrak mB$ is contained in the
-	Jacobson radical, $g'(x)$ is therefore a unit in $B$.
-	Example~\ref{ex:standard-etale}, applied with $h=1$,
+	Nakayama's lemma therefore gives $M=0$.
+	Hence $\mu$ is surjective, so there exists $b\in B$
+	with $g'(x)b=1$.
+	
+	Thus $g'(x)$ is a unit, and
+	Example~\ref{ex:standard-etale}, with $h=1$,
 	shows that the morphism is \etale.
 	It is finite because $B$ is finite over $A$.
 \end{proof}
