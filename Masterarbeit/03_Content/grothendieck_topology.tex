@@ -174,13 +174,17 @@ We work with the formulation of Grothendieck topologies in terms of covering fam
 \end{lemma}
 
 \begin{proof}
-	An element of the limit is a family $(x_n)_n$, $x_n\in X^n$, with $X(\theta)(x_m)=x_n$ for all $\theta:[m]\to[n]$. For $0\le k\le n$ let $v_k:[0]\to[n]$ be the map with image $k$. Then $x_k=X(v_k)(x_0)$, so the family is determined by $x_0$, and the map is injective. Moreover $x_0$ lies in the equalizer, because $d^0(x_0)=x_1=d^1(x_0)$.
+	An element of the limit is a family $(x_n)_n$, $x_n\in X^n$, with $X(\theta)(x_m)=x_n$ for all $\theta:[m]\to[n]$.
+	Moreover $x_0$ lies in the equalizer, because $d^0(x_0)=x_1=d^1(x_0)$, so the map is welldefined.
+	For $0\le k\le n$ let $v_k^n:[0]\to[n]$ be the map with image $k$. Then in particular we have $x_n = X(v_k^n)(x_0)$.
+	So the family is determined by $x_0$, and the map is injective.
 	
-	Conversely, let $x_0\in X^0$ with $d^0x_0=d^1x_0$. For $0\le k\le n$, let $e:[1]\to[n]$ be the map with $e(0)=0$, $e(1)=k$. Then $v_0=e\circ\delta^1$ and $v_k=e\circ\delta^0$, hence
-	\[
-	X(v_k)(x_0)=X(e)\,d^0(x_0)=X(e)\,d^1(x_0)=X(v_0)(x_0).
-	\]
-	So $X(v)(x_0)$ does not depend on the choice of $v:[0]\to[n]$. Put $x_n:=X(v_0)(x_0)$. For $\theta:[m]\to[n]$ we get $X(\theta)(x_m)=X(\theta\circ v_0)(x_0)=x_n$, since $\theta\circ v_0:[0]\to[n]$. Thus $(x_n)_n$ lies in the limit and maps to $x_0$.
+	Conversely, let $x_0\in X^0$ with $d^0x_0=d^1x_0$. For $0\le k\le n$, let $e:[1]\to[n]$ be the map with $e(0)=0$, $e(1)=k$. Then $v_0^n = e\circ\delta^1$ and $v_k^n = e\circ\delta^0$, hence
+	\begin{align*}
+		X(v_k^n)(x_0) &= X(e)(X(\delta^0)(x_0)) = X(e)(d^0(x_0)) \\
+		&= X(e) d^1(x_0) =  X(e)(X(\delta^1)(x_0)) = X(v_0^n)(x_0).
+	\end{align*}
+	So $X(v)(x_0)$ does not depend on the choice of $v:[0]\to[n]$. Put $x_n:=X(v_0^n)(x_0)$. For $\theta:[m]\to[n]$ we get $X(\theta)(x_m)=X(\theta\circ v_0^m)(x_0)=x_n$, since $\theta\circ v_0:[0]\to[n]$. Thus $(x_n)_n\in \lim_{[n]\in\Delta}X^n$ and maps to $x_0$, so the map is surjective.
 \end{proof}
 
 \begin{remark}

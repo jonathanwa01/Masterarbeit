@@ -11,12 +11,20 @@ the lifting of geometric points along \etale\ coverings.
 Foundational results are stated with references to the
 Stacks Project.
 
-Throughout this chapter, all morphisms are morphisms of
-schemes unless explicitly stated otherwise.
 
-%==========================================================
+\section{Conventions and notation}
+
+Fix a field $k$. Unless explicitly stated otherwise, all
+schemes are schemes over $k$, all morphisms between them are morphisms over $k$, and all algebraic spaces and stacks are considered over $\Spec{k}$.
+
+We write $(\mathrm{Sch}/k)$ for the category of schemes over $k$. An unsubscripted product denotes a product over $\Spec{k}$, fibre products with an indicated base are taken over that base.
+
+We do not assume any finite-type, separatedness, or algebraic-closedness
+condition on $k$-schemes unless explicitly stated.
+
+Throughout this chapter, morphisms are morphisms of schemes. The definitions and results recalled below hold for arbitrary schemes. In later chapters they will be applied in the category $(\mathrm{Sch}/k)$.
+
 \section{Definitions}
-%==========================================================
 
 \begin{definition}[Finiteness conditions]\label{def:lft-lfp}
 	(\cite[][Tags 01T2, 01TQ]{stacks-project})
@@ -102,8 +110,9 @@ algebraically.
 	
 \end{remark}
 
+
 \begin{definition}
-	(\cite[][Tag 01UM]{stacks-project})
+	(\cite[][Tag 01UU]{stacks-project})
 	Let $f:X\to Y$ be a morphism. The
 	sheaf of  differentials
 	$\Omega_{X/Y}$ is the quasi-coherent
@@ -183,6 +192,7 @@ algebraically.
 \end{remark}
 
 \begin{example}[Standard \Etale\ morphisms]
+	\label{ex:standard-etale}
 	Let $A$ be a ring and $g,h \in A[X]$, such that $g$ is monic and the formal derivative $g'$ is invertible in $B:=A[X]_h/(g)$. Let $f:A \to B$ be the morphism given by $A \to A[X] \to A[X]_h \to B$, then the induced morphism $f^*:\Specof{B} \to \Specof{A}$ is \etale. We call this morphism the standard \etale\ morphism.
 \end{example}
 
@@ -223,83 +233,70 @@ algebraically.
 	In fact, all \etale\ morphisms are Zariski locally of this form, see \cite[Tag 02GT]{stacks-project}.
 \end{remark}
 
-%==========================================================
-\section{Diagonals and open immersions}
-%==========================================================
-
-The following geometric characterisation of unramifiedness
-is especially important in the construction of coarse
-moduli spaces.
-
-\begin{lemma}[Diagonal criterion for unramifiedness]
-	\label{lem:unramified-diagonal}
-	(\cite[][Tag 02GE]{stacks-project})
-	Let $f:X\to Y$ be a morphism.
-	\begin{enumerate}
-		\item If $f$ is unramified, its diagonal
-		\[
-		\Delta_{X/Y}:X\longrightarrow X\times_Y X
-		\]
-		is an open immersion.
-		\item Conversely, if $f$ is locally of finite
-		type and $\Delta_{X/Y}$ is an open immersion,
-		then $f$ is unramified.
-	\end{enumerate}
-\end{lemma}
-
-\begin{corollary}[Diagonal of an \etale\ morphism]
-	\label{cor:etale-separated-diagonal}
-	Let $f:X\to Y$ be \etale. Then
-	$\Delta_{X/Y}$ is an open immersion.
-	If $f$ is also separated, its diagonal is an open
-	and closed immersion. In that case there is a
-	decomposition
+\begin{corollary}\label{cor:etale-polynomial-local-ring}
+	Let $(A, \mathfrak{m})$ be a local ring with residue
+	field $\kappa(\mathfrak{m})$, and let
+	$g\in A[X]$ be a monic polynomial of degree $\geq 1$.
+	Suppose that its reduction $\bar{g}\in\kappa(\mathfrak{m}[X]$
+	is separable. Then
 	\[
-	X\times_Y X
-	=
-	\Delta_{X/Y}(X)
-	\sqcup
-	\bigl((X\times_Y X)\setminus\Delta_{X/Y}(X)\bigr)
+	\Specof{A[X]/(g)}\longrightarrow\Specof{A}
 	\]
-	into open and closed subschemes.
+	is finite and \etale.
 \end{corollary}
 
 \begin{proof}
-	An \etale\ morphism is unramified by definition,
-	so its diagonal is an open immersion by
-	Lemma~\ref{lem:unramified-diagonal}.
-	If $f$ is separated, its diagonal is also a closed
-	immersion by definition. Its image and the
-	complementary open subscheme are therefore both
-	open and closed.
+	Set $B=A[X]/(g)$ and write $x$ for the image of $X$.
+	Since $g$ is monic, $B$ is finite free over $A$.
+	Moreover,
+	\[
+	B\otimes_A\kappa(\mathfrak{m}\cong\kappa(\mathfrak{m}[X]/(\bar g).
+	\]
+	Since $\gcd(\bar g,\bar g')=1$, the image of $g'(x)$
+	in $B\otimes_A\kappa(\mathfrak{m}$ is a unit. Thus, the
+	multiplication map
+	\[
+	\mu:B\longrightarrow B,\qquad
+	b\longmapsto g'(x)b
+	\]
+	becomes an isomorphism after tensoring with $\kappa(\mathfrak{m}$.
+	
+	Let $M=\operatorname{coker}(\mu)$.
+	This is a finite $A$-module, since it is a quotient
+	of $B$. By right exactness of tensor products,
+	\[
+	M\otimes_A\kappa(\mathfrak{m}
+	\cong\operatorname{coker}(\mu\otimes_A\kappa(\mathfrak{m})
+	=0.
+	\]
+	Nakayama's lemma therefore gives $M=0$.
+	Hence $\mu$ is surjective, so there exists $b\in B$
+	with $g'(x)b=1$.
+	
+	Thus $g'(x)$ is a unit, and
+	Example~\ref{ex:standard-etale}, with $h=1$,
+	shows that the morphism is \etale.
+	It is finite because $B$ is finite over $A$.
 \end{proof}
 
-\begin{remark}
-	The corresponding statement for algebraic spaces
-	is \cite[][Tag 05W1]{stacks-project}.
-	After base change, it also applies to representable
-	\etale\ separated morphisms of Deligne--Mumford
-	stacks. This is the input used to prove that the
-	stabilizer-preserving locus is open in the
-	Keel--Mori construction.
-\end{remark}
-
-\begin{lemma}[Unramified monomorphisms]
-	\label{lem:unramified-monomorphism}
-	(\cite[][Tag 05VH]{stacks-project})
-	Let $f:X\to Y$ be unramified.
-	Then $f$ is a monomorphism if and only if it is
-	universally injective.
-\end{lemma}
-
-\begin{proposition}[Open immersion criterion]
-	\label{prop:etale-open-immersion}
-	(\cite[][Tag 02LC]{stacks-project})
-	A morphism $f:X\to Y$ is an open immersion if and
-	only if it is \etale\ and universally injective.
-	In particular, an \etale\ monomorphism is an
-	open immersion.
-\end{proposition}
+\begin{example}[Finite separable field extensions]
+	\label{ex:finite-separable-etale}
+	Let $L/k$ be a finite separable field extension.
+	By the primitive element theorem, there exists
+	$\alpha\in L$ such that $L=k(\alpha)$.
+	If $g\in k[X]$ denotes the minimal polynomial of
+	$\alpha$, then
+	\[
+	L\cong k[X]/(g).
+	\]
+	Since $L/k$ is separable, $g$ is separable.
+	Applying Corollary~\ref{cor:etale-polynomial-local-ring}
+	to the local ring $(k, (0))$ shows that
+	\[
+	\Specof{L}\longrightarrow\Specof{k}
+	\]
+	is finite and \etale.
+\end{example}
 
 
 \section{Locality}
@@ -327,6 +324,77 @@ moduli spaces.
 		(\cite[][Tag 02GW]{stacks-project}).
 	\end{enumerate}
 \end{lemma}
+
+\begin{proof}[Proof of 1) and 2)]
+	\begin{enumerate}
+		\item 	Let $f:X\to Y$ and $g:Y\to Z$ be \etale.
+		Their composition is flat and locally of finite
+		presentation. It remains to show that
+		$\Omega_{X/Z}=0$, which can be checked on affine charts, since being $0$ is a local property.
+		
+		Choose compatible affine open subschemes
+		\[
+		U=\Specof{C}\subseteq X,\qquad
+		V=\Specof{B}\subseteq Y,\qquad
+		W=\Specof{A}\subseteq Z
+		\]
+		with $f(U)\subseteq V$ and $g(V)\subseteq W$.
+		Since $f$ and $g$ are \etale, we have
+		\[
+		\Omega_{C/B}=0,
+		\qquad
+		\Omega_{B/A}=0.
+		\]
+		
+		Let $M$ be a $C$-module and let $D:C\to M$
+		be an $A$-derivation.
+		Its restriction along $B\to C$ is an
+		$A$-derivation $B\to M$ and hence vanishes,
+		since $\Omega_{B/A}=0$.
+		Thus $D$ is a $B$-derivation.
+		Since $\Omega_{C/B}=0$, it follows that $D=0$.
+		
+		By the universal property, $\Omega_{C/A}=0$.
+		Therefore $\Omega_{X/Z}=0$, and $g\circ f$ is \etale.
+		
+		\item Let $f:X\to Y$ be \etale, let $Y'\to Y$ be
+		any morphism, and let $X'=X\times_Y Y'$.
+		The projection $f':X'\to Y'$ is flat and
+		locally of finite presentation.
+		
+		Again, to prove that $\Omega_{X'/Y'}=0$, we work on
+		affine charts. Let  $A\to B$ describe an affine
+		restriction of $f$, and let $A\to A'$ describe
+		a compatible affine restriction of $Y'\to Y$.
+		Set
+		\[
+		B'=B\otimes_A A'.
+		\]
+		Since $f$ is \etale, $\Omega_{B/A}=0$.
+		
+		Let $M$ be a $B'$-module and let $D:B'\to M$
+		be an $A'$-derivation.
+		The map
+		\[
+		B\longrightarrow M,
+		\qquad b\longmapsto D(b\otimes 1),
+		\]
+		is an $A$-derivation by $A$ bilinearity of the tensor product. Since  $\Omega_{B/A} = 0$, we have $D(b\otimes 1) = 0$ for all $b\in B$.
+		Moreover, $D(1\otimes a')=0$ for every $a'\in A'$, since $D$ is an $A'$-derivation.
+		The Leibniz rule therefore gives
+		\begin{align*}
+			D(b\otimes a')
+			&= D\bigl((b\otimes 1)(1\otimes a')\bigr) \\
+			&= (b\otimes 1)D(1\otimes a') + (1\otimes a')D(b\otimes 1) = 0.
+		\end{align*}
+		Since every element of $B'$ is a finite sum of elementary tensors, $D=0$.
+		Hence $\Omega_{B'/A'}=0$.
+		
+		These affine fibre products cover $X'$,
+		so $\Omega_{X'/Y'}=0$. Thus $f'$ is \etale.
+	\end{enumerate}
+\end{proof}
+
 
 \begin{remark}
 	The first three properties allow us to form
@@ -418,24 +486,117 @@ moduli spaces.
 	an open covering of the target.
 \end{remark}
 
-%==========================================================
+
 \section{\Etale\ morphisms over fields}
-%==========================================================
 
 Over a field, \etale\ schemes have a particularly simple
 description.
 
+\begin{lemma}[Affine \etale\ schemes over a field]
+	\label{lem:etale-algebra-structure-lemma}
+	Let $k$ be an algebraically closed field and let $k \to A$ be a $k$ algebra. If $k\to A$ is \etale\, then
+	\[
+		A \cong \prod_{i=1}^n k.
+	\]
+\end{lemma}
+
+\begin{proof}
+	Since $k\to A$ is \etale, $A$ is a finitely presented $k$ algebra. Let $\mathfrak{m} \subset A$ be maximal.
+	By Hilberts Nullstellensatz, the there is an isomorphism $A/\mathfrak{m} \cong k$. Consider the quotient map
+	\[
+		\varphi: A \xrightarrow{\cong} A/\mathfrak{m} \cong k.
+	\]
+	Since $k\to A$ is \etale, $\Omega_{A/k} = 0$ and hence $\operatorname{Der}_k(A,M) = 0$ for all $A$-modules $M$.
+	Consider the $A$-module $\mathfrak{m}/\mathfrak{m}^2$ and 
+	\begin{align*}
+		D: A &\to \mathfrak{m}/\mathfrak{m}^2 \\
+		a &\mapsto [a - \varphi(a)]
+	\end{align*}
+	Then $D$ is an $k$-derivation, hence $D = 0$. But for every $m\in \mathfrak{m}$ we have $\varphi(m) = 0$ and therefore $[m] = [m - \varphi(m)] = D(m) = 0$. Thus, $\mathfrak{m} / \mathfrak{m}^2 = 0$.
+	
+	
+	Since $A$ is a finitely generated algebra over a field,
+	it is Noetherian. Localizing the equality
+	$\mathfrak m/\mathfrak m^2=0$ gives
+	\[
+	\frac{\mathfrak m A_{\mathfrak m}}
+	{(\mathfrak m A_{\mathfrak m})^2}=0.
+	\]
+	Now applying Nakayama's lemma to the finitely generated
+	$A_{\mathfrak m}$-module $\mathfrak m A_{\mathfrak m}$,
+	yields
+	\[
+	\mathfrak m A_{\mathfrak m}=0.
+	\]
+	Thus $A_{\mathfrak m}$ is a field for every maximal
+	ideal $\mathfrak m\subset A$, and hence every maximal ideal has $\mathfrak{ht}(\mathfrak{m}) = \dim(A_\mathfrak{ht}) = 0$.
+	
+	It follows that every prime ideal of $A$ is maximal, i.e. $A$ is zero-dimensional.
+	Since $A$ is Noetherian, it is Artinian.
+	
+	The structure theorem for Artinian rings now gives
+	\[
+	A\cong\prod_{i=1}^{n}A_{\mathfrak m_i},
+	\]
+	where $\mathfrak m_1,\ldots,\mathfrak m_n$ are the
+	maximal ideals of $A$.
+	For each $i$, we have
+	\[
+	A_{\mathfrak m_i}
+	\cong A_{\mathfrak m_i}/\mathfrak m_iA_{\mathfrak m_i}
+	\cong A/\mathfrak m_i
+	\cong k,
+	\]
+	where the last isomorphism follows from Hilbert's
+	Nullstellensatz. Hence,
+	\[
+	A\cong\prod_{i=1}^{n}k.
+	\]
+\end{proof}
+
 \begin{lemma}[\Etale\ schemes over a field]
 	\label{lem:etale-over-field}
 	(\cite[][Tag 02GL]{stacks-project})
-	Let $k$ be a field and let $X$ be a $k$-scheme.
+	Let $k$ be an algebraically closed field and let $X$ be a $k$-scheme.
 	Then $X\to\Specof{k}$ is \etale\ if and only if
 	\[
-	X\cong\coprod_{i\in I}\Specof{k_i},
+	X\cong\coprod_{i\in I}\Specof{k}.
 	\]
-	where each $k_i/k$ is a finite separable field
-	extension.
 \end{lemma}
+
+\begin{proof}
+	\begin{proof}
+		Suppose first that $X\to\Specof{k}$ is \etale.
+		For each $x\in X$, choose an affine open
+		neighbourhood $U=\Specof{A}$.
+		The restriction $U\to\Specof{k}$ is again \etale, which makes $A$ into an \etale\ $k$ algebra.
+		So Lemma \ref{lem:etale-algebra-structure-lemma} gives
+		\[
+		A\cong\prod_{j = 1}^{n} k,
+		\qquad\text{hence}\qquad
+		U\cong\coprod_{j = 1}^{n} \Specof{k}.
+		\]
+		Thus $\{x\}$ is open in $U$, hence in $X$,
+		and its induced open subscheme is isomorphic
+		to $\Specof{k}$ as a $k$-scheme.
+		These pairwise disjoint open subschemes cover $X$,
+		so
+		\[
+		X\cong\coprod_{x\in |X|}\Specof{k}.
+		\]
+		
+		Conversely, suppose that
+		\[
+		X\cong\coprod_{i\in I}\Specof{k}
+		\]
+		as $k$-schemes.
+		Each summand is open in $X$, and the restriction
+		of the structure morphism to each summand is
+		the identity of $\Specof{k}$, hence \etale.
+		Since being \etale\ is local on the source,
+		$X\to\Specof{k}$ is \etale.
+	\end{proof}
+\end{proof}
 
 \begin{remark}
 	The index set $I$ need not be finite.
@@ -444,73 +605,80 @@ description.
 	be a finite scheme over that field.
 \end{remark}
 
-\begin{corollary}[Geometric fibres]
-	\label{cor:etale-geometric-fibres}
-	Let $f:X\to Y$ be \etale.
-	For every $y\in Y$, the fibre
-	\[
-	X_y=X\times_Y\Specof{\kappa(y)}
-	\]
-	is a disjoint union of spectra of finite
-	separable extensions of $\kappa(y)$.
-	For every geometric point
-	$\bar{y}:\Specof{k}\to Y$, the geometric fibre
-	is a disjoint union of copies of $\Specof{k}$.
-\end{corollary}
+\section{Diagonals and open immersions}
 
-\begin{proof}
-	Both fibre morphisms are \etale\ by base-change
-	stability. Apply Lemma~\ref{lem:etale-over-field}.
-	If $k$ is algebraically closed, every finite
-	separable extension of $k$ equals $k$.
-\end{proof}
 
-\begin{corollary}\label{cor:etale-over-alg-closed}
-	Let $k$ be algebraically closed and let
-	$X\to\Specof{k}$ be \etale.
-	Then
-	\[
-	X\cong\coprod_{i\in I}\Specof{k}.
-	\]
-	If $X$ is nonempty, the morphism
-	$X\to\Specof{k}$ admits a section.
-\end{corollary}
+The following geometric characterisation of unramifiedness
+is especially important in the construction of coarse
+moduli spaces.
 
-\begin{proof}
-	The decomposition follows from
-	Lemma~\ref{lem:etale-over-field}.
-	If $X$ is nonempty, choose one component.
-	Its inclusion into $X$ is a section.
-\end{proof}
-
-\begin{proposition}[Fibrewise characterisation]
-	\label{prop:etale-characterisations}
-	(\cite[][Tag 02GM]{stacks-project})
-	Let $f:X\to Y$ be locally of finite presentation.
-	The following are equivalent:
+\begin{lemma}[Diagonal criterion for unramifiedness]
+	\label{lem:unramified-diagonal}
+	(\cite[][Tag 02GE]{stacks-project})
+	Let $f:X\to Y$ be a morphism.
 	\begin{enumerate}
-		\item $f$ is \etale;
-		\item $f$ is flat and unramified;
-		\item $f$ is flat and, for every $y\in Y$,
-		the fibre $X_y$ is a disjoint union of
-		spectra of finite separable extensions of
-		$\kappa(y)$.
+		\item If $f$ is unramified, its diagonal
+		\[
+		\Delta_{X/Y}:X\longrightarrow X\times_Y X
+		\]
+		is an open immersion.
+		\item Conversely, if $f$ is locally of finite
+		type and $\Delta_{X/Y}$ is an open immersion,
+		then $f$ is unramified.
 	\end{enumerate}
-\end{proposition}
+\end{lemma}
+
+\begin{corollary}[Diagonal of an \etale\ morphism]
+	\label{cor:etale-separated-diagonal}
+	Let $f:X\to Y$ be \etale. Then
+	$\Delta_{X/Y}$ is an open immersion.
+	If $f$ is also separated, its diagonal is an open
+	and closed immersion. In that case there is a
+	decomposition
+	\[
+	X\times_Y X
+	=
+	\Delta_{X/Y}(X)
+	\sqcup
+	\bigl((X\times_Y X)\setminus\Delta_{X/Y}(X)\bigr)
+	\]
+	into open and closed subschemes.
+\end{corollary}
 
 \begin{proof}
-	The equivalence of (1) and (2) is our definition
-	under the stated finite-presentation hypothesis.
-	The implication (1)$\Rightarrow$(3) follows from
-	Corollary~\ref{cor:etale-geometric-fibres}.
-	The converse is
-	\cite[][Tag 02GM]{stacks-project}.
+	An \etale\ morphism is unramified by definition,
+	so its diagonal is an open immersion by
+	Lemma~\ref{lem:unramified-diagonal}.
+	If $f$ is separated, its diagonal is also a closed
+	immersion by definition. Its image and the
+	complementary open subscheme are therefore both
+	open and closed.
 \end{proof}
 
 \begin{remark}
-	This characterisation gives a geometric picture:
-	an \etale\ morphism is a flat, locally finitely
-	presented family whose geometric fibres are
-	discrete reduced schemes.
-	It need not be finite or surjective.
+	The corresponding statement for algebraic spaces
+	is \cite[][Tag 05W1]{stacks-project}.
+	After base change, it also applies to representable
+	\etale\ separated morphisms of Deligne--Mumford
+	stacks. This is the input used to prove that the
+	stabilizer-preserving locus is open in the
+	Keel--Mori construction.
 \end{remark}
+
+\begin{lemma}[Unramified monomorphisms]
+	\label{lem:unramified-monomorphism}
+	(\cite[][Tag 05VH]{stacks-project})
+	Let $f:X\to Y$ be unramified.
+	Then $f$ is a monomorphism if and only if it is
+	universally injective.
+\end{lemma}
+
+\begin{proposition}[Open immersion criterion]
+	\label{prop:etale-open-immersion}
+	(\cite[][Tag 02LC]{stacks-project})
+	A morphism $f:X\to Y$ is an open immersion if and
+	only if it is \etale\ and universally injective.
+	In particular, an \etale\ monomorphism is an
+	open immersion.
+\end{proposition}
+
