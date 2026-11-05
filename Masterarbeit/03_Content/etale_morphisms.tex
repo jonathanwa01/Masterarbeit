@@ -489,7 +489,7 @@ algebraically.
 
 \section{\Etale\ morphisms over fields}
 
-Over a field, \etale\ schemes have a particularly simple
+Over algebraically closed fields, \etale\ schemes have a particularly simple
 description.
 
 \begin{lemma}[Affine \etale\ schemes over a field]
@@ -506,14 +506,24 @@ description.
 	\[
 		\varphi: A \xrightarrow{\cong} A/\mathfrak{m} \cong k.
 	\]
+	We identify $k$ with its image in $A$ via the injection $k\to A$.
 	Since $k\to A$ is \etale, $\Omega_{A/k} = 0$ and hence $\operatorname{Der}_k(A,M) = 0$ for all $A$-modules $M$.
 	Consider the $A$-module $\mathfrak{m}/\mathfrak{m}^2$ and 
 	\begin{align*}
 		D: A &\to \mathfrak{m}/\mathfrak{m}^2 \\
-		a &\mapsto [a - \varphi(a)]
+		a &\mapsto [a - \varphi(a)].
 	\end{align*}
-	Then $D$ is an $k$-derivation, hence $D = 0$. But for every $m\in \mathfrak{m}$ we have $\varphi(m) = 0$ and therefore $[m] = [m - \varphi(m)] = D(m) = 0$. Thus, $\mathfrak{m} / \mathfrak{m}^2 = 0$.
-	
+	Since $\ker\varphi = \mathfrak{m}$, $a - \varphi(a) \in \mathfrak{m}$ for all $a$, so $D$ is well-defined.
+	Clearly $D$ is $A$-linear. For $x\in k$ we have $\varphi(x) = x$ and hence, $D(x) = [x - \varphi(x)] = [x - x] = 0$.
+	For $a, b \in A$ we have
+	\begin{align*}
+		D(ab) - aD(b) - bD(a) &= [ab - \varphi(a)\varphi(b)] - a[b - \varphi(b)] = b [a - \varphi(a)] \\
+		&= [ab -\varphi(a)\varphi(b) - a(b -\varphi(b)) - b(a - \varphi(a))] \\
+		&= [- (a - \varphi (a))(b - \varphi(b))]	\\
+		&= 0,
+	\end{align*}
+	since both factors are in $\mathfrak{m}$, and hence, the product vanishes mod $\mathfrak{m}^2$.
+	This makes $D$ a $k$-derivation, hence $D = 0$. But for every $m\in \mathfrak{m}$ we have $\varphi(m) = 0$ and therefore $[m] = [m - \varphi(m)] = D(m) = 0$. Thus, $\mathfrak{m} / \mathfrak{m}^2 = 0$.
 	
 	Since $A$ is a finitely generated algebra over a field,
 	it is Noetherian. Localizing the equality
@@ -554,10 +564,71 @@ description.
 	\]
 \end{proof}
 
+\begin{remark}
+	Morally, an affine \etale\ $k$-scheme over an algebraically
+	closed field $k$ consists of finitely many points with no
+	infinitesimal structure. Indeed, unramifiedness implies
+	that the cotangent space $\mathfrak{m} / \mathfrak{m}^2$ at every closed point vanishes.
+	Since the local rings are Noetherian, Nakayama's lemma
+	then shows that these local rings are fields.
+	Consequently, $X$ is reduced and zero-dimensional.
+	As $X$ is affine and of finite type over $k$, it is
+	therefore a finite disjoint union of reduced closed
+	points, each isomorphic to $\Specof{k}$ by
+	Hilbert's Nullstellensatz.
+\end{remark}
+
+\begin{remark}
+	More generally, let $K$ be an arbitrary field.
+	A $K$-algebra $A$ is \etale\ over $K$ if and only if
+	\[
+	A \cong \prod_{i=1}^{n} L_i
+	\]
+	as $K$-algebras, where each $L_i/K$ is a finite
+	separable field extension
+	(\cite[][Tag 02GL]{stacks-project}).
+	This reflects the structure of finite separable field extension being \etale\ morphisms of closed points being as in Example \ref{ex:finite-separable-etale}.
+\end{remark}
+
+\begin{example}[A nonreduced point]	
+	Let $k$ be an algebraically closed field and set
+	\[
+	A = k[\varepsilon]/(\varepsilon^2),
+	\qquad X=\Specof{A}.
+	\]
+	Although $X$ consists of a single closed point,
+	its structure morphism $X \to \Specof{k}$ is not
+	unramified, since the unique maximal ideal
+	$\mathfrak m=(\varepsilon)$ satisfies
+	\[
+	\mathfrak m/\mathfrak m^2
+	=(\varepsilon)\cong k.
+	\]
+	
+	Hence this point has a nonzero cotangent space, and by the calculations above,
+	\begin{align*}
+		D:A&\longrightarrow\mathfrak m/\mathfrak m^2 \\
+		 a+b\varepsilon&\longmapsto[b\varepsilon]
+	\end{align*}
+	is a $k$-derivation. It is nonzero, since
+	$D(\varepsilon)=[\varepsilon]\neq 0$.
+	
+	
+	By the universal property of K\"ahler differentials,
+	$D$ factors through the universal derivation:
+	\[
+	A\xrightarrow{d}\Omega_{A/k}
+	\longrightarrow\mathfrak m/\mathfrak m^2.
+	\]
+	In particular, $d\varepsilon\neq 0$, since its
+	image is $[\varepsilon]\neq 0$.
+	Thus $\Omega_{A/k}\neq 0$, i.e. it carries infinitesimal structure that an unramified $k$-scheme cannot have.
+\end{example}
+
 \begin{lemma}[\Etale\ schemes over a field]
 	\label{lem:etale-over-field}
 	(\cite[][Tag 02GL]{stacks-project})
-	Let $k$ be an algebraically closed field and let $X$ be a $k$-scheme.
+	Let $k$ be an algebraically closed field and let $X$ be a scheme.
 	Then $X\to\Specof{k}$ is \etale\ if and only if
 	\[
 	X\cong\coprod_{i\in I}\Specof{k}.
@@ -565,44 +636,41 @@ description.
 \end{lemma}
 
 \begin{proof}
-	\begin{proof}
-		Suppose first that $X\to\Specof{k}$ is \etale.
-		For each $x\in X$, choose an affine open
-		neighbourhood $U=\Specof{A}$.
-		The restriction $U\to\Specof{k}$ is again \etale, which makes $A$ into an \etale\ $k$ algebra.
-		So Lemma \ref{lem:etale-algebra-structure-lemma} gives
-		\[
-		A\cong\prod_{j = 1}^{n} k,
-		\qquad\text{hence}\qquad
-		U\cong\coprod_{j = 1}^{n} \Specof{k}.
-		\]
-		Thus $\{x\}$ is open in $U$, hence in $X$,
-		and its induced open subscheme is isomorphic
-		to $\Specof{k}$ as a $k$-scheme.
-		These pairwise disjoint open subschemes cover $X$,
-		so
-		\[
-		X\cong\coprod_{x\in |X|}\Specof{k}.
-		\]
-		
-		Conversely, suppose that
-		\[
-		X\cong\coprod_{i\in I}\Specof{k}
-		\]
-		as $k$-schemes.
-		Each summand is open in $X$, and the restriction
-		of the structure morphism to each summand is
-		the identity of $\Specof{k}$, hence \etale.
-		Since being \etale\ is local on the source,
-		$X\to\Specof{k}$ is \etale.
-	\end{proof}
+	Suppose first that $X\to\Specof{k}$ is \etale.
+	For each $x\in X$, choose an affine open
+	neighbourhood $U=\Specof{A}$.
+	The restriction $U\to\Specof{k}$ is again \etale, which makes $A$ into an \etale\ $k$ algebra.
+	So Lemma \ref{lem:etale-algebra-structure-lemma} gives
+	\[
+	A\cong\prod_{j = 1}^{n} k,
+	\qquad\text{hence}\qquad
+	U\cong\coprod_{j = 1}^{n} \Specof{k}.
+	\]
+	Thus $\{x\}$ is open in $U$, hence in $X$,
+	and its induced open subscheme is isomorphic
+	to $\Specof{k}$ as a $k$-scheme.
+	These pairwise disjoint open subschemes cover $X$,
+	so
+	\[
+	X\cong\coprod_{x\in |X|}\Specof{k}.
+	\]
+	
+	Conversely, suppose that
+	\[
+	X\cong\coprod_{i\in I}\Specof{k}
+	\]
+	as $k$-schemes.
+	Each summand is open in $X$, and the restriction
+	of the structure morphism to each summand is
+	the identity of $\Specof{k}$, hence \etale.
+	Since being \etale\ is local on the source,
+	$X\to\Specof{k}$ is \etale.
 \end{proof}
 
 \begin{remark}
 	The index set $I$ need not be finite.
-	Thus an \etale\ scheme over a field is a disjoint
-	union of finite separable points, but need not
-	be a finite scheme over that field.
+	Thus an \etale\ scheme over an algebraically closed field is a disjoint
+	union of closed points, but need not be a finite scheme over that field.
 \end{remark}
 
 \section{Diagonals and open immersions}
