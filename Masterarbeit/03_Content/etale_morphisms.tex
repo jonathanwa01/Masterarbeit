@@ -489,24 +489,113 @@ algebraically.
 
 \section{\Etale\ morphisms over fields}
 
-
 Over a field, \etale\ schemes have a particularly simple
 description.
+
+\begin{lemma}[Affine \etale\ schemes over a field]
+	\label{lem:etale-algebra-structure-lemma}
+	Let $k$ be an algebraically closed field and let $k \to A$ be a $k$ algebra. If $k\to A$ is \etale\, then
+	\[
+		A \cong \prod_{i=1}^n k.
+	\]
+\end{lemma}
+
+\begin{proof}
+	Since $k\to A$ is \etale, $A$ is a finitely presented $k$ algebra. Let $\mathfrak{m} \subset A$ be maximal.
+	By Hilberts Nullstellensatz, the there is an isomorphism $A/\mathfrak{m} \cong k$. Consider the quotient map
+	\[
+		\varphi: A \xrightarrow{\cong} A/\mathfrak{m} \cong k.
+	\]
+	Since $k\to A$ is \etale, $\Omega_{A/k} = 0$ and hence $\operatorname{Der}_k(A,M) = 0$ for all $A$-modules $M$.
+	Consider the $A$-module $\mathfrak{m}/\mathfrak{m}^2$ and 
+	\begin{align*}
+		D: A &\to \mathfrak{m}/\mathfrak{m}^2 \\
+		a &\mapsto [a - \varphi(a)]
+	\end{align*}
+	Then $D$ is an $k$-derivation, hence $D = 0$. But for every $m\in \mathfrak{m}$ we have $\varphi(m) = 0$ and therefore $[m] = [m - \varphi(m)] = D(m) = 0$. Thus, $\mathfrak{m} / \mathfrak{m}^2 = 0$.
+	
+	
+	Since $A$ is a finitely generated algebra over a field,
+	it is Noetherian. Localizing the equality
+	$\mathfrak m/\mathfrak m^2=0$ gives
+	\[
+	\frac{\mathfrak m A_{\mathfrak m}}
+	{(\mathfrak m A_{\mathfrak m})^2}=0.
+	\]
+	Now applying Nakayama's lemma to the finitely generated
+	$A_{\mathfrak m}$-module $\mathfrak m A_{\mathfrak m}$,
+	yields
+	\[
+	\mathfrak m A_{\mathfrak m}=0.
+	\]
+	Thus $A_{\mathfrak m}$ is a field for every maximal
+	ideal $\mathfrak m\subset A$, and hence every maximal ideal has $\mathfrak{ht}(\mathfrak{m}) = \dim(A_\mathfrak{ht}) = 0$.
+	
+	It follows that every prime ideal of $A$ is maximal, i.e. $A$ is zero-dimensional.
+	Since $A$ is Noetherian, it is Artinian.
+	
+	The structure theorem for Artinian rings now gives
+	\[
+	A\cong\prod_{i=1}^{n}A_{\mathfrak m_i},
+	\]
+	where $\mathfrak m_1,\ldots,\mathfrak m_n$ are the
+	maximal ideals of $A$.
+	For each $i$, we have
+	\[
+	A_{\mathfrak m_i}
+	\cong A_{\mathfrak m_i}/\mathfrak m_iA_{\mathfrak m_i}
+	\cong A/\mathfrak m_i
+	\cong k,
+	\]
+	where the last isomorphism follows from Hilbert's
+	Nullstellensatz. Hence,
+	\[
+	A\cong\prod_{i=1}^{n}k.
+	\]
+\end{proof}
 
 \begin{lemma}[\Etale\ schemes over a field]
 	\label{lem:etale-over-field}
 	(\cite[][Tag 02GL]{stacks-project})
-	Let $K$ be a field and let $X$ be a $K$-scheme.
-	Then $X\to\Specof{K}$ is \etale\ if and only if
+	Let $k$ be an algebraically closed field and let $X$ be a $k$-scheme.
+	Then $X\to\Specof{k}$ is \etale\ if and only if
 	\[
-	X\cong\coprod_{i\in I}\Specof{K_i},
+	X\cong\coprod_{i\in I}\Specof{k}.
 	\]
-	where each $K_i/K$ is a finite separable field
-	extension.
 \end{lemma}
 
 \begin{proof}
-	By Example \ref{ex:finite-separable-etale} and Lemma \ref{cor:etale-disjoint-union} one direction follows immediately. For the other direction assume $X\to \Specof{K}$ to be \etale.
+	\begin{proof}
+		Suppose first that $X\to\Specof{k}$ is \etale.
+		For each $x\in X$, choose an affine open
+		neighbourhood $U=\Specof{A}$.
+		The restriction $U\to\Specof{k}$ is again \etale, which makes $A$ into an \etale\ $k$ algebra.
+		So Lemma \ref{lem:etale-algebra-structure-lemma} gives
+		\[
+		A\cong\prod_{j = 1}^{n} k,
+		\qquad\text{hence}\qquad
+		U\cong\coprod_{j = 1}^{n} \Specof{k}.
+		\]
+		Thus $\{x\}$ is open in $U$, hence in $X$,
+		and its induced open subscheme is isomorphic
+		to $\Specof{k}$ as a $k$-scheme.
+		These pairwise disjoint open subschemes cover $X$,
+		so
+		\[
+		X\cong\coprod_{x\in |X|}\Specof{k}.
+		\]
+		
+		Conversely, suppose that
+		\[
+		X\cong\coprod_{i\in I}\Specof{k}
+		\]
+		as $k$-schemes.
+		Each summand is open in $X$, and the restriction
+		of the structure morphism to each summand is
+		the identity of $\Specof{k}$, hence \etale.
+		Since being \etale\ is local on the source,
+		$X\to\Specof{k}$ is \etale.
+	\end{proof}
 \end{proof}
 
 \begin{remark}
@@ -515,27 +604,6 @@ description.
 	union of finite separable points, but need not
 	be a finite scheme over that field.
 \end{remark}
-
-
-\begin{corollary}\label{cor:etale-over-alg-closed}
-	Let $k$ be algebraically closed and let
-	$X\to\Specof{k}$ be \etale.
-	Then
-	\[
-	X\cong\coprod_{i\in I}\Specof{k}.
-	\]
-	If $X$ is nonempty, the morphism
-	$X\to\Specof{k}$ admits a section.
-\end{corollary}
-
-\begin{proof}
-	The decomposition follows from
-	Lemma~\ref{lem:etale-over-field}.
-	If $X$ is nonempty, choose one component.
-	Its inclusion into $X$ is a section.
-\end{proof}
-
-
 
 \section{Diagonals and open immersions}
 
