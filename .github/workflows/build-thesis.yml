@@ -1,4 +1,4 @@
-name: Build and publish thesis
+name: Build thesis
 
 on:
   push:
@@ -6,10 +6,10 @@ on:
       - main
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
-  group: thesis-pages
+  group: thesis-build
   cancel-in-progress: true
 
 jobs:
@@ -18,8 +18,7 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: read
-      pages: read
+      contents: write
 
     steps:
       - name: Check out repository
@@ -46,34 +45,14 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v6
+      - name: Prepare PDF release asset
+        run: cp Masterarbeit/main.pdf thesis.pdf
 
-      - name: Prepare website
-        run: |
-          mkdir -p _site
-          cp -r website/* _site/
-          cp Masterarbeit/main.pdf _site/thesis.pdf
-
-      - name: Upload Pages website
-        uses: actions/upload-pages-artifact@v5
+      - name: Publish PDF release asset
+        uses: softprops/action-gh-release@v2
         with:
-          path: _site
-
-  deploy:
-    name: Publish GitHub Pages
-    needs: build
-    runs-on: ubuntu-latest
-
-    permissions:
-      pages: write
-      id-token: write
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Deploy website
-        id: deployment
-        uses: actions/deploy-pages@v5
+          tag_name: thesis-latest
+          name: Thesis PDF
+          files: thesis.pdf
+          overwrite_files: true
+          generate_release_notes: true
