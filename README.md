@@ -6,17 +6,13 @@ A master's thesis on Deligne–Mumford stacks and coarse moduli spaces,
 with an emphasis on descent, finite-group quotients, and
 local-to-global constructions.
 
-## Read the thesis
+## Download the thesis
 
-- [Thesis website](https://jonathanwa01.github.io/Masterarbeit/)
-- [Latest deployed PDF](https://jonathanwa01.github.io/Masterarbeit/thesis.pdf)
+- [Download latest PDF](https://github.com/jonathanwa01/Masterarbeit/releases/latest/download/thesis.pdf)
 
-The published document is a working draft and may contain incomplete
-arguments or material subject to revision.
-
-The website serves the most recently deployed successful build from
-the `main` branch. If a build or deployment fails, the previously
-published version remains available.
+The latest build is published as a release asset on each successful
+push to `main`. The document is a working draft and may contain
+incomplete arguments or material subject to revision.
 
 ## Mathematical focus
 
@@ -58,10 +54,8 @@ to resolve the bibliography and cross-references.
 .
 ├── .github/
 │   └── workflows/
-│       └── build-thesis.yml   # Compilation and Pages deployment
+│       └── build-thesis.yml   # Compilation and PDF release publishing
 ├── Masterarbeit/             # LaTeX sources and supporting files
-├── website/
-│   └── index.html            # Thesis landing and download page
 ├── build.sh                  # Local and CI build script
 ├── LICENSE
 └── README.md
@@ -69,16 +63,15 @@ to resolve the bibliography and cross-references.
 
 ## Automated publication
 
-GitHub Actions compiles and publishes the thesis whenever `main`
-is updated.
+GitHub Actions compiles the thesis whenever `main` is updated and
+publishes the resulting PDF as a downloadable release asset.
 
 The workflow:
 
 1. Installs the LaTeX build dependencies.
 2. Compiles the thesis using `./build.sh`.
 3. Uploads the PDF as a workflow artifact.
-4. Packages the landing page and PDF.
-5. Deploys the website to GitHub Pages.
+4. Publishes the PDF to the latest GitHub release.
 
 Feature-branch pushes do not trigger this workflow.
 
