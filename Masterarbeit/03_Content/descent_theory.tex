@@ -433,11 +433,11 @@ The homotopical input is the following standard fact: an augmented cosimplicial 
 \end{proof}
 
 \begin{remark}[Homotopical meaning]\label{rem:amitsur-homotopical}
-	Geometrically, $\Specof{\mu}$ is the diagonal $U\to U\times_XU$, a section of the base change $\mathrm{pr}_0:U\times_XU\to U$ of $f$ along itself. The augmented \v{C}ech nerve of a morphism with a section has an extra degeneracy and is therefore simplicially contractible (\cite[][Tag 019Z]{stacks-project}). Since faithfully flat base change along $f$ corresponds precisely to tensoring with $S$, after such a base change, the \v{C}ech nerve of $f$ becomes contractible, and faithfully flat base change detects exactness. Only exactness in degrees $\le0$ is needed for descent. The higher exactness says that quasi-coherent sheaves have vanishing \v{C}ech cohomology for affine fpqc coverings, which we will not need.
+	Geometrically, $\Specof{\mu}$ is the diagonal $U\to U\times_XU$, a section of the base change $\mathrm{pr}_0:U\times_XU\to U$ of $f$ along itself. The augmented \v{C}ech nerve of a morphism with a section has an extra degeneracy and is therefore simplicially contractible (\cite[][Tag 019Z]{stacks-project}). Since faithfully flat base change along $f$ corresponds precisely to tensoring with $S$, after such a base change, the \v{C}ech nerve of $f$ becomes contractible, and faithfully flat base change detects exactness. Only exactness in degrees $\le0$ is needed for descent. The higher exactness says that quasi-coherent sheaves have vanishing \v{C}ech cohomology for affine fppf coverings, which we will not need.
 \end{remark}
 
 
-\section{Faithfully flat descent for modules}\label{sec:fpqc-descent-for-modules}
+\section{Faithfully flat descent for modules}\label{sec:fppf-descent-for-modules}
 
 
 Let $R\to S$ be a ring map and $f:U=\Specof{S}\to X=\Specof{R}$. We apply Definition~\ref{def:classical-descent-data} to the pseudofunctor $\mathcal{M}$ of Example~\ref{ex:fibred-categories}(2) and write
@@ -517,9 +517,9 @@ an $R$-submodule of $N$. If $a:(N,\varphi)\to(N',\varphi')$ is a morphism, then 
 \end{remark}
 
 
-\section{fpqc descent for quasi-coherent sheaves}
+\section{fppf descent for quasi-coherent sheaves}
 
-We now globalize the results from \ref{sec:fpqc-descent-for-modules}. By Definition \ref{def:classical-descent-data}, given a morphism $f:U\to X$ of schemes, an object of $\Desc(U/X)=\Desc_f(\QCoh)$ is a pair $(\mathcal{E},\varphi)$ of $\mathcal{E}\in\QCoh(U)$ and an isomorphism $\varphi:\mathrm{pr}_0^*\mathcal{E}\to\mathrm{pr}_1^*\mathcal{E}$ on $U\times_XU$ with $\mathrm{pr}_{02}^*\varphi=\mathrm{pr}_{12}^*\varphi\circ\mathrm{pr}_{01}^*\varphi$, and morphisms are given by $a:\mathcal{E}\to\mathcal{E}'$ with $\varphi'\circ\mathrm{pr}_0^*a=\mathrm{pr}_1^*a\circ\varphi$. In particular, for $\mathcal{F},\mathcal{G}\in\QCoh(X)$, $f^*$ is bijective on $\Hom(\mathcal{F},\mathcal{G})$ if and only if
+We now globalize the results from \ref{sec:fppf-descent-for-modules}. By Definition \ref{def:classical-descent-data}, given a morphism $f:U\to X$ of schemes, an object of $\Desc(U/X)=\Desc_f(\QCoh)$ is a pair $(\mathcal{E},\varphi)$ of $\mathcal{E}\in\QCoh(U)$ and an isomorphism $\varphi:\mathrm{pr}_0^*\mathcal{E}\to\mathrm{pr}_1^*\mathcal{E}$ on $U\times_XU$ with $\mathrm{pr}_{02}^*\varphi=\mathrm{pr}_{12}^*\varphi\circ\mathrm{pr}_{01}^*\varphi$, and morphisms are given by $a:\mathcal{E}\to\mathcal{E}'$ with $\varphi'\circ\mathrm{pr}_0^*a=\mathrm{pr}_1^*a\circ\varphi$. In particular, for $\mathcal{F},\mathcal{G}\in\QCoh(X)$, $f^*$ is bijective on $\Hom(\mathcal{F},\mathcal{G})$ if and only if
 \[
 \Hom(\mathcal{F},\mathcal{G})\xrightarrow{\ f^*\ }\Hom(f^*\mathcal{F},f^*\mathcal{G})\ \substack{\xrightarrow{\ \mathrm{pr}_0^*\ }\\[-0.2em]\xrightarrow[\ \mathrm{pr}_1^*\ ]{}}\ \Hom\bigl((f\mathrm{pr}_0)^*\mathcal{F},(f\mathrm{pr}_0)^*\mathcal{G}\bigr)
 \]
@@ -534,9 +534,9 @@ is an equalizer. To keep the formulas readable we use the following convention: 
 	The ring map $R\to S$ is faithfully flat (\cite[][Tag 00HQ]{stacks-project}), and $\Specof{S}\times_{\Specof{R}}\Specof{S}=\Specof{S\otimes_RS}$. The pseudonatural equivalence $\mathcal{M}\simeq\QCoh|_{\Aff}$, $M\mapsto\widetilde{M}$, of Example~\ref{ex:fibred-categories}(2) induces, by Lemma~\ref{lem:desc-pseudonatural}(1), an equivalence $\Desc(S/R)\simeq\Desc_h(\QCoh)$ compatible with the canonical functors from $\Mod_R\simeq\QCoh(\Specof{R})$. Now apply Theorem~\ref{thm:faithfully-flat-descent-modules}.
 \end{proof}
 
-\begin{theorem}[fpqc descent for quasi-coherent sheaves]\label{thm:fpqc-descent-qcoh}
+\begin{theorem}[fppf descent for quasi-coherent sheaves]\label{thm:fppf-descent-qcoh}
 	(\cite[][Tag 023T]{stacks-project})
-	Let $f:U\to X$ be an fpqc covering of schemes. Then
+	Let $f:U\to X$ be an fppf covering of schemes. Then
 	\[
 	f^*:\QCoh(X)\longrightarrow\Desc(U/X),\qquad\mathcal{F}\longmapsto(f^*\mathcal{F},\mathrm{can}),
 	\]
@@ -549,9 +549,9 @@ is an equalizer. To keep the formulas readable we use the following convention: 
 
 Pullback of quasi-coherent sheaves is strong monoidal: $f^*(\mathcal{F}\otimes\mathcal{G})\cong f^*\mathcal{F}\otimes f^*\mathcal{G}$ and $f^*\OO_X\cong\OO_U$, compatibly with the canonical isomorphisms. Hence $T\mapsto\QCohAlg(T)$, with the pullback functors and coherence isomorphisms of Example~\ref{ex:fibred-categories}(1), is a pseudofunctor $\QCohAlg:\Sch^{\op}\to\Cat$; the coherence isomorphisms are algebra isomorphisms. An object of $\Desc_f(\QCohAlg)$ is an object $(\mathcal{B}',\varphi)$ of $\Desc_f(\QCoh)$ such that $\mathcal{B}'$ is a quasi-coherent $\OO_U$-algebra and $\varphi$ is an algebra isomorphism, and morphisms are morphisms of descent data that are algebra maps. Similarly, let $\mathcal{A}\mathit{ff}:\Sch^{\op}\to\Cat$ be the pseudofunctor sending $T$ to the category of affine morphisms $V\to T$ (with morphisms over $T$), and $g:T'\to T$ to the base change $V\mapsto V\times_TT'$ for a chosen fibre product; the coherence isomorphisms are the canonical isomorphisms between iterated fibre products given by their universal properties.
 
-\begin{corollary}[fpqc descent of affine morphisms]\label{thm:fpqc-descent-affine-schemes}
+\begin{corollary}[fppf descent of affine morphisms]\label{thm:fppf-descent-affine-schemes}
 	(\cite[][Tag 0245]{stacks-project})
-	Let $f:U\to X$ be an fpqc covering morphism of schemes. Then
+	Let $f:U\to X$ be an fppf covering morphism of schemes. Then
 	\begin{enumerate}
 		\item $f^*:\QCohAlg(X)\to\Desc_f(\QCohAlg)$ is an equivalence of categories, and
 		\item $f^*:\{\text{affine morphisms }V\to X\}\to\Desc_f(\mathcal{A}\mathit{ff})$, $V\mapsto V\times_XU$, is an equivalence of categories.
@@ -559,7 +559,7 @@ Pullback of quasi-coherent sheaves is strong monoidal: $f^*(\mathcal{F}\otimes\m
 \end{corollary}
 
 \begin{proof}
-	(1) Full faithfulness: an algebra map between quasi-coherent algebras on $X$ is a morphism of modules compatible with multiplication and unit. By Theorem~\ref{thm:fpqc-descent-qcoh} a morphism of descent data of algebras descends uniquely to a module map, and it is compatible with multiplication and unit because it is so after applying the faithful functor $f^*$. Effectivity: let $(\mathcal{B}',\varphi)$ be a descent datum of algebras. By Theorem~\ref{thm:fpqc-descent-qcoh} there is $\mathcal{B}\in\QCoh(X)$ with $f^*\mathcal{B}\cong\mathcal{B}'$ compatibly with the descent data. Since $\varphi$ is an algebra isomorphism, multiplication $\mathcal{B}'\otimes\mathcal{B}'\to\mathcal{B}'$ and unit $\OO_U\to\mathcal{B}'$ are morphisms of descent data, where $\mathcal{B}'\otimes\mathcal{B}'\cong f^*(\mathcal{B}\otimes\mathcal{B})$ and $\OO_U\cong f^*\OO_X$ carry the canonical data. By full faithfulness they descend to $\mathcal{B}\otimes\mathcal{B}\to\mathcal{B}$ and $\OO_X\to\mathcal{B}$, and associativity, commutativity and compatibility the unit holds, because it holds after applying the faithful functor $f^*$.
+	(1) Full faithfulness: an algebra map between quasi-coherent algebras on $X$ is a morphism of modules compatible with multiplication and unit. By Theorem~\ref{thm:fppf-descent-qcoh} a morphism of descent data of algebras descends uniquely to a module map, and it is compatible with multiplication and unit because it is so after applying the faithful functor $f^*$. Effectivity: let $(\mathcal{B}',\varphi)$ be a descent datum of algebras. By Theorem~\ref{thm:fppf-descent-qcoh} there is $\mathcal{B}\in\QCoh(X)$ with $f^*\mathcal{B}\cong\mathcal{B}'$ compatibly with the descent data. Since $\varphi$ is an algebra isomorphism, multiplication $\mathcal{B}'\otimes\mathcal{B}'\to\mathcal{B}'$ and unit $\OO_U\to\mathcal{B}'$ are morphisms of descent data, where $\mathcal{B}'\otimes\mathcal{B}'\cong f^*(\mathcal{B}\otimes\mathcal{B})$ and $\OO_U\cong f^*\OO_X$ carry the canonical data. By full faithfulness they descend to $\mathcal{B}\otimes\mathcal{B}\to\mathcal{B}$ and $\OO_X\to\mathcal{B}$, and associativity, commutativity and compatibility the unit holds, because it holds after applying the faithful functor $f^*$.
 	
 	(2) The relative spectrum $V\mapsto(V\to X)_*\OO_V$ is an anti-equivalence between affine morphisms $V\to X$ and quasi-coherent $\OO_X$-algebras, compatible with base change (\cite[][Tag 01S5]{stacks-project} and \cite[][Tag 01LX]{stacks-project}). Hence the relative spectrum is a pseudonatural equivalence $\QCohAlg^{\op}\simeq\mathcal{A}\mathit{ff}$, where $\QCohAlg^{\op}$ is the fibrewise opposite. By Lemma~\ref{lem:desc-pseudonatural} we obtain equivalences $\Desc_f(\mathcal{A}\mathit{ff})\simeq\Desc_f(\QCohAlg^{\op})\cong\Desc_f(\QCohAlg)^{\op}$, compatible with the canonical functors from $\{\text{affine morphisms }V\to X\}\simeq\QCohAlg(X)^{\op}$. Now apply (1).
 \end{proof}
