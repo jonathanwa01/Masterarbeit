@@ -6,12 +6,6 @@ A master's thesis on Deligne–Mumford stacks and coarse moduli spaces,
 with an emphasis on descent, finite-group quotients, and
 local-to-global constructions.
 
-## Download the thesis
-
-- [Download latest PDF](https://github.com/jonathanwa01/Masterarbeit/releases/latest/download/thesis.pdf)
-
-The document is a working draft and may contain incomplete arguments or material subject to revision.
-
 ## Mathematical focus
 
 - Delign-Mumford stacks and coarse moduli spaces
