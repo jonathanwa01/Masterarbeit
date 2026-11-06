@@ -10,9 +10,7 @@ local-to-global constructions.
 
 - [Download latest PDF](https://github.com/jonathanwa01/Masterarbeit/releases/latest/download/thesis.pdf)
 
-The latest build is published as a release asset on each successful
-push to `main`. The document is a working draft and may contain
-incomplete arguments or material subject to revision.
+The document is a working draft and may contain incomplete arguments or material subject to revision.
 
 ## Mathematical focus
 
@@ -45,8 +43,7 @@ The generated PDF is:
 Masterarbeit/main.pdf
 ```
 
-The script runs PDFLaTeX, Biber, and two further PDFLaTeX passes
-to resolve the bibliography and cross-references.
+The script runs PDFLaTeX, Biber, and further PDFLaTeX passes to resolve the bibliography and cross-references up to a maximum of 5 reruns.
 
 ## Repository structure
 
@@ -54,26 +51,28 @@ to resolve the bibliography and cross-references.
 .
 ├── .github/
 │   └── workflows/
-│       └── build-thesis.yml   # Compilation and PDF release publishing
+│       ├── ci.yml            # Continuous integration
+│       └── release.yml       # Release publishing
 ├── Masterarbeit/             # LaTeX sources and supporting files
 ├── build.sh                  # Local and CI build script
 ├── LICENSE
 └── README.md
 ```
 
-## Automated publication
+## GitHub Actions
 
-GitHub Actions compiles the thesis whenever `main` is updated and
-publishes the resulting PDF as a downloadable release asset.
+The repository has separate workflows for pull-request checks and releases:
 
-The workflow:
+- **CI** ([`ci.yml`](.github/workflows/ci.yml)) runs for pull requests targeting
+  `main`. It builds the thesis, checks the LaTeX log for errors and unresolved
+  references, and uploads the PDF and build logs as artifacts for 14 days.
+- **Release** ([`release.yml`](.github/workflows/release.yml)) runs when a
+  version tag such as `v1.2.3` or `v1.2.3-rc1` is pushed. It verifies the
+  tagged commit is on `main`, builds and checks the thesis, then creates a
+  GitHub release with versioned and latest-name PDF assets. Tags containing a
+  hyphen are published as prereleases.
 
-1. Installs the LaTeX build dependencies.
-2. Compiles the thesis using `./build.sh`.
-3. Uploads the PDF as a workflow artifact.
-4. Publishes the PDF to the latest GitHub release.
-
-Feature-branch pushes do not trigger this workflow.
+Ordinary pushes to branches do not trigger either workflow.
 
 [View workflow runs](https://github.com/jonathanwa01/Masterarbeit/actions)
 
