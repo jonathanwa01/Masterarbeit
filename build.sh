@@ -5,8 +5,20 @@ set -euo pipefail
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR/Masterarbeit"
 
-# Build
-pdflatex -synctex=1 -interaction=nonstopmode main.tex
+compile() {
+  pdflatex -synctex=1 -interaction=nonstopmode -halt-on-error main.tex
+}
+
+compile
 biber main
-pdflatex -synctex=1 -interaction=nonstopmode main.tex
-pdflatex -synctex=1 -interaction=nonstopmode main.tex
+
+max_passes=5
+for ((pass = 1; pass <= max_passes; pass++)); do
+  compile
+  if ! grep -qF 'Please rerun LaTeX' main.log; then
+    exit 0
+  fi
+done
+
+echo "LaTeX did not converge after $max_passes passes." >&2
+exit 1
