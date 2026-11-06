@@ -22,9 +22,9 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
-            asymptote cm-super-minimal texlive-latex-extra texlive-lang-german \
-            texlive-plain-generic texlive-science texlive-bibtex-extra \
-            texlive-fonts-recommended biber
+            asymptote biber cm-super-minimal texlive-bibtex-extra \
+            texlive-fonts-recommended texlive-lang-german texlive-latex-extra \
+            texlive-pictures texlive-plain-generic texlive-science
 
       - name: Compile
         run: |
