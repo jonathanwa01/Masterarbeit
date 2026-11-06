@@ -1,0 +1,79 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+-*'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Compile thesis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Ensure tag is on main
+        run: git merge-base --is-ancestor "$GITHUB_SHA" origin/main
+
+      - name: Install LaTeX and Biber
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            texlive-full \
+            biber
+
+      - name: Compile using build.sh
+        run: |
+          chmod +x ./build.sh
+          ./build.sh
+          test -s Masterarbeit/main.pdf
+
+      - name: Check log for errors and reference warnings
+        working-directory: Masterarbeit
+        run: |
+          fail=0
+          if grep -nE "^! |LaTeX Error|Fatal error" main.log; then fail=1; fi
+          if grep -nE "LaTeX Warning: (Reference|Citation|Label).*(undefined|multiply defined)" main.log; then fail=1; fi
+          exit $fail
+          
+      - name: Prepare release assets
+        run: |
+          mkdir dist
+          cp Masterarbeit/main.pdf "dist/thesis-${GITHUB_REF_NAME}.pdf"
+          cp Masterarbeit/main.pdf dist/thesis.pdf
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: thesis-${{ github.ref_name }}
+          path: dist/
+          if-no-files-found: error
+
+  publish:
+    name: Publish GitHub release
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v5
+        with:
+          name: thesis-${{ github.ref_name }}
+          path: dist
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.pdf
+          generate_release_notes: true
+          prerelease: ${{ contains(github.ref_name, '-') }}
+          fail_on_unmatched_files: true

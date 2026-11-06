@@ -25,7 +25,7 @@ jobs:
             texlive-full \
             biber
 
-      - name: Compile
+      - name: Compile using build.sh
         run: |
           chmod +x ./build.sh
           ./build.sh
