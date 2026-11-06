@@ -1,15 +1,15 @@
-\section{Representable presheaves are fpqc sheaves}\label{sec:representable-fpqc}
+\section{Representable presheaves are fppf sheaves}\label{sec:representable-fppf}
 
 
-We now deduce from fpqc descent for quasi-coherent sheaves that every scheme defines a sheaf for the fpqc topology, and hence for all topologies of Definition~\ref{def:standard-sites}. The argument has three steps:
+We now deduce from fppf descent for quasi-coherent sheaves that every scheme defines a sheaf for the fppf topology, and hence for all topologies of Definition~\ref{def:standard-sites}. The argument has three steps:
 \begin{enumerate}
-	\item The fully faithful part of Theorem~\ref{thm:fpqc-descent-qcoh}, applied to the structure sheaf, shows that $T\mapsto\Gamma(T,\mathcal{O}_T)$ satisfies fpqc descent.
+	\item The fully faithful part of Theorem~\ref{thm:fppf-descent-qcoh}, applied to the structure sheaf, shows that $T\mapsto\Gamma(T,\mathcal{O}_T)$ satisfies fppf descent.
 	\item Morphisms into an affine scheme $\Specof{A}$ are ring maps out of $A$, and $\Hom_{\Ring}(A,-)$ preserves limits. This gives the case of affine targets without any computation.
 	\item For an arbitrary target we descend open subsets along the covering and reduce to (2).
 \end{enumerate}
 
-\begin{corollary}\label{cor:structure-sheaf-fpqc}
-	Let $p:U\to T$ be an fpqc covering of schemes. Then
+\begin{corollary}\label{cor:structure-sheaf-fppf}
+	Let $p:U\to T$ be an fppf covering of schemes. Then
 	\[
 	\begin{tikzcd}
 		\Gamma(T,\mathcal{O}_T) \arrow[r, "p^*"] & \Gamma(U,\mathcal{O}_U) \arrow[r, shift left, "\mathrm{pr}_0^*"] \arrow[r, shift right, "\mathrm{pr}_1^*"'] & \Gamma(U\times_TU,\mathcal{O}_{U\times_TU})
@@ -19,7 +19,7 @@ We now deduce from fpqc descent for quasi-coherent sheaves that every scheme def
 \end{corollary}
 
 \begin{proof}
-	By Theorem~\ref{thm:fpqc-descent-qcoh}, the functor $\QCoh(T)\to\Desc(U/T)$, $\mathcal{F}\mapsto(p^*\mathcal{F},\mathrm{can}_\mathcal{F})$ (Definition~\ref{con:pullback-to-descent}), is fully faithful. We apply this to $\mathcal{F}=\mathcal{G}=\mathcal{O}_T$.
+	By Theorem~\ref{thm:fppf-descent-qcoh}, the functor $\QCoh(T)\to\Desc(U/T)$, $\mathcal{F}\mapsto(p^*\mathcal{F},\mathrm{can}_\mathcal{F})$ (Definition~\ref{con:pullback-to-descent}), is fully faithful. We apply this to $\mathcal{F}=\mathcal{G}=\mathcal{O}_T$.
 	
 	On the left, evaluation at $1_T\in \Gamma(T, \mathcal{O}_T)$ identifies $\Hom_{\QCoh(T)}(\mathcal{O}_T,\mathcal{O}_T)$ with $\Gamma(T,\mathcal{O}_T)$ via .
 	On the right, $p^*\mathcal{O}_T=\mathcal{O}_U$ canonically, and under the identifications $\mathrm{pr}_0^*\mathcal{O}_U=\mathcal{O}_{U\times_TU}=\mathrm{pr}_1^*\mathcal{O}_U$ the canonical descent datum $\mathrm{can}_{\mathcal{O}_T}$ is the identity. A morphism of descent data $(\mathcal{O}_U,\mathrm{id})\to(\mathcal{O}_U,\mathrm{id})$ is therefore an endomorphism of $\mathcal{O}_U$, i.e.\ a section $s\in\Gamma(U,\mathcal{O}_U)$, such that $\mathrm{pr}_0^*(s)=\mathrm{pr}_1^*(s)$.
@@ -30,7 +30,7 @@ We now deduce from fpqc descent for quasi-coherent sheaves that every scheme def
 
 
 \begin{lemma}\label{lem:representable-affine-target}
-	Let $X=\Specof{A}$ be an affine scheme and let $p:U\to T$ be an fpqc covering. Then $h_X$ satisfies descent along $p$.
+	Let $X=\Specof{A}$ be an affine scheme and let $p:U\to T$ be an fppf covering. Then $h_X$ satisfies descent along $p$.
 \end{lemma}
 
 \begin{proof}
@@ -42,29 +42,29 @@ We now deduce from fpqc descent for quasi-coherent sheaves that every scheme def
 	\[
 	h_X\cong\Hom_{\Ring}(A,-)\circ\Gamma(-, \mathcal{O}_{(-)}).
 	\]
-	The representable functor $\Hom_{\Ring}(A,-):\Ring\to\Set$ preserves all limits, in particular equalizers and by the adjunction $\Gamma \dashv \Spec$, $\Gamma$ preserves all limites. Hence, applying $h_X$ it to the equalizer of Corollary \ref{cor:structure-sheaf-fpqc} shows that
+	The representable functor $\Hom_{\Ring}(A,-):\Ring\to\Set$ preserves all limits, in particular equalizers and by the adjunction $\Gamma \dashv \Spec$, $\Gamma$ preserves all limites. Hence, applying $h_X$ it to the equalizer of Corollary \ref{cor:structure-sheaf-fppf} shows that
 	\[
 	h_X(T)\longrightarrow h_X(U)\rightrightarrows h_X(U\times_TU)
 	\]
 	is an equalizer, which means that $h_X$ satisfies descent along $p$ by Proposition \ref{prop:cech-descent-equalizer}.
 \end{proof}
 
-For a general target, the only additional input is that open subsets descend along fpqc coverings.
+For a general target, the only additional input is that open subsets descend along fppf coverings.
 
 \begin{lemma}[Descent of open subsets]\label{lem:descent-open-subsets}
 	(\cite[][Tag 03N0]{stacks-project})
-	Let $p:U\to T$ be an fpqc covering, and let $W'\subset U$ be an open subset with $\mathrm{pr}_0^{-1}(W')=\mathrm{pr}_1^{-1}(W')$ in $U\times_TU$. Then there is a unique open subset $W\subset T$ with $p^{-1}(W)=W'$, namely $W=p(W')$.
+	Let $p:U\to T$ be an fppf covering, and let $W'\subset U$ be an open subset with $\mathrm{pr}_0^{-1}(W')=\mathrm{pr}_1^{-1}(W')$ in $U\times_TU$. Then there is a unique open subset $W\subset T$ with $p^{-1}(W)=W'$, namely $W=p(W')$.
 \end{lemma}
 
-\begin{theorem}\label{thm:representable-fpqc-sheaf}
+\begin{theorem}\label{thm:representable-fppf-sheaf}
 	(\cite[][Tag 023Q]{stacks-project}, \cite[][Theorem~2.55]{vistoli2007notes})
-	Let $X$ be a scheme. Then the representable presheaf $h_X=\Hom_\Sch(-,X)$ satisfies the sheaf condition for every fpqc covering. In particular, $h_X$ is a sheaf on $\Sch_\tau$ for $\tau\in\{\mathrm{Zariski}, \text{\etale}, \mathrm{smooth}, \mathrm{fppf}\}$.
+	Let $X$ be a scheme. Then the representable presheaf $h_X=\Hom_\Sch(-,X)$ satisfies the sheaf condition for every fppf covering. In particular, $h_X$ is a sheaf on $\Sch_\tau$ for $\tau\in\{\mathrm{Zariski}, \text{\etale}, \mathrm{smooth}, \mathrm{fppf}\}$.
 \end{theorem}
 
 \begin{proof}
 	Morphisms of schemes glue uniquely along open coverings.
 	By Corollary~\ref{cor:sheaf-via-cech}, it therefore suffices
-	to prove that, for every fpqc covering $p:U\to T$, the diagram
+	to prove that, for every fppf covering $p:U\to T$, the diagram
 	\[
 	\Hom(T,X)\longrightarrow \Hom(U,X)
 	\rightrightarrows \Hom(U\times_T U,X)
@@ -87,7 +87,7 @@ For a general target, the only additional input is that open subsets descend alo
 	T_i:=g^{-1}(X_i)=g'^{-1}(X_i).
 	\]
 	Hence, the restrictions $g|_{T_i},g'|_{T_i}:T_i\to X_i$ agree
-	after pullback along the fpqc covering $p^{-1}(T_i)\to T_i$. Since $X_i$ are assumed to be affine, $g|_{T_i}$ and $g'|_{T_i}$ are equal by
+	after pullback along the fppf covering $p^{-1}(T_i)\to T_i$. Since $X_i$ are assumed to be affine, $g|_{T_i}$ and $g'|_{T_i}$ are equal by
 	Lemma~\ref{lem:representable-affine-target}.
 	As the $T_i$ cover $T$, we obtain $g=g'$.
 	
@@ -108,8 +108,45 @@ For a general target, the only additional input is that open subsets descend alo
 	=
 	\mathrm{pr}_2^{-1}(U_i).
 	\]
-	By Lemma~\ref{lem:descent-open-subsets}, there is a unique
-	open subset $T_i\subseteq T$ such that $p^{-1}(T_i)=U_i$. Hence, the following diagram is cartesian and $p_i:U_i\to T_i$ is an fpqc covering:
+	
+	Set $T_i = p(U_i)$. Since $p$ is flat and locally of finite presentation,
+	it is open by \cite[][Tag 01UA]{stacks-project}. Thus each $T_i$ is open in $T$.
+	We claim that $p^{-1}(T_i)=U_i$.
+	The inclusion $U_i\subseteq p^{-1}(T_i)$ is obvious.
+	By construction, $U_i\to T_i$ is surjective.
+	Its base change
+	\[
+	q:p^{-1}(T_i)\times_{T_i}U_i
+	\longrightarrow p^{-1}(T_i)
+	\]
+	is therefore surjective
+	(\cite[][Tag 01S1]{stacks-project}).
+	Under the canonical identification
+	\[
+	p^{-1}(T_i)\times_{T_i}U_i
+	\cong U\times_T U_i,
+	\]
+	the morphism $q$ is induced by the first projection.
+	On $U\times_T U_i$, the compatibility condition gives
+	\[
+	f\circ\mathrm{pr}_0=f\circ\mathrm{pr}_1.
+	\]
+	Since the second projection factors through $U_i$,
+	the right-hand side factors through $X_i$.
+	Consequently, the first projection factors through
+	$f^{-1}(X_i)=U_i$.
+	Thus $q$ factors through the open immersion
+	\[
+	U_i\hookrightarrow p^{-1}(T_i).
+	\]
+	Surjectivity of $q$ implies that this open immersion
+	is surjective, hence an isomorphism.
+	Therefore $p^{-1}(T_i)=U_i$.
+	
+	
+	
+	
+	Hence, the following diagram is cartesian and $p_i:U_i\to T_i$ is an fppf covering:
 	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJVX2kiXSxbMCwxLCJVIl0sWzEsMCwiVF9pIl0sWzEsMSwiVCJdLFsyLDMsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzAsMSwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMCwyLCJwX2kiXSxbMSwzLCJwIiwyXSxbMCwzLCIiLDAseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dXQ==
 	\[\begin{tikzcd}
 		{U_i} & {T_i} \\
@@ -211,7 +248,7 @@ For a general target, the only additional input is that open subsets descend alo
 	U_{ij}:=p^{-1}(T_{ij})=U_i\cap U_j.
 	\]
 	The morphism $p_{ij}:U_{ij}\to T_{ij}$ induced by $p$
-	is again an fpqc covering.
+	is again an fppf covering.
 	By construction,
 	\[
 	\begin{aligned}
@@ -246,13 +283,13 @@ For a general target, the only additional input is that open subsets descend alo
 
 \begin{corollary}[Relative version]\label{cor:representable-relative}
 	Let $S$ be a scheme,\\
-	$\tau\in\{\mathrm{Zariski}, \text{\etale}, \mathrm{smooth}, \mathrm{fppf}\}$, and $X$ a scheme over $S$. Then $h_{X/S}=\Hom_S(-,X)$ is a sheaf on $(\SchOver{S})_\tau$.
+	$\tau\in\{\mathrm{Zariski}, \text{\etale}, \mathrm{fppf}\}$, and $X$ a scheme over $S$. Then $h_{X/S}=\Hom_S(-,X)$ is a sheaf on $(\SchOver{S})_\tau$.
 \end{corollary}
 
 \begin{proof}
-	Let $\{U_i\to T\}$ be a $\tau$-covering in $\SchOver{S}$ and let $f_i:U_i\to X$ be $S$-morphisms that agree on all $U_i\times_TU_j$. By Theorem~\ref{thm:representable-fpqc-sheaf} they glue uniquely to a morphism $f:T\to X$. Composing with the structure morphism $X\to S$, the two morphisms $T\to S$ given by $X\to S$ composed with $f$ and by the structure morphism of $T$ agree on every $U_i$, so they are equal by injectivity in Theorem~\ref{thm:representable-fpqc-sheaf} applied to $h_S$. Hence $f$ is an $S$-morphism.
+	Let $\{U_i\to T\}$ be a $\tau$-covering in $\SchOver{S}$ and let $f_i:U_i\to X$ be $S$-morphisms that agree on all $U_i\times_TU_j$. By Theorem~\ref{thm:representable-fppf-sheaf} they glue uniquely to a morphism $f:T\to X$. Composing with the structure morphism $X\to S$, the two morphisms $T\to S$ given by $X\to S$ composed with $f$ and by the structure morphism of $T$ agree on every $U_i$, so they are equal by injectivity in Theorem~\ref{thm:representable-fppf-sheaf} applied to $h_S$. Hence $f$ is an $S$-morphism.
 \end{proof}
 
 \begin{remark}
-	Theorem~\ref{thm:representable-fpqc-sheaf} says that the sites $\Sch_\tau$ and $(\SchOver{S})_\tau$ are subcanonical. By the Yoneda lemma, $X\mapsto h_X$ is a fully faithful functor $\SchOver{S}\to\Sh{(\SchOver{S})_{\mathrm{fppf}}}$. This is the starting point of the chapter on algebraic spaces, where algebraic spaces are defined as fppf sheaves that are \etale\ locally representable.
+	Theorem~\ref{thm:representable-fppf-sheaf} says that the sites $\Sch_\tau$ and $(\SchOver{S})_\tau$ are subcanonical. By the Yoneda lemma, $X\mapsto h_X$ is a fully faithful functor $\SchOver{S}\to\Sh{(\SchOver{S})_{\mathrm{fppf}}}$. This is the starting point of the chapter on algebraic spaces, where algebraic spaces are defined as fppf sheaves that are \etale\ locally representable.
 \end{remark}
