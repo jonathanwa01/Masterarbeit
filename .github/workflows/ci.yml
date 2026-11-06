@@ -22,7 +22,11 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
-            texlive-full \
+            texlive-latex-extra \
+            texlive-bibtex-extra \
+            texlive-science \
+            texlive-lang-english \
+            texlive-lang-german \
             biber
 
       - name: Compile using build.sh
