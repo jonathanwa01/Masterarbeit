@@ -57,7 +57,6 @@ jobs:
         run: |
           mkdir dist
           cp Masterarbeit/main.pdf "dist/thesis-${GITHUB_REF_NAME}.pdf"
-          cp Masterarbeit/main.pdf dist/thesis.pdf
 
       - uses: actions/upload-artifact@v7
         with:
