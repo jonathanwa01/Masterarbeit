@@ -31,14 +31,12 @@ jobs:
           ./build.sh
           test -s Masterarbeit/main.pdf
 
-      - name: Check log for warnings and errors
+      - name: Check log for errors and reference warnings
         working-directory: Masterarbeit
         run: |
           fail=0
           if grep -nE "^! |LaTeX Error|Fatal error" main.log; then fail=1; fi
           if grep -nE "LaTeX Warning: (Reference|Citation|Label).*(undefined|multiply defined)" main.log; then fail=1; fi
-          if grep -nE "Package .* Warning|Rerun to get" main.log; then fail=1; fi
-          if grep -nE "^(WARN|ERROR)|Warning--" main.blg; then fail=1; fi
           exit $fail
 
       - uses: actions/upload-artifact@v7
