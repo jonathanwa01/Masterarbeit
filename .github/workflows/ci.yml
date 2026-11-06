@@ -26,6 +26,7 @@ jobs:
             texlive-bibtex-extra \
             texlive-plain-generic \
             texlive-science \
+            cm-super \
             texlive-lang-english \
             texlive-lang-german \
             biber
