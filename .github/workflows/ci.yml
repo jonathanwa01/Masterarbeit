@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build thesis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install LaTeX dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            texlive-latex-extra \
+            texlive-bibtex-extra \
+            texlive-plain-generic \
+            texlive-science \
+            cm-super \
+            texlive-lang-english \
+            texlive-lang-german \
+            biber
+
+      - name: Compile using build.sh
+        run: |
+          chmod +x ./build.sh
+          ./build.sh
+          test -s Masterarbeit/main.pdf
+
+      - name: Check log for errors and reference warnings
+        working-directory: Masterarbeit
+        run: |
+          fail=0
+          if grep -nE "^! |LaTeX Error|Fatal error" main.log; then fail=1; fi
+          if grep -nE "LaTeX Warning: (Reference|Citation|Label).*(undefined|multiply defined)" main.log; then fail=1; fi
+          exit $fail
+
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: thesis-pr-${{ github.event.number }}
+          path: |
+            Masterarbeit/main.pdf
+            Masterarbeit/main.log
+            Masterarbeit/main.blg
+          retention-days: 14
