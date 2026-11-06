@@ -240,11 +240,6 @@ linewidth=1pt
 	greek=upgreek,
 }
 %------------------------------
-% COLORS
-%------------------------------
-\definecolor{dbta_blue}{RGB}{51,102,153}
-\definecolor{tub_red}{RGB}{197,14,31}
-%------------------------------
 % XPARSE
 %------------------------------
 \NewDocumentCommand{\pder}{ O{} O{} m }{\dfrac{\partial^{#2}#1}{\partial#3^{#2}}}
@@ -258,7 +253,7 @@ linewidth=1pt
 %------------------------------
 % ENUMERATE ENVIRONMENT
 %------------------------------
-\renewcommand{\labelenumi}{\arabic{enumi})}
+\renewcommand{\labelenumi}{\arabic{enumi}}
 \renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
 \renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
 \setlist[enumerate,1]{%
@@ -274,35 +269,8 @@ linewidth=1pt
 	before*=\onehalfspacing,
 	itemsep=0.15\baselineskip,
 	labelindent=\parindent,
-}%
-%------------------------------
-% GERMAN CAPTION REDEFINITIONS
-%------------------------------
-\addto\captionsngerman{%
-	\renewcommand{\figurename}{Abb.}
-	\renewcommand{\tablename}{Tab.}
-	\SetAlgorithmName{Algorithmus}{Algorithmus}{Algorithmenverzeichnis}
-	\renewcommand{\nomname}{Symbolverzeichnis}
-	\renewcommand{\lstlistlistingname}{Codeverzeichnis}
-	\def\indexname{Indexverzeichnis}
 }
-%------------------------------
-% ENGLISH CAPTION REDEFINITIONS
-%------------------------------
-\addto\captionsenglish{
-	\renewcommand{\figurename}{Fig.}
-	\renewcommand{\tablename}{Tab.}
-	\renewcommand{\nomname}{List of Symbols}
-	\renewcommand{\lstlistlistingname}{List of Codes}
-	\def\indexname{Index}
-}
-%------------------------------
-% ADD TOCLIST ALGORITHM
-%------------------------------
-\addtotoclist[algorithm2e]{loa}
-\setuptoc{loa}{totoc}
-\newcommand*{\listofloaname}{\listalgorithmcfname}
-\renewcommand{\listofalgorithms}{\listoftoc{loa}}
+
 %------------------------------
 % AUTOREF GERMAN
 %------------------------------
