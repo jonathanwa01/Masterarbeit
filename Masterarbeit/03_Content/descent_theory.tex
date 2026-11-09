@@ -214,24 +214,24 @@ Fibred categories organize objects over varying bases and encode pullback throug
 \end{example}
 
 \begin{proposition}[Grothendieck construction]\label{prop:grothendieck-construction}
-	Let $\mathcal C$ be a category. There is an equivalence between
+	Let $\mathcal{C}$ be a category. There is an equivalence between
 	\begin{enumerate}
-		\item categories fibred in groupoids over $\mathcal C$, and
+		\item categories fibred in groupoids over $\mathcal{C}$, and
 		\item pseudofunctors
 		\[
-		F : \mathcal C^{op} \to \Grpd.
+		F : \mathcal{C}^{op} \to \Grpd.
 		\]
 	\end{enumerate}
 	
-	Under this equivalence, a fibred category $\mathcal F \to \mathcal C$
+	Under this equivalence, a fibred category $\mathcal{F} \to \mathcal{C}$
 	is sent to the pseudofunctor
 	\[
-	B \longmapsto \mathcal F(B),
+	B \longmapsto \mathcal{F}(B),
 	\]
 	which assigns to each object its fibre and to each morphism
 	$f : B' \to B$ the pullback functor
 	\[
-	f^* : \mathcal F(B) \to \mathcal F(B').
+	f^* : \mathcal{F}(B) \to \mathcal{F}(B').
 	\]
 	
 	Conversely, a pseudofunctor determines a category fibred in groupoids
@@ -568,9 +568,9 @@ is an equalizer. To keep the formulas readable we use the following convention: 
 	
 	\emph{Full faithfulness.}
 	Lets still assume $X$ affine to be affine, let
-	$\mathcal F,\mathcal G\in\QCoh(X)$ and let
+	$\mathcal{F},\mathcal{G}\in\QCoh(X)$ and let
 	\[
-	a:f^*\mathcal F\longrightarrow f^*\mathcal G
+	a:f^*\mathcal{F}\longrightarrow f^*\mathcal{G}
 	\]
 	be compatible with the canonical descent data, i.e. the following commutes:
 	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJwXzBeKmZeKlxcbWF0aGNhbHtGfSJdLFsxLDAsInBfMV4qZl4qXFxtYXRoY2Fse0Z9Il0sWzAsMSwicF8wXipmXipcXG1hdGhjYWx7R30iXSxbMSwxLCJwXzFeKmZeKlxcbWF0aGNhbHtHfSJdLFswLDEsIlxcbWF0aHJte2Nhbn1fXFxtYXRoY2Fse0Z9Il0sWzIsMywiXFxtYXRocm17Y2FufV9cXG1hdGhjYWx7R30iLDJdLFswLDIsInBfMF4qYSIsMl0sWzEsMywicF8xXiphIl1d
@@ -600,7 +600,7 @@ is an equalizer. To keep the formulas readable we use the following convention: 
 	Restricting $\mathcal{E}$ to $V$ along $g$ gives a descent datum along $p$. Again by Lemma~\ref{lem:qcoh-descent-affine}, there exist
 	$\mathcal{F}\in\QCoh(X)$ and an isomorphism
 	\[
-	\alpha:p^*\mathcal F\xrightarrow{\cong}g^*\mathcal E
+	\alpha:p^*\mathcal{F}\xrightarrow{\cong}g^*\mathcal{E}
 	\]
 	compatible with descent.
 	
@@ -647,11 +647,11 @@ is an equalizer. To keep the formulas readable we use the following convention: 
 	a unique isomorphism
 	\[
 	\beta_T:(f^*\mathcal{F})|_T
-	\xrightarrow{\sim}\mathcal E|_T.
+	\xrightarrow{\sim}\mathcal{E}|_T.
 	\]
 	Checking on affine open subsets, these isomorphisms agree on overlaps by uniqueness, so they glue to
 	\[
-	\beta:f^*\mathcal F\xrightarrow{\sim}\mathcal E.
+	\beta:f^*\mathcal{F}\xrightarrow{\sim}\mathcal{E}.
 	\]
 
 	
@@ -660,14 +660,14 @@ is an equalizer. To keep the formulas readable we use the following convention: 
 	We are left to check, that $\beta$ is compatible with the descent data $\varphi$, which means precisely that the diagram
 	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhybXtwcn1fMF4qZl4qXFxtYXRoY2Fse0Z9Il0sWzAsMSwiXHRcXG1hdGhybXtwcn1fMF4qXFxtYXRoY2FsIEUiXSxbMSwwLCJcXG1hdGhybXtwcn1fMV4qZl4qXFxtYXRoY2FsIEYiXSxbMSwxLCJcXG1hdGhybXtwcn1fMV4qXFxtYXRoY2FsIEUiXSxbMCwyLCJcXG1hdGhybXtjYW59X3tcXG1hdGhjYWwgRn0iXSxbMCwxLCJcXG1hdGhybXtwcn1fMF4qXFxiZXRhIiwyXSxbMiwzLCJcXG1hdGhybXtwcn1fMV4qXFxiZXRhIl0sWzEsMywiXFx2YXJwaGkiLDJdXQ==
 	\[\begin{tikzcd}
-		{\mathrm{pr}_0^*f^*\mathcal{F}} & {\mathrm{pr}_1^*f^*\mathcal F} \\
-		{	\mathrm{pr}_0^*\mathcal E} & {\mathrm{pr}_1^*\mathcal E}
-		\arrow["{\mathrm{can}_{\mathcal F}}", from=1-1, to=1-2]
+		{\mathrm{pr}_0^*f^*\mathcal{F}} & {\mathrm{pr}_1^*f^*\mathcal{F}} \\
+		{	\mathrm{pr}_0^*\mathcal{E}} & {\mathrm{pr}_1^*\mathcal{E}}
+		\arrow["{\mathrm{can}_{\mathcal{F}}}", from=1-1, to=1-2]
 		\arrow["{\mathrm{pr}_0^*\beta}"', from=1-1, to=2-1]
 		\arrow["{\mathrm{pr}_1^*\beta}", from=1-2, to=2-2]
 		\arrow["\varphi"', from=2-1, to=2-2]
 	\end{tikzcd}\]
-	commutes. Here $\mathrm{can}_{\mathcal F}$ is the canonical descent isomorphism of Definition~\ref{con:pullback-to-descent}. Write $Y:= U\times_X U$, with projections $\mathrm{pr}_0,\mathrm{pr}_1:Y\to U$.
+	commutes. Here $\mathrm{can}_{\mathcal{F}}$ is the canonical descent isomorphism of Definition~\ref{con:pullback-to-descent}. Write $Y:= U\times_X U$, with projections $\mathrm{pr}_0,\mathrm{pr}_1:Y\to U$.
 	
 
 
@@ -681,7 +681,7 @@ is an equalizer. To keep the formulas readable we use the following convention: 
 	For any $y\in U\times_X U$, choose $z\in Z$ above $y$.
 	The local homomorphism
 	\[
-	\mathcal O_{U\times_X U,y}\longrightarrow\mathcal O_{Z,z}
+	\mathcal{O}_{U\times_X U,y}\longrightarrow\mathcal{O}_{Z,z}
 	\]
 	is flat, hence faithfully flat, see
 	\cite[][Tag 00HR]{stacks-project}.
@@ -702,13 +702,13 @@ is an equalizer. To keep the formulas readable we use the following convention: 
 	consider the isomorphism
 	\[
 	\delta:=h^*\varphi^{-1}\circ\operatorname{pr}_1^*\alpha:
-	\operatorname{pr}_1^*p^*\mathcal F
+	\operatorname{pr}_1^*p^*\mathcal{F}
 	\xrightarrow{\sim}
-	\operatorname{pr}_0^*\mathcal E.
+	\operatorname{pr}_0^*\mathcal{E}.
 	\]
 	Since $p\circ\operatorname{pr}_1
 	=f\circ\operatorname{pr}_0$, we identify its source
-	canonically with $\operatorname{pr}_0^*f^*\mathcal F$.
+	canonically with $\operatorname{pr}_0^*f^*\mathcal{F}$.
 	
 	By construction, the pullback of each $\beta_T$ to
 	$T\times_X V$ is the restriction of $\delta$.
@@ -732,7 +732,7 @@ is an equalizer. To keep the formulas readable we use the following convention: 
 	Set
 	\[
 	\varphi_{ij}:=(\alpha_i,\alpha_j)^*\varphi:
-	\alpha_i^*\mathcal E\xrightarrow{\sim}\alpha_j^*\mathcal E.
+	\alpha_i^*\mathcal{E}\xrightarrow{\sim}\alpha_j^*\mathcal{E}.
 	\]
 	Pulling back the cocycle condition for $\varphi$ along
 	$(\alpha_0,\alpha_1,\alpha_2)$ gives
@@ -765,19 +765,19 @@ is an equalizer. To keep the formulas readable we use the following convention: 
 	\qquad(i=0,1),
 	\]
 	under the canonical identifications of pullbacks of
-	$\mathcal F$.
+	$\mathcal{F}$.
 	
 	Let
 	\[
 	t:=f\circ\alpha_0=f\circ\alpha_1
 	=p\circ\operatorname{pr}_2:Z\to X.
 	\]
-	Identify $\alpha_0^*f^*\mathcal F$,
-	$\alpha_1^*f^*\mathcal F$, and
-	$\operatorname{pr}_2^*p^*\mathcal F$ with
-	$t^*\mathcal F$ via the canonical pullback isomorphisms.
+	Identify $\alpha_0^*f^*\mathcal{F}$,
+	$\alpha_1^*f^*\mathcal{F}$, and
+	$\operatorname{pr}_2^*p^*\mathcal{F}$ with
+	$t^*\mathcal{F}$ via the canonical pullback isomorphisms.
 	Under these identifications,
-	$\operatorname{pr}_{01}^*\mathrm{can}_{\mathcal F}$
+	$\operatorname{pr}_{01}^*\mathrm{can}_{\mathcal{F}}$
 	is the identity.
 	
 	Since
@@ -803,7 +803,7 @@ is an equalizer. To keep the formulas readable we use the following convention: 
 		&=
 		\operatorname{pr}_{01}^*
 		\bigl(\operatorname{pr}_1^*\beta
-		\circ\mathrm{can}_{\mathcal F}\bigr).
+		\circ\mathrm{can}_{\mathcal{F}}\bigr).
 	\end{aligned}
 	\]
 	Here all equalities are understood under the canonical
@@ -814,7 +814,7 @@ is an equalizer. To keep the formulas readable we use the following convention: 
 	\[
 	\varphi\circ\operatorname{pr}_0^*\beta
 	=
-	\operatorname{pr}_1^*\beta\circ\mathrm{can}_{\mathcal F}.
+	\operatorname{pr}_1^*\beta\circ\mathrm{can}_{\mathcal{F}}.
 	\]
 	Hence $\beta$ is an isomorphism of descent data, proving
 	effectivity over an affine base.
@@ -825,18 +825,18 @@ is an equalizer. To keep the formulas readable we use the following convention: 
 	Finally for an arbitrary base $X$, choose an affine open cover $\{X_a\}$.
 	By the affine-base case, the restricted descent datum
 	over each $X_a$ descends to
-	$\mathcal F_a\in\QCoh(X_a)$.
+	$\mathcal{F}_a\in\QCoh(X_a)$.
 	Full faithfulness gives unique isomorphisms
 	\[
-	\mathcal F_a|_{X_a\cap X_b}
+	\mathcal{F}_a|_{X_a\cap X_b}
 	\xrightarrow{\sim}
-	\mathcal F_b|_{X_a\cap X_b}
+	\mathcal{F}_b|_{X_a\cap X_b}
 	\]
 	compatible with the chosen descent isomorphisms.
 	Their cocycle condition follows from uniqueness.
 	Zariski gluing therefore gives
-	$\mathcal F\in\QCoh(X)$ and an isomorphism
-	$f^*\mathcal F\simeq\mathcal E$ compatible with
+	$\mathcal{F}\in\QCoh(X)$ and an isomorphism
+	$f^*\mathcal{F}\simeq\mathcal{E}$ compatible with
 	$\varphi$.
 	Thus, $f^*$ is essentially surjective and hence
 	an equivalence.
