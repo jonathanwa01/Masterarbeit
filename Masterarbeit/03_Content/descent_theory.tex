@@ -567,7 +567,7 @@ is an equalizer. To keep the formulas readable we use the following convention: 
 	is again faithfully flat and $T\times_X V$ is affine.
 	
 	\emph{Full faithfulness.}
-	Lets still assume $X$ affine to be affine, let
+	Lets assume $X$ affine to be affine, let
 	$\mathcal{F},\mathcal{G}\in\QCoh(X)$ and let
 	\[
 	a:f^*\mathcal{F}\longrightarrow f^*\mathcal{G}
@@ -670,24 +670,27 @@ is an equalizer. To keep the formulas readable we use the following convention: 
 	commutes. Here $\mathrm{can}_{\mathcal{F}}$ is the canonical descent isomorphism of Definition~\ref{con:pullback-to-descent}. Write $Y:= U\times_X U$, with projections $\mathrm{pr}_0,\mathrm{pr}_1:Y\to U$.
 	
 
-
+	Claim:
 	It suffices to check the compatibility equality after
 	pullback along the fppf cover
 	\[
 	\operatorname{pr}_{01}:Z=(U\times_X U)\times_X V\longrightarrow U\times_X U.
 	\]
-	Indeed, let $a = \varphi\circ \operatorname{pr}_0^*\beta, b = \operatorname{pr}_1^*\beta \circ \mathrm{can}_\mathcal{F}$
-	and suppose $\pi^*a=\pi^*b$.
-	For any $y\in U\times_X U$, choose $z\in Z$ above $y$.
-	The local homomorphism
-	\[
-	\mathcal{O}_{U\times_X U,y}\longrightarrow\mathcal{O}_{Z,z}
-	\]
-	is flat, hence faithfully flat, see
-	\cite[][Tag 00HR]{stacks-project}.
-	Thus equality of the stalk maps implies
-	$a_y=b_y$.
-	Since this holds at every point, $a=b$.
+	\begin{proof}[Proof of the claim]
+		Indeed, let $a = \varphi\circ \operatorname{pr}_0^*\beta, b = \operatorname{pr}_1^*\beta \circ \mathrm{can}_\mathcal{F}$
+		and suppose $\pi^*a=\pi^*b$.
+		For any $y\in U\times_X U$, choose $z\in Z$ above $y$.
+		The local homomorphism
+		\[
+		\mathcal{O}_{U\times_X U,y}\longrightarrow\mathcal{O}_{Z,z}
+		\]
+		is flat, hence faithfully flat, see
+		\cite[][Tag 00HR]{stacks-project}.
+		Thus equality of the stalk maps implies
+		$a_y=b_y$.
+		Since this holds at every point, $a=b$.
+	\end{proof}
+	
 	
 	
 	We will glue the local construction of $\beta_T$ to the global cocycle condition on $U\times_X V$.
@@ -766,19 +769,6 @@ is an equalizer. To keep the formulas readable we use the following convention: 
 	\]
 	under the canonical identifications of pullbacks of
 	$\mathcal{F}$.
-	
-	Let
-	\[
-	t:=f\circ\alpha_0=f\circ\alpha_1
-	=p\circ\operatorname{pr}_2:Z\to X.
-	\]
-	Identify $\alpha_0^*f^*\mathcal{F}$,
-	$\alpha_1^*f^*\mathcal{F}$, and
-	$\operatorname{pr}_2^*p^*\mathcal{F}$ with
-	$t^*\mathcal{F}$ via the canonical pullback isomorphisms.
-	Under these identifications,
-	$\operatorname{pr}_{01}^*\mathrm{can}_{\mathcal{F}}$
-	is the identity.
 	
 	Since
 	$\operatorname{pr}_{01}=(\alpha_0,\alpha_1)$,
