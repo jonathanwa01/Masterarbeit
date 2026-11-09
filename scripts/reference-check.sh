@@ -4,7 +4,8 @@ set -euo pipefail
 ROOT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR/Masterarbeit"
 
-build_dir="${ROOT_DIR}/build/reference-check"
+build_dir="$(mktemp -d "${TMPDIR:-/tmp}/reference-check.XXXXXX")"
+trap 'rm -rf "$build_dir"' EXIT
 log_file="${build_dir}/reference-check.log"
 
 
