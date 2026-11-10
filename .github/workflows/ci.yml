@@ -33,7 +33,7 @@ jobs:
 
       - name: Compile using build.sh
         run: |
-          chmod +x ./build.sh
+          chmod +x .scripts/build.sh
           ./build.sh
           test -s Masterarbeit/main.pdf
 
