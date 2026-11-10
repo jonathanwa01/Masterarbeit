@@ -45,10 +45,16 @@
 % PREAMBLE
 %------------------------------
 \input{01_Document_administration/a_Packages} 				% all packages of this template
-\input{01_Document_administration/b_Meta}						% meta information of this document, such as title, author, etc.
+\input{01_Document_administration/b_Meta}					% meta information of this document, such as title, author, etc.
 \input{01_Document_administration/c_Commands} 				% all additional commands and options
 \addbibresource{05_Literature_and_Index/Bibliography.bib}
 \KOMAoptions{DIV=last}          % recalculate type area
+%------------------------------
+% Reference Lint build
+%------------------------------
+\ifdefined\ReferenceLint
+  \usepackage[norefs,nocites,msgs,ignoreunlbld]{refcheck}	% Enabled only by the reference-lint build
+\fi
 %------------------------------
 % BEGIN DOCUMENT
 %------------------------------
