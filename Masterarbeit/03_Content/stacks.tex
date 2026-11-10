@@ -110,17 +110,17 @@ or sheaves valued in groupoids.
 	overlaps, but only up to isomorphism. This leads to replacing sets by
 	groupoids. One therefore considers an assignment
 	\[
-	U \longmapsto \mathcal X(U),
+	U \longmapsto \mathcal{X}(U),
 	\]
-	where $\mathcal X(U)$ is a groupoid, together with pullback functors along
+	where $\mathcal{X}(U)$ is a groupoid, together with pullback functors along
 	morphisms. 
 	In this language, the sheaf condition is replaced by descent. For a covering
-	$U \to X$, a descent datum consists of an object $x \in \mathcal X(U)$
+	$U \to X$, a descent datum consists of an object $x \in \mathcal{X}(U)$
 	together with an isomorphism
 	\[
 	\pi_2^*x \xrightarrow{\cong} \pi_1^*x
 	\]
-	in $\mathcal X(U \times_X U)$ satisfying the cocycle condition on
+	in $\mathcal{X}(U \times_X U)$ satisfying the cocycle condition on
 	$U \times_X U \times_X U$. The stack condition asserts that every such
 	descent datum is effective. If all fibres are discrete groupoids, this reduces
 	to the usual sheaf condition for set-valued functors.
@@ -253,14 +253,14 @@ or sheaves valued in groupoids.
 	We define the quotient stack of pencils of quadratic forms modulo orthogonal
 	change of coordinates to be
 	\[
-	\mathcal X
+	\mathcal{X}
 	=
 	\left[
 	\operatorname{Gr}\bigl(2,\operatorname{Sym}^2(V^\vee)\bigr) / O(q)
 	\right].
 	\]
 	
-	For a \(k\)-scheme \(S\), an object of \(\mathcal X(S)\) consists of an
+	For a \(k\)-scheme \(S\), an object of \(\mathcal{X}(S)\) consists of an
 	\(O(q)\)-torsor
 	\[
 	\pi\colon E\to S
@@ -272,11 +272,11 @@ or sheaves valued in groupoids.
 	\]
 	Equivalently, it is a rank-two subbundle
 	\[
-	\mathcal P
+	\mathcal{P}
 	\subset
 	E\times_{O(q)} \operatorname{Sym}^2(V^\vee).
 	\]
-	Thus the stack \(\mathcal X\) classifies families of pencils of quadratic forms
+	Thus the stack \(\mathcal{X}\) classifies families of pencils of quadratic forms
 	on vector bundles locally isomorphic to \(V\), equipped with an orthogonal
 	structure modeled on \(q\), modulo orthogonal changes of coordinates.
 	
@@ -324,23 +324,23 @@ or sheaves valued in groupoids.
 	(\cite[][Tag 036X]{stacks-project})
 	Let \(\mathcal{X}\) be an algebraic stack over \(S\). The inertia stack of \(\mathcal{X}\), denoted
 	\[
-	\mathcal{I}_{\mathcal X},
+	\mathcal{I}_{\mathcal{X}},
 	\]
 	is the stack over \((\SchOver{S})_{\mathrm{fppf}}\) defined as follows:
 	
-	For every scheme $U$ over $S$, the groupoid \(I_{\mathcal X}(U)\) has
+	For every scheme $U$ over $S$, the groupoid \(I_{\mathcal{X}}(U)\) has
 	\begin{enumerate}
 		\item objects given by pairs \((x,\alpha)\), where
 		\[
-		x \in \mathcal X(U)
+		x \in \mathcal{X}(U)
 		\quad\text{and}\quad
-		\alpha \in \operatorname{Aut}_{\mathcal X(U)}(x),
+		\alpha \in \operatorname{Aut}_{\mathcal{X}(U)}(x),
 		\]
 		\item morphisms
 		\[
 		(x,\alpha) \to (y,\beta)
 		\]
-		given by morphisms \(f : x \to y\) in \(\mathcal X(U)\) such that
+		given by morphisms \(f : x \to y\) in \(\mathcal{X}(U)\) such that
 		\[
 		f \circ \alpha = \beta \circ f.
 		\]
@@ -373,15 +373,15 @@ or sheaves valued in groupoids.
 
 \begin{lemma}
 	(\cite[][Tag 036X]{stacks-project})
-	Let $\mathcal X$ be an algebraic stack over $S$. Then there is an isomorphism of stacks
+	Let $\mathcal{X}$ be an algebraic stack over $S$. Then there is an isomorphism of stacks
 	\[
-	\mathcal{I}_{\mathcal X}
+	\mathcal{I}_{\mathcal{X}}
 	\cong
-	\mathcal X \times_{\mathcal X \times \mathcal X} \mathcal X,
+	\mathcal{X} \times_{\mathcal{X} \times \mathcal{X}} \mathcal{X},
 	\]
-	where both morphisms $\mathcal X \to \mathcal X \times \mathcal X$ are equal to the diagonal
+	where both morphisms $\mathcal{X} \to \mathcal{X} \times \mathcal{X}$ are equal to the diagonal
 	\[
-	\Delta_{\mathcal X} : \mathcal X \to \mathcal X \times \mathcal X,
+	\Delta_{\mathcal{X}} : \mathcal{X} \to \mathcal{X} \times \mathcal{X},
 	\]
 	i.e. the following diagram is a 2-pullback:
 	% https://q.uiver.app/#q=WzAsNCxbMCwxLCJcXG1hdGhjYWx7WH0iXSxbMSwxLCJcXG1hdGhjYWx7WH1cXHRpbWVzIFxcbWF0aGNhbHtYfSJdLFsxLDAsIlxcbWF0aGNhbHtYfSJdLFswLDAsIlxcbWF0aGNhbHtJfV9cXG1hdGhjYWx7WH0iXSxbMCwxLCJcXERlbHRhIiwyXSxbMiwxLCJcXERlbHRhIl0sWzMsMF0sWzMsMl0sWzMsMSwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV1d
@@ -399,19 +399,19 @@ or sheaves valued in groupoids.
 \begin{proof}
 	Let $U$ be a scheme over $S$. By definition of the fibre product of stacks, an object of
 	\[
-	\left(\mathcal X \times_{\mathcal X \times \mathcal X} \mathcal X\right)(U)
+	\left(\mathcal{X} \times_{\mathcal{X} \times \mathcal{X}} \mathcal{X}\right)(U)
 	\]
-	consists of objects $x,y \in \mathcal X(U)$ together with an isomorphism
+	consists of objects $x,y \in \mathcal{X}(U)$ together with an isomorphism
 	\[
-	\varphi : \Delta_{\mathcal X}(x) \xrightarrow{\sim} \Delta_{\mathcal X}(y)
+	\varphi : \Delta_{\mathcal{X}}(x) \xrightarrow{\sim} \Delta_{\mathcal{X}}(y)
 	\]
-	in $(\mathcal X \times \mathcal X)(U)$.
+	in $(\mathcal{X} \times \mathcal{X})(U)$.
 	
 	Now
 	\[
-	\Delta_{\mathcal X}(x) = (x,x)
+	\Delta_{\mathcal{X}}(x) = (x,x)
 	\quad\text{and}\quad
-	\Delta_{\mathcal X}(y) = (y,y).
+	\Delta_{\mathcal{X}}(y) = (y,y).
 	\]
 	Hence an isomorphism
 	\[
@@ -427,17 +427,17 @@ or sheaves valued in groupoids.
 	\quad\text{and}\quad
 	g : x \xrightarrow{\sim} y
 	\]
-	in $\mathcal X(U)$.
+	in $\mathcal{X}(U)$.
 	
 	From such a tuple $(x,y,f,g)$ we obtain a pair
 	\[
 	(x,\alpha),
 	\qquad
-	\alpha = g^{-1}\circ f \in \operatorname{Aut}_{\mathcal X(U)}(x).
+	\alpha = g^{-1}\circ f \in \operatorname{Aut}_{\mathcal{X}(U)}(x).
 	\]
 	Conversely, given a pair $(x,\alpha)$ with
 	\[
-	\alpha \in \operatorname{Aut}_{\mathcal X(U)}(x),
+	\alpha \in \operatorname{Aut}_{\mathcal{X}(U)}(x),
 	\]
 	we obtain an object of the fibre product by taking
 	\[
@@ -449,11 +449,11 @@ or sheaves valued in groupoids.
 	\]
 	These two constructions are inverse to each other up to canonical isomorphism. Thus the objects of
 	\[
-	\left(\mathcal X \times_{\mathcal X \times \mathcal X} \mathcal X\right)(U)
+	\left(\mathcal{X} \times_{\mathcal{X} \times \mathcal{X}} \mathcal{X}\right)(U)
 	\]
-	identify with pairs $(x,\alpha)$, where $x \in \mathcal X(U)$ and
+	identify with pairs $(x,\alpha)$, where $x \in \mathcal{X}(U)$ and
 	\[
-	\alpha \in \operatorname{Aut}_{\mathcal X(U)}(x).
+	\alpha \in \operatorname{Aut}_{\mathcal{X}(U)}(x).
 	\]
 	It remains to identify the morphisms. A morphism in the fibre product from
 	\[
@@ -467,7 +467,7 @@ or sheaves valued in groupoids.
 	\qquad
 	b : y \to y'
 	\]
-	in $\mathcal X(U)$ such that the square
+	in $\mathcal{X}(U)$ such that the square
 	% https://q.uiver.app/#q=WzAsNCxbMCwwLCIoeCx4KSJdLFsxLDAsIih5LHkpIl0sWzAsMSwiKHgnLHgnKSJdLFsxLDEsIih5Jyx5JykiXSxbMCwyLCIoYSxhKSIsMl0sWzAsMSwiKGYsZykiXSxbMSwzLCIoYixiKSJdLFsyLDMsIihmJyxnJykiXV0=
 	\[\begin{tikzcd}
 		{(x,x)} & {(y,y)} \\
@@ -477,7 +477,7 @@ or sheaves valued in groupoids.
 		\arrow["{(b,b)}", from=1-2, to=2-2]
 		\arrow["{(f',g')}", from=2-1, to=2-2]
 	\end{tikzcd}\]
-	commutes in $(\mathcal X \times \mathcal X)(U)$. This means precisely that
+	commutes in $(\mathcal{X} \times \mathcal{X})(U)$. This means precisely that
 	\[
 	b\circ f = f'\circ a
 	\qquad\text{and}\qquad
@@ -504,15 +504,15 @@ or sheaves valued in groupoids.
 	
 	Therefore the stack
 	\[
-	\mathcal X \times_{\mathcal X \times \mathcal X} \mathcal X
+	\mathcal{X} \times_{\mathcal{X} \times \mathcal{X}} \mathcal{X}
 	\]
-	is identified with the inertia stack $I_{\mathcal X}$.
+	is identified with the inertia stack $I_{\mathcal{X}}$.
 \end{proof}
 
 \begin{corollary}
 	There is a natural morphism
 	\[
-	I_{\mathcal X} \to \mathcal X
+	I_{\mathcal{X}} \to \mathcal{X}
 	\]
 	given by either projection from the fibre product. On objects it sends
 	\[

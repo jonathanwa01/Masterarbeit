@@ -4,7 +4,7 @@
 We now deduce from fppf descent for quasi-coherent sheaves that every scheme defines a sheaf for the fppf topology, and hence for all topologies of Definition~\ref{def:standard-sites}. The argument has three steps:
 \begin{enumerate}
 	\item The fully faithful part of Theorem~\ref{thm:fppf-descent-qcoh}, applied to the structure sheaf, shows that $T\mapsto\Gamma(T,\mathcal{O}_T)$ satisfies fppf descent.
-	\item Morphisms into an affine scheme $\Specof{A}$ are ring maps out of $A$, and $\Hom_{\Ring}(A,-)$ preserves limits. This gives the case of affine targets without any computation.
+	\item Morphisms into an affine scheme $\Specof{A}$ are ring maps out of $A$, and the representable preshef $\Hom_{\Ring}(A,-)$ preserves limits. This gives the case of affine targets without any computation.
 	\item For an arbitrary target we descend open subsets along the covering and reduce to (2).
 \end{enumerate}
 
@@ -21,7 +21,7 @@ We now deduce from fppf descent for quasi-coherent sheaves that every scheme def
 \begin{proof}
 	By Theorem~\ref{thm:fppf-descent-qcoh}, the functor $\QCoh(T)\to\Desc(U/T)$, $\mathcal{F}\mapsto(p^*\mathcal{F},\mathrm{can}_\mathcal{F})$ (Definition~\ref{con:pullback-to-descent}), is fully faithful. We apply this to $\mathcal{F}=\mathcal{G}=\mathcal{O}_T$.
 	
-	On the left, evaluation at $1_T\in \Gamma(T, \mathcal{O}_T)$ identifies $\Hom_{\QCoh(T)}(\mathcal{O}_T,\mathcal{O}_T)$ with $\Gamma(T,\mathcal{O}_T)$ via .
+	On the left, evaluation at $1_T\in \Gamma(T, \mathcal{O}_T)$ identifies $\Hom_{\QCoh(T)}(\mathcal{O}_T,\mathcal{O}_T)$ with $\Gamma(T,\mathcal{O}_T)$.
 	On the right, $p^*\mathcal{O}_T=\mathcal{O}_U$ canonically, and under the identifications $\mathrm{pr}_0^*\mathcal{O}_U=\mathcal{O}_{U\times_TU}=\mathrm{pr}_1^*\mathcal{O}_U$ the canonical descent datum $\mathrm{can}_{\mathcal{O}_T}$ is the identity. A morphism of descent data $(\mathcal{O}_U,\mathrm{id})\to(\mathcal{O}_U,\mathrm{id})$ is therefore an endomorphism of $\mathcal{O}_U$, i.e.\ a section $s\in\Gamma(U,\mathcal{O}_U)$, such that $\mathrm{pr}_0^*(s)=\mathrm{pr}_1^*(s)$.
 	Under these identifications, the map on morphism sets is $p^*:\Gamma(T,\mathcal{O}_T)\to\Gamma(U,\mathcal{O}_U)$.
 	
@@ -42,7 +42,7 @@ We now deduce from fppf descent for quasi-coherent sheaves that every scheme def
 	\[
 	h_X\cong\Hom_{\Ring}(A,-)\circ\Gamma(-, \mathcal{O}_{(-)}).
 	\]
-	The representable functor $\Hom_{\Ring}(A,-):\Ring\to\Set$ preserves all limits, in particular equalizers and by the adjunction $\Gamma \dashv \Spec$, $\Gamma$ preserves all limites. Hence, applying $h_X$ it to the equalizer of Corollary \ref{cor:structure-sheaf-fppf} shows that
+	The representable functor $\Hom_{\Ring}(A,-):\Ring\to\Set$ preserves all limits, in particular equalizers and by the adjunction $\Gamma \dashv \Spec$, $\Gamma$ preserves all limites. Hence, applying $\Hom_{\Ring}(A, - )$ to the equalizer of Corollary \ref{cor:structure-sheaf-fppf} shows that
 	\[
 	h_X(T)\longrightarrow h_X(U)\rightrightarrows h_X(U\times_TU)
 	\]
@@ -51,10 +51,6 @@ We now deduce from fppf descent for quasi-coherent sheaves that every scheme def
 
 For a general target, the only additional input is that open subsets descend along fppf coverings.
 
-\begin{lemma}[Descent of open subsets]\label{lem:descent-open-subsets}
-	(\cite[][Tag 03N0]{stacks-project})
-	Let $p:U\to T$ be an fppf covering, and let $W'\subset U$ be an open subset with $\mathrm{pr}_0^{-1}(W')=\mathrm{pr}_1^{-1}(W')$ in $U\times_TU$. Then there is a unique open subset $W\subset T$ with $p^{-1}(W)=W'$, namely $W=p(W')$.
-\end{lemma}
 
 \begin{theorem}\label{thm:representable-fppf-sheaf}
 	(\cite[][Tag 023Q]{stacks-project}, \cite[][Theorem~2.55]{vistoli2007notes})
@@ -96,8 +92,7 @@ For a general target, the only additional input is that open subsets descend alo
 	\begin{align}\label{eq:compability-condition}
 		f\circ\mathrm{pr}_1=f\circ\mathrm{pr}_2.
 	\end{align}
-	Choose an affine open covering $X=\bigcup_{i\in I}X_i$,
-	and write $\iota_i:X_i\hookrightarrow X$ for the inclusions.
+	Write $\iota_i:X_i\hookrightarrow X$ for the inclusions.
 	Set $U_i:=f^{-1}(X_i)$. Then
 	\[
 	\mathrm{pr}_1^{-1}(U_i)

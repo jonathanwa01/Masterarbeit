@@ -214,24 +214,24 @@ Fibred categories organize objects over varying bases and encode pullback throug
 \end{example}
 
 \begin{proposition}[Grothendieck construction]\label{prop:grothendieck-construction}
-	Let $\mathcal C$ be a category. There is an equivalence between
+	Let $\mathcal{C}$ be a category. There is an equivalence between
 	\begin{enumerate}
-		\item categories fibred in groupoids over $\mathcal C$, and
+		\item categories fibred in groupoids over $\mathcal{C}$, and
 		\item pseudofunctors
 		\[
-		F : \mathcal C^{op} \to \Grpd.
+		F : \mathcal{C}^{op} \to \Grpd.
 		\]
 	\end{enumerate}
 	
-	Under this equivalence, a fibred category $\mathcal F \to \mathcal C$
+	Under this equivalence, a fibred category $\mathcal{F} \to \mathcal{C}$
 	is sent to the pseudofunctor
 	\[
-	B \longmapsto \mathcal F(B),
+	B \longmapsto \mathcal{F}(B),
 	\]
 	which assigns to each object its fibre and to each morphism
 	$f : B' \to B$ the pullback functor
 	\[
-	f^* : \mathcal F(B) \to \mathcal F(B').
+	f^* : \mathcal{F}(B) \to \mathcal{F}(B').
 	\]
 	
 	Conversely, a pseudofunctor determines a category fibred in groupoids
@@ -534,33 +534,310 @@ is an equalizer. To keep the formulas readable we use the following convention: 
 	The ring map $R\to S$ is faithfully flat (\cite[][Tag 00HQ]{stacks-project}), and $\Specof{S}\times_{\Specof{R}}\Specof{S}=\Specof{S\otimes_RS}$. The pseudonatural equivalence $\mathcal{M}\simeq\QCoh|_{\Aff}$, $M\mapsto\widetilde{M}$, of Example~\ref{ex:fibred-categories}(2) induces, by Lemma~\ref{lem:desc-pseudonatural}(1), an equivalence $\Desc(S/R)\simeq\Desc_h(\QCoh)$ compatible with the canonical functors from $\Mod_R\simeq\QCoh(\Specof{R})$. Now apply Theorem~\ref{thm:faithfully-flat-descent-modules}.
 \end{proof}
 
-\begin{theorem}[fppf descent for quasi-coherent sheaves]\label{thm:fppf-descent-qcoh}
-	(\cite[][Tag 023T]{stacks-project})
-	Let $f:U\to X$ be an fppf covering of schemes. Then
+
+\begin{theorem}[fppf descent for quasi-coherent sheaves]
+	\label{thm:fppf-descent-qcoh}
+	Let $f:U\to X$ be a surjective, flat morphism locally
+	of finite presentation. Then the functor
 	\[
 	f^*:\QCoh(X)\longrightarrow\Desc(U/X),\qquad\mathcal{F}\longmapsto(f^*\mathcal{F},\mathrm{can}),
 	\]
+	of Definition~\ref{con:pullback-to-descent}
 	is an equivalence of categories.
 \end{theorem}
 
 
-\section{Descent of affine morphisms}
-
-
-Pullback of quasi-coherent sheaves is strong monoidal: $f^*(\mathcal{F}\otimes\mathcal{G})\cong f^*\mathcal{F}\otimes f^*\mathcal{G}$ and $f^*\OO_X\cong\OO_U$, compatibly with the canonical isomorphisms. Hence $T\mapsto\QCohAlg(T)$, with the pullback functors and coherence isomorphisms of Example~\ref{ex:fibred-categories}(1), is a pseudofunctor $\QCohAlg:\Sch^{\op}\to\Cat$; the coherence isomorphisms are algebra isomorphisms. An object of $\Desc_f(\QCohAlg)$ is an object $(\mathcal{B}',\varphi)$ of $\Desc_f(\QCoh)$ such that $\mathcal{B}'$ is a quasi-coherent $\OO_U$-algebra and $\varphi$ is an algebra isomorphism, and morphisms are morphisms of descent data that are algebra maps. Similarly, let $\mathcal{A}\mathit{ff}:\Sch^{\op}\to\Cat$ be the pseudofunctor sending $T$ to the category of affine morphisms $V\to T$ (with morphisms over $T$), and $g:T'\to T$ to the base change $V\mapsto V\times_TT'$ for a chosen fibre product; the coherence isomorphisms are the canonical isomorphisms between iterated fibre products given by their universal properties.
-
-\begin{corollary}[fppf descent of affine morphisms]\label{thm:fppf-descent-affine-schemes}
-	(\cite[][Tag 0245]{stacks-project})
-	Let $f:U\to X$ be an fppf covering morphism of schemes. Then
-	\begin{enumerate}
-		\item $f^*:\QCohAlg(X)\to\Desc_f(\QCohAlg)$ is an equivalence of categories, and
-		\item $f^*:\{\text{affine morphisms }V\to X\}\to\Desc_f(\mathcal{A}\mathit{ff})$, $V\mapsto V\times_XU$, is an equivalence of categories.
-	\end{enumerate}
-\end{corollary}
-
 \begin{proof}
-	(1) Full faithfulness: an algebra map between quasi-coherent algebras on $X$ is a morphism of modules compatible with multiplication and unit. By Theorem~\ref{thm:fppf-descent-qcoh} a morphism of descent data of algebras descends uniquely to a module map, and it is compatible with multiplication and unit because it is so after applying the faithful functor $f^*$. Effectivity: let $(\mathcal{B}',\varphi)$ be a descent datum of algebras. By Theorem~\ref{thm:fppf-descent-qcoh} there is $\mathcal{B}\in\QCoh(X)$ with $f^*\mathcal{B}\cong\mathcal{B}'$ compatibly with the descent data. Since $\varphi$ is an algebra isomorphism, multiplication $\mathcal{B}'\otimes\mathcal{B}'\to\mathcal{B}'$ and unit $\OO_U\to\mathcal{B}'$ are morphisms of descent data, where $\mathcal{B}'\otimes\mathcal{B}'\cong f^*(\mathcal{B}\otimes\mathcal{B})$ and $\OO_U\cong f^*\OO_X$ carry the canonical data. By full faithfulness they descend to $\mathcal{B}\otimes\mathcal{B}\to\mathcal{B}$ and $\OO_X\to\mathcal{B}$, and associativity, commutativity and compatibility the unit holds, because it holds after applying the faithful functor $f^*$.
+	By Lemma~\ref{lem:qcoh-descent-affine}, the assertion
+	holds for faithfully flat morphisms between affine
+	schemes. We reduce to this case using Zariski gluing.
 	
-	(2) The relative spectrum $V\mapsto(V\to X)_*\OO_V$ is an anti-equivalence between affine morphisms $V\to X$ and quasi-coherent $\OO_X$-algebras, compatible with base change (\cite[][Tag 01S5]{stacks-project} and \cite[][Tag 01LX]{stacks-project}). Hence the relative spectrum is a pseudonatural equivalence $\QCohAlg^{\op}\simeq\mathcal{A}\mathit{ff}$, where $\QCohAlg^{\op}$ is the fibrewise opposite. By Lemma~\ref{lem:desc-pseudonatural} we obtain equivalences $\Desc_f(\mathcal{A}\mathit{ff})\simeq\Desc_f(\QCohAlg^{\op})\cong\Desc_f(\QCohAlg)^{\op}$, compatible with the canonical functors from $\{\text{affine morphisms }V\to X\}\simeq\QCohAlg(X)^{\op}$. Now apply (1).
+	\emph{Affine refinements.}
+	Suppose first that $X$ is affine.
+	Choose an affine open cover $\{V_i\}_{i\in I}$ of $U$.
+	Since fppf morphisms are open, the images $f(V_i)$ cover $X$ by open subsets. By quasi-compactness of $X$ ($X$ is affine), we can chose a finite subset $\{1, \dots, r\}\subset I$, such that
+	\[
+	V=\coprod_{i=1}^r V_i
+	\xrightarrow{g}U\xrightarrow{f}X
+	\]
+	and $p=f\circ g$ is faithfully flat. Note that $V$ is affine again. Since fppf morphisms are stable under base-change, for every affine open $T\subseteq U$, the pullback morphism
+	\[
+	T\times_X V\longrightarrow T
+	\]
+	is again faithfully flat and $T\times_X V$ is affine.
+	
+	\emph{Full faithfulness.}
+	Lets assume $X$ affine to be affine, let
+	$\mathcal{F},\mathcal{G}\in\QCoh(X)$ and let
+	\[
+	a:f^*\mathcal{F}\longrightarrow f^*\mathcal{G}
+	\]
+	be compatible with the canonical descent data, i.e. the following commutes:
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJwXzBeKmZeKlxcbWF0aGNhbHtGfSJdLFsxLDAsInBfMV4qZl4qXFxtYXRoY2Fse0Z9Il0sWzAsMSwicF8wXipmXipcXG1hdGhjYWx7R30iXSxbMSwxLCJwXzFeKmZeKlxcbWF0aGNhbHtHfSJdLFswLDEsIlxcbWF0aHJte2Nhbn1fXFxtYXRoY2Fse0Z9Il0sWzIsMywiXFxtYXRocm17Y2FufV9cXG1hdGhjYWx7R30iLDJdLFswLDIsInBfMF4qYSIsMl0sWzEsMywicF8xXiphIl1d
+	\[\begin{tikzcd}
+		{p_0^*f^*\mathcal{F}} & {p_1^*f^*\mathcal{F}} \\
+		{p_0^*f^*\mathcal{G}} & {p_1^*f^*\mathcal{G}}
+		\arrow["{\mathrm{can}_\mathcal{F}}", from=1-1, to=1-2]
+		\arrow["{p_0^*a}"', from=1-1, to=2-1]
+		\arrow["{p_1^*a}", from=1-2, to=2-2]
+		\arrow["{\mathrm{can}_\mathcal{G}}"', from=2-1, to=2-2]
+	\end{tikzcd}\]
+	
+	By Lemma~\ref{lem:qcoh-descent-affine}, the restriction of $a$
+	to $V$, i.e. pulling back $a$ along $g$ and identified via $g^* f^*\simeq (fg)^* \simeq p^*$, descends to a unique morphism $b:\mathcal{F} \to\mathcal{G}$.
+	For every affine open $T\subseteq U$, compatibility
+	with descent implies that $a|_T$ and $(f^*b)|_T$
+	agree after pullback to $T\times_X V$.
+	Faithfulness in Lemma~\ref{lem:qcoh-descent-affine}
+	therefore gives $a|_T=(f^*b)|_T$.
+	Hence $a=f^*b$, proving full faithfulness.
+	
+	For arbitrary $X$, the statement is Zariski local on $X$, so we apply the argument over an affine cover and the resulting morphisms agree on overlaps by uniqueness. Hence, they glue to a unique morphism, proving that $f^*$ is fully faithful.
+	
+	\emph{Effectivity over an affine base.}
+	Suppose again that $X$ is affine, and let
+	$(\mathcal{E},\varphi)\in\Desc(U/X)$.
+	Restricting $\mathcal{E}$ to $V$ along $g$ gives a descent datum along $p$. Again by Lemma~\ref{lem:qcoh-descent-affine}, there exist
+	$\mathcal{F}\in\QCoh(X)$ and an isomorphism
+	\[
+	\alpha:p^*\mathcal{F}\xrightarrow{\cong}g^*\mathcal{E}
+	\]
+	compatible with descent.
+	
+	Let $T\subseteq U$ be affine, and write
+	\[
+	q_0:T\times_X V\to T,
+	\qquad
+	q_1:T\times_X V\to V
+	\]
+	for the projections.
+	Pulling back $\alpha$ along $q_1$ gives an isomorphism 
+	\[
+		q_1^*\alpha: q_1^*p^*\mathcal{F}\xrightarrow{\cong} q_1^*g^*\mathcal{E}.
+	\]
+	Considering the following commutative diagram
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJUXFx0aW1lc19YViJdLFswLDEsIlYiXSxbMSwxLCJYIl0sWzEsMCwiVCJdLFswLDEsInFfMiIsMl0sWzEsMiwicCIsMl0sWzAsMywicV8xIl0sWzMsMiwiZnxfVCJdXQ==
+	\[\begin{tikzcd}
+		{T\times_XV} & T \\
+		V & X
+		\arrow["{q_0}", from=1-1, to=1-2]
+		\arrow["{q_1}"', from=1-1, to=2-1]
+		\arrow["{f|_T}", from=1-2, to=2-2]
+		\arrow["p"', from=2-1, to=2-2]
+	\end{tikzcd}\]
+	yields $q_1^*p^*\mathcal{F} \cong q_0^*f|_T^*\mathcal{F} = q_0^*((f^*\mathcal{F})|_T)$.
+	Now consider $\varphi: \operatorname{pr}_0^*\mathcal{E} \xrightarrow{\cong}\operatorname{pr}_1^*\mathcal{E}$ and let
+	$h = (j\circ q_0, g\circ q_1): T\times_X V \to U\times_X U$, where $j: T\hookrightarrow U$ is the inclusion. This is well-defined, since after post composition with $f$ they agree by construction. Write $\operatorname{pr}_i: U\times_X U \to U$ for the two projections. By definition we have $\operatorname{pr}_0h = jq_0$ and $\operatorname{pr}_1h=gq_1$ and hence pulling back $\varphi$ along $h$ yields
+	\begin{align*}
+		q_0^*(\mathcal{E}|_T) &= q_0^*(j^*\mathcal{E}) \cong (jq_0)^*\mathcal{E} = (\operatorname{pr}_0h)^*\mathcal{E} \\
+		&\cong h^*\operatorname{pr}_0^*\mathcal{E} \xrightarrow{h^*\varphi} h^*\operatorname{pr}_1^*\mathcal{E} \cong (\operatorname{pr}_1h)^*\mathcal{E} \\
+		&= (gq_1)^*\mathcal{E} \cong q_1^*g^*\mathcal{E}
+	\end{align*}
+	
+	Hence, combining this with the previous calculation results in
+	\begin{align*}
+		q_0^*((f^*\mathcal{F})|_T) &\cong q_1^*p^*\mathcal{F} \xrightarrow{q_1^*\alpha} q_1^*g^*\mathcal{E} \\
+		&\cong h^*\operatorname{pr}_1^*\mathcal{E} \xrightarrow{h^*\varphi^{-1}} h^*\operatorname{pr}_0^*\mathcal{E} \cong q_0^*(\mathcal{E}|_T). 
+	\end{align*}
+
+	The cocycle condition for $\varphi$ and compatibility
+	of $\alpha$ with descent imply that this isomorphism
+	respects the canonical descent data along $q$. Now $T$ and $T\times_X V$ is affine, so full faithfulness in
+	Lemma~\ref{lem:qcoh-descent-affine} gives
+	a unique isomorphism
+	\[
+	\beta_T:(f^*\mathcal{F})|_T
+	\xrightarrow{\sim}\mathcal{E}|_T.
+	\]
+	Checking on affine open subsets, these isomorphisms agree on overlaps by uniqueness, so they glue to
+	\[
+	\beta:f^*\mathcal{F}\xrightarrow{\sim}\mathcal{E}.
+	\]
+
+	
+	
+	
+	We are left to check, that $\beta$ is compatible with the descent data $\varphi$, which means precisely that the diagram
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhybXtwcn1fMF4qZl4qXFxtYXRoY2Fse0Z9Il0sWzAsMSwiXHRcXG1hdGhybXtwcn1fMF4qXFxtYXRoY2FsIEUiXSxbMSwwLCJcXG1hdGhybXtwcn1fMV4qZl4qXFxtYXRoY2FsIEYiXSxbMSwxLCJcXG1hdGhybXtwcn1fMV4qXFxtYXRoY2FsIEUiXSxbMCwyLCJcXG1hdGhybXtjYW59X3tcXG1hdGhjYWwgRn0iXSxbMCwxLCJcXG1hdGhybXtwcn1fMF4qXFxiZXRhIiwyXSxbMiwzLCJcXG1hdGhybXtwcn1fMV4qXFxiZXRhIl0sWzEsMywiXFx2YXJwaGkiLDJdXQ==
+	\[\begin{tikzcd}
+		{\mathrm{pr}_0^*f^*\mathcal{F}} & {\mathrm{pr}_1^*f^*\mathcal{F}} \\
+		{	\mathrm{pr}_0^*\mathcal{E}} & {\mathrm{pr}_1^*\mathcal{E}}
+		\arrow["{\mathrm{can}_{\mathcal{F}}}", from=1-1, to=1-2]
+		\arrow["{\mathrm{pr}_0^*\beta}"', from=1-1, to=2-1]
+		\arrow["{\mathrm{pr}_1^*\beta}", from=1-2, to=2-2]
+		\arrow["\varphi"', from=2-1, to=2-2]
+	\end{tikzcd}\]
+	commutes. Here $\mathrm{can}_{\mathcal{F}}$ is the canonical descent isomorphism of Definition~\ref{con:pullback-to-descent}. Write $Y:= U\times_X U$, with projections $\mathrm{pr}_0,\mathrm{pr}_1:Y\to U$.
+	
+
+	Claim:
+	It suffices to check the compatibility equality after
+	pullback along the fppf cover
+	\[
+	\operatorname{pr}_{01}:Z=(U\times_X U)\times_X V\longrightarrow U\times_X U.
+	\]
+	\begin{proof}[Proof of the claim]
+		Indeed, let $a = \varphi\circ \operatorname{pr}_0^*\beta, b = \operatorname{pr}_1^*\beta \circ \mathrm{can}_\mathcal{F}$
+		and suppose $\pi^*a=\pi^*b$.
+		For any $y\in U\times_X U$, choose $z\in Z$ above $y$.
+		The local homomorphism
+		\[
+		\mathcal{O}_{U\times_X U,y}\longrightarrow\mathcal{O}_{Z,z}
+		\]
+		is flat, hence faithfully flat, see
+		\cite[][Tag 00HR]{stacks-project}.
+		Thus equality of the stalk maps implies
+		$a_y=b_y$.
+		Since this holds at every point, $a=b$.
+	\end{proof}
+	
+	
+	
+	We will glue the local construction of $\beta_T$ to the global cocycle condition on $U\times_X V$.
+	
+	Write projections as $\operatorname{pr}_0:U\times_X V\to U$ and
+	$\operatorname{pr}_1:U\times_X V\to V$, and write
+	\[
+	h:=(\operatorname{pr}_0,g\circ\operatorname{pr}_1):
+	U\times_X V\longrightarrow U\times_X U.
+	\]
+	Under the canonical identifications of pullbacks,
+	consider the isomorphism
+	\[
+	\delta:=h^*\varphi^{-1}\circ\operatorname{pr}_1^*\alpha:
+	\operatorname{pr}_1^*p^*\mathcal{F}
+	\xrightarrow{\sim}
+	\operatorname{pr}_0^*\mathcal{E}.
+	\]
+	Since $p\circ\operatorname{pr}_1
+	=f\circ\operatorname{pr}_0$, we identify its source
+	canonically with $\operatorname{pr}_0^*f^*\mathcal{F}$.
+	
+	By construction, the pullback of each $\beta_T$ to
+	$T\times_X V$ is the restriction of $\delta$.
+	Since these opens cover $W$, the glued isomorphism
+	$\beta$ satisfies
+	\begin{align}\label{eq:identity-for-beta}
+		\operatorname{pr}_0^*\beta
+		=
+		h^*\varphi^{-1}\circ\operatorname{pr}_1^*\alpha,
+	\end{align}
+	under the canonical identifications above.
+	
+	Write $\alpha_0 = \operatorname{pr}_{0}, \alpha_1 = \operatorname{pr}_{1}, \alpha_2 =g\circ \operatorname{pr}_{2}$ for the three projections
+	
+	% https://q.uiver.app/#q=WzAsMixbMywwLCJVXFx0aW1lc19YVVxcdGltZXNfWCBVIl0sWzAsMCwiVVxcdGltZXNfWFVcXHRpbWVzX1ggViJdLFsxLDAsIihcXG9wZXJhdG9ybmFtZXtwcn1fezEyfSwgXFxvcGVyYXRvcm5hbWV7cHJ9X3swMn0sIGdcXGNpcmNcXG9wZXJhdG9ybmFtZXtwcn1fezAxfSkiLDJdXQ==
+	\[\begin{tikzcd}
+		{U\times_XU\times_X V} &&& {U\times_XU\times_X U}
+		\arrow["{(\operatorname{pr}_{12}, \operatorname{pr}_{02}, g\circ\operatorname{pr}_{01})}"', from=1-1, to=1-4]
+	\end{tikzcd}\]
+	and put $Z:=U\times_X U\times_X V$.
+	Set
+	\[
+	\varphi_{ij}:=(\alpha_i,\alpha_j)^*\varphi:
+	\alpha_i^*\mathcal{E}\xrightarrow{\sim}\alpha_j^*\mathcal{E}.
+	\]
+	Pulling back the cocycle condition for $\varphi$ along
+	$(\alpha_0,\alpha_1,\alpha_2)$ gives
+	\[
+	\varphi_{02}=\varphi_{12}\circ\varphi_{01},
+	\qquad\text{hence}\qquad
+	\varphi_{01}\circ\varphi_{02}^{-1}
+	=\varphi_{12}^{-1}.
+	\]
+	
+	For $i=0,1$, pull the defining identity \ref{eq:identity-for-beta} for $\beta$
+	back along
+	\[
+	\operatorname{pr}_{i2}
+	=(\alpha_i,\operatorname{pr}_2):Z\longrightarrow U\times_X V.
+	\]
+	Since
+	\[
+	\operatorname{pr}_0\circ\operatorname{pr}_{i2}
+	=\alpha_i,\qquad
+	\operatorname{pr}_1\circ\operatorname{pr}_{i2}
+	=\operatorname{pr}_2,\qquad
+	h\circ\operatorname{pr}_{i2}=(\alpha_i,\alpha_2),
+	\]
+	we obtain
+	\[
+	\alpha_i^*\beta
+	=
+	\varphi_{i2}^{-1}\circ\operatorname{pr}_2^*\alpha
+	\qquad(i=0,1),
+	\]
+	under the canonical identifications of pullbacks of
+	$\mathcal{F}$.
+	
+	Since
+	$\operatorname{pr}_{01}=(\alpha_0,\alpha_1)$,
+	functoriality of pullback and the preceding identities
+	give
+	\[
+	\begin{aligned}
+		\operatorname{pr}_{01}^*
+		\bigl(\varphi\circ\operatorname{pr}_0^*\beta\bigr)
+		&=
+		\operatorname{pr}_{01}^*\varphi
+		\circ\operatorname{pr}_{01}^*\operatorname{pr}_0^*\beta\\
+		&=
+		\operatorname{pr}_{01}^*\varphi
+		\circ(\operatorname{pr}_0\circ
+		\operatorname{pr}_{01})^*\beta\\
+		&=\varphi_{01}\circ\alpha_0^*\beta\\
+		&=\varphi_{01}\circ\varphi_{02}^{-1}
+		\circ\operatorname{pr}_2^*\alpha\\
+		&=\varphi_{12}^{-1}\circ\operatorname{pr}_2^*\alpha\\
+		&=\alpha_1^*\beta\\
+		&=
+		\operatorname{pr}_{01}^*
+		\bigl(\operatorname{pr}_1^*\beta
+		\circ\mathrm{can}_{\mathcal{F}}\bigr).
+	\end{aligned}
+	\]
+	Here all equalities are understood under the canonical
+	identifications just specified.
+	Thus the two morphisms agree after pullback along
+	$\operatorname{pr}_{01}:Z\to U\times_X U$.
+	By the faithfulness established above, it follows that
+	\[
+	\varphi\circ\operatorname{pr}_0^*\beta
+	=
+	\operatorname{pr}_1^*\beta\circ\mathrm{can}_{\mathcal{F}}.
+	\]
+	Hence $\beta$ is an isomorphism of descent data, proving
+	effectivity over an affine base.
+	
+	
+	
+	
+	Finally for an arbitrary base $X$, choose an affine open cover $\{X_a\}$.
+	By the affine-base case, the restricted descent datum
+	over each $X_a$ descends to
+	$\mathcal{F}_a\in\QCoh(X_a)$.
+	Full faithfulness gives unique isomorphisms
+	\[
+	\mathcal{F}_a|_{X_a\cap X_b}
+	\xrightarrow{\sim}
+	\mathcal{F}_b|_{X_a\cap X_b}
+	\]
+	compatible with the chosen descent isomorphisms.
+	Their cocycle condition follows from uniqueness.
+	Zariski gluing therefore gives
+	$\mathcal{F}\in\QCoh(X)$ and an isomorphism
+	$f^*\mathcal{F}\simeq\mathcal{E}$ compatible with
+	$\varphi$.
+	Thus, $f^*$ is essentially surjective and hence
+	an equivalence.
 \end{proof}
 
+\begin{remark}
+	This proof perfectly illustrates how carefull one has to be when working
+	with iterated pullbacks.
+	For composable morphisms $u$ and $v$, the functors
+	$u^*v^*$ and $(v\circ u)^*$ are canonically isomorphic,
+	rather than literally equal.
+	The canonical descent isomorphism records precisely
+	these identifications.
+\end{remark}
