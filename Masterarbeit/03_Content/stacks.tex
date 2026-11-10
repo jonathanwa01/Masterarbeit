@@ -92,86 +92,58 @@ Viewing sets as discrete groupoids identifies sheaves with a special case of sta
 		\]
 		commutes in $\mathcal{F}(U_i\times_U U_j)$.
 	\end{enumerate}
+	We denote the $2$-category of stacks with $\Stk$.
 \end{definition}
 
-\begin{remark}
-	Following Definition 2.6 of \cite[][p. 13]{khan2022stacks} we get a nice $\infty$-categorical picture of a stack, namely as a $2$-sheaf, satisfying descent.
-	
-	The passage from algebraic spaces to stacks may be viewed as a categorification
-	of the sheaf condition. Recall that an algebraic space may be described by its
-	functor of points as a sheaf of sets on the big \'etale site. For a covering
-	$U \to X$, the sheaf condition may be expressed by the equalizer diagram
-	\[
-	F(X) \to F(U) \rightrightarrows F(U \times_X U).
-	\]
-	Thus, sections over $X$ are precisely those sections over $U$ whose pullbacks
-	to $U \times_X U$ agree.
-	
-	For moduli problems, however, local objects usually do not agree literally on
-	overlaps, but only up to isomorphism. This leads to replacing sets by
-	groupoids. One therefore considers an assignment
-	\[
-	U \longmapsto \mathcal{X}(U),
-	\]
-	where $\mathcal{X}(U)$ is a groupoid, together with pullback functors along
-	morphisms. 
-	In this language, the sheaf condition is replaced by descent. For a covering
-	$U \to X$, a descent datum consists of an object $x \in \mathcal{X}(U)$
-	together with an isomorphism
-	\[
-	\pi_2^*x \xrightarrow{\cong} \pi_1^*x
-	\]
-	in $\mathcal{X}(U \times_X U)$ satisfying the cocycle condition on
-	$U \times_X U \times_X U$. The stack condition asserts that every such
-	descent datum is effective. If all fibres are discrete groupoids, this reduces
-	to the usual sheaf condition for set-valued functors.
-\end{remark}
 
 \begin{lemma}[Products and pullbacks of stacks]
 	\cite[][04TD]{stacks-project}
 	The category of stacks over a base scheme $S$ is closed under products and pullbacks.
 \end{lemma}
 
-\section{Algebraic Stacks}
+\begin{remark}
+	All pullbacks and products for stacks are meant to be $2$-limits.
+\end{remark}
+
+\begin{proposition}
+	\label{prop:algspaces-are-stacks}
+	There is a fully faithful embedding of algebraic spaces into algebraic stacks $\AlgSp \subset \Stk$.
+\end{proposition}
+
+\begin{proof}
+	This follows from the Grothendieck construction, proposition \ref{prop:grothendieck-construction}.
+\end{proof}
+
+\section{DM Stacks}
 
 \begin{definition}[Representable morphism of stacks]
 	(\cite[][Tag 02YQ]{stacks-project})
 	Let $\mathcal{X}, \mathcal{Y}$ be stacks over $(\SchOver{S})_{fppf}$ and let $f:\mathcal{X} \to \mathcal{Y}$ be a morphism of stacks. We call $f$ representable by algebraic spaces, if for all schemes $U$ over $S$ and $U\to \mathcal{Y}$, $U\times_{\mathcal{Y}} \mathcal{X}$ is an algebraic space.
 \end{definition}
 
-\begin{definition}[Algebraic Stack]
-	(\cite[][Tag 026O]{stacks-project})
-	Let $S$ be a scheme. An algebraic stack over $S$ is a category fibred in groupoids
+\begin{definition}[Delign-Mumford stack]
+	A Delign-Mumford stack $\mathcal{X}$, often just called a DM stack, is a stack over $(\SchOver{S})_{fppf}$, such that there exists a scheme $U$ and a morphism $U\to \mathcal{X}$, which is surjective and \etale, such that
 	\[
-	\mathcal{X} \to (\SchOver{S})_{\mathrm{fppf}}
+		\Delta_\mathcal{X}:\mathcal{X} \to \mathcal{X}\times\mathcal{X}
 	\]
-	such that:
-	\begin{enumerate}
-		\item $\mathcal{X}$ is a stack in groupoids over $(\SchOver{S})_{\mathrm{fppf}}$;
-		\item the diagonal
-		\[
-		\Delta_{\mathcal{X}} \colon \mathcal{X} \to \mathcal{X} \times \mathcal{X}
-		\]
-		is representable by algebraic spaces;
-		\item there exists a scheme $U$ and a smooth surjective morphism
-		\[
-		U \to \mathcal{X}.
-		\]
-	\end{enumerate}
+	is representable by algebraic spaces. We call the map $U\to \mathcal{X}$ \etale\ atlas.
 \end{definition}
 
-\begin{proposition}
-	\label{prop:algspaces-are-algstacks}
-	There is a fully faithful embedding of algebraic spaces into algebraic stacks $\AlgSp \subset \AlgStk$.
-\end{proposition}
+\begin{remark}\label{rem:dm-stack-finite-inertia}
+	The diagonal of a Deligne--Mumford stack is unramified
+	(\cite[][Tag 04YV]{stacks-project}).
+	Since the inertia morphism
+	\[
+	I_{\mathcal X}\longrightarrow\mathcal X
+	\]
+	is a base change of the diagonal, it is also unramified.
+\end{remark}
 
-\begin{proof}
-	This follows from the Grothendieck construction, proposition \ref{prop:grothendieck-construction}, and the fact that \etale\ morphisms are smooth.
-\end{proof}
+
 
 \begin{definition}[Points of algebraic stacks]
 	(\cite[][Tag 04XE]{stacks-project})
-	Let $\mathcal{X}$ be an algebraic stack, $K, L$ two fields and let $p:\Specof{K}\to \mathcal{X}$, $q: \Specof{L}\to \mathcal{X}$ be a morphisms of stacks. We call $p$ and $q$ equivalent, if there exists a field $\Omega$ such that the following diagram is $2$-commutative:
+	Let $\mathcal{X}$ be a DM stack, $K, L$ two fields and let $p:\Specof{K}\to \mathcal{X}$, $q: \Specof{L}\to \mathcal{X}$ be a morphisms of stacks. We call $p$ and $q$ equivalent, if there exists a field $\Omega$ such that the following diagram is $2$-commutative:
 	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXFNwZWNvZntcXE9tZWdhfSJdLFsxLDAsIlxcU3BlY29me0t9Il0sWzAsMSwiXFxTcGVjb2Z7TH0iXSxbMSwxLCJcXG1hdGhjYWx7WH0iXSxbMSwzLCJwIl0sWzIsMywicSIsMl0sWzAsMl0sWzAsMV1d
 	\[\begin{tikzcd}
 		{\Specof{\Omega}} & {\Specof{K}} \\
@@ -185,14 +157,71 @@ Viewing sets as discrete groupoids identifies sheaves with a special case of sta
 \end{definition}
 
 \begin{remark}
-	The fact that $|\mathcal{X}|$ is a set rather than a proper class relies critically on $\mathcal{X}$ being an algebraic stack. For a general stack, the collection of all isomorphism classes of morphisms $\Specof{K}\to \mathcal{X}$, as $K$ ranges over all fields, forms a priori only a proper class in ZFC set theory, since there is no bound on the cardinality of $K$.
+	The fact that $|\mathcal{X}|$ is a set rather than a proper class relies critically on $\mathcal{X}$ being a DM stack. For a general stack, the collection of all isomorphism classes of morphisms $\Specof{K}\to \mathcal{X}$, as $K$ ranges over all fields, forms a priori only a proper class in ZFC set theory, since there is no bound on the cardinality of $K$.
 	
-	For an algebraic stack however, this issue is resolved by the existence of a smooth surjective presentation $U\to \mathcal{X}$ from a scheme $U$. Since $|U|$ is a genuine set and the map $U\to \mathcal{X}$ is surjective (\cite[][Tag 04XI]{stacks-project}), every point of $|\mathcal{X}|$ is represented by a point of $U$. One then sees, that $|\mathcal{X}|$ is the set-theoretic quotient $|U|/|R|$, where $R=U\times_X U$ is the algebraic space encoding the equivalence relation. This is indeed a set, and one verifies that it agrees with the description via field-valued points.
+	For a DM stack however, this issue is resolved by the existence of an \etale\ surjective presentation $U\to \mathcal{X}$ from a scheme $U$. Since $|U|$ is a genuine set and the map $U\to \mathcal{X}$ is surjective (\cite[][Tag 04XI]{stacks-project}), every point of $|\mathcal{X}|$ is represented by a point of $U$. One then sees, that $|\mathcal{X}|$ is the set-theoretic quotient $|U|/|R|$, where $R=U\times_X U$ is the algebraic space encoding the equivalence relation. This is indeed a set, and one verifies that it agrees with the description via field-valued points.
 \end{remark}
 
 \begin{definition}[\Etale\ morphism of algebraic stacks]
-	Let $f:\mathcal{X} \to \mathcal{Y}$ be a morphism of algebraic stacks. We call $f$ \etale, if it is representable and for all schemes $U\to \mathcal{Y}$, the morphism $U\times_\mathcal{Y}\mathcal{X}\to U$ is \etale.
+	Let $f:\mathcal{X} \to \mathcal{Y}$ be a morphism of DM stacks. We call $f$ \etale, if it is representable and for all schemes $U\to \mathcal{Y}$, the morphism $U\times_\mathcal{Y}\mathcal{X}\to U$ is \etale.
 \end{definition}
+
+
+\begin{example}[Quotients by finite groups]
+	\label{ex:finite-group-quotient-dm}
+	Let $S$ be a scheme, let $G$ be a finite group, and let
+	$X$ be an $S$-scheme with a right action of the constant
+	group scheme
+	\[
+	G_S=\coprod_{g\in G}S.
+	\]
+	The quotient stack $[X/G]$ is defined as follows:
+	For an $S$-scheme $T$, an object of $[X/G](T)$ is a pair
+	$(P,u)$ consisting of a right $G_T$-torsor
+	\[
+	P\longrightarrow T
+	\]
+	and a $G$-equivariant morphism $u:P\to X$.
+	A morphism $(P,u)\to(P',u')$ in $[X/G](T)$ is a
+	$G_T$-equivariant isomorphism
+	\[
+	\alpha:P\xrightarrow{\cong}P'
+	\]
+	over $T$ such that the following commutes:
+	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJQIl0sWzIsMCwiUCciXSxbMSwxLCJYIl0sWzAsMSwiXFxhbHBoYSJdLFswLDIsInUiLDJdLFsxLDIsInUnIl1d
+	\[\begin{tikzcd}
+		P && {P'} \\
+		& X
+		\arrow["\alpha", from=1-1, to=1-3]
+		\arrow["u"', from=1-1, to=2-2]
+		\arrow["{u'}", from=1-3, to=2-2]
+	\end{tikzcd}\]
+	These groupoids, together with pullback, define a stack,
+	see \cite[][Tag 04UV]{stacks-project}.
+	
+	There is a canonical morphism
+	\[
+	q:X\longrightarrow[X/G],
+	\]
+	sending a morphism $x:T\to X$ to the trivial torsor
+	$T\times_S G_S$ with equivariant map
+	$(t,g)\mapsto x(t)\cdot g$.
+	For any morphism $T\to[X/G]$ corresponding to $(P,u)$ (via $2$-Yoneda),
+	there is a $2$-cartesian diagram
+	\[
+	\begin{tikzcd}
+		P \arrow[r,"u"] \arrow[d]
+		& X \arrow[d,"q"] \\
+		T \arrow[r]
+		& {[X/G]}.
+	\end{tikzcd}
+	\]
+	Since $G_S$ is finite \etale\ over $S$, the torsor
+	$P\to T$ is finite \etale\ and surjective.
+	Thus $q$ is representable, finite \etale, and surjective.
+	In particular, $q$ is an \etale\ atlas, so $[X/G]$
+	is a DM stack.
+\end{example}
 
 
 \begin{example}[A quotient stack of pencils of quadrics up to orthogonal action]
@@ -323,7 +352,7 @@ Viewing sets as discrete groupoids identifies sheaves with a special case of sta
 
 \begin{definition}[Inertia stack]
 	(\cite[][Tag 036X]{stacks-project})
-	Let \(\mathcal{X}\) be an algebraic stack over \(S\). The inertia stack of \(\mathcal{X}\), denoted
+	Let \(\mathcal{X}\) be a DM stack over \(S\). The inertia stack of \(\mathcal{X}\), denoted
 	\[
 	\mathcal{I}_{\mathcal{X}},
 	\]
@@ -374,7 +403,7 @@ Viewing sets as discrete groupoids identifies sheaves with a special case of sta
 
 \begin{lemma}
 	(\cite[][Tag 036X]{stacks-project})
-	Let $\mathcal{X}$ be an algebraic stack over $S$. Then there is an isomorphism of stacks
+	Let $\mathcal{X}$ be a DM stack over $S$. Then there is an isomorphism of stacks
 	\[
 	\mathcal{I}_{\mathcal{X}}
 	\cong
@@ -521,19 +550,4 @@ Viewing sets as discrete groupoids identifies sheaves with a special case of sta
 	\]
 \end{corollary}
 
-
-\section{Delign-Mumford Stacks}
-TODO:
-
-I want to introduce Delign-Mumford stacks which will be the object we are studying throughout the Keel-Mori section. They yield simplified version algebraic stacks and will essentially simplify the proof of Keel-Mori a bit.
-
-
-\begin{definition}[Delign-Mumford stack]
-	(\cite[][Definition 3.1.4.]{alper2026stacks})
-	A Delign-Mumford stack $\mathcal{X}$, often just called a DM stack, is a stack over $\Sch_{et}$, such that there exists a scheme $U$ and a morphism $U\to \mathcal{X}$, which is surjective, representable by algebraic spaces and \etale.
-\end{definition}
-
-\begin{remark}\label{rem:dm-stack-finite-inertia}
-	For algebraic stacks locally of finite type over a field, being DM is equivalent to having finite and reduced geometric stabilizer groups; equivalently, the diagonal is unramified, see \cite[][Theorem 3.6.4]{alper2026stacks}. In particular, every DM stack has finite inertia, so it satisfies the finiteness hypothesis appearing in the Keel-Mori theorem.
-\end{remark}
 

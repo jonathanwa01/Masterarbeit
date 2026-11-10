@@ -84,22 +84,6 @@ Fibred categories organize objects over varying bases and encode pullback throug
 	\cite[][Tag 02XJ]{stacks-project}.
 \end{definition}
 
-\begin{definition}[Fibred category and choice of pullbacks]
-	\label{def:fibred-category}
-	(\cite[][Tag 02XM and 02XN]{stacks-project})
-	A category $p:\mathcal{F}\to\mathcal{C}$ is
-	fibred if, for every morphism $f:U\to V$
-	and every $\eta\in\mathcal{F}(V)$, there exists a
-	cartesian morphism
-	\[
-	c_{f,\eta}:f^*\eta\longrightarrow\eta
-	\]
-	over $f$.
-	
-	A choice of pullbacks is a simultaneous choice
-	of such cartesian morphisms for every $f$ and $\eta$.
-\end{definition}
-
 \begin{proposition}[Basic properties of cartesian morphisms]
 	\label{prop:cartesian-properties}
 	\cite[][02XJ]{stacks-project}
@@ -122,6 +106,23 @@ Fibred categories organize objects over varying bases and encode pullback throug
 	\end{enumerate}
 \end{proposition}
 
+\begin{definition}[Fibred category and choice of pullbacks]
+	\label{def:fibred-category}
+	(\cite[][Tag 02XM and 02XN]{stacks-project})
+	A category $p:\mathcal{F}\to\mathcal{C}$ over $\mathcal{C}$ is
+	fibred if, for every morphism $f:U\to V$
+	and every $\eta\in\mathcal{F}(V)$, there exists a
+	cartesian morphism
+	\[
+	c_{f,\eta}:f^*\eta\longrightarrow\eta
+	\]
+	over $f$.
+	
+	A choice of pullbacks is a simultaneous choice
+	of such cartesian morphisms for every $f$ and $\eta$.
+\end{definition}
+
+
 \begin{definition}[Morphisms of fibred categories]
 	\label{def:morphism-fibred-categories}
 	(\cite[][Tag 02XP]{stacks-project})
@@ -130,35 +131,107 @@ Fibred categories organize objects over varying bases and encode pullback throug
 	A morphism of fibred categories is a functor $H:\mathcal{F} \to \mathcal{G}$ satisfying $qH=p$ and preserving cartesian
 	morphisms.
 	
-	A $2$-morphism $t:H\Rightarrow K$, for
-	$1$-morphisms
-	$H,K:(\mathcal{F},p)\to(\mathcal{G},q)$,
-	are natural transformations satisfying
+	A $2$-morphism $\alpha:H\Rightarrow K$ between
+	morphisms of fibred categories
 	\[
-	q(t_\xi)=\mathrm{id}_{p(\xi)}
-	\qquad
-	\text{for every }\xi\in\mathcal{F}.
+	H,K:(\mathcal F,p)\longrightarrow(\mathcal G,q)
 	\]
-
+	is a natural transformation over $\mathcal C$:
 	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG1hdGhjYWx7Rn0iXSxbMiwwLCJcXG1hdGhjYWx7R30iXSxbMSwxLCJcXG1hdGhjYWx7Q30iXSxbMCwxLCJIIiwxLHsiY3VydmUiOi0yfV0sWzAsMiwicCIsMl0sWzEsMiwicSJdLFswLDEsIkciLDEseyJjdXJ2ZSI6Mn1dLFszLDYsInQiLDAseyJzaG9ydGVuIjp7InNvdXJjZSI6MjAsInRhcmdldCI6MjB9fV1d
 	\[
 	\begin{tikzcd}
 		\mathcal{F} && \mathcal{G} \\
 		& \mathcal{C}
-		\arrow[""{name=Hmid, anchor=center, inner sep=0},
-		"H"{description}, bend left=20,
-		from=1-1, to=1-3]
-		\arrow[""{name=Gmid, anchor=center, inner sep=0},
-		"G"{description}, bend right=20,
-		from=1-1, to=1-3]
+		\arrow[
+		""{name=Hmid, anchor=center, inner sep=0},
+		"H"{description},
+		bend left=25,
+		from=1-1, to=1-3
+		]
+		\arrow[
+		""{name=Gmid, anchor=center, inner sep=0},
+		"G"{description},
+		bend right=25,
+		from=1-1, to=1-3
+		]
 		\arrow["p"', from=1-1, to=2-2]
-		\arrow["q", from=1-3, to=2-2]
-		\arrow["t", Rightarrow, from=Hmid, to=Gmid]
+		\arrow["q",  from=1-3, to=2-2]
+		\arrow[
+		phantom,
+		""{name=alphaStart, pos=0.3, anchor=center, inner sep=0},
+		""{name=alphaEnd,   pos=0.7, anchor=center, inner sep=0},
+		from=Hmid, to=Gmid
+		]
+		\arrow[
+		"\alpha",
+		Rightarrow,
+		from=alphaStart, to=alphaEnd
+		]
 	\end{tikzcd}
 	\]
-	These objects, morphisms, and $2$-morphisms form the
-	$2$-category of fibred categories over $\mathcal{C}$.
+	
+	Explicitly, it consists of morphisms
+	\[
+	\alpha_\xi:H(\xi)\longrightarrow K(\xi)
+	\qquad (\xi\in\mathcal F)
+	\]
+	such that
+	\[
+	q(\alpha_\xi)=\mathrm{id}_{p(\xi)}
+	\]
+	and, for every morphism $a:\xi\to\eta$ in $\mathcal F$,
+	\[
+	K(a)\circ\alpha_\xi
+	=
+	\alpha_\eta\circ H(a).
+	\]
+	Thus $\alpha_\xi$ is a morphism in the fibre
+	$\mathcal G(p(\xi))$, and the diagram
+	\[
+	\begin{tikzcd}
+		H(\xi) \arrow[r,"\alpha_\xi"] \arrow[d,"H(a)"']
+		& K(\xi) \arrow[d,"K(a)"] \\
+		H(\eta) \arrow[r,"\alpha_\eta"']
+		& K(\eta)
+	\end{tikzcd}
+	\]
+	commutes.
 \end{definition}
+
+\begin{remark}[The $2$-category of fibred categories]
+	\label{rem:2-category-fibred-categories}
+	Fibred categories over $\mathcal{C}$, morphisms of fibred
+	categories, and natural transformations over $\mathcal{C}$
+	form a strict $2$-category, denoted
+	$\mathrm{Fib}(\mathcal{C})$.
+	
+	For two objects $\mathcal{F}$ and $\mathcal{G}$, the
+	morphisms $\mathcal{F}\to\mathcal{G}$ and their
+	$2$-morphisms form a category
+	\[
+	\operatorname{Hom}_{\mathcal C}(\mathcal F,\mathcal G).
+	\]
+	Composition in this category is vertical composition
+	of natural transformations:
+	\[
+	(\beta\circ\alpha)_\xi
+	=
+	\beta_\xi\circ\alpha_\xi.
+	\]
+	Composition of $1$-morphisms is composition of functors.
+	Together with horizontal composition of natural
+	transformations. Together these operations give the
+	$2$-category structure and the axioms are inherited from
+	the strict $(2, 1)$-category of categories.
+	
+	If the target $\mathcal G$ is fibred in groupoids,
+	every $2$-morphism $\alpha:H\Rightarrow K$ is invertible, since
+	each component $\alpha_\xi$ lies in the groupoid
+	$\mathcal G(p(\xi))$. This means that categories fibred in groupoids over
+	$\mathcal C$ form a full sub-$2$-category of
+	$\mathrm{Fib}(\mathcal C)$, where all $2$-morphisms
+	are invertible, that is, a $(2,1)$-category.
+\end{remark}
 
 \begin{definition}
 	Let $\mathcal{F}\to \mathcal{C}$ be a fibred category and let $B\in \mathcal{C}$. We call the subcategory of $\mathcal{F}$ of objects lying over $B$ and morphisms lying over $id_B$ the fibre of $\mathcal{F}$ over $B$ and denote it by $\mathcal{F}(B)$.
