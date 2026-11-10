@@ -69,7 +69,7 @@ Viewing sets as discrete groupoids identifies sheaves with a special case of sta
 		\item \textbf{Effective descent for objects.}
 		Let $\{f_i:U_i\to U\}_{i\in I}$ be a covering, and for each $i$ let $X_i\in\mathcal{F}(U_i)$ be an object. Suppose moreover that for every pair $i,j$ there is an isomorphism
 		\[
-		\varphi_{ij}:\pi_1^*X_i\xrightarrow{\sim}\pi_2^*X_j
+		\varphi_{ij}:\operatorname{pr}_1^*X_i\xrightarrow{\sim}\operatorname{pr}_2^*X_j
 		\qquad\text{in }\mathcal{F}(U_i\times_U U_j),
 		\]
 		where $\pi_1:U_i\times_U U_j\to U_i$ and $\pi_2:U_i\times_U U_j\to U_j$ are the projections, and that these isomorphisms satisfy the cocycle condition on triple fibre products
@@ -84,10 +84,10 @@ Viewing sets as discrete groupoids identifies sheaves with a special case of sta
 		such that for every pair $i,j$ the diagram
 		\[
 		\begin{tikzcd}
-			\pi_1^*f_i^*X \arrow[r,"\pi_1^*\alpha_i"] \arrow[d,"\cong"']
-			& \pi_1^*X_i \arrow[d,"\varphi_{ij}"] \\
-			\pi_2^*f_j^*X \arrow[r,"\pi_2^*\alpha_j"']
-			& \pi_2^*X_j
+			\operatorname{pr}_1^*f_i^*X \arrow[r,"\operatorname{pr}_1^*\alpha_i"] \arrow[d,"\cong"']
+			& \operatorname{pr}_1^*X_i \arrow[d,"\varphi_{ij}"] \\
+			\operatorname{pr}_2^*f_j^*X \arrow[r,"\operatorname{pr}_2^*\alpha_j"']
+			& \operatorname{pr}_2^*X_j
 		\end{tikzcd}
 		\]
 		commutes in $\mathcal{F}(U_i\times_U U_j)$.
