@@ -43,9 +43,10 @@
 
 \section{Stacks}
 \label{sec:stacks}
-Conceptually, stacks generalize sheaves by allowing values in groupoids
-instead of sets. Equivalently, stacks are $2$-sheaves on a site,
-or sheaves valued in groupoids.
+We now introduce stacks, which are the central objects of this thesis. Building on what we developed in Chapter~\ref{chap:descent-theory}, we define a stack
+as a category fibred in groupoids satisfying descent for both objects and morphisms. Under the Grothendieck construction (Proposition~\ref{prop:grothendieck-construction}), this is equivalently a groupoid-valued pseudofunctor satisfying \v{C}ech descent, i.e. a $2$-sheaf. We keep this viewpoint as motivation, while using fibred categories as the working definition.
+
+Viewing sets as discrete groupoids identifies sheaves with a special case of stacks, as explained in Remark~\ref{rem:desc-sets}. We will futhermore enrich stacks with geometric conditions to obtain Deligne-Mumford stacks and introduce inertia, preparing the setting we need in order to state and prove the Keel-Mori theorem.
 
 \begin{definition}[Stack]\label{def:stack}
 	(\cite[][Tag 02ZH]{stacks-project})
