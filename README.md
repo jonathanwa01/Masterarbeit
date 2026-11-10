@@ -33,8 +33,8 @@ The exposition follows an approach informed by Jarod Alper's notes.
 From the repository root, run:
 
 ```bash
-chmod +x build.sh
-./build.sh
+chmod +x .scripts/build.sh
+./scripts/build.sh
 ```
 
 The generated PDF is:
@@ -54,7 +54,10 @@ The script runs PDFLaTeX, Biber, and further PDFLaTeX passes to resolve the bibl
 │       ├── ci.yml            # Continuous integration
 │       └── release.yml       # Release publishing
 ├── Masterarbeit/             # LaTeX sources and supporting files
-├── build.sh                  # Local and CI build script
+├── scripts/
+│   └── build.sh              # Local and CI build script
+│   └── reference-check.sh    # Local script to list unused references
+│   └── reference-check.sh    # test tex file to run reference checker
 ├── LICENSE
 └── README.md
 ```
