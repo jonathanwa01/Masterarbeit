@@ -2,8 +2,8 @@
 set -euo pipefail
 
 # Go into the LaTeX project folder (relative to this script's location)
-SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-cd "$SCRIPT_DIR/Masterarbeit"
+ROOT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT_DIR/Masterarbeit"
 
 compile() {
   pdflatex -synctex=1 -interaction=nonstopmode -halt-on-error main.tex
