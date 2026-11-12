@@ -617,11 +617,11 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 		\[
 		|\mathcal{X}_2(\bar{k})| \to X_2(\bar{k}) \qquad |\mathcal{X}_1(\bar{k})| \to X_1(\bar{k}).
 		\]
-		Chose lifts $\xi = (a, b, \alpha)$ and $\xi' = (a', b', \beta)$ in $\mathcal{X}_2(\bar{k}) = (\mathcal{X}_1 \times_{\mathcal{X}_0} \mathcal{X}_1)(\bar{k})$, where
+		Chose lifts $\xi = (a, b, \alpha)$ of $x$ and $\xi' = (a', b', \beta)$ of $x'$ n $\mathcal{X}_2(\bar{k}) = (\mathcal{X}_1 \times_{\mathcal{X}_0} \mathcal{X}_1)(\bar{k})$, where
 		\[
 			\alpha: g(a) \xrightarrow{\sim} g(b) \qquad \beta: g(a') \xrightarrow{\sim} g(b').
 		\]
-		This means $\pi_2(\xi) = r$ and $\pi_2(\xi') = r'$.
+		This means $\pi_2(\xi) = x$ and $\pi_2(\xi') = x'$.
 		Consider the following commutative diagram:
 		% https://q.uiver.app/#q=WzAsNSxbMCwwLCJ8XFxtYXRoY2Fse1h9XzIoXFxiYXJ7a30pfCJdLFswLDEsIlhfMihcXGJhcntrfSkiXSxbMiwwLCJ8XFxtYXRoY2Fse1h9XzEoXFxiYXJ7a30pfCJdLFsyLDEsIlhfMShcXGJhcntrfSkiXSxbMSwyLCIoWF8xXFx0aW1lcyBYXzEpKFxcYmFye2t9KSJdLFswLDEsIlxccGlfMiJdLFsyLDMsIlxccGlfMSIsMl0sWzEsNCwiaiIsMl0sWzQsMywiXFxvcGVyYXRvcm5hbWV7cHJ9XzEiLDAseyJvZmZzZXQiOi0xfV0sWzQsMywiXFxvcGVyYXRvcm5hbWV7cHJ9XzIiLDIseyJvZmZzZXQiOjF9XSxbMSwzLCJ0IiwyLHsib2Zmc2V0IjoxfV0sWzEsMywicyIsMCx7Im9mZnNldCI6LTF9XSxbMCwyLCJzX1xcbWF0aGNhbHtYfSIsMCx7Im9mZnNldCI6LTF9XSxbMCwyLCJ0X1xcbWF0aGNhbHtYfSIsMix7Im9mZnNldCI6MX1dXQ==
 		\[\begin{tikzcd}
@@ -654,7 +654,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 			{g(a')} & {g(b')}
 			\arrow["\alpha", from=1-1, to=1-2]
 			\arrow["{g(\tilde{v})}"', from=1-1, to=2-1]
-			\arrow["{g(\tilde{w})}", from=1-2, to=2-2]
+			\arrow["{g(w)}", from=1-2, to=2-2]
 			\arrow["\beta"', from=2-1, to=2-2]
 		\end{tikzcd}\]
 		
@@ -664,7 +664,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 		\[
 			\beta \circ g(\tilde{v}) = \beta \circ g(v) \circ g(\varphi)  = g(w) \circ \alpha.
 		\]
-		Hence, $(\tilde{v}, w): \xi = (a, b, \alpha) \xrightarrow{\sim} (a', b', \beta) = \xi'$ is an isomorphism in $\mathcal{X}_2(\bar{k})$. But the image of this isomorphism under $\pi_2$ is just $\operatorname{id}_r$, since $X_2(\bar{k})$ is a set, i.e. a discrete groupoid, which means $r = r'$.
+		Hence, $(\tilde{v}, w): \xi = (a, b, \alpha) \xrightarrow{\sim} (a', b', \beta) = \xi'$ is an isomorphism in $\mathcal{X}_2(\bar{k})$. But the image of this isomorphism under $\pi_2$ is just $\operatorname{id}_x$, since $X_2(\bar{k})$ is a set, i.e. a discrete groupoid, which means $x = x'$.
 	\end{proof}
 	
 	Now we apply \ref{lem:quotient-by-etale-eq} and obtain an algebraic space $X_0$ fitting into Diagram \ref{eq:groupoid-moduli-space} and equalizing $s,t$. Denote by $q: X_1 \to X_0$ the quotient map. By commutativity of  \ref{eq:groupoid-moduli-space} we obtain 
@@ -675,7 +675,8 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	
 	
 	We will now use \etale\ descent to construct a morphism $\pi_0:\mathcal{X}_0 \to X_0$.
-	Set $\alpha = q\pi_1: \mathcal{X}_1 \to X_0$. on the overlaps we have $\alpha s_\mathcal{X} = \alpha t_\mathcal{X}$.
+	
+	Set $\alpha = q\pi_1: \mathcal{X}_1 \to X_0$. On the overlaps we have $\alpha s_\mathcal{X} = \alpha t_\mathcal{X}$.
 	Now for every scheme $T$ and every $\xi\in \mathcal{X}_0(T)$ let $V:= T\times_{\mathcal{X}_0} \mathcal{X}_1$, where $\xi:T \to \mathcal{X}_0$ via Yoneda.
 	Since $g$ is \etale\, surjective and representable by algebraic spaces, $V\to T$ is an an \etale\ surjection of algebraic spaces. Now chosing an \etale\ cover of schemes $\{T_i \to V\}_i$ yields an \etale\ cover $\{T_i \to T\}_i$ after composing with $V\to T$. Write $u_i: T_i \to T$and $l_i: T_i \to \mathcal{X}_1$ for the composite and consider the following diagram:
 	% https://q.uiver.app/#q=WzAsNSxbMSwyLCJcXG1hdGhjYWx7WH1fMCJdLFswLDIsIlxcbWF0aGNhbHtYfV8xIl0sWzEsMSwiVCJdLFswLDEsIlYiXSxbMCwwLCJUX2kiXSxbMiwwLCJ4Il0sWzEsMCwiZyIsMl0sWzMsMl0sWzMsMV0sWzQsM10sWzQsMiwidV9pIl0sWzMsMCwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XSxbNCwxLCJsX2kiLDIseyJjdXJ2ZSI6Mn1dXQ==
