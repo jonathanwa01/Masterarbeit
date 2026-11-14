@@ -1,10 +1,8 @@
 \chapter{Keel Mori Theorem}
-The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by first constructing moduli spaces on a special local class of algebraic stacks, called well-nigh affine stacks, and then gluing these local moduli spaces along
-\etale\ overlaps.
 
 \section{Local constructions}
 
-From now on we will be working with Deligne-Momford stacks follwing jarod's notes.
+From now on we will be working with Deligne-Momford stacks follwing Jarod Alper's notes.
 
 
 \begin{lemma}[Local Structure Theorem of Deligne-Mumford Stacks]\label{lem:local-structure-theorem-dm-stacks}
@@ -21,46 +19,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 
 
 
-\begin{lemma}[Affine quotient by a finite group]\label{lem:affine-quotient-finite-group}
-	(\cite[Theorem 4.3.6. (1)]{alper2026stacks})
-	Let $G$ be a finite group acting on an affine scheme $\Spec(A)$. Then the canonical morphism
-	\[
-	\Spec(A) \longrightarrow \Spec(A^G)
-	\]
-	induces a morphism of stacks
-	\[
-	[\Spec(A)/G] \longrightarrow \Spec(A^G),
-	\]
-	and this morphism is a coarse moduli space.
-\end{lemma}
 
-\begin{proof}
-	We check the two defining properties of a coarse moduli space.
-	
-	\emph{(i) Geometric points.}
-	The induced map on geometric points identifies the set of $G$-orbits in
-	$\Spec(A)(\bar{k})$ with the set of points of $\Spec(A^G)(\bar{k})$.
-	The morphism $\Spec(A) \to \Spec(A^G)$ is finite and surjective, since
-	$A$ is integral over $A^G$ for a finite group action. In particular, two
-	geometric points have the same image in $\Spec(A^G)$ if and only if they lie in the same $G$-orbit.
-	
-	\emph{(2) Universality.}
-	Let $Y$ be an algebraic space and let
-	\[
-	f : [\Spec(A)/G] \longrightarrow Y
-	\]
-	be a morphism. Since $f$ is $G$-invariant, its restriction to $\Spec(A)$
-	corresponds locally on an étale cover of $Y$ to a $G$-invariant morphism of
-	affine schemes. Equivalently, on coordinate rings it is given by a
-	$G$-invariant homomorphism, hence factors uniquely through $A^G$.
-	
-	
-	Since $Y$ is a sheaf on the \etale\ site, these local factorizations glue
-	to a unique morphism $\Spec(A^G)\to Y$ making the diagram commute.
-	
-	Thus $\pi : [\Spec(A)/G]\to \Spec(A^G)$ satisfies the universal property of a
-	coarse moduli space.
-\end{proof}
 
 
 \begin{lemma}[Étale descent for finite-group quotients]
@@ -97,315 +56,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 \end{lemma}
 
 
-\begin{lemma}\label{lem:coarse-moduli-etale-local}\label{lem:coarse-moduli-space-local-on-target}
-	(\cite[Lemma 5.2.10]{alper2026stacks})
-	Let $\pi : \mathcal{X} \to X$ be a morphism to an algebraic space. Suppose
-	that there is an étale covering $\{f_i : X_i \to X\}$ such that
-	\[
-	\pi_i : \mathcal{X} \times_X X_i \longrightarrow X_i
-	\]
-	is a coarse moduli space for each $i$. Then $\pi : \mathcal{X} \to X$ is a
-	coarse moduli space.
-\end{lemma}
 
-\begin{proof}
-	We verify the two axioms of Definition~\ref{def:coarse-moduli-space}.
-	Let $\mathcal{X}_i := \mathcal{X} \times_X X_i$.
-	
-	\textbf{Geometric points}
-	Let $k$ be an algebraically closed field and let
-	$x : \Spec(k) \to X$ be a geometric point. Since $\{f_i : X_i \to X\}$
-	is an étale covering, there exists an  $i$ and a lift
-	$\tilde{x} : \Spec(k) \to X_i$ with $f_i \circ \tilde{x} = x$, by lemma \ref{lem:geometric-points-etale-cover}.
-	
-	Since $\pi_i$ is a coarse moduli space, the induced map
-	\[
-	|(\mathcal{X}_i)(k)| \longrightarrow X_i(k)
-	\]
-	is a bijection onto isomorphism classes. The fiber of $\pi$ over $x$
-	is canonically identified with the fiber of $\pi_i$ over $\tilde{x}$,
-	via the base-change isomorphism
-	\[
-	\mathcal{X} \times_X \Spec(k)
-	\;\cong\;
-	(\mathcal{X} \times_X X_i) \times_{X_i} \Spec(k) = \mathcal{X}_i\times_{X_i}\Specof{k}.
-	\]
-	Hence the bijection for $\pi_i$ implies the corresponding bijection for
-	$\pi$.
-	
-	\medskip
-	\textbf{Universality}
-	Let $Y$ be an algebraic space and $f : \mathcal{X} \to Y$ a morphism.
-	For each $i$, consider the composite
-	\[
-	f_i: \mathcal{X}_i \xrightarrow{\;p_i\;} \mathcal{X}
-	\xrightarrow{\;f\;} Y.
-	\]
-	Since $\pi_i$ is a coarse moduli space, there exists a unique morphism
-	$g_i : X_i \to Y$ such that the following commutes:
-	% https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXG1hdGhjYWx7WH1cXHRpbWVzX1ggWF9pIl0sWzEsMSwiWCJdLFsxLDAsIlxcbWF0aGNhbHtYfSJdLFswLDEsIlhfaSJdLFsyLDAsIlkiXSxbMCwyLCJwX2kiXSxbMCwzLCJcXHBpX2kiLDJdLFszLDFdLFsyLDFdLFsyLDQsImYiXSxbMyw0LCJnX2kiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
-	\begin{equation}\label{diag:extension-on-etale-cover-of-X}
-		\begin{tikzcd}
-			{\mathcal{X}_i} & {\mathcal{X}} & Y \\
-			{X_i} & X
-			\arrow["{p_i}", from=1-1, to=1-2]
-			\arrow["{\pi_i}"', from=1-1, to=2-1]
-			\arrow["f", from=1-2, to=1-3]
-			\arrow[from=1-2, to=2-2]
-			\arrow["{g_i}", dashed, from=2-1, to=1-3]
-			\arrow[from=2-1, to=2-2]
-		\end{tikzcd}
-	\end{equation}
-	
-	For $i,j$, set $X_{ij} := X_i \times_X X_j$ and $\mathcal{X}_{ij} := \mathcal{X}\times_X X_{ij}$. Consider the following commutative diagram:
-	
-	% https://q.uiver.app/#q=WzAsOCxbMiwwLCJcXG1hdGhjYWx7WH1fe2lqfSJdLFszLDAsIlxcbWF0aGNhbHtYfV9pIl0sWzAsMSwiXFxtYXRoY2Fse1h9X2oiXSxbMSwxLCJcXG1hdGhjYWx7WH0iXSxbMiwxLCJYX3tpan0iXSxbMCwyLCJYX2oiXSxbMSwyLCJYIl0sWzMsMSwiWF9pIl0sWzAsMl0sWzEsM10sWzAsMV0sWzIsM10sWzQsNywicV9pIiwxXSxbNCw1LCJxX2oiLDEseyJsYWJlbF9wb3NpdGlvbiI6MzB9XSxbNyw2LCJmX2kiLDFdLFs1LDYsImZfaiIsMV0sWzIsNSwiXFxwaV9qIiwxXSxbMyw2LCJcXHBpIiwxXSxbMCw0LCJcXHBpX3tpan0iLDFdLFsxLDcsIlxccGlfaSIsMV1d
-	\[\begin{tikzcd}
-		&& {\mathcal{X}_{ij}} & {\mathcal{X}_i} \\
-		{\mathcal{X}_j} & {\mathcal{X}} & {X_{ij}} & {X_i} \\
-		{X_j} & X
-		\arrow[from=1-3, to=1-4]
-		\arrow[from=1-3, to=2-1]
-		\arrow["{\pi_{ij}}"{description}, from=1-3, to=2-3]
-		\arrow[from=1-4, to=2-2]
-		\arrow["{\pi_i}"{description}, from=1-4, to=2-4]
-		\arrow[from=2-1, to=2-2]
-		\arrow["{\pi_j}"{description}, from=2-1, to=3-1]
-		\arrow["\pi"{description}, from=2-2, to=3-2]
-		\arrow["{q_i}"{description}, from=2-3, to=2-4]
-		\arrow["{q_j}"{description, pos=0.3}, from=2-3, to=3-1]
-		\arrow["{f_i}"{description}, from=2-4, to=3-2]
-		\arrow["{f_j}"{description}, from=3-1, to=3-2]
-	\end{tikzcd}\]
-	
-	By unfolding the cube we obtain a commutative diagram 
-	% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXG1hdGhjYWx7WH1fe2lqfSJdLFswLDEsIlhfe2lqfSJdLFsxLDAsIlxcbWF0aGNhbHtYfV9qIl0sWzEsMSwiWF9qIl0sWzIsMSwiWCJdLFsyLDAsIlxcbWF0aGNhbHtYfSJdLFs1LDQsIlxccGkiXSxbMyw0LCJmX2oiLDJdLFsyLDUsInBfaiJdLFsyLDMsIlxccGlfaiIsMl0sWzAsMSwiXFxwaV97aWp9IiwyXSxbMCwyXSxbMSwzLCJxX2oiLDJdLFsyLDQsIiIsMix7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXIifX1dXQ==
-	\[\begin{tikzcd}
-		{\mathcal{X}_{ij}} & {\mathcal{X}_j} & {\mathcal{X}} \\
-		{X_{ij}} & {X_j} & X
-		\arrow[from=1-1, to=1-2]
-		\arrow["{\pi_{ij}}"', from=1-1, to=2-1]
-		\arrow["{p_j}", from=1-2, to=1-3]
-		\arrow["{\pi_j}"', from=1-2, to=2-2]
-		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-2, to=2-3]
-		\arrow["\pi", from=1-3, to=2-3]
-		\arrow["{q_j}"', from=2-1, to=2-2]
-		\arrow["{f_j}"', from=2-2, to=2-3]
-	\end{tikzcd}\]
-	
-	Since the right square and the outter rectangle is cartesian by definition of $\mathcal{X}_j$ and $\mathcal{X}_{ij}$, by a diagram chase the left square is cartesian, i.e. 
-	$\mathcal{X}_{ij} \cong \mathcal{X}_j \times_{X_j} X_{ij}$ and by symmetry also $\mathcal{X}_{ij} \cong \mathcal{X}_i \times_{X_i} X_{ij}$.
-	The morphisms $q_i$ and $q_j$ are \etale\ as base change of the \etale\ morphisms $f_j$, $f_i$ resp.
-	Now $\pi_{ij}$ is an \etale\ base change of the $\pi_j$ along $q_j$. Since coarse mosuli spaces are preserved under flat, and hence \etale\ base change, see \cite[][Tag 0DUJ]{stacks-project}, the $\pi_{ij}: \mathcal{X}_{ij} \to X_{ij}$ are coarse moduli spaces.
-	
-	Pulling back the equation $f\circ p_i = g_i \circ \pi_i$ resulting from diagram \ref{diag:extension-on-etale-cover-of-X} along the projection on the overlap $\mathcal{X}_{ij}$ we get 
-	\[
-		f\mid_{\mathcal{X}_{ij}} = (g_j \circ q_j) \circ \pi_{ij}
-	\] and by symmetry also
-	\[
-		f\mid_{\mathcal{X}_{ij}} = (g_i \circ q_i) \circ \pi_{ij},
-	\]
-	as visualized in the following commutative diagram.
-	% https://q.uiver.app/#q=WzAsNyxbMCwwLCJcXG1hdGhjYWx7WH1fe2lqfSJdLFswLDEsIlhfe2lqfSJdLFsxLDAsIlxcbWF0aGNhbHtYfV9qIl0sWzEsMSwiWF9qIl0sWzIsMSwiWCJdLFsyLDAsIlxcbWF0aGNhbHtYfSJdLFszLDAsIlkiXSxbNSw0LCJcXHBpIl0sWzMsNCwiZl9qIiwyXSxbMiw1LCJwX2oiXSxbMiwzLCJcXHBpX2oiLDJdLFswLDEsIlxccGlfe2lqfSIsMl0sWzAsMl0sWzEsMywicV9qIiwyXSxbMiw0LCIiLDIseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XSxbNSw2LCJmIl0sWzMsNiwiZ19qIiwxLHsibGFiZWxfcG9zaXRpb24iOjMwfV1d
-	\[\begin{tikzcd}
-		{\mathcal{X}_{ij}} & {\mathcal{X}_j} & {\mathcal{X}} & Y \\
-		{X_{ij}} & {X_j} & X
-		\arrow[from=1-1, to=1-2]
-		\arrow["{\pi_{ij}}"', from=1-1, to=2-1]
-		\arrow["{p_j}", from=1-2, to=1-3]
-		\arrow["{\pi_j}"', from=1-2, to=2-2]
-		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-2, to=2-3]
-		\arrow["f", from=1-3, to=1-4]
-		\arrow["\pi", from=1-3, to=2-3]
-		\arrow["{q_j}"', from=2-1, to=2-2]
-		\arrow["{g_j}"{description, pos=0.3}, from=2-2, to=1-4]
-		\arrow["{f_j}"', from=2-2, to=2-3]
-	\end{tikzcd}\]
-	
-	
-	The two restrictions $g_i|_{X_{ij}} := g_i\circ q_i$ and $g_j|_{X_{ij}} := g_j \circ q_j$ both
-	factor the morphism
-	\[
-	\mathcal{X}_{ij} \longrightarrow Y
-	\]
-	through the coarse moduli space $\pi_{ij}$ of $\mathcal{X}_{ij}$. By uniqueness of in the universial property of $\pi_{ij}$, we get
-	\[
-	g_i|_{X_{ij}} = g_j|_{X_{ij}}.
-	\]
-	
-	The collection $\{g_i : X_i \to Y\}$ is compatible on the étale
-	cover $\{X_i \to X\}$. Since $Y$ is an algebraic space, it is a
-	sheaf in the étale topology, so the $g_i$ glue to a unique morphism
-	$g : X \to Y$.
-	
-
-	The identity $f = g \circ \pi$ holds because it holds after pulling back
-	along each $f_i$, and morphisms to algebraic spaces can be checked étale
-	locally. Uniqueness of $g$ follows from the sheaf property of $Y$: any
-	two morphisms $X \to Y$ agreeing on the cover $\{X_i \to X\}$ must
-	coincide.
-\end{proof}
-
-
-\begin{lemma}\label{lem:invariants-flat-base-change}
-	(\cite[Lemma 5.2.7]{alper2026stacks})
-	Let $G$ be a finite abstract group acting on an affine scheme $\Specof{A}$ and let $A^G \to B$ be a flat ring morphism. Then the action of $G$ on $\Specof{A}$ induces an action on $\Spec(B\times_{A^G} A)$ and $(B\times_{A^G} A)^G \cong B$.
-\end{lemma}
-
-\begin{proof}
-	By definition, $A^G$ is given by the following equalizer
-	% https://q.uiver.app/#q=WzAsNCxbMCwwLCIwIl0sWzEsMCwiQV5HIl0sWzIsMCwiQSJdLFszLDAsIlxccHJvZF97Z1xcaW4gR31BIl0sWzIsMywicF8xIiwwLHsib2Zmc2V0IjotMX1dLFsyLDMsInBfMiIsMix7Im9mZnNldCI6MX1dLFsxLDJdLFswLDFdXQ==
-	\[\begin{tikzcd}
-		0 & {A^G} & A & {\prod_{g\in G}A,}
-		\arrow[from=1-1, to=1-2]
-		\arrow[from=1-2, to=1-3]
-		\arrow["{p_1}", shift left, from=1-3, to=1-4]
-		\arrow["{p_2}"', shift right, from=1-3, to=1-4]
-	\end{tikzcd}\]
-	where $p_1(a) = (a)_{g\in G}$ and $p_2(a) = (ga)_{g\in G}$.
-	Since $A^G \to B$ is flat,
-	% https://q.uiver.app/#q=WzAsNCxbMCwwLCIwIl0sWzEsMCwiQiJdLFsyLDAsIkFcXG90aW1lc197QV5HfUIiXSxbMywwLCJcXHByb2Rfe2dcXGluIEd9QVxcb3RpbWVzX3tBXkd9QiJdLFsyLDMsInBfMSIsMCx7Im9mZnNldCI6LTF9XSxbMiwzLCJwXzIiLDIseyJvZmZzZXQiOjF9XSxbMSwyXSxbMCwxXV0=
-	\[\begin{tikzcd}
-		0 & B & {A\otimes_{A^G}B} & {\prod_{g\in G}A\otimes_{A^G}B}
-		\arrow[from=1-1, to=1-2]
-		\arrow[from=1-2, to=1-3]
-		\arrow["{p_1}", shift left, from=1-3, to=1-4]
-		\arrow["{p_2}"', shift right, from=1-3, to=1-4]
-	\end{tikzcd}\]
-	 is exact and hence, $(B\times_{A^G} A)^G \cong B$.
-\end{proof}
-
-
-\begin{lemma}[Pullback of a quotient presentation]
-	\label{lem:pullback-quotient-presentation}
-	Let $G$ be a finite abstract group acting on an algebraic
-	space $U$, and let
-	\[
-	f:\mathcal{Y}\longrightarrow[U/G]
-	\]
-	be a morphism of DM stacks, which is representable by algebraic soaces. Set
-	\[
-	V:=\mathcal{Y}\times_{[U/G]}U.
-	\]
-	Then $V\to\mathcal{Y}$ is a $G$-torsor. Its $G$-action
-	makes the projection $V\to U$ equivariant, and the induced
-	morphism
-	\[
-	[V/G]\longrightarrow\mathcal{Y}
-	\]
-	is an equivalence.
-	
-	If $f$ is affine and $U$ is an affine scheme, then $V$ is an affine scheme.
-\end{lemma}
-
-\begin{proof}
-	By definition, the following is $2$-cartesian:
-	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJWIl0sWzAsMSwiXFxtYXRoY2Fse1l9Il0sWzEsMSwiW1UvR10iXSxbMSwwLCJVIl0sWzMsMl0sWzEsMiwiZiIsMl0sWzAsMV0sWzAsM11d
-	\[\begin{tikzcd}
-		V & U \\
-		{\mathcal{Y}} & {[U/G]}
-		\arrow[from=1-1, to=1-2]
-		\arrow[from=1-1, to=2-1]
-		\arrow[from=1-2, to=2-2]
-		\arrow["f"', from=2-1, to=2-2]
-	\end{tikzcd}\]
-	The standard morphism $U\to[U/G]$ is a $G$-torsor.
-	Its pullback $V\to\mathcal{Y}$ is therefore a $G$-torsor,
-	with an equivariant projection $V\to U$.
-	
-	We show that the induced morphism
-	$[V/G]\to\mathcal{Y}$ is an equivalence.
-	This may be checked after an fppf covering of
-	$\mathcal{Y}$, which trivializes the torsor $V\to\mathcal{Y}$.
-	Over such a covering $T\to\mathcal{Y}$, being trivial yields an identification
-	\[
-	[(G\times T)/G]\longrightarrow T,
-	\]
-	which is an equivalence. Hence $[V/G]\simeq\mathcal{Y}$.
-	
-	Finally, $V\to U$ is the base change of $f$. If $f$ is affine and $U$ is affine,
-	then $V$ is an affine scheme.
-\end{proof}
-
-
-
-
-
-
-
-
-
-\begin{lemma}\label{lem:coarse-moduli-flat-base-change}
-	(\cite[Theorem 4.3.6. (1)]{alper2023stacks})
-	Let $G$ be a finite abstract group acting on an affine scheme $\Specof{A}$ and let $\pi: [\Specof{A} / G] \to \Specof{A^G}$ be the coarse moduli space by Lemma \ref{lem:coarse-moduli-etale-local}. 
-	Then the base change of $\pi$ along any flat morphism $X' \to \Specof{A^G}$ of algebraic spaces is a corase moduli space:
-	% https://q.uiver.app/#q=WzAsNCxbMSwwLCJbXFxTcGVjb2Z7QX0gL0ddIl0sWzEsMSwiXFxTcGVjb2Z7QV5HfSJdLFswLDEsIlgnIl0sWzAsMCwiWCdcXHRpbWVzX3tcXFNwZWNvZntBXkd9fVtcXFNwZWNvZntBfSAvR10iXSxbMiwxXSxbMCwxLCJcXHBpIl0sWzMsMF0sWzMsMl1d
-	\[\begin{tikzcd}
-		{X'\times_{\Specof{A^G}}[\Specof{A} /G]} & {[\Specof{A} /G]} \\
-		{X'} & {\Specof{A^G}}
-		\arrow[from=1-1, to=1-2]
-		\arrow[from=1-1, to=2-1]
-		\arrow["\pi", from=1-2, to=2-2]
-		\arrow[from=2-1, to=2-2]
-	\end{tikzcd}\]
-\end{lemma}
-
-\begin{proof}
-	By Lemma \ref{lem:coarse-moduli-etale-local} being a coarse moduli space is \etale\ local on the target. If we cover $X'$ by affine schemes, we may, without loss of generality, assume $X' = \Specof{B}$ to be affine. The flat morphism $X' \to \Specof{A^G}$ is induced by the flat morphism $A^G \to B$. 
-	Set
-	\[
-	C := A\otimes_{A^G}B.
-	\]
-	Since $G$ acts trivial on $A^G$, the $G$ action on $A$ induces a $G$ action on $C$ by 
-	\[
-		g(a\otimes b) := g(a) \otimes b.
-	\]
-	
-	Let $\mathcal{Y} = \Specof{B} \times_{\Specof{A^G}}[\Specof{A} / G]$ and consider the following diagram:
-	
-	% https://q.uiver.app/#q=WzAsNixbMCwyLCJcXFNwZWNvZntCfSJdLFsxLDIsIlxcU3BlY29me0FeR30iXSxbMSwxLCJbXFxTcGVjb2Z7QX0vR10iXSxbMCwxLCJcXG1hdGhjYWx7WX0iXSxbMSwwLCJcXFNwZWNvZntBfSJdLFswLDAsIlxcU3BlY29me0N9Il0sWzIsMSwiXFxwaSJdLFswLDFdLFszLDBdLFszLDJdLFszLDEsIiIsMix7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV0sWzQsMl0sWzUsNF0sWzUsM11d
-	\[\begin{tikzcd}
-		{\Specof{C}} & {\Specof{A}} \\
-		{\mathcal{Y}} & {[\Specof{A}/G]} \\
-		{\Specof{B}} & {\Specof{A^G}}
-		\arrow[from=1-1, to=1-2]
-		\arrow[from=1-1, to=2-1]
-		\arrow[from=1-2, to=2-2]
-		\arrow[from=2-1, to=2-2]
-		\arrow[from=2-1, to=3-1]
-		\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=2-1, to=3-2]
-		\arrow["\pi", from=2-2, to=3-2]
-		\arrow[from=3-1, to=3-2]
-	\end{tikzcd}\]
-
-	Since the lower square and the outer square is $2$-cartesian, so is the upper.
-	Hence, Lemma \ref{lem:pullback-quotient-presentation} gives
-	an equivalence
-	\[
-	\mathcal{Y} \cong [\Specof{C}/G],
-	\]
-	under which the base change of $\pi$ identifies with the
-	morphism
-	\[
-	[\Specof{C}/G]\longrightarrow\Specof{B}
-	\]
-	induced by the $G$-invariant ring homomorphism
-	$B\to C$, $b\mapsto 1\otimes b$.
-	
-	Since $B$ is flat over $A^G$,
-	Lemma~\ref{lem:invariants-flat-base-change} shows that the
-	canonical homomorphism
-	\[
-	B \xlongrightarrow{\cong} C^G
-	\]
-	is an isomorphism. Hence the base-changed morphism identifies
-	with
-	\[
-	[\Specof{C}/G]\longrightarrow\Specof{C^G},
-	\]
-	which is a coarse moduli space by
-	Lemma~\ref{lem:affine-quotient-finite-group}.
-\end{proof}
 
 \section{Keel Mori Theorem}
 
@@ -723,7 +374,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 		\[
 		|\mathcal{X}_2(\bar{k})| \to X_2(\bar{k}) \qquad |\mathcal{X}_1(\bar{k})| \to X_1(\bar{k}).
 		\]
-		Chose lifts $\xi = (a, b, \alpha)$ of $x$ and $\xi' = (a', b', \beta)$ of $x'$ n $\mathcal{X}_2(\bar{k}) = (\mathcal{X}_1 \times_{\mathcal{X}_0} \mathcal{X}_1)(\bar{k})$, where
+		Chose lifts $\xi = (a, b, \alpha)$ of $x$ and $\xi' = (a', b', \beta)$ of $x'$ in $\mathcal{X}_2(\bar{k}) = (\mathcal{X}_1 \times_{\mathcal{X}_0} \mathcal{X}_1)(\bar{k})$, where
 		\[
 			\alpha: g(a) \xrightarrow{\sim} g(b) \qquad \beta: g(a') \xrightarrow{\sim} g(b').
 		\]
@@ -784,7 +435,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	
 	Set $\alpha = q\pi_1: \mathcal{X}_1 \to X_0$. On the overlaps we have $\alpha s_\mathcal{X} = \alpha t_\mathcal{X}$.
 	Now for every scheme $T$ and every $\xi\in \mathcal{X}_0(T)$ let $V:= T\times_{\mathcal{X}_0} \mathcal{X}_1$, where $\xi:T \to \mathcal{X}_0$ via Yoneda.
-	Since $g$ is \etale\, surjective and representable by algebraic spaces, $V\to T$ is an an \etale\ surjection of algebraic spaces. Now chosing an \etale\ cover of schemes $\{T_i \to V\}_i$ yields an \etale\ cover $\{T_i \to T\}_i$ after composing with $V\to T$. Write $u_i: T_i \to T$and $l_i: T_i \to \mathcal{X}_1$ for the composite and consider the following diagram:
+	Since $g$ is \etale\, surjective and representable by algebraic spaces, $V\to T$ is an an \etale\ surjection of algebraic spaces. Now chosing an \etale\ cover of schemes $\{T_i \to V\}_i$ yields an \etale\ cover $\{T_i \to T\}_i$ after composing with $V\to T$. Write $u_i: T_i \to T$ and $l_i: T_i \to \mathcal{X}_1$ for the composite and consider the following diagram:
 	% https://q.uiver.app/#q=WzAsNSxbMSwyLCJcXG1hdGhjYWx7WH1fMCJdLFswLDIsIlxcbWF0aGNhbHtYfV8xIl0sWzEsMSwiVCJdLFswLDEsIlYiXSxbMCwwLCJUX2kiXSxbMiwwLCJ4Il0sWzEsMCwiZyIsMl0sWzMsMl0sWzMsMV0sWzQsM10sWzQsMiwidV9pIl0sWzMsMCwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XSxbNCwxLCJsX2kiLDIseyJjdXJ2ZSI6Mn1dXQ==
 	\[
 	\begin{tikzcd}
