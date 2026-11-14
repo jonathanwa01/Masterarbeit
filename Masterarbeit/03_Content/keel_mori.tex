@@ -1,10 +1,8 @@
 \chapter{Keel Mori Theorem}
-The proof of the Keel-Mori theorem follows the Stacks Project. We proceed by first constructing moduli spaces on a special local class of algebraic stacks, called well-nigh affine stacks, and then gluing these local moduli spaces along
-\etale\ overlaps.
 
 \section{Local constructions}
 
-From now on we will be working with Deligne-Momford stacks follwing jarod's notes.
+From now on we will be working with Deligne-Momford stacks follwing Jarod Alper's notes.
 
 
 \begin{lemma}[Local Structure Theorem of Deligne-Mumford Stacks]\label{lem:local-structure-theorem-dm-stacks}
@@ -21,46 +19,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 
 
 
-\begin{lemma}[Affine quotient by a finite group]\label{lem:affine-quotient-finite-group}
-	(\cite[Theorem 4.3.6. (1)]{alper2026stacks})
-	Let $G$ be a finite group acting on an affine scheme $\Spec(A)$. Then the canonical morphism
-	\[
-	\Spec(A) \longrightarrow \Spec(A^G)
-	\]
-	induces a morphism of stacks
-	\[
-	[\Spec(A)/G] \longrightarrow \Spec(A^G),
-	\]
-	and this morphism is a coarse moduli space.
-\end{lemma}
 
-\begin{proof}
-	We check the two defining properties of a coarse moduli space.
-	
-	\emph{(i) Geometric points.}
-	The induced map on geometric points identifies the set of $G$-orbits in
-	$\Spec(A)(\bar{k})$ with the set of points of $\Spec(A^G)(\bar{k})$.
-	The morphism $\Spec(A) \to \Spec(A^G)$ is finite and surjective, since
-	$A$ is integral over $A^G$ for a finite group action. In particular, two
-	geometric points have the same image in $\Spec(A^G)$ if and only if they lie in the same $G$-orbit.
-	
-	\emph{(2) Universality.}
-	Let $Y$ be an algebraic space and let
-	\[
-	f : [\Spec(A)/G] \longrightarrow Y
-	\]
-	be a morphism. Since $f$ is $G$-invariant, its restriction to $\Spec(A)$
-	corresponds locally on an étale cover of $Y$ to a $G$-invariant morphism of
-	affine schemes. Equivalently, on coordinate rings it is given by a
-	$G$-invariant homomorphism, hence factors uniquely through $A^G$.
-	
-	
-	Since $Y$ is a sheaf on the \etale\ site, these local factorizations glue
-	to a unique morphism $\Spec(A^G)\to Y$ making the diagram commute.
-	
-	Thus $\pi : [\Spec(A)/G]\to \Spec(A^G)$ satisfies the universal property of a
-	coarse moduli space.
-\end{proof}
 
 
 \begin{lemma}[Étale descent for finite-group quotients]
@@ -97,183 +56,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 \end{lemma}
 
 
-\begin{lemma}\label{lem:coarse-moduli-etale-local}\label{lem:coarse-moduli-space-local-on-target}
-	(\cite[Lemma 5.2.10]{alper2026stacks})
-	Let $\pi : \mathcal{X} \to X$ be a morphism to an algebraic space. Suppose
-	that there is an étale covering $\{f_i : X_i \to X\}$ such that
-	\[
-	\pi_i : \mathcal{X} \times_X X_i \longrightarrow X_i
-	\]
-	is a coarse moduli space for each $i$. Then $\pi : \mathcal{X} \to X$ is a
-	coarse moduli space.
-\end{lemma}
 
-\begin{proof}
-	We verify the two axioms of Definition~\ref{def:coarse-moduli-space}.
-	Let $\mathcal{X}_i := \mathcal{X} \times_X X_i$.
-	
-	\textbf{Geometric points}
-	Let $k$ be an algebraically closed field and let
-	$x : \Spec(k) \to X$ be a geometric point. Since $\{f_i : X_i \to X\}$
-	is an étale covering, there exists an  $i$ and a lift
-	$\tilde{x} : \Spec(k) \to X_i$ with $f_i \circ \tilde{x} = x$, by lemma \ref{lem:geometric-points-etale-cover}.
-	
-	Since $\pi_i$ is a coarse moduli space, the induced map
-	\[
-	|(\mathcal{X}_i)(k)| \longrightarrow X_i(k)
-	\]
-	is a bijection onto isomorphism classes. The fiber of $\pi$ over $x$
-	is canonically identified with the fiber of $\pi_i$ over $\tilde{x}$,
-	via the base-change isomorphism
-	\[
-	\mathcal{X} \times_X \Spec(k)
-	\;\cong\;
-	(\mathcal{X} \times_X X_i) \times_{X_i} \Spec(k) = \mathcal{X}_i\times_{X_i}\Specof{k}.
-	\]
-	Hence the bijection for $\pi_i$ implies the corresponding bijection for
-	$\pi$.
-	
-	\medskip
-	\textbf{Universality}
-	Let $Y$ be an algebraic space and $f : \mathcal{X} \to Y$ a morphism.
-	For each $i$, consider the composite
-	\[
-	f_i: \mathcal{X}_i \xrightarrow{\;p_i\;} \mathcal{X}
-	\xrightarrow{\;f\;} Y.
-	\]
-	Since $\pi_i$ is a coarse moduli space, there exists a unique morphism
-	$g_i : X_i \to Y$ such that the following commutes:
-	% https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXG1hdGhjYWx7WH1cXHRpbWVzX1ggWF9pIl0sWzEsMSwiWCJdLFsxLDAsIlxcbWF0aGNhbHtYfSJdLFswLDEsIlhfaSJdLFsyLDAsIlkiXSxbMCwyLCJwX2kiXSxbMCwzLCJcXHBpX2kiLDJdLFszLDFdLFsyLDFdLFsyLDQsImYiXSxbMyw0LCJnX2kiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
-	\begin{equation}\label{diag:extension-on-etale-cover-of-X}
-		\begin{tikzcd}
-			{\mathcal{X}_i} & {\mathcal{X}} & Y \\
-			{X_i} & X
-			\arrow["{p_i}", from=1-1, to=1-2]
-			\arrow["{\pi_i}"', from=1-1, to=2-1]
-			\arrow["f", from=1-2, to=1-3]
-			\arrow[from=1-2, to=2-2]
-			\arrow["{g_i}", dashed, from=2-1, to=1-3]
-			\arrow[from=2-1, to=2-2]
-		\end{tikzcd}
-	\end{equation}
-	
-	For $i,j$, set $X_{ij} := X_i \times_X X_j$ and $\mathcal{X}_{ij} := \mathcal{X}\times_X X_{ij}$. Consider the following commutative diagram:
-	
-	% https://q.uiver.app/#q=WzAsOCxbMiwwLCJcXG1hdGhjYWx7WH1fe2lqfSJdLFszLDAsIlxcbWF0aGNhbHtYfV9pIl0sWzAsMSwiXFxtYXRoY2Fse1h9X2oiXSxbMSwxLCJcXG1hdGhjYWx7WH0iXSxbMiwxLCJYX3tpan0iXSxbMCwyLCJYX2oiXSxbMSwyLCJYIl0sWzMsMSwiWF9pIl0sWzAsMl0sWzEsM10sWzAsMV0sWzIsM10sWzQsNywicV9pIiwxXSxbNCw1LCJxX2oiLDEseyJsYWJlbF9wb3NpdGlvbiI6MzB9XSxbNyw2LCJmX2kiLDFdLFs1LDYsImZfaiIsMV0sWzIsNSwiXFxwaV9qIiwxXSxbMyw2LCJcXHBpIiwxXSxbMCw0LCJcXHBpX3tpan0iLDFdLFsxLDcsIlxccGlfaSIsMV1d
-	\[\begin{tikzcd}
-		&& {\mathcal{X}_{ij}} & {\mathcal{X}_i} \\
-		{\mathcal{X}_j} & {\mathcal{X}} & {X_{ij}} & {X_i} \\
-		{X_j} & X
-		\arrow[from=1-3, to=1-4]
-		\arrow[from=1-3, to=2-1]
-		\arrow["{\pi_{ij}}"{description}, from=1-3, to=2-3]
-		\arrow[from=1-4, to=2-2]
-		\arrow["{\pi_i}"{description}, from=1-4, to=2-4]
-		\arrow[from=2-1, to=2-2]
-		\arrow["{\pi_j}"{description}, from=2-1, to=3-1]
-		\arrow["\pi"{description}, from=2-2, to=3-2]
-		\arrow["{q_i}"{description}, from=2-3, to=2-4]
-		\arrow["{q_j}"{description, pos=0.3}, from=2-3, to=3-1]
-		\arrow["{f_i}"{description}, from=2-4, to=3-2]
-		\arrow["{f_j}"{description}, from=3-1, to=3-2]
-	\end{tikzcd}\]
-	
-	By unfolding the cube we obtain a commutative diagram 
-	% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXG1hdGhjYWx7WH1fe2lqfSJdLFswLDEsIlhfe2lqfSJdLFsxLDAsIlxcbWF0aGNhbHtYfV9qIl0sWzEsMSwiWF9qIl0sWzIsMSwiWCJdLFsyLDAsIlxcbWF0aGNhbHtYfSJdLFs1LDQsIlxccGkiXSxbMyw0LCJmX2oiLDJdLFsyLDUsInBfaiJdLFsyLDMsIlxccGlfaiIsMl0sWzAsMSwiXFxwaV97aWp9IiwyXSxbMCwyXSxbMSwzLCJxX2oiLDJdLFsyLDQsIiIsMix7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXIifX1dXQ==
-	\[\begin{tikzcd}
-		{\mathcal{X}_{ij}} & {\mathcal{X}_j} & {\mathcal{X}} \\
-		{X_{ij}} & {X_j} & X
-		\arrow[from=1-1, to=1-2]
-		\arrow["{\pi_{ij}}"', from=1-1, to=2-1]
-		\arrow["{p_j}", from=1-2, to=1-3]
-		\arrow["{\pi_j}"', from=1-2, to=2-2]
-		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-2, to=2-3]
-		\arrow["\pi", from=1-3, to=2-3]
-		\arrow["{q_j}"', from=2-1, to=2-2]
-		\arrow["{f_j}"', from=2-2, to=2-3]
-	\end{tikzcd}\]
-	
-	Since the right square and the outter rectangle is cartesian by definition of $\mathcal{X}_j$ and $\mathcal{X}_{ij}$, by a diagram chase the left square is cartesian, i.e. 
-	$\mathcal{X}_{ij} \cong \mathcal{X}_j \times_{X_j} X_{ij}$ and by symmetry also $\mathcal{X}_{ij} \cong \mathcal{X}_i \times_{X_i} X_{ij}$.
-	The morphisms $q_i$ and $q_j$ are \etale\ as base change of the \etale\ morphisms $f_j$, $f_i$ resp.
-	Now $\pi_{ij}$ is an \etale\ base change of the $\pi_j$ along $q_j$. Since coarse mosuli spaces are preserved under flat, and hence \etale\ base change, see \cite[][Tag 0DUJ]{stacks-project}, the $\pi_{ij}: \mathcal{X}_{ij} \to X_{ij}$ are coarse moduli spaces.
-	
-	Pulling back the equation $f\circ p_i = g_i \circ \pi_i$ resulting from diagram \ref{diag:extension-on-etale-cover-of-X} along the projection on the overlap $\mathcal{X}_{ij}$ we get 
-	\[
-		f\mid_{\mathcal{X}_{ij}} = (g_j \circ q_j) \circ \pi_{ij}
-	\] and by symmetry also
-	\[
-		f\mid_{\mathcal{X}_{ij}} = (g_i \circ q_i) \circ \pi_{ij},
-	\]
-	as visualized in the following commutative diagram.
-	% https://q.uiver.app/#q=WzAsNyxbMCwwLCJcXG1hdGhjYWx7WH1fe2lqfSJdLFswLDEsIlhfe2lqfSJdLFsxLDAsIlxcbWF0aGNhbHtYfV9qIl0sWzEsMSwiWF9qIl0sWzIsMSwiWCJdLFsyLDAsIlxcbWF0aGNhbHtYfSJdLFszLDAsIlkiXSxbNSw0LCJcXHBpIl0sWzMsNCwiZl9qIiwyXSxbMiw1LCJwX2oiXSxbMiwzLCJcXHBpX2oiLDJdLFswLDEsIlxccGlfe2lqfSIsMl0sWzAsMl0sWzEsMywicV9qIiwyXSxbMiw0LCIiLDIseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyIn19XSxbNSw2LCJmIl0sWzMsNiwiZ19qIiwxLHsibGFiZWxfcG9zaXRpb24iOjMwfV1d
-	\[\begin{tikzcd}
-		{\mathcal{X}_{ij}} & {\mathcal{X}_j} & {\mathcal{X}} & Y \\
-		{X_{ij}} & {X_j} & X
-		\arrow[from=1-1, to=1-2]
-		\arrow["{\pi_{ij}}"', from=1-1, to=2-1]
-		\arrow["{p_j}", from=1-2, to=1-3]
-		\arrow["{\pi_j}"', from=1-2, to=2-2]
-		\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-2, to=2-3]
-		\arrow["f", from=1-3, to=1-4]
-		\arrow["\pi", from=1-3, to=2-3]
-		\arrow["{q_j}"', from=2-1, to=2-2]
-		\arrow["{g_j}"{description, pos=0.3}, from=2-2, to=1-4]
-		\arrow["{f_j}"', from=2-2, to=2-3]
-	\end{tikzcd}\]
-	
-	
-	The two restrictions $g_i|_{X_{ij}} := g_i\circ q_i$ and $g_j|_{X_{ij}} := g_j \circ q_j$ both
-	factor the morphism
-	\[
-	\mathcal{X}_{ij} \longrightarrow Y
-	\]
-	through the coarse moduli space $\pi_{ij}$ of $\mathcal{X}_{ij}$. By uniqueness of in the universial property of $\pi_{ij}$, we get
-	\[
-	g_i|_{X_{ij}} = g_j|_{X_{ij}}.
-	\]
-	
-	The collection $\{g_i : X_i \to Y\}$ is compatible on the étale
-	cover $\{X_i \to X\}$. Since $Y$ is an algebraic space, it is a
-	sheaf in the étale topology, so the $g_i$ glue to a unique morphism
-	$g : X \to Y$.
-	
-
-	The identity $f = g \circ \pi$ holds because it holds after pulling back
-	along each $f_i$, and morphisms to algebraic spaces can be checked étale
-	locally. Uniqueness of $g$ follows from the sheaf property of $Y$: any
-	two morphisms $X \to Y$ agreeing on the cover $\{X_i \to X\}$ must
-	coincide.
-\end{proof}
-
-
-\begin{lemma}\label{lem:invariants-flat-base-change}
-	(\cite[Lemma 4.2.4]{alper2026stacks})
-	Let $G$ be a finite abstract group acting on an affine scheme $\Specof{A}$ and let $A^G \to B$ be a flat ring morphism. Then the action of $G$ on $\Specof{A}$ induces an action on $\Spec(B\times_{A^G} A)$ and $(B\times_{A^G} A)^G = B$.
-\end{lemma}
-
-\begin{lemma}\label{lem:coarse-moduli-flat-base-change}
-	(\cite[Theorem 4.3.6. (1)]{alper2026stacks})
-	Let $G$ be a finite abstract group acting on an affine scheme $\Specof{A}$ and let $\pi: [\Specof{A} / G] \to \Specof{A^G}$ be the coarse moduli space by Lemma \ref{lem:coarse-moduli-etale-local}. 
-	Then the base change of $\pi$ along any flat morphism $X' \to \Specof{A^G}$ of algebraic spaces is a corase moduli space:
-	% https://q.uiver.app/#q=WzAsNCxbMSwwLCJbXFxTcGVjb2Z7QX0gL0ddIl0sWzEsMSwiXFxTcGVjb2Z7QV5HfSJdLFswLDEsIlgnIl0sWzAsMCwiWCdcXHRpbWVzX3tcXFNwZWNvZntBXkd9fVtcXFNwZWNvZntBfSAvR10iXSxbMiwxXSxbMCwxLCJcXHBpIl0sWzMsMF0sWzMsMl1d
-	\[\begin{tikzcd}
-		{X'\times_{\Specof{A^G}}[\Specof{A} /G]} & {[\Specof{A} /G]} \\
-		{X'} & {\Specof{A^G}}
-		\arrow[from=1-1, to=1-2]
-		\arrow[from=1-1, to=2-1]
-		\arrow["\pi", from=1-2, to=2-2]
-		\arrow[from=2-1, to=2-2]
-	\end{tikzcd}\]
-\end{lemma}
-
-\begin{proof}
-	By Lemma \ref{lem:coarse-moduli-etale-local} being a coarse moduli space is \etale\ local on the target. Hence, without loss of generality we may assume $X' = \Specof{B}$ to be affine. The flat morphism $X' \to \Specof{A^G}$ is induced by the flat morphism $A^G \to B$. 
-	UNSURE: \ref{lem:etale-descent-finite-group-quotients} induces a $G$ action on $X'$.
-	TODO: FINISH ARGUMENT
-	Now by Lemma \ref{lem:invariants-flat-base-change} 
-
-\end{proof}
 
 \section{Keel Mori Theorem}
 
@@ -410,28 +193,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	\[
 	V = \Specof{A} \times_{[\Specof{A} / G_x]} \pi_\mathcal{W}^{-1}(X')
 	\]
-	Now consider the following diagram:
-	% https://q.uiver.app/#q=WzAsOCxbMCwxLCJcXFNwZWNvZntBfSJdLFsxLDEsIltcXFNwZWNvZntBfS9HX3hdIl0sWzIsMCwiViJdLFszLDAsIlxccGlfXFxtYXRoY2Fse1d9XnstMX0oWF8xKSJdLFszLDEsIlhfMSJdLFswLDIsIlxcU3BlY29me0F9Il0sWzEsMiwiXFxTcGVjb2Z7QV57R194fX0iXSxbMiwxLCJWIl0sWzIsM10sWzIsMF0sWzAsMV0sWzMsMV0sWzcsNV0sWzUsNl0sWzQsNl0sWzcsNF0sWzcsNiwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzIsMSwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lciJ9fV0sWzIsN10sWzEsNiwiXFxwaV9cXG1hdGhjYWx7V30iXSxbMyw0LCJcXHBpX1xcbWF0aGNhbHtXfSJdLFswLDVdXQ==
-	\[\begin{tikzcd}
-		&& V & {\pi_\mathcal{W}^{-1}(X')} \\
-		{\Specof{A}} & {[\Specof{A}/G_x]} & V & {X'} \\
-		{\Specof{A}} & {\Specof{A^{G_x}}}
-		\arrow[from=1-3, to=1-4]
-		\arrow[from=1-3, to=2-1]
-		\arrow["\lrcorner"{anchor=center, pos=0.125, rotate=-90}, draw=none, from=1-3, to=2-2]
-		\arrow[from=1-3, to=2-3]
-		\arrow[from=1-4, to=2-2]
-		\arrow["{\pi_\mathcal{W}}", from=1-4, to=2-4]
-		\arrow[from=2-1, to=2-2]
-		\arrow[from=2-1, to=3-1]
-		\arrow["{\pi_\mathcal{W}}", from=2-2, to=3-2]
-		\arrow[from=2-3, to=2-4]
-		\arrow[from=2-3, to=3-1]
-		\arrow["\lrcorner"{anchor=center, pos=0.125, rotate=-90}, draw=none, from=2-3, to=3-2]
-		\arrow[from=2-4, to=3-2]
-		\arrow[from=3-1, to=3-2]
-	\end{tikzcd}\]
-	Hence $V=\Specof{A'}$ and
+	Now apply Lemma \ref{lem:pullback-quotient-presentation} to obtain $V=\Specof{A'}$ and
 	\[
 	\pi_{\mathcal{W}}^{-1}(X')
 	\cong [\Specof{A'}/G_x].
@@ -476,49 +238,43 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 		\arrow["{t_\mathcal{X}}"', shift right, from=1-1, to=1-2]
 	\end{tikzcd}\]
 	Since $\mathcal{X}_0 \hookrightarrow \mathcal{X}$ is an open immersion, $\mathcal{X}_2 \cong \mathcal{X}_1\times_{\mathcal{X}}\mathcal{X}_1$.
-	Since $g$ is affine, $s_\mathcal{X}, t_\mathcal{X}$ are affine. Hence, pulling back the standard $G$ torsor $\Specof{A_1} \to \mathcal{X}_1$ along $s_\mathcal{X}$ yields:
-	% https://q.uiver.app/#q=WzAsNixbMCwxLCJcXG1hdGhjYWx7WH1fMiJdLFsxLDEsIlxcbWF0aGNhbHtYfV8xIl0sWzAsMiwiXFxtYXRoY2Fse1h9XzEiXSxbMSwyLCJcXG1hdGhjYWx7WH1fMCJdLFsxLDAsIlxcU3BlY3tBXzF9Il0sWzAsMCwiXFxTcGVje0FfMn0iXSxbMCwxLCJwXzEiXSxbMCwyLCJwXzIiLDJdLFsyLDMsImciLDJdLFsxLDMsImciXSxbMCwzLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dLFs0LDFdLFs1LDRdLFs1LDBdLFs1LDEsIiIsMCx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV1d
-	\[\begin{tikzcd}
-		{\Spec{A_2}} & {\Spec{A_1}} \\
-		{\mathcal{X}_2} & {\mathcal{X}_1} \\
-		{\mathcal{X}_1} & {\mathcal{X}_0}
-		\arrow[from=1-1, to=1-2]
-		\arrow[from=1-1, to=2-1]
-		\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
-		\arrow[from=1-2, to=2-2]
-		\arrow["{s_\mathcal{X}}", from=2-1, to=2-2]
-		\arrow["{t_\mathcal{X}}"', from=2-1, to=3-1]
-		\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=2-1, to=3-2]
-		\arrow["g", from=2-2, to=3-2]
-		\arrow["g"', from=3-1, to=3-2]
-	\end{tikzcd}\]
-	Now the projection $\Specof{A_2} \to \mathcal{X}_2$ is the pullback of the $G$-torsor $\Specof{A_1} \to \mathcal{X}_1$, which induces a $G$ action on $\Specof{A_2}$.
-	By definition of the quotient stack of $\mathcal{X}_1$, we have a cartesian diagram
-	% https://q.uiver.app/#q=WzAsNCxbMSwxLCJcXG1hdGhjYWx7WH1fMSJdLFswLDEsIlxcU3BlY3tBXzF9Il0sWzEsMCwiXFxTcGVje0FfMX0iXSxbMCwwLCJHXFx0aW1lc1xcU3BlY3tBXzF9Il0sWzIsMF0sWzEsMF0sWzMsMV0sWzMsMl0sWzMsMCwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XV0=
-	\[\begin{tikzcd}
-		{G\times\Spec{A_1}} & {\Spec{A_1}} \\
-		{\Spec{A_1}} & {\mathcal{X}_1}
-		\arrow[from=1-1, to=1-2]
-		\arrow[from=1-1, to=2-1]
-		\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
-		\arrow[from=1-2, to=2-2]
-		\arrow[from=2-1, to=2-2]
-	\end{tikzcd}\]
-	Hence, by associativity of the 2-fibre product we get 
-	\begin{align*}
-			\Specof{A_2}\times_{\mathcal{X}_2} \Specof{A_2} &\cong (\mathcal{X}_2 \times_{\mathcal{X}_1} \Specof{A_1}) \times_{\mathcal{X}_2}	(\mathcal{X}_2 \times_{\mathcal{X}_1} \Specof{A_1})\\
-			&\cong \mathcal{X}_2 \times_{\mathcal{X}_1} (\Specof{A_1}\times_{\mathcal{X}_1} \Specof{A_1}) \\
-			&\cong \mathcal{X}_2 \times_{\mathcal{X}_1} (G\times \Specof{A_1})\\
-			&\cong G\times (\mathcal{X}_2 \times_{\mathcal{X}_1} \Specof{A_1})\\
-			&\cong G \times \Specof{A_2}
-	\end{align*}
+	Since $g$ is affine, $s_\mathcal{X}, t_\mathcal{X}$ are affine.
 	
-	and we can deduce $\mathcal{X}_2 \cong [\Specof{A_2} /G]$.
-	Since $g$ induces isomorphism on all geometric stabilizer groups, the same is true for the projections $\mathcal{X}_2 \to \mathcal{X}_1$.
-	By Lemma \ref{lem:affine-quotient-finite-group}, we obtain a coarse moduli space 
+
+	
+	
+	Now we pull back the standard $G$-torsor
+	$\Specof{A_1}\to\mathcal{X}_1$ along $s_{\mathcal{X}}$.
+	Since $s_{\mathcal{X}}$ is affine, the fibre product
 	\[
-	\pi_2: \mathcal{X}_2 \to X_2 = \Specof{A_2^G}.
+	\mathcal{X}_2 \times_{\mathcal{X}_1} \Specof{A_1}
 	\]
+	is an affine scheme, which we denote by $\Specof{A_2}$.
+	By Lemma~\ref{lem:pullback-quotient-presentation},
+	$\Specof{A_2}$ carries a $G$-action and there is an
+	equivalence
+	\[
+	\mathcal{X}_2 \cong [\Specof{A_2}/G]
+	\]
+	over $\mathcal{X}_1$.
+	Moreover, the projection
+	$\Specof{A_2} \to\Specof{A_1}$ is $G$-equivariant.
+	
+	By Lemma~\ref{lem:affine-quotient-finite-group},
+	we therefore obtain a coarse moduli space
+	\[
+	\pi_2:\mathcal{X}_2
+	\longrightarrow
+	X_2:=\Specof{A_2^G}.
+	\]
+	
+	
+	
+	
+	
+	
+	
+	
 	Applying Lemma \ref{lem:etale-descent-finite-group-quotients} to $\Specof{A_2}\to \Specof{A_1}$ yields a commutative diagram, such that the induced morphisms $s, t: X_2 \to X_1$ are \etale\ and both left squares are 2-cartesian.
 	% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXG1hdGhjYWx7WH1fMiJdLFswLDEsIlhfMiJdLFsxLDAsIlxcbWF0aGNhbHtYfV8xIl0sWzEsMSwiWF8xIl0sWzIsMCwiXFxtYXRoY2Fse1h9XzAiXSxbMiwxLCJYXzAiXSxbMCwyLCJ0X1xcbWF0aGNhbHtYfSIsMix7Im9mZnNldCI6MX1dLFswLDIsInNfXFxtYXRoY2Fse1h9IiwwLHsib2Zmc2V0IjotMX1dLFsxLDMsInQiLDIseyJvZmZzZXQiOjF9XSxbMSwzLCJzIiwwLHsib2Zmc2V0IjotMX1dLFswLDEsIlxccGlfMiIsMl0sWzIsMywiXFxwaV8xIiwyXSxbNCw1LCJcXHBpXzAiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMiw0LCJnIl0sWzMsNSwicSIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFswLDMsIiIsMCx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV1d
 	
@@ -541,6 +297,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	
 	Now since $X_1$ is a coarse moduli space, the diagonal $e_\mathcal{X} = \Delta: \mathcal{X}_1 \to \mathcal{X}_2$ yields the identity $e_X:X_1 \to X_2$, such that $e_X\pi_1 = e_\mathcal{X}\pi_2$. 
 	Similarily changing the factors yields a morphism $i_\mathcal{X} = (t_\mathcal{X}, s_\mathcal{X}):\mathcal{X}_2 \to \mathcal{X}_2$, which descends to the inverse morphism $i_X: X_2\to X_2$.
+	
 	For the composition morphism let $P := X_2\times_{t, X_1, s} X_2$ and $\mathcal{P} := \mathcal{X}_2 \times_{t_\mathcal{X}, \mathcal{X}_1, s_\mathcal{X}} \mathcal{X}_2$. Since the left square of \ref{eq:groupoid-moduli-space} is cartesian and by associativity of the fibre product, we optain a natural isomorphism:
 	\begin{align*}
 			\mathcal{P} &\cong \mathcal{X}_2 \times_{t_\mathcal{X}, \mathcal{X}_1, s_\mathcal{X}} \mathcal{X}_2 \\
@@ -571,11 +328,11 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 		\arrow["s"', from=4-1, to=4-3]
 	\end{tikzcd}\]
 
-	Hence, we optain a cartesian diagram:
+	Hence, we optain a $2$-cartesian diagram
 	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhjYWx7UH0iXSxbMSwwLCJcXG1hdGhjYWx7WH1fMiJdLFswLDEsIlAiXSxbMSwxLCJYXzIiXSxbMSwzLCJcXHBpXzIiXSxbMCwxXSxbMiwzLCJcXG9wZXJhdG9ybmFtZXtwcn1fMSJdLFswLDIsIlxccGlfXFxtYXRoY2Fse1B9Il1d
 	\[\begin{tikzcd}
 		{\mathcal{P}} & {\mathcal{X}_2} \\
-		P & {X_2}
+		P & {X_2.}
 		\arrow[from=1-1, to=1-2]
 		\arrow["{\pi_\mathcal{P}}", from=1-1, to=2-1]
 		\arrow["{\pi_2}", from=1-2, to=2-2]
@@ -617,7 +374,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 		\[
 		|\mathcal{X}_2(\bar{k})| \to X_2(\bar{k}) \qquad |\mathcal{X}_1(\bar{k})| \to X_1(\bar{k}).
 		\]
-		Chose lifts $\xi = (a, b, \alpha)$ of $x$ and $\xi' = (a', b', \beta)$ of $x'$ n $\mathcal{X}_2(\bar{k}) = (\mathcal{X}_1 \times_{\mathcal{X}_0} \mathcal{X}_1)(\bar{k})$, where
+		Chose lifts $\xi = (a, b, \alpha)$ of $x$ and $\xi' = (a', b', \beta)$ of $x'$ in $\mathcal{X}_2(\bar{k}) = (\mathcal{X}_1 \times_{\mathcal{X}_0} \mathcal{X}_1)(\bar{k})$, where
 		\[
 			\alpha: g(a) \xrightarrow{\sim} g(b) \qquad \beta: g(a') \xrightarrow{\sim} g(b').
 		\]
@@ -678,7 +435,7 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 	
 	Set $\alpha = q\pi_1: \mathcal{X}_1 \to X_0$. On the overlaps we have $\alpha s_\mathcal{X} = \alpha t_\mathcal{X}$.
 	Now for every scheme $T$ and every $\xi\in \mathcal{X}_0(T)$ let $V:= T\times_{\mathcal{X}_0} \mathcal{X}_1$, where $\xi:T \to \mathcal{X}_0$ via Yoneda.
-	Since $g$ is \etale\, surjective and representable by algebraic spaces, $V\to T$ is an an \etale\ surjection of algebraic spaces. Now chosing an \etale\ cover of schemes $\{T_i \to V\}_i$ yields an \etale\ cover $\{T_i \to T\}_i$ after composing with $V\to T$. Write $u_i: T_i \to T$and $l_i: T_i \to \mathcal{X}_1$ for the composite and consider the following diagram:
+	Since $g$ is \etale\, surjective and representable by algebraic spaces, $V\to T$ is an an \etale\ surjection of algebraic spaces. Now chosing an \etale\ cover of schemes $\{T_i \to V\}_i$ yields an \etale\ cover $\{T_i \to T\}_i$ after composing with $V\to T$. Write $u_i: T_i \to T$ and $l_i: T_i \to \mathcal{X}_1$ for the composite and consider the following diagram:
 	% https://q.uiver.app/#q=WzAsNSxbMSwyLCJcXG1hdGhjYWx7WH1fMCJdLFswLDIsIlxcbWF0aGNhbHtYfV8xIl0sWzEsMSwiVCJdLFswLDEsIlYiXSxbMCwwLCJUX2kiXSxbMiwwLCJ4Il0sWzEsMCwiZyIsMl0sWzMsMl0sWzMsMV0sWzQsM10sWzQsMiwidV9pIl0sWzMsMCwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XSxbNCwxLCJsX2kiLDIseyJjdXJ2ZSI6Mn1dXQ==
 	\[
 	\begin{tikzcd}
@@ -892,6 +649,5 @@ From now on we will be working with Deligne-Momford stacks follwing jarod's note
 
 	
 	We are now left to prove, that $\pi_0$ is a coarse moduli space.
-	This follows by Lemma \ref{lem:coarse-moduli-etale-local} applied to the \etale\ cover $X_1 \to X_0$, stating that being a coarse moduli space is local on the target.
-	
+	This follows by Lemma \ref{lem:coarse-moduli-etale-local} applied to the \etale\ cover $X_1 \to X_0$, since being a coarse moduli space is local on the target.
 \end{proof}
