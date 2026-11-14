@@ -33,7 +33,7 @@ The exposition follows an approach informed by Jarod Alper's notes.
 From the repository root, run:
 
 ```bash
-chmod +x .scripts/build.sh
+chmod +x ./scripts/build.sh
 ./scripts/build.sh
 ```
 
