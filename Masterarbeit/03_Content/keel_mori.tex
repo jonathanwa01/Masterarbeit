@@ -72,9 +72,9 @@ From now on we will be working with Deligne-Momford stacks follwing Jarod Alper'
 \end{remark}
 
 \begin{proof}
-	\textbf{Zariski gluing on the target}
+	\textbf{Zariski gluing on the $\mathcal{X}$}
 	
-	The statement is Zariski local on the target $\mathcal{X}$: Let $\{\mathcal{X}_i \hookrightarrow \mathcal{X}\}_{i\in I}$ be a Zariski cover of $\mathcal{X}$, such that each $\mathcal{X}_i$ admits a coarse moduli space $X_i$. Then by uniqueness of the coarse moduli space, each intersecation $\mathcal{X}_i \cap \mathcal{X}_j$ admits a coarse moduli space $X_{ij}$, which are identified with open subschemes of $X_i$ and $X_j$ and hence, can be glued to an algebraic space $X$. Now by Lemma \ref{lem:coarse-moduli-space-local-on-target} $\mathcal{X} \to X$ is a coarse moduli space.
+	The statement is Zariski local on $\mathcal{X}$: Let $\{\mathcal{X}_i \hookrightarrow \mathcal{X}\}_{i\in I}$ be a Zariski cover of $\mathcal{X}$, such that each $\mathcal{X}_i$ admits a coarse moduli space $X_i$. Then by uniqueness of the coarse moduli space, each intersecation $\mathcal{X}_i \cap \mathcal{X}_j$ admits a coarse moduli space $X_{ij}$, which are identified with open subschemes of $X_i$ and $X_j$ and hence, can be glued to an algebraic space $X$. Now by Lemma \ref{lem:coarse-moduli-space-local-on-target} $\mathcal{X} \to X$ is a coarse moduli space.
 	
 	\textbf{Construct covering with coarse moduli space}
 	
@@ -332,18 +332,19 @@ From now on we will be working with Deligne-Momford stacks follwing Jarod Alper'
 	\end{tikzcd}\]
 
 	Hence, we optain a $2$-cartesian diagram
-	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhjYWx7UH0iXSxbMSwwLCJcXG1hdGhjYWx7WH1fMiJdLFswLDEsIlAiXSxbMSwxLCJYXzIiXSxbMSwzLCJcXHBpXzIiXSxbMCwxXSxbMiwzLCJcXG9wZXJhdG9ybmFtZXtwcn1fMSJdLFswLDIsIlxccGlfXFxtYXRoY2Fse1B9Il1d
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhjYWx7UH0iXSxbMSwwLCJcXG1hdGhjYWx7WH1fMiJdLFswLDEsIlAiXSxbMSwxLCJYXzIiXSxbMSwzLCJcXHBpXzIiXSxbMCwxXSxbMiwzLCJcXG9wZXJhdG9ybmFtZXtwcn1fMSJdLFswLDIsIlxccGlfXFxtYXRoY2Fse1B9Il0sWzAsMywiIiwyLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XV0=
 	\[\begin{tikzcd}
 		{\mathcal{P}} & {\mathcal{X}_2} \\
-		P & {X_2.}
+		P & {X_2}
 		\arrow[from=1-1, to=1-2]
 		\arrow["{\pi_\mathcal{P}}", from=1-1, to=2-1]
+		\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
 		\arrow["{\pi_2}", from=1-2, to=2-2]
 		\arrow["{\operatorname{pr}_1}", from=2-1, to=2-2]
 	\end{tikzcd}\]
 
 	Since $\operatorname{pr}_1$ is \etale, in particular flat, by Lemma \ref{lem:coarse-moduli-flat-base-change} flat base change of the coarse moduli space $\pi_2$ yields a coarse moduli space $\pi_\mathcal{P}$.
-	Now multiplication $m_\mathcal{X}: \mathcal{P} \to \mathcal{X}_2$ descends down to $m_X: P \to X_2$, such that $m_x\pi_P = \pi_2 m_\mathcal{X}$, by $P$ being a coarse moduli space.
+	Now multiplication $m_\mathcal{X}: \mathcal{P} \to \mathcal{X}_2$ descends down to $m_X: P \to X_2$, such that $m_X\pi_P = \pi_2 m_\mathcal{X}$, by $P$ being a coarse moduli space.
 	This induces an \etale\ groupoid structure
 	% https://q.uiver.app/#q=WzAsMixbMCwwLCJYXzIiXSxbMSwwLCJYXzEiXSxbMCwxLCJ0IiwyLHsib2Zmc2V0IjoxfV0sWzAsMSwicyIsMCx7Im9mZnNldCI6LTF9XV0=
 	\[\begin{tikzcd}
@@ -355,7 +356,7 @@ From now on we will be working with Deligne-Momford stacks follwing Jarod Alper'
 	We claim, that $j := (s, t): X_2 \to X_1\times_k X_1$ is a monomorphism.
 	
 	\begin{proof}[Proof of the claim]
-		Note, that both $X_1 = \Specof{A_1^G}$ and $X_2 = \Specof{A_2^G}$ are schemes.
+		Note, that both $X_1 = \Specof{A_1^G}$ and $X_2 = \Specof{A_2^G}$ are affine schemes, in particular separated.
 		
 		Since $X_1$ is separated over $k$, the graph
 		$\Gamma_t:X_2\to X_2\times_k X_1$ is a closed
@@ -370,7 +371,14 @@ From now on we will be working with Deligne-Momford stacks follwing Jarod Alper'
 		\]
 		Since $\Gamma_t$ is a closed immersion, it is unramified. $s\times \operatorname{id}_{X_1}$ is the base change of the \etale\ morphism $s$, hence \etale\ and in particular unramified. This shows that $j$ is unramified.
 		
-		By Lemma \ref{lem:unramified-monomorphism} it suffices to show, that $j$ is a univerally injective, and by \cite[Tag 01S4]{stacks-project} it suffices to show injectivity on geometric points $\Specof{\bar{k}} \to X_2$ for an algebraically closed extension  $\bar{k}/k$ of $k$.
+		
+		By Lemma \ref{lem:unramified-monomorphism}, it suffices to show
+		that $j$ is universally injective. By
+		\cite[Tag 01S4]{stacks-project}, it is enough to prove that
+		$X_1(K)\to X_2(K)$ is injective for every field extension $K/k$.
+		It suffices to check injectivity on points valued in
+		algebraically closed extensions of $k$, since equality of
+		morphisms into $X_1$ can be checked fppf locally on the source and $\Specof{\bar{k}} \to \Specof{k}$ is fppf. 
 		
 		So let $x, x' \in X_2(\bar{k})$, such that $j(x) = j(x')$.
 		Since $\pi_1$ and $\pi_2$ are coarse moduli spaces, they induce a bijection on geometric points 
@@ -544,7 +552,7 @@ From now on we will be working with Deligne-Momford stacks follwing Jarod Alper'
 	\[
 		a_{h^*\xi}=a_\xi\circ h.
 	\]
-	We check this locally on an \etale\ cover of $t'$. So let $T_i' = T_i \times_T T'$, so the following diagram is cartesian:
+	We check this locally on an \etale\ cover of $T'$. So let $T_i' = T_i \times_T T'$, so the following diagram is cartesian:
 	% https://q.uiver.app/#q=WzAsNCxbMSwwLCJUX2kiXSxbMSwxLCJUIl0sWzAsMSwiVCciXSxbMCwwLCJUX2knIl0sWzAsMSwidV9pIl0sWzIsMSwiaCIsMl0sWzMsMiwidV9pJyIsMl0sWzMsMCwiaF9pIl0sWzMsMSwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XV0=
 	\[\begin{tikzcd}
 		{T_i'} & {T_i} \\
@@ -584,7 +592,7 @@ From now on we will be working with Deligne-Momford stacks follwing Jarod Alper'
 
 	Hence, we get
 	\[
-		a_{h^*\xi}\circ u_i' = \alpha\circ l_i' = \alpha\circ l_i \circ h_i = \alpha_ \circ h_i = a_\xi \circ u_i \circ h_i = a_\xi \circ h \circ u_i'.
+		a_{h^*\xi}\circ u_i' = \alpha\circ l_i' = \alpha\circ l_i \circ h_i = \alpha_i \circ h_i = a_\xi \circ u_i \circ h_i = a_\xi \circ h \circ u_i'.
 	\] 
 	Since $\{T_i \to T\}$ is an \etale\ covering and $X_0$ is an \etale\ sheaf, we obtain $a_{h^*\xi} = a_{\xi}\circ h$ by uniqueness.
 		
