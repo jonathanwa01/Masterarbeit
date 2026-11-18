@@ -8,8 +8,6 @@ local-to-global constructions.
 
 ## Download the thesis
 
-- [Download latest PDF](https://github.com/jonathanwa01/Masterarbeit/releases/latest/download/thesis.pdf)
-
 The document is a working draft and may contain incomplete arguments or material subject to revision.
 
 ## Mathematical focus
@@ -33,7 +31,7 @@ The exposition follows an approach informed by Jarod Alper's notes.
 From the repository root, run:
 
 ```bash
-chmod +x .scripts/build.sh
+chmod +x ./scripts/build.sh
 ./scripts/build.sh
 ```
 
