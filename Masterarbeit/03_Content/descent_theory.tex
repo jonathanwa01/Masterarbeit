@@ -246,6 +246,23 @@ We will later see, that the both approaches, fibred categories and pseudofunctor
 \begin{example}\label{ex:fibred-categories}
 	\leavevmode
 	\begin{enumerate}
+		\item \emph{Modules.}
+		We denote by $\Aff$ the category $\Ring^\op$ of affine schemes.
+		Let $\mathcal{M}\to\Aff$ have objects $(\Specof{A}, M)$ with $M\in\Mod_A$.
+		A morphism
+		\[
+		(\Specof{B}, N)\longrightarrow(\Specof{A}, M)
+		\]
+		over $g:\Specof{B}\to\Specof{A}$ is a
+		$B$-linear map
+		\[
+		u:N\longrightarrow B\otimes_A M.
+		\]
+		This defines a fibred category with fibre
+		$\Mod_A$ over $\Specof{A}$.
+		Again, $(g, u)$ is cartesian if and only if
+		$u$ is an isomorphism (\cite[][Tags 01IB, 01I9]{stacks-project}, $M\mapsto\widetilde{M}$)
+		
 		\item \emph{Quasi-coherent sheaves.}
 		Let $\mathcal{Q}\to\Sch$ be the category whose objects
 		are pairs $(T, \mathcal{E})$ with
@@ -266,23 +283,6 @@ We will later see, that the both approaches, fibred categories and pseudofunctor
 		The arrow $(g,u)$ is cartesian if and only if
 		$u$ is an isomorphism (\cite[][Section~3.2]{vistoli2007notes}). 
 		We also denote this fibred category by $\QCoh$.
-		
-		\item \emph{Modules.}
-		Let $\mathcal{M}\to\Aff$ have objects
-		$(\Specof{A}, M)$ with $M\in\Mod_A$.
-		A morphism
-		\[
-		(\Specof{B}, N)\longrightarrow(\Specof{A}, M)
-		\]
-		over $g:\Specof{B}\to\Specof{A}$ is a
-		$B$-linear map
-		\[
-		u:N\longrightarrow B\otimes_A M.
-		\]
-		This defines a fibred category with fibre
-		$\Mod_A$ over $\Specof{A}$.
-		Again, $(g, u)$ is cartesian if and only if
-		$u$ is an isomorphism (\cite[][Tags 01IB, 01I9]{stacks-project}, $M\mapsto\widetilde{M}$)
 	\end{enumerate}
 \end{example}
 
@@ -361,6 +361,23 @@ for the projections. In the notation of Definition~\ref{def:cech-nerve}, $\mathr
 	Composition is composition in $F(U)$. For $F=\QCoh$ we write $\Desc(U/X):=\Desc_f(\QCoh)$.
 \end{definition}
 
+Descent data encode the compatibility needed to regard an object
+over $U$ as the restriction of an object over $X$. For a sheaf of
+sets, this compatibility is expressed by equality of the two
+restrictions to $U\times_XU$, and the sheaf condition identifies
+global sections with the corresponding equalizer. For a
+category-valued pseudofunctor, equality is replaced by a chosen
+isomorphism, together with a coherence condition. The descent
+category is therefore the $2$-categorical analogue of this
+equalizer, expressed more conceptually as the totalization of
+the pseudofunctor applied to the \v{C}ech nerve. Studying descent
+asks whether the comparison
+\[
+F(X)\longrightarrow \Desc_f(F)
+\simeq \Tot F\bigl((U/X)_\bullet\bigr)
+\]
+is an equivalence.
+
 \begin{definition}[Canonical descent data]\label{con:pullback-to-descent}
 	In the situation of Definition~\ref{def:classical-descent-data}, let $\zeta\in F(X)$. Since $f\circ\mathrm{pr}_0=f\circ\mathrm{pr}_1$, the coherence isomorphisms give an isomorphism
 	\[
@@ -374,8 +391,6 @@ for the projections. In the notation of Definition~\ref{def:cech-nerve}, $\mathr
 	We say that $F$ \emph{satisfies descent along $f$} if this functor is an equivalence of categories. Descent data in its essential image are called \emph{effective}.
 \end{definition}
 
-Concretely, $f^*$ is fully faithful if and only if morphisms between pullbacks that are compatible with the canonical descent data descend uniquely, and $F$ satisfies descent along $f$ if in addition every descent datum is effective.
-
 \begin{remark}[The normalization is automatic]\label{rem:normalization-automatic}
 	Some authors additionally require $\Delta^*\varphi=\mathrm{id}_\xi$, where $\Delta:U\to U\times_XU$ is the diagonal and $\Delta^*\mathrm{pr}_0^*\xi=\xi=\Delta^*\mathrm{pr}_1^*\xi$, but this follows from the cocycle condition: 
 	Let $\Delta_3:U\to U\times_XU\times_XU$ be the small diagonal. Then $\mathrm{pr}_{ij}\circ\Delta_3=\Delta$ for all $i<j$, so pulling the cocycle condition back along $\Delta_3$ gives $\Delta^*\varphi=\Delta^*\varphi\circ\Delta^*\varphi$. Since $\varphi$ is an isomorphism, $\Delta^*\varphi=\mathrm{id}_\xi$.
@@ -384,7 +399,7 @@ Concretely, $f^*$ is fully faithful if and only if morphisms between pullbacks t
 \begin{remark}[Sets, groupoids and categories]\label{rem:desc-sets}
 	Definition~\ref{def:classical-descent-data} contains the sheaf condition of Chapter~\ref{chap:grothendieck-topologies} and the descent condition for stacks as special cases.
 	\begin{enumerate}
-		\item \textbf{Sets.} Let $F:\CatC^{\op}\to\Set$ be a presheaf, regarded as a pseudofunctor with discrete values. An isomorphism $\mathrm{pr}_0^*\xi\to\mathrm{pr}_1^*\xi$ in the discrete category $F(U\times_XU)$ exists if and only if $\mathrm{pr}_0^*\xi=\mathrm{pr}_1^*\xi$, and then it is the identity; the cocycle condition is automatic. Hence $\Desc_f(F)$ is the discrete category on $\Eq\bigl(F(U)\rightrightarrows F(U\times_XU)\bigr)$, and $F$ satisfies descent along $f$ in the sense of Definition~\ref{con:pullback-to-descent} if and only if it does so in the sense of Definition~\ref{def:cech-descent}, by Proposition~\ref{prop:cech-descent-equalizer}.
+		\item \textbf{Sets.} Let $F:\CatC^{\op}\to\Set$ be a presheaf, regarded as a pseudofunctor with discrete values. An isomorphism $\mathrm{pr}_0^*\xi\to\mathrm{pr}_1^*\xi$ in the discrete category $F(U\times_XU)$ exists if and only if $\mathrm{pr}_0^*\xi=\mathrm{pr}_1^*\xi$, and then it is the identity, so the cocycle condition is automatic. Hence $\Desc_f(F)$ is the discrete category on $\Eq\bigl(F(U)\rightrightarrows F(U\times_XU)\bigr)$, and $F$ satisfies descent along $f$ in the sense of Definition~\ref{con:pullback-to-descent} if and only if it does so in the sense of Definition~\ref{def:cech-descent}, by Proposition~\ref{prop:cech-descent-equalizer}.
 		\item \textbf{Groupoids.} If $F$ is fibred in groupoids, the gluing isomorphisms are additional data and the cocycle condition is a genuine condition. Every morphism of descent data is invertible, so $\Desc_f(F)$ is a groupoid. This is the situation of Definition~\ref{def:stack}.
 		\item \textbf{Categories.} For $\QCoh$, objects of $\Desc_f(F)$ are described exactly as for groupoids, but morphisms of descent data need not be invertible.
 	\end{enumerate}
@@ -453,7 +468,7 @@ Let $R\to S$ be a ring map, $X=\Specof{R}$ and $U=\Specof{S}$. Since fibre produ
 	is the \emph{(augmented) Amitsur complex} of $M$.
 \end{definition}
 
-The homotopical input is the following standard fact: an augmented cosimplicial object with an extra codegeneracy is contractible. To state it uniformly, regard the augmentation as the coface $d^0:M^{-1}\to M^0$.
+The homotopical input is the following standard fact: An augmented cosimplicial object with an extra codegeneracy is contractible. To state it uniformly, regard the augmentation as the coface $d^0:M^{-1}\to M^0$.
 
 \begin{lemma}[Extra codegeneracy]\label{lem:extra-codegeneracy}
 	Let $M^{-1}\xrightarrow{d^0}M^\bullet$ be an augmented cosimplicial abelian group, with cofaces $d^0,\dots,d^n:M^{n-1}\to M^n$ for $n\ge0$. Suppose there are homomorphisms $h:M^n\to M^{n-1}$ for $n\ge0$ such that
@@ -498,11 +513,11 @@ The homotopical input is the following standard fact: an augmented cosimplicial 
 \end{theorem}
 
 \begin{proof}
-	Let $C(M)$ denote the augmented Amitsur complex of $M$ over $R$. For the $S$-algebra $S':=S\otimes_RS$ (via $s\mapsto s\otimes1$) and the $S$-module $S\otimes_RM$, base change along $R\to S$ yields isomorphisms
+	Let $C^\bullet(M)$ denote the augmented Amitsur complex of $M$ over $R$. For the $S$-algebra $S':=S\otimes_RS$ (via $s\mapsto s\otimes1$) and the $S$-module $S\otimes_RM$, base change along $R\to S$ yields isomorphisms
 	\[
 	S\otimes_R\bigl(S^{\otimes_R(n+1)}\otimes_RM\bigr)\cong S'^{\otimes_S(n+1)}\otimes_S(S\otimes_RM),
 	\]
-	natural in $[n]$ and compatible with the augmentations. So $S\otimes_RC(M)$ is the augmented Amitsur complex of $S\otimes_RM$ for $S\to S'$. The multiplication $\mu:S\otimes_RS\to S$ is a retraction of $S\to S'$ as $S$-algebras, so $S\otimes_RC(M)$ is exact by Lemma~\ref{lem:amitsur-split}. Since $S$ is flat over $R$, $H^i(S\otimes_RC(M))=S\otimes_RH^i(C(M))$, and since $S$ is faithfully flat, $S\otimes_RH^i(C(M))=0$ implies $H^i(C(M))=0$ (\cite[][Tag 00HP]{stacks-project}). The last claim is exactness in degrees $-1$ and $0$.
+	natural in $[n]$ and compatible with the augmentations. So $S\otimes_RC^\bullet(M)$ is the augmented Amitsur complex of $S\otimes_RM$ for $S\to S'$. The multiplication $\mu:S\otimes_RS\to S$ is a retraction of $S\to S'$ as $S$-algebras, so $S\otimes_RC^\bullet(M)$ is exact by Lemma~\ref{lem:amitsur-split}. In particular $H^i(S\otimes_R C^\bullet(M)) = 0$. Since $S$ is flat over $R$, $H^i(S\otimes_RC^\bullet(M))=S\otimes_RH^i(C^\bullet(M))$, and since $S$ is faithfully flat, $S\otimes_RH^i(C^\bullet(M))=0$ implies $H^i(C^\bullet(M))=0$ (\cite[][Tag 00HP]{stacks-project}), i.e. $C^\bullet(M)$ is exact. The last claim is exactness in degrees $-1$ and $0$.
 \end{proof}
 
 \begin{remark}[Homotopical meaning]\label{rem:amitsur-homotopical}
@@ -513,7 +528,7 @@ The homotopical input is the following standard fact: an augmented cosimplicial 
 \section{Faithfully flat descent for modules}\label{sec:fppf-descent-for-modules}
 
 
-Let $R\to S$ be a ring map and $f:U=\Specof{S}\to X=\Specof{R}$. We apply Definition~\ref{def:classical-descent-data} to the pseudofunctor $\mathcal{M}$ of Example~\ref{ex:fibred-categories}(2) and write
+Let $R\to S$ be a ring map and $f:U=\Specof{S}\to X=\Specof{R}$. We apply Definition~\ref{def:classical-descent-data} to the fibred category $\mathcal{M}$ of Example~\ref{ex:fibred-categories}(1) and write
 \[
 \Desc(S/R):=\Desc_f(\mathcal{M}).
 \]
