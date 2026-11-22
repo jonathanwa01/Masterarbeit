@@ -80,23 +80,25 @@ We now deduce from fppf descent for quasi-coherent sheaves that every scheme def
 		\arrow["{\lambda_1}", from=1-2, to=2-2]
 		\arrow["{\mathrm{id}}"', from=2-1, to=2-2]
 	\end{tikzcd}\]
-	
 	Now let $s\in\Gamma(U,\mathcal{O}_U)$, such that
 	$\mathrm{pr}_0^*s = \mathrm{pr}_1^*s \in \Gamma(U\times_T U,\mathcal{O}_{U\times_T U})$. Define
 	\[
 	b:=\varepsilon^{-1}\circ m_s\circ\varepsilon:
 	p^*\mathcal O_T\longrightarrow p^*\mathcal O_T.
 	\]
-	We claim that $b$ is a morphism of descent data.
+	We claim that $b$ is a morphism of descent data 
+	\[
+		b: (p^*\mathcal{O}_T, \mathrm{can}_{\mathcal{O}_T})\to (p^*\mathcal{O}_T, \mathrm{can}_{\mathcal{O}_T}).
+	\]
 	Hence, we need to show that
 	\[
-	(\mathrm{pr}_1^*b)\circ\mathrm{can}_{\mathcal O_T}
+	(\mathrm{pr}_1^*b)\circ\mathrm{can}_{\mathcal{O}_T}
 	=
-	\mathrm{can}_{\mathcal O_T}\circ(\mathrm{pr}_0^*b).
+	\mathrm{can}_{\mathcal{O}_T}\circ(\mathrm{pr}_0^*b).
 	\]
 	
 	Under the isomorphisms $\lambda_i$, the endomorphism
-	$\mathrm{pr}_i^*b$ becomes multiplication by $\mathrm{pr}_i^*s$.i.e. the following diagramm commutes:
+	$\mathrm{pr}_i^*b$ becomes multiplication by $\mathrm{pr}_i^*s$, i.e. the following diagramm commutes:
 	% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXG1hdGhybXtwcn1faV4qcF4qXFxtYXRoY2Fse099X1QiXSxbMSwwLCJcXG1hdGhybXtwcn1faV4qcF4qXFxtYXRoY2Fse099X1QiXSxbMCwyLCJcXG1hdGhjYWx7T31fe1VcXHRpbWVzX1RVfSJdLFsxLDIsIlxcbWF0aGNhbHtPfV97VVxcdGltZXNfVFV9Il0sWzAsMSwiXFxtYXRocm17cHJ9X2leKlxcbWF0aGNhbHtPfV9VIl0sWzEsMSwiXFxtYXRocm17cHJ9X2leKlxcbWF0aGNhbHtPfV9VIl0sWzAsMSwiXFxtYXRocm17cHJ9X2leKmIiXSxbMiwzLCJtX3tcXG1hdGhybXtwcn1faV4qc30iLDJdLFswLDQsIlxcbWF0aHJte3ByfV9pXipcXHZhcmVwc2lsb24iXSxbMSw1LCJcXG1hdGhybXtwcn1faV4qXFx2YXJlcHNpbG9uIiwyXSxbNCwyLCJcXGNvbmciXSxbNSwzLCJcXGNvbmciLDJdLFs0LDUsIlxcbWF0aHJte3ByfV9pXiptX3MiLDJdLFswLDIsIlxcbGFtYmRhX2kiLDIseyJjdXJ2ZSI6M31dLFsxLDMsIlxcbGFtYmRhX2kiLDAseyJjdXJ2ZSI6LTN9XV0=
 	\[\begin{tikzcd}
 		{\mathrm{pr}_i^*p^*\mathcal{O}_T} & {\mathrm{pr}_i^*p^*\mathcal{O}_T} \\
@@ -178,15 +180,7 @@ We now deduce from fppf descent for quasi-coherent sheaves that every scheme def
 	
 	Finally, every section pulled back from $T$ satisfies
 	$\mathrm{pr}_0^*p^*t=\mathrm{pr}_1^*p^*t$, since $p\circ \mathrm{pr}_0=p\circ \mathrm{pr}_1$.
-	Therefore $p^*$ identifies $\Gamma(T,\mathcal O_T)$
-	bijectively with the subring
-	\[
-	\{s\in\Gamma(U,\mathcal O_U)
-	\mid \mathrm{pr}_0^*s=\mathrm{pr}_1^*s\}.
-	\]
-	As $p^*$ is a ring homomorphism, this identification
-	is an isomorphism of rings. Thus the asserted diagram
-	is an equalizer of rings.
+	Therefore the asserted diagram is an equalizer of rings.
 \end{proof}
 
 \begin{lemma}\label{lem:representable-affine-target}
