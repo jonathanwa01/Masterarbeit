@@ -44,10 +44,6 @@ However, in general $\mathcal{X}$ is not representable by a scheme or algebraic 
 	\end{enumerate}
 \end{definition}
 
-\begin{remark}
-	The coarse moduli space forgets all automorphism data and only remembers isomorphism classes. In particular, it does not carry a universal family in general.
-\end{remark}
-
 
 \section{Basic Properties}
 
@@ -79,12 +75,17 @@ However, in general $\mathcal{X}$ is not representable by a scheme or algebraic 
 	\]
 	be a morphism. Since $f$ is $G$-invariant, its restriction to $\Spec(A)$
 	corresponds locally on an étale cover of $Y$ to a $G$-invariant morphism of
-	affine schemes. Equivalently, on coordinate rings it is given by a
-	$G$-invariant homomorphism, hence factors uniquely through $A^G$.
-	
-	
+	affine schemes.
 	Since $Y$ is a sheaf on the \etale\ site, these local factorizations glue
-	to a unique morphism $\Spec(A^G)\to Y$ making the diagram commute.
+	to a unique morphism $\Spec(A^G)\to Y$ making the following diagram commute:
+	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJbXFxTcGVjb2Z7QX0vR10iXSxbMSwwLCJZIl0sWzEsMSwiXFxTcGVjb2Z7QV5HfSJdLFswLDEsImYiXSxbMSwyXSxbMCwyXV0=
+	\[\begin{tikzcd}
+		{[\Specof{A}/G]} & Y \\
+		& {\Specof{A^G}}
+		\arrow["f", from=1-1, to=1-2]
+		\arrow[from=1-1, to=2-2]
+		\arrow[from=1-2, to=2-2]
+	\end{tikzcd}\]
 	
 	Thus $\pi : [\Spec(A)/G]\to \Spec(A^G)$ satisfies the universal property of a
 	coarse moduli space.
@@ -411,3 +412,39 @@ However, in general $\mathcal{X}$ is not representable by a scheme or algebraic 
 	\]
 	is a oarse moduli space.
 \end{example}
+
+
+\begin{example}[Quotients by $\mathbb{Z}/2$]\label{ex:Z2-coarse}
+		(\cite[][Example 5.2.4.]{alper2026stacks})
+		Assume $\operatorname{char}k\neq2$ and let $G=\mathbb{Z}/2=\{\pm1\}$ act on affine space $\mathbb{A}^n=\operatorname{Spec}k[x_1,\dots,x_n]$ by $-1\cdot x_i=-x_i$. In the affine case the coarse moduli space of $[\operatorname{Spec}A/G]$ is $\operatorname{Spec}A^G$, so we compute the invariant ring.
+		
+		\medskip\noindent\textbf{(a) The case $n=1$.}
+		Let $G$ act on $\mathbb{A}^1=\operatorname{Spec}k[x]$ via $-1\cdot x=-x$. Then a polynomial is invariant if and only if only even powers of $x$ occur, so
+		\[
+		k[x]^G=k[x^2].
+		\]
+		The quotient map is
+		\[
+		\mathbb{A}^1=\operatorname{Spec}k[x]\longrightarrow\operatorname{Spec}k[x^2]=\mathbb{A}^1,\qquad t\mapsto t^2,
+		\]
+		which is a geometric quotient. The induced morphism
+		\[
+		[\mathbb{A}^1/G]\longrightarrow\operatorname{Spec}k[x^2]
+		\]
+		is the coarse moduli space of $[\mathbb{A}^1/G]$. The action is free away from the origin, and the origin has stabilizer $G=\mathbb{Z}/2$.
+		
+		\medskip\noindent\textbf{(b) The case $n=2$.}
+		Let $G$ act on $\mathbb{A}^2=\operatorname{Spec}k[x,y]$ via $-1\cdot(x,y)=(-x,-y)$. A monomial $x^ay^b$ is invariant if and only if $a+b$ is even, so
+		\[
+		k[x,y]^G=k[x^2,xy,y^2].
+		\]
+		The geometric quotient is
+		\[
+		\mathbb{A}^2\longrightarrow\mathbb{A}^2/G=\operatorname{Spec}k[x^2,xy,y^2].
+		\]
+		Setting $A=x^2$, $B=xy$, $C=y^2$ identifies the invariant ring with
+		\[
+		k[A,B,C]/(AC-B^2),
+		\]
+		since the three generators satisfy $AC=x^2y^2=B^2$ and this is the only relation. Hence $\mathbb{A}^2/G$ is the quadric cone $\{AC=B^2\}\subset\mathbb{A}^3$. As in (a), the morphism $[\mathbb{A}^2/G]\to\mathbb{A}^2/G$ is the coarse moduli space. The stack $[\mathbb{A}^2/G]$ is a DM stack with the origin being the only stacky point, while its coarse space is singular at the image of the origin.
+	\end{example}
