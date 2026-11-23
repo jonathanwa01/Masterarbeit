@@ -83,6 +83,74 @@ We have seen in Theorem \ref{thm:representable-fppf-sheaf} that the representabl
 
 \section{\Etale\ Equivalence Relation}
 
+\begin{definition}[\Etale\ groupoid of schemes]
+	An \etale\ groupoid of schemes is a pair of schemes $U, R$ together with \etale\ morphisms $s,t: R \rightrightarrows U$ and a composition morphism $c: R\times_UR \to R$ such that the following holds:
+	\begin{enumerate}
+		\item[Associativity] The following commutes:
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJSXFx0aW1lc19VUlxcdGltZXNfVVIiXSxbMCwxLCJSXFx0aW1lc19VUiJdLFsxLDAsIlJcXHRpbWVzX1VSIl0sWzEsMSwiUiJdLFswLDEsIlxcbWF0aHJte2lkfVxcdGltZXMgYyIsMl0sWzAsMiwiY1xcdGltZXNcXG1hdGhybXtpZH0iXSxbMiwzLCJjIl0sWzEsMywiYyIsMl1d
+		\[\begin{tikzcd}
+			{R\times_UR\times_UR} & {R\times_UR} \\
+			{R\times_UR} & R
+			\arrow["{c\times\mathrm{id}}", from=1-1, to=1-2]
+			\arrow["{\mathrm{id}\times c}"', from=1-1, to=2-1]
+			\arrow["c", from=1-2, to=2-2]
+			\arrow["c"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		\item[Identity] There exists a morphsim $e:U\to R$, such that the following commutes:
+		% https://q.uiver.app/#q=WzAsOCxbMSwwLCJVIl0sWzEsMSwiUiJdLFswLDEsIlUiXSxbMiwxLCJVIl0sWzQsMCwiUiJdLFs1LDEsIlIiXSxbNiwwLCJSIl0sWzUsMCwiUlxcdGltZXNfVVIiXSxbMCwxLCJlIl0sWzEsMiwicyJdLFswLDIsIlxcbWF0aHJte2lkfSIsMl0sWzAsMywiXFxtYXRocm17aWR9Il0sWzEsMywidCIsMl0sWzQsNSwiXFxtYXRocm17aWR9IiwyXSxbNiw1LCJcXG1hdGhybXtpZH0iXSxbNCw3LCIoZVxcY2lyYyBzLCBcXG1hdGhybXtpZH0pIl0sWzYsNywiKGVcXGNpcmMgdCwgXFxtYXRocm17aWR9KSIsMl0sWzcsNSwiYyJdXQ==
+		\[\begin{tikzcd}
+			& U &&& R & {R\times_UR} & R \\
+			U & R & U &&& R
+			\arrow["{\mathrm{id}}"', from=1-2, to=2-1]
+			\arrow["e", from=1-2, to=2-2]
+			\arrow["{\mathrm{id}}", from=1-2, to=2-3]
+			\arrow["{(e\circ s, \mathrm{id})}", from=1-5, to=1-6]
+			\arrow["{\mathrm{id}}"', from=1-5, to=2-6]
+			\arrow["c", from=1-6, to=2-6]
+			\arrow["{(e\circ t, \mathrm{id})}"', from=1-7, to=1-6]
+			\arrow["{\mathrm{id}}", from=1-7, to=2-6]
+			\arrow["s", from=2-2, to=2-1]
+			\arrow["t"', from=2-2, to=2-3]
+		\end{tikzcd}\]
+		\item[Inverse] There exists a morphism $i: R\to R$, such that the following commutes:
+		% https://q.uiver.app/#q=WzAsMTAsWzAsMCwiUiJdLFsxLDAsIlIiXSxbMiwwLCJSIl0sWzEsMSwiVSJdLFszLDAsIlIiXSxbNCwwLCJVIl0sWzQsMSwiUiJdLFszLDEsIlJcXHRpbWVzX1VSIl0sWzUsMCwiUiJdLFs1LDEsIlJcXHRpbWVzX1VSIl0sWzAsMSwiaSJdLFsyLDEsImkiLDJdLFswLDMsInMiLDJdLFsxLDMsInQiLDJdLFsyLDMsInMiXSxbNCw1LCJzIl0sWzUsNiwiZSJdLFs3LDYsImMiLDJdLFs0LDcsIihpLCBcXG1hdGhybXtpZH0pIiwyXSxbOCw5LCIoXFxtYXRocm17aWR9LGkpIl0sWzgsNSwidCIsMl0sWzksNiwiYyJdXQ==
+		\[\begin{tikzcd}
+			R & R & R & R & U & R \\
+			& U && {R\times_UR} & R & {R\times_UR}
+			\arrow["i", from=1-1, to=1-2]
+			\arrow["s"', from=1-1, to=2-2]
+			\arrow["t"', from=1-2, to=2-2]
+			\arrow["i"', from=1-3, to=1-2]
+			\arrow["s", from=1-3, to=2-2]
+			\arrow["s", from=1-4, to=1-5]
+			\arrow["{(i, \mathrm{id})}"', from=1-4, to=2-4]
+			\arrow["e", from=1-5, to=2-5]
+			\arrow["t"', from=1-6, to=1-5]
+			\arrow["{(\mathrm{id},i)}", from=1-6, to=2-6]
+			\arrow["c"', from=2-4, to=2-5]
+			\arrow["c", from=2-6, to=2-5]
+		\end{tikzcd}\]
+	\end{enumerate}
+	We often supress the $c, e, i$ and simply call $R\rightrightarrows U$ an etale groupoid.
+\end{definition}
+
+\begin{remark}
+	A groupoid is a category in which every morphism is invertible.
+	To express this notion geometrically, we regard the objects and
+	morphisms as spaces $U$ and $R$, respectively, equipped with source
+	and target maps
+	\[
+	s,t\colon R\rightrightarrows U,
+	\]
+	together with identity, inversion, and composition maps satisfying
+	the usual groupoid axioms.
+	This formulation allows us to consider groupoids internal to
+	categories such as schemes or algebraic spaces, and to impose
+	geometric conditions on their structure maps.
+	In particular, we call such a groupoid \etale\ if both $s$ and $t$
+	are \etale.
+\end{remark}
+
 \begin{definition}[\Etale\ equivalence relation]
 	An \etale\ equivalence relation on an $S$-scheme $U$ is a monomorphism 
 	\[
