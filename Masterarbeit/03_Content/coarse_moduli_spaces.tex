@@ -438,18 +438,19 @@ However, in general $\mathcal{X}$ is not representable by a scheme or algebraic 
 		\[
 		k[x,y]^G=k[x^2,xy,y^2].
 		\]
-		The geometric quotient is
+		The algebraic space quotient is
 		\[
-		\mathbb{A}^2\longrightarrow\mathbb{A}^2/G=\operatorname{Spec}k[x^2,xy,y^2].
+		\tilde{\pi}: \mathbb{A}^2\longrightarrow\mathbb{A}^2/G=\operatorname{Spec}k[x^2,xy,y^2].
 		\]
 		Setting $A=x^2$, $B=xy$, $C=y^2$ identifies the invariant ring with
 		\[
 		k[A,B,C]/(AC-B^2),
 		\]
-		since the three generators satisfy $AC=x^2y^2=B^2$ and this is the only relation. Hence $\mathbb{A}^2/G$ is the quadric cone $\{AC=B^2\}\subset\mathbb{A}^3$. As in (a), the morphism $[\mathbb{A}^2/G]\to\mathbb{A}^2/G$ is the coarse moduli space. The stack $[\mathbb{A}^2/G]$ is a DM stack with the origin being the only stacky point, while its coarse space is singular at the image of the origin, see Figure \ref{fig:Z2-quotient}.
+		since the three generators satisfy $AC=x^2y^2=B^2$ and this is the only relation. Hence $\mathbb{A}^2/G$ is the quadric cone $\{AC=B^2\}\subset\mathbb{A}^3$. As in (a), the morphism $[\mathbb{A}^2/G]\to\mathbb{A}^2/G$ is the coarse moduli space. The stack $[\mathbb{A}^2/G]$ is a DM stack with the origin being the only stacky point, while its coarse space is singular at the image of the origin, see Figure \ref{fig:z2-coarse-quotient}. Away from the origin, the action is free.
 	\end{example}
 
 	\begin{figure}
+		\label{fig:z2-coarse-quotient}
 		\centering
 		\begin{tikzpicture}[
 			x=1cm,
@@ -663,8 +664,7 @@ However, in general $\mathcal{X}$ is not representable by a scheme or algebraic 
 			node[above=6pt, pos=0.200461] {$\pi$};
 			\end{tikzpicture}
 
-		\caption{The stack $[\mathbb{A}^2/G]$ has a single stacky point at the origin, while its coarse moduli space is singular at the image of the origin. Away from the origin, the action is free, see \cite[][Example 5.2.4.]{alper2026stacks}}
-		\label{fig:z2-coarse-quotient}
+		\caption{The stack $[\mathbb{A}^2/G]$ with $\Z/2$ stabilizer at the origin and its coarse moduli space given by the invariant scheme, see \cite[][Example 5.2.4.]{alper2026stacks}}
 	\end{figure}
 	
 	
