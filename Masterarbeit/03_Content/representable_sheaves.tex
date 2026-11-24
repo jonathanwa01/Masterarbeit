@@ -18,16 +18,170 @@ We now deduce from fppf descent for quasi-coherent sheaves that every scheme def
 	is an equalizer diagram of rings.
 \end{corollary}
 
-\begin{proof}
-	By Theorem~\ref{thm:fppf-descent-qcoh}, the functor $\QCoh(T)\to\Desc(U/T)$, $\mathcal{F}\mapsto(p^*\mathcal{F},\mathrm{can}_\mathcal{F})$ (Definition~\ref{con:pullback-to-descent}), is fully faithful. We apply this to $\mathcal{F}=\mathcal{G}=\mathcal{O}_T$.
-	
-	On the left, evaluation at $1_T\in \Gamma(T, \mathcal{O}_T)$ identifies $\Hom_{\QCoh(T)}(\mathcal{O}_T,\mathcal{O}_T)$ with $\Gamma(T,\mathcal{O}_T)$.
-	On the right, $p^*\mathcal{O}_T=\mathcal{O}_U$ canonically, and under the identifications $\mathrm{pr}_0^*\mathcal{O}_U=\mathcal{O}_{U\times_TU}=\mathrm{pr}_1^*\mathcal{O}_U$ the canonical descent datum $\mathrm{can}_{\mathcal{O}_T}$ is the identity. A morphism of descent data $(\mathcal{O}_U,\mathrm{id})\to(\mathcal{O}_U,\mathrm{id})$ is therefore an endomorphism of $\mathcal{O}_U$, i.e.\ a section $s\in\Gamma(U,\mathcal{O}_U)$, such that $\mathrm{pr}_0^*(s)=\mathrm{pr}_1^*(s)$.
-	Under these identifications, the map on morphism sets is $p^*:\Gamma(T,\mathcal{O}_T)\to\Gamma(U,\mathcal{O}_U)$.
-	
-	By full faithfulness, $p^*$ is a bijection onto the equalizer of $\mathrm{pr}_0^*$ and $\mathrm{pr}_1^*$. Since $p^*$ is a ring map and equalizers of rings are computed on underlying sets, the diagram is an equalizer of rings.
-\end{proof}
 
+
+
+
+\begin{proof}
+	By Theorem~\ref{thm:fppf-descent-qcoh}, the functor
+	\[
+	D:\QCoh(T)\longrightarrow\Desc(U/T),
+	\qquad
+	\mathcal F\longmapsto
+	(p^*\mathcal F,\mathrm{can}_{\mathcal F})
+	\]
+	of Definition~\ref{con:pullback-to-descent}
+	is fully faithful. In particular, it induces a bijection
+	\[
+		\Hom_{\QCoh(T)}(\mathcal O_T,\mathcal O_T)
+		\xrightarrow{\sim}
+		\Hom_{\Desc(U/T)}
+		\bigl(D(\mathcal O_T),D(\mathcal O_T)\bigr)
+	\]
+	For every scheme $V$, evaluation at $1$ gives a canonical
+	bijection
+	\[
+	\Hom_{\QCoh(V)}(\mathcal O_V,\mathcal O_V)
+	\xrightarrow{\sim}
+	\Gamma(V,\mathcal O_V),
+	\]
+	whose inverse sends a section $t$ to multiplication by $t$,
+	denoted $m_t$, see \cite[][Tag 01AL]{stacks-project}.
+	
+	
+	Write
+	\[
+	\varepsilon:p^*\mathcal{O}_T\xrightarrow{\cong}\mathcal{O}_U
+	\]
+	for the canonical isomorphism $p^\sharp$. For $i=0,1$, let
+	\[
+	\lambda_i:
+	\mathrm{pr}_i^*p^*\mathcal O_T
+	\xrightarrow{\sim}
+	(p\circ \mathrm{pr}_i)^*\mathcal O_T
+	\xrightarrow{\sim}
+	\mathcal O_{U\times_T U}
+	\]
+	be the canonical composite.
+	
+	Since $p\circ \mathrm{pr}_0=p\circ \mathrm{pr}_1$, the definition of the
+	canonical descent isomorphism gives
+	\[
+	\lambda_1 \circ\mathrm{can}_{\mathcal O_T}
+	=\lambda_0.
+	\]
+	Thus the following diagram commutes:
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhybXtwcn1fMF4qcF4qXFxtYXRoY2FsIE9fVCJdLFsxLDAsIlxcbWF0aHJte3ByfV8xXipwXipcXG1hdGhjYWwgT19UIl0sWzAsMSwiXFxtYXRoY2Fse099X3tVXFx0aW1lc19UIFV9Il0sWzEsMSwiXFxtYXRoY2Fse099X3tVXFx0aW1lc19UIFV9Il0sWzAsMSwiXFxtYXRocm17Y2FufV97XFxtYXRoY2Fse099X1R9Il0sWzIsMywiXFxtYXRocm17aWR9IiwyXSxbMCwyLCJcXGxhbWJkYV8wIiwyXSxbMSwzLCJcXGxhbWJkYV8xIl1d
+	\[\begin{tikzcd}
+		{\mathrm{pr}_0^*p^*\mathcal O_T} & {\mathrm{pr}_1^*p^*\mathcal O_T} \\
+		{\mathcal{O}_{U\times_T U}} & {\mathcal{O}_{U\times_T U}}
+		\arrow["{\mathrm{can}_{\mathcal{O}_T}}", from=1-1, to=1-2]
+		\arrow["{\lambda_0}"', from=1-1, to=2-1]
+		\arrow["{\lambda_1}", from=1-2, to=2-2]
+		\arrow["{\mathrm{id}}"', from=2-1, to=2-2]
+	\end{tikzcd}\]
+	Now let $s\in\Gamma(U,\mathcal{O}_U)$, such that
+	$\mathrm{pr}_0^*s = \mathrm{pr}_1^*s \in \Gamma(U\times_T U,\mathcal{O}_{U\times_T U})$. Define
+	\[
+	b:=\varepsilon^{-1}\circ m_s\circ\varepsilon:
+	p^*\mathcal O_T\longrightarrow p^*\mathcal O_T.
+	\]
+	We claim that $b$ is a morphism of descent data 
+	\[
+		b: (p^*\mathcal{O}_T, \mathrm{can}_{\mathcal{O}_T})\to (p^*\mathcal{O}_T, \mathrm{can}_{\mathcal{O}_T}).
+	\]
+	Hence, we need to show that
+	\[
+	(\mathrm{pr}_1^*b)\circ\mathrm{can}_{\mathcal{O}_T}
+	=
+	\mathrm{can}_{\mathcal{O}_T}\circ(\mathrm{pr}_0^*b).
+	\]
+	
+	Under the isomorphisms $\lambda_i$, the endomorphism
+	$\mathrm{pr}_i^*b$ becomes multiplication by $\mathrm{pr}_i^*s$, i.e. the following diagramm commutes:
+	% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXG1hdGhybXtwcn1faV4qcF4qXFxtYXRoY2Fse099X1QiXSxbMSwwLCJcXG1hdGhybXtwcn1faV4qcF4qXFxtYXRoY2Fse099X1QiXSxbMCwyLCJcXG1hdGhjYWx7T31fe1VcXHRpbWVzX1RVfSJdLFsxLDIsIlxcbWF0aGNhbHtPfV97VVxcdGltZXNfVFV9Il0sWzAsMSwiXFxtYXRocm17cHJ9X2leKlxcbWF0aGNhbHtPfV9VIl0sWzEsMSwiXFxtYXRocm17cHJ9X2leKlxcbWF0aGNhbHtPfV9VIl0sWzAsMSwiXFxtYXRocm17cHJ9X2leKmIiXSxbMiwzLCJtX3tcXG1hdGhybXtwcn1faV4qc30iLDJdLFswLDQsIlxcbWF0aHJte3ByfV9pXipcXHZhcmVwc2lsb24iXSxbMSw1LCJcXG1hdGhybXtwcn1faV4qXFx2YXJlcHNpbG9uIiwyXSxbNCwyLCJcXGNvbmciXSxbNSwzLCJcXGNvbmciLDJdLFs0LDUsIlxcbWF0aHJte3ByfV9pXiptX3MiLDJdLFswLDIsIlxcbGFtYmRhX2kiLDIseyJjdXJ2ZSI6M31dLFsxLDMsIlxcbGFtYmRhX2kiLDAseyJjdXJ2ZSI6LTN9XV0=
+	\[\begin{tikzcd}
+		{\mathrm{pr}_i^*p^*\mathcal{O}_T} & {\mathrm{pr}_i^*p^*\mathcal{O}_T} \\
+		{\mathrm{pr}_i^*\mathcal{O}_U} & {\mathrm{pr}_i^*\mathcal{O}_U} \\
+		{\mathcal{O}_{U\times_TU}} & {\mathcal{O}_{U\times_TU}}
+		\arrow["{\mathrm{pr}_i^*b}", from=1-1, to=1-2]
+		\arrow["{\mathrm{pr}_i^*\varepsilon}", from=1-1, to=2-1]
+		\arrow["{\lambda_i}"', bend right=40, from=1-1, to=3-1]
+		\arrow["{\mathrm{pr}_i^*\varepsilon}"', from=1-2, to=2-2]
+		\arrow["{\lambda_i}", bend left=40, from=1-2, to=3-2]
+		\arrow["{\mathrm{pr}_i^*m_s}"', from=2-1, to=2-2]
+		\arrow["\cong", from=2-1, to=3-1]
+		\arrow["\cong"', from=2-2, to=3-2]
+		\arrow["{m_{\mathrm{pr}_i^*s}}"', from=3-1, to=3-2]
+	\end{tikzcd}\]
+	
+	
+	Now this fits into the the following diagram:
+	% https://q.uiver.app/#q=WzAsMTIsWzIsMiwiXFxtYXRocm17cHJ9XzBeKnBeKlxcbWF0aGNhbHtPfV9UIl0sWzMsMiwiXFxtYXRocm17cHJ9XzFeKnBeKlxcbWF0aGNhbHtPfV9UIl0sWzIsMywiXFxtYXRocm17cHJ9XzBeKnBeKlxcbWF0aGNhbHtPfV9UIl0sWzMsMywiXFxtYXRocm17cHJ9XzFeKnBeKlxcbWF0aGNhbHtPfV9UIl0sWzAsMCwiXFxtYXRoY2Fse099X3tVXFx0aW1lc19UVX0iXSxbMCw1LCJcXG1hdGhjYWx7T31fe1VcXHRpbWVzX1RVfSJdLFs1LDAsIlxcbWF0aGNhbHtPfV97VVxcdGltZXNfVFV9Il0sWzUsNSwiXFxtYXRoY2Fse099X3tVXFx0aW1lc19UVX0iXSxbMSwxLCJcXG1hdGhybXtwcn1fMF4qXFxtYXRoY2Fse099X1UiXSxbMSw0LCJcXG1hdGhybXtwcn1fMF4qXFxtYXRoY2Fse099X1UiXSxbNCwxLCJcXG1hdGhybXtwcn1fMV4qXFxtYXRoY2Fse099X1UiXSxbNCw0LCJcXG1hdGhybXtwcn1fMV4qXFxtYXRoY2Fse099X1UiXSxbMiwzLCJcXG1hdGhybXtjYW59X3tcXG1hdGhjYWwgT19UfSIsMl0sWzAsMiwiXFxtYXRocm17cHJ9XzBeKmIiLDJdLFswLDEsIlxcbWF0aHJte2Nhbn1fe1xcbWF0aGNhbCBPX1R9IiwyXSxbMSwzLCJcXG1hdGhybXtwcn1fMV4qYiJdLFs0LDUsIm1fe1xcbWF0aHJte3ByfV8wXipzfSIsMl0sWzYsNywibV97XFxtYXRocm17cHJ9XzFeKnN9Il0sWzQsNiwiXFxtYXRocm17aWR9Il0sWzUsNywiXFxtYXRocm17aWR9IiwyXSxbMCw4LCJcXG1hdGhybXtwcn1fMF4qXFx2YXJlcHNpbG9uIl0sWzIsOSwiXFxtYXRocm17cHJ9XzBeKlxcdmFyZXBzaWxvbiIsMl0sWzgsNCwiXFxjb25nIl0sWzksNSwiXFxjb25nIiwyXSxbOCw5LCJcXG1hdGhybXtwcn1fMF4qbV9zIiwyXSxbMCw0LCJcXGxhbWJkYV8wIiwyLHsiY3VydmUiOjN9XSxbMTAsMTEsIlxcbWF0aHJte3ByfV8xXiptX3MiXSxbMTAsNl0sWzExLDddLFsxLDEwLCJcXG1hdGhybXtwcn1fMF4qXFx2YXJlcHNpbG9uIiwyXSxbMywxMSwiXFxtYXRocm17cHJ9XzBeKlxcdmFyZXBzaWxvbiJdLFsxLDYsIlxcbGFtYmRhXzEiLDAseyJjdXJ2ZSI6LTN9XSxbMyw3LCJcXGxhbWJkYV8xIiwyLHsiY3VydmUiOjN9XSxbMiw1LCJcXGxhbWJkYV8wIiwwLHsiY3VydmUiOi0zfV1d
+	\[\begin{tikzcd}
+		{\mathcal{O}_{U\times_TU}} &&&&& {\mathcal{O}_{U\times_TU}} \\
+		& {\mathrm{pr}_0^*\mathcal{O}_U} &&& {\mathrm{pr}_1^*\mathcal{O}_U} \\
+		&& {\mathrm{pr}_0^*p^*\mathcal{O}_T} & {\mathrm{pr}_1^*p^*\mathcal{O}_T} \\
+		&& {\mathrm{pr}_0^*p^*\mathcal{O}_T} & {\mathrm{pr}_1^*p^*\mathcal{O}_T} \\
+		& {\mathrm{pr}_0^*\mathcal{O}_U} &&& {\mathrm{pr}_1^*\mathcal{O}_U} \\
+		{\mathcal{O}_{U\times_TU}} &&&&& {\mathcal{O}_{U\times_TU}}
+		\arrow["{\mathrm{id}}", from=1-1, to=1-6]
+		\arrow["{m_{\mathrm{pr}_0^*s}}"', from=1-1, to=6-1]
+		\arrow["{m_{\mathrm{pr}_1^*s}}", from=1-6, to=6-6]
+		\arrow["\cong", from=2-2, to=1-1]
+		\arrow["{\mathrm{pr}_0^*m_s}"', from=2-2, to=5-2]
+		\arrow[from=2-5, to=1-6]
+		\arrow["{\mathrm{pr}_1^*m_s}", from=2-5, to=5-5]
+		\arrow["{\lambda_0}"', bend right=25, from=3-3, to=1-1]
+		\arrow["{\mathrm{pr}_0^*\varepsilon}", from=3-3, to=2-2]
+		\arrow["{\mathrm{can}_{\mathcal O_T}}"', from=3-3, to=3-4]
+		\arrow["{\mathrm{pr}_0^*b}"', from=3-3, to=4-3]
+		\arrow["{\lambda_1}", bend left=25, from=3-4, to=1-6]
+		\arrow["{\mathrm{pr}_0^*\varepsilon}"', from=3-4, to=2-5]
+		\arrow["{\mathrm{pr}_1^*b}", from=3-4, to=4-4]
+		\arrow["{\mathrm{can}_{\mathcal O_T}}"', from=4-3, to=4-4]
+		\arrow["{\mathrm{pr}_0^*\varepsilon}"', from=4-3, to=5-2]
+		\arrow["{\lambda_0}", bend left=25, from=4-3, to=6-1]
+		\arrow["{\mathrm{pr}_0^*\varepsilon}", from=4-4, to=5-5]
+		\arrow["{\lambda_1}"', bend right=25, from=4-4, to=6-6]
+		\arrow["\cong"', from=5-2, to=6-1]
+		\arrow[from=5-5, to=6-6]
+		\arrow["{\mathrm{id}}"', from=6-1, to=6-6]
+	\end{tikzcd}\]
+	
+	By assumption, $\mathrm{pr}_0^*s = \mathrm{pr}_1^*s$, hence, the outter square commutes and so does the inner square, so $b$ is inceed a morphism of descent data.
+	
+	
+	
+	
+	
+	By full faithfulness of $D$, there is a unique
+	$\mathcal O_T$-linear endomorphism
+	$a:\mathcal O_T\to\mathcal O_T$ such that $p^*a=b$.
+	Write $a=m_t$ for the corresponding section
+	$t\in\Gamma(T,\mathcal O_T)$. Then
+	\[
+	m_s
+	=\varepsilon\circ b\circ\varepsilon^{-1}
+	=\varepsilon\circ p^*m_t\circ\varepsilon^{-1}
+	=m_{p^*t}.
+	\]
+	Evaluating at $1$ yields $s=p^*t$.
+	
+	If $t'\in\Gamma(T,\mathcal O_T)$ also satisfies
+	$p^*t'=s$, then
+	\[
+	p^*m_{t'}
+	=\varepsilon^{-1}\circ m_s\circ\varepsilon
+	=b.
+	\]
+	By the uniqueness of $a$, we obtain $m_{t'}=m_t$,
+	hence $t'=t$.
+	
+	Finally, every section pulled back from $T$ satisfies
+	$\mathrm{pr}_0^*p^*t=\mathrm{pr}_1^*p^*t$, since $p\circ \mathrm{pr}_0=p\circ \mathrm{pr}_1$.
+	Therefore the asserted diagram is an equalizer of rings.
+\end{proof}
 
 \begin{lemma}\label{lem:representable-affine-target}
 	Let $X=\Specof{A}$ be an affine scheme and let $p:U\to T$ be an fppf covering. Then $h_X$ satisfies descent along $p$.
