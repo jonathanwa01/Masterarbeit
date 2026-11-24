@@ -348,3 +348,117 @@ We have seen in Theorem \ref{thm:representable-fppf-sheaf} that the representabl
 	and étale. Since $X$ is an fppf sheaf, it is an
 	algebraic space.
 \end{proof}
+
+
+\begin{example}
+	(\cite[][Tag 02Z1]{stacks-project})
+	Let $k$ be a field with \(\operatorname{char}(k)\neq 2\). Let $U = \mathbb{A}_k^1$ be the affine line. Let $\mathbb{G}_m = \Specof{k[t, t^{-1}]} = D(t) \subset \mathbb{A}_k^1$ be the multiplicative group scheme. Let 
+	\[
+		R:=U\coprod\mathbb{G}_m
+	\]
+	and define morphisms $s,t:R\rightrightarrows U$ , where $s = \operatorname{id} \coprod \iota$ and $t = \operatorname{id} \coprod (\iota \circ i)$ for $\iota: \mathbb{G}_m \hookrightarrow U$ and $i: \mathbb{G}_m \to \mathbb{G}_m, \quad x\mapsto -x$.
+	
+	The morphism
+	\[
+	j=(s,t):R\longrightarrow U\times_k U
+	\]
+	identifies the first component with the diagonal
+	\[
+	\Delta=V(z_1-z_2)
+	\]
+	and the second component with the punctured antidiagonal
+	\[
+	\Gamma=V(z_1+z_2)\cap D(z_1).
+	\]
+	We may write $R=\Delta\coprod\Gamma$. Since $\operatorname{char}(k)\neq 2$, these two images are disjoint, and $j$ is a monomorphism.
+	Moreover, $s$ and $t$ are étale, and $R$ defines the
+	equivalence relation which identifies $x$ with $-x$ for $x\neq 0$ and keeps one origin. This is an equivalence relation so $q: U \to X = U/R$ is an algebraic space. 
+	Geometrically, the quotient indentifies every nonzero geometric point $x$ with $-x$ and keeps a single origin. Each geometric point in the quotient has two preimages $\{x, -x\}$ for $x\neq 0$ and only once for the origin.
+		
+	
+	
+	\begin{center}
+		\resizebox{\textwidth}{!}{
+			\begin{tikzpicture}				
+				% Source: disjoint components
+				\begin{scope}[shift={(-4,1)}]
+					\draw[blue, thick] (-1.3,0) -- (1.3,0);
+					\fill[blue] (0,0) circle (2pt);
+					\node[above] at (0,0.25) {$\Delta \cong U$};
+					\node[below] at (0,-0.1) {$0$};
+				\end{scope}
+				
+				\begin{scope}[shift={(-4,-1)}]
+					\draw[red, thick] (-1.3,0) -- (1.3,0);
+					\draw[red, fill=white, thick] (0,0) circle (2.5pt);
+					\node[above] at (0,0.25) {$\Gamma \cong \mathbb{G}_m$};
+					\node[below] at (0,-0.1) {$0$};
+				\end{scope}
+				
+				\node at (-4,0) {$\amalg$};
+				
+				% Map to the plane
+				\draw[->, thick] (-2.2,0) -- (-0.6,0)
+				node[midway, above] {$j=(s,t)$};
+				
+				% Target plane
+				\begin{scope}[shift={(1.8,0)}]
+					\draw[->, gray] (-2,0) -- (2.2,0)
+					node[right] {$s$};
+					\draw[->, gray] (0,-2) -- (0,2.2)
+					node[above] {$t$};
+					
+					\draw[blue, thick] (-1.6,-1.6) -- (1.6,1.6);
+					\draw[red, thick] (-1.6,1.6) -- (-0.07,0.07);
+					\draw[red, thick] (0.07,-0.07) -- (1.6,-1.6);
+					
+					\fill (0,0) circle (2pt);
+					
+					\node[blue, right] at (1.6,1.6)
+					{$\Delta:\ t=s$};
+					\node[red, below] at (1.6,-1.6)
+					{$\Gamma:\ t=-s,\ s\neq0$};
+					\node[below right] at (0,0) {$(0,0)$};
+					
+					\node at (0,-2.5) {$j(R)\subseteq U\times_kU$};
+				\end{scope}
+				
+				% Map from the relation to the quotient
+				% It is defined on R, not on the whole coordinate plane.
+				\draw[->, thick] (4.77, 0) -- (6.37,0) 
+				node[midway, above] {$q\circ s = q\circ t$};
+				
+				% Quotient: schematic orbit picture
+				\begin{scope}[shift={(228pt,0pt)}]
+					\draw[thick] (-1.1,0) -- (1.1,0);
+					\fill (0,0) circle (2pt);
+					
+					\node[above] at (0,0.7) {$X=U/R$};
+					\node[below] at (0,-0.1) {$q(0)$};
+					
+					\node[align=center] at (0,-1.4)
+					{$[x]=\{x,-x\}$ for $x\neq0$\\
+						$[0]=\{0\}$};
+				\end{scope}
+			\end{tikzpicture}
+		}
+	\end{center}
+	
+	We claim, that $X$ is not a scheme.
+	Consider consider the diagonal $\Delta_{X/k}: X\to X\times_k X$. The base change along $U\times_k U$ is precisely $j$:
+	% https://q.uiver.app/#q=WzAsNCxbMCwxLCJYIl0sWzEsMSwiWFxcdGltZXNfa1giXSxbMSwwLCJVXFx0aW1lc19rVSJdLFswLDAsIlI9VVxcdGltZXNfWFUiXSxbMCwxLCJcXERlbHRhX3tYL2t9IiwyXSxbMiwxXSxbMywwXSxbMywyLCJqIl0sWzMsMSwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XV0=
+	\[\begin{tikzcd}
+		{R=U\times_XU} & {U\times_kU} \\
+		X & {X\times_kX}
+		\arrow["j", from=1-1, to=1-2]
+		\arrow[from=1-1, to=2-1]
+		\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+		\arrow[from=1-2, to=2-2]
+		\arrow["{\Delta_{X/k}}"', from=2-1, to=2-2]
+	\end{tikzcd}\]
+	Suppose $X$ is a scheme, the diagonal $\Delta_{X/k}$ is an immersion and via base change, $j$ is an immersion.  $\Delta$ is open in $R$ and $\Delta$ and $\Gamma$ are disjoint, but since every open neighborhood of $(0,0)$ in intersects $\Gamma$, $j(\Delta)$ is not open in $j(R)$ and $j$ is not a homeomorphism, and hence, not an immersion. Contradiction.
+\end{example}
+
+\begin{remark}
+	This example illustrates perfectly, why algebriac spaces naturally expands the category of schemes. Although $R\rightrightarrows U$ are \etale\ morphisms of schemes, the quotient need not be a scheme again.
+\end{remark}
