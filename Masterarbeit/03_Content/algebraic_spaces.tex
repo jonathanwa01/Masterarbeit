@@ -83,15 +83,107 @@ We have seen in Theorem \ref{thm:representable-fppf-sheaf} that the representabl
 
 \section{\Etale\ Equivalence Relation}
 
-\begin{definition}[\Etale\ equivalence relation]
-	An \etale\ equivalence relation on an $S$-scheme $U$ is a monomorphism 
-	\[
-		R\hookrightarrow U\times_S U,
-	\]
-	such that for every $S$-scheme $T$, the $T$-points $R(T) \subset U(T)\times U(T)$ is an equivalence relation on $U(T)$ and the projections $s,t: R\to U$ are \etale.
+\begin{definition}[\Etale\ groupoid of schemes]
+	An \etale\ groupoid of schemes is a pair of schemes $U, R$ together with \etale\ morphisms $s,t: R \rightrightarrows U$ and a composition morphism $c: R\times_UR \to R$ such that the following holds:
+	\begin{enumerate}
+		\item Associativity:The following commutes:
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJSXFx0aW1lc19VUlxcdGltZXNfVVIiXSxbMCwxLCJSXFx0aW1lc19VUiJdLFsxLDAsIlJcXHRpbWVzX1VSIl0sWzEsMSwiUiJdLFswLDEsIlxcbWF0aHJte2lkfVxcdGltZXMgYyIsMl0sWzAsMiwiY1xcdGltZXNcXG1hdGhybXtpZH0iXSxbMiwzLCJjIl0sWzEsMywiYyIsMl1d
+		\[\begin{tikzcd}
+			{R\times_UR\times_UR} & {R\times_UR} \\
+			{R\times_UR} & R
+			\arrow["{c\times\mathrm{id}}", from=1-1, to=1-2]
+			\arrow["{\mathrm{id}\times c}"', from=1-1, to=2-1]
+			\arrow["c", from=1-2, to=2-2]
+			\arrow["c"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		\item Identity: There exists a morphsim $e:U\to R$, such that the following commutes:
+		% https://q.uiver.app/#q=WzAsOCxbMSwwLCJVIl0sWzEsMSwiUiJdLFswLDEsIlUiXSxbMiwxLCJVIl0sWzQsMCwiUiJdLFs1LDEsIlIiXSxbNiwwLCJSIl0sWzUsMCwiUlxcdGltZXNfVVIiXSxbMCwxLCJlIl0sWzEsMiwicyJdLFswLDIsIlxcbWF0aHJte2lkfSIsMl0sWzAsMywiXFxtYXRocm17aWR9Il0sWzEsMywidCIsMl0sWzQsNSwiXFxtYXRocm17aWR9IiwyXSxbNiw1LCJcXG1hdGhybXtpZH0iXSxbNCw3LCIoZVxcY2lyYyBzLCBcXG1hdGhybXtpZH0pIl0sWzYsNywiKGVcXGNpcmMgdCwgXFxtYXRocm17aWR9KSIsMl0sWzcsNSwiYyJdXQ==
+		\[\begin{tikzcd}
+			& U &&& R & {R\times_UR} & R \\
+			U & R & U &&& R
+			\arrow["{\mathrm{id}}"', from=1-2, to=2-1]
+			\arrow["e", from=1-2, to=2-2]
+			\arrow["{\mathrm{id}}", from=1-2, to=2-3]
+			\arrow["{(e\circ s, \mathrm{id})}", from=1-5, to=1-6]
+			\arrow["{\mathrm{id}}"', from=1-5, to=2-6]
+			\arrow["c", from=1-6, to=2-6]
+			\arrow["{(e\circ t, \mathrm{id})}"', from=1-7, to=1-6]
+			\arrow["{\mathrm{id}}", from=1-7, to=2-6]
+			\arrow["s", from=2-2, to=2-1]
+			\arrow["t"', from=2-2, to=2-3]
+		\end{tikzcd}\]
+		\item inverse: There exists a morphism $i: R\to R$, such that the following commutes:
+		% https://q.uiver.app/#q=WzAsMTAsWzAsMCwiUiJdLFsxLDAsIlIiXSxbMiwwLCJSIl0sWzEsMSwiVSJdLFszLDAsIlIiXSxbNCwwLCJVIl0sWzQsMSwiUiJdLFszLDEsIlJcXHRpbWVzX1VSIl0sWzUsMCwiUiJdLFs1LDEsIlJcXHRpbWVzX1VSIl0sWzAsMSwiaSJdLFsyLDEsImkiLDJdLFswLDMsInMiLDJdLFsxLDMsInQiLDJdLFsyLDMsInMiXSxbNCw1LCJzIl0sWzUsNiwiZSJdLFs3LDYsImMiLDJdLFs0LDcsIihpLCBcXG1hdGhybXtpZH0pIiwyXSxbOCw5LCIoXFxtYXRocm17aWR9LGkpIl0sWzgsNSwidCIsMl0sWzksNiwiYyJdXQ==
+		\[\begin{tikzcd}
+			R & R & R & R & U & R \\
+			& U && {R\times_UR} & R & {R\times_UR}
+			\arrow["i", from=1-1, to=1-2]
+			\arrow["s"', from=1-1, to=2-2]
+			\arrow["t"', from=1-2, to=2-2]
+			\arrow["i"', from=1-3, to=1-2]
+			\arrow["s", from=1-3, to=2-2]
+			\arrow["s", from=1-4, to=1-5]
+			\arrow["{(i, \mathrm{id})}"', from=1-4, to=2-4]
+			\arrow["e", from=1-5, to=2-5]
+			\arrow["t"', from=1-6, to=1-5]
+			\arrow["{(\mathrm{id},i)}", from=1-6, to=2-6]
+			\arrow["c"', from=2-4, to=2-5]
+			\arrow["c", from=2-6, to=2-5]
+		\end{tikzcd}\]
+	\end{enumerate}
+	We often supress the $c, e, i$ and simply call $R\rightrightarrows U$ an etale groupoid.
 \end{definition}
 
-\begin{proposition}
+\begin{remark}
+	A groupoid is a category in which every morphism is invertible.
+	To express this notion geometrically, we regard the objects and
+	morphisms as spaces $U$ and $R$, respectively, equipped with source
+	and target maps
+	\[
+	s,t\colon R\rightrightarrows U,
+	\]
+	together with identity, inversion, and composition maps satisfying
+	the usual groupoid axioms.
+	This formulation allows us to consider groupoids internal to
+	categories such as schemes or algebraic spaces, and to impose
+	geometric conditions on their structure maps.
+	In particular, we call such a groupoid \etale\ if both $s$ and $t$
+	are \etale.
+\end{remark}
+
+\begin{example}
+	(\cite[][Example 4.4.3]{alper2026stacks})
+	Let $G$ be group scheme acting on a scheme $U$ via multiplication $\sigma: G\times U\to U$. Then
+	\[
+		\mathrm{pr_2}, \sigma: G\times U \rightrightarrows U
+	\]
+	is n \etale groupoid of schemes. The inverse is given by 
+	\begin{align*}
+		i:G\times U &\to G\times U \\
+		(g, u) \mapsto (g^{-1}, gu),
+	\end{align*}
+	and the composition is given by
+	\begin{align*}
+		c:(G\times U) \times_{\mathrm{pr}_2, U, \sigma} (G\times U) &\to G\times U \\
+		((g, u), (g', u') | u' = gu) &\mapsto (g'g, u).
+	\end{align*}
+
+\end{example}
+
+\begin{definition}[\Etale\ equivalence relation]
+	An \etale\ equivalence relation on a scheme $U$ is an etale groupoid $R\rightrightarrows U$, such that
+	\[
+		R\rightarrow U\times U,
+	\]
+	is a monomorphism, i.e. for every scheme $T$, $R(T) \to U(T)\times U(T)$ is a injective.
+\end{definition}
+
+\begin{remark}
+	Identity morphisms give reflexivity, inverses give symmetry and composition gives transitivity.
+\end{remark}
+
+
+\begin{proposition}\label{prop:etale-quotient-isom}
 	Let $U$ be a scheme and let
 	% https://q.uiver.app/#q=WzAsMixbMCwwLCJSIl0sWzEsMCwiVVxcdGltZXNfUyBVIl0sWzAsMSwidCIsMix7Im9mZnNldCI6MX1dLFswLDEsInMiLDAseyJvZmZzZXQiOi0xfV1d
 	\[\begin{tikzcd}
@@ -168,9 +260,10 @@ We have seen in Theorem \ref{thm:representable-fppf-sheaf} that the representabl
 	We will denote the algebraic space $X$ by $U/R$.
 \end{lemma}
 
+
 \begin{proof}
-	By construction, $X$ is a sheaf on the big \etale\ site.
-	
+	Let $X$ be the fppf sheafification of the presheaf quotient
+	$U/R$, and write $p:U\to X$ for the canonical morphism.
 	We first show that the canonical morphism $p:U\to X$ is surjective. Let $T$ be a scheme and let
 	\[
 	\sigma\in X(T).
@@ -189,42 +282,181 @@ We have seen in Theorem \ref{thm:representable-fppf-sheaf} that the representabl
 	\]
 	Hence $p:U\to X$ is surjective as a morphism of sheaves.
 	
-	Now let $a:T\to X$ be a morphism from a scheme $T$. Since $p$ is surjective, there exists an \'etale covering $\{T_i\to T\}_i$ and lifts
+	We first see that $t:R\to U$ is separated. Since $U$ is affine, $U$ is separated. The canonical morphism
 	\[
-	f_i:T_i\to U
+	R \longrightarrow U\times U
+	\longrightarrow
+	U\times U
 	\]
-	of the morphisms $a|_{T_i}:T_i\to X$, so that
-	\[
-	p\circ f_i=a|_{T_i}.
-	\]
+	is a monomorphism, hence separated. Consequently, $R$
+	is separated, and therefore
+	$t:R\to U$ is separated. Since $t$ is also étale, it is
+	locally quasi-finite.
 	
-	By the previous proposition, there is a pullback diagram
+	Let $a:T\to X$ be a morphism from a scheme, and set
 	\[
-	\begin{tikzcd}
-		R \arrow[r,"s"] \arrow[d,"t"'] & U \arrow[d,"p"] \\
-		U \arrow[r,"p"'] & X.
-	\end{tikzcd}
+	Y:=T\times_X U.
 	\]
-	Pulling this square back along $f_i:T_i\to U$ yields an isomorphism
+	Choose an fppf covering $\{T_i\to T\}_{i\in I}$ and
+	morphisms $f_i:T_i\to U$ such that
 	\[
-	T_i\times_X U \cong T_i\times_{U,t} R 
+	p\circ f_i=a|_{T_i},
 	\]
-	visualized via
-	% https://q.uiver.app/#q=WzAsNixbMSwwLCJSIl0sWzIsMCwiVSJdLFsxLDEsIlUiXSxbMiwxLCJYIl0sWzAsMCwiVF9pXFx0aW1lc19YUiJdLFswLDEsIlRfaSJdLFsyLDMsInAiLDJdLFsxLDMsInAiXSxbMCwyLCJ0IiwyXSxbMCwxLCJzIl0sWzQsNV0sWzUsMiwiZl9pIiwyXSxbNCwwXV0=
+	i.e. 
+	% https://q.uiver.app/#q=WzAsNCxbMSwwLCJVIl0sWzEsMSwiWCJdLFswLDEsIlQiXSxbMCwwLCJUX2kiXSxbMiwxLCJhIiwyXSxbMCwxLCJwIl0sWzMsMl0sWzMsMCwiZl9pIl1d
 	\[\begin{tikzcd}
-		{T_i\times_XR} & R & U \\
-		{T_i} & U & X.
-		\arrow[from=1-1, to=1-2]
+		{T_i} & U \\
+		T & X
+		\arrow["{f_i}", from=1-1, to=1-2]
 		\arrow[from=1-1, to=2-1]
-		\arrow["s", from=1-2, to=1-3]
-		\arrow["t"', from=1-2, to=2-2]
-		\arrow["p", from=1-3, to=2-3]
-		\arrow["{f_i}"', from=2-1, to=2-2]
-		\arrow["p"', from=2-2, to=2-3]
+		\arrow["p", from=1-2, to=2-2]
+		\arrow["a"', from=2-1, to=2-2]
 	\end{tikzcd}\]
-	In particular, since $T_i, U$ and $R$ are schemes, $T_i\times_X U$ is represented by a scheme. Since $t:R\to U$ is \'etale, its base change
+	commutes. By the Proposition \ref{prop:etale-quotient-isom}, $U\times_X U\cong R$,
+	with projections corresponding to $t$ and $s$.
+	Associativity of fibre products therefore gives
 	\[
-		R\hookrightarrow X\times_S X,
+	Y\times_T T_i
+	\cong T_i\times_X U
+	\cong T_i\times_{f_i,U,t}R
+	=:Y_i.
 	\]
-	such that for every $S$-scheme $T$, the $T$-points $R(T) \subset X(T)\times X(T)$ is an equivalence relation on $X(T)$ and the projections $s,t: R\to X$ are \etale.
+	In particular, $Y_i$ is a scheme, since $R$ and $U$ are schemes, and $Y_i\to T_i$
+	is separated and étale, being a base change of $t$ and in particular quasi-finite.
+	The identifications $Y_i\cong Y\times_T T_i$ endow the
+	schemes $Y_i$ with a canonical descent datum relative
+	to $\{T_i\to T\}$. Since each $Y_i\to T_i$ is separated
+	and locally quasi-finite, this descent datum is effective
+	by \cite[Lemma 37.57.1]{stacks-project}.
+	Thus there exists a scheme $V\to T$ whose associated
+	fppf sheaf is isomorphic to $Y$.
+	Hence $Y$ is representable by a scheme and $p$ is representable by schemes.
+	
+	Moreover, the base change of $Y\to T$ to each $T_i$
+	is the étale morphism $Y_i\to T_i$.
+	Since being étale is fppf local on the target,
+	$Y\to T$ is étale. Thus $p$ is étale.
+	
+	Finally, $t:R\to U$ has a section given by the identity
+	of the equivalence relation, and hence is surjective.
+	Therefore each $Y_i\to T_i$ is surjective.
+	Surjectivity descends along the covering
+	$\{T_i\to T\}$, so $Y\to T$ is surjective.
+	Consequently, $p:U\to X$ is representable, surjective,
+	and étale. Since $X$ is an fppf sheaf, it is an
+	algebraic space.
 \end{proof}
+
+
+\begin{example}
+	(\cite[][Tag 02Z1]{stacks-project})
+	Let $k$ be a field with \(\operatorname{char}(k)\neq 2\). Let $U = \mathbb{A}_k^1$ be the affine line. Let $\mathbb{G}_m = \Specof{k[t, t^{-1}]} = D(t) \subset \mathbb{A}_k^1$ be the multiplicative group scheme. Let 
+	\[
+		R:=U\coprod\mathbb{G}_m
+	\]
+	and define morphisms $s,t:R\rightrightarrows U$ , where $s = \operatorname{id} \coprod \iota$ and $t = \operatorname{id} \coprod (\iota \circ i)$ for $\iota: \mathbb{G}_m \hookrightarrow U$ and $i: \mathbb{G}_m \to \mathbb{G}_m, \quad x\mapsto -x$.
+	
+	The morphism
+	\[
+	j=(s,t):R\longrightarrow U\times_k U
+	\]
+	identifies the first component with the diagonal
+	\[
+	\Delta=V(z_1-z_2)
+	\]
+	and the second component with the punctured antidiagonal
+	\[
+	\Gamma=V(z_1+z_2)\cap D(z_1).
+	\]
+	We may write $R=\Delta\coprod\Gamma$. Since $\operatorname{char}(k)\neq 2$, these two images are disjoint, and $j$ is a monomorphism.
+	Moreover, $s$ and $t$ are étale, and $R$ defines the
+	equivalence relation which identifies $x$ with $-x$ for $x\neq 0$ and keeps one origin. This is an equivalence relation so $q: U \to X = U/R$ is an algebraic space. 
+	Geometrically, the quotient indentifies every nonzero geometric point $x$ with $-x$ and keeps a single origin. Each geometric point in the quotient has two preimages $\{x, -x\}$ for $x\neq 0$ and only once for the origin.
+		
+	
+	
+	\begin{center}
+		\resizebox{\textwidth}{!}{
+			\begin{tikzpicture}				
+				% Source: disjoint components
+				\begin{scope}[shift={(-4,1)}]
+					\draw[blue, thick] (-1.3,0) -- (1.3,0);
+					\fill[blue] (0,0) circle (2pt);
+					\node[above] at (0,0.25) {$\Delta \cong U$};
+					\node[below] at (0,-0.1) {$0$};
+				\end{scope}
+				
+				\begin{scope}[shift={(-4,-1)}]
+					\draw[red, thick] (-1.3,0) -- (1.3,0);
+					\draw[red, fill=white, thick] (0,0) circle (2.5pt);
+					\node[above] at (0,0.25) {$\Gamma \cong \mathbb{G}_m$};
+					\node[below] at (0,-0.1) {$0$};
+				\end{scope}
+				
+				\node at (-4,0) {$\amalg$};
+				
+				% Map to the plane
+				\draw[->, thick] (-2.2,0) -- (-0.6,0)
+				node[midway, above] {$j=(s,t)$};
+				
+				% Target plane
+				\begin{scope}[shift={(1.8,0)}]
+					\draw[->, gray] (-2,0) -- (2.2,0)
+					node[right] {$s$};
+					\draw[->, gray] (0,-2) -- (0,2.2)
+					node[above] {$t$};
+					
+					\draw[blue, thick] (-1.6,-1.6) -- (1.6,1.6);
+					\draw[red, thick] (-1.6,1.6) -- (-0.07,0.07);
+					\draw[red, thick] (0.07,-0.07) -- (1.6,-1.6);
+					
+					\fill (0,0) circle (2pt);
+					
+					\node[blue, right] at (1.6,1.6)
+					{$\Delta:\ t=s$};
+					\node[red, below] at (1.6,-1.6)
+					{$\Gamma:\ t=-s,\ s\neq0$};
+					\node[below right] at (0,0) {$(0,0)$};
+					
+					\node at (0,-2.5) {$j(R)\subseteq U\times_kU$};
+				\end{scope}
+				
+				% Map from the relation to the quotient
+				% It is defined on R, not on the whole coordinate plane.
+				\draw[->, thick] (4.77, 0) -- (6.37,0) 
+				node[midway, above] {$q\circ s = q\circ t$};
+				
+				% Quotient: schematic orbit picture
+				\begin{scope}[shift={(228pt,0pt)}]
+					\draw[thick] (-1.1,0) -- (1.1,0);
+					\fill (0,0) circle (2pt);
+					
+					\node[above] at (0,0.7) {$X=U/R$};
+					\node[below] at (0,-0.1) {$q(0)$};
+					
+					\node[align=center] at (0,-1.4)
+					{$[x]=\{x,-x\}$ for $x\neq0$\\
+						$[0]=\{0\}$};
+				\end{scope}
+			\end{tikzpicture}
+		}
+	\end{center}
+	
+	We claim, that $X$ is not a scheme.
+	Consider consider the diagonal $\Delta_{X/k}: X\to X\times_k X$. The base change along $U\times_k U$ is precisely $j$:
+	% https://q.uiver.app/#q=WzAsNCxbMCwxLCJYIl0sWzEsMSwiWFxcdGltZXNfa1giXSxbMSwwLCJVXFx0aW1lc19rVSJdLFswLDAsIlI9VVxcdGltZXNfWFUiXSxbMCwxLCJcXERlbHRhX3tYL2t9IiwyXSxbMiwxXSxbMywwXSxbMywyLCJqIl0sWzMsMSwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XV0=
+	\[\begin{tikzcd}
+		{R=U\times_XU} & {U\times_kU} \\
+		X & {X\times_kX}
+		\arrow["j", from=1-1, to=1-2]
+		\arrow[from=1-1, to=2-1]
+		\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+		\arrow[from=1-2, to=2-2]
+		\arrow["{\Delta_{X/k}}"', from=2-1, to=2-2]
+	\end{tikzcd}\]
+	Suppose $X$ is a scheme, the diagonal $\Delta_{X/k}$ is an immersion and via base change, $j$ is an immersion.  $\Delta$ is open in $R$ and $\Delta$ and $\Gamma$ are disjoint, but since every open neighborhood of $(0,0)$ in intersects $\Gamma$, $j(\Delta)$ is not open in $j(R)$ and $j$ is not a homeomorphism, and hence, not an immersion. Contradiction.
+\end{example}
+
+\begin{remark}
+	This example illustrates perfectly, why algebriac spaces naturally expands the category of schemes. Although $R\rightrightarrows U$ are \etale\ morphisms of schemes, the quotient need not be a scheme again.
+\end{remark}
